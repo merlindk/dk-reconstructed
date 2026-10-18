@@ -1,0 +1,200 @@
+[
+  {
+    "name": ".text_obj1",
+    "start": "0x10000",
+    "end": "0x1447a0",
+    "readable": true,
+    "writable": false,
+    "executable": true,
+    "permissions": {
+      "available": true,
+      "source": "ghidra-memory-block"
+    },
+    "provenance": "ghidra-memory-block",
+    "address_space": "ram",
+    "image_base": "0x10000",
+    "initialized": true,
+    "overlay": false,
+    "sections": []
+  },
+  {
+    "name": ".text_obj2",
+    "start": "0x150000",
+    "end": "0x1500fe",
+    "readable": true,
+    "writable": false,
+    "executable": true,
+    "permissions": {
+      "available": true,
+      "source": "ghidra-memory-block"
+    },
+    "provenance": "ghidra-memory-block",
+    "address_space": "ram",
+    "image_base": "0x10000",
+    "initialized": true,
+    "overlay": false,
+    "sections": []
+  },
+  {
+    "name": ".data_obj3",
+    "start": "0x160000",
+    "end": "0x19a000",
+    "readable": true,
+    "writable": true,
+    "executable": false,
+    "permissions": {
+      "available": true,
+      "source": "ghidra-memory-block"
+    },
+    "provenance": "ghidra-memory-block",
+    "address_space": "ram",
+    "image_base": "0x10000",
+    "initialized": true,
+    "overlay": false,
+    "sections": []
+  },
+  {
+    "name": ".bss_obj3",
+    "start": "0x19a000",
+    "end": "0x3f1570",
+    "readable": true,
+    "writable": true,
+    "executable": false,
+    "permissions": {
+      "available": true,
+      "source": "ghidra-memory-block"
+    },
+    "provenance": "ghidra-memory-block",
+    "address_space": "ram",
+    "image_base": "0x10000",
+    "initialized": false,
+    "overlay": false,
+    "sections": []
+  },
+  {
+    "name": ".bss_obj4",
+    "start": "0x400000",
+    "end": "0x402024",
+    "readable": true,
+    "writable": true,
+    "executable": false,
+    "permissions": {
+      "available": true,
+      "source": "ghidra-memory-block"
+    },
+    "provenance": "ghidra-memory-block",
+    "address_space": "ram",
+    "image_base": "0x10000",
+    "initialized": false,
+    "overlay": false,
+    "sections": []
+  },
+  {
+    "name": ".shstrtab",
+    "start": ".shstrtab:0x0",
+    "end": ".shstrtab:0x50",
+    "readable": false,
+    "writable": false,
+    "executable": false,
+    "permissions": {
+      "available": true,
+      "source": "ghidra-memory-block"
+    },
+    "provenance": "ghidra-memory-block",
+    "address_space": ".shstrtab",
+    "image_base": "0x10000",
+    "initialized": true,
+    "overlay": true,
+    "sections": []
+  },
+  {
+    "name": ".strtab",
+    "start": ".strtab:0x0",
+    "end": ".strtab:0xddcb",
+    "readable": false,
+    "writable": false,
+    "executable": false,
+    "permissions": {
+      "available": true,
+      "source": "ghidra-memory-block"
+    },
+    "provenance": "ghidra-memory-block",
+    "address_space": ".strtab",
+    "image_base": "0x10000",
+    "initialized": true,
+    "overlay": true,
+    "sections": []
+  },
+  {
+    "name": ".symtab",
+    "start": ".symtab:0x0",
+    "end": ".symtab:0x11110",
+    "readable": false,
+    "writable": false,
+    "executable": false,
+    "permissions": {
+      "available": true,
+      "source": "ghidra-memory-block"
+    },
+    "provenance": "ghidra-memory-block",
+    "address_space": ".symtab",
+    "image_base": "0x10000",
+    "initialized": true,
+    "overlay": true,
+    "sections": []
+  },
+  {
+    "name": "_elfHeader",
+    "start": "_elfHeader:0x0",
+    "end": "_elfHeader:0x34",
+    "readable": false,
+    "writable": false,
+    "executable": false,
+    "permissions": {
+      "available": true,
+      "source": "ghidra-memory-block"
+    },
+    "provenance": "ghidra-memory-block",
+    "address_space": "_elfHeader",
+    "image_base": "0x10000",
+    "initialized": true,
+    "overlay": true,
+    "sections": []
+  },
+  {
+    "name": "_elfProgramHeaders",
+    "start": "_elfProgramHeaders:0x0",
+    "end": "_elfProgramHeaders:0x80",
+    "readable": false,
+    "writable": false,
+    "executable": false,
+    "permissions": {
+      "available": true,
+      "source": "ghidra-memory-block"
+    },
+    "provenance": "ghidra-memory-block",
+    "address_space": "_elfProgramHeaders",
+    "image_base": "0x10000",
+    "initialized": true,
+    "overlay": true,
+    "sections": []
+  },
+  {
+    "name": "_elfSectionHeaders",
+    "start": "_elfSectionHeaders:0x0",
+    "end": "_elfSectionHeaders:0x168",
+    "readable": false,
+    "writable": false,
+    "executable": false,
+    "permissions": {
+      "available": true,
+      "source": "ghidra-memory-block"
+    },
+    "provenance": "ghidra-memory-block",
+    "address_space": "_elfSectionHeaders",
+    "image_base": "0x10000",
+    "initialized": true,
+    "overlay": true,
+    "sections": []
+  }
+]
