@@ -2810,8 +2810,7 @@ int main(int argc, char **argv) {
     DK_MEM_U32(0x002ee8dc) = 0x0D;         /* Preferred screen mode: 0x0D (640x480) */
     DK_MEM_U16(VA_LB_SCREEN_MODE) = 0x0D;  /* Active screen mode: 0x0D (640x480) */
 
-    /* Hook 0x0006b4c7: setup_show_bullfrog_legal_splash - skip intro screens & maintain high-res Mode 13 */
-    dk_install_hook(0x0006b4c7, hook_setup_show_bullfrog_legal_splash);
+
 
     /* Register recompiled C++ functions from runtime/recompiled_modules.cpp */
     dk_register_recompiled_cpp_functions();
