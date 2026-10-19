@@ -19,6 +19,10 @@
 #include <vector>
 #include <cmath>
 
+#ifndef _WIN32
+#define __debugbreak() __builtin_trap()
+#endif
+
 namespace
 {
 template <uint32_t N> inline
@@ -392,7 +396,11 @@ template <> inline unsigned char rotateBlendInfo<ROT_270>(unsigned char b) { ret
 #ifndef NDEBUG
     int debugPixelX = -1;
     int debugPixelY = 12;
+#if defined(_MSC_VER)
     __declspec(thread) bool breakIntoDebugger = false;
+#else
+    thread_local bool breakIntoDebugger = false;
+#endif
 #endif
 
 
