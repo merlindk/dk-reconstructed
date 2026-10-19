@@ -16,627 +16,627 @@ This document details the reverse-engineered graphics pipeline in `KEEPER.EXE`, 
 
 | Module | Address | Inferred Name | Callers | Callees | Naming Evidence |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `setup.cpp` | `0x69a90` | `sub_069a90` | `1` | `1` | Address-based identifier |
-| `setup.cpp` | `0x69acb` | `sub_069acb` | `1` | `1` | Address-based identifier |
-| `setup.cpp` | `0x69ba0` | `sub_069ba0` | `1` | `1` | Address-based identifier |
-| `setup.cpp` | `0x69c2c` | `dk_unhandled_physicalmemory_069c2c` | `2` | `1` | String 'Unhandled PhysicalMemory' |
-| `setup.cpp` | `0x69c7f` | `sub_069c7f` | `1` | `8` | Address-based identifier |
-| `setup.cpp` | `0x69edc` | `sub_069edc` | `1` | `7` | Address-based identifier |
-| `setup.cpp` | `0x6a356` | `dk_data_gui_dat_06a356` | `2` | `6` | String 'data\gui.dat' |
-| `setup.cpp` | `0x6a412` | `dk_please_run_install_dungeon_06a412` | `1` | `21` | String 'Please run INSTALL from the Dungeon Keeper CDRom.' |
-| `setup.cpp` | `0x6a553` | `sub_06a553` | `1` | `11` | Address-based identifier |
-| `setup.cpp` | `0x6a652` | `sub_06a652` | `1` | `7` | Address-based identifier |
-| `setup.cpp` | `0x6a689` | `dk_mcga_minimal_allowed_06a689` | `1` | `28` | String 'MCGA Minimal not allowed' |
-| `setup.cpp` | `0x6aac0` | `dk_data_gui_dat_06aac0` | `2` | `18` | String 'data\gui.dat' |
-| `setup.cpp` | `0x6adc5` | `dk_data_text_dat_06adc5` | `1` | `5` | String 'DATA/TEXT.DAT' |
-| `setup.cpp` | `0x6ae14` | `sub_06ae14` | `1` | `0` | Address-based identifier |
-| `setup.cpp` | `0x6ae37` | `sub_06ae37` | `1` | `2` | Address-based identifier |
-| `setup.cpp` | `0x6ae80` | `dk_loading_raw_06ae80` | `2` | `13` | String 'LOADING.RAW' |
-| `setup.cpp` | `0x6b04d` | `sub_06b04d` | `1` | `3` | Address-based identifier |
-| `setup.cpp` | `0x6b0c8` | `dk_data_hpointer_dat_06b0c8` | `2` | `3` | String 'data\hpointer.dat' |
-| `setup.cpp` | `0x6b12b` | `dk_data_hpointer_dat_06b12b` | `2` | `2` | String 'data\hpointer.dat' |
-| `setup.cpp` | `0x6b16f` | `dk_graphics_heap_already_allocated_06b16f` | `1` | `9` | String 'Graphics heap already allocated' |
-| `setup.cpp` | `0x6b4c7` | `dk_data_legal_raw_06b4c7` | `1` | `22` | String 'DATA\LEGAL.RAW' |
-| `setup.cpp` | `0x6b7d0` | `sub_06b7d0` | `1` | `0` | Address-based identifier |
-| `setup.cpp` | `0x6b820` | `sub_06b820` | `3` | `10` | Address-based identifier |
-| `setup.cpp` | `0x6bdda` | `sub_06bdda` | `1` | `18` | Address-based identifier |
-| `setup.cpp` | `0x6c22b` | `sub_06c22b` | `1` | `0` | Address-based identifier |
-| `setup.cpp` | `0x6c2cc` | `sub_06c2cc` | `1` | `8` | Address-based identifier |
-| `engine3.cpp` | `0x948a0` | `sub_0948a0` | `0` | `1` | Address-based identifier |
-| `engine3.cpp` | `0x956b8` | `sub_0956b8` | `1` | `1` | Address-based identifier |
-| `engine3.cpp` | `0x964d0` | `sub_0964d0` | `1` | `1` | Address-based identifier |
-| `engine3.cpp` | `0x98104` | `sub_098104` | `0` | `0` | Address-based identifier |
-| `engine3.cpp` | `0x98248` | `sub_098248` | `0` | `0` | Address-based identifier |
-| `engine3.cpp` | `0x9838c` | `sub_09838c` | `0` | `0` | Address-based identifier |
-| `engine3.cpp` | `0x984d0` | `sub_0984d0` | `0` | `0` | Address-based identifier |
-| `engine3.cpp` | `0x98614` | `sub_098614` | `1` | `3` | Address-based identifier |
-| `engine3.cpp` | `0x98cb8` | `sub_098cb8` | `1` | `1` | Address-based identifier |
-| `engine3.cpp` | `0x9bdf0` | `sub_09bdf0` | `1` | `1` | Address-based identifier |
-| `engine3.cpp` | `0x9ef3c` | `sub_09ef3c` | `1` | `1` | Address-based identifier |
-| `engine3.cpp` | `0x9f2a4` | `sub_09f2a4` | `1` | `0` | Address-based identifier |
-| `engine3.cpp` | `0x9f314` | `sub_09f314` | `1` | `1` | Address-based identifier |
-| `engine3.cpp` | `0x9f8bc` | `sub_09f8bc` | `1` | `2` | Address-based identifier |
-| `engine3.cpp` | `0x9fe38` | `sub_09fe38` | `0` | `1` | Address-based identifier |
-| `engine3.cpp` | `0x9ff84` | `sub_09ff84` | `1` | `10` | Address-based identifier |
-| `engine3.cpp` | `0xa3a4c` | `sub_0a3a4c` | `0` | `0` | Address-based identifier |
-| `engine3.cpp` | `0xa3aa0` | `sub_0a3aa0` | `1` | `16` | Address-based identifier |
-| `engine3.cpp` | `0xa434c` | `sub_0a434c` | `0` | `1` | Address-based identifier |
-| `engine3.cpp` | `0xa49ec` | `sub_0a49ec` | `1` | `3` | Address-based identifier |
-| `engine3.cpp` | `0xa5030` | `sub_0a5030` | `1` | `0` | Address-based identifier |
-| `engine3.cpp` | `0xa5178` | `sub_0a5178` | `2` | `0` | Address-based identifier |
-| `engine3.cpp` | `0xa5240` | `sub_0a5240` | `3` | `8` | Address-based identifier |
-| `engine3.cpp` | `0xa596c` | `sub_0a596c` | `2` | `1` | Address-based identifier |
-| `engine3.cpp` | `0xa5a74` | `sub_0a5a74` | `2` | `1` | Address-based identifier |
-| `engine3.cpp` | `0xa5c28` | `sub_0a5c28` | `2` | `1` | Address-based identifier |
-| `engine3.cpp` | `0xa5d4c` | `sub_0a5d4c` | `2` | `1` | Address-based identifier |
-| `engine3.cpp` | `0xa5dd0` | `sub_0a5dd0` | `0` | `0` | Address-based identifier |
-| `engine3.cpp` | `0xa5e00` | `sub_0a5e00` | `0` | `0` | Address-based identifier |
-| `engine3.cpp` | `0xa5e60` | `sub_0a5e60` | `0` | `0` | Address-based identifier |
-| `engine3.cpp` | `0xa5ff0` | `sub_0a5ff0` | `0` | `0` | Address-based identifier |
-| `engine3.cpp` | `0xa60a0` | `sub_0a60a0` | `0` | `0` | Address-based identifier |
-| `engine3.cpp` | `0xa6134` | `sub_0a6134` | `0` | `1` | Address-based identifier |
-| `engine3.cpp` | `0xa6504` | `sub_0a6504` | `1` | `9` | Address-based identifier |
-| `engine3.cpp` | `0xa6990` | `dk_illegal_quadrant_0a6990` | `1` | `9` | String 'Illegal quadrant' |
-| `engine3.cpp` | `0xaa3a8` | `sub_0aa3a8` | `3` | `0` | Address-based identifier |
-| `draw.cpp` | `0x872a4` | `sub_0872a4` | `2` | `4` | Address-based identifier |
-| `draw.cpp` | `0x872b8` | `sub_0872b8` | `3` | `14` | Address-based identifier |
-| `draw.cpp` | `0x87694` | `sub_087694` | `3` | `13` | Address-based identifier |
-| `draw.cpp` | `0x87870` | `sub_087870` | `1` | `13` | Address-based identifier |
-| `draw.cpp` | `0x87da4` | `dk_unhandled_screen_mode_087da4` | `1` | `8` | String 'Unhandled screen mode' |
-| `draw.cpp` | `0x880d0` | `sub_0880d0` | `2` | `1` | Address-based identifier |
-| `draw.cpp` | `0x882b4` | `sub_0882b4` | `2` | `3` | Address-based identifier |
-| `draw.cpp` | `0x88698` | `sub_088698` | `1` | `4` | Address-based identifier |
-| `draw.cpp` | `0x88c6c` | `sub_088c6c` | `1` | `1` | Address-based identifier |
-| `draw.cpp` | `0x88e2c` | `sub_088e2c` | `1` | `3` | Address-based identifier |
-| `draw.cpp` | `0x89080` | `sub_089080` | `0` | `0` | Address-based identifier |
-| `draw.cpp` | `0x890bc` | `sub_0890bc` | `3` | `5` | Address-based identifier |
-| `draw.cpp` | `0x89ae8` | `sub_089ae8` | `1` | `1` | Address-based identifier |
-| `draw.cpp` | `0x8a194` | `sub_08a194` | `1` | `6` | Address-based identifier |
-| `draw.cpp` | `0x8a9f4` | `sub_08a9f4` | `0` | `1` | Address-based identifier |
-| `draw.cpp` | `0x8abc4` | `sub_08abc4` | `0` | `1` | Address-based identifier |
-| `draw.cpp` | `0x8ac9c` | `sub_08ac9c` | `0` | `1` | Address-based identifier |
-| `draw.cpp` | `0x8ae00` | `dk_frames_different_between_views_08ae00` | `1` | `3` | String 'No frames different between views C%d, M%d, A%d, B%d' |
-| `draw.cpp` | `0x8aee4` | `dk_frames_different_between_views_08aee4` | `1` | `3` | String 'No frames different between views C%d, M%d, A%d, B%d' |
-| `draw.cpp` | `0x8afd8` | `sub_08afd8` | `2` | `7` | Address-based identifier |
-| `draw.cpp` | `0x8bb2c` | `sub_08bb2c` | `1` | `3` | Address-based identifier |
-| `draw.cpp` | `0x8bde8` | `sub_08bde8` | `1` | `12` | Address-based identifier |
-| `draw.cpp` | `0x8cc24` | `dk_load_palette_file_08cc24` | `1` | `6` | String 'Cannot load palette file %s' |
-| `draw.cpp` | `0x8ccec` | `sub_08ccec` | `25` | `1` | Address-based identifier |
-| `draw.cpp` | `0x8cdf4` | `sub_08cdf4` | `0` | `2` | Address-based identifier |
-| `draw.cpp` | `0x8d220` | `sub_08d220` | `3` | `1` | Address-based identifier |
-| `draw.cpp` | `0x8d348` | `sub_08d348` | `3` | `3` | Address-based identifier |
-| `draw.cpp` | `0x8d740` | `sub_08d740` | `1` | `2` | Address-based identifier |
-| `draw.cpp` | `0x8d998` | `sub_08d998` | `1` | `4` | Address-based identifier |
-| `draw.cpp` | `0x8dcd0` | `sub_08dcd0` | `0` | `4` | Address-based identifier |
-| `draw.cpp` | `0x8de90` | `sub_08de90` | `0` | `2` | Address-based identifier |
-| `draw.cpp` | `0x8eadc` | `sub_08eadc` | `2` | `0` | Address-based identifier |
-| `draw.cpp` | `0x8ebb0` | `sub_08ebb0` | `3` | `3` | Address-based identifier |
-| `draw.cpp` | `0x8ecb0` | `sub_08ecb0` | `0` | `1` | Address-based identifier |
-| `draw.cpp` | `0x8ed2c` | `sub_08ed2c` | `1` | `0` | Address-based identifier |
-| `draw.cpp` | `0x8ed84` | `sub_08ed84` | `0` | `0` | Address-based identifier |
-| `draw.cpp` | `0x8ee8c` | `sub_08ee8c` | `0` | `0` | Address-based identifier |
-| `draw.cpp` | `0x8eebc` | `sub_08eebc` | `0` | `0` | Address-based identifier |
-| `draw.cpp` | `0x8eeec` | `sub_08eeec` | `1` | `3` | Address-based identifier |
-| `draw.cpp` | `0x8f190` | `dk_dene_says_big_hello_08f190` | `0` | `3` | String 'Dene says a big 'Hello' to Goth Buns, Tarts and Barbies' |
-| `draw.cpp` | `0x8f320` | `sub_08f320` | `1` | `1` | Address-based identifier |
-| `draw.cpp` | `0x8f518` | `sub_08f518` | `1` | `4` | Address-based identifier |
-| `draw.cpp` | `0x8f75c` | `sub_08f75c` | `1` | `3` | Address-based identifier |
-| `draw.cpp` | `0x8f924` | `sub_08f924` | `3` | `4` | Address-based identifier |
-| `draw.cpp` | `0x8fb10` | `sub_08fb10` | `1` | `3` | Address-based identifier |
-| `draw.cpp` | `0x8fd14` | `sub_08fd14` | `1` | `2` | Address-based identifier |
-| `draw.cpp` | `0x8feb4` | `sub_08feb4` | `0` | `0` | Address-based identifier |
-| `draw.cpp` | `0x902e4` | `sub_0902e4` | `0` | `0` | Address-based identifier |
-| `draw.cpp` | `0x90610` | `sub_090610` | `2` | `0` | Address-based identifier |
-| `draw.cpp` | `0x90720` | `sub_090720` | `0` | `0` | Address-based identifier |
-| `draw.cpp` | `0x907d8` | `sub_0907d8` | `0` | `0` | Address-based identifier |
-| `draw.cpp` | `0x90a50` | `sub_090a50` | `0` | `0` | Address-based identifier |
-| `draw.cpp` | `0x90c14` | `sub_090c14` | `1` | `1` | Address-based identifier |
-| `draw.cpp` | `0x915dc` | `sub_0915dc` | `2` | `1` | Address-based identifier |
-| `draw.cpp` | `0x9164c` | `sub_09164c` | `1` | `0` | Address-based identifier |
-| `draw.cpp` | `0x929c0` | `sub_0929c0` | `1` | `1` | Address-based identifier |
-| `draw.cpp` | `0x92be0` | `sub_092be0` | `1` | `0` | Address-based identifier |
-| `draw.cpp` | `0x92d10` | `sub_092d10` | `1` | `0` | Address-based identifier |
-| `draw.cpp` | `0x93120` | `sub_093120` | `1` | `0` | Address-based identifier |
-| `draw.cpp` | `0x938d8` | `sub_0938d8` | `1` | `0` | Address-based identifier |
-| `draw.cpp` | `0x940dc` | `sub_0940dc` | `1` | `0` | Address-based identifier |
-| `draw.cpp` | `0x94218` | `sub_094218` | `0` | `0` | Address-based identifier |
-| `draw.cpp` | `0x943c0` | `sub_0943c0` | `0` | `0` | Address-based identifier |
-| `draw.cpp` | `0x94594` | `sub_094594` | `0` | `0` | Address-based identifier |
-| `draw.cpp` | `0x947b8` | `sub_0947b8` | `0` | `0` | Address-based identifier |
-| `draw.cpp` | `0x94820` | `sub_094820` | `0` | `0` | Address-based identifier |
-| `draw.cpp` | `0x94824` | `sub_094824` | `3` | `0` | Address-based identifier |
-| `draw.cpp` | `0xa43b4` | `sub_0a43b4` | `2` | `4` | Address-based identifier |
-| `column.cpp` | `0x15318` | `sub_015318` | `8` | `0` | Address-based identifier |
-| `column.cpp` | `0x1534a` | `sub_01534a` | `3` | `1` | Address-based identifier |
-| `column.cpp` | `0x15386` | `dk_could_create_column_none_015386` | `3` | `3` | String 'Could not create column: None free' |
-| `column.cpp` | `0x15456` | `sub_015456` | `1` | `0` | Address-based identifier |
-| `column.cpp` | `0x15479` | `dk_allocate_column_015479` | `3` | `4` | String 'Cannot allocate column' |
-| `column.cpp` | `0x15502` | `sub_015502` | `2` | `1` | Address-based identifier |
-| `column.cpp` | `0x15561` | `sub_015561` | `0` | `1` | Address-based identifier |
-| `column.cpp` | `0x15603` | `sub_015603` | `1` | `3` | Address-based identifier |
-| `column.cpp` | `0x156a7` | `sub_0156a7` | `0` | `1` | Address-based identifier |
-| `column.cpp` | `0x156de` | `sub_0156de` | `1` | `3` | Address-based identifier |
-| `column.cpp` | `0x157ac` | `sub_0157ac` | `4` | `0` | Address-based identifier |
-| `column.cpp` | `0x157e4` | `sub_0157e4` | `1` | `0` | Address-based identifier |
-| `column.cpp` | `0x1581c` | `sub_01581c` | `1` | `0` | Address-based identifier |
-| `ceiling.cpp` | `0x7bb10` | `sub_07bb10` | `1` | `3` | Address-based identifier |
-| `ceiling.cpp` | `0x7bc8d` | `sub_07bc8d` | `1` | `3` | Address-based identifier |
-| `ceiling.cpp` | `0x7c1f0` | `dk_illegal_ceiling_step_value_07c1f0` | `2` | `1` | String 'Illegal ceiling step value' |
-| `ceiling.cpp` | `0x7c3c8` | `sub_07c3c8` | `1` | `2` | Address-based identifier |
-| `ceiling.cpp` | `0x7c590` | `sub_07c590` | `3` | `2` | Address-based identifier |
-| `ceiling.cpp` | `0x7c870` | `sub_07c870` | `0` | `2` | Address-based identifier |
-| `ceiling.cpp` | `0x7c998` | `sub_07c998` | `0` | `1` | Address-based identifier |
-| `ceiling.cpp` | `0x7caf0` | `sub_07caf0` | `4` | `0` | Address-based identifier |
-| `ceiling.cpp` | `0x7cd3c` | `sub_07cd3c` | `3` | `1` | Address-based identifier |
-| `ceiling.cpp` | `0x7d100` | `sub_07d100` | `1` | `0` | Address-based identifier |
-| `ceiling.cpp` | `0x7d3f4` | `sub_07d3f4` | `0` | `0` | Address-based identifier |
-| `ceiling.cpp` | `0x7d674` | `sub_07d674` | `1` | `2` | Address-based identifier |
-| `ceiling.cpp` | `0x7d748` | `sub_07d748` | `0` | `0` | Address-based identifier |
-| `ceiling.cpp` | `0x7d7c0` | `sub_07d7c0` | `0` | `0` | Address-based identifier |
-| `ceiling.cpp` | `0x7da18` | `sub_07da18` | `13` | `1` | Address-based identifier |
-| `ceiling.cpp` | `0x7daac` | `sub_07daac` | `1` | `2` | Address-based identifier |
-| `ceiling.cpp` | `0x7dae0` | `sub_07dae0` | `1` | `0` | Address-based identifier |
-| `ceiling.cpp` | `0x7dbc0` | `sub_07dbc0` | `35` | `0` | Address-based identifier |
-| `ceiling.cpp` | `0x7ddf8` | `sub_07ddf8` | `7` | `0` | Address-based identifier |
-| `ceiling.cpp` | `0x7df48` | `sub_07df48` | `12` | `0` | Address-based identifier |
-| `light.cpp` | `0xac094` | `sub_0ac094` | `0` | `5` | Address-based identifier |
-| `light.cpp` | `0xac19c` | `sub_0ac19c` | `0` | `2` | Address-based identifier |
-| `light.cpp` | `0xac370` | `sub_0ac370` | `2` | `0` | Address-based identifier |
-| `light.cpp` | `0xac630` | `sub_0ac630` | `6` | `2` | Address-based identifier |
-| `light.cpp` | `0xac694` | `sub_0ac694` | `1` | `1` | Address-based identifier |
-| `light.cpp` | `0xac9e8` | `sub_0ac9e8` | `0` | `1` | Address-based identifier |
-| `light.cpp` | `0xaca0c` | `sub_0aca0c` | `1` | `2` | Address-based identifier |
-| `light.cpp` | `0xaca68` | `sub_0aca68` | `1` | `1` | Address-based identifier |
-| `light.cpp` | `0xacaf8` | `dk_light_already_list_0acaf8` | `13` | `2` | String 'Light is already in list' |
-| `light.cpp` | `0xacce4` | `dk_attempt_delete_light_0acce4` | `8` | `4` | String 'Attempt to delete light 0' |
-| `light.cpp` | `0xacdfc` | `sub_0acdfc` | `2` | `1` | Address-based identifier |
-| `light.cpp` | `0xaced0` | `sub_0aced0` | `1` | `0` | Address-based identifier |
-| `light.cpp` | `0xacef0` | `sub_0acef0` | `1` | `0` | Address-based identifier |
-| `light.cpp` | `0xacf7c` | `dk_attempt_get_anglexy_unallocated_0acf7c` | `1` | `1` | String 'Attempt to get anglexy of unallocated light structure' |
-| `light.cpp` | `0xad0f4` | `dk_attempt_get_width_unallocated_0ad0f4` | `1` | `1` | String 'Attempt to get width of unallocated light structure' |
-| `light.cpp` | `0xad148` | `dk_attempt_set_intensity_unallocated_0ad148` | `3` | `2` | String 'Attempt to set intensity of unallocated light structure' |
-| `light.cpp` | `0xad23c` | `dk_attempt_get_intensity_unallocated_0ad23c` | `4` | `1` | String 'Attempt to get intensity of unallocated light structure' |
-| `light.cpp` | `0xad290` | `dk_attempt_set_size_unallocated_0ad290` | `0` | `2` | String 'Attempt to set size of unallocated light structure' |
-| `light.cpp` | `0xad37c` | `dk_attempt_get_size_unallocated_0ad37c` | `1` | `1` | String 'Attempt to get size of unallocated light structure' |
-| `light.cpp` | `0xad438` | `dk_attempt_stop_animating_size_0ad438` | `0` | `1` | String 'Attempt to stop animating size of unallocated light structur' |
-| `light.cpp` | `0xad4f8` | `dk_attempt_stop_animating_intensity_0ad4f8` | `0` | `1` | String 'Attempt to stop animating intensity of unallocated light str' |
-| `light.cpp` | `0xad54c` | `dk_light_already_list_0ad54c` | `6` | `1` | String 'Light is already in list' |
-| `light.cpp` | `0xad66c` | `dk_attempt_turn_off_unallocated_0ad66c` | `4` | `3` | String 'Attempt to turn off unallocated light structure' |
-| `light.cpp` | `0xad834` | `dk_attempt_set_size_unallocated_0ad834` | `6` | `1` | String 'Attempt to set size of unallocated light structure' |
-| `light.cpp` | `0xad888` | `dk_attempt_set_minimum_light_0ad888` | `1` | `1` | String 'Attempt to set_minimum light size to cache on non dynamic li' |
-| `light.cpp` | `0xadbc0` | `sub_0adbc0` | `2` | `2` | Address-based identifier |
-| `light.cpp` | `0xb04e4` | `sub_0b04e4` | `0` | `0` | Address-based identifier |
-| `light.cpp` | `0xb06fc` | `sub_0b06fc` | `0` | `1` | Address-based identifier |
-| `light.cpp` | `0xb087c` | `sub_0b087c` | `8` | `1` | Address-based identifier |
-| `light.cpp` | `0xb0980` | `sub_0b0980` | `2` | `0` | Address-based identifier |
-| `light.cpp` | `0xb0ab4` | `sub_0b0ab4` | `0` | `0` | Address-based identifier |
-| `light.cpp` | `0xb0b20` | `sub_0b0b20` | `0` | `0` | Address-based identifier |
-| `light.cpp` | `0xb0b9c` | `sub_0b0b9c` | `0` | `0` | Address-based identifier |
-| `light.cpp` | `0xb0c44` | `sub_0b0c44` | `2` | `0` | Address-based identifier |
-| `light.cpp` | `0xb0d0c` | `sub_0b0d0c` | `1` | `1` | Address-based identifier |
-| `light.cpp` | `0xb0f94` | `dk_prev_when_removing_light_0b0f94` | `2` | `2` | String 'No prev when removing light from list' |
-| `light.cpp` | `0xb10c0` | `sub_0b10c0` | `1` | `1` | Address-based identifier |
-| `light.cpp` | `0xb1398` | `sub_0b1398` | `0` | `0` | Address-based identifier |
-| `light.cpp` | `0xb13c0` | `sub_0b13c0` | `2` | `0` | Address-based identifier |
-| `light.cpp` | `0xb14a0` | `sub_0b14a0` | `0` | `2` | Address-based identifier |
-| `light.cpp` | `0xb182c` | `sub_0b182c` | `1` | `2` | Address-based identifier |
-| `light.cpp` | `0xb1b90` | `sub_0b1b90` | `0` | `0` | Address-based identifier |
-| `light.cpp` | `0xb1c20` | `sub_0b1c20` | `0` | `0` | Address-based identifier |
-| `light.cpp` | `0xb1c40` | `sub_0b1c40` | `0` | `0` | Address-based identifier |
-| `light.cpp` | `0xb1f60` | `sub_0b1f60` | `0` | `1` | Address-based identifier |
-| `light.cpp` | `0xb20e0` | `sub_0b20e0` | `1` | `4` | Address-based identifier |
-| `light.cpp` | `0xb2158` | `sub_0b2158` | `1` | `0` | Address-based identifier |
-| `light.cpp` | `0xb21f0` | `sub_0b21f0` | `2` | `1` | Address-based identifier |
-| `light.cpp` | `0xb224c` | `sub_0b224c` | `1` | `0` | Address-based identifier |
-| `light.cpp` | `0xb2280` | `sub_0b2280` | `2` | `1` | Address-based identifier |
-| `light.cpp` | `0xb2398` | `sub_0b2398` | `15` | `0` | Address-based identifier |
-| `light.cpp` | `0xb23ec` | `sub_0b23ec` | `2` | `0` | Address-based identifier |
-| `light.cpp` | `0xb2440` | `sub_0b2440` | `3` | `0` | Address-based identifier |
-| `light.cpp` | `0xb250c` | `sub_0b250c` | `1` | `0` | Address-based identifier |
-| `ssprite.cpp` | `0xdb120` | `sub_0db120` | `1` | `0` | Address-based identifier |
-| `ssprite.cpp` | `0xdb1a4` | `sub_0db1a4` | `3` | `3` | Address-based identifier |
-| `ssprite.cpp` | `0xdb5c4` | `dk_graphic_id_model_class_0db5c4` | `1` | `5` | String 'Invalid graphic Id %d from model %d, class %d' |
-| `ssprite.cpp` | `0xdbb70` | `sub_0dbb70` | `1` | `1` | Address-based identifier |
-| `ssprite.cpp` | `0xdbb84` | `dk_graphic_id_model_class_0dbb84` | `2` | `5` | String 'Invalid graphic Id %d from model %d, class %d' |
-| `ssprite.cpp` | `0xdc0e0` | `sub_0dc0e0` | `1` | `0` | Address-based identifier |
-| `ssprite.cpp` | `0xdc0f0` | `sub_0dc0f0` | `0` | `0` | Address-based identifier |
-| `ssprite.cpp` | `0xdc150` | `sub_0dc150` | `30` | `0` | Address-based identifier |
-| `ssprite.cpp` | `0xdc184` | `sub_0dc184` | `1` | `0` | Address-based identifier |
-| `ssprite.cpp` | `0xdc19c` | `sub_0dc19c` | `5` | `0` | Address-based identifier |
-| `ssprite.cpp` | `0xdc2c8` | `sub_0dc2c8` | `2` | `0` | Address-based identifier |
-| `ssprite.cpp` | `0xdc324` | `sub_0dc324` | `2` | `0` | Address-based identifier |
-| `ssprite.cpp` | `0xdc354` | `sub_0dc354` | `13` | `0` | Address-based identifier |
-| `ssprite.cpp` | `0xdc3c0` | `sub_0dc3c0` | `1` | `0` | Address-based identifier |
-| `ssprite.cpp` | `0xdc4a0` | `sub_0dc4a0` | `7` | `0` | Address-based identifier |
-| `ssprite.cpp` | `0xdc4cc` | `sub_0dc4cc` | `1` | `1` | Address-based identifier |
-| `ssprite.cpp` | `0xdc5c4` | `sub_0dc5c4` | `6` | `2` | Address-based identifier |
-| `ssprite.cpp` | `0xdc800` | `sub_0dc800` | `0` | `1` | Address-based identifier |
-| `ssprite.cpp` | `0xdc859` | `sub_0dc859` | `0` | `1` | Address-based identifier |
-| `ssprite.cpp` | `0xdc8ad` | `sub_0dc8ad` | `0` | `1` | Address-based identifier |
-| `ssprite.cpp` | `0xdc8f9` | `sub_0dc8f9` | `0` | `1` | Address-based identifier |
-| `ssprite.cpp` | `0xdc95a` | `sub_0dc95a` | `1` | `0` | Address-based identifier |
-| `ssprite.cpp` | `0xdc984` | `sub_0dc984` | `1` | `1` | Address-based identifier |
-| `ssprite.cpp` | `0xdccfc` | `sub_0dccfc` | `0` | `2` | Address-based identifier |
-| `ssprite.cpp` | `0xdcd44` | `sub_0dcd44` | `1` | `2` | Address-based identifier |
-| `eyelens.cpp` | `0x26e5e` | `sub_026e5e` | `0` | `4` | Address-based identifier |
-| `eyelens.cpp` | `0x26f4d` | `sub_026f4d` | `0` | `4` | Address-based identifier |
-| `eyelens.cpp` | `0x26faa` | `sub_026faa` | `0` | `4` | Address-based identifier |
-| `eyelens.cpp` | `0x2700c` | `dk_eyelens_memory_already_allocated_02700c` | `2` | `4` | String 'EyeLens Memory already allocated' |
-| `eyelens.cpp` | `0x270e0` | `sub_0270e0` | `6` | `1` | Address-based identifier |
-| `eyelens.cpp` | `0x27130` | `dk_data_frac_dat_027130` | `5` | `7` | String 'data\frac%02d.dat' |
-| `eyelens.cpp` | `0x27320` | `sub_027320` | `2` | `2` | Address-based identifier |
-| `frontend.cpp` | `0x2d8e2` | `sub_02d8e2` | `1` | `1` | Address-based identifier |
-| `frontend.cpp` | `0x2d920` | `sub_02d920` | `1` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x2d974` | `sub_02d974` | `1` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x2daae` | `sub_02daae` | `0` | `1` | Address-based identifier |
-| `frontend.cpp` | `0x2db0c` | `sub_02db0c` | `1` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x2dbac` | `sub_02dbac` | `1` | `1` | Address-based identifier |
-| `frontend.cpp` | `0x2dbb7` | `sub_02dbb7` | `0` | `1` | Address-based identifier |
-| `frontend.cpp` | `0x2dc8e` | `sub_02dc8e` | `1` | `1` | Address-based identifier |
-| `frontend.cpp` | `0x2dcec` | `sub_02dcec` | `1` | `3` | Address-based identifier |
-| `frontend.cpp` | `0x2dfac` | `dk_why_are_we_here_02dfac` | `1` | `30` | String 'Why are we here' |
-| `frontend.cpp` | `0x2e486` | `sub_02e486` | `0` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x2e48a` | `sub_02e48a` | `0` | `1` | Address-based identifier |
-| `frontend.cpp` | `0x2e500` | `sub_02e500` | `0` | `1` | Address-based identifier |
-| `frontend.cpp` | `0x2e534` | `sub_02e534` | `0` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x2e561` | `sub_02e561` | `0` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x2e58b` | `sub_02e58b` | `0` | `2` | Address-based identifier |
-| `frontend.cpp` | `0x2e624` | `sub_02e624` | `0` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x2e647` | `sub_02e647` | `0` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x2e654` | `sub_02e654` | `0` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x2e667` | `sub_02e667` | `0` | `1` | Address-based identifier |
-| `frontend.cpp` | `0x2e696` | `sub_02e696` | `0` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x2e6a6` | `sub_02e6a6` | `0` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x2e6bb` | `sub_02e6bb` | `0` | `1` | Address-based identifier |
-| `frontend.cpp` | `0x2e6c4` | `sub_02e6c4` | `0` | `8` | Address-based identifier |
-| `frontend.cpp` | `0x2e8a7` | `dk_load_frontend_palette_02e8a7` | `23` | `37` | String 'Unable to load FRONTEND PALETTE' |
-| `frontend.cpp` | `0x2ecbd` | `dk_why_are_we_here_02ecbd` | `0` | `4` | String 'Why are we here when it's not a new level' |
-| `frontend.cpp` | `0x2ed34` | `sub_02ed34` | `0` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x2ed41` | `dk_continue_sav_02ed41` | `0` | `8` | String 'CONTINUE.SAV' |
-| `frontend.cpp` | `0x2ee00` | `sub_02ee00` | `3` | `1` | Address-based identifier |
-| `frontend.cpp` | `0x2ee3e` | `sub_02ee3e` | `0` | `2` | Address-based identifier |
-| `frontend.cpp` | `0x2eeb9` | `sub_02eeb9` | `0` | `6` | Address-based identifier |
-| `frontend.cpp` | `0x2ef93` | `sub_02ef93` | `0` | `1` | Address-based identifier |
-| `frontend.cpp` | `0x2efb4` | `sub_02efb4` | `1` | `4` | Address-based identifier |
-| `frontend.cpp` | `0x2f18a` | `sub_02f18a` | `2` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x2f1c8` | `sub_02f1c8` | `5` | `1` | Address-based identifier |
-| `frontend.cpp` | `0x2f1d2` | `sub_02f1d2` | `5` | `1` | Address-based identifier |
-| `frontend.cpp` | `0x2f1dc` | `sub_02f1dc` | `2` | `1` | Address-based identifier |
-| `frontend.cpp` | `0x2f237` | `sub_02f237` | `0` | `1` | Address-based identifier |
-| `frontend.cpp` | `0x2f251` | `sub_02f251` | `0` | `2` | Address-based identifier |
-| `frontend.cpp` | `0x2f404` | `sub_02f404` | `0` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x2f414` | `sub_02f414` | `1` | `3` | Address-based identifier |
-| `frontend.cpp` | `0x2f541` | `sub_02f541` | `0` | `2` | Address-based identifier |
-| `frontend.cpp` | `0x2f56e` | `sub_02f56e` | `0` | `1` | Address-based identifier |
-| `frontend.cpp` | `0x2f688` | `sub_02f688` | `0` | `1` | Address-based identifier |
-| `frontend.cpp` | `0x2f755` | `sub_02f755` | `0` | `1` | Address-based identifier |
-| `frontend.cpp` | `0x2f769` | `sub_02f769` | `0` | `2` | Address-based identifier |
-| `frontend.cpp` | `0x2f7d3` | `sub_02f7d3` | `0` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x2f7e0` | `sub_02f7e0` | `0` | `1` | Address-based identifier |
-| `frontend.cpp` | `0x2f7ef` | `sub_02f7ef` | `0` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x2f7fc` | `sub_02f7fc` | `0` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x2f809` | `sub_02f809` | `0` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x2f819` | `sub_02f819` | `0` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x2f829` | `sub_02f829` | `0` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x2f83c` | `sub_02f83c` | `0` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x2f84f` | `sub_02f84f` | `0` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x2f874` | `dk_intromix_smk_02f874` | `1` | `2` | String 'INTROMIX.SMK' |
-| `frontend.cpp` | `0x2f8a2` | `sub_02f8a2` | `1` | `6` | Address-based identifier |
-| `frontend.cpp` | `0x2f9ce` | `dk_outromix_smk_02f9ce` | `1` | `1` | String 'OUTROMIX.SMK' |
-| `frontend.cpp` | `0x2f9f5` | `sub_02f9f5` | `2` | `10` | Address-based identifier |
-| `frontend.cpp` | `0x2faf6` | `sub_02faf6` | `1` | `12` | Address-based identifier |
-| `frontend.cpp` | `0x2fc49` | `sub_02fc49` | `1` | `14` | Address-based identifier |
-| `frontend.cpp` | `0x2fda1` | `sub_02fda1` | `1` | `12` | Address-based identifier |
-| `frontend.cpp` | `0x2feca` | `sub_02feca` | `2` | `1` | Address-based identifier |
-| `frontend.cpp` | `0x2fefd` | `sub_02fefd` | `1` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x2ff2e` | `dk_continue_sav_02ff2e` | `1` | `7` | String 'CONTINUE.SAV' |
-| `frontend.cpp` | `0x2ffe4` | `dk_ldata_front_raw_02ffe4` | `1` | `10` | String 'LDATA\FRONT.RAW' |
-| `frontend.cpp` | `0x30057` | `dk_ldata_front_raw_030057` | `1` | `1` | String 'LDATA\FRONT.RAW' |
-| `frontend.cpp` | `0x30061` | `sub_030061` | `1` | `2` | Address-based identifier |
-| `frontend.cpp` | `0x300a7` | `sub_0300a7` | `1` | `5` | Address-based identifier |
-| `frontend.cpp` | `0x3012d` | `sub_03012d` | `1` | `3` | Address-based identifier |
-| `frontend.cpp` | `0x30266` | `sub_030266` | `1` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x302ba` | `sub_0302ba` | `1` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x30309` | `dk_data_hiscores_dat_030309` | `2` | `1` | String 'DATA\HISCORES.DAT' |
-| `frontend.cpp` | `0x30322` | `dk_data_hiscores_dat_030322` | `1` | `4` | String 'DATA\HISCORES.DAT' |
-| `frontend.cpp` | `0x30389` | `sub_030389` | `0` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x3038a` | `sub_03038a` | `0` | `1` | Address-based identifier |
-| `frontend.cpp` | `0x303ad` | `sub_0303ad` | `1` | `6` | Address-based identifier |
-| `frontend.cpp` | `0x306e4` | `sub_0306e4` | `1` | `1` | Address-based identifier |
-| `frontend.cpp` | `0x30782` | `sub_030782` | `3` | `1` | Address-based identifier |
-| `frontend.cpp` | `0x3078d` | `sub_03078d` | `0` | `3` | Address-based identifier |
-| `frontend.cpp` | `0x30972` | `sub_030972` | `0` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x30996` | `sub_030996` | `1` | `1` | Address-based identifier |
-| `frontend.cpp` | `0x30a28` | `sub_030a28` | `1` | `0` | Address-based identifier |
-| `frontend.cpp` | `0x30a2d` | `dk_text_long_box_030a2d` | `3` | `4` | String 'Text too long for error box' |
-| `frontend.cpp` | `0x30ca0` | `sub_030ca0` | `1` | `1` | Address-based identifier |
-| `frontend.cpp` | `0x30cb9` | `sub_030cb9` | `1` | `2` | Address-based identifier |
-| `frontend.cpp` | `0x30cd9` | `sub_030cd9` | `2` | `5` | Address-based identifier |
-| `frontend.cpp` | `0x30e04` | `sub_030e04` | `1` | `1` | Address-based identifier |
-| `frontend.cpp` | `0x30e88` | `sub_030e88` | `1` | `3` | Address-based identifier |
-| `frontmap.cpp` | `0x30e47` | `sub_030e47` | `1` | `1` | Address-based identifier |
-| `frontmap.cpp` | `0x30ef8` | `dk_ldata_dkflag00_dat_030ef8` | `1` | `15` | String 'LDATA\DKFLAG00.DAT' |
-| `frontmap.cpp` | `0x31213` | `dk_ldata_dkflag00_dat_031213` | `1` | `7` | String 'LDATA\DKFLAG00.DAT' |
-| `frontmap.cpp` | `0x31273` | `sub_031273` | `1` | `5` | Address-based identifier |
-| `frontmap.cpp` | `0x31599` | `sub_031599` | `1` | `5` | Address-based identifier |
-| `frontmap.cpp` | `0x31854` | `sub_031854` | `1` | `8` | Address-based identifier |
-| `frontmap.cpp` | `0x31a51` | `dk_ldata_netflag_dat_031a51` | `1` | `13` | String 'LDATA\NETFLAG.DAT' |
-| `frontmap.cpp` | `0x31bd6` | `dk_ldata_netflag_dat_031bd6` | `1` | `5` | String 'LDATA\NETFLAG.DAT' |
-| `frontmap.cpp` | `0x31c23` | `sub_031c23` | `1` | `5` | Address-based identifier |
-| `frontmap.cpp` | `0x31def` | `dk_LbNetwork_Exchange_031def` | `1` | `11` | References 'LbNetwork_Exchange failed' |
-| `frontmap.cpp` | `0x322e9` | `dk_number_players_0322e9` | `1` | `10` | String 'Invalid number of players' |
-| `frontmap.cpp` | `0x32612` | `sub_032612` | `1` | `1` | Address-based identifier |
-| `frontmap.cpp` | `0x32738` | `sub_032738` | `2` | `3` | Address-based identifier |
-| `frontmap.cpp` | `0x327b5` | `sub_0327b5` | `2` | `1` | Address-based identifier |
-| `frontmap.cpp` | `0x32805` | `sub_032805` | `2` | `1` | Address-based identifier |
-| `frontmap.cpp` | `0x328e1` | `sub_0328e1` | `2` | `0` | Address-based identifier |
-| `frontmap.cpp` | `0x329ae` | `dk_enough_memory_game_structure_0329ae` | `2` | `8` | String 'Not enough memory in game structure for map' |
-| `frontmap.cpp` | `0x32b21` | `sub_032b21` | `3` | `2` | Address-based identifier |
-| `frontmap.cpp` | `0x32bf6` | `sub_032bf6` | `1` | `1` | Address-based identifier |
-| `frontmap.cpp` | `0x32d30` | `sub_032d30` | `1` | `2` | Address-based identifier |
-| `frontmap.cpp` | `0x32d8c` | `sub_032d8c` | `2` | `6` | Address-based identifier |
-| `frontmap.cpp` | `0x32e00` | `sub_032e00` | `1` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x52988` | `sub_052988` | `1` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x529b9` | `sub_0529b9` | `1` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x52a88` | `sub_052a88` | `1` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x52b58` | `sub_052b58` | `7` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x52b67` | `dk_more_room_menu_stack_052b67` | `1` | `1` | String 'NO MORE ROOM FOR MENU STACK' |
-| `newgui.cpp` | `0x52be7` | `sub_052be7` | `3` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x52c47` | `sub_052c47` | `1` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x52c6d` | `sub_052c6d` | `0` | `3` | Address-based identifier |
-| `newgui.cpp` | `0x52ced` | `sub_052ced` | `0` | `3` | Address-based identifier |
-| `newgui.cpp` | `0x52d6d` | `sub_052d6d` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x52da0` | `sub_052da0` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x52def` | `sub_052def` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x52e3d` | `sub_052e3d` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x52e7f` | `sub_052e7f` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x52ead` | `sub_052ead` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x52ebe` | `sub_052ebe` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x52ee8` | `sub_052ee8` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x52f03` | `sub_052f03` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x52f16` | `sub_052f16` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x52f44` | `sub_052f44` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x52f78` | `sub_052f78` | `2` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x53021` | `sub_053021` | `0` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x5315d` | `sub_05315d` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x53188` | `sub_053188` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x53208` | `sub_053208` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x53240` | `sub_053240` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x53290` | `sub_053290` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x53306` | `sub_053306` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x53356` | `sub_053356` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x533e6` | `sub_0533e6` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5341e` | `sub_05341e` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5345d` | `sub_05345d` | `1` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x534e5` | `sub_0534e5` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x53684` | `sub_053684` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x53716` | `sub_053716` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x53753` | `dk_illegal_computer_player_053753` | `0` | `1` | String 'Illegal computer player' |
-| `newgui.cpp` | `0x537af` | `sub_0537af` | `2` | `4` | Address-based identifier |
-| `newgui.cpp` | `0x5389b` | `sub_05389b` | `0` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x53971` | `sub_053971` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x53a18` | `dk_state_type_gui_state_053a18` | `0` | `2` | String 'Unknown state_type_to_gui_state[]' |
-| `newgui.cpp` | `0x53c05` | `sub_053c05` | `1` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x53c32` | `sub_053c32` | `1` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x53c6b` | `sub_053c6b` | `14` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x53ca3` | `sub_053ca3` | `1` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x53ccc` | `dk_oi_there_fade_time_053ccc` | `2` | `10` | String 'Oi! There is a fade time less than 1. Idiot.' |
-| `newgui.cpp` | `0x54089` | `sub_054089` | `2` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x540cb` | `sub_0540cb` | `1` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x54269` | `sub_054269` | `1` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5426d` | `sub_05426d` | `1` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x542d6` | `sub_0542d6` | `1` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5430b` | `sub_05430b` | `1` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x54324` | `sub_054324` | `1` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5435a` | `sub_05435a` | `2` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x543dd` | `sub_0543dd` | `3` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x5449e` | `sub_05449e` | `6` | `9` | Address-based identifier |
-| `newgui.cpp` | `0x54742` | `sub_054742` | `1` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x547f3` | `sub_0547f3` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5482c` | `dk_cycle_button_have_gui_05482c` | `0` | `2` | String 'Cycle button cannot have a 'gui_area_normal_button' draw fun' |
-| `newgui.cpp` | `0x548cb` | `dk_cycle_button_have_gui_0548cb` | `0` | `3` | String 'Cycle button cannot have a 'gui_area_normal_button' draw fun' |
-| `newgui.cpp` | `0x549a4` | `sub_0549a4` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x54a22` | `sub_054a22` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x54aa9` | `sub_054aa9` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x54add` | `dk_cycle_button_must_have_054add` | `0` | `2` | String 'Cycle button must have a non-null UBYTE Data pointer!' |
-| `newgui.cpp` | `0x54bab` | `dk_cycle_button_must_have_054bab` | `0` | `2` | String 'Cycle button must have a non-null UBYTE Data pointer!' |
-| `newgui.cpp` | `0x54c79` | `sub_054c79` | `0` | `4` | Address-based identifier |
-| `newgui.cpp` | `0x54d41` | `dk_button_must_point_scroll_054d41` | `0` | `3` | String 'Button must point to a SCROLL_TEXT_WINDOW data item' |
-| `newgui.cpp` | `0x54d8a` | `sub_054d8a` | `0` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x54eeb` | `sub_054eeb` | `0` | `7` | Address-based identifier |
-| `newgui.cpp` | `0x551e4` | `sub_0551e4` | `0` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x5542b` | `sub_05542b` | `0` | `5` | Address-based identifier |
-| `newgui.cpp` | `0x55701` | `sub_055701` | `0` | `8` | Address-based identifier |
-| `newgui.cpp` | `0x55b68` | `sub_055b68` | `0` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x55e33` | `sub_055e33` | `0` | `3` | Address-based identifier |
-| `newgui.cpp` | `0x56010` | `sub_056010` | `0` | `4` | Address-based identifier |
-| `newgui.cpp` | `0x563b1` | `sub_0563b1` | `0` | `3` | Address-based identifier |
-| `newgui.cpp` | `0x56642` | `sub_056642` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x56699` | `sub_056699` | `0` | `4` | Address-based identifier |
-| `newgui.cpp` | `0x5674c` | `sub_05674c` | `0` | `3` | Address-based identifier |
-| `newgui.cpp` | `0x5686f` | `sub_05686f` | `0` | `3` | Address-based identifier |
-| `newgui.cpp` | `0x569a1` | `sub_0569a1` | `0` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x56a50` | `sub_056a50` | `0` | `4` | Address-based identifier |
-| `newgui.cpp` | `0x56b63` | `sub_056b63` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x56ee6` | `sub_056ee6` | `1` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x570a7` | `sub_0570a7` | `0` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x571cf` | `sub_0571cf` | `0` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x57348` | `sub_057348` | `0` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x574b5` | `sub_0574b5` | `0` | `3` | Address-based identifier |
-| `newgui.cpp` | `0x5762c` | `sub_05762c` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x57739` | `sub_057739` | `3` | `6` | Address-based identifier |
-| `newgui.cpp` | `0x5789a` | `dk_have_text_scrolling_box_05789a` | `1` | `4` | String 'Cannot have a TEXT_SCROLLING box type without a pointer to a' |
-| `newgui.cpp` | `0x57a52` | `sub_057a52` | `2` | `4` | Address-based identifier |
-| `newgui.cpp` | `0x57b6f` | `sub_057b6f` | `2` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x57bba` | `dk_bar_small_057bba` | `3` | `2` | String 'Bar is too small' |
-| `newgui.cpp` | `0x57cac` | `dk_bar_small_057cac` | `2` | `2` | String 'Bar is too small' |
-| `newgui.cpp` | `0x57d9e` | `dk_bar_small_057d9e` | `1` | `3` | String 'Bar is too small' |
-| `newgui.cpp` | `0x57ea2` | `sub_057ea2` | `1` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x57f01` | `sub_057f01` | `1` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x57f6b` | `sub_057f6b` | `10` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x57fd9` | `sub_057fd9` | `1` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x57fe4` | `sub_057fe4` | `5` | `20` | Address-based identifier |
-| `newgui.cpp` | `0x58718` | `sub_058718` | `2` | `3` | Address-based identifier |
-| `newgui.cpp` | `0x587a6` | `sub_0587a6` | `2` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x587ff` | `sub_0587ff` | `1` | `4` | Address-based identifier |
-| `newgui.cpp` | `0x588b6` | `sub_0588b6` | `2` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x58921` | `dk_jonty_here_am_writing_058921` | `1` | `3` | String 'JONTY HERE   : ...I AM WRITING THIS AT 4AM ON KEEPERS LAST D' |
-| `newgui.cpp` | `0x58a7e` | `sub_058a7e` | `1` | `3` | Address-based identifier |
-| `newgui.cpp` | `0x58b21` | `sub_058b21` | `1` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x58b37` | `dk_this_bloody_tooltip_long_058b37` | `1` | `4` | String 'This bloody tooltip is too long' |
-| `newgui.cpp` | `0x58ba8` | `sub_058ba8` | `5` | `6` | Address-based identifier |
-| `newgui.cpp` | `0x58ca7` | `sub_058ca7` | `1` | `3` | Address-based identifier |
-| `newgui.cpp` | `0x58e1c` | `sub_058e1c` | `4` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x590f8` | `sub_0590f8` | `1` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x59323` | `sub_059323` | `1` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x595ab` | `sub_0595ab` | `2` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x5990a` | `sub_05990a` | `0` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x59a23` | `sub_059a23` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x59aef` | `sub_059aef` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x59c71` | `sub_059c71` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x59c83` | `sub_059c83` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x59ca1` | `sub_059ca1` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x59ccb` | `sub_059ccb` | `2` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x59d02` | `sub_059d02` | `2` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x59d1a` | `sub_059d1a` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x59d40` | `sub_059d40` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x59d66` | `sub_059d66` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x59dc4` | `dk_stupid_spell_chosen_059dc4` | `0` | `3` | String 'Stupid spell chosen' |
-| `newgui.cpp` | `0x59ee7` | `sub_059ee7` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x59f51` | `sub_059f51` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x59f7e` | `sub_059f7e` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x59fd4` | `sub_059fd4` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5a004` | `sub_05a004` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5a06d` | `sub_05a06d` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5a0e7` | `sub_05a0e7` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5a111` | `dk_illegal_autopilot_type_05a111` | `0` | `1` | String 'ILLEGAL AUTOPILOT TYPE' |
-| `newgui.cpp` | `0x5a180` | `sub_05a180` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5a18a` | `sub_05a18a` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5a19c` | `sub_05a19c` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5a1a4` | `sub_05a1a4` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5a1b6` | `sub_05a1b6` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5a1d1` | `sub_05a1d1` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5a1da` | `sub_05a1da` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5a202` | `sub_05a202` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5a22b` | `sub_05a22b` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5a266` | `sub_05a266` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5a2b1` | `sub_05a2b1` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5a2bc` | `sub_05a2bc` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5a2c7` | `sub_05a2c7` | `0` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x5a338` | `sub_05a338` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5a365` | `sub_05a365` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5a3a8` | `sub_05a3a8` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5a3ce` | `sub_05a3ce` | `0` | `4` | Address-based identifier |
-| `newgui.cpp` | `0x5a417` | `sub_05a417` | `0` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x5a432` | `sub_05a432` | `0` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x5a47f` | `sub_05a47f` | `0` | `4` | Address-based identifier |
-| `newgui.cpp` | `0x5a521` | `sub_05a521` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5a526` | `sub_05a526` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5a567` | `sub_05a567` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5a5b5` | `sub_05a5b5` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5a600` | `sub_05a600` | `0` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x5a649` | `sub_05a649` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5a692` | `sub_05a692` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5a6a6` | `sub_05a6a6` | `1` | `3` | Address-based identifier |
-| `newgui.cpp` | `0x5a705` | `sub_05a705` | `0` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x5a76c` | `sub_05a76c` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5a83d` | `sub_05a83d` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5a8f3` | `dk_eek_this_what_you_05a8f3` | `0` | `3` | String 'EEK! This is what you just picked up a second ago!' |
-| `newgui.cpp` | `0x5aaf4` | `sub_05aaf4` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5ab45` | `sub_05ab45` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5ab81` | `sub_05ab81` | `1` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5abd1` | `sub_05abd1` | `0` | `3` | Address-based identifier |
-| `newgui.cpp` | `0x5abf3` | `sub_05abf3` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5ac13` | `sub_05ac13` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5ac1e` | `sub_05ac1e` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5ac4a` | `sub_05ac4a` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5ac77` | `sub_05ac77` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5ac80` | `sub_05ac80` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5accc` | `sub_05accc` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5acf7` | `sub_05acf7` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5ad0a` | `sub_05ad0a` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5ad26` | `sub_05ad26` | `1` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5ae20` | `sub_05ae20` | `2` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5ae90` | `sub_05ae90` | `2` | `4` | Address-based identifier |
-| `newgui.cpp` | `0x5aee2` | `sub_05aee2` | `4` | `4` | Address-based identifier |
-| `newgui.cpp` | `0x5afda` | `sub_05afda` | `10` | `3` | Address-based identifier |
-| `newgui.cpp` | `0x5b1bc` | `dk_backup_input_field_small_05b1bc` | `1` | `7` | String 'backup_input_field too small' |
-| `newgui.cpp` | `0x5b25b` | `sub_05b25b` | `1` | `5` | Address-based identifier |
-| `newgui.cpp` | `0x5b3dd` | `sub_05b3dd` | `1` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5b3fc` | `sub_05b3fc` | `1` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x5b4e7` | `sub_05b4e7` | `1` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x5b5e1` | `sub_05b5e1` | `2` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5b5f5` | `sub_05b5f5` | `1` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5b645` | `sub_05b645` | `10` | `3` | Address-based identifier |
-| `newgui.cpp` | `0x5b940` | `sub_05b940` | `1` | `3` | Address-based identifier |
-| `newgui.cpp` | `0x5b9b3` | `sub_05b9b3` | `3` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5b9c0` | `sub_05b9c0` | `2` | `3` | Address-based identifier |
-| `newgui.cpp` | `0x5ba63` | `sub_05ba63` | `1` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5ba80` | `sub_05ba80` | `2` | `3` | Address-based identifier |
-| `newgui.cpp` | `0x5bb49` | `sub_05bb49` | `1` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x5bb9c` | `sub_05bb9c` | `2` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x5bcc1` | `sub_05bcc1` | `2` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5bcd7` | `sub_05bcd7` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5bd22` | `sub_05bd22` | `1` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x5be78` | `sub_05be78` | `1` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x5bf63` | `sub_05bf63` | `1` | `3` | Address-based identifier |
-| `newgui.cpp` | `0x5c053` | `sub_05c053` | `1` | `8` | Address-based identifier |
-| `newgui.cpp` | `0x5c2e3` | `sub_05c2e3` | `4` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x5c377` | `sub_05c377` | `2` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5c408` | `dk_undefined_event_type_05c408` | `0` | `8` | String 'Undefined event type: %d' |
-| `newgui.cpp` | `0x5c4f3` | `sub_05c4f3` | `2` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x5c544` | `sub_05c544` | `2` | `3` | Address-based identifier |
-| `newgui.cpp` | `0x5c74d` | `sub_05c74d` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5c7c4` | `sub_05c7c4` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5c7ea` | `sub_05c7ea` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5c810` | `sub_05c810` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5c82f` | `sub_05c82f` | `2` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5c848` | `sub_05c848` | `19` | `6` | Address-based identifier |
-| `newgui.cpp` | `0x5c8bc` | `sub_05c8bc` | `0` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5c8fa` | `sub_05c8fa` | `6` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5c985` | `sub_05c985` | `1` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x5c9cf` | `sub_05c9cf` | `1` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5cabb` | `sub_05cabb` | `2` | `3` | Address-based identifier |
-| `newgui.cpp` | `0x5cc4a` | `sub_05cc4a` | `3` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5cc56` | `sub_05cc56` | `1` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5ccf5` | `dk_cycle_button_have_gui_05ccf5` | `0` | `1` | String 'Cycle button cannot have a 'gui_area_normal_button' draw fun' |
-| `newgui.cpp` | `0x5cd55` | `sub_05cd55` | `3` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5cda7` | `sub_05cda7` | `1` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x5ce3d` | `sub_05ce3d` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5ce63` | `dk_create_floating_spirit_05ce63` | `0` | `3` | String 'Unable to create floating spirit' |
-| `newgui.cpp` | `0x5ceca` | `sub_05ceca` | `1` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5cee9` | `sub_05cee9` | `2` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5cef9` | `sub_05cef9` | `1` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5cf03` | `sub_05cf03` | `4` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x5cf2d` | `sub_05cf2d` | `16` | `1` | Address-based identifier |
-| `newgui.cpp` | `0x5cf9f` | `sub_05cf9f` | `0` | `4` | Address-based identifier |
-| `newgui.cpp` | `0x5d01f` | `sub_05d01f` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5d032` | `sub_05d032` | `1` | `2` | Address-based identifier |
-| `newgui.cpp` | `0x5d15e` | `sub_05d15e` | `2` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5d174` | `sub_05d174` | `0` | `0` | Address-based identifier |
-| `newgui.cpp` | `0x5d19c` | `dk_dead_thing_friend_enemy_05d19c` | `1` | `1` | String 'Dead thing in friend/enemy battle-list' |
-| `newgui.cpp` | `0x5d280` | `sub_05d280` | `1` | `5` | Address-based identifier |
-| `panmap.cpp` | `0x62570` | `sub_062570` | `0` | `0` | Address-based identifier |
-| `panmap.cpp` | `0x62578` | `sub_062578` | `1` | `3` | Address-based identifier |
-| `panmap.cpp` | `0x62787` | `sub_062787` | `1` | `0` | Address-based identifier |
-| `panmap.cpp` | `0x627b5` | `sub_0627b5` | `17` | `2` | Address-based identifier |
-| `panmap.cpp` | `0x629cc` | `sub_0629cc` | `3` | `0` | Address-based identifier |
-| `panmap.cpp` | `0x62a0d` | `sub_062a0d` | `1` | `0` | Address-based identifier |
-| `panmap.cpp` | `0x62b62` | `sub_062b62` | `1` | `0` | Address-based identifier |
-| `panmap.cpp` | `0x62d70` | `sub_062d70` | `1` | `1` | Address-based identifier |
-| `panmap.cpp` | `0x62eb7` | `sub_062eb7` | `1` | `2` | Address-based identifier |
-| `panmap.cpp` | `0x62ee2` | `sub_062ee2` | `3` | `2` | Address-based identifier |
-| `panmap.cpp` | `0x63122` | `dk_door_flagged_position_063122` | `15` | `2` | String 'No door for flagged position' |
-| `panmap.cpp` | `0x633c4` | `sub_0633c4` | `1` | `7` | Address-based identifier |
-| `bflib/bflib_video.cpp` | `0xf0d90` | `sub_0f0d90` | `2` | `4` | Address-based identifier |
-| `bflib/bflib_video.cpp` | `0xf143c` | `dk_sbawe32_mdi_0f143c` | `3` | `16` | String 'SBAWE32.MDI' |
-| `bflib/bflib_video.cpp` | `0xf1b38` | `dk_bf_debug_audio_0f1b38` | `1` | `11` | String 'BF_DEBUG_AUDIO' |
-| `bflib/bflib_video.cpp` | `0xfe128` | `dk_bf25_init_music_0fe128` | `1` | `21` | String 'BF25 - Init Music' |
+| `setup.cpp` | `0x69a90` | `setup_init_color_tables` | `1` | `1` | Initialize colour lookup tables before screen setup |
+| `setup.cpp` | `0x69acb` | `setup_build_fade_palette_steps` | `1` | `1` | Precompute palette fade step tables |
+| `setup.cpp` | `0x69ba0` | `setup_compare_display_modes` | `1` | `1` | Compare two display mode descriptors for compatibility |
+| `setup.cpp` | `0x69c2c` | `setup_detect_physical_memory_tier` | `2` | `1` | Map detected physical RAM (MB) to asset caching tier (8/16/24/32 MB) |
+| `setup.cpp` | `0x69c7f` | `setup_load_vga_256_palettes` | `1` | `8` | Load VGA 256-color palettes and shade tables from DATA/ |
+| `setup.cpp` | `0x69edc` | `setup_load_alpha_and_light_tables` | `1` | `7` | Load DATA/ALPHA.COL and lighting tables |
+| `setup.cpp` | `0x6a356` | `setup_free_gui_data_files` | `2` | `6` | Free loaded GUI data/sprite tables (data/gui.dat) |
+| `setup.cpp` | `0x6a412` | `setup_verify_cdrom_installation` | `1` | `21` | Verify installation files and prompt for Dungeon Keeper CD-ROM if missing |
+| `setup.cpp` | `0x6a553` | `setup_load_core_game_data` | `1` | `11` | Load core game data files via LbDataLoadAll |
+| `setup.cpp` | `0x6a652` | `setup_shutdown_video_and_audio` | `1` | `7` | Shutdown sound, timer, and LbScreenReset on game exit |
+| `setup.cpp` | `0x6a689` | `setup_init_game_screen_and_subsystems` | `1` | `28` | Initialize VESA/VGA screen mode (disallow MCGA minimal) and game subsystems |
+| `setup.cpp` | `0x6aac0` | `setup_reload_gui_and_mode_sprites` | `2` | `18` | Reload GUI sprite tables (data/gui.dat) for current screen resolution |
+| `setup.cpp` | `0x6adc5` | `setup_load_text_strings_dat` | `1` | `5` | Load localized text strings from DATA/TEXT.DAT |
+| `setup.cpp` | `0x6ae14` | `setup_clear_pointer_array` | `1` | `0` | Zero out array of pointers |
+| `setup.cpp` | `0x6ae37` | `setup_clear_screen_backbuffer` | `1` | `2` | Clear full screen backbuffer (g_screen_width * g_screen_height) |
+| `setup.cpp` | `0x6ae80` | `setup_show_loading_raw_screen` | `2` | `13` | Load and display LOADING.RAW splash screen with palette |
+| `setup.cpp` | `0x6b04d` | `setup_init_mouse_and_pointer` | `1` | `3` | Initialize mouse driver and cursor pointer |
+| `setup.cpp` | `0x6b0c8` | `setup_load_pointer_sprites` | `2` | `3` | Load mouse pointer sprite sheet (data/hpointer.dat) |
+| `setup.cpp` | `0x6b12b` | `setup_free_pointer_sprites` | `2` | `2` | Detach mouse cursor and free pointer sprite sheet |
+| `setup.cpp` | `0x6b16f` | `setup_allocate_graphics_heap` | `1` | `9` | Allocate and initialize sprite/texture graphics heap |
+| `setup.cpp` | `0x6b4c7` | `setup_show_bullfrog_legal_splash` | `1` | `22` | Enter 640x480 mode (0x0d) and display DATA/LEGAL.RAW splash |
+| `setup.cpp` | `0x6b7d0` | `setup_init_trig_and_projection_tables` | `1` | `0` | Initialize 512-entry trigonometry/projection lookup tables |
+| `setup.cpp` | `0x6b820` | `setup_switch_screen_resolution` | `3` | `10` | Switch active screen mode, reallocate viewport, and reload sprites |
+| `setup.cpp` | `0x6bdda` | `setup_compute_creature_eye_offset` | `1` | `18` | Compute first-person camera eye height offset for creature breed |
+| `setup.cpp` | `0x6c22b` | `setup_interpolate_creature_eye_bob` | `1` | `0` | Interpolate head-bob offset during creature possession movement |
+| `setup.cpp` | `0x6c2cc` | `setup_apply_possession_lens_and_eye` | `1` | `8` | Configure eye lens effect and camera height when entering possession |
+| `engine3.cpp` | `0x948a0` | `engine3_clip_and_emit_textured_tri_mode0` | `0` | `1` | Frustum-clip 3D triangle (mask 0x1f8) and emit textured poly (mode 0) |
+| `engine3.cpp` | `0x956b8` | `engine3_clip_and_emit_textured_tri_mode1` | `1` | `1` | Frustum-clip 3D triangle (mask 0x1f8) and emit textured poly (mode 1) |
+| `engine3.cpp` | `0x964d0` | `engine3_clip_and_emit_textured_tri_mode2` | `1` | `1` | Frustum-clip 3D triangle (mask 0x1f8) and emit textured poly (mode 2) |
+| `engine3.cpp` | `0x98104` | `engine3_emit_unclipped_tri_variant0` | `0` | `0` | Emit unclipped 3D triangle primitive (variant 0) into g_render_poly_write_ptr |
+| `engine3.cpp` | `0x98248` | `engine3_emit_unclipped_tri_variant1` | `0` | `0` | Emit unclipped 3D triangle primitive (variant 1) into g_render_poly_write_ptr |
+| `engine3.cpp` | `0x9838c` | `engine3_emit_unclipped_tri_variant2` | `0` | `0` | Emit unclipped 3D triangle primitive (variant 2) into g_render_poly_write_ptr |
+| `engine3.cpp` | `0x984d0` | `engine3_emit_unclipped_tri_variant3` | `0` | `0` | Emit unclipped 3D triangle primitive (variant 3) into g_render_poly_write_ptr |
+| `engine3.cpp` | `0x98614` | `engine3_build_subtile_column_geometry_high` | `1` | `3` | Generate 3D voxel column faces for visible subtile strip (high detail) |
+| `engine3.cpp` | `0x98cb8` | `engine3_build_subtile_column_geometry_med` | `1` | `1` | Generate 3D voxel column faces for visible subtile strip (medium detail) |
+| `engine3.cpp` | `0x9bdf0` | `engine3_build_subtile_column_geometry_low` | `1` | `1` | Generate 3D voxel column faces for visible subtile strip (low detail) |
+| `engine3.cpp` | `0x9ef3c` | `engine3_clear_visible_subtile_span_list` | `1` | `1` | Reset visible subtile span buffers for g_view_render_radius |
+| `engine3.cpp` | `0x9f2a4` | `engine3_intersect_frustum_edge_with_grid` | `1` | `0` | Compute subtile grid intersection along camera frustum ray |
+| `engine3.cpp` | `0x9f314` | `engine3_scan_frustum_subtile_bounds` | `1` | `1` | Compute left/right visible subtile bounds across frustum edges |
+| `engine3.cpp` | `0x9f8bc` | `engine3_determine_visible_subtiles_for_camera` | `1` | `2` | Build visible subtile list for isometric or first-person camera |
+| `engine3.cpp` | `0x9fe38` | `engine3_begin_frame_projection_setup` | `0` | `1` | Reset g_render_poly_write_ptr and select projection transform for frame |
+| `engine3.cpp` | `0x9ff84` | `engine3_rasterize_depth_buckets_high` | `1` | `10` | Traverse all 704 depth buckets (0x2bf..0) and rasterize queued polygons (high) |
+| `engine3.cpp` | `0xa3a4c` | `engine3_update_camera_rotation_trig` | `0` | `0` | Compute sin/cos camera rotation matrix terms |
+| `engine3.cpp` | `0xa3aa0` | `engine3_project_camera_grid_to_screen` | `1` | `16` | Transform world subtile grid coordinates into camera/screen space |
+| `engine3.cpp` | `0xa434c` | `engine3_sweep_visible_subtile_rows` | `0` | `1` | Iterate visible subtile rows within g_view_render_radius |
+| `engine3.cpp` | `0xa49ec` | `engine3_draw_creature_health_and_level_bar` | `1` | `3` | Render floating health bar and level flower above Creature Thing |
+| `engine3.cpp` | `0xa5030` | `engine3_copy_sprite_draw_descriptor` | `1` | `0` | Copy 28-byte (7-dword) sprite draw descriptor |
+| `engine3.cpp` | `0xa5178` | `engine3_queue_room_flag_or_special_sprite` | `2` | `0` | Queue room efficiency/banner sprite into depth bucket |
+| `engine3.cpp` | `0xa5240` | `engine3_draw_queued_billboard_sprite` | `3` | `8` | Render depth-sorted 2D billboard sprite in 3D view |
+| `engine3.cpp` | `0xa596c` | `engine3_draw_string_billboard` | `2` | `1` | Render floating text/number billboard in 3D view |
+| `engine3.cpp` | `0xa5a74` | `engine3_draw_keeper_hand_or_object_sprite` | `2` | `1` | Render Keeper hand or held object sprite in 3D view |
+| `engine3.cpp` | `0xa5c28` | `engine3_draw_translucent_effect_sprite` | `2` | `1` | Render translucent spell/effect sprite in 3D view |
+| `engine3.cpp` | `0xa5d4c` | `engine3_mark_slab_subtiles_rendered` | `2` | `1` | Mark 3x3 subtiles of a slab as visited during frame rendering |
+| `engine3.cpp` | `0xa5dd0` | `engine3_init_quad_vertex_uvs` | `0` | `0` | Populate quad vertex indices and 16.16 fixed-point UV coordinates |
+| `engine3.cpp` | `0xa5e00` | `engine3_is_triangle_front_facing_and_inside_frustum` | `0` | `0` | Test 3D triangle clip flags (0x1f8) and 2D screen-space cross product winding |
+| `engine3.cpp` | `0xa5e60` | `engine3_project_vertex_perspective` | `0` | `0` | Project 3D camera-space vertex to 2D screen coordinates (perspective) |
+| `engine3.cpp` | `0xa5ff0` | `engine3_enqueue_line_primitive` | `0` | `0` | Append 3D line primitive into g_render_poly_write_ptr and depth bucket |
+| `engine3.cpp` | `0xa60a0` | `engine3_enqueue_point_or_marker_primitive` | `0` | `0` | Append marker primitive into g_render_poly_write_ptr and depth bucket |
+| `engine3.cpp` | `0xa6134` | `engine3_collect_and_queue_subtile_things` | `0` | `1` | Walk mapwho Thing linked list on subtile and queue sprites for rendering |
+| `engine3.cpp` | `0xa6504` | `engine3_rasterize_depth_buckets_low` | `1` | `9` | Traverse all 704 depth buckets (0x2bf..0) and rasterize queued polygons (low) |
+| `engine3.cpp` | `0xa6990` | `engine3_render_3d_dungeon_viewport` | `1` | `9` | Top-level 3D dungeon viewport renderer (clamps camera zoom, projects & rasterizes scene) |
+| `engine3.cpp` | `0xaa3a8` | `engine3_scale_coord_by_camera_zoom` | `3` | `0` | Scale world coordinate delta by camera zoom factor |
+| `draw.cpp` | `0x872a4` | `draw_fn_0872a4` | `2` | `4` | Module draw.cpp procedure @ 0x0872a4 |
+| `draw.cpp` | `0x872b8` | `draw_update_player_dungeon_0872b8` | `3` | `14` | Accesses per-player Dungeon state (stride 0x1508) |
+| `draw.cpp` | `0x87694` | `draw_fn_087694` | `3` | `13` | Module draw.cpp procedure @ 0x087694 |
+| `draw.cpp` | `0x87870` | `draw_update_creature_and_thing_087870` | `1` | `13` | Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs) |
+| `draw.cpp` | `0x87da4` | `draw_unhandled_screen_mode_087da4` | `1` | `8` | String 'Unhandled screen mode' |
+| `draw.cpp` | `0x880d0` | `draw_fn_0880d0` | `2` | `1` | Module draw.cpp procedure @ 0x0880d0 |
+| `draw.cpp` | `0x882b4` | `draw_update_slab_subtile_columns_0882b4` | `2` | `3` | Updates 3x3 subtile map entries for slab coordinates |
+| `draw.cpp` | `0x88698` | `draw_update_slab_subtile_columns_088698` | `1` | `4` | Updates 3x3 subtile map entries for slab coordinates |
+| `draw.cpp` | `0x88c6c` | `draw_process_map_subtile_088c6c` | `1` | `1` | Reads/modifies Map[256x256] subtile data |
+| `draw.cpp` | `0x88e2c` | `draw_process_thing_entity_088e2c` | `1` | `3` | Looks up Thing* in g_thing_ptrs[2048] and updates state |
+| `draw.cpp` | `0x89080` | `draw_fn_089080` | `0` | `0` | Module draw.cpp procedure @ 0x089080 |
+| `draw.cpp` | `0x890bc` | `draw_update_creature_and_thing_0890bc` | `3` | `5` | Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs) |
+| `draw.cpp` | `0x89ae8` | `draw_update_player_dungeon_089ae8` | `1` | `1` | Accesses per-player Dungeon state (stride 0x1508) |
+| `draw.cpp` | `0x8a194` | `draw_update_player_dungeon_08a194` | `1` | `6` | Accesses per-player Dungeon state (stride 0x1508) |
+| `draw.cpp` | `0x8a9f4` | `draw_update_player_view_state_08a9f4` | `0` | `1` | Accesses per-player PlayerInfo state (stride 0x4ef) |
+| `draw.cpp` | `0x8abc4` | `draw_update_player_view_state_08abc4` | `0` | `1` | Accesses per-player PlayerInfo state (stride 0x4ef) |
+| `draw.cpp` | `0x8ac9c` | `draw_update_player_view_state_08ac9c` | `0` | `1` | Accesses per-player PlayerInfo state (stride 0x4ef) |
+| `draw.cpp` | `0x8ae00` | `draw_frames_different_between_views_08ae00` | `1` | `3` | String 'No frames different between views C%d, M%d, A%d, B%d' |
+| `draw.cpp` | `0x8aee4` | `draw_frames_different_between_views_08aee4` | `1` | `3` | String 'No frames different between views C%d, M%d, A%d, B%d' |
+| `draw.cpp` | `0x8afd8` | `draw_update_slab_subtile_columns_08afd8` | `2` | `7` | Updates 3x3 subtile map entries for slab coordinates |
+| `draw.cpp` | `0x8bb2c` | `draw_update_creature_and_thing_08bb2c` | `1` | `3` | Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs) |
+| `draw.cpp` | `0x8bde8` | `draw_process_map_subtile_08bde8` | `1` | `12` | Reads/modifies Map[256x256] subtile data |
+| `draw.cpp` | `0x8cc24` | `draw_load_palette_file_08cc24` | `1` | `6` | String 'Cannot load palette file %s' |
+| `draw.cpp` | `0x8ccec` | `draw_roll_action_random_08ccec` | `25` | `1` | Evaluates deterministic lockstep PRNG (g_action_random_seed) |
+| `draw.cpp` | `0x8cdf4` | `draw_draw_text_overlay_08cdf4` | `0` | `2` | Configures font/flags and draws text on screen |
+| `draw.cpp` | `0x8d220` | `draw_fn_08d220` | `3` | `1` | Module draw.cpp procedure @ 0x08d220 |
+| `draw.cpp` | `0x8d348` | `draw_draw_text_overlay_08d348` | `3` | `3` | Configures font/flags and draws text on screen |
+| `draw.cpp` | `0x8d740` | `draw_fn_08d740` | `1` | `2` | Module draw.cpp procedure @ 0x08d740 |
+| `draw.cpp` | `0x8d998` | `draw_draw_text_overlay_08d998` | `1` | `4` | Configures font/flags and draws text on screen |
+| `draw.cpp` | `0x8dcd0` | `draw_draw_text_overlay_08dcd0` | `0` | `4` | Configures font/flags and draws text on screen |
+| `draw.cpp` | `0x8de90` | `draw_fn_08de90` | `0` | `2` | Module draw.cpp procedure @ 0x08de90 |
+| `draw.cpp` | `0x8eadc` | `draw_fn_08eadc` | `2` | `0` | Module draw.cpp procedure @ 0x08eadc |
+| `draw.cpp` | `0x8ebb0` | `draw_draw_text_overlay_08ebb0` | `3` | `3` | Configures font/flags and draws text on screen |
+| `draw.cpp` | `0x8ecb0` | `draw_update_player_view_state_08ecb0` | `0` | `1` | Accesses per-player PlayerInfo state (stride 0x4ef) |
+| `draw.cpp` | `0x8ed2c` | `draw_process_dungeon_room_08ed2c` | `1` | `0` | Operates on Room structure in g_rooms (stride 0x45) |
+| `draw.cpp` | `0x8ed84` | `draw_update_player_view_state_08ed84` | `0` | `0` | Accesses per-player PlayerInfo state (stride 0x4ef) |
+| `draw.cpp` | `0x8ee8c` | `draw_update_player_dungeon_08ee8c` | `0` | `0` | Accesses per-player Dungeon state (stride 0x1508) |
+| `draw.cpp` | `0x8eebc` | `draw_update_player_dungeon_08eebc` | `0` | `0` | Accesses per-player Dungeon state (stride 0x1508) |
+| `draw.cpp` | `0x8eeec` | `draw_process_thing_entity_08eeec` | `1` | `3` | Looks up Thing* in g_thing_ptrs[2048] and updates state |
+| `draw.cpp` | `0x8f190` | `draw_dene_says_big_hello_08f190` | `0` | `3` | String 'Dene says a big 'Hello' to Goth Buns, Tarts and Barbies' |
+| `draw.cpp` | `0x8f320` | `draw_update_slab_subtile_columns_08f320` | `1` | `1` | Updates 3x3 subtile map entries for slab coordinates |
+| `draw.cpp` | `0x8f518` | `draw_update_slab_subtile_columns_08f518` | `1` | `4` | Updates 3x3 subtile map entries for slab coordinates |
+| `draw.cpp` | `0x8f75c` | `draw_update_slab_subtile_columns_08f75c` | `1` | `3` | Updates 3x3 subtile map entries for slab coordinates |
+| `draw.cpp` | `0x8f924` | `draw_update_slab_subtile_columns_08f924` | `3` | `4` | Updates 3x3 subtile map entries for slab coordinates |
+| `draw.cpp` | `0x8fb10` | `draw_update_slab_subtile_columns_08fb10` | `1` | `3` | Updates 3x3 subtile map entries for slab coordinates |
+| `draw.cpp` | `0x8fd14` | `draw_update_slab_subtile_columns_08fd14` | `1` | `2` | Updates 3x3 subtile map entries for slab coordinates |
+| `draw.cpp` | `0x8feb4` | `draw_process_map_subtile_08feb4` | `0` | `0` | Reads/modifies Map[256x256] subtile data |
+| `draw.cpp` | `0x902e4` | `draw_process_map_subtile_0902e4` | `0` | `0` | Reads/modifies Map[256x256] subtile data |
+| `draw.cpp` | `0x90610` | `draw_fn_090610` | `2` | `0` | Module draw.cpp procedure @ 0x090610 |
+| `draw.cpp` | `0x90720` | `draw_fn_090720` | `0` | `0` | Module draw.cpp procedure @ 0x090720 |
+| `draw.cpp` | `0x907d8` | `draw_update_player_view_state_0907d8` | `0` | `0` | Accesses per-player PlayerInfo state (stride 0x4ef) |
+| `draw.cpp` | `0x90a50` | `draw_update_player_view_state_090a50` | `0` | `0` | Accesses per-player PlayerInfo state (stride 0x4ef) |
+| `draw.cpp` | `0x90c14` | `draw_update_player_view_state_090c14` | `1` | `1` | Accesses per-player PlayerInfo state (stride 0x4ef) |
+| `draw.cpp` | `0x915dc` | `draw_update_player_view_state_0915dc` | `2` | `1` | Accesses per-player PlayerInfo state (stride 0x4ef) |
+| `draw.cpp` | `0x9164c` | `draw_fn_09164c` | `1` | `0` | Module draw.cpp procedure @ 0x09164c |
+| `draw.cpp` | `0x929c0` | `draw_fn_0929c0` | `1` | `1` | Module draw.cpp procedure @ 0x0929c0 |
+| `draw.cpp` | `0x92be0` | `draw_update_player_view_state_092be0` | `1` | `0` | Accesses per-player PlayerInfo state (stride 0x4ef) |
+| `draw.cpp` | `0x92d10` | `draw_process_map_subtile_092d10` | `1` | `0` | Reads/modifies Map[256x256] subtile data |
+| `draw.cpp` | `0x93120` | `draw_process_map_subtile_093120` | `1` | `0` | Reads/modifies Map[256x256] subtile data |
+| `draw.cpp` | `0x938d8` | `draw_process_map_subtile_0938d8` | `1` | `0` | Reads/modifies Map[256x256] subtile data |
+| `draw.cpp` | `0x940dc` | `draw_update_player_view_state_0940dc` | `1` | `0` | Accesses per-player PlayerInfo state (stride 0x4ef) |
+| `draw.cpp` | `0x94218` | `draw_fn_094218` | `0` | `0` | Module draw.cpp procedure @ 0x094218 |
+| `draw.cpp` | `0x943c0` | `draw_fn_0943c0` | `0` | `0` | Module draw.cpp procedure @ 0x0943c0 |
+| `draw.cpp` | `0x94594` | `draw_fn_094594` | `0` | `0` | Module draw.cpp procedure @ 0x094594 |
+| `draw.cpp` | `0x947b8` | `draw_fn_0947b8` | `0` | `0` | Module draw.cpp procedure @ 0x0947b8 |
+| `draw.cpp` | `0x94820` | `draw_fn_094820` | `0` | `0` | Module draw.cpp procedure @ 0x094820 |
+| `draw.cpp` | `0x94824` | `draw_fn_094824` | `3` | `0` | Module draw.cpp procedure @ 0x094824 |
+| `draw.cpp` | `0xa43b4` | `draw_process_map_subtile_0a43b4` | `2` | `4` | Reads/modifies Map[256x256] subtile data |
+| `column.cpp` | `0x15318` | `column_fn_015318` | `8` | `0` | Module column.cpp procedure @ 0x015318 |
+| `column.cpp` | `0x1534a` | `column_fn_01534a` | `3` | `1` | Module column.cpp procedure @ 0x01534a |
+| `column.cpp` | `0x15386` | `column_could_create_column_none_015386` | `3` | `3` | String 'Could not create column: None free' |
+| `column.cpp` | `0x15456` | `column_fn_015456` | `1` | `0` | Module column.cpp procedure @ 0x015456 |
+| `column.cpp` | `0x15479` | `column_allocate_column_015479` | `3` | `4` | String 'Cannot allocate column' |
+| `column.cpp` | `0x15502` | `column_process_map_subtile_015502` | `2` | `1` | Reads/modifies Map[256x256] subtile data |
+| `column.cpp` | `0x15561` | `column_fn_015561` | `0` | `1` | Module column.cpp procedure @ 0x015561 |
+| `column.cpp` | `0x15603` | `column_process_map_subtile_015603` | `1` | `3` | Reads/modifies Map[256x256] subtile data |
+| `column.cpp` | `0x156a7` | `column_fn_0156a7` | `0` | `1` | Module column.cpp procedure @ 0x0156a7 |
+| `column.cpp` | `0x156de` | `column_process_map_subtile_0156de` | `1` | `3` | Reads/modifies Map[256x256] subtile data |
+| `column.cpp` | `0x157ac` | `column_fn_0157ac` | `4` | `0` | Module column.cpp procedure @ 0x0157ac |
+| `column.cpp` | `0x157e4` | `column_fn_0157e4` | `1` | `0` | Module column.cpp procedure @ 0x0157e4 |
+| `column.cpp` | `0x1581c` | `column_fn_01581c` | `1` | `0` | Module column.cpp procedure @ 0x01581c |
+| `ceiling.cpp` | `0x7bb10` | `ceiling_fn_07bb10` | `1` | `3` | Module ceiling.cpp procedure @ 0x07bb10 |
+| `ceiling.cpp` | `0x7bc8d` | `ceiling_fn_07bc8d` | `1` | `3` | Module ceiling.cpp procedure @ 0x07bc8d |
+| `ceiling.cpp` | `0x7c1f0` | `ceiling_illegal_ceiling_step_value_07c1f0` | `2` | `1` | String 'Illegal ceiling step value' |
+| `ceiling.cpp` | `0x7c3c8` | `ceiling_process_map_subtile_07c3c8` | `1` | `2` | Reads/modifies Map[256x256] subtile data |
+| `ceiling.cpp` | `0x7c590` | `ceiling_process_map_subtile_07c590` | `3` | `2` | Reads/modifies Map[256x256] subtile data |
+| `ceiling.cpp` | `0x7c870` | `ceiling_fn_07c870` | `0` | `2` | Module ceiling.cpp procedure @ 0x07c870 |
+| `ceiling.cpp` | `0x7c998` | `ceiling_fn_07c998` | `0` | `1` | Module ceiling.cpp procedure @ 0x07c998 |
+| `ceiling.cpp` | `0x7caf0` | `ceiling_fn_07caf0` | `4` | `0` | Module ceiling.cpp procedure @ 0x07caf0 |
+| `ceiling.cpp` | `0x7cd3c` | `ceiling_process_map_subtile_07cd3c` | `3` | `1` | Reads/modifies Map[256x256] subtile data |
+| `ceiling.cpp` | `0x7d100` | `ceiling_process_thing_entity_07d100` | `1` | `0` | Looks up Thing* in g_thing_ptrs[2048] and updates state |
+| `ceiling.cpp` | `0x7d3f4` | `ceiling_process_thing_entity_07d3f4` | `0` | `0` | Looks up Thing* in g_thing_ptrs[2048] and updates state |
+| `ceiling.cpp` | `0x7d674` | `ceiling_roll_action_random_07d674` | `1` | `2` | Evaluates deterministic lockstep PRNG (g_action_random_seed) |
+| `ceiling.cpp` | `0x7d748` | `ceiling_fn_07d748` | `0` | `0` | Module ceiling.cpp procedure @ 0x07d748 |
+| `ceiling.cpp` | `0x7d7c0` | `ceiling_process_thing_entity_07d7c0` | `0` | `0` | Looks up Thing* in g_thing_ptrs[2048] and updates state |
+| `ceiling.cpp` | `0x7da18` | `ceiling_process_map_subtile_07da18` | `13` | `1` | Reads/modifies Map[256x256] subtile data |
+| `ceiling.cpp` | `0x7daac` | `ceiling_fn_07daac` | `1` | `2` | Module ceiling.cpp procedure @ 0x07daac |
+| `ceiling.cpp` | `0x7dae0` | `ceiling_fn_07dae0` | `1` | `0` | Module ceiling.cpp procedure @ 0x07dae0 |
+| `ceiling.cpp` | `0x7dbc0` | `ceiling_process_map_subtile_07dbc0` | `35` | `0` | Reads/modifies Map[256x256] subtile data |
+| `ceiling.cpp` | `0x7ddf8` | `ceiling_process_map_subtile_07ddf8` | `7` | `0` | Reads/modifies Map[256x256] subtile data |
+| `ceiling.cpp` | `0x7df48` | `ceiling_fn_07df48` | `12` | `0` | Module ceiling.cpp procedure @ 0x07df48 |
+| `light.cpp` | `0xac094` | `light_update_creature_control_0ac094` | `0` | `5` | Accesses CreatureControl state in g_creature_ctrl_ptrs |
+| `light.cpp` | `0xac19c` | `light_update_creature_control_0ac19c` | `0` | `2` | Accesses CreatureControl state in g_creature_ctrl_ptrs |
+| `light.cpp` | `0xac370` | `light_fn_0ac370` | `2` | `0` | Module light.cpp procedure @ 0x0ac370 |
+| `light.cpp` | `0xac630` | `light_fn_0ac630` | `6` | `2` | Module light.cpp procedure @ 0x0ac630 |
+| `light.cpp` | `0xac694` | `light_fn_0ac694` | `1` | `1` | Module light.cpp procedure @ 0x0ac694 |
+| `light.cpp` | `0xac9e8` | `light_fn_0ac9e8` | `0` | `1` | Module light.cpp procedure @ 0x0ac9e8 |
+| `light.cpp` | `0xaca0c` | `light_fn_0aca0c` | `1` | `2` | Module light.cpp procedure @ 0x0aca0c |
+| `light.cpp` | `0xaca68` | `light_fn_0aca68` | `1` | `1` | Module light.cpp procedure @ 0x0aca68 |
+| `light.cpp` | `0xacaf8` | `light_already_list_0acaf8` | `13` | `2` | String 'Light is already in list' |
+| `light.cpp` | `0xacce4` | `light_attempt_delete_light_0acce4` | `8` | `4` | String 'Attempt to delete light 0' |
+| `light.cpp` | `0xacdfc` | `light_fn_0acdfc` | `2` | `1` | Module light.cpp procedure @ 0x0acdfc |
+| `light.cpp` | `0xaced0` | `light_fn_0aced0` | `1` | `0` | Module light.cpp procedure @ 0x0aced0 |
+| `light.cpp` | `0xacef0` | `light_fn_0acef0` | `1` | `0` | Module light.cpp procedure @ 0x0acef0 |
+| `light.cpp` | `0xacf7c` | `light_attempt_get_anglexy_unallocated_0acf7c` | `1` | `1` | String 'Attempt to get anglexy of unallocated light structure' |
+| `light.cpp` | `0xad0f4` | `light_attempt_get_width_unallocated_0ad0f4` | `1` | `1` | String 'Attempt to get width of unallocated light structure' |
+| `light.cpp` | `0xad148` | `light_attempt_set_intensity_unallocated_0ad148` | `3` | `2` | String 'Attempt to set intensity of unallocated light structure' |
+| `light.cpp` | `0xad23c` | `light_attempt_get_intensity_unallocated_0ad23c` | `4` | `1` | String 'Attempt to get intensity of unallocated light structure' |
+| `light.cpp` | `0xad290` | `light_attempt_set_size_unallocated_0ad290` | `0` | `2` | String 'Attempt to set size of unallocated light structure' |
+| `light.cpp` | `0xad37c` | `light_attempt_get_size_unallocated_0ad37c` | `1` | `1` | String 'Attempt to get size of unallocated light structure' |
+| `light.cpp` | `0xad438` | `light_attempt_stop_animating_size_0ad438` | `0` | `1` | String 'Attempt to stop animating size of unallocated light structur' |
+| `light.cpp` | `0xad4f8` | `light_attempt_stop_animating_intensity_0ad4f8` | `0` | `1` | String 'Attempt to stop animating intensity of unallocated light str' |
+| `light.cpp` | `0xad54c` | `light_already_list_0ad54c` | `6` | `1` | String 'Light is already in list' |
+| `light.cpp` | `0xad66c` | `light_attempt_turn_off_unallocated_0ad66c` | `4` | `3` | String 'Attempt to turn off unallocated light structure' |
+| `light.cpp` | `0xad834` | `light_attempt_set_size_unallocated_0ad834` | `6` | `1` | String 'Attempt to set size of unallocated light structure' |
+| `light.cpp` | `0xad888` | `light_attempt_set_minimum_light_0ad888` | `1` | `1` | String 'Attempt to set_minimum light size to cache on non dynamic li' |
+| `light.cpp` | `0xadbc0` | `light_maintain_gui_button_state_0adbc0` | `2` | `2` | Updates GUI button enabled bit (0x08) |
+| `light.cpp` | `0xb04e4` | `light_fn_0b04e4` | `0` | `0` | Module light.cpp procedure @ 0x0b04e4 |
+| `light.cpp` | `0xb06fc` | `light_fn_0b06fc` | `0` | `1` | Module light.cpp procedure @ 0x0b06fc |
+| `light.cpp` | `0xb087c` | `light_fn_0b087c` | `8` | `1` | Module light.cpp procedure @ 0x0b087c |
+| `light.cpp` | `0xb0980` | `light_process_map_subtile_0b0980` | `2` | `0` | Reads/modifies Map[256x256] subtile data |
+| `light.cpp` | `0xb0ab4` | `light_fn_0b0ab4` | `0` | `0` | Module light.cpp procedure @ 0x0b0ab4 |
+| `light.cpp` | `0xb0b20` | `light_fn_0b0b20` | `0` | `0` | Module light.cpp procedure @ 0x0b0b20 |
+| `light.cpp` | `0xb0b9c` | `light_fn_0b0b9c` | `0` | `0` | Module light.cpp procedure @ 0x0b0b9c |
+| `light.cpp` | `0xb0c44` | `light_fn_0b0c44` | `2` | `0` | Module light.cpp procedure @ 0x0b0c44 |
+| `light.cpp` | `0xb0d0c` | `light_fn_0b0d0c` | `1` | `1` | Module light.cpp procedure @ 0x0b0d0c |
+| `light.cpp` | `0xb0f94` | `light_prev_when_removing_light_0b0f94` | `2` | `2` | String 'No prev when removing light from list' |
+| `light.cpp` | `0xb10c0` | `light_fn_0b10c0` | `1` | `1` | Module light.cpp procedure @ 0x0b10c0 |
+| `light.cpp` | `0xb1398` | `light_fn_0b1398` | `0` | `0` | Module light.cpp procedure @ 0x0b1398 |
+| `light.cpp` | `0xb13c0` | `light_fn_0b13c0` | `2` | `0` | Module light.cpp procedure @ 0x0b13c0 |
+| `light.cpp` | `0xb14a0` | `light_fn_0b14a0` | `0` | `2` | Module light.cpp procedure @ 0x0b14a0 |
+| `light.cpp` | `0xb182c` | `light_fn_0b182c` | `1` | `2` | Module light.cpp procedure @ 0x0b182c |
+| `light.cpp` | `0xb1b90` | `light_fn_0b1b90` | `0` | `0` | Module light.cpp procedure @ 0x0b1b90 |
+| `light.cpp` | `0xb1c20` | `light_fn_0b1c20` | `0` | `0` | Module light.cpp procedure @ 0x0b1c20 |
+| `light.cpp` | `0xb1c40` | `light_fn_0b1c40` | `0` | `0` | Module light.cpp procedure @ 0x0b1c40 |
+| `light.cpp` | `0xb1f60` | `light_fn_0b1f60` | `0` | `1` | Module light.cpp procedure @ 0x0b1f60 |
+| `light.cpp` | `0xb20e0` | `light_fn_0b20e0` | `1` | `4` | Module light.cpp procedure @ 0x0b20e0 |
+| `light.cpp` | `0xb2158` | `light_update_slab_subtile_columns_0b2158` | `1` | `0` | Updates 3x3 subtile map entries for slab coordinates |
+| `light.cpp` | `0xb21f0` | `light_fn_0b21f0` | `2` | `1` | Module light.cpp procedure @ 0x0b21f0 |
+| `light.cpp` | `0xb224c` | `light_fn_0b224c` | `1` | `0` | Module light.cpp procedure @ 0x0b224c |
+| `light.cpp` | `0xb2280` | `light_fn_0b2280` | `2` | `1` | Module light.cpp procedure @ 0x0b2280 |
+| `light.cpp` | `0xb2398` | `light_process_map_subtile_0b2398` | `15` | `0` | Reads/modifies Map[256x256] subtile data |
+| `light.cpp` | `0xb23ec` | `light_process_map_subtile_0b23ec` | `2` | `0` | Reads/modifies Map[256x256] subtile data |
+| `light.cpp` | `0xb2440` | `light_process_map_subtile_0b2440` | `3` | `0` | Reads/modifies Map[256x256] subtile data |
+| `light.cpp` | `0xb250c` | `light_process_map_subtile_0b250c` | `1` | `0` | Reads/modifies Map[256x256] subtile data |
+| `ssprite.cpp` | `0xdb120` | `ssprite_clear_render_state` | `1` | `0` | Initialize scaled sprite renderer state variables |
+| `ssprite.cpp` | `0xdb1a4` | `ssprite_decode_and_blit_rle_frame` | `3` | `3` | Decode and blit RLE-compressed sprite frame from TbSprite table |
+| `ssprite.cpp` | `0xdb5c4` | `get_thing_anim_sprite_id_checked` | `1` | `5` | Resolve animation graphic ID for Thing model/class with bounds logging |
+| `ssprite.cpp` | `0xdbb70` | `update_neutral_thing_anim_sprite` | `1` | `1` | Update animation sprite for neutral (owner 5) Thing |
+| `ssprite.cpp` | `0xdbb84` | `update_thing_anim_sprite_frame` | `2` | `5` | Advance and validate Thing animation sprite frame |
+| `ssprite.cpp` | `0xdc0e0` | `ssprite_noop_stub` | `1` | `0` | Empty sprite callback stub |
+| `ssprite.cpp` | `0xdc0f0` | `scale_value_by_creature_level` | `0` | `0` | Scale base stat value by creature experience level (10% per level) |
+| `ssprite.cpp` | `0xdc150` | `get_scaled_viewport_bottom_y` | `30` | `0` | Calculate scaled bottom Y coordinate of 3D viewport |
+| `ssprite.cpp` | `0xdc184` | `toggle_player_view_flag_bit` | `1` | `0` | XOR a bit in g_player_view_flags for player_idx |
+| `ssprite.cpp` | `0xdc19c` | `is_subtile_revealed_and_within_bounds` | `5` | `0` | Check if (subtile_x, subtile_y) is within 0..254 and revealed to player |
+| `ssprite.cpp` | `0xdc2c8` | `get_2d_box_distance_xy` | `2` | `0` | Compute 2D octile/box distance between (x1, y1) and (x2, y2) |
+| `ssprite.cpp` | `0xdc324` | `get_2d_squared_distance` | `2` | `0` | Compute 2D squared Euclidean distance between two Coord3d positions |
+| `ssprite.cpp` | `0xdc354` | `get_2d_box_distance` | `13` | `0` | Compute 2D octile/box distance between two Coord3d positions |
+| `ssprite.cpp` | `0xdc3c0` | `get_3d_box_distance` | `1` | `0` | Compute 3D octile/box distance between two Coord3d positions |
+| `ssprite.cpp` | `0xdc4a0` | `get_chessboard_distance_xy` | `7` | `0` | Compute Chebyshev max(|dx|, |dy|) distance between (x1, y1) and (x2, y2) |
+| `ssprite.cpp` | `0xdc4cc` | `get_2d_angle_between_positions` | `1` | `1` | Compute 2D angle (0..2047) from pos1 to pos2 |
+| `ssprite.cpp` | `0xdc5c4` | `get_3d_angles_between_positions` | `6` | `2` | Compute horizontal and vertical angles from pos1 to pos2 |
+| `ssprite.cpp` | `0xdc800` | `ssprite_blit_span_alpha_mode0` | `0` | `1` | Scanline RLE sprite blitter helper (alpha/remap mode 0) |
+| `ssprite.cpp` | `0xdc859` | `ssprite_blit_span_alpha_mode1` | `0` | `1` | Scanline RLE sprite blitter helper (alpha/remap mode 1) |
+| `ssprite.cpp` | `0xdc8ad` | `ssprite_blit_span_alpha_mode2` | `0` | `1` | Scanline RLE sprite blitter helper (alpha/remap mode 2) |
+| `ssprite.cpp` | `0xdc8f9` | `ssprite_blit_span_alpha_mode3` | `0` | `1` | Scanline RLE sprite blitter helper (alpha/remap mode 3) |
+| `ssprite.cpp` | `0xdc95a` | `ssprite_return_true_stub` | `1` | `0` | Constant true (1) return stub |
+| `ssprite.cpp` | `0xdc984` | `move_coord3d_along_angle_checked` | `1` | `1` | Advance Coord3d position along angle and speed with map bounds clamp |
+| `ssprite.cpp` | `0xdccfc` | `can_thing_traverse_subtile` | `0` | `2` | Check whether Thing can move through target subtile |
+| `ssprite.cpp` | `0xdcd44` | `trace_line_of_sight_2d` | `1` | `2` | Raymarch 2D line of sight between two Coord3d positions |
+| `eyelens.cpp` | `0x26e5e` | `eyelens_update_player_dungeon_026e5e` | `0` | `4` | Accesses per-player Dungeon state (stride 0x1508) |
+| `eyelens.cpp` | `0x26f4d` | `eyelens_fn_026f4d` | `0` | `4` | Module eyelens.cpp procedure @ 0x026f4d |
+| `eyelens.cpp` | `0x26faa` | `eyelens_fn_026faa` | `0` | `4` | Module eyelens.cpp procedure @ 0x026faa |
+| `eyelens.cpp` | `0x2700c` | `eyelens_memory_already_allocated_02700c` | `2` | `4` | String 'EyeLens Memory already allocated' |
+| `eyelens.cpp` | `0x270e0` | `eyelens_fn_0270e0` | `6` | `1` | Module eyelens.cpp procedure @ 0x0270e0 |
+| `eyelens.cpp` | `0x27130` | `eyelens_data_frac_dat_027130` | `5` | `7` | String 'data\frac%02d.dat' |
+| `eyelens.cpp` | `0x27320` | `eyelens_fn_027320` | `2` | `2` | Module eyelens.cpp procedure @ 0x027320 |
+| `frontend.cpp` | `0x2d8e2` | `frontend_fn_02d8e2` | `1` | `1` | Module frontend.cpp procedure @ 0x02d8e2 |
+| `frontend.cpp` | `0x2d920` | `frontend_fn_02d920` | `1` | `0` | Module frontend.cpp procedure @ 0x02d920 |
+| `frontend.cpp` | `0x2d974` | `frontend_fn_02d974` | `1` | `0` | Module frontend.cpp procedure @ 0x02d974 |
+| `frontend.cpp` | `0x2daae` | `frontend_fn_02daae` | `0` | `1` | Module frontend.cpp procedure @ 0x02daae |
+| `frontend.cpp` | `0x2db0c` | `frontend_fn_02db0c` | `1` | `0` | Module frontend.cpp procedure @ 0x02db0c |
+| `frontend.cpp` | `0x2dbac` | `frontend_fn_02dbac` | `1` | `1` | Module frontend.cpp procedure @ 0x02dbac |
+| `frontend.cpp` | `0x2dbb7` | `frontend_fn_02dbb7` | `0` | `1` | Module frontend.cpp procedure @ 0x02dbb7 |
+| `frontend.cpp` | `0x2dc8e` | `frontend_fn_02dc8e` | `1` | `1` | Module frontend.cpp procedure @ 0x02dc8e |
+| `frontend.cpp` | `0x2dcec` | `frontend_fn_02dcec` | `1` | `3` | Module frontend.cpp procedure @ 0x02dcec |
+| `frontend.cpp` | `0x2dfac` | `frontend_why_are_we_here_02dfac` | `1` | `30` | String 'Why are we here' |
+| `frontend.cpp` | `0x2e486` | `frontend_fn_02e486` | `0` | `0` | Module frontend.cpp procedure @ 0x02e486 |
+| `frontend.cpp` | `0x2e48a` | `frontend_update_player_view_state_02e48a` | `0` | `1` | Accesses per-player PlayerInfo state (stride 0x4ef) |
+| `frontend.cpp` | `0x2e500` | `frontend_fn_02e500` | `0` | `1` | Module frontend.cpp procedure @ 0x02e500 |
+| `frontend.cpp` | `0x2e534` | `frontend_fn_02e534` | `0` | `0` | Module frontend.cpp procedure @ 0x02e534 |
+| `frontend.cpp` | `0x2e561` | `frontend_fn_02e561` | `0` | `0` | Module frontend.cpp procedure @ 0x02e561 |
+| `frontend.cpp` | `0x2e58b` | `frontend_draw_gui_button_label_02e58b` | `0` | `2` | Sets active font and draws GUI button text label |
+| `frontend.cpp` | `0x2e624` | `frontend_maintain_gui_button_state_02e624` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `frontend.cpp` | `0x2e647` | `frontend_maintain_gui_button_state_02e647` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `frontend.cpp` | `0x2e654` | `frontend_maintain_gui_button_state_02e654` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `frontend.cpp` | `0x2e667` | `frontend_fn_02e667` | `0` | `1` | Module frontend.cpp procedure @ 0x02e667 |
+| `frontend.cpp` | `0x2e696` | `frontend_fn_02e696` | `0` | `0` | Module frontend.cpp procedure @ 0x02e696 |
+| `frontend.cpp` | `0x2e6a6` | `frontend_fn_02e6a6` | `0` | `0` | Module frontend.cpp procedure @ 0x02e6a6 |
+| `frontend.cpp` | `0x2e6bb` | `frontend_fn_02e6bb` | `0` | `1` | Module frontend.cpp procedure @ 0x02e6bb |
+| `frontend.cpp` | `0x2e6c4` | `frontend_fn_02e6c4` | `0` | `8` | Module frontend.cpp procedure @ 0x02e6c4 |
+| `frontend.cpp` | `0x2e8a7` | `frontend_load_frontend_palette_02e8a7` | `23` | `37` | String 'Unable to load FRONTEND PALETTE' |
+| `frontend.cpp` | `0x2ecbd` | `frontend_why_are_we_here_02ecbd` | `0` | `4` | String 'Why are we here when it's not a new level' |
+| `frontend.cpp` | `0x2ed34` | `frontend_maintain_gui_button_state_02ed34` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `frontend.cpp` | `0x2ed41` | `frontend_continue_sav_02ed41` | `0` | `8` | String 'CONTINUE.SAV' |
+| `frontend.cpp` | `0x2ee00` | `frontend_fn_02ee00` | `3` | `1` | Module frontend.cpp procedure @ 0x02ee00 |
+| `frontend.cpp` | `0x2ee3e` | `frontend_draw_gui_button_label_02ee3e` | `0` | `2` | Sets active font and draws GUI button text label |
+| `frontend.cpp` | `0x2eeb9` | `frontend_draw_text_overlay_02eeb9` | `0` | `6` | Configures font/flags and draws text on screen |
+| `frontend.cpp` | `0x2ef93` | `frontend_fn_02ef93` | `0` | `1` | Module frontend.cpp procedure @ 0x02ef93 |
+| `frontend.cpp` | `0x2efb4` | `frontend_draw_gui_button_label_02efb4` | `1` | `4` | Sets active font and draws GUI button text label |
+| `frontend.cpp` | `0x2f18a` | `frontend_update_player_view_state_02f18a` | `2` | `0` | Accesses per-player PlayerInfo state (stride 0x4ef) |
+| `frontend.cpp` | `0x2f1c8` | `frontend_fn_02f1c8` | `5` | `1` | Module frontend.cpp procedure @ 0x02f1c8 |
+| `frontend.cpp` | `0x2f1d2` | `frontend_fn_02f1d2` | `5` | `1` | Module frontend.cpp procedure @ 0x02f1d2 |
+| `frontend.cpp` | `0x2f1dc` | `frontend_fn_02f1dc` | `2` | `1` | Module frontend.cpp procedure @ 0x02f1dc |
+| `frontend.cpp` | `0x2f237` | `frontend_fn_02f237` | `0` | `1` | Module frontend.cpp procedure @ 0x02f237 |
+| `frontend.cpp` | `0x2f251` | `frontend_draw_text_overlay_02f251` | `0` | `2` | Configures font/flags and draws text on screen |
+| `frontend.cpp` | `0x2f404` | `frontend_maintain_gui_button_state_02f404` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `frontend.cpp` | `0x2f414` | `frontend_draw_text_overlay_02f414` | `1` | `3` | Configures font/flags and draws text on screen |
+| `frontend.cpp` | `0x2f541` | `frontend_fn_02f541` | `0` | `2` | Module frontend.cpp procedure @ 0x02f541 |
+| `frontend.cpp` | `0x2f56e` | `frontend_fn_02f56e` | `0` | `1` | Module frontend.cpp procedure @ 0x02f56e |
+| `frontend.cpp` | `0x2f688` | `frontend_fn_02f688` | `0` | `1` | Module frontend.cpp procedure @ 0x02f688 |
+| `frontend.cpp` | `0x2f755` | `frontend_fn_02f755` | `0` | `1` | Module frontend.cpp procedure @ 0x02f755 |
+| `frontend.cpp` | `0x2f769` | `frontend_draw_gui_button_label_02f769` | `0` | `2` | Sets active font and draws GUI button text label |
+| `frontend.cpp` | `0x2f7d3` | `frontend_maintain_gui_button_state_02f7d3` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `frontend.cpp` | `0x2f7e0` | `frontend_fn_02f7e0` | `0` | `1` | Module frontend.cpp procedure @ 0x02f7e0 |
+| `frontend.cpp` | `0x2f7ef` | `frontend_maintain_gui_button_state_02f7ef` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `frontend.cpp` | `0x2f7fc` | `frontend_maintain_gui_button_state_02f7fc` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `frontend.cpp` | `0x2f809` | `frontend_fn_02f809` | `0` | `0` | Module frontend.cpp procedure @ 0x02f809 |
+| `frontend.cpp` | `0x2f819` | `frontend_fn_02f819` | `0` | `0` | Module frontend.cpp procedure @ 0x02f819 |
+| `frontend.cpp` | `0x2f829` | `frontend_maintain_gui_button_state_02f829` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `frontend.cpp` | `0x2f83c` | `frontend_fn_02f83c` | `0` | `0` | Module frontend.cpp procedure @ 0x02f83c |
+| `frontend.cpp` | `0x2f84f` | `frontend_fn_02f84f` | `0` | `0` | Module frontend.cpp procedure @ 0x02f84f |
+| `frontend.cpp` | `0x2f874` | `frontend_intromix_smk_02f874` | `1` | `2` | String 'INTROMIX.SMK' |
+| `frontend.cpp` | `0x2f8a2` | `frontend_fn_02f8a2` | `1` | `6` | Module frontend.cpp procedure @ 0x02f8a2 |
+| `frontend.cpp` | `0x2f9ce` | `frontend_outromix_smk_02f9ce` | `1` | `1` | String 'OUTROMIX.SMK' |
+| `frontend.cpp` | `0x2f9f5` | `frontend_fn_02f9f5` | `2` | `10` | Module frontend.cpp procedure @ 0x02f9f5 |
+| `frontend.cpp` | `0x2faf6` | `frontend_fn_02faf6` | `1` | `12` | Module frontend.cpp procedure @ 0x02faf6 |
+| `frontend.cpp` | `0x2fc49` | `frontend_fn_02fc49` | `1` | `14` | Module frontend.cpp procedure @ 0x02fc49 |
+| `frontend.cpp` | `0x2fda1` | `frontend_fn_02fda1` | `1` | `12` | Module frontend.cpp procedure @ 0x02fda1 |
+| `frontend.cpp` | `0x2feca` | `frontend_fn_02feca` | `2` | `1` | Module frontend.cpp procedure @ 0x02feca |
+| `frontend.cpp` | `0x2fefd` | `frontend_fn_02fefd` | `1` | `0` | Module frontend.cpp procedure @ 0x02fefd |
+| `frontend.cpp` | `0x2ff2e` | `frontend_continue_sav_02ff2e` | `1` | `7` | String 'CONTINUE.SAV' |
+| `frontend.cpp` | `0x2ffe4` | `frontend_ldata_front_raw_02ffe4` | `1` | `10` | String 'LDATA\FRONT.RAW' |
+| `frontend.cpp` | `0x30057` | `frontend_ldata_front_raw_030057` | `1` | `1` | String 'LDATA\FRONT.RAW' |
+| `frontend.cpp` | `0x30061` | `frontend_draw_text_overlay_030061` | `1` | `2` | Configures font/flags and draws text on screen |
+| `frontend.cpp` | `0x300a7` | `frontend_draw_text_overlay_0300a7` | `1` | `5` | Configures font/flags and draws text on screen |
+| `frontend.cpp` | `0x3012d` | `frontend_draw_text_overlay_03012d` | `1` | `3` | Configures font/flags and draws text on screen |
+| `frontend.cpp` | `0x30266` | `frontend_fn_030266` | `1` | `0` | Module frontend.cpp procedure @ 0x030266 |
+| `frontend.cpp` | `0x302ba` | `frontend_fn_0302ba` | `1` | `0` | Module frontend.cpp procedure @ 0x0302ba |
+| `frontend.cpp` | `0x30309` | `frontend_data_hiscores_dat_030309` | `2` | `1` | String 'DATA\HISCORES.DAT' |
+| `frontend.cpp` | `0x30322` | `frontend_data_hiscores_dat_030322` | `1` | `4` | String 'DATA\HISCORES.DAT' |
+| `frontend.cpp` | `0x30389` | `frontend_fn_030389` | `0` | `0` | Module frontend.cpp procedure @ 0x030389 |
+| `frontend.cpp` | `0x3038a` | `frontend_fn_03038a` | `0` | `1` | Module frontend.cpp procedure @ 0x03038a |
+| `frontend.cpp` | `0x303ad` | `frontend_draw_text_overlay_0303ad` | `1` | `6` | Configures font/flags and draws text on screen |
+| `frontend.cpp` | `0x306e4` | `frontend_fn_0306e4` | `1` | `1` | Module frontend.cpp procedure @ 0x0306e4 |
+| `frontend.cpp` | `0x30782` | `frontend_fn_030782` | `3` | `1` | Module frontend.cpp procedure @ 0x030782 |
+| `frontend.cpp` | `0x3078d` | `frontend_draw_gui_button_label_03078d` | `0` | `3` | Sets active font and draws GUI button text label |
+| `frontend.cpp` | `0x30972` | `frontend_fn_030972` | `0` | `0` | Module frontend.cpp procedure @ 0x030972 |
+| `frontend.cpp` | `0x30996` | `frontend_fn_030996` | `1` | `1` | Module frontend.cpp procedure @ 0x030996 |
+| `frontend.cpp` | `0x30a28` | `frontend_draw_text_overlay_030a28` | `1` | `0` | Configures font/flags and draws text on screen |
+| `frontend.cpp` | `0x30a2d` | `frontend_text_long_box_030a2d` | `3` | `4` | String 'Text too long for error box' |
+| `frontend.cpp` | `0x30ca0` | `frontend_fn_030ca0` | `1` | `1` | Module frontend.cpp procedure @ 0x030ca0 |
+| `frontend.cpp` | `0x30cb9` | `frontend_fn_030cb9` | `1` | `2` | Module frontend.cpp procedure @ 0x030cb9 |
+| `frontend.cpp` | `0x30cd9` | `frontend_process_map_subtile_030cd9` | `2` | `5` | Reads/modifies Map[256x256] subtile data |
+| `frontend.cpp` | `0x30e04` | `frontend_fn_030e04` | `1` | `1` | Module frontend.cpp procedure @ 0x030e04 |
+| `frontend.cpp` | `0x30e88` | `frontend_fn_030e88` | `1` | `3` | Module frontend.cpp procedure @ 0x030e88 |
+| `frontmap.cpp` | `0x30e47` | `frontmap_fn_030e47` | `1` | `1` | Module frontmap.cpp procedure @ 0x030e47 |
+| `frontmap.cpp` | `0x30ef8` | `frontmap_ldata_dkflag00_dat_030ef8` | `1` | `15` | String 'LDATA\DKFLAG00.DAT' |
+| `frontmap.cpp` | `0x31213` | `frontmap_ldata_dkflag00_dat_031213` | `1` | `7` | String 'LDATA\DKFLAG00.DAT' |
+| `frontmap.cpp` | `0x31273` | `frontmap_fn_031273` | `1` | `5` | Module frontmap.cpp procedure @ 0x031273 |
+| `frontmap.cpp` | `0x31599` | `frontmap_fn_031599` | `1` | `5` | Module frontmap.cpp procedure @ 0x031599 |
+| `frontmap.cpp` | `0x31854` | `frontmap_fn_031854` | `1` | `8` | Module frontmap.cpp procedure @ 0x031854 |
+| `frontmap.cpp` | `0x31a51` | `frontmap_ldata_netflag_dat_031a51` | `1` | `13` | String 'LDATA\NETFLAG.DAT' |
+| `frontmap.cpp` | `0x31bd6` | `frontmap_ldata_netflag_dat_031bd6` | `1` | `5` | String 'LDATA\NETFLAG.DAT' |
+| `frontmap.cpp` | `0x31c23` | `frontmap_fn_031c23` | `1` | `5` | Module frontmap.cpp procedure @ 0x031c23 |
+| `frontmap.cpp` | `0x31def` | `frontmap_LbNetwork_Exchange_031def` | `1` | `11` | References 'LbNetwork_Exchange failed' |
+| `frontmap.cpp` | `0x322e9` | `frontmap_number_players_0322e9` | `1` | `10` | String 'Invalid number of players' |
+| `frontmap.cpp` | `0x32612` | `frontmap_fn_032612` | `1` | `1` | Module frontmap.cpp procedure @ 0x032612 |
+| `frontmap.cpp` | `0x32738` | `frontmap_fn_032738` | `2` | `3` | Module frontmap.cpp procedure @ 0x032738 |
+| `frontmap.cpp` | `0x327b5` | `frontmap_fn_0327b5` | `2` | `1` | Module frontmap.cpp procedure @ 0x0327b5 |
+| `frontmap.cpp` | `0x32805` | `frontmap_fn_032805` | `2` | `1` | Module frontmap.cpp procedure @ 0x032805 |
+| `frontmap.cpp` | `0x328e1` | `frontmap_fn_0328e1` | `2` | `0` | Module frontmap.cpp procedure @ 0x0328e1 |
+| `frontmap.cpp` | `0x329ae` | `frontmap_enough_memory_game_structure_0329ae` | `2` | `8` | String 'Not enough memory in game structure for map' |
+| `frontmap.cpp` | `0x32b21` | `frontmap_fn_032b21` | `3` | `2` | Module frontmap.cpp procedure @ 0x032b21 |
+| `frontmap.cpp` | `0x32bf6` | `frontmap_fn_032bf6` | `1` | `1` | Module frontmap.cpp procedure @ 0x032bf6 |
+| `frontmap.cpp` | `0x32d30` | `frontmap_fn_032d30` | `1` | `2` | Module frontmap.cpp procedure @ 0x032d30 |
+| `frontmap.cpp` | `0x32d8c` | `frontmap_fn_032d8c` | `2` | `6` | Module frontmap.cpp procedure @ 0x032d8c |
+| `frontmap.cpp` | `0x32e00` | `frontmap_fn_032e00` | `1` | `1` | Module frontmap.cpp procedure @ 0x032e00 |
+| `newgui.cpp` | `0x52988` | `newgui_fn_052988` | `1` | `0` | Module newgui.cpp procedure @ 0x052988 |
+| `newgui.cpp` | `0x529b9` | `newgui_fn_0529b9` | `1` | `0` | Module newgui.cpp procedure @ 0x0529b9 |
+| `newgui.cpp` | `0x52a88` | `newgui_fn_052a88` | `1` | `0` | Module newgui.cpp procedure @ 0x052a88 |
+| `newgui.cpp` | `0x52b58` | `newgui_fn_052b58` | `7` | `1` | Module newgui.cpp procedure @ 0x052b58 |
+| `newgui.cpp` | `0x52b67` | `newgui_more_room_menu_stack_052b67` | `1` | `1` | String 'NO MORE ROOM FOR MENU STACK' |
+| `newgui.cpp` | `0x52be7` | `newgui_fn_052be7` | `3` | `0` | Module newgui.cpp procedure @ 0x052be7 |
+| `newgui.cpp` | `0x52c47` | `newgui_fn_052c47` | `1` | `0` | Module newgui.cpp procedure @ 0x052c47 |
+| `newgui.cpp` | `0x52c6d` | `newgui_fn_052c6d` | `0` | `3` | Module newgui.cpp procedure @ 0x052c6d |
+| `newgui.cpp` | `0x52ced` | `newgui_fn_052ced` | `0` | `3` | Module newgui.cpp procedure @ 0x052ced |
+| `newgui.cpp` | `0x52d6d` | `newgui_fn_052d6d` | `0` | `0` | Module newgui.cpp procedure @ 0x052d6d |
+| `newgui.cpp` | `0x52da0` | `newgui_fn_052da0` | `0` | `0` | Module newgui.cpp procedure @ 0x052da0 |
+| `newgui.cpp` | `0x52def` | `newgui_maintain_gui_button_state_052def` | `0` | `1` | Updates GUI button enabled bit (0x08) |
+| `newgui.cpp` | `0x52e3d` | `newgui_maintain_gui_button_state_052e3d` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `newgui.cpp` | `0x52e7f` | `newgui_maintain_gui_button_state_052e7f` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `newgui.cpp` | `0x52ead` | `newgui_maintain_gui_button_state_052ead` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `newgui.cpp` | `0x52ebe` | `newgui_maintain_gui_button_state_052ebe` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `newgui.cpp` | `0x52ee8` | `newgui_maintain_gui_button_state_052ee8` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `newgui.cpp` | `0x52f03` | `newgui_maintain_gui_button_state_052f03` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `newgui.cpp` | `0x52f16` | `newgui_maintain_gui_button_state_052f16` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `newgui.cpp` | `0x52f44` | `newgui_maintain_gui_button_state_052f44` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `newgui.cpp` | `0x52f78` | `newgui_update_player_view_state_052f78` | `2` | `1` | Accesses per-player PlayerInfo state (stride 0x4ef) |
+| `newgui.cpp` | `0x53021` | `newgui_maintain_gui_button_state_053021` | `0` | `2` | Updates GUI button enabled bit (0x08) |
+| `newgui.cpp` | `0x5315d` | `newgui_maintain_gui_button_state_05315d` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `newgui.cpp` | `0x53188` | `newgui_maintain_gui_button_state_053188` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `newgui.cpp` | `0x53208` | `newgui_maintain_gui_button_state_053208` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `newgui.cpp` | `0x53240` | `newgui_maintain_gui_button_state_053240` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `newgui.cpp` | `0x53290` | `newgui_maintain_gui_button_state_053290` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `newgui.cpp` | `0x53306` | `newgui_maintain_gui_button_state_053306` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `newgui.cpp` | `0x53356` | `newgui_maintain_gui_button_state_053356` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `newgui.cpp` | `0x533e6` | `newgui_maintain_gui_button_state_0533e6` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `newgui.cpp` | `0x5341e` | `newgui_maintain_gui_button_state_05341e` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `newgui.cpp` | `0x5345d` | `newgui_fn_05345d` | `1` | `1` | Module newgui.cpp procedure @ 0x05345d |
+| `newgui.cpp` | `0x534e5` | `newgui_maintain_gui_button_state_0534e5` | `0` | `1` | Updates GUI button enabled bit (0x08) |
+| `newgui.cpp` | `0x53684` | `newgui_maintain_gui_button_state_053684` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `newgui.cpp` | `0x53716` | `newgui_maintain_gui_button_state_053716` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `newgui.cpp` | `0x53753` | `newgui_illegal_computer_player_053753` | `0` | `1` | String 'Illegal computer player' |
+| `newgui.cpp` | `0x537af` | `newgui_update_creature_and_thing_0537af` | `2` | `4` | Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs) |
+| `newgui.cpp` | `0x5389b` | `newgui_process_thing_entity_05389b` | `0` | `2` | Looks up Thing* in g_thing_ptrs[2048] and updates state |
+| `newgui.cpp` | `0x53971` | `newgui_process_thing_entity_053971` | `0` | `1` | Looks up Thing* in g_thing_ptrs[2048] and updates state |
+| `newgui.cpp` | `0x53a18` | `newgui_state_type_gui_state_053a18` | `0` | `2` | String 'Unknown state_type_to_gui_state[]' |
+| `newgui.cpp` | `0x53c05` | `newgui_fn_053c05` | `1` | `0` | Module newgui.cpp procedure @ 0x053c05 |
+| `newgui.cpp` | `0x53c32` | `newgui_fn_053c32` | `1` | `0` | Module newgui.cpp procedure @ 0x053c32 |
+| `newgui.cpp` | `0x53c6b` | `newgui_fn_053c6b` | `14` | `0` | Module newgui.cpp procedure @ 0x053c6b |
+| `newgui.cpp` | `0x53ca3` | `newgui_fn_053ca3` | `1` | `0` | Module newgui.cpp procedure @ 0x053ca3 |
+| `newgui.cpp` | `0x53ccc` | `newgui_oi_there_fade_time_053ccc` | `2` | `10` | String 'Oi! There is a fade time less than 1. Idiot.' |
+| `newgui.cpp` | `0x54089` | `newgui_fn_054089` | `2` | `1` | Module newgui.cpp procedure @ 0x054089 |
+| `newgui.cpp` | `0x540cb` | `newgui_fn_0540cb` | `1` | `1` | Module newgui.cpp procedure @ 0x0540cb |
+| `newgui.cpp` | `0x54269` | `newgui_fn_054269` | `1` | `0` | Module newgui.cpp procedure @ 0x054269 |
+| `newgui.cpp` | `0x5426d` | `newgui_fn_05426d` | `1` | `0` | Module newgui.cpp procedure @ 0x05426d |
+| `newgui.cpp` | `0x542d6` | `newgui_fn_0542d6` | `1` | `0` | Module newgui.cpp procedure @ 0x0542d6 |
+| `newgui.cpp` | `0x5430b` | `newgui_fn_05430b` | `1` | `0` | Module newgui.cpp procedure @ 0x05430b |
+| `newgui.cpp` | `0x54324` | `newgui_fn_054324` | `1` | `0` | Module newgui.cpp procedure @ 0x054324 |
+| `newgui.cpp` | `0x5435a` | `newgui_fn_05435a` | `2` | `0` | Module newgui.cpp procedure @ 0x05435a |
+| `newgui.cpp` | `0x543dd` | `newgui_fn_0543dd` | `3` | `2` | Module newgui.cpp procedure @ 0x0543dd |
+| `newgui.cpp` | `0x5449e` | `newgui_draw_text_overlay_05449e` | `6` | `9` | Configures font/flags and draws text on screen |
+| `newgui.cpp` | `0x54742` | `newgui_fn_054742` | `1` | `0` | Module newgui.cpp procedure @ 0x054742 |
+| `newgui.cpp` | `0x547f3` | `newgui_fn_0547f3` | `0` | `0` | Module newgui.cpp procedure @ 0x0547f3 |
+| `newgui.cpp` | `0x5482c` | `newgui_cycle_button_have_gui_05482c` | `0` | `2` | String 'Cycle button cannot have a 'gui_area_normal_button' draw fun' |
+| `newgui.cpp` | `0x548cb` | `newgui_cycle_button_have_gui_0548cb` | `0` | `3` | String 'Cycle button cannot have a 'gui_area_normal_button' draw fun' |
+| `newgui.cpp` | `0x549a4` | `newgui_fn_0549a4` | `0` | `1` | Module newgui.cpp procedure @ 0x0549a4 |
+| `newgui.cpp` | `0x54a22` | `newgui_fn_054a22` | `0` | `1` | Module newgui.cpp procedure @ 0x054a22 |
+| `newgui.cpp` | `0x54aa9` | `newgui_fn_054aa9` | `0` | `0` | Module newgui.cpp procedure @ 0x054aa9 |
+| `newgui.cpp` | `0x54add` | `newgui_cycle_button_must_have_054add` | `0` | `2` | String 'Cycle button must have a non-null UBYTE Data pointer!' |
+| `newgui.cpp` | `0x54bab` | `newgui_cycle_button_must_have_054bab` | `0` | `2` | String 'Cycle button must have a non-null UBYTE Data pointer!' |
+| `newgui.cpp` | `0x54c79` | `newgui_fn_054c79` | `0` | `4` | Module newgui.cpp procedure @ 0x054c79 |
+| `newgui.cpp` | `0x54d41` | `newgui_button_must_point_scroll_054d41` | `0` | `3` | String 'Button must point to a SCROLL_TEXT_WINDOW data item' |
+| `newgui.cpp` | `0x54d8a` | `newgui_update_player_dungeon_054d8a` | `0` | `2` | Accesses per-player Dungeon state (stride 0x1508) |
+| `newgui.cpp` | `0x54eeb` | `newgui_update_player_view_state_054eeb` | `0` | `7` | Accesses per-player PlayerInfo state (stride 0x4ef) |
+| `newgui.cpp` | `0x551e4` | `newgui_update_player_dungeon_0551e4` | `0` | `2` | Accesses per-player Dungeon state (stride 0x1508) |
+| `newgui.cpp` | `0x5542b` | `newgui_update_player_dungeon_05542b` | `0` | `5` | Accesses per-player Dungeon state (stride 0x1508) |
+| `newgui.cpp` | `0x55701` | `newgui_draw_gui_button_label_055701` | `0` | `8` | Sets active font and draws GUI button text label |
+| `newgui.cpp` | `0x55b68` | `newgui_update_creature_and_thing_055b68` | `0` | `2` | Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs) |
+| `newgui.cpp` | `0x55e33` | `newgui_update_player_dungeon_055e33` | `0` | `3` | Accesses per-player Dungeon state (stride 0x1508) |
+| `newgui.cpp` | `0x56010` | `newgui_update_player_dungeon_056010` | `0` | `4` | Accesses per-player Dungeon state (stride 0x1508) |
+| `newgui.cpp` | `0x563b1` | `newgui_update_player_dungeon_0563b1` | `0` | `3` | Accesses per-player Dungeon state (stride 0x1508) |
+| `newgui.cpp` | `0x56642` | `newgui_fn_056642` | `0` | `0` | Module newgui.cpp procedure @ 0x056642 |
+| `newgui.cpp` | `0x56699` | `newgui_update_player_dungeon_056699` | `0` | `4` | Accesses per-player Dungeon state (stride 0x1508) |
+| `newgui.cpp` | `0x5674c` | `newgui_update_player_dungeon_05674c` | `0` | `3` | Accesses per-player Dungeon state (stride 0x1508) |
+| `newgui.cpp` | `0x5686f` | `newgui_update_player_dungeon_05686f` | `0` | `3` | Accesses per-player Dungeon state (stride 0x1508) |
+| `newgui.cpp` | `0x569a1` | `newgui_update_player_dungeon_0569a1` | `0` | `2` | Accesses per-player Dungeon state (stride 0x1508) |
+| `newgui.cpp` | `0x56a50` | `newgui_update_player_dungeon_056a50` | `0` | `4` | Accesses per-player Dungeon state (stride 0x1508) |
+| `newgui.cpp` | `0x56b63` | `newgui_fn_056b63` | `0` | `1` | Module newgui.cpp procedure @ 0x056b63 |
+| `newgui.cpp` | `0x56ee6` | `newgui_fn_056ee6` | `1` | `1` | Module newgui.cpp procedure @ 0x056ee6 |
+| `newgui.cpp` | `0x570a7` | `newgui_update_creature_and_thing_0570a7` | `0` | `2` | Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs) |
+| `newgui.cpp` | `0x571cf` | `newgui_process_thing_entity_0571cf` | `0` | `2` | Looks up Thing* in g_thing_ptrs[2048] and updates state |
+| `newgui.cpp` | `0x57348` | `newgui_process_thing_entity_057348` | `0` | `2` | Looks up Thing* in g_thing_ptrs[2048] and updates state |
+| `newgui.cpp` | `0x574b5` | `newgui_update_creature_and_thing_0574b5` | `0` | `3` | Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs) |
+| `newgui.cpp` | `0x5762c` | `newgui_fn_05762c` | `0` | `1` | Module newgui.cpp procedure @ 0x05762c |
+| `newgui.cpp` | `0x57739` | `newgui_draw_text_overlay_057739` | `3` | `6` | Configures font/flags and draws text on screen |
+| `newgui.cpp` | `0x5789a` | `newgui_have_text_scrolling_box_05789a` | `1` | `4` | String 'Cannot have a TEXT_SCROLLING box type without a pointer to a' |
+| `newgui.cpp` | `0x57a52` | `newgui_draw_text_overlay_057a52` | `2` | `4` | Configures font/flags and draws text on screen |
+| `newgui.cpp` | `0x57b6f` | `newgui_draw_text_overlay_057b6f` | `2` | `1` | Configures font/flags and draws text on screen |
+| `newgui.cpp` | `0x57bba` | `newgui_bar_small_057bba` | `3` | `2` | String 'Bar is too small' |
+| `newgui.cpp` | `0x57cac` | `newgui_bar_small_057cac` | `2` | `2` | String 'Bar is too small' |
+| `newgui.cpp` | `0x57d9e` | `newgui_bar_small_057d9e` | `1` | `3` | String 'Bar is too small' |
+| `newgui.cpp` | `0x57ea2` | `newgui_fn_057ea2` | `1` | `1` | Module newgui.cpp procedure @ 0x057ea2 |
+| `newgui.cpp` | `0x57f01` | `newgui_fn_057f01` | `1` | `0` | Module newgui.cpp procedure @ 0x057f01 |
+| `newgui.cpp` | `0x57f6b` | `newgui_process_thing_entity_057f6b` | `10` | `0` | Looks up Thing* in g_thing_ptrs[2048] and updates state |
+| `newgui.cpp` | `0x57fd9` | `newgui_fn_057fd9` | `1` | `0` | Module newgui.cpp procedure @ 0x057fd9 |
+| `newgui.cpp` | `0x57fe4` | `newgui_process_map_subtile_057fe4` | `5` | `20` | Reads/modifies Map[256x256] subtile data |
+| `newgui.cpp` | `0x58718` | `newgui_fn_058718` | `2` | `3` | Module newgui.cpp procedure @ 0x058718 |
+| `newgui.cpp` | `0x587a6` | `newgui_fn_0587a6` | `2` | `0` | Module newgui.cpp procedure @ 0x0587a6 |
+| `newgui.cpp` | `0x587ff` | `newgui_fn_0587ff` | `1` | `4` | Module newgui.cpp procedure @ 0x0587ff |
+| `newgui.cpp` | `0x588b6` | `newgui_fn_0588b6` | `2` | `0` | Module newgui.cpp procedure @ 0x0588b6 |
+| `newgui.cpp` | `0x58921` | `newgui_jonty_here_am_writing_058921` | `1` | `3` | String 'JONTY HERE   : ...I AM WRITING THIS AT 4AM ON KEEPERS LAST D' |
+| `newgui.cpp` | `0x58a7e` | `newgui_fn_058a7e` | `1` | `3` | Module newgui.cpp procedure @ 0x058a7e |
+| `newgui.cpp` | `0x58b21` | `newgui_fn_058b21` | `1` | `0` | Module newgui.cpp procedure @ 0x058b21 |
+| `newgui.cpp` | `0x58b37` | `newgui_this_bloody_tooltip_long_058b37` | `1` | `4` | String 'This bloody tooltip is too long' |
+| `newgui.cpp` | `0x58ba8` | `newgui_draw_text_overlay_058ba8` | `5` | `6` | Configures font/flags and draws text on screen |
+| `newgui.cpp` | `0x58ca7` | `newgui_draw_text_overlay_058ca7` | `1` | `3` | Configures font/flags and draws text on screen |
+| `newgui.cpp` | `0x58e1c` | `newgui_fn_058e1c` | `4` | `2` | Module newgui.cpp procedure @ 0x058e1c |
+| `newgui.cpp` | `0x590f8` | `newgui_fn_0590f8` | `1` | `2` | Module newgui.cpp procedure @ 0x0590f8 |
+| `newgui.cpp` | `0x59323` | `newgui_fn_059323` | `1` | `1` | Module newgui.cpp procedure @ 0x059323 |
+| `newgui.cpp` | `0x595ab` | `newgui_fn_0595ab` | `2` | `2` | Module newgui.cpp procedure @ 0x0595ab |
+| `newgui.cpp` | `0x5990a` | `newgui_fn_05990a` | `0` | `2` | Module newgui.cpp procedure @ 0x05990a |
+| `newgui.cpp` | `0x59a23` | `newgui_fn_059a23` | `0` | `1` | Module newgui.cpp procedure @ 0x059a23 |
+| `newgui.cpp` | `0x59aef` | `newgui_fn_059aef` | `0` | `1` | Module newgui.cpp procedure @ 0x059aef |
+| `newgui.cpp` | `0x59c71` | `newgui_fn_059c71` | `0` | `0` | Module newgui.cpp procedure @ 0x059c71 |
+| `newgui.cpp` | `0x59c83` | `newgui_fn_059c83` | `0` | `0` | Module newgui.cpp procedure @ 0x059c83 |
+| `newgui.cpp` | `0x59ca1` | `newgui_fn_059ca1` | `0` | `0` | Module newgui.cpp procedure @ 0x059ca1 |
+| `newgui.cpp` | `0x59ccb` | `newgui_fn_059ccb` | `2` | `1` | Module newgui.cpp procedure @ 0x059ccb |
+| `newgui.cpp` | `0x59d02` | `newgui_fn_059d02` | `2` | `1` | Module newgui.cpp procedure @ 0x059d02 |
+| `newgui.cpp` | `0x59d1a` | `newgui_fn_059d1a` | `0` | `0` | Module newgui.cpp procedure @ 0x059d1a |
+| `newgui.cpp` | `0x59d40` | `newgui_fn_059d40` | `0` | `0` | Module newgui.cpp procedure @ 0x059d40 |
+| `newgui.cpp` | `0x59d66` | `newgui_fn_059d66` | `0` | `1` | Module newgui.cpp procedure @ 0x059d66 |
+| `newgui.cpp` | `0x59dc4` | `newgui_stupid_spell_chosen_059dc4` | `0` | `3` | String 'Stupid spell chosen' |
+| `newgui.cpp` | `0x59ee7` | `newgui_fn_059ee7` | `0` | `1` | Module newgui.cpp procedure @ 0x059ee7 |
+| `newgui.cpp` | `0x59f51` | `newgui_fn_059f51` | `0` | `1` | Module newgui.cpp procedure @ 0x059f51 |
+| `newgui.cpp` | `0x59f7e` | `newgui_fn_059f7e` | `0` | `1` | Module newgui.cpp procedure @ 0x059f7e |
+| `newgui.cpp` | `0x59fd4` | `newgui_fn_059fd4` | `0` | `0` | Module newgui.cpp procedure @ 0x059fd4 |
+| `newgui.cpp` | `0x5a004` | `newgui_fn_05a004` | `0` | `1` | Module newgui.cpp procedure @ 0x05a004 |
+| `newgui.cpp` | `0x5a06d` | `newgui_process_thing_entity_05a06d` | `0` | `1` | Looks up Thing* in g_thing_ptrs[2048] and updates state |
+| `newgui.cpp` | `0x5a0e7` | `newgui_fn_05a0e7` | `0` | `0` | Module newgui.cpp procedure @ 0x05a0e7 |
+| `newgui.cpp` | `0x5a111` | `newgui_illegal_autopilot_type_05a111` | `0` | `1` | String 'ILLEGAL AUTOPILOT TYPE' |
+| `newgui.cpp` | `0x5a180` | `newgui_fn_05a180` | `0` | `0` | Module newgui.cpp procedure @ 0x05a180 |
+| `newgui.cpp` | `0x5a18a` | `newgui_fn_05a18a` | `0` | `1` | Module newgui.cpp procedure @ 0x05a18a |
+| `newgui.cpp` | `0x5a19c` | `newgui_fn_05a19c` | `0` | `0` | Module newgui.cpp procedure @ 0x05a19c |
+| `newgui.cpp` | `0x5a1a4` | `newgui_fn_05a1a4` | `0` | `0` | Module newgui.cpp procedure @ 0x05a1a4 |
+| `newgui.cpp` | `0x5a1b6` | `newgui_fn_05a1b6` | `0` | `1` | Module newgui.cpp procedure @ 0x05a1b6 |
+| `newgui.cpp` | `0x5a1d1` | `newgui_fn_05a1d1` | `0` | `0` | Module newgui.cpp procedure @ 0x05a1d1 |
+| `newgui.cpp` | `0x5a1da` | `newgui_fn_05a1da` | `0` | `0` | Module newgui.cpp procedure @ 0x05a1da |
+| `newgui.cpp` | `0x5a202` | `newgui_fn_05a202` | `0` | `0` | Module newgui.cpp procedure @ 0x05a202 |
+| `newgui.cpp` | `0x5a22b` | `newgui_fn_05a22b` | `0` | `1` | Module newgui.cpp procedure @ 0x05a22b |
+| `newgui.cpp` | `0x5a266` | `newgui_fn_05a266` | `0` | `0` | Module newgui.cpp procedure @ 0x05a266 |
+| `newgui.cpp` | `0x5a2b1` | `newgui_fn_05a2b1` | `0` | `0` | Module newgui.cpp procedure @ 0x05a2b1 |
+| `newgui.cpp` | `0x5a2bc` | `newgui_fn_05a2bc` | `0` | `0` | Module newgui.cpp procedure @ 0x05a2bc |
+| `newgui.cpp` | `0x5a2c7` | `newgui_fn_05a2c7` | `0` | `2` | Module newgui.cpp procedure @ 0x05a2c7 |
+| `newgui.cpp` | `0x5a338` | `newgui_fn_05a338` | `0` | `0` | Module newgui.cpp procedure @ 0x05a338 |
+| `newgui.cpp` | `0x5a365` | `newgui_fn_05a365` | `0` | `0` | Module newgui.cpp procedure @ 0x05a365 |
+| `newgui.cpp` | `0x5a3a8` | `newgui_fn_05a3a8` | `0` | `0` | Module newgui.cpp procedure @ 0x05a3a8 |
+| `newgui.cpp` | `0x5a3ce` | `newgui_fn_05a3ce` | `0` | `4` | Module newgui.cpp procedure @ 0x05a3ce |
+| `newgui.cpp` | `0x5a417` | `newgui_fn_05a417` | `0` | `2` | Module newgui.cpp procedure @ 0x05a417 |
+| `newgui.cpp` | `0x5a432` | `newgui_fn_05a432` | `0` | `2` | Module newgui.cpp procedure @ 0x05a432 |
+| `newgui.cpp` | `0x5a47f` | `newgui_fn_05a47f` | `0` | `4` | Module newgui.cpp procedure @ 0x05a47f |
+| `newgui.cpp` | `0x5a521` | `newgui_fn_05a521` | `0` | `0` | Module newgui.cpp procedure @ 0x05a521 |
+| `newgui.cpp` | `0x5a526` | `newgui_update_player_view_state_05a526` | `0` | `1` | Accesses per-player PlayerInfo state (stride 0x4ef) |
+| `newgui.cpp` | `0x5a567` | `newgui_update_player_view_state_05a567` | `0` | `1` | Accesses per-player PlayerInfo state (stride 0x4ef) |
+| `newgui.cpp` | `0x5a5b5` | `newgui_update_player_view_state_05a5b5` | `0` | `1` | Accesses per-player PlayerInfo state (stride 0x4ef) |
+| `newgui.cpp` | `0x5a600` | `newgui_update_player_dungeon_05a600` | `0` | `2` | Accesses per-player Dungeon state (stride 0x1508) |
+| `newgui.cpp` | `0x5a649` | `newgui_update_player_dungeon_05a649` | `0` | `1` | Accesses per-player Dungeon state (stride 0x1508) |
+| `newgui.cpp` | `0x5a692` | `newgui_update_player_dungeon_05a692` | `0` | `0` | Accesses per-player Dungeon state (stride 0x1508) |
+| `newgui.cpp` | `0x5a6a6` | `newgui_update_player_dungeon_05a6a6` | `1` | `3` | Accesses per-player Dungeon state (stride 0x1508) |
+| `newgui.cpp` | `0x5a705` | `newgui_update_player_dungeon_05a705` | `0` | `2` | Accesses per-player Dungeon state (stride 0x1508) |
+| `newgui.cpp` | `0x5a76c` | `newgui_process_map_subtile_05a76c` | `0` | `0` | Reads/modifies Map[256x256] subtile data |
+| `newgui.cpp` | `0x5a83d` | `newgui_process_map_subtile_05a83d` | `0` | `0` | Reads/modifies Map[256x256] subtile data |
+| `newgui.cpp` | `0x5a8f3` | `newgui_eek_this_what_you_05a8f3` | `0` | `3` | String 'EEK! This is what you just picked up a second ago!' |
+| `newgui.cpp` | `0x5aaf4` | `newgui_fn_05aaf4` | `0` | `1` | Module newgui.cpp procedure @ 0x05aaf4 |
+| `newgui.cpp` | `0x5ab45` | `newgui_fn_05ab45` | `0` | `0` | Module newgui.cpp procedure @ 0x05ab45 |
+| `newgui.cpp` | `0x5ab81` | `newgui_update_player_dungeon_05ab81` | `1` | `1` | Accesses per-player Dungeon state (stride 0x1508) |
+| `newgui.cpp` | `0x5abd1` | `newgui_fn_05abd1` | `0` | `3` | Module newgui.cpp procedure @ 0x05abd1 |
+| `newgui.cpp` | `0x5abf3` | `newgui_maintain_gui_button_state_05abf3` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `newgui.cpp` | `0x5ac13` | `newgui_fn_05ac13` | `0` | `0` | Module newgui.cpp procedure @ 0x05ac13 |
+| `newgui.cpp` | `0x5ac1e` | `newgui_fn_05ac1e` | `0` | `0` | Module newgui.cpp procedure @ 0x05ac1e |
+| `newgui.cpp` | `0x5ac4a` | `newgui_fn_05ac4a` | `0` | `1` | Module newgui.cpp procedure @ 0x05ac4a |
+| `newgui.cpp` | `0x5ac77` | `newgui_fn_05ac77` | `0` | `0` | Module newgui.cpp procedure @ 0x05ac77 |
+| `newgui.cpp` | `0x5ac80` | `newgui_fn_05ac80` | `0` | `1` | Module newgui.cpp procedure @ 0x05ac80 |
+| `newgui.cpp` | `0x5accc` | `newgui_fn_05accc` | `0` | `1` | Module newgui.cpp procedure @ 0x05accc |
+| `newgui.cpp` | `0x5acf7` | `newgui_fn_05acf7` | `0` | `0` | Module newgui.cpp procedure @ 0x05acf7 |
+| `newgui.cpp` | `0x5ad0a` | `newgui_fn_05ad0a` | `0` | `0` | Module newgui.cpp procedure @ 0x05ad0a |
+| `newgui.cpp` | `0x5ad26` | `newgui_update_player_dungeon_05ad26` | `1` | `0` | Accesses per-player Dungeon state (stride 0x1508) |
+| `newgui.cpp` | `0x5ae20` | `newgui_fn_05ae20` | `2` | `0` | Module newgui.cpp procedure @ 0x05ae20 |
+| `newgui.cpp` | `0x5ae90` | `newgui_fn_05ae90` | `2` | `4` | Module newgui.cpp procedure @ 0x05ae90 |
+| `newgui.cpp` | `0x5aee2` | `newgui_fn_05aee2` | `4` | `4` | Module newgui.cpp procedure @ 0x05aee2 |
+| `newgui.cpp` | `0x5afda` | `newgui_fn_05afda` | `10` | `3` | Module newgui.cpp procedure @ 0x05afda |
+| `newgui.cpp` | `0x5b1bc` | `newgui_backup_input_field_small_05b1bc` | `1` | `7` | String 'backup_input_field too small' |
+| `newgui.cpp` | `0x5b25b` | `newgui_fn_05b25b` | `1` | `5` | Module newgui.cpp procedure @ 0x05b25b |
+| `newgui.cpp` | `0x5b3dd` | `newgui_copy_state_struct_05b3dd` | `1` | `1` | Copies fixed-size state structure via LbMemoryCopy |
+| `newgui.cpp` | `0x5b3fc` | `newgui_fn_05b3fc` | `1` | `2` | Module newgui.cpp procedure @ 0x05b3fc |
+| `newgui.cpp` | `0x5b4e7` | `newgui_copy_state_struct_05b4e7` | `1` | `2` | Copies fixed-size state structure via LbMemoryCopy |
+| `newgui.cpp` | `0x5b5e1` | `newgui_fn_05b5e1` | `2` | `1` | Module newgui.cpp procedure @ 0x05b5e1 |
+| `newgui.cpp` | `0x5b5f5` | `newgui_fn_05b5f5` | `1` | `0` | Module newgui.cpp procedure @ 0x05b5f5 |
+| `newgui.cpp` | `0x5b645` | `newgui_fn_05b645` | `10` | `3` | Module newgui.cpp procedure @ 0x05b645 |
+| `newgui.cpp` | `0x5b940` | `newgui_fn_05b940` | `1` | `3` | Module newgui.cpp procedure @ 0x05b940 |
+| `newgui.cpp` | `0x5b9b3` | `newgui_update_player_view_state_05b9b3` | `3` | `0` | Accesses per-player PlayerInfo state (stride 0x4ef) |
+| `newgui.cpp` | `0x5b9c0` | `newgui_update_player_view_state_05b9c0` | `2` | `3` | Accesses per-player PlayerInfo state (stride 0x4ef) |
+| `newgui.cpp` | `0x5ba63` | `newgui_fn_05ba63` | `1` | `0` | Module newgui.cpp procedure @ 0x05ba63 |
+| `newgui.cpp` | `0x5ba80` | `newgui_update_player_dungeon_05ba80` | `2` | `3` | Accesses per-player Dungeon state (stride 0x1508) |
+| `newgui.cpp` | `0x5bb49` | `newgui_fn_05bb49` | `1` | `2` | Module newgui.cpp procedure @ 0x05bb49 |
+| `newgui.cpp` | `0x5bb9c` | `newgui_draw_text_overlay_05bb9c` | `2` | `2` | Configures font/flags and draws text on screen |
+| `newgui.cpp` | `0x5bcc1` | `newgui_copy_state_struct_05bcc1` | `2` | `1` | Copies fixed-size state structure via LbMemoryCopy |
+| `newgui.cpp` | `0x5bcd7` | `newgui_fn_05bcd7` | `0` | `1` | Module newgui.cpp procedure @ 0x05bcd7 |
+| `newgui.cpp` | `0x5bd22` | `newgui_process_dungeon_room_05bd22` | `1` | `2` | Operates on Room structure in g_rooms (stride 0x45) |
+| `newgui.cpp` | `0x5be78` | `newgui_process_slabmap_tile_05be78` | `1` | `2` | Reads/modifies SlabMap[85x85] tile entry |
+| `newgui.cpp` | `0x5bf63` | `newgui_update_player_view_state_05bf63` | `1` | `3` | Accesses per-player PlayerInfo state (stride 0x4ef) |
+| `newgui.cpp` | `0x5c053` | `newgui_process_thing_entity_05c053` | `1` | `8` | Looks up Thing* in g_thing_ptrs[2048] and updates state |
+| `newgui.cpp` | `0x5c2e3` | `newgui_fn_05c2e3` | `4` | `2` | Module newgui.cpp procedure @ 0x05c2e3 |
+| `newgui.cpp` | `0x5c377` | `newgui_fn_05c377` | `2` | `0` | Module newgui.cpp procedure @ 0x05c377 |
+| `newgui.cpp` | `0x5c408` | `newgui_undefined_event_type_05c408` | `0` | `8` | String 'Undefined event type: %d' |
+| `newgui.cpp` | `0x5c4f3` | `newgui_fn_05c4f3` | `2` | `2` | Module newgui.cpp procedure @ 0x05c4f3 |
+| `newgui.cpp` | `0x5c544` | `newgui_fn_05c544` | `2` | `3` | Module newgui.cpp procedure @ 0x05c544 |
+| `newgui.cpp` | `0x5c74d` | `newgui_process_thing_entity_05c74d` | `0` | `1` | Looks up Thing* in g_thing_ptrs[2048] and updates state |
+| `newgui.cpp` | `0x5c7c4` | `newgui_fn_05c7c4` | `0` | `0` | Module newgui.cpp procedure @ 0x05c7c4 |
+| `newgui.cpp` | `0x5c7ea` | `newgui_fn_05c7ea` | `0` | `0` | Module newgui.cpp procedure @ 0x05c7ea |
+| `newgui.cpp` | `0x5c810` | `newgui_fn_05c810` | `0` | `1` | Module newgui.cpp procedure @ 0x05c810 |
+| `newgui.cpp` | `0x5c82f` | `newgui_fn_05c82f` | `2` | `1` | Module newgui.cpp procedure @ 0x05c82f |
+| `newgui.cpp` | `0x5c848` | `newgui_fn_05c848` | `19` | `6` | Module newgui.cpp procedure @ 0x05c848 |
+| `newgui.cpp` | `0x5c8bc` | `newgui_fn_05c8bc` | `0` | `1` | Module newgui.cpp procedure @ 0x05c8bc |
+| `newgui.cpp` | `0x5c8fa` | `newgui_fn_05c8fa` | `6` | `1` | Module newgui.cpp procedure @ 0x05c8fa |
+| `newgui.cpp` | `0x5c985` | `newgui_fn_05c985` | `1` | `2` | Module newgui.cpp procedure @ 0x05c985 |
+| `newgui.cpp` | `0x5c9cf` | `newgui_fn_05c9cf` | `1` | `1` | Module newgui.cpp procedure @ 0x05c9cf |
+| `newgui.cpp` | `0x5cabb` | `newgui_process_thing_entity_05cabb` | `2` | `3` | Looks up Thing* in g_thing_ptrs[2048] and updates state |
+| `newgui.cpp` | `0x5cc4a` | `newgui_fn_05cc4a` | `3` | `0` | Module newgui.cpp procedure @ 0x05cc4a |
+| `newgui.cpp` | `0x5cc56` | `newgui_fn_05cc56` | `1` | `0` | Module newgui.cpp procedure @ 0x05cc56 |
+| `newgui.cpp` | `0x5ccf5` | `newgui_cycle_button_have_gui_05ccf5` | `0` | `1` | String 'Cycle button cannot have a 'gui_area_normal_button' draw fun' |
+| `newgui.cpp` | `0x5cd55` | `newgui_fn_05cd55` | `3` | `0` | Module newgui.cpp procedure @ 0x05cd55 |
+| `newgui.cpp` | `0x5cda7` | `newgui_fn_05cda7` | `1` | `2` | Module newgui.cpp procedure @ 0x05cda7 |
+| `newgui.cpp` | `0x5ce3d` | `newgui_fn_05ce3d` | `0` | `0` | Module newgui.cpp procedure @ 0x05ce3d |
+| `newgui.cpp` | `0x5ce63` | `newgui_create_floating_spirit_05ce63` | `0` | `3` | String 'Unable to create floating spirit' |
+| `newgui.cpp` | `0x5ceca` | `newgui_fn_05ceca` | `1` | `0` | Module newgui.cpp procedure @ 0x05ceca |
+| `newgui.cpp` | `0x5cee9` | `newgui_fn_05cee9` | `2` | `1` | Module newgui.cpp procedure @ 0x05cee9 |
+| `newgui.cpp` | `0x5cef9` | `newgui_fn_05cef9` | `1` | `1` | Module newgui.cpp procedure @ 0x05cef9 |
+| `newgui.cpp` | `0x5cf03` | `newgui_fn_05cf03` | `4` | `2` | Module newgui.cpp procedure @ 0x05cf03 |
+| `newgui.cpp` | `0x5cf2d` | `newgui_fn_05cf2d` | `16` | `1` | Module newgui.cpp procedure @ 0x05cf2d |
+| `newgui.cpp` | `0x5cf9f` | `newgui_fn_05cf9f` | `0` | `4` | Module newgui.cpp procedure @ 0x05cf9f |
+| `newgui.cpp` | `0x5d01f` | `newgui_maintain_gui_button_state_05d01f` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `newgui.cpp` | `0x5d032` | `newgui_update_player_dungeon_05d032` | `1` | `2` | Accesses per-player Dungeon state (stride 0x1508) |
+| `newgui.cpp` | `0x5d15e` | `newgui_update_player_dungeon_05d15e` | `2` | `0` | Accesses per-player Dungeon state (stride 0x1508) |
+| `newgui.cpp` | `0x5d174` | `newgui_update_player_dungeon_05d174` | `0` | `0` | Accesses per-player Dungeon state (stride 0x1508) |
+| `newgui.cpp` | `0x5d19c` | `newgui_dead_thing_friend_enemy_05d19c` | `1` | `1` | String 'Dead thing in friend/enemy battle-list' |
+| `newgui.cpp` | `0x5d280` | `newgui_update_player_view_state_05d280` | `1` | `5` | Accesses per-player PlayerInfo state (stride 0x4ef) |
+| `panmap.cpp` | `0x62570` | `panmap_fn_062570` | `0` | `0` | Module panmap.cpp procedure @ 0x062570 |
+| `panmap.cpp` | `0x62578` | `panmap_fn_062578` | `1` | `3` | Module panmap.cpp procedure @ 0x062578 |
+| `panmap.cpp` | `0x62787` | `panmap_fn_062787` | `1` | `0` | Module panmap.cpp procedure @ 0x062787 |
+| `panmap.cpp` | `0x627b5` | `panmap_update_player_view_state_0627b5` | `17` | `2` | Accesses per-player PlayerInfo state (stride 0x4ef) |
+| `panmap.cpp` | `0x629cc` | `panmap_fn_0629cc` | `3` | `0` | Module panmap.cpp procedure @ 0x0629cc |
+| `panmap.cpp` | `0x62a0d` | `panmap_fn_062a0d` | `1` | `0` | Module panmap.cpp procedure @ 0x062a0d |
+| `panmap.cpp` | `0x62b62` | `panmap_fn_062b62` | `1` | `0` | Module panmap.cpp procedure @ 0x062b62 |
+| `panmap.cpp` | `0x62d70` | `panmap_fn_062d70` | `1` | `1` | Module panmap.cpp procedure @ 0x062d70 |
+| `panmap.cpp` | `0x62eb7` | `panmap_fn_062eb7` | `1` | `2` | Module panmap.cpp procedure @ 0x062eb7 |
+| `panmap.cpp` | `0x62ee2` | `panmap_update_player_view_state_062ee2` | `3` | `2` | Accesses per-player PlayerInfo state (stride 0x4ef) |
+| `panmap.cpp` | `0x63122` | `panmap_door_flagged_position_063122` | `15` | `2` | String 'No door for flagged position' |
+| `panmap.cpp` | `0x633c4` | `panmap_fn_0633c4` | `1` | `7` | Module panmap.cpp procedure @ 0x0633c4 |
+| `bflib/bflib_video.cpp` | `0xf0d90` | `bflib_video_fn_0f0d90` | `2` | `4` | Module bflib/bflib_video.cpp procedure @ 0x0f0d90 |
+| `bflib/bflib_video.cpp` | `0xf143c` | `bflib_video_sbawe32_mdi_0f143c` | `3` | `16` | String 'SBAWE32.MDI' |
+| `bflib/bflib_video.cpp` | `0xf1b38` | `bflib_video_bf_debug_audio_0f1b38` | `1` | `11` | String 'BF_DEBUG_AUDIO' |
+| `bflib/bflib_video.cpp` | `0xfe128` | `bflib_video_bf25_init_music_0fe128` | `1` | `21` | String 'BF25 - Init Music' |
 
 ## 3. Anchor Graphics & Renderer Functions (Decompiled)
 
-### `dk_unhandled_physicalmemory_069c2c` (`0x69c2c` in `setup.cpp`)
-- **Evidence**: String 'Unhandled PhysicalMemory'
+### `setup_detect_physical_memory_tier` (`0x69c2c` in `setup.cpp`)
+- **Evidence**: Map detected physical RAM (MB) to asset caching tier (8/16/24/32 MB)
 ```c
 longlong FUN_00069c2c(void)
 
@@ -667,8 +667,8 @@ longlong FUN_00069c2c(void)
 }
 ```
 
-### `dk_data_gui_dat_06a356` (`0x6a356` in `setup.cpp`)
-- **Evidence**: String 'data\gui.dat'
+### `setup_free_gui_data_files` (`0x6a356` in `setup.cpp`)
+- **Evidence**: Free loaded GUI data/sprite tables (data/gui.dat)
 ```c
 longlong FUN_0006a356(void)
 
@@ -717,8 +717,8 @@ LAB_0006a3bc:
 }
 ```
 
-### `sub_06a553` (`0x6a553` in `setup.cpp`)
-- **Evidence**: Address-based identifier
+### `setup_load_core_game_data` (`0x6a553` in `setup.cpp`)
+- **Evidence**: Load core game data files via LbDataLoadAll
 ```c
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
@@ -754,8 +754,8 @@ longlong FUN_0006a553(void)
 }
 ```
 
-### `dk_mcga_minimal_allowed_06a689` (`0x6a689` in `setup.cpp`)
-- **Evidence**: String 'MCGA Minimal not allowed'
+### `setup_init_game_screen_and_subsystems` (`0x6a689` in `setup.cpp`)
+- **Evidence**: Initialize VESA/VGA screen mode (disallow MCGA minimal) and game subsystems
 ```c
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
@@ -907,8 +907,8 @@ LAB_00069ed6:
 }
 ```
 
-### `dk_data_gui_dat_06aac0` (`0x6aac0` in `setup.cpp`)
-- **Evidence**: String 'data\gui.dat'
+### `setup_reload_gui_and_mode_sprites` (`0x6aac0` in `setup.cpp`)
+- **Evidence**: Reload GUI sprite tables (data/gui.dat) for current screen resolution
 ```c
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
@@ -1033,8 +1033,8 @@ LAB_00069ed6:
 }
 ```
 
-### `dk_loading_raw_06ae80` (`0x6ae80` in `setup.cpp`)
-- **Evidence**: String 'LOADING.RAW'
+### `setup_show_loading_raw_screen` (`0x6ae80` in `setup.cpp`)
+- **Evidence**: Load and display LOADING.RAW splash screen with palette
 ```c
 void FUN_0006ae80(void)
 
@@ -1106,8 +1106,8 @@ void FUN_0006ae80(void)
 }
 ```
 
-### `dk_data_hpointer_dat_06b0c8` (`0x6b0c8` in `setup.cpp`)
-- **Evidence**: String 'data\hpointer.dat'
+### `setup_load_pointer_sprites` (`0x6b0c8` in `setup.cpp`)
+- **Evidence**: Load mouse pointer sprite sheet (data/hpointer.dat)
 ```c
 void FUN_0006b0c8(void)
 
@@ -1123,8 +1123,8 @@ void FUN_0006b0c8(void)
 }
 ```
 
-### `dk_graphics_heap_already_allocated_06b16f` (`0x6b16f` in `setup.cpp`)
-- **Evidence**: String 'Graphics heap already allocated'
+### `setup_allocate_graphics_heap` (`0x6b16f` in `setup.cpp`)
+- **Evidence**: Allocate and initialize sprite/texture graphics heap
 ```c
 longlong FUN_0006b16f(void)
 
@@ -1254,8 +1254,8 @@ LAB_0006b347:
 }
 ```
 
-### `dk_illegal_quadrant_0a6990` (`0xa6990` in `engine3.cpp`)
-- **Evidence**: String 'Illegal quadrant'
+### `engine3_render_3d_dungeon_viewport` (`0xa6990` in `engine3.cpp`)
+- **Evidence**: Top-level 3D dungeon viewport renderer (clamps camera zoom, projects & rasterizes scene)
 ```c
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
@@ -2544,7 +2544,7 @@ LAB_000a7ab4:
 }
 ```
 
-### `dk_unhandled_screen_mode_087da4` (`0x87da4` in `draw.cpp`)
+### `draw_unhandled_screen_mode_087da4` (`0x87da4` in `draw.cpp`)
 - **Evidence**: String 'Unhandled screen mode'
 ```c
 void FUN_00087da4(void)
@@ -2630,7 +2630,7 @@ LAB_00087f52:
 }
 ```
 
-### `dk_frames_different_between_views_08ae00` (`0x8ae00` in `draw.cpp`)
+### `draw_frames_different_between_views_08ae00` (`0x8ae00` in `draw.cpp`)
 - **Evidence**: String 'No frames different between views C%d, M%d, A%d, B%d'
 ```c
 void FUN_0008ae00(void)
@@ -2678,7 +2678,7 @@ void FUN_0008ae00(void)
 }
 ```
 
-### `dk_frames_different_between_views_08aee4` (`0x8aee4` in `draw.cpp`)
+### `draw_frames_different_between_views_08aee4` (`0x8aee4` in `draw.cpp`)
 - **Evidence**: String 'No frames different between views C%d, M%d, A%d, B%d'
 ```c
 void FUN_0008aee4(void)
@@ -2726,7 +2726,7 @@ void FUN_0008aee4(void)
 }
 ```
 
-### `dk_load_palette_file_08cc24` (`0x8cc24` in `draw.cpp`)
+### `draw_load_palette_file_08cc24` (`0x8cc24` in `draw.cpp`)
 - **Evidence**: String 'Cannot load palette file %s'
 ```c
 void FUN_0008cc24(void)
@@ -2763,8 +2763,8 @@ void FUN_0008cc24(void)
 }
 ```
 
-### `sub_08de90` (`0x8de90` in `draw.cpp`)
-- **Evidence**: Address-based identifier
+### `draw_fn_08de90` (`0x8de90` in `draw.cpp`)
+- **Evidence**: Module draw.cpp procedure @ 0x08de90
 ```c
 void FUN_0008de90(void)
 
@@ -2787,7 +2787,7 @@ void FUN_0008de90(void)
 }
 ```
 
-### `dk_could_create_column_none_015386` (`0x15386` in `column.cpp`)
+### `column_could_create_column_none_015386` (`0x15386` in `column.cpp`)
 - **Evidence**: String 'Could not create column: None free'
 ```c
 undefined8 FUN_00015386(void)
@@ -2853,7 +2853,7 @@ LAB_0001544f:
 }
 ```
 
-### `dk_allocate_column_015479` (`0x15479` in `column.cpp`)
+### `column_allocate_column_015479` (`0x15479` in `column.cpp`)
 - **Evidence**: String 'Cannot allocate column'
 ```c
 void FUN_00015479(void)
@@ -2883,8 +2883,8 @@ void FUN_00015479(void)
 }
 ```
 
-### `sub_015603` (`0x15603` in `column.cpp`)
-- **Evidence**: Address-based identifier
+### `column_process_map_subtile_015603` (`0x15603` in `column.cpp`)
+- **Evidence**: Reads/modifies Map[256x256] subtile data
 ```c
 void FUN_00015603(void)
 
@@ -2938,8 +2938,8 @@ void FUN_00015603(void)
 }
 ```
 
-### `sub_0156de` (`0x156de` in `column.cpp`)
-- **Evidence**: Address-based identifier
+### `column_process_map_subtile_0156de` (`0x156de` in `column.cpp`)
+- **Evidence**: Reads/modifies Map[256x256] subtile data
 ```c
 void FUN_000156de(void)
 
@@ -3003,7 +3003,7 @@ void FUN_000156de(void)
 }
 ```
 
-### `dk_illegal_ceiling_step_value_07c1f0` (`0x7c1f0` in `ceiling.cpp`)
+### `ceiling_illegal_ceiling_step_value_07c1f0` (`0x7c1f0` in `ceiling.cpp`)
 - **Evidence**: String 'Illegal ceiling step value'
 ```c
 undefined4 FUN_0007c1f0(void)
@@ -3041,7 +3041,7 @@ undefined4 FUN_0007c1f0(void)
 }
 ```
 
-### `dk_light_already_list_0acaf8` (`0xacaf8` in `light.cpp`)
+### `light_already_list_0acaf8` (`0xacaf8` in `light.cpp`)
 - **Evidence**: String 'Light is already in list'
 ```c
 /* WARNING: Removing unreachable block (ram,0x000acb12) */
@@ -3145,7 +3145,7 @@ LAB_000acb7a:
 }
 ```
 
-### `dk_attempt_delete_light_0acce4` (`0xacce4` in `light.cpp`)
+### `light_attempt_delete_light_0acce4` (`0xacce4` in `light.cpp`)
 - **Evidence**: String 'Attempt to delete light 0'
 ```c
 void FUN_000acce4(void)
@@ -3175,8 +3175,8 @@ void FUN_000acce4(void)
 }
 ```
 
-### `sub_0acef0` (`0xacef0` in `light.cpp`)
-- **Evidence**: Address-based identifier
+### `light_fn_0acef0` (`0xacef0` in `light.cpp`)
+- **Evidence**: Module light.cpp procedure @ 0x0acef0
 ```c
 undefined8 FUN_000acef0(void)
 
@@ -3188,7 +3188,7 @@ undefined8 FUN_000acef0(void)
 }
 ```
 
-### `dk_attempt_get_anglexy_unallocated_0acf7c` (`0xacf7c` in `light.cpp`)
+### `light_attempt_get_anglexy_unallocated_0acf7c` (`0xacf7c` in `light.cpp`)
 - **Evidence**: String 'Attempt to get anglexy of unallocated light structure'
 ```c
 longlong FUN_000acf7c(void)
@@ -3205,7 +3205,7 @@ longlong FUN_000acf7c(void)
 }
 ```
 
-### `dk_attempt_get_width_unallocated_0ad0f4` (`0xad0f4` in `light.cpp`)
+### `light_attempt_get_width_unallocated_0ad0f4` (`0xad0f4` in `light.cpp`)
 - **Evidence**: String 'Attempt to get width of unallocated light structure'
 ```c
 longlong FUN_000ad0f4(void)
@@ -3222,7 +3222,7 @@ longlong FUN_000ad0f4(void)
 }
 ```
 
-### `dk_attempt_set_intensity_unallocated_0ad148` (`0xad148` in `light.cpp`)
+### `light_attempt_set_intensity_unallocated_0ad148` (`0xad148` in `light.cpp`)
 - **Evidence**: String 'Attempt to set intensity of unallocated light structure'
 ```c
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
@@ -3261,7 +3261,7 @@ void FUN_000ad148(void)
 }
 ```
 
-### `dk_attempt_get_intensity_unallocated_0ad23c` (`0xad23c` in `light.cpp`)
+### `light_attempt_get_intensity_unallocated_0ad23c` (`0xad23c` in `light.cpp`)
 - **Evidence**: String 'Attempt to get intensity of unallocated light structure'
 ```c
 longlong FUN_000ad23c(void)
@@ -3278,7 +3278,7 @@ longlong FUN_000ad23c(void)
 }
 ```
 
-### `dk_attempt_set_size_unallocated_0ad290` (`0xad290` in `light.cpp`)
+### `light_attempt_set_size_unallocated_0ad290` (`0xad290` in `light.cpp`)
 - **Evidence**: String 'Attempt to set size of unallocated light structure'
 ```c
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
@@ -3315,8 +3315,8 @@ void FUN_000ad290(void)
 }
 ```
 
-### `dk_graphic_id_model_class_0db5c4` (`0xdb5c4` in `ssprite.cpp`)
-- **Evidence**: String 'Invalid graphic Id %d from model %d, class %d'
+### `get_thing_anim_sprite_id_checked` (`0xdb5c4` in `ssprite.cpp`)
+- **Evidence**: Resolve animation graphic ID for Thing model/class with bounds logging
 ```c
 void FUN_000db5c4(void)
 
@@ -3543,8 +3543,8 @@ LAB_000dbb50:
 }
 ```
 
-### `dk_graphic_id_model_class_0dbb84` (`0xdbb84` in `ssprite.cpp`)
-- **Evidence**: String 'Invalid graphic Id %d from model %d, class %d'
+### `update_thing_anim_sprite_frame` (`0xdbb84` in `ssprite.cpp`)
+- **Evidence**: Advance and validate Thing animation sprite frame
 ```c
 /* WARNING: Type propagation algorithm not settling */
 
@@ -3731,7 +3731,7 @@ LAB_000dc0c4:
 }
 ```
 
-### `dk_eyelens_memory_already_allocated_02700c` (`0x2700c` in `eyelens.cpp`)
+### `eyelens_memory_already_allocated_02700c` (`0x2700c` in `eyelens.cpp`)
 - **Evidence**: String 'EyeLens Memory already allocated'
 ```c
 void FUN_0002700c(void)
@@ -3772,7 +3772,7 @@ LAB_00027046:
 }
 ```
 
-### `dk_data_frac_dat_027130` (`0x27130` in `eyelens.cpp`)
+### `eyelens_data_frac_dat_027130` (`0x27130` in `eyelens.cpp`)
 - **Evidence**: String 'data\frac%02d.dat'
 ```c
 void FUN_00027130(void)
@@ -3844,7 +3844,7 @@ LAB_000272c0:
 }
 ```
 
-### `dk_why_are_we_here_02dfac` (`0x2dfac` in `frontend.cpp`)
+### `frontend_why_are_we_here_02dfac` (`0x2dfac` in `frontend.cpp`)
 - **Evidence**: String 'Why are we here'
 ```c
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
@@ -4033,7 +4033,7 @@ LAB_0002e46d:
 }
 ```
 
-### `dk_load_frontend_palette_02e8a7` (`0x2e8a7` in `frontend.cpp`)
+### `frontend_load_frontend_palette_02e8a7` (`0x2e8a7` in `frontend.cpp`)
 - **Evidence**: String 'Unable to load FRONTEND PALETTE'
 ```c
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
@@ -4233,7 +4233,7 @@ LAB_0002ea55:
 }
 ```
 
-### `dk_why_are_we_here_02ecbd` (`0x2ecbd` in `frontend.cpp`)
+### `frontend_why_are_we_here_02ecbd` (`0x2ecbd` in `frontend.cpp`)
 - **Evidence**: String 'Why are we here when it's not a new level'
 ```c
 void FUN_0002ecbd(void)
@@ -4259,8 +4259,8 @@ void FUN_0002ecbd(void)
 }
 ```
 
-### `sub_02f9f5` (`0x2f9f5` in `frontend.cpp`)
-- **Evidence**: Address-based identifier
+### `frontend_fn_02f9f5` (`0x2f9f5` in `frontend.cpp`)
+- **Evidence**: Module frontend.cpp procedure @ 0x02f9f5
 ```c
 undefined4 FUN_0002f9f5(void)
 
@@ -4300,7 +4300,7 @@ undefined4 FUN_0002f9f5(void)
 }
 ```
 
-### `dk_ldata_front_raw_02ffe4` (`0x2ffe4` in `frontend.cpp`)
+### `frontend_ldata_front_raw_02ffe4` (`0x2ffe4` in `frontend.cpp`)
 - **Evidence**: String 'LDATA\FRONT.RAW'
 ```c
 undefined8 FUN_0002ffe4(void)
@@ -4328,7 +4328,7 @@ undefined8 FUN_0002ffe4(void)
 }
 ```
 
-### `dk_text_long_box_030a2d` (`0x30a2d` in `frontend.cpp`)
+### `frontend_text_long_box_030a2d` (`0x30a2d` in `frontend.cpp`)
 - **Evidence**: String 'Text too long for error box'
 ```c
 void FUN_00030a2d(void)
@@ -4379,7 +4379,7 @@ void FUN_00030a2d(void)
 }
 ```
 
-### `dk_ldata_dkflag00_dat_030ef8` (`0x30ef8` in `frontmap.cpp`)
+### `frontmap_ldata_dkflag00_dat_030ef8` (`0x30ef8` in `frontmap.cpp`)
 - **Evidence**: String 'LDATA\DKFLAG00.DAT'
 ```c
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
@@ -4510,7 +4510,7 @@ longlong FUN_00030ef8(void)
 }
 ```
 
-### `dk_ldata_netflag_dat_031a51` (`0x31a51` in `frontmap.cpp`)
+### `frontmap_ldata_netflag_dat_031a51` (`0x31a51` in `frontmap.cpp`)
 - **Evidence**: String 'LDATA\NETFLAG.DAT'
 ```c
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
@@ -4575,7 +4575,7 @@ void FUN_00031a51(void)
 }
 ```
 
-### `dk_LbNetwork_Exchange_031def` (`0x31def` in `frontmap.cpp`)
+### `frontmap_LbNetwork_Exchange_031def` (`0x31def` in `frontmap.cpp`)
 - **Evidence**: References 'LbNetwork_Exchange failed'
 ```c
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
@@ -4757,7 +4757,7 @@ LAB_00032316:
 }
 ```
 
-### `dk_number_players_0322e9` (`0x322e9` in `frontmap.cpp`)
+### `frontmap_number_players_0322e9` (`0x322e9` in `frontmap.cpp`)
 - **Evidence**: String 'Invalid number of players'
 ```c
 /* WARNING: Removing unreachable block (ram,0x000323f2) */
@@ -4882,7 +4882,7 @@ LAB_000323ba:
 }
 ```
 
-### `dk_enough_memory_game_structure_0329ae` (`0x329ae` in `frontmap.cpp`)
+### `frontmap_enough_memory_game_structure_0329ae` (`0x329ae` in `frontmap.cpp`)
 - **Evidence**: String 'Not enough memory in game structure for map'
 ```c
 longlong FUN_000329ae(void)
@@ -4927,7 +4927,7 @@ longlong FUN_000329ae(void)
 }
 ```
 
-### `dk_more_room_menu_stack_052b67` (`0x52b67` in `newgui.cpp`)
+### `newgui_more_room_menu_stack_052b67` (`0x52b67` in `newgui.cpp`)
 - **Evidence**: String 'NO MORE ROOM FOR MENU STACK'
 ```c
 void FUN_00052b67(void)
@@ -4966,7 +4966,7 @@ void FUN_00052b67(void)
 }
 ```
 
-### `dk_illegal_computer_player_053753` (`0x53753` in `newgui.cpp`)
+### `newgui_illegal_computer_player_053753` (`0x53753` in `newgui.cpp`)
 - **Evidence**: String 'Illegal computer player'
 ```c
 void FUN_00053753(void)
@@ -4986,7 +4986,7 @@ void FUN_00053753(void)
 }
 ```
 
-### `dk_state_type_gui_state_053a18` (`0x53a18` in `newgui.cpp`)
+### `newgui_state_type_gui_state_053a18` (`0x53a18` in `newgui.cpp`)
 - **Evidence**: String 'Unknown state_type_to_gui_state[]'
 ```c
 /* WARNING: Removing unreachable block (ram,0x00053bb1) */
@@ -5070,7 +5070,7 @@ void FUN_00053a18(void)
 }
 ```
 
-### `dk_oi_there_fade_time_053ccc` (`0x53ccc` in `newgui.cpp`)
+### `newgui_oi_there_fade_time_053ccc` (`0x53ccc` in `newgui.cpp`)
 - **Evidence**: String 'Oi! There is a fade time less than 1. Idiot.'
 ```c
 undefined8 FUN_00053ccc(void)
@@ -5254,7 +5254,7 @@ LAB_0005499e:
 }
 ```
 
-### `dk_cycle_button_have_gui_05482c` (`0x5482c` in `newgui.cpp`)
+### `newgui_cycle_button_have_gui_05482c` (`0x5482c` in `newgui.cpp`)
 - **Evidence**: String 'Cycle button cannot have a 'gui_area_normal_button' draw fun'
 ```c
 void FUN_0005482c(void)
@@ -5277,7 +5277,7 @@ void FUN_0005482c(void)
 }
 ```
 
-### `dk_cycle_button_have_gui_0548cb` (`0x548cb` in `newgui.cpp`)
+### `newgui_cycle_button_have_gui_0548cb` (`0x548cb` in `newgui.cpp`)
 - **Evidence**: String 'Cycle button cannot have a 'gui_area_normal_button' draw fun'
 ```c
 void FUN_000548cb(void)
@@ -5300,7 +5300,7 @@ void FUN_000548cb(void)
 }
 ```
 
-### `dk_cycle_button_must_have_054add` (`0x54add` in `newgui.cpp`)
+### `newgui_cycle_button_must_have_054add` (`0x54add` in `newgui.cpp`)
 - **Evidence**: String 'Cycle button must have a non-null UBYTE Data pointer!'
 ```c
 void FUN_00054add(void)
@@ -5330,7 +5330,7 @@ void FUN_00054add(void)
 }
 ```
 
-### `dk_cycle_button_must_have_054bab` (`0x54bab` in `newgui.cpp`)
+### `newgui_cycle_button_must_have_054bab` (`0x54bab` in `newgui.cpp`)
 - **Evidence**: String 'Cycle button must have a non-null UBYTE Data pointer!'
 ```c
 void FUN_00054bab(void)
@@ -5360,7 +5360,7 @@ void FUN_00054bab(void)
 }
 ```
 
-### `dk_door_flagged_position_063122` (`0x63122` in `panmap.cpp`)
+### `panmap_door_flagged_position_063122` (`0x63122` in `panmap.cpp`)
 - **Evidence**: String 'No door for flagged position'
 ```c
 void FUN_00063122(void)

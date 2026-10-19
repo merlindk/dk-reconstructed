@@ -1,7 +1,7 @@
 /**
- * Dungeon Keeper (KEEPER.EXE) - Reconstructed Source Module: door.cpp
+ * Dungeon Keeper (KEEPER.EXE) - Reconstructed & Semantically Named Module: door.cpp
  * Binary Subject: /home/merlin/Dungeon Keeper/re/KEEPER.elf
- * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 (x86:LE:32:default)
+ * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 + DK Semantic Analyzer
  * Functions in this translation unit: 21
  */
 
@@ -11,57 +11,57 @@
 #include "../include/dk_functions.h"
 
 /******************************************************************************
- * Function : sub_022905 (Ghidra: FUN_00022905)
- * Prototype: longlong sub_022905(void);
+ * Function : door_fn_022905 (Original VA: 0x22905, Ghidra: FUN_00022905)
+ * Prototype: longlong door_fn_022905(void);
  * Address  : 0x22905 (Size: 46 bytes)
  * Module   : door.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x225fc
- * Callees  : 1 -> 0x22a72
+ * Purpose  : Module door.cpp procedure @ 0x022905
+ * Callers  : 1 -> compturn_fn_0225fc
+ * Callees  : 1 -> door_process_map_subtile_022a72
  ******************************************************************************/
-longlong FUN_00022905(void)
+longlong door_fn_022905(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  undefined4 *puVar2;
+  int arg_eax;
+  int val;
+  undefined4 *word_ptr;
   undefined4 uStack_20;
   undefined4 uStack_1c;
   undefined4 uStack_18;
   undefined4 uStack_14;
   
-  puVar2 = (undefined4 *)&stack0xfffffff0;
+  word_ptr = (undefined4 *)&stack0xfffffff0;
   uStack_14 = 0x22910;
-  iVar1 = FUN_00022a72();
-  if (iVar1 != 0) {
+  val = door_process_map_subtile_022a72();
+  if (val != 0) {
     uStack_14 = 0x100;
     uStack_18 = 2;
     uStack_1c = 0;
-    puVar2 = &uStack_20;
+    word_ptr = &uStack_20;
     uStack_20 = 3;
-    *(undefined1 *)(in_EAX + 7) = 3;
-    FUN_0006e538();
+    *(undefined1 *)(arg_eax + 7) = 3;
+    sound_fn_06e538();
   }
-  return (ulonglong)*(uint *)((int)puVar2 + 4) << 0x20;
+  return (ulonglong)*(uint *)((int)word_ptr + 4) << 0x20;
 }
 
 /******************************************************************************
- * Function : sub_022933 (Ghidra: FUN_00022933)
- * Prototype: undefined4 sub_022933(void);
+ * Function : door_fn_022933 (Original VA: 0x22933, Ghidra: FUN_00022933)
+ * Prototype: undefined4 door_fn_022933(void);
  * Address  : 0x22933 (Size: 177 bytes)
  * Module   : door.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x225fc
- * Callees  : 4 -> 0x228a5, 0x22a72, 0x6e538, 0xd8b7c
+ * Purpose  : Module door.cpp procedure @ 0x022933
+ * Callers  : 1 -> compturn_fn_0225fc
+ * Callees  : 4 -> compturn_fn_0228a5, door_process_map_subtile_022a72, sound_fn_06e538, slab_attempt_dump_an_animating_0d8b7c
  ******************************************************************************/
-undefined4 FUN_00022933(void)
+undefined4 door_fn_022933(void)
 
 {
-  ushort uVar1;
-  int in_EAX;
-  undefined4 uVar2;
-  int iVar3;
-  int *piVar4;
+  ushort uval;
+  int arg_eax;
+  undefined4 uval_2;
+  int val;
+  int *int_ptr;
   undefined4 uStack_30;
   undefined4 uStack_2c;
   undefined4 uStack_28;
@@ -69,213 +69,213 @@ undefined4 FUN_00022933(void)
   int local_20;
   uint local_1c;
   
-  piVar4 = &local_20;
-  iVar3 = (int)*(short *)(in_EAX + 0x16) >> 0x1f;
-  local_20 = (int)(((int)*(short *)(in_EAX + 0x16) + iVar3 * -0x100) - (uint)(iVar3 << 7 < 0)) >> 8;
-  iVar3 = (uint)*(byte *)(in_EAX + 0x1a) * 0x10;
-  uVar1 = *(ushort *)(&DAT_0018de0f + (uint)*(ushort *)(in_EAX + 0x13) * 8 + iVar3);
-  local_1c = (uint)*(ushort *)(&DAT_0018de09 + (uint)*(ushort *)(in_EAX + 0x13) * 8 + iVar3);
+  int_ptr = &local_20;
+  val = (int)*(short *)(arg_eax + 0x16) >> 0x1f;
+  local_20 = (int)(((int)*(short *)(arg_eax + 0x16) + val * -0x100) - (uint)(val << 7 < 0)) >> 8;
+  val = (uint)*(byte *)(arg_eax + 0x1a) * 0x10;
+  uval = *(ushort *)(&g_data_0018de0f + (uint)*(ushort *)(arg_eax + 0x13) * 8 + val);
+  local_1c = (uint)*(ushort *)(&g_data_0018de09 + (uint)*(ushort *)(arg_eax + 0x13) * 8 + val);
   uStack_24 = 0x22973;
-  iVar3 = FUN_00022a72();
-  if (iVar3 != 0) {
+  val = door_process_map_subtile_022a72();
+  if (val != 0) {
     uStack_24 = 0x100;
     uStack_28 = 2;
     uStack_2c = 0;
-    piVar4 = &uStack_30;
+    int_ptr = &uStack_30;
     uStack_30 = 3;
-    *(undefined1 *)(in_EAX + 7) = 3;
-    FUN_0006e538();
+    *(undefined1 *)(arg_eax + 7) = 3;
+    sound_fn_06e538();
   }
-  if ((int)(uint)uVar1 < (int)*(short *)(in_EAX + 0x16)) {
-    *(short *)(in_EAX + 0x16) = *(short *)(in_EAX + 0x16) - uVar1;
+  if ((int)(uint)uval < (int)*(short *)(arg_eax + 0x16)) {
+    *(short *)(arg_eax + 0x16) = *(short *)(arg_eax + 0x16) - uval;
   }
   else {
-    *(undefined2 *)(in_EAX + 0x16) = 0;
-    *(undefined1 *)(in_EAX + 7) = 2;
+    *(undefined2 *)(arg_eax + 0x16) = 0;
+    *(undefined1 *)(arg_eax + 7) = 2;
   }
-  iVar3 = (int)*(short *)(in_EAX + 0x16) >> 0x1f;
-  if ((int)(((int)*(short *)(in_EAX + 0x16) + iVar3 * -0x100) - (uint)(iVar3 << 7 < 0)) >> 8 !=
+  val = (int)*(short *)(arg_eax + 0x16) >> 0x1f;
+  if ((int)(((int)*(short *)(arg_eax + 0x16) + val * -0x100) - (uint)(val << 7 < 0)) >> 8 !=
       local_20) {
-    *(uint *)((int)piVar4 + -4) = (uint)*(byte *)(in_EAX + 6);
-    *(undefined4 *)((int)piVar4 + -8) = 0x229df;
-    FUN_000d8b7c();
-    uVar2 = FUN_000228a5();
-    return uVar2;
+    *(uint *)((int)int_ptr + -4) = (uint)*(byte *)(arg_eax + 6);
+    *(undefined4 *)((int)int_ptr + -8) = 0x229df;
+    slab_attempt_dump_an_animating_0d8b7c();
+    uval_2 = compturn_fn_0228a5();
+    return uval_2;
   }
   return 1;
 }
 
 /******************************************************************************
- * Function : sub_0229e4 (Ghidra: FUN_000229e4)
- * Prototype: undefined8 sub_0229e4(void);
+ * Function : door_fn_0229e4 (Original VA: 0x229e4, Ghidra: FUN_000229e4)
+ * Prototype: undefined8 door_fn_0229e4(void);
  * Address  : 0x229e4 (Size: 142 bytes)
  * Module   : door.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x225fc
- * Callees  : 1 -> 0xd8b7c
+ * Purpose  : Module door.cpp procedure @ 0x0229e4
+ * Callers  : 1 -> compturn_fn_0225fc
+ * Callees  : 1 -> slab_attempt_dump_an_animating_0d8b7c
  ******************************************************************************/
-undefined8 FUN_000229e4(void)
+undefined8 door_fn_0229e4(void)
 
 {
-  undefined2 uVar1;
-  int in_EAX;
-  int iVar2;
-  int iVar3;
-  undefined4 in_EDX;
+  undefined2 uval;
+  int arg_eax;
+  int val;
+  int val_2;
+  undefined4 arg_edx;
   
-  iVar3 = (int)*(short *)(in_EAX + 0x16);
-  iVar2 = (uint)*(ushort *)(in_EAX + 0x13) * 8 + (uint)*(byte *)(in_EAX + 0x1a) * 0x10;
-  uVar1 = *(undefined2 *)(&DAT_0018de09 + iVar2);
-  if ((int)(iVar3 + (uint)*(ushort *)(&DAT_0018de0f + iVar2)) < 0x300) {
-    *(short *)(in_EAX + 0x16) = *(short *)(in_EAX + 0x16) + *(ushort *)(&DAT_0018de0f + iVar2);
+  val_2 = (int)*(short *)(arg_eax + 0x16);
+  val = (uint)*(ushort *)(arg_eax + 0x13) * 8 + (uint)*(byte *)(arg_eax + 0x1a) * 0x10;
+  uval = *(undefined2 *)(&g_data_0018de09 + val);
+  if ((int)(val_2 + (uint)*(ushort *)(&g_data_0018de0f + val)) < 0x300) {
+    *(short *)(arg_eax + 0x16) = *(short *)(arg_eax + 0x16) + *(ushort *)(&g_data_0018de0f + val);
   }
   else {
-    *(undefined2 *)(in_EAX + 0x16) = 0x300;
-    *(undefined1 *)(in_EAX + 7) = 1;
-    *(undefined1 *)(in_EAX + 0x15) = 10;
+    *(undefined2 *)(arg_eax + 0x16) = 0x300;
+    *(undefined1 *)(arg_eax + 7) = 1;
+    *(undefined1 *)(arg_eax + 0x15) = 10;
   }
-  iVar2 = (int)*(short *)(in_EAX + 0x16) >> 0x1f;
-  if ((int)(((int)*(short *)(in_EAX + 0x16) + iVar2 * -0x100) - (uint)(iVar2 << 7 < 0)) >> 8 !=
-      (int)((iVar3 + (iVar3 >> 0x1f) * -0x100) - (uint)((iVar3 >> 0x1f) << 7 < 0)) >> 8) {
-    FUN_000d8b7c(*(undefined1 *)(in_EAX + 6),uVar1);
+  val = (int)*(short *)(arg_eax + 0x16) >> 0x1f;
+  if ((int)(((int)*(short *)(arg_eax + 0x16) + val * -0x100) - (uint)(val << 7 < 0)) >> 8 !=
+      (int)((val_2 + (val_2 >> 0x1f) * -0x100) - (uint)((val_2 >> 0x1f) << 7 < 0)) >> 8) {
+    slab_attempt_dump_an_animating_0d8b7c(*(undefined1 *)(arg_eax + 6),uval);
   }
-  return CONCAT44(in_EDX,1);
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : sub_022a72 (Ghidra: FUN_00022a72)
- * Prototype: undefined8 sub_022a72(void);
+ * Function : door_process_map_subtile_022a72 (Original VA: 0x22a72, Ghidra: FUN_00022a72)
+ * Prototype: undefined8 door_process_map_subtile_022a72(void);
  * Address  : 0x22a72 (Size: 200 bytes)
  * Module   : door.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0x228b1, 0x22905, 0x22933
- * Callees  : 1 -> 0x22b94
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 3 -> compturn_fn_0228b1, door_fn_022905, door_fn_022933
+ * Callees  : 1 -> door_update_player_view_state_022b94
  ******************************************************************************/
-undefined8 FUN_00022a72(void)
+undefined8 door_process_map_subtile_022a72(void)
 
 {
-  byte bVar1;
-  byte bVar2;
-  int in_EAX;
-  int iVar3;
-  undefined4 uVar4;
-  char *pcVar5;
+  byte flag;
+  byte flag_2;
+  int arg_eax;
+  int val;
+  undefined4 uval;
+  char *str_ptr;
   char *extraout_ECX;
-  undefined4 in_EDX;
-  int iVar6;
-  uint uVar7;
-  int iVar8;
+  undefined4 arg_edx;
+  int val_2;
+  uint thing_ptr;
+  int loop_i;
   
-  bVar1 = *(byte *)(in_EAX + 0xe);
-  bVar2 = *(byte *)(in_EAX + 0x10);
-  pcVar5 = (char *)&DAT_002ee9c1;
-  if (*(char *)(in_EAX + 0x18) == '\0') {
-    for (iVar8 = 0; iVar8 < 0x20; iVar8 = iVar8 + 1) {
-      iVar3 = (int)pcVar5[1] + (uint)bVar1;
-      iVar6 = (int)*pcVar5 + (uint)bVar2;
-      if (iVar3 < 0) {
-        iVar3 = 0;
+  flag = *(byte *)(arg_eax + 0xe);
+  flag_2 = *(byte *)(arg_eax + 0x10);
+  str_ptr = (char *)&g_bss_002ee9c1;
+  if (*(char *)(arg_eax + 0x18) == '\0') {
+    for (loop_i = 0; loop_i < 0x20; loop_i = loop_i + 1) {
+      val = (int)str_ptr[1] + (uint)flag;
+      val_2 = (int)*str_ptr + (uint)flag_2;
+      if (val < 0) {
+        val = 0;
       }
-      else if (0xfe < iVar3) {
-        iVar3 = 0xfe;
+      else if (0xfe < val) {
+        val = 0xfe;
       }
-      if (iVar6 < 0) {
-        iVar6 = 0;
+      if (val_2 < 0) {
+        val_2 = 0;
       }
-      else if (0xfe < iVar6) {
-        iVar6 = 0xfe;
+      else if (0xfe < val_2) {
+        val_2 = 0xfe;
       }
-      iVar3 = (iVar3 + iVar6 * 0x100) * 5;
-      if ((*(byte *)((int)&DAT_00279203 + iVar3) & 0x10) == 0) {
-        for (uVar7 = (&DAT_001ae9fc)[(*(uint *)((int)&DAT_00279203 + iVar3 + 1) & 0x3fffff) >> 0xb];
-            DAT_001ae9fc < uVar7; uVar7 = (&DAT_001ae9fc)[*(ushort *)(uVar7 + 2)]) {
-          iVar3 = FUN_00022b94();
-          if (iVar3 != 0) {
-            uVar4 = 1;
+      val = (val + val_2 * 0x100) * 5;
+      if ((*(byte *)((int)&g_map_subtiles + val) & 0x10) == 0) {
+        for (thing_ptr = (&g_thing_ptrs)[(*(uint *)((int)&g_map_subtiles + val + 1) & 0x3fffff) >> 0xb];
+            g_thing_ptrs < thing_ptr; thing_ptr = (&g_thing_ptrs)[*(ushort *)(thing_ptr + 2)]) {
+          val = door_update_player_view_state_022b94();
+          if (val != 0) {
+            uval = 1;
             goto LAB_000228aa;
           }
-          pcVar5 = extraout_ECX;
+          str_ptr = extraout_ECX;
         }
       }
-      pcVar5 = pcVar5 + 4;
+      str_ptr = str_ptr + 4;
     }
   }
-  uVar4 = 0;
+  uval = 0;
 LAB_000228aa:
-  return CONCAT44(in_EDX,uVar4);
+  return CONCAT44(arg_edx,uval);
 }
 
 /******************************************************************************
- * Function : sub_022b3a (Ghidra: FUN_00022b3a)
- * Prototype: uint sub_022b3a(void);
+ * Function : door_process_map_subtile_022b3a (Original VA: 0x22b3a, Ghidra: FUN_00022b3a)
+ * Prototype: uint door_process_map_subtile_022b3a(void);
  * Address  : 0x22b3a (Size: 90 bytes)
  * Module   : door.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 24 -> 0x115a4, 0x194e8, 0x28afb, 0x5f6c5, 0x63122, 0x65545, 0x6ca16, 0x6cee6, 0x6d909, 0x7ba98 ...
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 24 -> angtool_update_creature_control_0115a4, compevnt_process_dungeon_room_0194e8, evil_update_creature_control_028afb, process_players_dungeon_command_packet, panmap_door_flagged_position_063122, pom_roll_action_random_065545, shot_process_thing_entity_06ca16, shot_process_thing_entity_06cee6 ...
  * Callees  : 0 -> 
  ******************************************************************************/
-uint FUN_00022b3a(void)
+uint door_process_map_subtile_022b3a(void)
 
 {
-  int in_EAX;
-  uint uVar1;
-  int in_EDX;
+  int arg_eax;
+  uint thing_ptr;
+  int arg_edx;
   
-  uVar1 = (*(uint *)((int)&DAT_00279203 +
-                    (((in_EDX / 3) * 3 + 1) * 0x100 + (in_EAX / 3) * 3 + 1) * 5 + 1) & 0x3fffff) >>
+  thing_ptr = (*(uint *)((int)&g_map_subtiles +
+                    (((arg_edx / 3) * 3 + 1) * 0x100 + (arg_eax / 3) * 3 + 1) * 5 + 1) & 0x3fffff) >>
           0xb;
   while( true ) {
-    uVar1 = (&DAT_001ae9fc)[uVar1];
-    if (uVar1 <= DAT_001ae9fc) {
+    thing_ptr = (&g_thing_ptrs)[thing_ptr];
+    if (thing_ptr <= g_thing_ptrs) {
       return 0;
     }
-    if (*(char *)(uVar1 + 0x1f) == '\t') break;
-    uVar1 = (uint)*(ushort *)(uVar1 + 2);
+    if (*(char *)(thing_ptr + 0x1f) == '\t') break; /* thing->class_id */
+    thing_ptr = (uint)*(ushort *)(thing_ptr + 2);
   }
-  return uVar1;
+  return thing_ptr;
 }
 
 /******************************************************************************
- * Function : sub_022b94 (Ghidra: FUN_00022b94)
- * Prototype: undefined4 sub_022b94(void);
+ * Function : door_update_player_view_state_022b94 (Original VA: 0x22b94, Ghidra: FUN_00022b94)
+ * Prototype: undefined4 door_update_player_view_state_022b94(void);
  * Address  : 0x22b94 (Size: 150 bytes)
  * Module   : door.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x22a72, 0x7df64
+ * Purpose  : Accesses per-player PlayerInfo state (stride 0x4ef)
+ * Callers  : 2 -> door_process_map_subtile_022a72, creature_update_slab_subtile_columns_07df64
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_00022b94(void)
+undefined4 door_update_player_view_state_022b94(void)
 
 {
-  int in_EAX;
-  uint uVar1;
-  int in_EDX;
-  uint uVar2;
-  uint uVar3;
+  int arg_eax;
+  uint uval;
+  int arg_edx;
+  uint uval_2;
+  uint uval_3;
   
-  if ((*(char *)(in_EAX + 0x18) != '\0') || (*(char *)(in_EDX + 0x1f) != '\x05')) {
+  if ((*(char *)(arg_eax + 0x18) != '\0') || (*(char *)(arg_edx + 0x1f) != '\x05')) {
     return 0;
   }
-  if (*(char *)(in_EAX + 6) != *(char *)(in_EDX + 6)) {
-    uVar3 = (uint)*(char *)(in_EAX + 6);
-    uVar2 = (uint)DAT_002eb543;
-    if (uVar3 == uVar2) {
+  if (*(char *)(arg_eax + 6) != *(char *)(arg_edx + 6)) {
+    uval_3 = (uint)*(char *)(arg_eax + 6);
+    uval_2 = (uint)g_neutral_player_number;
+    if (uval_3 == uval_2) {
       return 0;
     }
-    uVar1 = (uint)*(char *)(in_EDX + 6);
-    if (uVar2 == uVar1) {
+    uval = (uint)*(char *)(arg_edx + 6);
+    if (uval_2 == uval) {
       return 0;
     }
-    if (((uint)(byte)(&DAT_0019d0f2)[uVar3 * 0x4ef] & 1 << (*(byte *)(in_EDX + 6) & 0x1f)) == 0) {
+    if (((uint)(byte)(&g_player_view_flags)[uval_3 * 0x4ef] & 1 << (*(byte *)(arg_edx + 6) & 0x1f)) == 0) {
       return 0;
     }
-    if (uVar2 == uVar1) {
+    if (uval_2 == uval) {
       return 0;
     }
-    if (uVar3 == uVar2) {
+    if (uval_3 == uval_2) {
       return 0;
     }
-    if (((uint)(byte)(&DAT_0019d0f2)[uVar1 * 0x4ef] & 1 << (*(byte *)(in_EAX + 6) & 0x1f)) == 0) {
+    if (((uint)(byte)(&g_player_view_flags)[uval * 0x4ef] & 1 << (*(byte *)(arg_eax + 6) & 0x1f)) == 0) {
       return 0;
     }
   }
@@ -283,119 +283,119 @@ undefined4 FUN_00022b94(void)
 }
 
 /******************************************************************************
- * Function : sub_022c2a (Ghidra: FUN_00022c2a)
- * Prototype: void sub_022c2a(void);
+ * Function : door_update_creature_control_022c2a (Original VA: 0x22c2a, Ghidra: FUN_00022c2a)
+ * Prototype: void door_update_creature_control_022c2a(void);
  * Address  : 0x22c2a (Size: 306 bytes)
  * Module   : door.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0xb3dac
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
+ * Callers  : 1 -> move_update_creature_control_0b3dac
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_00022c2a(void)
+void door_update_creature_control_022c2a(void)
 
 {
-  int in_EAX;
-  uint uVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  ushort *in_EDX;
-  int iVar5;
-  int iVar6;
-  int iVar7;
-  uint unaff_EBX;
-  int iVar8;
+  int thing;
+  uint uval;
+  int val;
+  int loop_i;
+  int val_2;
+  ushort *arg_edx;
+  int val_3;
+  int val_4;
+  int loop_i_2;
+  uint arg_ebx;
+  int val_5;
   
-  uVar1 = *(ushort *)(&DAT_0019073b + (uint)*(ushort *)(in_EAX + 0x56) * 2) / 2;
-  iVar2 = *in_EDX - uVar1;
-  iVar5 = iVar2 >> 0x1f;
-  iVar2 = (int)((iVar2 + iVar5 * -0x100) - (uint)(iVar5 << 7 < 0)) >> 8;
-  iVar5 = (int)(*in_EDX + uVar1) >> 8;
-  iVar3 = in_EDX[1] - uVar1;
-  iVar6 = iVar3 >> 0x1f;
-  iVar3 = (int)((iVar3 + iVar6 * -0x100) - (uint)(iVar6 << 7 < 0)) >> 8;
-  iVar6 = (int)(in_EDX[1] + uVar1) >> 8;
-  if ((unaff_EBX & 1) != 0) {
-    iVar8 = iVar2;
-    if (*(ushort *)(in_EAX + 0xd) < *in_EDX) {
-      iVar8 = iVar5;
+  uval = *(ushort *)(&g_data_0019073b + (uint)*(ushort *)(thing + 0x56) * 2) / 2;
+  val = *arg_edx - uval;
+  val_3 = val >> 0x1f;
+  val = (int)((val + val_3 * -0x100) - (uint)(val_3 << 7 < 0)) >> 8;
+  val_3 = (int)(*arg_edx + uval) >> 8;
+  loop_i = arg_edx[1] - uval;
+  val_4 = loop_i >> 0x1f;
+  loop_i = (int)((loop_i + val_4 * -0x100) - (uint)(val_4 << 7 < 0)) >> 8;
+  val_4 = (int)(arg_edx[1] + uval) >> 8;
+  if ((arg_ebx & 1) != 0) {
+    val_5 = val;
+    if (*(ushort *)(thing + 0xd) < *arg_edx) { /* thing->mappos.val_x */
+      val_5 = val_3;
     }
-    iVar4 = iVar3;
-    for (iVar7 = iVar3 * 0x500 + iVar8 * 5; iVar7 <= iVar8 * 5 + iVar6 * 0x500;
-        iVar7 = iVar7 + 0x500) {
-      if ((*(byte *)((int)&DAT_00279203 + iVar7) & 0x40) != 0) goto LAB_00022d40;
-      iVar4 = iVar4 + 1;
+    val_2 = loop_i;
+    for (loop_i_2 = loop_i * 0x500 + val_5 * 5; loop_i_2 <= val_5 * 5 + val_4 * 0x500;
+        loop_i_2 = loop_i_2 + 0x500) {
+      if ((*(byte *)((int)&g_map_subtiles + loop_i_2) & 0x40) != 0) goto LAB_00022d40;
+      val_2 = val_2 + 1;
     }
   }
-  if ((unaff_EBX & 2) != 0) {
-    iVar4 = iVar3;
-    if (*(ushort *)(in_EAX + 0xf) < in_EDX[1]) {
-      iVar4 = iVar6;
+  if ((arg_ebx & 2) != 0) {
+    val_2 = loop_i;
+    if (*(ushort *)(thing + 0xf) < arg_edx[1]) { /* thing->mappos.val_y */
+      val_2 = val_4;
     }
-    for (iVar3 = iVar2 * 5 + iVar4 * 0x500; iVar3 <= iVar4 * 0x500 + iVar5 * 5; iVar3 = iVar3 + 5) {
-      iVar8 = iVar2;
-      if ((*(byte *)((int)&DAT_00279203 + iVar3) & 0x40) != 0) {
+    for (loop_i = val * 5 + val_2 * 0x500; loop_i <= val_2 * 0x500 + val_3 * 5; loop_i = loop_i + 5) {
+      val_5 = val;
+      if ((*(byte *)((int)&g_map_subtiles + loop_i) & 0x40) != 0) {
 LAB_00022d40:
-        *(short *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 0x1d0) =
-             (short)iVar8 + (short)(iVar4 << 8);
+        *(short *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 0x1d0) = /* thing->ccontrol_idx */
+             (short)val_5 + (short)(val_2 << 8);
         return;
       }
-      iVar2 = iVar2 + 1;
+      val = val + 1;
     }
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_022d5c (Ghidra: FUN_00022d5c)
- * Prototype: undefined4 sub_022d5c(void);
+ * Function : door_process_map_subtile_022d5c (Original VA: 0x22d5c, Ghidra: FUN_00022d5c)
+ * Prototype: undefined4 door_process_map_subtile_022d5c(void);
  * Address  : 0x22d5c (Size: 262 bytes)
  * Module   : door.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x1211a, 0x12230
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 2 -> ariadne_fn_01211a, ariadne_fn_012230
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_00022d5c(void)
+undefined4 door_process_map_subtile_022d5c(void)
 
 {
-  int in_EAX;
-  uint uVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  ushort *in_EDX;
-  int iVar5;
-  int iVar6;
-  int iVar7;
-  uint unaff_EBX;
+  int arg_eax;
+  uint uval;
+  int val;
+  int val_2;
+  int loop_i;
+  ushort *arg_edx;
+  int loop_i_2;
+  int val_3;
+  int val_4;
+  uint arg_ebx;
   
-  uVar1 = *(ushort *)(&DAT_0019073b + (uint)*(ushort *)(in_EAX + 0x56) * 2) / 2;
-  iVar2 = *in_EDX - uVar1;
-  iVar5 = iVar2 >> 0x1f;
-  iVar5 = (int)((iVar2 + iVar5 * -0x100) - (uint)(iVar5 << 7 < 0)) >> 8;
-  iVar3 = (int)(*in_EDX + uVar1) >> 8;
-  iVar2 = in_EDX[1] - uVar1;
-  iVar6 = iVar2 >> 0x1f;
-  iVar6 = (int)((iVar2 + iVar6 * -0x100) - (uint)(iVar6 << 7 < 0)) >> 8;
-  iVar2 = (int)(in_EDX[1] + uVar1) >> 8;
-  if ((unaff_EBX & 1) != 0) {
-    iVar7 = iVar5;
-    if (*(ushort *)(in_EAX + 0xd) < *in_EDX) {
-      iVar7 = iVar3;
+  uval = *(ushort *)(&g_data_0019073b + (uint)*(ushort *)(arg_eax + 0x56) * 2) / 2;
+  val = *arg_edx - uval;
+  loop_i_2 = val >> 0x1f;
+  loop_i_2 = (int)((val + loop_i_2 * -0x100) - (uint)(loop_i_2 << 7 < 0)) >> 8;
+  val_2 = (int)(*arg_edx + uval) >> 8;
+  val = arg_edx[1] - uval;
+  val_3 = val >> 0x1f;
+  val_3 = (int)((val + val_3 * -0x100) - (uint)(val_3 << 7 < 0)) >> 8;
+  val = (int)(arg_edx[1] + uval) >> 8;
+  if ((arg_ebx & 1) != 0) {
+    val_4 = loop_i_2;
+    if (*(ushort *)(arg_eax + 0xd) < *arg_edx) {
+      val_4 = val_2;
     }
-    for (iVar4 = iVar6 * 0x500 + iVar7 * 5; iVar4 <= iVar7 * 5 + iVar2 * 0x500;
-        iVar4 = iVar4 + 0x500) {
-      if ((*(byte *)((int)&DAT_00279203 + iVar4) & 0x40) != 0) {
+    for (loop_i = val_3 * 0x500 + val_4 * 5; loop_i <= val_4 * 5 + val * 0x500;
+        loop_i = loop_i + 0x500) {
+      if ((*(byte *)((int)&g_map_subtiles + loop_i) & 0x40) != 0) {
         return 1;
       }
     }
   }
-  if ((unaff_EBX & 2) != 0) {
-    if (in_EDX[1] <= *(ushort *)(in_EAX + 0xf)) {
-      iVar2 = iVar6;
+  if ((arg_ebx & 2) != 0) {
+    if (arg_edx[1] <= *(ushort *)(arg_eax + 0xf)) {
+      val = val_3;
     }
-    for (iVar5 = iVar5 * 5 + iVar2 * 0x500; iVar5 <= iVar2 * 0x500 + iVar3 * 5; iVar5 = iVar5 + 5) {
-      if ((*(byte *)((int)&DAT_00279203 + iVar5) & 0x40) != 0) {
+    for (loop_i_2 = loop_i_2 * 5 + val * 0x500; loop_i_2 <= val * 0x500 + val_2 * 5; loop_i_2 = loop_i_2 + 5) {
+      if ((*(byte *)((int)&g_map_subtiles + loop_i_2) & 0x40) != 0) {
         return 1;
       }
     }
@@ -404,344 +404,339 @@ undefined4 FUN_00022d5c(void)
 }
 
 /******************************************************************************
- * Function : sub_022e62 (Ghidra: FUN_00022e62)
- * Prototype: uint sub_022e62(void);
+ * Function : door_process_slabmap_tile_022e62 (Original VA: 0x22e62, Ghidra: FUN_00022e62)
+ * Prototype: uint door_process_slabmap_tile_022e62(void);
  * Address  : 0x22e62 (Size: 241 bytes)
  * Module   : door.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x61d43, 0x8f924
+ * Purpose  : Reads/modifies SlabMap[85x85] tile entry
+ * Callers  : 2 -> packet_activate_dungeon_special_or_spell, draw_update_slab_subtile_columns_08f924
  * Callees  : 0 -> 
  ******************************************************************************/
-uint FUN_00022e62(void)
+uint door_process_slabmap_tile_022e62(void)
 
 {
-  char cVar1;
-  byte bVar2;
-  byte bVar3;
-  uint in_EAX;
-  uint uVar4;
-  int iVar5;
-  uint uVar6;
-  byte in_DL;
-  ushort uVar7;
-  undefined3 uVar8;
-  char unaff_BL;
+  char ch;
+  byte flag;
+  byte flag_2;
+  uint arg_eax;
+  uint uval;
+  int slab_coord;
+  uint uval_2;
+  byte arg_dl;
+  ushort uval_3;
+  undefined3 uval_4;
+  char arg_bl;
   
-  bVar2 = (byte)((ulonglong)(in_EAX & 0xff) / 3);
-  bVar3 = (byte)((ulonglong)(uint)in_DL / 3);
-  uVar4 = (uint)(byte)(&DAT_002d33c5)[((uint)bVar2 + (uint)bVar3 * 0x55) * 6];
-  if ((uVar4 == 0xb) &&
-     (iVar5 = ((&DAT_0019033b)[in_EAX & 0xff] + (&DAT_0019033b)[in_DL] * 0x55) * 6,
-     uVar4 = CONCAT31((int3)((uint)iVar5 >> 8),(&DAT_002d33ca)[iVar5]) & 0xffffff07,
-     (char)uVar4 == unaff_BL)) {
-    uVar4 = 0;
+  flag = (byte)((ulonglong)(arg_eax & 0xff) / 3);
+  flag_2 = (byte)((ulonglong)(uint)arg_dl / 3);
+  uval = (uint)(byte)(&g_slabmap_base)[((uint)flag + (uint)flag_2 * 0x55) * 6];
+  if ((uval == 0xb) &&
+     (slab_coord = ((&g_subtile_to_slab_lut)[arg_eax & 0xff] + (&g_subtile_to_slab_lut)[arg_dl] * 0x55) * 6,
+     uval = CONCAT31((int3)((uint)slab_coord >> 8),(&g_slabmap)[slab_coord]) & 0xffffff07,
+     (char)uval == arg_bl)) {
+    uval = 0;
     while( true ) {
-      uVar6 = uVar4 >> 8;
-      if (3 < uVar6) break;
-      uVar6 = (uint)(byte)(&DAT_002d33c5)
-                          [((int)*(char *)((int)&DAT_0018b67b + uVar6 * 2 + 3) + (uint)bVar2 +
-                           ((int)(char)(&DAT_0018b67f)[uVar6 * 2] + (uint)bVar3) * 0x55) * 6];
-      uVar8 = (undefined3)(uVar4 >> 8);
-      cVar1 = (char)uVar4 * '\x02';
-      uVar7 = (ushort)CONCAT31(uVar8,cVar1);
-      if (((((&DAT_001921cf)[uVar6 * 0x16] == '\x03') || (uVar6 == 0)) || (uVar6 == 2)) ||
-         (((uVar6 == 3 || (uVar6 == 1)) || (uVar6 == 0x34)))) {
-        uVar7 = (ushort)CONCAT31(uVar8,cVar1) | 1;
+      uval_2 = uval >> 8;
+      if (3 < uval_2) break;
+      uval_2 = (uint)(byte)(&g_slabmap_base)
+                          [((int)*(char *)((int)&g_data_0018b67b + uval_2 * 2 + 3) + (uint)flag +
+                           ((int)(char)(&g_data_0018b67f)[uval_2 * 2] + (uint)flag_2) * 0x55) * 6];
+      uval_4 = (undefined3)(uval >> 8);
+      ch = (char)uval * '\x02';
+      uval_3 = (ushort)CONCAT31(uval_4,ch);
+      if (((((&g_data_001921cf)[uval_2 * 0x16] == '\x03') || (uval_2 == 0)) || (uval_2 == 2)) ||
+         (((uval_2 == 3 || (uval_2 == 1)) || (uval_2 == 0x34)))) {
+        uval_3 = (ushort)CONCAT31(uval_4,ch) | 1;
       }
-      uVar4 = (uint)CONCAT11((char)(uVar7 >> 8) + '\x01',(char)uVar7);
+      uval = (uint)CONCAT11((char)(uval_3 >> 8) + '\x01',(char)uval_3);
     }
-    return (uint)*(byte *)((uVar4 & 0xff) + 0x179c0c);
+    return (uint)*(byte *)((uval & 0xff) + 0x179c0c);
   }
-  return CONCAT31((int3)(uVar4 >> 8),0xff);
+  return CONCAT31((int3)(uval >> 8),0xff);
 }
 
 /******************************************************************************
- * Function : sub_022f53 (Ghidra: FUN_00022f53)
- * Prototype: undefined8 sub_022f53(void);
+ * Function : door_process_slabmap_tile_022f53 (Original VA: 0x22f53, Ghidra: FUN_00022f53)
+ * Prototype: undefined8 door_process_slabmap_tile_022f53(void);
  * Address  : 0x22f53 (Size: 146 bytes)
  * Module   : door.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x225fc
+ * Purpose  : Reads/modifies SlabMap[85x85] tile entry
+ * Callers  : 1 -> compturn_fn_0225fc
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined8 FUN_00022f53(void)
+undefined8 door_process_slabmap_tile_022f53(void)
 
 {
-  char cVar1;
-  int in_EAX;
-  undefined4 in_EDX;
-  uint uVar2;
-  ushort uVar3;
-  uint uVar4;
-  undefined3 uVar5;
+  char ch;
+  int arg_eax;
+  undefined4 arg_edx;
+  uint uval;
+  ushort uval_2;
+  uint uval_3;
+  undefined3 uval_4;
   
-  uVar4 = 0;
+  uval_3 = 0;
   while( true ) {
-    uVar2 = uVar4 >> 8;
-    if (3 < uVar2) break;
-    uVar2 = (uint)(byte)(&DAT_002d33c5)
-                        [((int)*(char *)((int)&DAT_0018b67b + uVar2 * 2 + 3) +
-                          (&DAT_0019033b)[*(byte *)(in_EAX + 0xe)] +
-                         ((int)(char)(&DAT_0018b67f)[uVar2 * 2] +
-                         (&DAT_0019033b)[*(byte *)(in_EAX + 0x10)]) * 0x55) * 6];
-    uVar5 = (undefined3)(uVar4 >> 8);
-    cVar1 = (char)uVar4 * '\x02';
-    uVar3 = (ushort)CONCAT31(uVar5,cVar1);
-    if (((((&DAT_001921cf)[uVar2 * 0x16] == '\x03') || (uVar2 == 0)) || (uVar2 == 2)) ||
-       (((uVar2 == 3 || (uVar2 == 1)) || (uVar2 == 0x34)))) {
-      uVar3 = (ushort)CONCAT31(uVar5,cVar1) | 1;
+    uval = uval_3 >> 8;
+    if (3 < uval) break;
+    uval = (uint)(byte)(&g_slabmap_base)
+                        [((int)*(char *)((int)&g_data_0018b67b + uval * 2 + 3) +
+                          (&g_subtile_to_slab_lut)[*(byte *)(arg_eax + 0xe)] +
+                         ((int)(char)(&g_data_0018b67f)[uval * 2] +
+                         (&g_subtile_to_slab_lut)[*(byte *)(arg_eax + 0x10)]) * 0x55) * 6];
+    uval_4 = (undefined3)(uval_3 >> 8);
+    ch = (char)uval_3 * '\x02';
+    uval_2 = (ushort)CONCAT31(uval_4,ch);
+    if (((((&g_data_001921cf)[uval * 0x16] == '\x03') || (uval == 0)) || (uval == 2)) ||
+       (((uval == 3 || (uval == 1)) || (uval == 0x34)))) {
+      uval_2 = (ushort)CONCAT31(uval_4,ch) | 1;
     }
-    uVar4 = (uint)CONCAT11((char)(uVar3 >> 8) + '\x01',(char)uVar3);
+    uval_3 = (uint)CONCAT11((char)(uval_2 >> 8) + '\x01',(char)uval_2);
   }
-  cVar1 = *(char *)((uVar4 & 0xff) + 0x179c0c);
-  return CONCAT44(in_EDX,CONCAT31(cVar1 >> 7,cVar1 != -1));
+  ch = *(char *)((uval_3 & 0xff) + 0x179c0c);
+  return CONCAT44(arg_edx,CONCAT31(ch >> 7,ch != -1));
 }
 
 /******************************************************************************
- * Function : sub_022fe5 (Ghidra: FUN_00022fe5)
- * Prototype: undefined8 sub_022fe5(void);
+ * Function : door_fn_022fe5 (Original VA: 0x22fe5, Ghidra: FUN_00022fe5)
+ * Prototype: undefined8 door_fn_022fe5(void);
  * Address  : 0x22fe5 (Size: 47 bytes)
  * Module   : door.cpp [callgraph_affinity_to_following_unit]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x23042
- * Callees  : 1 -> 0x43f07
+ * Purpose  : Module door.cpp procedure @ 0x022fe5
+ * Callers  : 1 -> door_fn_023042
+ * Callees  : 1 -> inits_allocate_light_object_043f07
  ******************************************************************************/
-undefined8 FUN_00022fe5(void)
+undefined8 door_fn_022fe5(void)
 
 {
-  int iVar1;
-  undefined4 in_EDX;
+  int val;
+  undefined4 arg_edx;
   
-  iVar1 = FUN_00043f07();
-  if (iVar1 != 0) {
-    *(undefined1 *)(iVar1 + 0xd) = 0x80;
-    *(undefined1 *)(iVar1 + 0xf) = 0x80;
-    *(undefined1 *)(iVar1 + 0x12) = 4;
+  val = inits_allocate_light_object_043f07();
+  if (val != 0) {
+    *(undefined1 *)(val + 0xd) = 0x80;
+    *(undefined1 *)(val + 0xf) = 0x80;
+    *(undefined1 *)(val + 0x12) = 4;
   }
-  return CONCAT44(in_EDX,(uint)(iVar1 != 0));
+  return CONCAT44(arg_edx,(uint)(val != 0));
 }
 
 /******************************************************************************
- * Function : sub_023014 (Ghidra: FUN_00023014)
- * Prototype: undefined8 sub_023014(void);
+ * Function : door_fn_023014 (Original VA: 0x23014, Ghidra: FUN_00023014)
+ * Prototype: undefined8 door_fn_023014(void);
  * Address  : 0x23014 (Size: 46 bytes)
  * Module   : door.cpp [callgraph_affinity_to_following_unit]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x230d3
- * Callees  : 2 -> 0x50d3c, 0x72af4
+ * Purpose  : Module door.cpp procedure @ 0x023014
+ * Callers  : 1 -> door_remove_keyhole_0230d3
+ * Callees  : 2 -> mapwho_process_map_subtile_050d3c, structs_update_creature_control_072af4
  ******************************************************************************/
-undefined8 FUN_00023014(void)
+undefined8 door_fn_023014(void)
 
 {
-  int iVar1;
-  undefined4 in_EDX;
+  int val;
+  undefined4 arg_edx;
   
-  iVar1 = FUN_00050d3c();
-  if (iVar1 != 0) {
-    FUN_00072af4();
+  val = mapwho_process_map_subtile_050d3c();
+  if (val != 0) {
+    structs_update_creature_control_072af4();
   }
-  return CONCAT44(in_EDX,(uint)(iVar1 != 0));
+  return CONCAT44(arg_edx,(uint)(val != 0));
 }
 
 /******************************************************************************
- * Function : sub_023042 (Ghidra: FUN_00023042)
- * Prototype: void sub_023042(void);
+ * Function : door_fn_023042 (Original VA: 0x23042, Ghidra: FUN_00023042)
+ * Prototype: void door_fn_023042(void);
  * Address  : 0x23042 (Size: 145 bytes)
  * Module   : door.cpp [direct_file_string_xref]
- * OrigLine : door.cpp:541
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x5f6c5
- * Callees  : 5 -> 0x22fe5, 0x63122, 0xd167c, 0xd8b7c, 0xddaf0
- * Strings  :
- *   - 0x1625e4: "door.cpp"
+ * OrigLine : door.cpp lines 541
+ * Purpose  : Module door.cpp procedure @ 0x023042
+ * Callers  : 1 -> process_players_dungeon_command_packet
+ * Callees  : 5 -> door_fn_022fe5, panmap_door_flagged_position_063122, routes_fn_0d167c, slab_attempt_dump_an_animating_0d8b7c, LbErrorLog
  ******************************************************************************/
-void FUN_00023042(void)
+void door_fn_023042(void)
 
 {
-  int in_EAX;
-  int iVar1;
+  int arg_eax;
+  int val;
   
-  *(undefined1 *)(in_EAX + 7) = 2;
-  DAT_002ebaf7 = 1;
-  *(undefined2 *)(in_EAX + 0x16) = 0;
-  *(undefined1 *)(in_EAX + 0x18) = 1;
-  FUN_000d8b7c(*(undefined1 *)(in_EAX + 6));
-  FUN_000d167c();
-  FUN_00063122();
-  iVar1 = FUN_00022fe5();
-  if (iVar1 == 0) {
-    FUN_000ddaf0(); /* LbErrorLog("door.cpp", line 541, g_log_buf) */
+  *(undefined1 *)(arg_eax + 7) = 2;
+  g_bss_002ebaf7 = 1;
+  *(undefined2 *)(arg_eax + 0x16) = 0;
+  *(undefined1 *)(arg_eax + 0x18) = 1;
+  slab_attempt_dump_an_animating_0d8b7c(*(undefined1 *)(arg_eax + 6));
+  routes_fn_0d167c();
+  panmap_door_flagged_position_063122();
+  val = door_fn_022fe5();
+  if (val == 0) {
+    LbErrorLog(); /* LbErrorLog("door.cpp", line 541, g_log_buf) */
   }
   return;
 }
 
 /******************************************************************************
- * Function : dk_remove_keyhole_0230d3 (Ghidra: FUN_000230d3)
- * Prototype: void dk_remove_keyhole_0230d3(void);
+ * Function : door_remove_keyhole_0230d3 (Original VA: 0x230d3, Ghidra: FUN_000230d3)
+ * Prototype: void door_remove_keyhole_0230d3(void);
  * Address  : 0x230d3 (Size: 105 bytes)
  * Module   : door.cpp [direct_file_string_xref]
- * OrigLine : door.cpp:556 ("Cannot remove keyhole")
- * Naming   : String 'Cannot remove keyhole'
- * Callers  : 1 -> 0x5f6c5
- * Callees  : 4 -> 0x23014, 0x63122, 0xd167c, 0xddaf0
- * Strings  :
- *   - 0x162603: "door.cpp"
- *   - 0x1625ed: "Cannot remove keyhole"
+ * OrigLine : door.cpp lines 556
+ * Purpose  : String 'Cannot remove keyhole'
+ * Callers  : 1 -> process_players_dungeon_command_packet
+ * Callees  : 4 -> door_fn_023014, panmap_door_flagged_position_063122, routes_fn_0d167c, LbErrorLog
  ******************************************************************************/
-void FUN_000230d3(void)
+void door_remove_keyhole_0230d3(void)
 
 {
-  int in_EAX;
-  int iVar1;
+  int arg_eax;
+  int val;
   
-  *(undefined1 *)(in_EAX + 0x18) = 0;
-  DAT_002ebaf7 = 1;
-  FUN_000d167c();
-  FUN_00063122();
-  iVar1 = FUN_00023014();
-  if (iVar1 == 0) {
-    FUN_000ddaf0(); /* LbErrorLog("door.cpp", line 556, "Cannot remove keyhole") */
+  *(undefined1 *)(arg_eax + 0x18) = 0;
+  g_bss_002ebaf7 = 1;
+  routes_fn_0d167c();
+  panmap_door_flagged_position_063122();
+  val = door_fn_023014();
+  if (val == 0) {
+    LbErrorLog(); /* LbErrorLog("door.cpp", line 556, "Cannot remove keyhole") */
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_02313c (Ghidra: FUN_0002313c)
- * Prototype: void sub_02313c(void);
+ * Function : door_process_thing_entity_02313c (Original VA: 0x2313c, Ghidra: FUN_0002313c)
+ * Prototype: void door_process_thing_entity_02313c(void);
  * Address  : 0x2313c (Size: 212 bytes)
  * Module   : door.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x5accc
- * Callees  : 1 -> 0x5ddee
+ * Purpose  : Looks up Thing* in g_thing_ptrs[2048] and updates state
+ * Callers  : 1 -> newgui_fn_05accc
+ * Callees  : 1 -> set_packet_action
  ******************************************************************************/
-void FUN_0002313c(void)
+void door_process_thing_entity_02313c(void)
 
 {
-  uint in_EAX;
-  int iVar1;
-  uint uVar2;
-  uint in_EDX;
+  uint arg_eax;
+  int thing_ptr;
+  uint uval;
+  uint arg_edx;
   
-  if (*(short *)(&DAT_0033406c + in_EAX * 2) != 0) {
-    iVar1 = (&DAT_001ae9fc)[*(ushort *)(&DAT_0033406c + in_EAX * 2)];
+  if (*(short *)(&g_bss_0033406c + arg_eax * 2) != 0) {
+    thing_ptr = (&g_thing_ptrs)[*(ushort *)(&g_bss_0033406c + arg_eax * 2)];
     do {
-      iVar1 = (&DAT_001ae9fc)[*(ushort *)(iVar1 + 0x67)];
-      if (iVar1 == DAT_001ae9fc) break;
-    } while (((int)*(char *)(iVar1 + 6) != (in_EDX & 0xff)) || (*(byte *)(iVar1 + 0x1a) != in_EAX));
-    *(undefined2 *)(&DAT_0033406c + in_EAX * 2) = *(undefined2 *)(iVar1 + 0x1b);
+      thing_ptr = (&g_thing_ptrs)[*(ushort *)(thing_ptr + 0x67)];
+      if (thing_ptr == g_thing_ptrs) break;
+    } while (((int)*(char *)(thing_ptr + 6) != (arg_edx & 0xff)) || (*(byte *)(thing_ptr + 0x1a) != arg_eax)); /* thing->owner */
+    *(undefined2 *)(&g_bss_0033406c + arg_eax * 2) = *(undefined2 *)(thing_ptr + 0x1b); /* thing->index_or_angle */
   }
-  uVar2 = DAT_002e6ef6;
-  if (*(short *)(&DAT_0033406c + in_EAX * 2) == 0) {
-    while (iVar1 = (&DAT_001ae9fc)[uVar2], iVar1 != DAT_001ae9fc) {
-      if (((int)*(char *)(iVar1 + 6) == (in_EDX & 0xff)) && (*(byte *)(iVar1 + 0x1a) == in_EAX)) {
-        *(undefined2 *)(&DAT_0033406c + in_EAX * 2) = *(undefined2 *)(iVar1 + 0x1b);
+  uval = g_bss_002e6ef6;
+  if (*(short *)(&g_bss_0033406c + arg_eax * 2) == 0) {
+    while (thing_ptr = (&g_thing_ptrs)[uval], thing_ptr != g_thing_ptrs) {
+      if (((int)*(char *)(thing_ptr + 6) == (arg_edx & 0xff)) && (*(byte *)(thing_ptr + 0x1a) == arg_eax)) { /* thing->owner */
+        *(undefined2 *)(&g_bss_0033406c + arg_eax * 2) = *(undefined2 *)(thing_ptr + 0x1b); /* thing->index_or_angle */
         break;
       }
-      uVar2 = (uint)*(ushort *)(iVar1 + 0x67);
+      uval = (uint)*(ushort *)(thing_ptr + 0x67);
     }
   }
-  if (*(short *)(&DAT_0033406c + in_EAX * 2) != 0) {
-    FUN_0005ddee(0,0);
+  if (*(short *)(&g_bss_0033406c + arg_eax * 2) != 0) {
+    set_packet_action(0,0);
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_023210 (Ghidra: FUN_00023210)
- * Prototype: int sub_023210(void);
+ * Function : door_process_thing_entity_023210 (Original VA: 0x23210, Ghidra: FUN_00023210)
+ * Prototype: int door_process_thing_entity_023210(void);
  * Address  : 0x23210 (Size: 62 bytes)
  * Module   : door.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x55e33
+ * Purpose  : Looks up Thing* in g_thing_ptrs[2048] and updates state
+ * Callers  : 1 -> newgui_update_player_dungeon_055e33
  * Callees  : 0 -> 
  ******************************************************************************/
-int FUN_00023210(void)
+int door_process_thing_entity_023210(void)
 
 {
-  int iVar1;
-  uint in_EAX;
-  uint uVar2;
-  uint3 uVar3;
-  byte in_DL;
+  int thing_ptr;
+  uint arg_eax;
+  uint uval;
+  uint3 uval_2;
+  byte arg_dl;
   
-  uVar2 = DAT_002e6ef6;
+  uval = g_bss_002e6ef6;
   while( true ) {
-    iVar1 = (&DAT_001ae9fc)[uVar2];
-    uVar3 = (uint3)((uint)iVar1 >> 8);
-    if (iVar1 == DAT_001ae9fc) {
-      return (uint)uVar3 << 8;
+    thing_ptr = (&g_thing_ptrs)[uval];
+    uval_2 = (uint3)((uint)thing_ptr >> 8);
+    if (thing_ptr == g_thing_ptrs) {
+      return (uint)uval_2 << 8;
     }
-    if (((int)*(char *)(iVar1 + 6) == (uint)in_DL) && (*(byte *)(iVar1 + 0x1a) == in_EAX)) break;
-    uVar2 = (uint)*(ushort *)(iVar1 + 0x67);
+    if (((int)*(char *)(thing_ptr + 6) == (uint)arg_dl) && (*(byte *)(thing_ptr + 0x1a) == arg_eax)) break; /* thing->owner */
+    uval = (uint)*(ushort *)(thing_ptr + 0x67);
   }
-  return CONCAT31(uVar3,1);
+  return CONCAT31(uval_2,1);
 }
 
 /******************************************************************************
- * Function : sub_023250 (Ghidra: FUN_00023250)
- * Prototype: void sub_023250(void);
+ * Function : door_update_creature_and_thing_023250 (Original VA: 0x23250, Ghidra: FUN_00023250)
+ * Prototype: void door_update_creature_and_thing_023250(void);
  * Address  : 0x23250 (Size: 413 bytes)
  * Module   : door.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0xde6a8
- * Callees  : 11 -> 0x10434, 0x23291, 0x2347d, 0x23519, 0x235e8, 0x236ad, 0x248e5, 0x24998, 0x37964, 0xb3b10 ...
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
+ * Callers  : 1 -> update_go_first_person_without_0de6a8
+ * Callees  : 11 -> anger_fn_010434, door_update_creature_and_thing_023291, door_process_thing_entity_02347d, door_process_thing_entity_023519, dungeon_update_player_dungeon_0235e8, dungeon_update_player_view_state_0236ad, effect_process_thing_entity_0248e5, effect_allocate_light_effect_024998 ...
  ******************************************************************************/
-void FUN_00023250(void)
+void door_update_creature_and_thing_023250(void)
 
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
+  int thing_ptr;
+  int cctrl_ptr;
+  int val;
   undefined2 *local_24;
   int local_20;
   int local_1c;
   
-  FUN_00023519();
-  FUN_0002347d();
-  FUN_000235e8();
-  FUN_000236ad();
-  FUN_000c4d28();
-  FUN_00037964();
-  FUN_00023291();
+  door_process_thing_entity_023519();
+  door_process_thing_entity_02347d();
+  dungeon_update_player_dungeon_0235e8();
+  dungeon_update_player_view_state_0236ad();
+  object_update_player_dungeon_0c4d28();
+  gen2_update_player_view_state_037964();
+  door_update_creature_and_thing_023291();
   local_20 = 0;
-  local_24 = &DAT_002e0589;
-  iVar3 = 0;
+  local_24 = &g_dungeons;
+  val = 0;
   do {
-    if ((((&DAT_0019d0c8)[iVar3] & 1) != 0) && ((&DAT_0019d0f4)[iVar3] == '\x01')) {
+    if ((((&g_players)[val] & 1) != 0) && ((&g_bss_0019d0f4)[val] == '\x01')) {
       for (local_1c = 0; local_1c < (int)(uint)*(byte *)((int)local_24 + 99);
           local_1c = local_1c + 1) {
-        iVar1 = (&DAT_001ae9fc)[*(ushort *)((int)local_24 + local_1c * 2 + 0x33)];
-        if (*(char *)(iVar1 + 0x1f) == '\x05') {
-          if (((DAT_002ed402 != 0) &&
-              (iVar2 = (&DAT_001b0a00)[*(ushort *)(iVar1 + 100)], *(int *)(iVar2 + 0x2ef) != 0)) &&
-             (*(uint *)(iVar2 + 0x2ef) <= DAT_002e8bee)) {
-            *(undefined4 *)(iVar2 + 0x2ef) = 0;
-            iVar2 = FUN_000248e5();
-            if (iVar2 != 0) {
-              FUN_00024998();
+        thing_ptr = (&g_thing_ptrs)[*(ushort *)((int)local_24 + local_1c * 2 + 0x33)];
+        if (*(char *)(thing_ptr + 0x1f) == '\x05') { /* thing->class_id */
+          if (((g_bss_002ed402 != 0) &&
+              (cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)], *(int *)(cctrl_ptr + 0x2ef) != 0)) && /* thing->ccontrol_idx */
+             (*(uint *)(cctrl_ptr + 0x2ef) <= g_game_turn)) {
+            *(undefined4 *)(cctrl_ptr + 0x2ef) = 0;
+            cctrl_ptr = effect_process_thing_entity_0248e5();
+            if (cctrl_ptr != 0) {
+              effect_allocate_light_effect_024998();
               local_1c = local_1c + -1;
-              FUN_000b3b10();
+              move_fn_0b3b10();
               goto LAB_000247c7;
             }
           }
-          if (*(short *)(&DAT_002e91ef + (uint)*(byte *)(iVar1 + 0x1a) * 0xe6) != 0) {
-            FUN_00010434();
+          if (*(short *)(&g_bss_002e91ef + (uint)*(byte *)(thing_ptr + 0x1a) * 0xe6) != 0) {
+            anger_fn_010434();
           }
-          iVar2 = (&DAT_001b0a00)[*(ushort *)(iVar1 + 100)];
-          iVar1 = iVar2 + 0x14;
+          cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)]; /* thing->ccontrol_idx */
+          thing_ptr = cctrl_ptr + 0x14;
           do {
-            if ((*(char *)(iVar2 + 0x1d4) != '\0') && (0 < *(short *)(iVar2 + 0x1d5))) {
-              *(short *)(iVar2 + 0x1d5) = *(short *)(iVar2 + 0x1d5) + -1;
+            if ((*(char *)(cctrl_ptr + 0x1d4) != '\0') && (0 < *(short *)(cctrl_ptr + 0x1d5))) {
+              *(short *)(cctrl_ptr + 0x1d5) = *(short *)(cctrl_ptr + 0x1d5) + -1;
             }
-            iVar2 = iVar2 + 4;
-          } while (iVar2 != iVar1);
+            cctrl_ptr = cctrl_ptr + 4;
+          } while (cctrl_ptr != thing_ptr);
         }
 LAB_000247c7:
       }
     }
     local_24 = local_24 + 0xa84;
     local_20 = local_20 + 1;
-    iVar3 = iVar3 + 0x4ef;
+    val = val + 0x4ef;
     if (4 < local_20) {
       return;
     }
@@ -749,193 +744,193 @@ LAB_000247c7:
 }
 
 /******************************************************************************
- * Function : sub_023291 (Ghidra: FUN_00023291)
- * Prototype: void sub_023291(void);
+ * Function : door_update_creature_and_thing_023291 (Original VA: 0x23291, Ghidra: FUN_00023291)
+ * Prototype: void door_update_creature_and_thing_023291(void);
  * Address  : 0x23291 (Size: 485 bytes)
  * Module   : door.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x23250
- * Callees  : 2 -> 0x274ad, 0x51374
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
+ * Callers  : 1 -> door_update_creature_and_thing_023250
+ * Callees  : 2 -> event_fn_0274ad, moodneed_fn_051374
  ******************************************************************************/
-void FUN_00023291(void)
+void door_update_creature_and_thing_023291(void)
 
 {
-  ushort uVar1;
-  int iVar2;
-  uint uVar3;
-  uint uVar4;
-  undefined1 *puVar5;
-  char *pcVar6;
+  ushort cctrl_ptr;
+  int cctrl_ptr_2;
+  uint cctrl_ptr_3;
+  uint thing_ptr;
+  undefined1 *word_ptr;
+  char *str_ptr;
   undefined4 auStack_30 [2];
   char acStack_28 [8];
   byte local_20;
   byte local_1c;
   
-  DAT_002ed3e6 = DAT_002ed3e6 + 1;
-  for (local_1c = 0; local_1c < DAT_002eb542; local_1c = local_1c + 1) {
-    uVar4 = (uint)local_1c;
-    if ((((&DAT_0019d0c8)[uVar4 * 0x4ef] & 1) != 0) && ((&DAT_0019d0f4)[uVar4 * 0x4ef] == '\x01')) {
-      uVar1 = (&DAT_002e05b6)[uVar4 * 0xa84];
-      *(undefined4 *)(&DAT_002e1a41 + uVar4 * 0x1508) = 0;
-      while (uVar4 = (&DAT_001ae9fc)[uVar1], DAT_001ae9fc < uVar4) {
-        iVar2 = (uint)*(byte *)(uVar4 + 0x1a) * 0xe6;
-        if (*(short *)(&DAT_002e91a5 + iVar2) != 0) {
-          if (*(short *)(&DAT_002e19a9 +
-                        (uint)*(byte *)(uVar4 + 0x1a) * 2 + *(char *)(uVar4 + 6) * 0x1508) == 0) {
-            uVar3 = ((uint)*(ushort *)(&DAT_002e91a5 + iVar2) *
-                     (uint)*(byte *)((&DAT_001b0a00)[*(ushort *)(uVar4 + 100)] + 0x23) * 0x23) / 100
-                    + (uint)*(ushort *)(&DAT_002e91a5 + iVar2);
+  g_bss_002ed3e6 = g_bss_002ed3e6 + 1;
+  for (local_1c = 0; local_1c < g_bss_002eb542; local_1c = local_1c + 1) {
+    thing_ptr = (uint)local_1c;
+    if ((((&g_players)[thing_ptr * 0x4ef] & 1) != 0) && ((&g_bss_0019d0f4)[thing_ptr * 0x4ef] == '\x01')) {
+      cctrl_ptr = (&g_bss_002e05b6)[thing_ptr * 0xa84];
+      *(undefined4 *)(&g_bss_002e1a41 + thing_ptr * 0x1508) = 0;
+      while (thing_ptr = (&g_thing_ptrs)[cctrl_ptr], g_thing_ptrs < thing_ptr) {
+        cctrl_ptr_2 = (uint)*(byte *)(thing_ptr + 0x1a) * 0xe6;
+        if (*(short *)(&g_bss_002e91a5 + cctrl_ptr_2) != 0) {
+          if (*(short *)(&g_bss_002e19a9 +
+                        (uint)*(byte *)(thing_ptr + 0x1a) * 2 + *(char *)(thing_ptr + 6) * 0x1508) == 0) { /* thing->owner */
+            cctrl_ptr_3 = ((uint)*(ushort *)(&g_bss_002e91a5 + cctrl_ptr_2) *
+                     (uint)*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x23) * 0x23) / 100 /* thing->ccontrol_idx */
+                    + (uint)*(ushort *)(&g_bss_002e91a5 + cctrl_ptr_2);
           }
           else {
-            uVar3 = (((uint)*(ushort *)(&DAT_002e91a5 + iVar2) *
-                      (uint)*(byte *)((&DAT_001b0a00)[*(ushort *)(uVar4 + 100)] + 0x23) * 0x23) /
-                     100 + (uint)*(ushort *)(&DAT_002e91a5 + iVar2)) / 2;
+            cctrl_ptr_3 = (((uint)*(ushort *)(&g_bss_002e91a5 + cctrl_ptr_2) *
+                      (uint)*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x23) * 0x23) / /* thing->ccontrol_idx */
+                     100 + (uint)*(ushort *)(&g_bss_002e91a5 + cctrl_ptr_2)) / 2;
           }
-          *(uint *)(&DAT_002e1a41 + (uint)local_1c * 0x1508) =
-               *(int *)(&DAT_002e1a41 + (uint)local_1c * 0x1508) + uVar3;
+          *(uint *)(&g_bss_002e1a41 + (uint)local_1c * 0x1508) =
+               *(int *)(&g_bss_002e1a41 + (uint)local_1c * 0x1508) + cctrl_ptr_3;
         }
-        uVar1 = *(ushort *)((&DAT_001b0a00)[*(ushort *)(uVar4 + 100)] + 0x1f);
+        cctrl_ptr = *(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x1f); /* thing->ccontrol_idx */
       }
     }
   }
-  if (DAT_002ed3e2 <= DAT_002ed3e6) {
-    FUN_00051374();
-    DAT_002ed3e6 = 0;
-    for (uVar4 = DAT_002e6eb6; uVar4 = (&DAT_001ae9fc)[uVar4], DAT_001ae9fc < uVar4;
-        uVar4 = (uint)*(ushort *)(uVar4 + 0x67)) {
-      if ((((int)*(char *)(uVar4 + 6) != (uint)DAT_002eb543) &&
-          ((int)*(char *)(uVar4 + 6) != (uint)DAT_002eb542)) &&
-         (*(short *)(&DAT_002e91a5 + (uint)*(byte *)(uVar4 + 0x1a) * 0xe6) != 0)) {
-        iVar2 = (&DAT_001b0a00)[*(ushort *)(uVar4 + 100)];
-        if (*(char *)(iVar2 + 0x49) == '\0') {
-          *(char *)(iVar2 + 0x48) = *(char *)(iVar2 + 0x48) + '\x01';
-          acStack_28[*(char *)(uVar4 + 6)] = '\x01';
+  if (g_bss_002ed3e2 <= g_bss_002ed3e6) {
+    moodneed_fn_051374();
+    g_bss_002ed3e6 = 0;
+    for (thing_ptr = g_bss_002e6eb6; thing_ptr = (&g_thing_ptrs)[thing_ptr], g_thing_ptrs < thing_ptr;
+        thing_ptr = (uint)*(ushort *)(thing_ptr + 0x67)) {
+      if ((((int)*(char *)(thing_ptr + 6) != (uint)g_neutral_player_number) && /* thing->owner */
+          ((int)*(char *)(thing_ptr + 6) != (uint)g_bss_002eb542)) && /* thing->owner */
+         (*(short *)(&g_bss_002e91a5 + (uint)*(byte *)(thing_ptr + 0x1a) * 0xe6) != 0)) {
+        cctrl_ptr_2 = (&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)]; /* thing->ccontrol_idx */
+        if (*(char *)(cctrl_ptr_2 + 0x49) == '\0') {
+          *(char *)(cctrl_ptr_2 + 0x48) = *(char *)(cctrl_ptr_2 + 0x48) + '\x01';
+          acStack_28[*(char *)(thing_ptr + 6)] = '\x01'; /* thing->owner */
         }
         else {
-          *(char *)(iVar2 + 0x49) = *(char *)(iVar2 + 0x49) + -1;
+          *(char *)(cctrl_ptr_2 + 0x49) = *(char *)(cctrl_ptr_2 + 0x49) + -1;
         }
       }
     }
-    pcVar6 = acStack_28;
-    for (local_20 = 0; uVar4 = (uint)local_20, uVar4 < 5; local_20 = local_20 + 1) {
-      puVar5 = pcVar6;
-      if (acStack_28[uVar4] != '\0') {
-        puVar5 = pcVar6 + -4;
-        *(undefined4 *)(pcVar6 + -4) = *(undefined4 *)(&DAT_002e1a41 + uVar4 * 0x1508);
-        *(undefined4 *)(pcVar6 + -8) = 0x23474;
-        FUN_000274ad();
+    str_ptr = acStack_28;
+    for (local_20 = 0; thing_ptr = (uint)local_20, thing_ptr < 5; local_20 = local_20 + 1) {
+      word_ptr = str_ptr;
+      if (acStack_28[thing_ptr] != '\0') {
+        word_ptr = str_ptr + -4;
+        *(undefined4 *)(str_ptr + -4) = *(undefined4 *)(&g_bss_002e1a41 + thing_ptr * 0x1508);
+        *(undefined4 *)(str_ptr + -8) = 0x23474;
+        event_fn_0274ad();
       }
-      pcVar6 = puVar5;
+      str_ptr = word_ptr;
     }
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_023476 (Ghidra: FUN_00023476)
- * Prototype: void sub_023476(void);
+ * Function : door_fn_023476 (Original VA: 0x23476, Ghidra: FUN_00023476)
+ * Prototype: void door_fn_023476(void);
  * Address  : 0x23476 (Size: 7 bytes)
  * Module   : door.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x23a48
+ * Purpose  : Module door.cpp procedure @ 0x023476
+ * Callers  : 1 -> dungeon_update_player_dungeon_023a48
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_00023476(void)
+void door_fn_023476(void)
 
 {
   return;
 }
 
 /******************************************************************************
- * Function : sub_02347d (Ghidra: FUN_0002347d)
- * Prototype: void sub_02347d(void);
+ * Function : door_process_thing_entity_02347d (Original VA: 0x2347d, Ghidra: FUN_0002347d)
+ * Prototype: void door_process_thing_entity_02347d(void);
  * Address  : 0x2347d (Size: 156 bytes)
  * Module   : door.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x23250
- * Callees  : 3 -> 0x275c1, 0xdd6c8, 0xe846c
+ * Purpose  : Looks up Thing* in g_thing_ptrs[2048] and updates state
+ * Callers  : 1 -> door_update_creature_and_thing_023250
+ * Callees  : 3 -> event_fn_0275c1, update_update_player_dungeon_0dd6c8, LbPaletteSet
  ******************************************************************************/
-void FUN_0002347d(void)
+void door_process_thing_entity_02347d(void)
 
 {
-  uint uVar1;
+  uint uval;
   uint extraout_ECX;
   uint extraout_ECX_00;
-  int iVar2;
+  int val;
   int extraout_EDX;
   int extraout_EDX_00;
-  int iVar3;
+  int val_2;
   
-  uVar1 = 0;
-  iVar3 = 0;
-  iVar2 = 0;
+  uval = 0;
+  val_2 = 0;
+  val = 0;
   do {
-    if ((((((&DAT_0019d0c8)[iVar2] & 1) != 0) && ((&DAT_0019d0f4)[iVar2] == '\x01')) &&
-        ((*(short *)((int)&DAT_002e0589 + iVar3) == 0 ||
-         (*(char *)((&DAT_001ae9fc)[*(ushort *)((int)&DAT_002e0589 + iVar3)] + 7) == '\x03')))) &&
-       ((&DAT_0019d0f1)[iVar2] == '\0')) {
-      FUN_000275c1();
-      FUN_000dd6c8();
-      uVar1 = extraout_ECX;
-      iVar2 = extraout_EDX;
-      if (extraout_ECX == (byte)(&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef]) {
-        FUN_000e846c(DAT_00199210);
-        uVar1 = extraout_ECX_00;
-        iVar2 = extraout_EDX_00;
+    if ((((((&g_players)[val] & 1) != 0) && ((&g_bss_0019d0f4)[val] == '\x01')) &&
+        ((*(short *)((int)&g_dungeons + val_2) == 0 ||
+         (*(char *)((&g_thing_ptrs)[*(ushort *)((int)&g_dungeons + val_2)] + 7) == '\x03')))) &&
+       ((&g_bss_0019d0f1)[val] == '\0')) {
+      event_fn_0275c1();
+      update_update_player_dungeon_0dd6c8();
+      uval = extraout_ECX;
+      val = extraout_EDX;
+      if (extraout_ECX == (byte)(&g_player_id_number)[g_my_player_word._3_1_ * 0x4ef]) {
+        LbPaletteSet(g_display_palette);
+        uval = extraout_ECX_00;
+        val = extraout_EDX_00;
       }
     }
-    iVar3 = iVar3 + 0x1508;
-    uVar1 = uVar1 + 1;
-    iVar2 = iVar2 + 0x4ef;
-  } while ((int)uVar1 < 5);
+    val_2 = val_2 + 0x1508;
+    uval = uval + 1;
+    val = val + 0x4ef;
+  } while ((int)uval < 5);
   return;
 }
 
 /******************************************************************************
- * Function : sub_023519 (Ghidra: FUN_00023519)
- * Prototype: void sub_023519(void);
+ * Function : door_process_thing_entity_023519 (Original VA: 0x23519, Ghidra: FUN_00023519)
+ * Prototype: void door_process_thing_entity_023519(void);
  * Address  : 0x23519 (Size: 207 bytes)
  * Module   : door.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x23250
- * Callees  : 1 -> 0xdd500
+ * Purpose  : Looks up Thing* in g_thing_ptrs[2048] and updates state
+ * Callers  : 1 -> door_update_creature_and_thing_023250
+ * Callees  : 1 -> update_update_player_dungeon_0dd500
  ******************************************************************************/
-void FUN_00023519(void)
+void door_process_thing_entity_023519(void)
 
 {
-  bool bVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
+  bool flag;
+  int val;
+  int val_2;
+  int val_3;
+  int loop_i;
   int local_18;
   
-  if ((DAT_0019d0b6 & 1) != 0) {
-    iVar2 = 0;
-    for (iVar5 = 0; iVar5 < 5; iVar5 = iVar5 + 1) {
-      if (((((&DAT_0019d0c8)[iVar2] & 1) != 0) && ((&DAT_0019d0f4)[iVar2] == '\x01')) &&
-         ((&DAT_0019d0f1)[iVar2] == '\0')) {
-        bVar1 = true;
-        iVar4 = 0;
-        iVar3 = 0;
+  if ((g_game_system_flags & 1) != 0) {
+    val = 0;
+    for (loop_i = 0; loop_i < 5; loop_i = loop_i + 1) {
+      if (((((&g_players)[val] & 1) != 0) && ((&g_bss_0019d0f4)[val] == '\x01')) &&
+         ((&g_bss_0019d0f1)[val] == '\0')) {
+        flag = true;
+        val_3 = 0;
+        val_2 = 0;
         for (local_18 = 0; local_18 < 5; local_18 = local_18 + 1) {
-          if (((((&DAT_0019d0c8)[iVar4] & 1) != 0) && ((&DAT_0019d0f4)[iVar4] == '\x01')) &&
-             ((iVar5 != local_18 &&
-              ((*(short *)((int)&DAT_002e0589 + iVar3) != 0 &&
-               (*(char *)((&DAT_001ae9fc)[*(ushort *)((int)&DAT_002e0589 + iVar3)] + 7) != '\x03')))
+          if (((((&g_players)[val_3] & 1) != 0) && ((&g_bss_0019d0f4)[val_3] == '\x01')) &&
+             ((loop_i != local_18 &&
+              ((*(short *)((int)&g_dungeons + val_2) != 0 &&
+               (*(char *)((&g_thing_ptrs)[*(ushort *)((int)&g_dungeons + val_2)] + 7) != '\x03')))
               ))) {
-            bVar1 = false;
+            flag = false;
             break;
           }
-          iVar4 = iVar4 + 0x4ef;
-          iVar3 = iVar3 + 0x1508;
+          val_3 = val_3 + 0x4ef;
+          val_2 = val_2 + 0x1508;
         }
-        if (bVar1) {
-          FUN_000dd500();
+        if (flag) {
+          update_update_player_dungeon_0dd500();
           return;
         }
       }
-      iVar2 = iVar2 + 0x4ef;
+      val = val + 0x4ef;
     }
   }
   return;

@@ -1,7 +1,7 @@
 /**
- * Dungeon Keeper (KEEPER.EXE) - Reconstructed Source Module: workshop.cpp
+ * Dungeon Keeper (KEEPER.EXE) - Reconstructed & Semantically Named Module: workshop.cpp
  * Binary Subject: /home/merlin/Dungeon Keeper/re/KEEPER.elf
- * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 (x86:LE:32:default)
+ * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 + DK Semantic Analyzer
  * Functions in this translation unit: 35
  */
 
@@ -11,512 +11,491 @@
 #include "../include/dk_functions.h"
 
 /******************************************************************************
- * Function : sub_0768fb (Ghidra: FUN_000768fb)
- * Prototype: undefined4 sub_0768fb(void);
+ * Function : workshop_fn_0768fb (Original VA: 0x768fb, Ghidra: FUN_000768fb)
+ * Prototype: undefined4 workshop_fn_0768fb(void);
  * Address  : 0x768fb (Size: 35 bytes)
  * Module   : workshop.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x4fe44
- * Callees  : 1 -> 0x7691e
+ * Purpose  : Module workshop.cpp procedure @ 0x0768fb
+ * Callers  : 1 -> magic_update_creature_control_04fe44
+ * Callees  : 1 -> workshop_fn_07691e
  ******************************************************************************/
-undefined4 FUN_000768fb(void)
+undefined4 workshop_fn_0768fb(void)
 
 {
-  int in_EAX;
-  int in_EDX;
-  undefined8 uVar1;
+  int arg_eax;
+  int arg_edx;
+  undefined8 uval;
   
-  if ((*(char *)(in_EAX + 6) == in_EDX) && (*(char *)(in_EAX + 0x1a) == '\x01')) {
-    uVar1 = FUN_0007691e();
-    if ((int)uVar1 != 0) {
-      return (int)((ulonglong)uVar1 >> 0x20);
+  if ((*(char *)(arg_eax + 6) == arg_edx) && (*(char *)(arg_eax + 0x1a) == '\x01')) {
+    uval = workshop_fn_07691e();
+    if ((int)uval != 0) {
+      return (int)((ulonglong)uval >> 0x20);
     }
   }
   return 0;
 }
 
 /******************************************************************************
- * Function : sub_07691e (Ghidra: FUN_0007691e)
- * Prototype: longlong sub_07691e(void);
+ * Function : workshop_fn_07691e (Original VA: 0x7691e, Ghidra: FUN_0007691e)
+ * Prototype: longlong workshop_fn_07691e(void);
  * Address  : 0x7691e (Size: 31 bytes)
  * Module   : workshop.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x768fb, 0xe2c58
+ * Purpose  : Module workshop.cpp procedure @ 0x07691e
+ * Callers  : 2 -> workshop_fn_0768fb, update_fn_0e2c58
  * Callees  : 0 -> 
  ******************************************************************************/
-longlong FUN_0007691e(void)
+longlong workshop_fn_07691e(void)
 
 {
-  int in_EAX;
-  uint in_EDX;
+  int arg_eax;
+  uint arg_edx;
   
-  if (('\0' < *(char *)(in_EAX + 0x13)) && (*(uint *)(in_EAX + 0x14) <= DAT_002e8bee)) {
-    return CONCAT44(in_EDX,1);
+  if (('\0' < *(char *)(arg_eax + 0x13)) && (*(uint *)(arg_eax + 0x14) <= g_game_turn)) {
+    return CONCAT44(arg_edx,1);
   }
-  return (ulonglong)in_EDX << 0x20;
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : sub_076944 (Ghidra: FUN_00076944)
- * Prototype: void sub_076944(void);
+ * Function : workshop_fn_076944 (Original VA: 0x76944, Ghidra: FUN_00076944)
+ * Prototype: void workshop_fn_076944(void);
  * Address  : 0x76944 (Size: 30 bytes)
  * Module   : workshop.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module workshop.cpp procedure @ 0x076944
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_00076944(void)
+void workshop_fn_076944(void)
 
 {
-  short sVar1;
-  int in_EAX;
-  short *in_EDX;
+  short short_val;
+  int arg_eax;
+  short *arg_edx;
   
-  *(short *)(in_EAX + 0x32) = *(short *)(in_EAX + 0x32) + *in_EDX;
-  *(short *)(in_EAX + 0x34) = *(short *)(in_EAX + 0x34) + in_EDX[1];
-  sVar1 = in_EDX[2];
-  *(byte *)(in_EAX + 1) = *(byte *)(in_EAX + 1) | 4;
-  *(short *)(in_EAX + 0x36) = *(short *)(in_EAX + 0x36) + sVar1;
+  *(short *)(arg_eax + 0x32) = *(short *)(arg_eax + 0x32) + *arg_edx;
+  *(short *)(arg_eax + 0x34) = *(short *)(arg_eax + 0x34) + arg_edx[1];
+  short_val = arg_edx[2];
+  *(byte *)(arg_eax + 1) = *(byte *)(arg_eax + 1) | 4;
+  *(short *)(arg_eax + 0x36) = *(short *)(arg_eax + 0x36) + short_val;
   return;
 }
 
 /******************************************************************************
- * Function : sub_076964 (Ghidra: FUN_00076964)
- * Prototype: undefined4 sub_076964(void);
+ * Function : workshop_fn_076964 (Original VA: 0x76964, Ghidra: FUN_00076964)
+ * Prototype: undefined4 workshop_fn_076964(void);
  * Address  : 0x76964 (Size: 6 bytes)
  * Module   : workshop.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module workshop.cpp procedure @ 0x076964
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_00076964(void)
+undefined4 workshop_fn_076964(void)
 
 {
   return 0x100;
 }
 
 /******************************************************************************
- * Function : sub_076970 (Ghidra: FUN_00076970)
- * Prototype: undefined8 sub_076970(void);
+ * Function : workshop_update_creature_control_076970 (Original VA: 0x76970, Ghidra: FUN_00076970)
+ * Prototype: undefined8 workshop_update_creature_control_076970(void);
  * Address  : 0x76970 (Size: 122 bytes)
  * Module   : workshop.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
  * Callers  : 0 -> 
- * Callees  : 5 -> 0x63b6d, 0x64ae7, 0x77647, 0xcd85c, 0xd0f50
+ * Callees  : 5 -> person_fn_063b6d, person_update_creature_control_064ae7, workshop_update_slab_subtile_columns_077647, room_attempt_add_creature_room_0cd85c, room_update_slab_subtile_columns_0d0f50
  ******************************************************************************/
-undefined8 FUN_00076970(void)
+undefined8 workshop_update_creature_control_076970(void)
 
 {
-  char cVar1;
-  int in_EAX;
-  int iVar2;
-  undefined4 in_EDX;
+  char ch;
+  int thing;
+  int val;
+  undefined4 arg_edx;
   
-  *(undefined2 *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 0x80) = 0;
-  iVar2 = FUN_000d0f50();
-  if ((((iVar2 != 0) && (*(short *)(iVar2 + 10) == 8)) &&
-      (*(char *)(iVar2 + 3) == *(char *)(in_EAX + 6))) &&
-     (*(ushort *)(iVar2 + 0x10) < *(ushort *)(iVar2 + 0xe))) {
-    cVar1 = FUN_000cd85c();
-    if (cVar1 != '\0') {
-      FUN_00064ae7();
-      FUN_00077647();
+  *(undefined2 *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 0x80) = 0; /* thing->ccontrol_idx */
+  val = room_update_slab_subtile_columns_0d0f50();
+  if ((((val != 0) && (*(short *)(val + 10) == 8)) &&
+      (*(char *)(val + 3) == *(char *)(thing + 6))) && /* thing->owner */
+     (*(ushort *)(val + 0x10) < *(ushort *)(val + 0xe))) {
+    ch = room_attempt_add_creature_room_0cd85c();
+    if (ch != '\0') {
+      person_update_creature_control_064ae7();
+      workshop_update_slab_subtile_columns_077647();
       goto LAB_000769e0;
     }
   }
-  FUN_00063b6d();
+  person_fn_063b6d();
 LAB_000769e0:
-  return CONCAT44(in_EDX,1);
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : sub_0769ea (Ghidra: FUN_000769ea)
- * Prototype: undefined8 sub_0769ea(void);
+ * Function : workshop_update_player_dungeon_0769ea (Original VA: 0x769ea, Ghidra: FUN_000769ea)
+ * Prototype: undefined8 workshop_update_player_dungeon_0769ea(void);
  * Address  : 0x769ea (Size: 319 bytes)
  * Module   : workshop.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses per-player Dungeon state (stride 0x1508)
  * Callers  : 0 -> 
- * Callees  : 6 -> 0x51374, 0x63b6d, 0x67018, 0x77033, 0xcd9b0, 0xd0f50
+ * Callees  : 6 -> moodneed_fn_051374, person_fn_063b6d, scavenge_fn_067018, workshop_update_slab_subtile_columns_077033, room_attempt_remove_creature_room_0cd9b0, room_update_slab_subtile_columns_0d0f50
  ******************************************************************************/
-undefined8 FUN_000769ea(void)
+undefined8 workshop_update_player_dungeon_0769ea(void)
 
 {
-  char cVar1;
-  int in_EAX;
-  int iVar2;
-  int iVar3;
-  undefined4 uVar4;
+  char ch;
+  int arg_eax;
+  int dungeon_off;
+  int val;
+  undefined4 uval;
   int extraout_ECX;
-  undefined4 in_EDX;
-  int iVar5;
-  undefined8 uVar6;
+  undefined4 arg_edx;
+  int val_2;
+  undefined8 uval_2;
   
-  cVar1 = *(char *)(in_EAX + 6);
-  iVar2 = cVar1 * 0x1508;
-  uVar6 = FUN_000d0f50();
-  iVar3 = (int)((ulonglong)uVar6 >> 0x20);
-  iVar5 = (int)uVar6;
-  if ((((iVar5 != 0) && (*(short *)(iVar5 + 10) == 8)) &&
-      (*(short *)(iVar5 + 1) == *(short *)(iVar3 + 0x7e))) &&
-     ((*(char *)(iVar5 + 3) == *(char *)(extraout_ECX + 6) &&
-      (*(short *)(iVar5 + 1) == *(short *)(iVar3 + 0x7e))))) {
-    if (*(ushort *)(iVar5 + 0x10) <= *(ushort *)(iVar5 + 0xe)) {
-      if ((&DAT_002e1712)[iVar2] != '\0') {
-        iVar3 = FUN_00067018((&DAT_002e91a7)[(uint)*(byte *)(extraout_ECX + 0x1a) * 0xe6],100);
-        iVar3 = iVar3 * (uint)*(ushort *)(iVar5 + 0x3f);
-        iVar5 = iVar3 >> 0x1f;
-        iVar5 = (int)((iVar3 + iVar5 * -0x100) - (uint)(iVar5 << 7 < 0)) >> 8;
-        *(int *)(&DAT_002e170e + iVar2) = *(int *)(&DAT_002e170e + iVar2) + iVar5;
-        (&DAT_002e170a)[cVar1 * 0x542] = (&DAT_002e170a)[cVar1 * 0x542] + iVar5;
+  ch = *(char *)(arg_eax + 6);
+  dungeon_off = ch * 0x1508;
+  uval_2 = room_update_slab_subtile_columns_0d0f50();
+  val = (int)((ulonglong)uval_2 >> 0x20);
+  val_2 = (int)uval_2;
+  if ((((val_2 != 0) && (*(short *)(val_2 + 10) == 8)) &&
+      (*(short *)(val_2 + 1) == *(short *)(val + 0x7e))) &&
+     ((*(char *)(val_2 + 3) == *(char *)(extraout_ECX + 6) &&
+      (*(short *)(val_2 + 1) == *(short *)(val + 0x7e))))) {
+    if (*(ushort *)(val_2 + 0x10) <= *(ushort *)(val_2 + 0xe)) {
+      if ((&g_bss_002e1712)[dungeon_off] != '\0') {
+        val = scavenge_fn_067018((&g_bss_002e91a7)[(uint)*(byte *)(extraout_ECX + 0x1a) * 0xe6],100);
+        val = val * (uint)*(ushort *)(val_2 + 0x3f);
+        val_2 = val >> 0x1f;
+        val_2 = (int)((val + val_2 * -0x100) - (uint)(val_2 << 7 < 0)) >> 8;
+        *(int *)(&g_bss_002e170e + dungeon_off) = *(int *)(&g_bss_002e170e + dungeon_off) + val_2;
+        (&g_bss_002e170a)[ch * 0x542] = (&g_bss_002e170a)[ch * 0x542] + val_2;
       }
-      FUN_00077033();
-      uVar4 = 1;
+      workshop_update_slab_subtile_columns_077033();
+      uval = 1;
       goto LAB_00076ae3;
     }
-    if ((int)*(char *)(extraout_ECX + 6) == (uint)(byte)(&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef])
+    if ((int)*(char *)(extraout_ECX + 6) == (uint)(byte)(&g_player_id_number)[g_my_player_word._3_1_ * 0x4ef])
     {
-      FUN_00051374();
+      moodneed_fn_051374();
     }
   }
-  FUN_000cd9b0();
-  FUN_00063b6d();
-  uVar4 = 0;
+  room_attempt_remove_creature_room_0cd9b0();
+  person_fn_063b6d();
+  uval = 0;
 LAB_00076ae3:
-  return CONCAT44(in_EDX,uVar4);
+  return CONCAT44(arg_edx,uval);
 }
 
 /******************************************************************************
- * Function : dk_door_choice_076b29 (Ghidra: FUN_00076b29)
- * Prototype: undefined8 dk_door_choice_076b29(void);
+ * Function : workshop_door_choice_076b29 (Original VA: 0x76b29, Ghidra: FUN_00076b29)
+ * Prototype: undefined8 workshop_door_choice_076b29(void);
  * Address  : 0x76b29 (Size: 491 bytes)
  * Module   : workshop.cpp [direct_file_string_xref]
- * OrigLine : workshop.cpp:139 ("BAD DOOR CHOICE")
- * Naming   : String 'BAD DOOR CHOICE'
- * Callers  : 1 -> 0xde6a8
- * Callees  : 7 -> 0x51374, 0x76d56, 0x76ee6, 0x76f1e, 0xca65c, 0xd129c, 0xddaf0
- * Strings  :
- *   - 0x167d04: "workshop.cpp"
- *   - 0x167d21: "workshop.cpp"
- *   - 0x167d42: "workshop.cpp"
- *   - 0x167d72: "workshop.cpp"
- *   - 0x167cf4: "BAD DOOR CHOICE"
- *   - 0x167d11: "BAD TRAP CHOICE"
- *   - 0x167d2e: "INVALID MANUFACTURE"
- *   - 0x167d4f: "COULD NOT CREATE MANUFACTURED ITEM"
+ * OrigLine : workshop.cpp lines 139
+ * Purpose  : String 'BAD DOOR CHOICE'
+ * Callers  : 1 -> update_go_first_person_without_0de6a8
+ * Callees  : 7 -> moodneed_fn_051374, workshop_what_hell_have_we_076d56, workshop_fn_076ee6, workshop_fn_076f1e, room_process_dungeon_room_0ca65c, room_process_dungeon_room_0d129c, LbErrorLog
  ******************************************************************************/
-undefined8 FUN_00076b29(void)
+undefined8 workshop_door_choice_076b29(void)
 
 {
-  char *pcVar1;
-  byte bVar2;
-  uint in_EAX;
-  int iVar3;
-  int iVar4;
-  undefined4 uVar5;
+  char *str_ptr;
+  byte player_off;
+  uint arg_eax;
+  int val;
+  int val_2;
+  undefined4 uval;
   int extraout_ECX;
   int extraout_ECX_00;
   int extraout_ECX_01;
   int extraout_ECX_02;
   int extraout_ECX_03;
-  undefined4 in_EDX;
+  undefined4 arg_edx;
   
-  iVar3 = FUN_000d129c();
-  if (iVar3 != 0) {
-    if ((&DAT_002e1712)[extraout_ECX] == '\0') {
+  val = room_process_dungeon_room_0d129c();
+  if (val != 0) {
+    if ((&g_bss_002e1712)[extraout_ECX] == '\0') {
 LAB_00076d04:
-      FUN_00076f1e();
+      workshop_fn_076f1e();
     }
     else {
-      iVar3 = FUN_00076ee6();
-      if (iVar3 * 0x100 <= *(int *)(extraout_ECX_00 + 0x1185)) {
-        iVar4 = FUN_000ca65c();
-        if (iVar4 == 0) {
+      val = workshop_fn_076ee6();
+      if (val * 0x100 <= *(int *)(extraout_ECX_00 + 0x1185)) {
+        val_2 = room_process_dungeon_room_0ca65c();
+        if (val_2 == 0) {
           *(undefined1 *)(extraout_ECX_01 + 0x1189) = 0;
-          uVar5 = 0;
+          uval = 0;
           goto LAB_00076d0e;
         }
-        iVar4 = FUN_00076d56();
-        if (iVar4 != 0) {
+        val_2 = workshop_what_hell_have_we_076d56();
+        if (val_2 != 0) {
           if (*(char *)(extraout_ECX_02 + 0x1189) == '\t') {
-            iVar4 = (uint)*(byte *)(extraout_ECX_02 + 0x118a) + extraout_ECX_02;
-            if (*(byte *)(iVar4 + 0x101d) < 199) {
-              pcVar1 = (char *)(iVar4 + 0x101d);
-              *pcVar1 = *pcVar1 + '\x01';
+            val_2 = (uint)*(byte *)(extraout_ECX_02 + 0x118a) + extraout_ECX_02;
+            if (*(byte *)(val_2 + 0x101d) < 199) {
+              str_ptr = (char *)(val_2 + 0x101d);
+              *str_ptr = *str_ptr + '\x01';
               *(int *)(extraout_ECX_02 + 0x122b) = *(int *)(extraout_ECX_02 + 0x122b) + 1;
               *(undefined1 *)(extraout_ECX_02 + 0x1027 + (uint)*(byte *)(extraout_ECX_02 + 0x118a))
                    = 1;
-              bVar2 = (&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef];
+              player_off = (&g_player_id_number)[g_my_player_word._3_1_ * 0x4ef];
 joined_r0x00076c8f:
-              iVar4 = extraout_ECX_02;
-              if (bVar2 == in_EAX) {
-                FUN_00051374();
-                iVar4 = extraout_ECX_03;
+              val_2 = extraout_ECX_02;
+              if (player_off == arg_eax) {
+                moodneed_fn_051374();
+                val_2 = extraout_ECX_03;
               }
-              *(int *)(iVar4 + 0x1185) = *(int *)(iVar4 + 0x1185) + iVar3 * -0x100;
-              *(undefined4 *)(iVar4 + 0x118b) = DAT_002e8bee;
-              *(int *)(iVar4 + 0x1233) = *(int *)(iVar4 + 0x1233) + 1;
+              *(int *)(val_2 + 0x1185) = *(int *)(val_2 + 0x1185) + val * -0x100;
+              *(undefined4 *)(val_2 + 0x118b) = g_game_turn;
+              *(int *)(val_2 + 0x1233) = *(int *)(val_2 + 0x1233) + 1;
               goto LAB_00076d04;
             }
           }
           else if ((*(char *)(extraout_ECX_02 + 0x1189) == '\b') &&
-                  (iVar4 = (uint)*(byte *)(extraout_ECX_02 + 0x118a) + extraout_ECX_02,
-                  *(byte *)(iVar4 + 0x1008) < 199)) {
-            pcVar1 = (char *)(iVar4 + 0x1008);
-            *pcVar1 = *pcVar1 + '\x01';
+                  (val_2 = (uint)*(byte *)(extraout_ECX_02 + 0x118a) + extraout_ECX_02,
+                  *(byte *)(val_2 + 0x1008) < 199)) {
+            str_ptr = (char *)(val_2 + 0x1008);
+            *str_ptr = *str_ptr + '\x01';
             *(int *)(extraout_ECX_02 + 0x122f) = *(int *)(extraout_ECX_02 + 0x122f) + 1;
             *(undefined1 *)(extraout_ECX_02 + 0x1016 + (uint)*(byte *)(extraout_ECX_02 + 0x118a)) =
                  1;
-            bVar2 = (&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef];
+            player_off = (&g_player_id_number)[g_my_player_word._3_1_ * 0x4ef];
             goto joined_r0x00076c8f;
           }
         }
-        FUN_000ddaf0(); /* LbErrorLog("workshop.cpp", line 139, "BAD DOOR CHOICE") */
-        uVar5 = 0;
+        LbErrorLog(); /* LbErrorLog("workshop.cpp", line 139, "BAD DOOR CHOICE") */
+        uval = 0;
         goto LAB_00076d0e;
       }
     }
   }
-  uVar5 = 1;
+  uval = 1;
 LAB_00076d0e:
-  return CONCAT44(in_EDX,uVar5);
+  return CONCAT44(arg_edx,uval);
 }
 
 /******************************************************************************
- * Function : sub_076d14 (Ghidra: FUN_00076d14)
- * Prototype: longlong sub_076d14(void);
+ * Function : workshop_update_player_dungeon_076d14 (Original VA: 0x76d14, Ghidra: FUN_00076d14)
+ * Prototype: longlong workshop_update_player_dungeon_076d14(void);
  * Address  : 0x76d14 (Size: 66 bytes)
  * Module   : workshop.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x731f3
- * Callees  : 1 -> 0x76ee6
+ * Purpose  : Accesses per-player Dungeon state (stride 0x1508)
+ * Callers  : 1 -> temple_how_you_sacrifice_neutral_0731f3
+ * Callees  : 1 -> workshop_fn_076ee6
  ******************************************************************************/
-longlong FUN_00076d14(void)
+longlong workshop_update_player_dungeon_076d14(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  int iVar2;
-  uint in_EDX;
+  int arg_eax;
+  int dungeon_off;
+  int val;
+  uint arg_edx;
   
-  iVar1 = in_EAX * 0x1508;
-  if ((&DAT_002e1712)[iVar1] != '\0') {
-    iVar2 = FUN_00076ee6();
-    iVar2 = iVar2 * 0x100;
-    if (iVar2 <= *(int *)(&DAT_002e170e + iVar1)) {
-      iVar2 = *(int *)(&DAT_002e170e + iVar1);
+  dungeon_off = arg_eax * 0x1508;
+  if ((&g_bss_002e1712)[dungeon_off] != '\0') {
+    val = workshop_fn_076ee6();
+    val = val * 0x100;
+    if (val <= *(int *)(&g_bss_002e170e + dungeon_off)) {
+      val = *(int *)(&g_bss_002e170e + dungeon_off);
     }
-    *(int *)(&DAT_002e170e + iVar1) = iVar2;
+    *(int *)(&g_bss_002e170e + dungeon_off) = val;
   }
-  return (ulonglong)in_EDX << 0x20;
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : dk_what_hell_have_we_076d56 (Ghidra: FUN_00076d56)
- * Prototype: undefined4 dk_what_hell_have_we_076d56(void);
+ * Function : workshop_what_hell_have_we_076d56 (Original VA: 0x76d56, Ghidra: FUN_00076d56)
+ * Prototype: undefined4 workshop_what_hell_have_we_076d56(void);
  * Address  : 0x76d56 (Size: 400 bytes)
  * Module   : workshop.cpp [direct_file_string_xref]
- * OrigLine : workshop.cpp:238 ("WHAT THE HELL HAVE WE CREATED?"); workshop.cpp:277 ("Could not find room for thing"); workshop.cpp:290 ("COULD NOT CREATE SPELL")
- * Naming   : String 'WHAT THE HELL HAVE WE CREATED?'
- * Callers  : 1 -> 0x76b29
- * Callees  : 10 -> 0x24998, 0x27390, 0x43f07, 0x6e538, 0x72af4, 0xb28e8, 0xb3b10, 0xc9e8c, 0xccf10, 0xddaf0
- * Strings  :
- *   - 0x167d9e: "workshop.cpp"
- *   - 0x167dc9: "workshop.cpp"
- *   - 0x167de8: "workshop.cpp"
- *   - 0x167e0c: "workshop.cpp"
- *   - 0x167d7f: "WHAT THE HELL HAVE WE CREATED?"
- *   - 0x167dab: "Could not find room for thing"
- *   - 0x167dd6: "NO ROOM FOR THING"
- *   - 0x167df5: "COULD NOT CREATE SPELL"
+ * OrigLine : workshop.cpp lines 238, 277, 290
+ * Purpose  : String 'WHAT THE HELL HAVE WE CREATED?'
+ * Callers  : 1 -> workshop_door_choice_076b29
+ * Callees  : 10 -> effect_allocate_light_effect_024998, event_illegal_event_number_created_027390, inits_allocate_light_object_043f07, sound_fn_06e538, structs_update_creature_control_072af4, move_process_map_subtile_0b28e8, move_fn_0b3b10, room_process_dungeon_room_0c9e8c ...
  ******************************************************************************/
-undefined4 FUN_00076d56(void)
+undefined4 workshop_what_hell_have_we_076d56(void)
 
 {
-  char cVar1;
-  int in_EAX;
-  int iVar2;
+  char ch;
+  int arg_eax;
+  int val;
   int extraout_ECX;
-  int in_EDX;
-  int unaff_EBX;
-  int *piVar3;
+  int arg_edx;
+  int arg_ebx;
+  int *int_ptr;
   int iStack_28;
   
-  if ((in_EDX == 8) || (in_EDX == 9)) {
+  if ((arg_edx == 8) || (arg_edx == 9)) {
     iStack_28 = 0x76d8b;
-    iVar2 = FUN_00043f07();
+    val = inits_allocate_light_object_043f07();
   }
   else {
     iStack_28 = 0x76dc0;
-    FUN_000ddaf0(); /* LbErrorLog("workshop.cpp", line 238, "WHAT THE HELL HAVE WE CREATED?") */
-    iVar2 = 0;
+    LbErrorLog(); /* LbErrorLog("workshop.cpp", line 238, "WHAT THE HELL HAVE WE CREATED?") */
+    val = 0;
   }
-  if (iVar2 == 0) {
+  if (val == 0) {
     iStack_28 = 0x76edf;
-    FUN_000ddaf0(); /* LbErrorLog("workshop.cpp", line 277, "Could not find room for thing") */
+    LbErrorLog(); /* LbErrorLog("workshop.cpp", line 277, "Could not find room for thing") */
   }
   else {
     iStack_28 = 0x76ddc;
-    iVar2 = FUN_000c9e8c();
-    if (iVar2 != 0) {
+    val = room_process_dungeon_room_0c9e8c();
+    if (val != 0) {
       iStack_28 = 0x76df2;
-      cVar1 = FUN_000ccf10();
-      if (cVar1 != '\0') {
+      ch = room_number_slabs_room_zero_0ccf10();
+      if (ch != '\0') {
         iStack_28 = 0x76e04;
-        FUN_000b28e8();
+        move_process_map_subtile_0b28e8();
         iStack_28 = 0x76e12;
-        FUN_000b3b10();
+        move_fn_0b3b10();
         *(short *)(extraout_ECX + 0x10) = *(short *)(extraout_ECX + 0x10) + 1;
         *(int *)(extraout_ECX + 0x17) = *(int *)(extraout_ECX + 0x17) + 1;
-        iVar2 = in_EAX * 0x1508 + unaff_EBX;
-        if (in_EDX == 8) {
-          cVar1 = (&DAT_002e159f)[iVar2];
+        val = arg_eax * 0x1508 + arg_ebx;
+        if (arg_edx == 8) {
+          ch = (&g_bss_002e159f)[val];
         }
         else {
-          cVar1 = (&DAT_002e15b0)[iVar2];
+          ch = (&g_bss_002e15b0)[val];
         }
-        piVar3 = (int *)&stack0xffffffdc;
-        if (cVar1 == '\0') {
-          piVar3 = &iStack_28;
-          iStack_28 = unaff_EBX;
-          FUN_00027390();
+        int_ptr = (int *)&stack0xffffffdc;
+        if (ch == '\0') {
+          int_ptr = &iStack_28;
+          iStack_28 = arg_ebx;
+          event_illegal_event_number_created_027390();
         }
-        *(undefined4 *)((int)piVar3 + -4) = 0x76e73;
-        FUN_00024998();
-        *(undefined4 *)((int)piVar3 + -4) = 0x100;
-        *(undefined4 *)((int)piVar3 + -8) = 2;
-        *(undefined4 *)((int)piVar3 + -0xc) = 0;
-        *(undefined4 *)((int)piVar3 + -0x10) = 3;
-        *(undefined4 *)((int)piVar3 + -0x14) = 0x76e91;
-        FUN_0006e538();
+        *(undefined4 *)((int)int_ptr + -4) = 0x76e73;
+        effect_allocate_light_effect_024998();
+        *(undefined4 *)((int)int_ptr + -4) = 0x100;
+        *(undefined4 *)((int)int_ptr + -8) = 2;
+        *(undefined4 *)((int)int_ptr + -0xc) = 0;
+        *(undefined4 *)((int)int_ptr + -0x10) = 3;
+        *(undefined4 *)((int)int_ptr + -0x14) = 0x76e91;
+        sound_fn_06e538();
         return 1;
       }
     }
     iStack_28 = 0x76eaf;
-    FUN_000ddaf0(); /* LbErrorLog("workshop.cpp", line 290, "COULD NOT CREATE SPELL") */
+    LbErrorLog(); /* LbErrorLog("workshop.cpp", line 290, "COULD NOT CREATE SPELL") */
     iStack_28 = 0x76eb8;
-    FUN_00072af4();
+    structs_update_creature_control_072af4();
   }
   return 0;
 }
 
 /******************************************************************************
- * Function : sub_076ee6 (Ghidra: FUN_00076ee6)
- * Prototype: undefined4 sub_076ee6(void);
+ * Function : workshop_fn_076ee6 (Original VA: 0x76ee6, Ghidra: FUN_00076ee6)
+ * Prototype: undefined4 workshop_fn_076ee6(void);
  * Address  : 0x76ee6 (Size: 56 bytes)
  * Module   : workshop.cpp [direct_file_string_xref]
- * OrigLine : workshop.cpp:310 ("INVALID TYPE")
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0x5686f, 0x76b29, 0x76d14
- * Callees  : 1 -> 0xddaf0
- * Strings  :
- *   - 0x167e26: "workshop.cpp"
- *   - 0x167e19: "INVALID TYPE"
+ * OrigLine : workshop.cpp lines 310
+ * Purpose  : Module workshop.cpp procedure @ 0x076ee6
+ * Callers  : 3 -> newgui_update_player_dungeon_05686f, workshop_door_choice_076b29, workshop_update_player_dungeon_076d14
+ * Callees  : 1 -> LbErrorLog
  ******************************************************************************/
-undefined4 FUN_00076ee6(void)
+undefined4 workshop_fn_076ee6(void)
 
 {
-  int in_EAX;
-  int in_EDX;
+  int arg_eax;
+  int arg_edx;
   
-  if (in_EAX == 8) {
-    return *(undefined4 *)(&DAT_001ae898 + in_EDX * 0x14);
+  if (arg_eax == 8) {
+    return *(undefined4 *)(&g_bss_001ae898 + arg_edx * 0x14);
   }
-  if (in_EAX == 9) {
-    return *(undefined4 *)(&DAT_001ae924 + in_EDX * 0x14);
+  if (arg_eax == 9) {
+    return *(undefined4 *)(&g_bss_001ae924 + arg_edx * 0x14);
   }
-  FUN_000ddaf0(); /* LbErrorLog("workshop.cpp", line 310, "INVALID TYPE") */
+  LbErrorLog(); /* LbErrorLog("workshop.cpp", line 310, "INVALID TYPE") */
   return 0;
 }
 
 /******************************************************************************
- * Function : sub_076f1e (Ghidra: FUN_00076f1e)
- * Prototype: undefined8 sub_076f1e(void);
+ * Function : workshop_fn_076f1e (Original VA: 0x76f1e, Ghidra: FUN_00076f1e)
+ * Prototype: undefined8 workshop_fn_076f1e(void);
  * Address  : 0x76f1e (Size: 277 bytes)
  * Module   : workshop.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x76b29
- * Callees  : 1 -> 0x77547
+ * Purpose  : Module workshop.cpp procedure @ 0x076f1e
+ * Callers  : 1 -> workshop_door_choice_076b29
+ * Callees  : 1 -> workshop_fn_077547
  ******************************************************************************/
-undefined8 FUN_00076f1e(void)
+undefined8 workshop_fn_076f1e(void)
 
 {
-  int iVar1;
-  char cVar2;
-  int iVar3;
-  uint uVar4;
-  undefined4 in_EDX;
+  int val;
+  char ch;
+  int val_2;
+  uint uval;
+  undefined4 arg_edx;
   int extraout_EDX;
-  uint uVar5;
-  int iVar6;
+  uint uval_2;
+  int val_3;
   int local_24;
   int local_20;
   int local_1c;
   
-  FUN_00077547();
-  cVar2 = '\0';
-  uVar5 = 0x7fffffff;
+  workshop_fn_077547();
+  ch = '\0';
+  uval_2 = 0x7fffffff;
   local_1c = 1;
-  iVar3 = 0x14;
-  iVar6 = 0x7fffffff;
-  iVar1 = extraout_EDX;
+  val_2 = 0x14;
+  val_3 = 0x7fffffff;
+  val = extraout_EDX;
   do {
-    if ((((*(char *)(iVar1 + 0x1023) != '\0') &&
-         (*(int *)(&DAT_001ae920 + iVar3) <= *(int *)(extraout_EDX + 0x118f))) &&
-        (uVar4 = (uint)*(byte *)(iVar1 + 0x101e), uVar4 < 199)) &&
-       ((uVar4 < uVar5 || ((uVar5 == uVar4 && (*(int *)(&DAT_001ae920 + iVar3) < iVar6)))))) {
+    if ((((*(char *)(val + 0x1023) != '\0') &&
+         (*(int *)(&g_bss_001ae920 + val_2) <= *(int *)(extraout_EDX + 0x118f))) &&
+        (uval = (uint)*(byte *)(val + 0x101e), uval < 199)) &&
+       ((uval < uval_2 || ((uval_2 == uval && (*(int *)(&g_bss_001ae920 + val_2) < val_3)))))) {
       local_24 = local_1c;
-      cVar2 = '\t';
-      iVar6 = *(int *)(&DAT_001ae920 + iVar3);
-      uVar5 = uVar4;
+      ch = '\t';
+      val_3 = *(int *)(&g_bss_001ae920 + val_2);
+      uval_2 = uval;
     }
     local_1c = local_1c + 1;
-    iVar3 = iVar3 + 0x14;
-    iVar1 = iVar1 + 1;
+    val_2 = val_2 + 0x14;
+    val = val + 1;
   } while (local_1c < 5);
   local_20 = 1;
-  iVar3 = 0x14;
-  iVar1 = extraout_EDX;
+  val_2 = 0x14;
+  val = extraout_EDX;
   do {
-    if ((((*(char *)(iVar1 + 0x1010) != '\0') &&
-         (*(int *)(&DAT_001ae894 + iVar3) <= *(int *)(extraout_EDX + 0x118f))) &&
-        (uVar4 = (uint)*(byte *)(iVar1 + 0x1009), uVar4 < 199)) &&
-       ((uVar4 < uVar5 || ((uVar5 == uVar4 && (*(int *)(&DAT_001ae894 + iVar3) < iVar6)))))) {
+    if ((((*(char *)(val + 0x1010) != '\0') &&
+         (*(int *)(&g_bss_001ae894 + val_2) <= *(int *)(extraout_EDX + 0x118f))) &&
+        (uval = (uint)*(byte *)(val + 0x1009), uval < 199)) &&
+       ((uval < uval_2 || ((uval_2 == uval && (*(int *)(&g_bss_001ae894 + val_2) < val_3)))))) {
       local_24 = local_20;
-      cVar2 = '\b';
-      iVar6 = *(int *)(&DAT_001ae894 + iVar3);
-      uVar5 = uVar4;
+      ch = '\b';
+      val_3 = *(int *)(&g_bss_001ae894 + val_2);
+      uval_2 = uval;
     }
     local_20 = local_20 + 1;
-    iVar3 = iVar3 + 0x14;
-    iVar1 = iVar1 + 1;
+    val_2 = val_2 + 0x14;
+    val = val + 1;
   } while (local_20 < 7);
-  if (cVar2 != '\0') {
-    *(char *)(extraout_EDX + 0x1189) = cVar2;
+  if (ch != '\0') {
+    *(char *)(extraout_EDX + 0x1189) = ch;
     *(undefined1 *)(extraout_EDX + 0x118a) = (undefined1)local_24;
   }
-  return CONCAT44(in_EDX,(uint)(cVar2 != '\0'));
+  return CONCAT44(arg_edx,(uint)(ch != '\0'));
 }
 
 /******************************************************************************
- * Function : sub_077033 (Ghidra: FUN_00077033)
- * Prototype: undefined4 sub_077033(void);
+ * Function : workshop_update_slab_subtile_columns_077033 (Original VA: 0x77033, Ghidra: FUN_00077033)
+ * Prototype: undefined4 workshop_update_slab_subtile_columns_077033(void);
  * Address  : 0x77033 (Size: 1300 bytes)
  * Module   : workshop.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x769ea
- * Callees  : 7 -> 0x10010, 0x49bfc, 0x63b6d, 0x775be, 0x77647, 0x7779d, 0xb4ac4
+ * Purpose  : Updates 3x3 subtile map entries for slab coordinates
+ * Callers  : 1 -> workshop_update_player_dungeon_0769ea
+ * Callees  : 7 -> anger_fn_010010, instance_negative_instance_049bfc, person_fn_063b6d, workshop_illegal_setup_0775be, workshop_update_slab_subtile_columns_077647, workshop_update_slab_subtile_columns_07779d, move_fn_0b4ac4
  ******************************************************************************/
-undefined4 FUN_00077033(void)
+undefined4 workshop_update_slab_subtile_columns_077033(void)
 
 {
-  int iVar1;
-  char cVar2;
-  int in_EAX;
-  int iVar3;
-  uint uVar4;
+  int cctrl_ptr;
+  char thing_ptr;
+  int thing;
+  int thing_ptr_2;
+  uint thing_ptr_3;
   int extraout_ECX;
-  int iVar5;
-  short *psVar6;
+  int thing_ptr_4;
+  short *val;
   undefined4 uStack_3c;
   short local_38;
   short local_36;
@@ -527,1043 +506,1026 @@ undefined4 FUN_00077033(void)
   int local_20;
   int local_18;
   
-  psVar6 = &local_38;
-  iVar1 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  if (((uint)(DAT_002e8bee - *(int *)(&DAT_002e1714 + *(char *)(in_EAX + 6) * 0x1508)) < 0x32) &&
-     (((uint)*(ushort *)(in_EAX + 0x1b) + DAT_002e8bee & 3) == 0)) {
-    if (*(char *)(iVar1 + 0xd2) != '\0') {
+  val = &local_38;
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  if (((uint)(g_game_turn - *(int *)(&g_bss_002e1714 + *(char *)(thing + 6) * 0x1508)) < 0x32) && /* thing->owner */
+     (((uint)*(ushort *)(thing + 0x1b) + g_game_turn & 3) == 0)) { /* thing->index_or_angle */
+    if (*(char *)(cctrl_ptr + 0xd2) != '\0') {
       return 1;
     }
 LAB_00077535:
     uStack_3c = 0;
-    FUN_00049bfc();
+    instance_negative_instance_049bfc();
     return 1;
   }
-  if (*(char *)(iVar1 + 0xd2) != '\0') {
+  if (*(char *)(cctrl_ptr + 0xd2) != '\0') {
     return 1;
   }
-  cVar2 = *(char *)(iVar1 + 0x9a);
-  if (cVar2 == '\x01') {
-    *(char *)(iVar1 + 0x9e) = *(char *)(iVar1 + 0x9e) + -1;
-    if (*(char *)(iVar1 + 0x9e) < '\x01') {
+  thing_ptr = *(char *)(cctrl_ptr + 0x9a);
+  if (thing_ptr == '\x01') {
+    *(char *)(cctrl_ptr + 0x9e) = *(char *)(cctrl_ptr + 0x9e) + -1;
+    if (*(char *)(cctrl_ptr + 0x9e) < '\x01') {
       uStack_3c = 0x770d3;
-      FUN_0007779d();
-      *(undefined1 *)(iVar1 + 0x9e) = 0x32;
+      workshop_update_slab_subtile_columns_07779d();
+      *(undefined1 *)(cctrl_ptr + 0x9e) = 0x32;
       return 1;
     }
-    psVar6 = (short *)&uStack_3c;
+    val = (short *)&uStack_3c;
     uStack_3c = 0;
-    cVar2 = FUN_000b4ac4();
-    if (cVar2 != '\x01') {
+    thing_ptr = move_fn_0b4ac4();
+    if (thing_ptr != '\x01') {
 LAB_000771a1:
-      if (cVar2 != -1) {
+      if (thing_ptr != -1) {
         return 1;
       }
-      FUN_00063b6d();
+      person_fn_063b6d();
       return 1;
     }
-    for (uVar4 = (*(uint *)((int)&DAT_00279203 +
-                           (((&DAT_0019033b)[*(byte *)(in_EAX + 0x10)] * 3 + 1) * 0x100 +
-                           (&DAT_0019033b)[*(byte *)(in_EAX + 0xe)] * 3 + 1) * 5 + 1) & 0x3fffff) >>
-                 0xb; uVar4 != 0; uVar4 = (uint)*(ushort *)((&DAT_001ae9fc)[uVar4] + 2)) {
-      if (((*(char *)((&DAT_001ae9fc)[uVar4] + 0x1f) == '\x01') &&
-          ((cVar2 = *(char *)((&DAT_001ae9fc)[uVar4] + 0x1a), cVar2 == 'r' || (cVar2 == '\x1a'))))
-         && (*(char *)((&DAT_001ae9fc)[uVar4] + 6) == *(char *)(in_EAX + 6))) {
-        *(undefined1 *)(iVar1 + 0x9a) = 2;
-        *(undefined1 *)(iVar1 + 0x9e) = 0x32;
+    for (thing_ptr_3 = (*(uint *)((int)&g_map_subtiles +
+                           (((&g_subtile_to_slab_lut)[*(byte *)(thing + 0x10)] * 3 + 1) * 0x100 +
+                           (&g_subtile_to_slab_lut)[*(byte *)(thing + 0xe)] * 3 + 1) * 5 + 1) & 0x3fffff) >>
+                 0xb; thing_ptr_3 != 0; thing_ptr_3 = (uint)*(ushort *)((&g_thing_ptrs)[thing_ptr_3] + 2)) {
+      if (((*(char *)((&g_thing_ptrs)[thing_ptr_3] + 0x1f) == '\x01') &&
+          ((thing_ptr = *(char *)((&g_thing_ptrs)[thing_ptr_3] + 0x1a), thing_ptr == 'r' || (thing_ptr == '\x1a'))))
+         && (*(char *)((&g_thing_ptrs)[thing_ptr_3] + 6) == *(char *)(thing + 6))) { /* thing->owner */
+        *(undefined1 *)(cctrl_ptr + 0x9a) = 2;
+        *(undefined1 *)(cctrl_ptr + 0x9e) = 0x32;
         return 1;
       }
     }
   }
-  else if (cVar2 == '\x02') {
-    local_2c = (&DAT_0019033b)[*(byte *)(in_EAX + 0xe)];
-    local_18 = (&DAT_0019033b)[*(byte *)(in_EAX + 0x10)];
+  else if (thing_ptr == '\x02') {
+    local_2c = (&g_subtile_to_slab_lut)[*(byte *)(thing + 0xe)];
+    local_18 = (&g_subtile_to_slab_lut)[*(byte *)(thing + 0x10)];
     local_20 = 0;
-    for (iVar3 = 0; iVar3 < 8; iVar3 = iVar3 + 2) {
-      local_28 = local_18 + (char)(&DAT_0018b67f)[iVar3];
-      iVar5 = *(char *)((int)&DAT_0018b67b + iVar3 + 3) + local_2c;
-      if ((&DAT_002d33c5)[(local_28 * 0x55 + iVar5) * 6] == '\x1c') {
+    for (thing_ptr_2 = 0; thing_ptr_2 < 8; thing_ptr_2 = thing_ptr_2 + 2) {
+      local_28 = local_18 + (char)(&g_data_0018b67f)[thing_ptr_2];
+      thing_ptr_4 = *(char *)((int)&g_data_0018b67b + thing_ptr_2 + 3) + local_2c;
+      if ((&g_slabmap_base)[(local_28 * 0x55 + thing_ptr_4) * 6] == '\x1c') {
         local_24 = local_28 * 3;
-        local_30 = (uint)((&DAT_002d33ca)
-                          [((&DAT_0019033f)[iVar5 * 3] + (&DAT_0019033f)[local_28 * 3] * 0x55) * 6]
+        local_30 = (uint)((&g_slabmap)
+                          [((&g_data_0019033f)[thing_ptr_4 * 3] + (&g_data_0019033f)[local_28 * 3] * 0x55) * 6]
                          & 7);
-        if ((int)*(char *)(in_EAX + 6) == local_30) {
-          local_30 = ((char)(&DAT_001917b9)[iVar3] + local_24) * 0x100;
-          uVar4 = (*(uint *)((int)&DAT_00279203 +
-                            ((int)(char)(&DAT_001917b8)[iVar3] + iVar5 * 3 + local_30) * 5 + 1) &
+        if ((int)*(char *)(thing + 6) == local_30) { /* thing->owner */
+          local_30 = ((char)(&g_data_001917b9)[thing_ptr_2] + local_24) * 0x100;
+          thing_ptr_3 = (*(uint *)((int)&g_map_subtiles +
+                            ((int)(char)(&g_data_001917b8)[thing_ptr_2] + thing_ptr_4 * 3 + local_30) * 5 + 1) &
                   0x3fffff) >> 0xb;
-          while ((uVar4 != 0 &&
-                 (((iVar5 = (&DAT_001ae9fc)[uVar4], *(char *)(iVar5 + 0x1f) != '\x05' ||
-                   (*(char *)(iVar5 + 7) != '-')) ||
-                  ((*(byte *)((&DAT_001b0a00)[*(ushort *)(iVar5 + 100)] + 0x9a) < 2 ||
-                   (*(char *)(iVar5 + 6) != *(char *)(in_EAX + 6)))))))) {
-            uVar4 = (uint)*(ushort *)((&DAT_001ae9fc)[uVar4] + 2);
+          while ((thing_ptr_3 != 0 &&
+                 (((thing_ptr_4 = (&g_thing_ptrs)[thing_ptr_3], *(char *)(thing_ptr_4 + 0x1f) != '\x05' || /* thing->class_id */
+                   (*(char *)(thing_ptr_4 + 7) != '-')) ||
+                  ((*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr_4 + 100)] + 0x9a) < 2 || /* thing->ccontrol_idx */
+                   (*(char *)(thing_ptr_4 + 6) != *(char *)(thing + 6)))))))) { /* thing->owner */
+            thing_ptr_3 = (uint)*(ushort *)((&g_thing_ptrs)[thing_ptr_3] + 2);
           }
-          if (uVar4 == 0) {
-            uVar4 = (*(uint *)((int)&DAT_00279203 +
-                              ((*(char *)((int)&DAT_0018b67b + iVar3 + 3) + local_2c) * 3 +
-                               ((char)(&DAT_0018b67f)[iVar3] + local_18) * 0x300 + 0x101) * 5 + 1) &
+          if (thing_ptr_3 == 0) {
+            thing_ptr_3 = (*(uint *)((int)&g_map_subtiles +
+                              ((*(char *)((int)&g_data_0018b67b + thing_ptr_2 + 3) + local_2c) * 3 +
+                               ((char)(&g_data_0018b67f)[thing_ptr_2] + local_18) * 0x300 + 0x101) * 5 + 1) &
                     0x3fffff) >> 0xb;
-            while ((uVar4 != 0 &&
-                   ((*(char *)((&DAT_001ae9fc)[uVar4] + 0x1f) != '\x01' ||
-                    (((cVar2 = *(char *)((&DAT_001ae9fc)[uVar4] + 0x1a), cVar2 != 'r' &&
-                      (cVar2 != '\x1a')) ||
-                     (*(char *)((&DAT_001ae9fc)[uVar4] + 6) != *(char *)(in_EAX + 6)))))))) {
-              uVar4 = (uint)*(ushort *)((&DAT_001ae9fc)[uVar4] + 2);
+            while ((thing_ptr_3 != 0 &&
+                   ((*(char *)((&g_thing_ptrs)[thing_ptr_3] + 0x1f) != '\x01' ||
+                    (((thing_ptr = *(char *)((&g_thing_ptrs)[thing_ptr_3] + 0x1a), thing_ptr != 'r' &&
+                      (thing_ptr != '\x1a')) ||
+                     (*(char *)((&g_thing_ptrs)[thing_ptr_3] + 6) != *(char *)(thing + 6)))))))) { /* thing->owner */
+              thing_ptr_3 = (uint)*(ushort *)((&g_thing_ptrs)[thing_ptr_3] + 2);
             }
           }
-          if (uVar4 == 0) {
-            *(char *)(iVar1 + 0x9c) =
-                 *(char *)(&DAT_0019033b + *(byte *)(in_EAX + 0xe)) * '\x03' + '\x01';
-            *(char *)(iVar1 + 0x9d) =
-                 *(char *)(&DAT_0019033b + *(byte *)(in_EAX + 0x10)) * '\x03' + '\x01';
-            local_2c = (*(char *)((int)&DAT_0018b67b + local_20 * 2 + 3) + local_2c) * 3 +
-                       (int)(char)(&DAT_001917b8)[local_20 * 2];
-            local_18 = ((char)(&DAT_0018b67f)[local_20 * 2] + local_18) * 3 +
-                       (int)(char)(&DAT_001917b9)[local_20 * 2];
+          if (thing_ptr_3 == 0) {
+            *(char *)(cctrl_ptr + 0x9c) =
+                 *(char *)(&g_subtile_to_slab_lut + *(byte *)(thing + 0xe)) * '\x03' + '\x01';
+            *(char *)(cctrl_ptr + 0x9d) =
+                 *(char *)(&g_subtile_to_slab_lut + *(byte *)(thing + 0x10)) * '\x03' + '\x01';
+            local_2c = (*(char *)((int)&g_data_0018b67b + local_20 * 2 + 3) + local_2c) * 3 +
+                       (int)(char)(&g_data_001917b8)[local_20 * 2];
+            local_18 = ((char)(&g_data_0018b67f)[local_20 * 2] + local_18) * 3 +
+                       (int)(char)(&g_data_001917b9)[local_20 * 2];
             uStack_3c = 0x773c4;
-            FUN_000775be();
-            *(undefined1 *)(iVar1 + 0x9a) = 3;
+            workshop_illegal_setup_0775be();
+            *(undefined1 *)(cctrl_ptr + 0x9a) = 3;
             break;
           }
         }
       }
       local_20 = local_20 + 1;
     }
-    psVar6 = &local_38;
-    if (*(char *)(iVar1 + 0x9a) != '\x02') {
+    val = &local_38;
+    if (*(char *)(cctrl_ptr + 0x9a) != '\x02') {
       return 1;
     }
   }
   else {
-    if (cVar2 == '\x03') {
+    if (thing_ptr == '\x03') {
       uStack_3c = 0;
-      cVar2 = FUN_000b4ac4();
-      if (cVar2 == '\x01') {
-        uVar4 = (*(uint *)((int)&DAT_00279203 +
-                          (uint)CONCAT11(*(undefined1 *)(in_EAX + 0x10),
-                                         *(undefined1 *)(in_EAX + 0xe)) * 5 + 1) & 0x3fffff) >> 0xb;
+      thing_ptr = move_fn_0b4ac4();
+      if (thing_ptr == '\x01') {
+        thing_ptr_3 = (*(uint *)((int)&g_map_subtiles +
+                          (uint)CONCAT11(*(undefined1 *)(thing + 0x10),
+                                         *(undefined1 *)(thing + 0xe)) * 5 + 1) & 0x3fffff) >> 0xb;
         do {
-          iVar3 = 0;
-          if (uVar4 == 0) {
+          thing_ptr_2 = 0;
+          if (thing_ptr_3 == 0) {
 LAB_000774a8:
-            if (iVar3 != 0) {
+            if (thing_ptr_2 != 0) {
               return 1;
             }
-            *(undefined1 *)(iVar1 + 0x9a) = 4;
+            *(undefined1 *)(cctrl_ptr + 0x9a) = 4;
             return 1;
           }
-          if ((((in_EAX != (&DAT_001ae9fc)[uVar4]) &&
-               (iVar3 = (&DAT_001ae9fc)[uVar4], *(char *)(iVar3 + 0x1f) == '\x05')) &&
-              (*(char *)(iVar3 + 7) == '-')) &&
-             ((1 < *(byte *)((&DAT_001b0a00)[*(ushort *)(iVar3 + 100)] + 0x9a) &&
-              (*(char *)(iVar3 + 6) == *(char *)(in_EAX + 6))))) {
-            FUN_00077647();
-            iVar3 = extraout_ECX;
+          if ((((thing != (&g_thing_ptrs)[thing_ptr_3]) &&
+               (thing_ptr_2 = (&g_thing_ptrs)[thing_ptr_3], *(char *)(thing_ptr_2 + 0x1f) == '\x05')) && /* thing->class_id */
+              (*(char *)(thing_ptr_2 + 7) == '-')) &&
+             ((1 < *(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr_2 + 100)] + 0x9a) && /* thing->ccontrol_idx */
+              (*(char *)(thing_ptr_2 + 6) == *(char *)(thing + 6))))) { /* thing->owner */
+            workshop_update_slab_subtile_columns_077647();
+            thing_ptr_2 = extraout_ECX;
             goto LAB_000774a8;
           }
-          uVar4 = (uint)*(ushort *)((&DAT_001ae9fc)[uVar4] + 2);
+          thing_ptr_3 = (uint)*(ushort *)((&g_thing_ptrs)[thing_ptr_3] + 2);
         } while( true );
       }
       goto LAB_000771a1;
     }
-    if (cVar2 == '\x04') {
-      local_38 = (ushort)*(byte *)(iVar1 + 0x9c) * 0x100 + 0x80;
-      local_36 = (ushort)*(byte *)(iVar1 + 0x9d) * 0x100 + 0x80;
+    if (thing_ptr == '\x04') {
+      local_38 = (ushort)*(byte *)(cctrl_ptr + 0x9c) * 0x100 + 0x80;
+      local_36 = (ushort)*(byte *)(cctrl_ptr + 0x9d) * 0x100 + 0x80;
       uStack_3c = 0x774f3;
-      iVar3 = FUN_00010010();
-      if (0x37 < iVar3) {
+      thing_ptr_2 = anger_fn_010010();
+      if (0x37 < thing_ptr_2) {
         return 1;
       }
-      *(undefined1 *)(iVar1 + 0x9a) = 5;
-      *(undefined1 *)(iVar1 + 0x9b) = 0x4b;
+      *(undefined1 *)(cctrl_ptr + 0x9a) = 5;
+      *(undefined1 *)(cctrl_ptr + 0x9b) = 0x4b;
       return 1;
     }
-    *(char *)(iVar1 + 0x9b) = *(char *)(iVar1 + 0x9b) + -1;
-    if (0 < *(char *)(iVar1 + 0x9b)) {
-      if ((int)*(char *)(iVar1 + 0x9b) % 8 != 0) {
+    *(char *)(cctrl_ptr + 0x9b) = *(char *)(cctrl_ptr + 0x9b) + -1;
+    if (0 < *(char *)(cctrl_ptr + 0x9b)) {
+      if ((int)*(char *)(cctrl_ptr + 0x9b) % 8 != 0) {
         return 1;
       }
       goto LAB_00077535;
     }
   }
-  *(undefined4 *)((int)psVar6 + -4) = 0x773ea;
-  FUN_00077647();
+  *(undefined4 *)((int)val + -4) = 0x773ea;
+  workshop_update_slab_subtile_columns_077647();
   return 1;
 }
 
 /******************************************************************************
- * Function : sub_077547 (Ghidra: FUN_00077547)
- * Prototype: undefined8 sub_077547(void);
+ * Function : workshop_fn_077547 (Original VA: 0x77547, Ghidra: FUN_00077547)
+ * Prototype: undefined8 workshop_fn_077547(void);
  * Address  : 0x77547 (Size: 119 bytes)
  * Module   : workshop.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x76f1e
- * Callees  : 1 -> 0xd11f4
+ * Purpose  : Module workshop.cpp procedure @ 0x077547
+ * Callers  : 1 -> workshop_fn_076f1e
+ * Callees  : 1 -> room_process_dungeon_room_0d11f4
  ******************************************************************************/
-undefined8 FUN_00077547(void)
+undefined8 workshop_fn_077547(void)
 
 {
-  int in_EAX;
-  uint uVar1;
-  undefined4 in_EDX;
+  int arg_eax;
+  uint uval;
+  undefined4 arg_edx;
   
-  uVar1 = FUN_000d11f4();
-  if (uVar1 < 0x11) {
-    if (uVar1 < 10) {
-      *(undefined4 *)(in_EAX + 0x118f) = 0;
+  uval = room_process_dungeon_room_0d11f4();
+  if (uval < 0x11) {
+    if (uval < 10) {
+      *(undefined4 *)(arg_eax + 0x118f) = 0;
     }
     else {
-      *(undefined4 *)(in_EAX + 0x118f) = 1;
+      *(undefined4 *)(arg_eax + 0x118f) = 1;
     }
     goto LAB_000775b6;
   }
-  if (uVar1 < 0x14) {
+  if (uval < 0x14) {
 LAB_00077583:
-    *(undefined4 *)(in_EAX + 0x118f) = 2;
+    *(undefined4 *)(arg_eax + 0x118f) = 2;
   }
   else {
-    if (0x14 < uVar1) {
-      if (uVar1 < 0x1a) goto LAB_00077583;
-      if (uVar1 < 0x25) {
-        *(undefined4 *)(in_EAX + 0x118f) = 3;
+    if (0x14 < uval) {
+      if (uval < 0x1a) goto LAB_00077583;
+      if (uval < 0x25) {
+        *(undefined4 *)(arg_eax + 0x118f) = 3;
         goto LAB_000775b6;
       }
     }
-    *(undefined4 *)(in_EAX + 0x118f) = 4;
+    *(undefined4 *)(arg_eax + 0x118f) = 4;
   }
 LAB_000775b6:
-  return CONCAT44(in_EDX,1);
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : dk_illegal_setup_0775be (Ghidra: FUN_000775be)
- * Prototype: void dk_illegal_setup_0775be(void);
+ * Function : workshop_illegal_setup_0775be (Original VA: 0x775be, Ghidra: FUN_000775be)
+ * Prototype: void workshop_illegal_setup_0775be(void);
  * Address  : 0x775be (Size: 137 bytes)
  * Module   : workshop.cpp [direct_file_string_xref]
- * OrigLine : workshop.cpp:661
- * Naming   : String 'Illegal setup to X%d Y%d'
- * Callers  : 3 -> 0x77033, 0x77647, 0x7779d
- * Callees  : 5 -> 0x63b6d, 0x7dbc0, 0xb28e8, 0xddaf0, 0xe7714
- * Strings  :
- *   - 0x167e4c: "workshop.cpp"
- *   - 0x167e33: "Illegal setup to X%d Y%d"
+ * OrigLine : workshop.cpp lines 661
+ * Purpose  : String 'Illegal setup to X%d Y%d'
+ * Callers  : 3 -> workshop_update_slab_subtile_columns_077033, workshop_update_slab_subtile_columns_077647, workshop_update_slab_subtile_columns_07779d
+ * Callees  : 5 -> person_fn_063b6d, ceiling_process_map_subtile_07dbc0, move_process_map_subtile_0b28e8, LbErrorLog, dk_sprintf
  ******************************************************************************/
-void FUN_000775be(void)
+void workshop_illegal_setup_0775be(void)
 
 {
-  int iVar1;
-  undefined2 uVar2;
-  int in_EAX;
-  int iVar3;
-  int in_EDX;
+  int cctrl_ptr;
+  undefined2 uval;
+  int thing;
+  int val;
+  int arg_edx;
   
-  iVar1 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  *(char *)(iVar1 + 0x2e) = (char)(in_EDX % 0x100);
-  *(undefined1 *)(iVar1 + 0x2d) = 0x80;
-  *(char *)(iVar1 + 0x30) = (char)(in_EDX / 0x100);
-  *(undefined1 *)(iVar1 + 0x2f) = 0x80;
-  uVar2 = FUN_000b28e8();
-  *(undefined2 *)(iVar1 + 0x31) = uVar2;
-  iVar3 = FUN_0007dbc0();
-  if (iVar3 != 0) {
-    FUN_000e7714(&DAT_0019cbac,s_Illegal_setup_to_X_d_Y_d_00167e33,*(undefined1 *)(iVar1 + 0x2e),
-                 *(undefined1 *)(iVar1 + 0x30));
-    FUN_000ddaf0(); /* LbErrorLog("workshop.cpp", line 661, g_log_buf) */
-    FUN_00063b6d();
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  *(char *)(cctrl_ptr + 0x2e) = (char)(arg_edx % 0x100);
+  *(undefined1 *)(cctrl_ptr + 0x2d) = 0x80;
+  *(char *)(cctrl_ptr + 0x30) = (char)(arg_edx / 0x100);
+  *(undefined1 *)(cctrl_ptr + 0x2f) = 0x80;
+  uval = move_process_map_subtile_0b28e8();
+  *(undefined2 *)(cctrl_ptr + 0x31) = uval;
+  val = ceiling_process_map_subtile_07dbc0();
+  if (val != 0) {
+    dk_sprintf(&g_log_sprintf_buf,s_Illegal_setup_to_X_d_Y_d_00167e33,*(undefined1 *)(cctrl_ptr + 0x2e),
+                 *(undefined1 *)(cctrl_ptr + 0x30));
+    LbErrorLog(); /* LbErrorLog("workshop.cpp", line 661, g_log_buf) */
+    person_fn_063b6d();
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_077647 (Ghidra: FUN_00077647)
- * Prototype: void sub_077647(void);
+ * Function : workshop_update_slab_subtile_columns_077647 (Original VA: 0x77647, Ghidra: FUN_00077647)
+ * Prototype: void workshop_update_slab_subtile_columns_077647(void);
  * Address  : 0x77647 (Size: 342 bytes)
  * Module   : workshop.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0x76970, 0x77033, 0x7779d
- * Callees  : 1 -> 0x775be
+ * Purpose  : Updates 3x3 subtile map entries for slab coordinates
+ * Callers  : 3 -> workshop_update_creature_control_076970, workshop_update_slab_subtile_columns_077033, workshop_update_slab_subtile_columns_07779d
+ * Callees  : 1 -> workshop_illegal_setup_0775be
  ******************************************************************************/
-void FUN_00077647(void)
+void workshop_update_slab_subtile_columns_077647(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  int unaff_EBX;
-  int iVar2;
-  int iVar3;
-  uint uVar4;
+  int thing;
+  int slab_coord;
+  int arg_ebx;
+  int cctrl_ptr;
+  int val;
+  uint rand_seed;
   int local_18;
   
-  iVar2 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  if (unaff_EBX != 0) {
-    *(undefined1 *)(iVar2 + 0x9e) = 0x32;
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  if (arg_ebx != 0) {
+    *(undefined1 *)(cctrl_ptr + 0x9e) = 0x32;
   }
-  *(undefined1 *)(iVar2 + 0x9a) = 1;
-  DAT_002e8bf6 = DAT_002e8bf6 * 0x24a1 + 0x24df;
+  *(undefined1 *)(cctrl_ptr + 0x9a) = 1;
+  g_action_random_seed = g_action_random_seed * 0x24a1 + 0x24df;
   local_18 = 0;
-  iVar2 = 0;
-  uVar4 = DAT_002e8bf6 >> 0xd;
-  DAT_002e8bf6 = uVar4 | DAT_002e8bf6 * 0x80000;
-  uVar4 = uVar4 & 7;
+  cctrl_ptr = 0;
+  rand_seed = g_action_random_seed >> 0xd;
+  g_action_random_seed = rand_seed | g_action_random_seed * 0x80000;
+  rand_seed = rand_seed & 7;
   do {
-    if ((1 < iVar2) || (8 < local_18)) {
-      if (1 < iVar2) {
-        FUN_000775be();
+    if ((1 < cctrl_ptr) || (8 < local_18)) {
+      if (1 < cctrl_ptr) {
+        workshop_illegal_setup_0775be();
       }
       return;
     }
-    iVar2 = 0;
-    iVar3 = (int)*(short *)((int)&DAT_0018b624 + uVar4 * 2 + 2) +
-            (uint)CONCAT11(*(undefined1 *)(in_EAX + 0x10),*(undefined1 *)(in_EAX + 0xe));
-    while (((*(byte *)((int)&DAT_00279203 + iVar3 * 5) & 2) != 0 &&
-           ((*(byte *)((int)&DAT_00279203 + iVar3 * 5) & 0x10) == 0))) {
-      iVar1 = ((&DAT_0019033b)[iVar3 % 0x100] +
-              (&DAT_0019033b)
-              [(int)((iVar3 + (iVar3 >> 0x1f) * -0x100) - (uint)((iVar3 >> 0x1f) << 7 < 0)) >> 8] *
+    cctrl_ptr = 0;
+    val = (int)*(short *)((int)&g_data_0018b624 + rand_seed * 2 + 2) +
+            (uint)CONCAT11(*(undefined1 *)(thing + 0x10),*(undefined1 *)(thing + 0xe));
+    while (((*(byte *)((int)&g_map_subtiles + val * 5) & 2) != 0 &&
+           ((*(byte *)((int)&g_map_subtiles + val * 5) & 0x10) == 0))) {
+      slab_coord = ((&g_subtile_to_slab_lut)[val % 0x100] +
+              (&g_subtile_to_slab_lut)
+              [(int)((val + (val >> 0x1f) * -0x100) - (uint)((val >> 0x1f) << 7 < 0)) >> 8] *
               0x55) * 6;
-      if (((uint)((&DAT_002d33ca)[iVar1] & 7) != (int)*(char *)(in_EAX + 6)) ||
-         ((*(short *)(&DAT_002ddd25 + (uint)(byte)(&DAT_002d33c8)[iVar1] * 0x45) != 8 || (7 < iVar2)
+      if (((uint)((&g_slabmap)[slab_coord] & 7) != (int)*(char *)(thing + 6)) || /* thing->owner */
+         ((*(short *)(&g_room_slabs_count + (uint)(byte)(&g_bss_002d33c8)[slab_coord] * 0x45) != 8 || (7 < cctrl_ptr)
           ))) break;
-      iVar2 = iVar2 + 1;
-      iVar3 = iVar3 + *(short *)((int)&DAT_0018b624 + uVar4 * 2 + 2);
+      cctrl_ptr = cctrl_ptr + 1;
+      val = val + *(short *)((int)&g_data_0018b624 + rand_seed * 2 + 2);
     }
-    if (iVar2 < 2) {
-      uVar4 = uVar4 + 1 & 7;
+    if (cctrl_ptr < 2) {
+      rand_seed = rand_seed + 1 & 7;
     }
     local_18 = local_18 + 1;
   } while( true );
 }
 
 /******************************************************************************
- * Function : sub_07779d (Ghidra: FUN_0007779d)
- * Prototype: void sub_07779d(void);
+ * Function : workshop_update_slab_subtile_columns_07779d (Original VA: 0x7779d, Ghidra: FUN_0007779d)
+ * Prototype: void workshop_update_slab_subtile_columns_07779d(void);
  * Address  : 0x7779d (Size: 355 bytes)
  * Module   : workshop.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x77033
- * Callees  : 2 -> 0x775be, 0x77647
+ * Purpose  : Updates 3x3 subtile map entries for slab coordinates
+ * Callers  : 1 -> workshop_update_slab_subtile_columns_077033
+ * Callees  : 2 -> workshop_illegal_setup_0775be, workshop_update_slab_subtile_columns_077647
  ******************************************************************************/
-void FUN_0007779d(void)
+void workshop_update_slab_subtile_columns_07779d(void)
 
 {
-  char cVar1;
-  ushort uVar2;
-  uint uVar3;
-  int in_EAX;
-  int iVar4;
-  uint uVar5;
-  uint uVar6;
+  char thing_ptr;
+  ushort uval;
+  uint thing_ptr_2;
+  int arg_eax;
+  int room_off;
+  uint thing_ptr_3;
+  uint uval_2;
   uint local_24;
   int local_20;
   
-  iVar4 = (uint)(byte)(&DAT_002d33c8)
-                      [((&DAT_0019033b)[*(byte *)(in_EAX + 0xe)] +
-                       (&DAT_0019033b)[*(byte *)(in_EAX + 0x10)] * 0x55) * 6] * 0x45;
+  room_off = (uint)(byte)(&g_bss_002d33c8)
+                      [((&g_subtile_to_slab_lut)[*(byte *)(arg_eax + 0xe)] +
+                       (&g_subtile_to_slab_lut)[*(byte *)(arg_eax + 0x10)] * 0x55) * 6] * 0x45;
   local_24 = 0xffffffff;
-  DAT_002e8bf6 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-  DAT_002e8bf6 = DAT_002e8bf6 >> 0xd | DAT_002e8bf6 * 0x80000;
-  uVar5 = DAT_002e8bf6 % (uint)*(ushort *)(&DAT_002ddd56 + iVar4);
-  uVar2 = *(ushort *)(&DAT_002ddd52 + iVar4);
-  while ((uVar6 = (uint)uVar2, 0 < (int)uVar5 && (uVar6 != 0))) {
-    uVar5 = uVar5 - 1;
-    uVar2 = *(ushort *)(&DAT_002d33c6 + uVar6 * 6);
+  g_action_random_seed = g_action_random_seed * 0x24a1 + 0x24df;
+  g_action_random_seed = g_action_random_seed >> 0xd | g_action_random_seed * 0x80000;
+  thing_ptr_3 = g_action_random_seed % (uint)*(ushort *)(&g_bss_002ddd56 + room_off);
+  uval = *(ushort *)(&g_bss_002ddd52 + room_off);
+  while ((uval_2 = (uint)uval, 0 < (int)thing_ptr_3 && (uval_2 != 0))) {
+    thing_ptr_3 = thing_ptr_3 - 1;
+    uval = *(ushort *)(&g_bss_002d33c6 + uval_2 * 6);
   }
-  for (local_20 = 0; local_20 < (int)(uint)*(ushort *)(&DAT_002ddd56 + iVar4);
+  for (local_20 = 0; local_20 < (int)(uint)*(ushort *)(&g_bss_002ddd56 + room_off);
       local_20 = local_20 + 1) {
-    if (uVar6 == 0) {
-      uVar6 = (uint)*(ushort *)(&DAT_002ddd52 + iVar4);
+    if (uval_2 == 0) {
+      uval_2 = (uint)*(ushort *)(&g_bss_002ddd52 + room_off);
     }
-    uVar5 = (*(uint *)((int)&DAT_00279203 +
-                      ((uVar6 % 0x55) * 3 + 0x101 + (uVar6 / 0x55) * 0x300) * 5 + 1) & 0x3fffff) >>
+    thing_ptr_3 = (*(uint *)((int)&g_map_subtiles +
+                      ((uval_2 % 0x55) * 3 + 0x101 + (uval_2 / 0x55) * 0x300) * 5 + 1) & 0x3fffff) >>
             0xb;
-    while ((uVar3 = local_24, uVar5 != 0 &&
-           ((*(char *)((&DAT_001ae9fc)[uVar5] + 0x1f) != '\x01' ||
-            (((cVar1 = *(char *)((&DAT_001ae9fc)[uVar5] + 0x1a), cVar1 != 'r' && (cVar1 != '\x1a'))
-             || (uVar3 = uVar5, *(char *)((&DAT_001ae9fc)[uVar5] + 6) != *(char *)(in_EAX + 6)))))))
+    while ((thing_ptr_2 = local_24, thing_ptr_3 != 0 &&
+           ((*(char *)((&g_thing_ptrs)[thing_ptr_3] + 0x1f) != '\x01' ||
+            (((thing_ptr = *(char *)((&g_thing_ptrs)[thing_ptr_3] + 0x1a), thing_ptr != 'r' && (thing_ptr != '\x1a'))
+             || (thing_ptr_2 = thing_ptr_3, *(char *)((&g_thing_ptrs)[thing_ptr_3] + 6) != *(char *)(arg_eax + 6)))))))
           ) {
-      uVar5 = (uint)*(ushort *)((&DAT_001ae9fc)[uVar5] + 2);
+      thing_ptr_3 = (uint)*(ushort *)((&g_thing_ptrs)[thing_ptr_3] + 2);
     }
-    local_24 = uVar3;
-    uVar6 = (uint)*(ushort *)(&DAT_002d33c6 + uVar6 * 6);
+    local_24 = thing_ptr_2;
+    uval_2 = (uint)*(ushort *)(&g_bss_002d33c6 + uval_2 * 6);
   }
   if (local_24 == 0xffffffff) {
-    FUN_00077647();
+    workshop_update_slab_subtile_columns_077647();
   }
   else {
-    FUN_000775be();
+    workshop_illegal_setup_0775be();
   }
   return;
 }
 
 /******************************************************************************
- * Function : dk_workshop_content_077900 (Ghidra: FUN_00077900)
- * Prototype: longlong dk_workshop_content_077900(void);
+ * Function : workshop_content_077900 (Original VA: 0x77900, Ghidra: FUN_00077900)
+ * Prototype: longlong workshop_content_077900(void);
  * Address  : 0x77900 (Size: 60 bytes)
  * Module   : workshop.cpp [direct_file_string_xref]
- * OrigLine : workshop.cpp:791 ("INVALID WORKSHOP CONTENT")
- * Naming   : String 'INVALID WORKSHOP CONTENT'
- * Callers  : 2 -> 0x645dd, 0x7795d
- * Callees  : 1 -> 0xddaf0
- * Strings  :
- *   - 0x167e72: "workshop.cpp"
- *   - 0x167e59: "INVALID WORKSHOP CONTENT"
+ * OrigLine : workshop.cpp lines 791
+ * Purpose  : String 'INVALID WORKSHOP CONTENT'
+ * Callers  : 2 -> person_update_creature_and_thing_0645dd, workshop_crate_workshop_ok_07795d
+ * Callees  : 1 -> LbErrorLog
  ******************************************************************************/
-longlong FUN_00077900(void)
+longlong workshop_content_077900(void)
 
 {
-  int in_EAX;
-  uint in_EDX;
+  int camera;
+  uint arg_edx;
   
-  if ((*(short *)(in_EAX + 0x10) != 0) && (0 < *(int *)(in_EAX + 0x17))) {
-    *(short *)(in_EAX + 0x10) = *(short *)(in_EAX + 0x10) + -1;
-    *(int *)(in_EAX + 0x17) = *(int *)(in_EAX + 0x17) + -1;
-    return CONCAT44(in_EDX,1);
+  if ((*(short *)(camera + 0x10) != 0) && (0 < *(int *)(camera + 0x17))) { /* camera->zoom */
+    *(short *)(camera + 0x10) = *(short *)(camera + 0x10) + -1;
+    *(int *)(camera + 0x17) = *(int *)(camera + 0x17) + -1; /* camera->zoom */
+    return CONCAT44(arg_edx,1);
   }
-  FUN_000ddaf0(); /* LbErrorLog("workshop.cpp", line 791, "INVALID WORKSHOP CONTENT") */
-  return (ulonglong)in_EDX << 0x20;
+  LbErrorLog(); /* LbErrorLog("workshop.cpp", line 791, "INVALID WORKSHOP CONTENT") */
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : sub_07793c (Ghidra: FUN_0007793c)
- * Prototype: longlong sub_07793c(void);
+ * Function : workshop_fn_07793c (Original VA: 0x7793c, Ghidra: FUN_0007793c)
+ * Prototype: longlong workshop_fn_07793c(void);
  * Address  : 0x7793c (Size: 33 bytes)
  * Module   : workshop.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x647b6
+ * Purpose  : Module workshop.cpp procedure @ 0x07793c
+ * Callers  : 1 -> person_update_creature_and_thing_0647b6
  * Callees  : 0 -> 
  ******************************************************************************/
-longlong FUN_0007793c(void)
+longlong workshop_fn_07793c(void)
 
 {
-  int in_EAX;
-  uint in_EDX;
+  int camera;
+  uint arg_edx;
   
-  if (*(ushort *)(in_EAX + 0x10) < *(ushort *)(in_EAX + 0xe)) {
-    *(short *)(in_EAX + 0x10) = *(short *)(in_EAX + 0x10) + 1;
-    *(int *)(in_EAX + 0x17) = *(int *)(in_EAX + 0x17) + 1;
-    return CONCAT44(in_EDX,1);
+  if (*(ushort *)(camera + 0x10) < *(ushort *)(camera + 0xe)) {
+    *(short *)(camera + 0x10) = *(short *)(camera + 0x10) + 1;
+    *(int *)(camera + 0x17) = *(int *)(camera + 0x17) + 1; /* camera->zoom */
+    return CONCAT44(arg_edx,1);
   }
-  return (ulonglong)in_EDX << 0x20;
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : dk_crate_workshop_ok_07795d (Ghidra: FUN_0007795d)
- * Prototype: undefined4 dk_crate_workshop_ok_07795d(void);
+ * Function : workshop_crate_workshop_ok_07795d (Original VA: 0x7795d, Ghidra: FUN_0007795d)
+ * Prototype: undefined4 workshop_crate_workshop_ok_07795d(void);
  * Address  : 0x7795d (Size: 158 bytes)
  * Module   : workshop.cpp [direct_file_string_xref]
- * OrigLine : workshop.cpp:830 ("CRATE NOT IN A WORKSHOP - ok")
- * Naming   : String 'CRATE NOT IN A WORKSHOP - ok'
- * Callers  : 3 -> 0x1cd80, 0x5f6c5, 0x61d43
- * Callees  : 5 -> 0x24998, 0x72af4, 0x77900, 0xd0f50, 0xddaf0
- * Strings  :
- *   - 0x167e9c: "workshop.cpp"
- *   - 0x167e7f: "CRATE NOT IN A WORKSHOP - ok"
+ * OrigLine : workshop.cpp lines 830
+ * Purpose  : String 'CRATE NOT IN A WORKSHOP - ok'
+ * Callers  : 3 -> comptask_sell_item_type_01cd80, process_players_dungeon_command_packet, packet_activate_dungeon_special_or_spell
+ * Callees  : 5 -> effect_allocate_light_effect_024998, structs_update_creature_control_072af4, workshop_content_077900, room_update_slab_subtile_columns_0d0f50, LbErrorLog
  ******************************************************************************/
-undefined4 FUN_0007795d(void)
+undefined4 workshop_crate_workshop_ok_07795d(void)
 
 {
-  byte *pbVar1;
-  int in_EAX;
-  int iVar2;
-  uint uVar3;
-  uint in_EDX;
+  byte *thing_ptr;
+  int arg_eax;
+  int val;
+  uint uval;
+  uint arg_edx;
   
-  uVar3 = DAT_002e6ec6;
+  uval = g_bss_002e6ec6;
   while( true ) {
-    pbVar1 = (&DAT_001ae9fc)[uVar3];
-    if (pbVar1 == DAT_001ae9fc) {
+    thing_ptr = (&g_thing_ptrs)[uval];
+    if (thing_ptr == g_thing_ptrs) {
       return 0;
     }
-    if (((((*pbVar1 & 1) != 0) && (pbVar1[0x1a] == in_EDX)) && ((char)pbVar1[6] == in_EAX)) &&
-       (((*pbVar1 & 0x10) == 0 && ((pbVar1[1] & 2) == 0)))) break;
-    uVar3 = (uint)*(ushort *)(pbVar1 + 0x67);
+    if (((((*thing_ptr & 1) != 0) && (thing_ptr[0x1a] == arg_edx)) && ((char)thing_ptr[6] == arg_eax)) &&
+       (((*thing_ptr & 0x10) == 0 && ((thing_ptr[1] & 2) == 0)))) break;
+    uval = (uint)*(ushort *)(thing_ptr + 0x67);
   }
-  iVar2 = FUN_000d0f50();
-  if ((iVar2 == 0) || (*(short *)(iVar2 + 10) != 8)) {
-    FUN_000ddaf0(); /* LbErrorLog("workshop.cpp", line 830, "CRATE NOT IN A WORKSHOP - ok") */
+  val = room_update_slab_subtile_columns_0d0f50();
+  if ((val == 0) || (*(short *)(val + 10) != 8)) {
+    LbErrorLog(); /* LbErrorLog("workshop.cpp", line 830, "CRATE NOT IN A WORKSHOP - ok") */
   }
   else {
-    FUN_00077900();
+    workshop_content_077900();
   }
-  FUN_00024998();
-  FUN_00072af4();
+  effect_allocate_light_effect_024998();
+  structs_update_creature_control_072af4();
   return 1;
 }
 
 /******************************************************************************
- * Function : dk_illegal_item_class_0779fb (Ghidra: FUN_000779fb)
- * Prototype: undefined4 dk_illegal_item_class_0779fb(void);
+ * Function : workshop_illegal_item_class_0779fb (Original VA: 0x779fb, Ghidra: FUN_000779fb)
+ * Prototype: undefined4 workshop_illegal_item_class_0779fb(void);
  * Address  : 0x779fb (Size: 96 bytes)
  * Module   : workshop.cpp [direct_file_string_xref]
- * OrigLine : workshop.cpp:889 ("ILLEGAL ITEM CLASS")
- * Naming   : String 'ILLEGAL ITEM CLASS'
- * Callers  : 3 -> 0x647b6, 0xcf19c, 0xd08a8
- * Callees  : 1 -> 0xddaf0
- * Strings  :
- *   - 0x167ebc: "workshop.cpp"
- *   - 0x167ea9: "ILLEGAL ITEM CLASS"
+ * OrigLine : workshop.cpp lines 889
+ * Purpose  : String 'ILLEGAL ITEM CLASS'
+ * Callers  : 3 -> person_update_creature_and_thing_0647b6, room_bloody_hell_spells_reposition_0cf19c, room_lair_thinks_it_belongs_0d08a8
+ * Callees  : 1 -> LbErrorLog
  ******************************************************************************/
-undefined4 FUN_000779fb(void)
+undefined4 workshop_illegal_item_class_0779fb(void)
 
 {
-  char *pcVar1;
-  int iVar2;
-  int in_EAX;
-  int in_EDX;
-  int unaff_EBX;
+  char *str_ptr;
+  int dungeon_off;
+  int arg_eax;
+  int arg_edx;
+  int arg_ebx;
   
-  iVar2 = unaff_EBX + in_EAX * 0x1508;
-  if (in_EDX == 8) {
-    *(undefined1 *)((int)&DAT_002e0589 + iVar2 + 0x1016) = 1;
-    pcVar1 = (char *)((int)&DAT_002e0589 + iVar2 + 0x1008);
-    *pcVar1 = *pcVar1 + '\x01';
+  dungeon_off = arg_ebx + arg_eax * 0x1508;
+  if (arg_edx == 8) {
+    *(undefined1 *)((int)&g_dungeons + dungeon_off + 0x1016) = 1;
+    str_ptr = (char *)((int)&g_dungeons + dungeon_off + 0x1008);
+    *str_ptr = *str_ptr + '\x01';
   }
   else {
-    if (in_EDX != 9) {
-      FUN_000ddaf0(); /* LbErrorLog("workshop.cpp", line 889, "ILLEGAL ITEM CLASS") */
+    if (arg_edx != 9) {
+      LbErrorLog(); /* LbErrorLog("workshop.cpp", line 889, "ILLEGAL ITEM CLASS") */
       return 0;
     }
-    *(undefined1 *)((int)&DAT_002e0589 + iVar2 + 0x1027) = 1;
-    pcVar1 = (char *)((int)&DAT_002e0589 + iVar2 + 0x101d);
-    *pcVar1 = *pcVar1 + '\x01';
+    *(undefined1 *)((int)&g_dungeons + dungeon_off + 0x1027) = 1;
+    str_ptr = (char *)((int)&g_dungeons + dungeon_off + 0x101d);
+    *str_ptr = *str_ptr + '\x01';
   }
   return 1;
 }
 
 /******************************************************************************
- * Function : dk_item_class_077a5b (Ghidra: FUN_00077a5b)
- * Prototype: undefined4 dk_item_class_077a5b(void);
+ * Function : workshop_item_class_077a5b (Original VA: 0x77a5b, Ghidra: FUN_00077a5b)
+ * Prototype: undefined4 workshop_item_class_077a5b(void);
  * Address  : 0x77a5b (Size: 115 bytes)
  * Module   : workshop.cpp [direct_file_string_xref]
- * OrigLine : workshop.cpp:924 ("INVALID DOOR")
- * Naming   : String 'INVALID ITEM CLASS'
- * Callers  : 8 -> 0x1cd80, 0x48c77, 0x5f6c5, 0x61d43, 0x645dd, 0xc9280, 0xcf19c, 0xd08a8
- * Callees  : 1 -> 0xddaf0
- * Strings  :
- *   - 0x167ed6: "workshop.cpp"
- *   - 0x167ef6: "workshop.cpp"
- *   - 0x167ec9: "INVALID DOOR"
- *   - 0x167ee3: "INVALID ITEM CLASS"
+ * OrigLine : workshop.cpp lines 924
+ * Purpose  : String 'INVALID ITEM CLASS'
+ * Callers  : 8 -> comptask_sell_item_type_01cd80, input_game_action_048c77, process_players_dungeon_command_packet, packet_activate_dungeon_special_or_spell, person_update_creature_and_thing_0645dd, room_lair_thinks_it_belongs_0c9280, room_bloody_hell_spells_reposition_0cf19c, room_lair_thinks_it_belongs_0d08a8
+ * Callees  : 1 -> LbErrorLog
  ******************************************************************************/
-undefined4 FUN_00077a5b(void)
+undefined4 workshop_item_class_077a5b(void)
 
 {
-  char *pcVar1;
-  int iVar2;
-  int in_EAX;
-  int in_EDX;
-  int unaff_EBX;
+  char *str_ptr;
+  int dungeon_off;
+  int arg_eax;
+  int arg_edx;
+  int arg_ebx;
   
-  iVar2 = unaff_EBX + in_EAX * 0x1508;
-  if (in_EDX == 8) {
-    if (*(char *)((int)&DAT_002e0589 + iVar2 + 0x1008) != '\0') {
-      pcVar1 = (char *)((int)&DAT_002e0589 + iVar2 + 0x1008);
-      *pcVar1 = *pcVar1 + -1;
+  dungeon_off = arg_ebx + arg_eax * 0x1508;
+  if (arg_edx == 8) {
+    if (*(char *)((int)&g_dungeons + dungeon_off + 0x1008) != '\0') {
+      str_ptr = (char *)((int)&g_dungeons + dungeon_off + 0x1008);
+      *str_ptr = *str_ptr + -1;
       return 1;
     }
   }
   else {
-    if ((in_EDX == 9) && (*(char *)((int)&DAT_002e0589 + iVar2 + 0x101d) != '\0')) {
-      pcVar1 = (char *)((int)&DAT_002e0589 + iVar2 + 0x101d);
-      *pcVar1 = *pcVar1 + -1;
-      *(int *)(&DAT_002e1808 + in_EAX * 0x1508) = *(int *)(&DAT_002e1808 + in_EAX * 0x1508) + 1;
+    if ((arg_edx == 9) && (*(char *)((int)&g_dungeons + dungeon_off + 0x101d) != '\0')) {
+      str_ptr = (char *)((int)&g_dungeons + dungeon_off + 0x101d);
+      *str_ptr = *str_ptr + -1;
+      *(int *)(&g_bss_002e1808 + arg_eax * 0x1508) = *(int *)(&g_bss_002e1808 + arg_eax * 0x1508) + 1;
       return 1;
     }
-    FUN_000ddaf0(); /* LbErrorLog("workshop.cpp", line 924, "INVALID DOOR") */
+    LbErrorLog(); /* LbErrorLog("workshop.cpp", line 924, "INVALID DOOR") */
   }
   return 0;
 }
 
 /******************************************************************************
- * Function : sub_077ad0 (Ghidra: FUN_00077ad0)
- * Prototype: void sub_077ad0(void);
+ * Function : workshop_fn_077ad0 (Original VA: 0x77ad0, Ghidra: FUN_00077ad0)
+ * Prototype: void workshop_fn_077ad0(void);
  * Address  : 0x77ad0 (Size: 63 bytes)
  * Module   : workshop.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x5f163
- * Callees  : 1 -> 0xe69fc
+ * Purpose  : Module workshop.cpp procedure @ 0x077ad0
+ * Callers  : 1 -> process_players_global_packet_action
+ * Callees  : 1 -> bflib_system_io_fn_0e69fc
  ******************************************************************************/
-void FUN_00077ad0(void)
+void workshop_fn_077ad0(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  undefined4 uVar2;
-  int iVar3;
+  int arg_eax;
+  int val;
+  undefined4 uval;
+  int val_2;
   int extraout_ECX;
   int extraout_ECX_00;
   int extraout_ECX_01;
   int extraout_ECX_02;
-  int in_EDX;
+  int arg_edx;
   
-  *(int *)(in_EAX + 0x25) = *(int *)(in_EAX + 0x25) + in_EDX;
-  iVar1 = FUN_000e69fc();
-  if (-*(int *)(extraout_ECX + 0x25) == iVar1 || -iVar1 < *(int *)(extraout_ECX + 0x25)) {
-    iVar3 = FUN_000e69fc();
-    iVar1 = extraout_ECX_01;
-    if (iVar3 < *(int *)(extraout_ECX_01 + 0x25)) {
-      uVar2 = FUN_000e69fc();
-      *(undefined4 *)(extraout_ECX_02 + 0x25) = uVar2;
-      iVar1 = extraout_ECX_02;
+  *(int *)(arg_eax + 0x25) = *(int *)(arg_eax + 0x25) + arg_edx;
+  val = bflib_system_io_fn_0e69fc();
+  if (-*(int *)(extraout_ECX + 0x25) == val || -val < *(int *)(extraout_ECX + 0x25)) {
+    val_2 = bflib_system_io_fn_0e69fc();
+    val = extraout_ECX_01;
+    if (val_2 < *(int *)(extraout_ECX_01 + 0x25)) {
+      uval = bflib_system_io_fn_0e69fc();
+      *(undefined4 *)(extraout_ECX_02 + 0x25) = uval;
+      val = extraout_ECX_02;
     }
   }
   else {
-    uVar2 = FUN_000e69fc();
-    *(undefined4 *)(extraout_ECX_00 + 0x25) = uVar2;
+    uval = bflib_system_io_fn_0e69fc();
+    *(undefined4 *)(extraout_ECX_00 + 0x25) = uval;
     *(int *)(extraout_ECX_00 + 0x25) = -*(int *)(extraout_ECX_00 + 0x25);
-    iVar1 = extraout_ECX_00;
+    val = extraout_ECX_00;
   }
-  *(undefined1 *)(iVar1 + 0x29) = 1;
+  *(undefined1 *)(val + 0x29) = 1;
   return;
 }
 
 /******************************************************************************
- * Function : sub_077b0f (Ghidra: FUN_00077b0f)
- * Prototype: void sub_077b0f(void);
+ * Function : workshop_fn_077b0f (Original VA: 0x77b0f, Ghidra: FUN_00077b0f)
+ * Prototype: void workshop_fn_077b0f(void);
  * Address  : 0x77b0f (Size: 63 bytes)
  * Module   : workshop.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x5f163
- * Callees  : 1 -> 0xe69fc
+ * Purpose  : Module workshop.cpp procedure @ 0x077b0f
+ * Callers  : 1 -> process_players_global_packet_action
+ * Callees  : 1 -> bflib_system_io_fn_0e69fc
  ******************************************************************************/
-void FUN_00077b0f(void)
+void workshop_fn_077b0f(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  undefined4 uVar2;
-  int iVar3;
+  int thing;
+  int val;
+  undefined4 uval;
+  int val_2;
   int extraout_ECX;
   int extraout_ECX_00;
   int extraout_ECX_01;
   int extraout_ECX_02;
-  int in_EDX;
+  int arg_edx;
   
-  *(int *)(in_EAX + 0x20) = *(int *)(in_EAX + 0x20) + in_EDX;
-  iVar1 = FUN_000e69fc();
-  if (-*(int *)(extraout_ECX + 0x20) == iVar1 || -iVar1 < *(int *)(extraout_ECX + 0x20)) {
-    iVar3 = FUN_000e69fc();
-    iVar1 = extraout_ECX_01;
-    if (iVar3 < *(int *)(extraout_ECX_01 + 0x20)) {
-      uVar2 = FUN_000e69fc();
-      *(undefined4 *)(extraout_ECX_02 + 0x20) = uVar2;
-      iVar1 = extraout_ECX_02;
+  *(int *)(thing + 0x20) = *(int *)(thing + 0x20) + arg_edx; /* thing->model */
+  val = bflib_system_io_fn_0e69fc();
+  if (-*(int *)(extraout_ECX + 0x20) == val || -val < *(int *)(extraout_ECX + 0x20)) {
+    val_2 = bflib_system_io_fn_0e69fc();
+    val = extraout_ECX_01;
+    if (val_2 < *(int *)(extraout_ECX_01 + 0x20)) {
+      uval = bflib_system_io_fn_0e69fc();
+      *(undefined4 *)(extraout_ECX_02 + 0x20) = uval;
+      val = extraout_ECX_02;
     }
   }
   else {
-    uVar2 = FUN_000e69fc();
-    *(undefined4 *)(extraout_ECX_00 + 0x20) = uVar2;
+    uval = bflib_system_io_fn_0e69fc();
+    *(undefined4 *)(extraout_ECX_00 + 0x20) = uval;
     *(int *)(extraout_ECX_00 + 0x20) = -*(int *)(extraout_ECX_00 + 0x20);
-    iVar1 = extraout_ECX_00;
+    val = extraout_ECX_00;
   }
-  *(undefined1 *)(iVar1 + 0x24) = 1;
+  *(undefined1 *)(val + 0x24) = 1;
   return;
 }
 
 /******************************************************************************
- * Function : sub_077b4e (Ghidra: FUN_00077b4e)
- * Prototype: void sub_077b4e(void);
+ * Function : workshop_fn_077b4e (Original VA: 0x77b4e, Ghidra: FUN_00077b4e)
+ * Prototype: void workshop_fn_077b4e(void);
  * Address  : 0x77b4e (Size: 63 bytes)
  * Module   : workshop.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x5f163
- * Callees  : 1 -> 0xe69fc
+ * Purpose  : Module workshop.cpp procedure @ 0x077b4e
+ * Callers  : 1 -> process_players_global_packet_action
+ * Callees  : 1 -> bflib_system_io_fn_0e69fc
  ******************************************************************************/
-void FUN_00077b4e(void)
+void workshop_fn_077b4e(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  undefined4 uVar2;
-  int iVar3;
+  int gui_btn;
+  int thing_ptr;
+  undefined4 uval;
+  int val;
   int extraout_ECX;
   int extraout_ECX_00;
   int extraout_ECX_01;
   int extraout_ECX_02;
-  int in_EDX;
+  int arg_edx;
   
-  *(int *)(in_EAX + 0x1b) = *(int *)(in_EAX + 0x1b) + in_EDX;
-  iVar1 = FUN_000e69fc();
-  if (-*(int *)(extraout_ECX + 0x1b) == iVar1 || -iVar1 < *(int *)(extraout_ECX + 0x1b)) {
-    iVar3 = FUN_000e69fc();
-    iVar1 = extraout_ECX_01;
-    if (iVar3 < *(int *)(extraout_ECX_01 + 0x1b)) {
-      uVar2 = FUN_000e69fc();
-      *(undefined4 *)(extraout_ECX_02 + 0x1b) = uVar2;
-      iVar1 = extraout_ECX_02;
+  *(int *)(gui_btn + 0x1b) = *(int *)(gui_btn + 0x1b) + arg_edx; /* gui_btn->id_num */
+  thing_ptr = bflib_system_io_fn_0e69fc();
+  if (-*(int *)(extraout_ECX + 0x1b) == thing_ptr || -thing_ptr < *(int *)(extraout_ECX + 0x1b)) {
+    val = bflib_system_io_fn_0e69fc();
+    thing_ptr = extraout_ECX_01;
+    if (val < *(int *)(extraout_ECX_01 + 0x1b)) {
+      uval = bflib_system_io_fn_0e69fc();
+      *(undefined4 *)(extraout_ECX_02 + 0x1b) = uval;
+      thing_ptr = extraout_ECX_02;
     }
   }
   else {
-    uVar2 = FUN_000e69fc();
-    *(undefined4 *)(extraout_ECX_00 + 0x1b) = uVar2;
+    uval = bflib_system_io_fn_0e69fc();
+    *(undefined4 *)(extraout_ECX_00 + 0x1b) = uval;
     *(int *)(extraout_ECX_00 + 0x1b) = -*(int *)(extraout_ECX_00 + 0x1b);
-    iVar1 = extraout_ECX_00;
+    thing_ptr = extraout_ECX_00;
   }
-  *(undefined1 *)(iVar1 + 0x1f) = 1;
+  *(undefined1 *)(thing_ptr + 0x1f) = 1; /* thing->class_id */
   return;
 }
 
 /******************************************************************************
- * Function : sub_077b8d (Ghidra: FUN_00077b8d)
- * Prototype: void sub_077b8d(void);
+ * Function : workshop_fn_077b8d (Original VA: 0x77b8d, Ghidra: FUN_00077b8d)
+ * Prototype: void workshop_fn_077b8d(void);
  * Address  : 0x77b8d (Size: 185 bytes)
  * Module   : workshop.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0xde6a8, 0xe2cd0, 0xe31b8
- * Callees  : 5 -> 0x77c46, 0x77cf1, 0x77da0, 0x77e5c, 0xe69fc
+ * Purpose  : Module workshop.cpp procedure @ 0x077b8d
+ * Callers  : 3 -> update_go_first_person_without_0de6a8, update_go_first_person_without_0e2cd0, update_go_first_person_without_0e31b8
+ * Callees  : 5 -> workshop_fn_077c46, workshop_fn_077cf1, workshop_fn_077da0, workshop_fn_077e5c, bflib_system_io_fn_0e69fc
  ******************************************************************************/
-void FUN_00077b8d(void)
+void workshop_fn_077b8d(void)
 
 {
-  int in_EAX;
+  int thing;
   
-  if (*(int *)(in_EAX + 0x20) < 0) {
-    FUN_000e69fc();
-    FUN_00077da0();
+  if (*(int *)(thing + 0x20) < 0) { /* thing->model */
+    bflib_system_io_fn_0e69fc();
+    workshop_fn_077da0();
   }
-  else if (0 < *(int *)(in_EAX + 0x20)) {
-    FUN_000e69fc();
-    FUN_00077e5c();
+  else if (0 < *(int *)(thing + 0x20)) { /* thing->model */
+    bflib_system_io_fn_0e69fc();
+    workshop_fn_077e5c();
   }
-  if (*(char *)(in_EAX + 0x24) == '\0') {
-    *(int *)(in_EAX + 0x20) = *(int *)(in_EAX + 0x20) / 2;
-  }
-  else {
-    *(undefined1 *)(in_EAX + 0x24) = 0;
-  }
-  if (*(int *)(in_EAX + 0x25) < 0) {
-    FUN_000e69fc();
-    FUN_00077c46();
-  }
-  else if (0 < *(int *)(in_EAX + 0x25)) {
-    FUN_000e69fc();
-    FUN_00077cf1();
-  }
-  if (*(char *)(in_EAX + 0x29) == '\0') {
-    *(int *)(in_EAX + 0x25) = *(int *)(in_EAX + 0x25) / 2;
+  if (*(char *)(thing + 0x24) == '\0') {
+    *(int *)(thing + 0x20) = *(int *)(thing + 0x20) / 2; /* thing->model */
   }
   else {
-    *(undefined1 *)(in_EAX + 0x29) = 0;
+    *(undefined1 *)(thing + 0x24) = 0;
   }
-  if (*(int *)(in_EAX + 0x1b) != 0) {
-    *(uint *)(in_EAX + 7) = *(int *)(in_EAX + 7) + *(int *)(in_EAX + 0x1b) & 0x7ff;
+  if (*(int *)(thing + 0x25) < 0) {
+    bflib_system_io_fn_0e69fc();
+    workshop_fn_077c46();
   }
-  if (*(char *)(in_EAX + 0x1f) != '\0') {
-    *(undefined1 *)(in_EAX + 0x1f) = 0;
+  else if (0 < *(int *)(thing + 0x25)) {
+    bflib_system_io_fn_0e69fc();
+    workshop_fn_077cf1();
+  }
+  if (*(char *)(thing + 0x29) == '\0') {
+    *(int *)(thing + 0x25) = *(int *)(thing + 0x25) / 2;
+  }
+  else {
+    *(undefined1 *)(thing + 0x29) = 0;
+  }
+  if (*(int *)(thing + 0x1b) != 0) { /* thing->index_or_angle */
+    *(uint *)(thing + 7) = *(int *)(thing + 7) + *(int *)(thing + 0x1b) & 0x7ff; /* thing->index_or_angle */
+  }
+  if (*(char *)(thing + 0x1f) != '\0') { /* thing->class_id */
+    *(undefined1 *)(thing + 0x1f) = 0; /* thing->class_id */
     return;
   }
-  *(int *)(in_EAX + 0x1b) = *(int *)(in_EAX + 0x1b) / 2;
+  *(int *)(thing + 0x1b) = *(int *)(thing + 0x1b) / 2; /* thing->index_or_angle */
   return;
 }
 
 /******************************************************************************
- * Function : sub_077c46 (Ghidra: FUN_00077c46)
- * Prototype: void sub_077c46(void);
+ * Function : workshop_fn_077c46 (Original VA: 0x77c46, Ghidra: FUN_00077c46)
+ * Prototype: void workshop_fn_077c46(void);
  * Address  : 0x77c46 (Size: 171 bytes)
  * Module   : workshop.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x77b8d
+ * Purpose  : Module workshop.cpp procedure @ 0x077c46
+ * Callers  : 1 -> workshop_fn_077b8d
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_00077c46(void)
+void workshop_fn_077c46(void)
 
 {
-  byte bVar1;
-  ushort *in_EAX;
-  int in_EDX;
-  int iVar2;
-  int iVar3;
-  bool bVar4;
+  byte flag;
+  ushort *arg_eax;
+  int arg_edx;
+  int val;
+  int val_2;
+  bool flag_2;
   
-  bVar1 = (byte)in_EAX[3];
-  if (bVar1 < 3) {
-    bVar4 = bVar1 == 2;
+  flag = (byte)arg_eax[3];
+  if (flag < 3) {
+    flag_2 = flag == 2;
   }
   else {
-    if (bVar1 < 4) {
-      iVar2 = (uint)in_EAX[1] - in_EDX;
-      if (iVar2 < 0) {
-        iVar2 = 0;
+    if (flag < 4) {
+      val = (uint)arg_eax[1] - arg_edx;
+      if (val < 0) {
+        val = 0;
       }
-      else if (0xffff < iVar2) {
-        iVar2 = 0xffff;
+      else if (0xffff < val) {
+        val = 0xffff;
       }
       goto LAB_00077cc1;
     }
-    bVar4 = bVar1 == 5;
+    flag_2 = flag == 5;
   }
-  if (!bVar4) {
+  if (!flag_2) {
     return;
   }
-  iVar3 = ((&DAT_001927e0)[*(int *)((int)in_EAX + 7)] * in_EDX >> 0x10) + (uint)*in_EAX;
-  iVar2 = (-(in_EDX * (int)(&PTR_LAB_00192fe0)[*(int *)((int)in_EAX + 7)] >> 8) >> 8) +
-          (uint)in_EAX[1];
-  if (iVar3 < 0) {
-    iVar3 = 0;
+  val_2 = ((&g_slab_attr_table)[*(int *)((int)arg_eax + 7)] * arg_edx >> 0x10) + (uint)*arg_eax;
+  val = (-(arg_edx * (int)(&PTR_LAB_00192fe0)[*(int *)((int)arg_eax + 7)] >> 8) >> 8) +
+          (uint)arg_eax[1];
+  if (val_2 < 0) {
+    val_2 = 0;
   }
-  else if (0xffff < iVar3) {
-    iVar3 = 0xffff;
+  else if (0xffff < val_2) {
+    val_2 = 0xffff;
   }
-  if (iVar2 < 0) {
-    iVar2 = 0;
+  if (val < 0) {
+    val = 0;
   }
-  else if (0xffff < iVar2) {
-    iVar2 = 0xffff;
+  else if (0xffff < val) {
+    val = 0xffff;
   }
-  *in_EAX = (ushort)iVar3;
+  *arg_eax = (ushort)val_2;
 LAB_00077cc1:
-  in_EAX[1] = (ushort)iVar2;
+  arg_eax[1] = (ushort)val;
   return;
 }
 
 /******************************************************************************
- * Function : sub_077cf1 (Ghidra: FUN_00077cf1)
- * Prototype: void sub_077cf1(void);
+ * Function : workshop_fn_077cf1 (Original VA: 0x77cf1, Ghidra: FUN_00077cf1)
+ * Prototype: void workshop_fn_077cf1(void);
  * Address  : 0x77cf1 (Size: 175 bytes)
  * Module   : workshop.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x77b8d
+ * Purpose  : Module workshop.cpp procedure @ 0x077cf1
+ * Callers  : 1 -> workshop_fn_077b8d
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_00077cf1(void)
+void workshop_fn_077cf1(void)
 
 {
-  byte bVar1;
-  ushort *in_EAX;
-  int iVar2;
-  int in_EDX;
-  int iVar3;
-  bool bVar4;
+  byte flag;
+  ushort *arg_eax;
+  int val;
+  int arg_edx;
+  int val_2;
+  bool flag_2;
   
-  bVar1 = (byte)in_EAX[3];
-  if (bVar1 < 3) {
-    bVar4 = bVar1 == 2;
+  flag = (byte)arg_eax[3];
+  if (flag < 3) {
+    flag_2 = flag == 2;
   }
   else {
-    if (bVar1 < 4) {
-      iVar2 = (uint)in_EAX[1] + in_EDX;
-      if (iVar2 < 0) {
-        iVar2 = 0;
+    if (flag < 4) {
+      val = (uint)arg_eax[1] + arg_edx;
+      if (val < 0) {
+        val = 0;
       }
-      else if (0xffff < iVar2) {
-        iVar2 = 0xffff;
+      else if (0xffff < val) {
+        val = 0xffff;
       }
       goto LAB_00077d70;
     }
-    bVar4 = bVar1 == 5;
+    flag_2 = flag == 5;
   }
-  if (!bVar4) {
+  if (!flag_2) {
     return;
   }
-  iVar3 = (uint)*in_EAX - ((&DAT_001927e0)[*(int *)((int)in_EAX + 7)] * in_EDX >> 0x10);
-  iVar2 = (uint)in_EAX[1] -
-          (-(in_EDX * (int)(&PTR_LAB_00192fe0)[*(int *)((int)in_EAX + 7)] >> 8) >> 8);
-  if (iVar3 < 0) {
-    iVar3 = 0;
+  val_2 = (uint)*arg_eax - ((&g_slab_attr_table)[*(int *)((int)arg_eax + 7)] * arg_edx >> 0x10);
+  val = (uint)arg_eax[1] -
+          (-(arg_edx * (int)(&PTR_LAB_00192fe0)[*(int *)((int)arg_eax + 7)] >> 8) >> 8);
+  if (val_2 < 0) {
+    val_2 = 0;
   }
-  else if (0xffff < iVar3) {
-    iVar3 = 0xffff;
+  else if (0xffff < val_2) {
+    val_2 = 0xffff;
   }
-  if (iVar2 < 0) {
-    iVar2 = 0;
+  if (val < 0) {
+    val = 0;
   }
-  else if (0xffff < iVar2) {
-    iVar2 = 0xffff;
+  else if (0xffff < val) {
+    val = 0xffff;
   }
-  *in_EAX = (ushort)iVar3;
+  *arg_eax = (ushort)val_2;
 LAB_00077d70:
-  in_EAX[1] = (ushort)iVar2;
+  arg_eax[1] = (ushort)val;
   return;
 }
 
 /******************************************************************************
- * Function : sub_077da0 (Ghidra: FUN_00077da0)
- * Prototype: void sub_077da0(void);
+ * Function : workshop_fn_077da0 (Original VA: 0x77da0, Ghidra: FUN_00077da0)
+ * Prototype: void workshop_fn_077da0(void);
  * Address  : 0x77da0 (Size: 188 bytes)
  * Module   : workshop.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x77b8d
+ * Purpose  : Module workshop.cpp procedure @ 0x077da0
+ * Callers  : 1 -> workshop_fn_077b8d
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_00077da0(void)
+void workshop_fn_077da0(void)
 
 {
-  byte bVar1;
-  ushort *in_EAX;
-  int in_EDX;
-  uint uVar2;
-  int iVar3;
-  int iVar4;
-  bool bVar5;
+  byte flag;
+  ushort *arg_eax;
+  int arg_edx;
+  uint uval;
+  int val;
+  int val_2;
+  bool flag_2;
   
-  bVar1 = (byte)in_EAX[3];
-  if (bVar1 < 3) {
-    bVar5 = bVar1 == 2;
+  flag = (byte)arg_eax[3];
+  if (flag < 3) {
+    flag_2 = flag == 2;
   }
   else {
-    if (bVar1 < 4) {
-      iVar4 = (uint)*in_EAX - in_EDX;
-      if (iVar4 < 0) {
-        iVar4 = 0;
+    if (flag < 4) {
+      val_2 = (uint)*arg_eax - arg_edx;
+      if (val_2 < 0) {
+        val_2 = 0;
       }
-      else if (0xffff < iVar4) {
-        iVar4 = 0xffff;
+      else if (0xffff < val_2) {
+        val_2 = 0xffff;
       }
-      *in_EAX = (ushort)iVar4;
+      *arg_eax = (ushort)val_2;
       return;
     }
-    bVar5 = bVar1 == 5;
+    flag_2 = flag == 5;
   }
-  if (!bVar5) {
+  if (!flag_2) {
     return;
   }
-  uVar2 = *(int *)((int)in_EAX + 7) + 0x200U & 0x7ff;
-  iVar4 = (uint)*in_EAX - ((&DAT_001927e0)[uVar2] * in_EDX >> 0x10);
-  iVar3 = (uint)in_EAX[1] - (-(in_EDX * (int)(&PTR_LAB_00192fe0)[uVar2] >> 8) >> 8);
-  if (iVar4 < 0) {
-    iVar4 = 0;
+  uval = *(int *)((int)arg_eax + 7) + 0x200U & 0x7ff;
+  val_2 = (uint)*arg_eax - ((&g_slab_attr_table)[uval] * arg_edx >> 0x10);
+  val = (uint)arg_eax[1] - (-(arg_edx * (int)(&PTR_LAB_00192fe0)[uval] >> 8) >> 8);
+  if (val_2 < 0) {
+    val_2 = 0;
   }
-  else if (0xffff < iVar4) {
-    iVar4 = 0xffff;
+  else if (0xffff < val_2) {
+    val_2 = 0xffff;
   }
-  if (iVar3 < 0) {
-    iVar3 = 0;
+  if (val < 0) {
+    val = 0;
   }
-  else if (0xffff < iVar3) {
-    iVar3 = 0xffff;
+  else if (0xffff < val) {
+    val = 0xffff;
   }
-  *in_EAX = (ushort)iVar4;
-  in_EAX[1] = (ushort)iVar3;
+  *arg_eax = (ushort)val_2;
+  arg_eax[1] = (ushort)val;
   return;
 }
 
 /******************************************************************************
- * Function : sub_077e5c (Ghidra: FUN_00077e5c)
- * Prototype: void sub_077e5c(void);
+ * Function : workshop_fn_077e5c (Original VA: 0x77e5c, Ghidra: FUN_00077e5c)
+ * Prototype: void workshop_fn_077e5c(void);
  * Address  : 0x77e5c (Size: 186 bytes)
  * Module   : workshop.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x77b8d
+ * Purpose  : Module workshop.cpp procedure @ 0x077e5c
+ * Callers  : 1 -> workshop_fn_077b8d
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_00077e5c(void)
+void workshop_fn_077e5c(void)
 
 {
-  byte bVar1;
-  ushort *in_EAX;
-  int in_EDX;
-  int iVar2;
-  uint uVar3;
-  int iVar4;
-  bool bVar5;
+  byte flag;
+  ushort *arg_eax;
+  int arg_edx;
+  int val;
+  uint uval;
+  int val_2;
+  bool flag_2;
   
-  bVar1 = (byte)in_EAX[3];
-  if (bVar1 < 3) {
-    bVar5 = bVar1 == 2;
+  flag = (byte)arg_eax[3];
+  if (flag < 3) {
+    flag_2 = flag == 2;
   }
   else {
-    if (bVar1 < 4) {
-      iVar2 = (uint)*in_EAX + in_EDX;
-      if (iVar2 < 0) {
-        iVar2 = 0;
+    if (flag < 4) {
+      val = (uint)*arg_eax + arg_edx;
+      if (val < 0) {
+        val = 0;
       }
-      else if (0xffff < iVar2) {
-        iVar2 = 0xffff;
+      else if (0xffff < val) {
+        val = 0xffff;
       }
-      *in_EAX = (ushort)iVar2;
+      *arg_eax = (ushort)val;
       return;
     }
-    bVar5 = bVar1 == 5;
+    flag_2 = flag == 5;
   }
-  if (!bVar5) {
+  if (!flag_2) {
     return;
   }
-  uVar3 = *(int *)((int)in_EAX + 7) + 0x200U & 0x7ff;
-  iVar2 = ((&DAT_001927e0)[uVar3] * in_EDX >> 0x10) + (uint)*in_EAX;
-  iVar4 = (uint)in_EAX[1] + (-(in_EDX * (int)(&PTR_LAB_00192fe0)[uVar3] >> 8) >> 8);
-  if (iVar2 < 0) {
-    iVar2 = 0;
+  uval = *(int *)((int)arg_eax + 7) + 0x200U & 0x7ff;
+  val = ((&g_slab_attr_table)[uval] * arg_edx >> 0x10) + (uint)*arg_eax;
+  val_2 = (uint)arg_eax[1] + (-(arg_edx * (int)(&PTR_LAB_00192fe0)[uval] >> 8) >> 8);
+  if (val < 0) {
+    val = 0;
   }
-  else if (0xffff < iVar2) {
-    iVar2 = 0xffff;
+  else if (0xffff < val) {
+    val = 0xffff;
   }
-  if (iVar4 < 0) {
-    iVar4 = 0;
+  if (val_2 < 0) {
+    val_2 = 0;
   }
-  else if (0xffff < iVar4) {
-    iVar4 = 0xffff;
+  else if (0xffff < val_2) {
+    val_2 = 0xffff;
   }
-  *in_EAX = (ushort)iVar2;
-  in_EAX[1] = (ushort)iVar4;
+  *arg_eax = (ushort)val;
+  arg_eax[1] = (ushort)val_2;
   return;
 }
 
 /******************************************************************************
- * Function : sub_077f16 (Ghidra: FUN_00077f16)
- * Prototype: void sub_077f16(void);
+ * Function : workshop_fn_077f16 (Original VA: 0x77f16, Ghidra: FUN_00077f16)
+ * Prototype: void workshop_fn_077f16(void);
  * Address  : 0x77f16 (Size: 198 bytes)
  * Module   : workshop.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x4b2a7, 0x5f163
+ * Purpose  : Module workshop.cpp procedure @ 0x077f16
+ * Callers  : 2 -> instance_process_thing_entity_04b2a7, process_players_global_packet_action
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_00077f16(void)
+void workshop_fn_077f16(void)
 
 {
-  byte bVar1;
-  int in_EAX;
-  int iVar2;
-  int in_EDX;
-  int iVar3;
-  int unaff_EBX;
+  byte flag;
+  int camera;
+  int val;
+  int arg_edx;
+  int val_2;
+  int arg_ebx;
   
-  bVar1 = *(byte *)(in_EAX + 6);
-  if (bVar1 < 3) {
-    if (bVar1 == 2) {
-      iVar2 = (*(int *)(in_EAX + 0x17) * 100) / 0x55;
-      *(int *)(in_EAX + 0x17) = iVar2;
-      if (iVar2 < unaff_EBX) {
-        *(int *)(in_EAX + 0x17) = unaff_EBX;
+  flag = *(byte *)(camera + 6);
+  if (flag < 3) {
+    if (flag == 2) {
+      val = (*(int *)(camera + 0x17) * 100) / 0x55; /* camera->zoom */
+      *(int *)(camera + 0x17) = val; /* camera->zoom */
+      if (val < arg_ebx) {
+        *(int *)(camera + 0x17) = arg_ebx; /* camera->zoom */
         return;
       }
-      if (in_EDX < iVar2) {
-        *(int *)(in_EAX + 0x17) = in_EDX;
+      if (arg_edx < val) {
+        *(int *)(camera + 0x17) = arg_edx; /* camera->zoom */
         return;
       }
     }
   }
-  else if (bVar1 < 4) {
-    iVar2 = *(short *)(in_EAX + 4) * 5;
-    iVar3 = iVar2 >> 0x1f;
-    iVar2 = (int)((iVar2 + iVar3 * -4) - (uint)(iVar3 << 1 < 0)) >> 2;
-    if (*(short *)(in_EAX + 4) == iVar2) {
-      *(short *)(in_EAX + 4) = *(short *)(in_EAX + 4) + 1;
+  else if (flag < 4) {
+    val = *(short *)(camera + 4) * 5;
+    val_2 = val >> 0x1f;
+    val = (int)((val + val_2 * -4) - (uint)(val_2 << 1 < 0)) >> 2;
+    if (*(short *)(camera + 4) == val) {
+      *(short *)(camera + 4) = *(short *)(camera + 4) + 1;
     }
     else {
-      *(short *)(in_EAX + 4) = (short)iVar2;
+      *(short *)(camera + 4) = (short)val;
     }
-    if (*(short *)(in_EAX + 4) < 0x10) {
-      *(undefined2 *)(in_EAX + 4) = 0x10;
+    if (*(short *)(camera + 4) < 0x10) {
+      *(undefined2 *)(camera + 4) = 0x10;
       return;
     }
-    if (0x400 < *(short *)(in_EAX + 4)) {
-      *(undefined2 *)(in_EAX + 4) = 0x400;
+    if (0x400 < *(short *)(camera + 4)) {
+      *(undefined2 *)(camera + 4) = 0x400;
       return;
     }
   }
   else {
-    if (bVar1 != 5) {
+    if (flag != 5) {
       return;
     }
-    iVar2 = (*(int *)(in_EAX + 0x17) * 100) / 0x55;
-    *(int *)(in_EAX + 0x17) = iVar2;
-    if (iVar2 < 0x4000) {
-      *(undefined4 *)(in_EAX + 0x17) = 0x4000;
+    val = (*(int *)(camera + 0x17) * 100) / 0x55; /* camera->zoom */
+    *(int *)(camera + 0x17) = val; /* camera->zoom */
+    if (val < 0x4000) {
+      *(undefined4 *)(camera + 0x17) = 0x4000; /* camera->zoom */
       return;
     }
-    if (0x10000 < iVar2) {
-      *(undefined4 *)(in_EAX + 0x17) = 0x10000;
+    if (0x10000 < val) {
+      *(undefined4 *)(camera + 0x17) = 0x10000; /* camera->zoom */
       return;
     }
   }
@@ -1571,67 +1533,67 @@ void FUN_00077f16(void)
 }
 
 /******************************************************************************
- * Function : sub_077fdc (Ghidra: FUN_00077fdc)
- * Prototype: void sub_077fdc(void);
+ * Function : workshop_fn_077fdc (Original VA: 0x77fdc, Ghidra: FUN_00077fdc)
+ * Prototype: void workshop_fn_077fdc(void);
  * Address  : 0x77fdc (Size: 199 bytes)
  * Module   : workshop.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x4b792, 0x5f163
+ * Purpose  : Module workshop.cpp procedure @ 0x077fdc
+ * Callers  : 2 -> instance_fn_04b792, process_players_global_packet_action
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_00077fdc(void)
+void workshop_fn_077fdc(void)
 
 {
-  byte bVar1;
-  int in_EAX;
-  int iVar2;
-  int in_EDX;
-  int unaff_EBX;
+  byte flag;
+  int camera;
+  int val;
+  int arg_edx;
+  int arg_ebx;
   
-  bVar1 = *(byte *)(in_EAX + 6);
-  if (bVar1 < 3) {
-    if (bVar1 == 2) {
-      iVar2 = (*(int *)(in_EAX + 0x17) * 0x55) / 100;
-      *(int *)(in_EAX + 0x17) = iVar2;
-      if (iVar2 < unaff_EBX) {
-        *(int *)(in_EAX + 0x17) = unaff_EBX;
+  flag = *(byte *)(camera + 6);
+  if (flag < 3) {
+    if (flag == 2) {
+      val = (*(int *)(camera + 0x17) * 0x55) / 100; /* camera->zoom */
+      *(int *)(camera + 0x17) = val; /* camera->zoom */
+      if (val < arg_ebx) {
+        *(int *)(camera + 0x17) = arg_ebx; /* camera->zoom */
         return;
       }
-      if (in_EDX < iVar2) {
-        *(int *)(in_EAX + 0x17) = in_EDX;
+      if (arg_edx < val) {
+        *(int *)(camera + 0x17) = arg_edx; /* camera->zoom */
         return;
       }
     }
   }
-  else if (bVar1 < 4) {
-    iVar2 = ((int)*(short *)(in_EAX + 4) << 2) / 5;
-    if (*(short *)(in_EAX + 4) == iVar2) {
-      *(short *)(in_EAX + 4) = *(short *)(in_EAX + 4) + 1;
+  else if (flag < 4) {
+    val = ((int)*(short *)(camera + 4) << 2) / 5;
+    if (*(short *)(camera + 4) == val) {
+      *(short *)(camera + 4) = *(short *)(camera + 4) + 1;
     }
     else {
-      *(short *)(in_EAX + 4) = (short)iVar2;
+      *(short *)(camera + 4) = (short)val;
     }
-    if (*(short *)(in_EAX + 4) < 0x10) {
-      *(undefined2 *)(in_EAX + 4) = 0x10;
+    if (*(short *)(camera + 4) < 0x10) {
+      *(undefined2 *)(camera + 4) = 0x10;
       return;
     }
-    if (0x400 < *(short *)(in_EAX + 4)) {
-      *(undefined2 *)(in_EAX + 4) = 0x400;
+    if (0x400 < *(short *)(camera + 4)) {
+      *(undefined2 *)(camera + 4) = 0x400;
       return;
     }
   }
   else {
-    if (bVar1 != 5) {
+    if (flag != 5) {
       return;
     }
-    iVar2 = (*(int *)(in_EAX + 0x17) * 0x55) / 100;
-    *(int *)(in_EAX + 0x17) = iVar2;
-    if (iVar2 < 0x4000) {
-      *(undefined4 *)(in_EAX + 0x17) = 0x4000;
+    val = (*(int *)(camera + 0x17) * 0x55) / 100; /* camera->zoom */
+    *(int *)(camera + 0x17) = val; /* camera->zoom */
+    if (val < 0x4000) {
+      *(undefined4 *)(camera + 0x17) = 0x4000; /* camera->zoom */
       return;
     }
-    if (0x10000 < iVar2) {
-      *(undefined4 *)(in_EAX + 0x17) = 0x10000;
+    if (0x10000 < val) {
+      *(undefined4 *)(camera + 0x17) = 0x10000; /* camera->zoom */
       return;
     }
   }
@@ -1639,57 +1601,57 @@ void FUN_00077fdc(void)
 }
 
 /******************************************************************************
- * Function : sub_0780a3 (Ghidra: FUN_000780a3)
- * Prototype: longlong sub_0780a3(void);
+ * Function : workshop_fn_0780a3 (Original VA: 0x780a3, Ghidra: FUN_000780a3)
+ * Prototype: longlong workshop_fn_0780a3(void);
  * Address  : 0x780a3 (Size: 31 bytes)
  * Module   : workshop.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 5 -> 0x4b222, 0x4b792, 0x4b992, 0x5ce63, 0x5f163
+ * Purpose  : Module workshop.cpp procedure @ 0x0780a3
+ * Callers  : 5 -> instance_update_player_view_state_04b222, instance_fn_04b792, instance_fn_04b992, newgui_create_floating_spirit_05ce63, process_players_global_packet_action
  * Callees  : 0 -> 
  ******************************************************************************/
-longlong FUN_000780a3(void)
+longlong workshop_fn_0780a3(void)
 
 {
-  byte bVar1;
-  int in_EAX;
-  uint in_EDX;
+  byte flag;
+  int camera;
+  uint arg_edx;
   
-  bVar1 = *(byte *)(in_EAX + 6);
-  if (1 < bVar1) {
-    if (bVar1 < 3) {
-      return CONCAT44(in_EDX,*(undefined4 *)(in_EAX + 0x17));
+  flag = *(byte *)(camera + 6);
+  if (1 < flag) {
+    if (flag < 3) {
+      return CONCAT44(arg_edx,*(undefined4 *)(camera + 0x17)); /* camera->zoom */
     }
-    if (bVar1 == 3) {
-      return CONCAT44(in_EDX,(int)*(short *)(in_EAX + 4));
+    if (flag == 3) {
+      return CONCAT44(arg_edx,(int)*(short *)(camera + 4));
     }
   }
-  return (ulonglong)in_EDX << 0x20;
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : sub_0780c2 (Ghidra: FUN_000780c2)
- * Prototype: void sub_0780c2(void);
+ * Function : workshop_fn_0780c2 (Original VA: 0x780c2, Ghidra: FUN_000780c2)
+ * Prototype: void workshop_fn_0780c2(void);
  * Address  : 0x780c2 (Size: 29 bytes)
  * Module   : workshop.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 6 -> 0x4b2a7, 0x4b478, 0x4b792, 0x4b7d4, 0x5f163, 0x85f80
+ * Purpose  : Module workshop.cpp procedure @ 0x0780c2
+ * Callers  : 6 -> instance_process_thing_entity_04b2a7, instance_update_creature_and_thing_04b478, instance_fn_04b792, instance_update_player_view_state_04b7d4, process_players_global_packet_action, creature_update_player_view_state_085f80
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_000780c2(void)
+void workshop_fn_0780c2(void)
 
 {
-  byte bVar1;
-  int in_EAX;
-  undefined4 in_EDX;
+  byte flag;
+  int camera;
+  undefined4 arg_edx;
   
-  bVar1 = *(byte *)(in_EAX + 6);
-  if (1 < bVar1) {
-    if (bVar1 < 3) {
-      *(undefined4 *)(in_EAX + 0x17) = in_EDX;
+  flag = *(byte *)(camera + 6);
+  if (1 < flag) {
+    if (flag < 3) {
+      *(undefined4 *)(camera + 0x17) = arg_edx; /* camera->zoom */
       return;
     }
-    if (bVar1 == 3) {
-      *(short *)(in_EAX + 4) = (short)in_EDX;
+    if (flag == 3) {
+      *(short *)(camera + 4) = (short)arg_edx;
       return;
     }
   }
@@ -1697,76 +1659,76 @@ void FUN_000780c2(void)
 }
 
 /******************************************************************************
- * Function : sub_0780df (Ghidra: FUN_000780df)
- * Prototype: void sub_0780df(void);
+ * Function : workshop_update_player_view_state_0780df (Original VA: 0x780df, Ghidra: FUN_000780df)
+ * Prototype: void workshop_update_player_view_state_0780df(void);
  * Address  : 0x780df (Size: 176 bytes)
  * Module   : workshop.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 11 -> 0x36ff4, 0x402e5, 0x4823a, 0x5b9c0, 0x5d7b5, 0x7818f, 0x781c8, 0x872b8, 0x87694, 0x87da4 ...
+ * Purpose  : Accesses per-player PlayerInfo state (stride 0x4ef)
+ * Callers  : 11 -> game_out_sync_gameturn_036ff4, inits_non_keeper_keeper_game_0402e5, input_maintain_gui_button_state_04823a, newgui_update_player_view_state_05b9c0, packet_build_local_player_turn_packet, workshop_fn_07818f, command_fn_0781c8, draw_update_player_dungeon_0872b8 ...
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_000780df(void)
+void workshop_update_player_view_state_0780df(void)
 
 {
-  uint in_EAX;
-  int in_ECX;
-  uint in_EDX;
-  int iVar1;
-  int unaff_EBX;
+  uint arg_eax;
+  int arg_ecx;
+  uint arg_edx;
+  int player_off;
+  int arg_ebx;
   
-  if ((DAT_0019d0b8 & 0x20) == 0) {
-    if ((int)in_EAX < 0) {
-      in_EAX = 0;
+  if ((g_game_operation_flags & 0x20) == 0) {
+    if ((int)arg_eax < 0) {
+      arg_eax = 0;
       goto LAB_0007811c;
     }
   }
-  else if ((int)in_EAX < 0x8c) {
-    in_EAX = 0x8c;
+  else if ((int)arg_eax < 0x8c) {
+    arg_eax = 0x8c;
     goto LAB_0007811c;
   }
-  if ((int)(uint)DAT_0019cba4 < (int)in_EAX) {
-    in_EAX = (uint)DAT_0019cba4;
+  if ((int)(uint)g_mouse_cursor_y < (int)arg_eax) {
+    arg_eax = (uint)g_mouse_cursor_y;
   }
 LAB_0007811c:
-  if ((int)in_EDX < 0) {
-    in_EDX = 0;
+  if ((int)arg_edx < 0) {
+    arg_edx = 0;
   }
-  else if ((int)(uint)DAT_0019cba2 < (int)in_EDX) {
-    in_EDX = (uint)DAT_0019cba2;
+  else if ((int)(uint)g_mouse_cursor_x < (int)arg_edx) {
+    arg_edx = (uint)g_mouse_cursor_x;
   }
-  if (unaff_EBX < 0) {
-    unaff_EBX = 0;
+  if (arg_ebx < 0) {
+    arg_ebx = 0;
   }
-  if ((int)(uint)DAT_0019cba4 < (int)(in_EAX + unaff_EBX)) {
-    unaff_EBX = DAT_0019cba4 - in_EAX;
+  if ((int)(uint)g_mouse_cursor_y < (int)(arg_eax + arg_ebx)) {
+    arg_ebx = g_mouse_cursor_y - arg_eax;
   }
-  if (in_ECX < 0) {
-    in_ECX = 0;
+  if (arg_ecx < 0) {
+    arg_ecx = 0;
   }
-  else if ((int)(uint)DAT_0019cba2 < (int)(in_EDX + in_ECX)) {
-    in_ECX = DAT_0019cba2 - in_EDX;
+  else if ((int)(uint)g_mouse_cursor_x < (int)(arg_edx + arg_ecx)) {
+    arg_ecx = g_mouse_cursor_x - arg_edx;
   }
-  iVar1 = DAT_002f10ce._3_1_ * 0x4ef;
-  *(short *)(&DAT_0019d510 + iVar1) = (short)in_EAX;
-  *(short *)(&DAT_0019d512 + iVar1) = (short)in_EDX;
-  *(short *)(&DAT_0019d50c + iVar1) = (short)unaff_EBX;
-  *(short *)(&DAT_0019d50e + iVar1) = (short)in_ECX;
+  player_off = g_my_player_word._3_1_ * 0x4ef;
+  *(short *)(&g_player_hand_thing_idx + player_off) = (short)arg_eax;
+  *(short *)(&g_bss_0019d512 + player_off) = (short)arg_edx;
+  *(short *)(&g_bss_0019d50c + player_off) = (short)arg_ebx;
+  *(short *)(&g_bss_0019d50e + player_off) = (short)arg_ecx;
   return;
 }
 
 /******************************************************************************
- * Function : sub_07818f (Ghidra: FUN_0007818f)
- * Prototype: void sub_07818f(void);
+ * Function : workshop_fn_07818f (Original VA: 0x7818f, Ghidra: FUN_0007818f)
+ * Prototype: void workshop_fn_07818f(void);
  * Address  : 0x7818f (Size: 57 bytes)
  * Module   : workshop.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module workshop.cpp procedure @ 0x07818f
  * Callers  : 0 -> 
- * Callees  : 1 -> 0x780df
+ * Callees  : 1 -> workshop_update_player_view_state_0780df
  ******************************************************************************/
-void FUN_0007818f(void)
+void workshop_fn_07818f(void)
 
 {
-  FUN_000780df();
+  workshop_update_player_view_state_0780df();
   return;
 }
 

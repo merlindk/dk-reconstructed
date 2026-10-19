@@ -1,7 +1,7 @@
 /**
- * Dungeon Keeper (KEEPER.EXE) - Reconstructed Source Module: panmap.cpp
+ * Dungeon Keeper (KEEPER.EXE) - Reconstructed & Semantically Named Module: panmap.cpp
  * Binary Subject: /home/merlin/Dungeon Keeper/re/KEEPER.elf
- * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 (x86:LE:32:default)
+ * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 + DK Semantic Analyzer
  * Functions in this translation unit: 12
  */
 
@@ -11,208 +11,208 @@
 #include "../include/dk_functions.h"
 
 /******************************************************************************
- * Function : sub_062570 (Ghidra: FUN_00062570)
- * Prototype: undefined4 sub_062570(void);
+ * Function : panmap_fn_062570 (Original VA: 0x62570, Ghidra: FUN_00062570)
+ * Prototype: undefined4 panmap_fn_062570(void);
  * Address  : 0x62570 (Size: 6 bytes)
  * Module   : panmap.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module panmap.cpp procedure @ 0x062570
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_00062570(void)
+undefined4 panmap_fn_062570(void)
 
 {
   return 1;
 }
 
 /******************************************************************************
- * Function : sub_062578 (Ghidra: FUN_00062578)
- * Prototype: undefined8 sub_062578(void);
+ * Function : panmap_fn_062578 (Original VA: 0x62578, Ghidra: FUN_00062578)
+ * Prototype: undefined8 panmap_fn_062578(void);
  * Address  : 0x62578 (Size: 527 bytes)
  * Module   : panmap.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0xde6a8
- * Callees  : 3 -> 0x627b5, 0xe8214, 0xe846c
+ * Purpose  : Module panmap.cpp procedure @ 0x062578
+ * Callers  : 1 -> update_go_first_person_without_0de6a8
+ * Callees  : 3 -> panmap_update_player_view_state_0627b5, bflib_system_io_fn_0e8214, LbPaletteSet
  ******************************************************************************/
 /* WARNING: Removing unreachable block (ram,0x00062680) */
 /* WARNING: Removing unreachable block (ram,0x0006270a) */
 /* WARNING: Removing unreachable block (ram,0x000626bb) */
 
-undefined8 FUN_00062578(void)
+undefined8 panmap_fn_062578(void)
 
 {
-  char cVar1;
-  byte bVar2;
-  int in_EAX;
-  int iVar3;
-  uint uVar4;
-  int iVar5;
-  undefined4 in_EDX;
+  char ch;
+  byte flag;
+  int arg_eax;
+  int val;
+  uint uval;
+  int val_2;
+  undefined4 arg_edx;
   byte local_318 [768];
   
-  if ((*(int *)(in_EAX + 0x4c1) != 0) || (*(int *)(in_EAX + 0x4c5) != 0)) {
-    if ((*(byte *)(in_EAX + 3) & 8) == 0) {
-      if ((*(int *)(in_EAX + 0x4c1) == 0) || (*(int *)(in_EAX + 0x4c5) == 0)) {
-        if ((*(int *)(in_EAX + 0x4c1) == 0) || (*(int *)(in_EAX + 0x4c5) != 0)) {
-          iVar3 = (*(int *)(in_EAX + 0x4c5) + -1) * 10;
-          if (0x78 < iVar3) {
-            iVar3 = 0x78;
+  if ((*(int *)(arg_eax + 0x4c1) != 0) || (*(int *)(arg_eax + 0x4c5) != 0)) {
+    if ((*(byte *)(arg_eax + 3) & 8) == 0) {
+      if ((*(int *)(arg_eax + 0x4c1) == 0) || (*(int *)(arg_eax + 0x4c5) == 0)) {
+        if ((*(int *)(arg_eax + 0x4c1) == 0) || (*(int *)(arg_eax + 0x4c5) != 0)) {
+          val = (*(int *)(arg_eax + 0x4c5) + -1) * 10;
+          if (0x78 < val) {
+            val = 0x78;
           }
         }
         else {
-          iVar3 = (*(int *)(in_EAX + 0x4c1) + -1) * 0xc;
-          if (0x78 < iVar3) {
-            iVar3 = 0x78;
+          val = (*(int *)(arg_eax + 0x4c1) + -1) * 0xc;
+          if (0x78 < val) {
+            val = 0x78;
           }
         }
       }
       else {
-        iVar3 = (*(int *)(in_EAX + 0x4c1) + -1) * 0xc + (*(int *)(in_EAX + 0x4c5) + -1) * 10;
-        if (0x78 < iVar3) {
-          iVar3 = 0x78;
+        val = (*(int *)(arg_eax + 0x4c1) + -1) * 0xc + (*(int *)(arg_eax + 0x4c5) + -1) * 10;
+        if (0x78 < val) {
+          val = 0x78;
         }
       }
-      iVar3 = 0x78 - iVar3;
-      iVar5 = 0;
+      val = 0x78 - val;
+      val_2 = 0;
       do {
-        bVar2 = (char)((int)((*(byte *)(iVar5 + *(int *)(in_EAX + 0x4c9)) - 0x3f) * iVar3) / 0x78) +
+        flag = (char)((int)((*(byte *)(val_2 + *(int *)(arg_eax + 0x4c9)) - 0x3f) * val) / 0x78) +
                 0x3f;
-        local_318[iVar5] = bVar2;
-        if (0x3f < bVar2) {
-          local_318[iVar5] = 0x3f;
+        local_318[val_2] = flag;
+        if (0x3f < flag) {
+          local_318[val_2] = 0x3f;
         }
-        uVar4 = (int)((uint)*(byte *)(iVar5 + 1 + *(int *)(in_EAX + 0x4c9)) * iVar3) / 0x78;
-        local_318[iVar5 + 1] = (byte)uVar4;
-        if (0x3f < (uVar4 & 0xff)) {
-          local_318[iVar5 + 1] = 0x3f;
+        uval = (int)((uint)*(byte *)(val_2 + 1 + *(int *)(arg_eax + 0x4c9)) * val) / 0x78;
+        local_318[val_2 + 1] = (byte)uval;
+        if (0x3f < (uval & 0xff)) {
+          local_318[val_2 + 1] = 0x3f;
         }
-        uVar4 = (int)((uint)*(byte *)(iVar5 + 2 + *(int *)(in_EAX + 0x4c9)) * iVar3) / 0x78;
-        local_318[iVar5 + 2] = (byte)uVar4;
-        if (0x3f < (uVar4 & 0xff)) {
-          local_318[iVar5 + 2] = 0x3f;
+        uval = (int)((uint)*(byte *)(val_2 + 2 + *(int *)(arg_eax + 0x4c9)) * val) / 0x78;
+        local_318[val_2 + 2] = (byte)uval;
+        if (0x3f < (uval & 0xff)) {
+          local_318[val_2 + 2] = 0x3f;
         }
-        iVar5 = iVar5 + 3;
-      } while (iVar5 != 0x300);
-      if (*(int *)(in_EAX + 0x4c1) != 0) {
-        *(int *)(in_EAX + 0x4c1) = *(int *)(in_EAX + 0x4c1) + -1;
+        val_2 = val_2 + 3;
+      } while (val_2 != 0x300);
+      if (*(int *)(arg_eax + 0x4c1) != 0) {
+        *(int *)(arg_eax + 0x4c1) = *(int *)(arg_eax + 0x4c1) + -1;
       }
-      if (((*(int *)(in_EAX + 0x4c5) != 0) && (cVar1 = *(char *)(in_EAX + 0x4b0), cVar1 != '\x12'))
-         && (cVar1 != '\x11')) {
-        if ((cVar1 == '\x05') || (cVar1 == '\x06')) {
-          if (*(int *)(in_EAX + 0x4c5) < 0xd) {
-            *(int *)(in_EAX + 0x4c5) = *(int *)(in_EAX + 0x4c5) + 1;
+      if (((*(int *)(arg_eax + 0x4c5) != 0) && (ch = *(char *)(arg_eax + 0x4b0), ch != '\x12'))
+         && (ch != '\x11')) {
+        if ((ch == '\x05') || (ch == '\x06')) {
+          if (*(int *)(arg_eax + 0x4c5) < 0xd) {
+            *(int *)(arg_eax + 0x4c5) = *(int *)(arg_eax + 0x4c5) + 1;
           }
         }
-        else if (*(int *)(in_EAX + 0x4c5) != 0) {
-          *(int *)(in_EAX + 0x4c5) = *(int *)(in_EAX + 0x4c5) + -1;
+        else if (*(int *)(arg_eax + 0x4c5) != 0) {
+          *(int *)(arg_eax + 0x4c5) = *(int *)(arg_eax + 0x4c5) + -1;
         }
       }
-      FUN_000e8214();
-      FUN_000e846c(local_318);
+      bflib_system_io_fn_0e8214();
+      LbPaletteSet(local_318);
       goto LAB_00062780;
     }
-    FUN_000627b5();
-    *(byte *)(in_EAX + 3) = *(byte *)(in_EAX + 3) & 0xf7;
-    if (*(int *)(in_EAX + 0x4c1) != 0) {
-      *(undefined4 *)(in_EAX + 0x4c1) = 0;
+    panmap_update_player_view_state_0627b5();
+    *(byte *)(arg_eax + 3) = *(byte *)(arg_eax + 3) & 0xf7;
+    if (*(int *)(arg_eax + 0x4c1) != 0) {
+      *(undefined4 *)(arg_eax + 0x4c1) = 0;
     }
   }
-  iVar3 = 0;
+  val = 0;
 LAB_00062780:
-  return CONCAT44(in_EDX,iVar3);
+  return CONCAT44(arg_edx,val);
 }
 
 /******************************************************************************
- * Function : sub_062787 (Ghidra: FUN_00062787)
- * Prototype: void sub_062787(void);
+ * Function : panmap_fn_062787 (Original VA: 0x62787, Ghidra: FUN_00062787)
+ * Prototype: void panmap_fn_062787(void);
  * Address  : 0x62787 (Size: 46 bytes)
  * Module   : panmap.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x81a2c
+ * Purpose  : Module panmap.cpp procedure @ 0x062787
+ * Callers  : 1 -> creature_update_creature_and_thing_081a2c
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_00062787(void)
+void panmap_fn_062787(void)
 
 {
-  int in_EAX;
-  int in_EDX;
+  int arg_eax;
+  int arg_edx;
   
-  *(int *)(in_EAX + 0x4c1) = *(int *)(in_EAX + 0x4c1) + in_EDX;
-  if (*(int *)(in_EAX + 0x4c1) < 1) {
-    *(undefined4 *)(in_EAX + 0x4c1) = 1;
+  *(int *)(arg_eax + 0x4c1) = *(int *)(arg_eax + 0x4c1) + arg_edx;
+  if (*(int *)(arg_eax + 0x4c1) < 1) {
+    *(undefined4 *)(arg_eax + 0x4c1) = 1;
     return;
   }
-  if (10 < *(int *)(in_EAX + 0x4c1)) {
-    *(undefined4 *)(in_EAX + 0x4c1) = 10;
+  if (10 < *(int *)(arg_eax + 0x4c1)) {
+    *(undefined4 *)(arg_eax + 0x4c1) = 10;
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0627b5 (Ghidra: FUN_000627b5)
- * Prototype: void sub_0627b5(void);
+ * Function : panmap_update_player_view_state_0627b5 (Original VA: 0x627b5, Ghidra: FUN_000627b5)
+ * Prototype: void panmap_update_player_view_state_0627b5(void);
  * Address  : 0x627b5 (Size: 532 bytes)
  * Module   : panmap.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 17 -> 0x24ab9, 0x2684f, 0x2c833, 0x36ff4, 0x4b2a7, 0x4b478, 0x4b5ca, 0x4b6ae, 0x4b7d4, 0x4bd35 ...
- * Callees  : 2 -> 0xe8214, 0xe846c
+ * Purpose  : Accesses per-player PlayerInfo state (stride 0x4ef)
+ * Callers  : 17 -> effect_process_thing_entity_024ab9, entrance_update_player_view_state_02684f, file_update_player_dungeon_02c833, game_out_sync_gameturn_036ff4, instance_process_thing_entity_04b2a7, instance_update_creature_and_thing_04b478, instance_update_player_view_state_04b5ca, instance_update_player_view_state_04b6ae ...
+ * Callees  : 2 -> bflib_system_io_fn_0e8214, LbPaletteSet
  ******************************************************************************/
 /* WARNING: Removing unreachable block (ram,0x000628f0) */
 /* WARNING: Removing unreachable block (ram,0x00062986) */
 /* WARNING: Removing unreachable block (ram,0x0006292f) */
 
-void FUN_000627b5(void)
+void panmap_update_player_view_state_0627b5(void)
 
 {
-  byte bVar1;
-  undefined1 *in_EAX;
-  int iVar2;
-  byte *in_EDX;
-  byte *pbVar3;
+  byte flag;
+  undefined1 *arg_eax;
+  int val;
+  byte *arg_edx;
+  byte *byte_ptr;
   byte local_320 [768];
   int local_20;
   int local_1c;
   undefined4 local_18;
   
-  if (in_EDX == DAT_00199218) {
-    if ((in_EAX[3] & 4) != 0) {
+  if (arg_edx == g_data_00199218) {
+    if ((arg_eax[3] & 4) != 0) {
       return;
     }
-    in_EAX[3] = in_EAX[3] | 4;
+    arg_eax[3] = arg_eax[3] | 4;
   }
   else {
-    in_EAX[3] = in_EAX[3] & 0xfb;
+    arg_eax[3] = arg_eax[3] & 0xfb;
   }
-  if (*(int *)(in_EAX + 7) != 0) {
-    if (in_EDX == *(byte **)(in_EAX + 0x4c9)) {
+  if (*(int *)(arg_eax + 7) != 0) {
+    if (arg_edx == *(byte **)(arg_eax + 0x4c9)) {
       return;
     }
-    if (in_EDX != *(byte **)(in_EAX + 7)) {
+    if (arg_edx != *(byte **)(arg_eax + 7)) {
       return;
     }
   }
-  if ((*(int *)(in_EAX + 0x4c1) == 0) && (*(int *)(in_EAX + 0x4c5) == 0)) {
-    iVar2 = (int)DAT_002f10ce._3_1_;
-    *(byte **)(in_EAX + 0x4c9) = in_EDX;
-    if (in_EAX != &DAT_0019d0c8 + iVar2 * 0x4ef) {
+  if ((*(int *)(arg_eax + 0x4c1) == 0) && (*(int *)(arg_eax + 0x4c5) == 0)) {
+    val = (int)g_my_player_word._3_1_;
+    *(byte **)(arg_eax + 0x4c9) = arg_edx;
+    if (arg_eax != &g_players + val * 0x4ef) {
       return;
     }
-    FUN_000e8214();
-    FUN_000e846c();
+    bflib_system_io_fn_0e8214();
+    LbPaletteSet();
     return;
   }
-  if ((*(int *)(in_EAX + 0x4c1) == 0) || (*(int *)(in_EAX + 0x4c5) == 0)) {
-    if ((*(int *)(in_EAX + 0x4c1) == 0) || (*(int *)(in_EAX + 0x4c5) != 0)) {
-      local_1c = (*(int *)(in_EAX + 0x4c5) + -1) * 10;
+  if ((*(int *)(arg_eax + 0x4c1) == 0) || (*(int *)(arg_eax + 0x4c5) == 0)) {
+    if ((*(int *)(arg_eax + 0x4c1) == 0) || (*(int *)(arg_eax + 0x4c5) != 0)) {
+      local_1c = (*(int *)(arg_eax + 0x4c5) + -1) * 10;
       if (0x78 < local_1c) {
         local_1c = 0x78;
       }
       goto LAB_000628a3;
     }
-    local_1c = (*(int *)(in_EAX + 0x4c1) + -1) * 0xc;
+    local_1c = (*(int *)(arg_eax + 0x4c1) + -1) * 0xc;
   }
   else {
-    local_1c = (*(int *)(in_EAX + 0x4c5) + -1) * 10 + (*(int *)(in_EAX + 0x4c1) + -1) * 0xc;
+    local_1c = (*(int *)(arg_eax + 0x4c5) + -1) * 10 + (*(int *)(arg_eax + 0x4c1) + -1) * 0xc;
   }
   if (0x78 < local_1c) {
     local_1c = 0x78;
@@ -220,255 +220,255 @@ void FUN_000627b5(void)
 LAB_000628a3:
   local_1c = 0x78 - local_1c;
   local_20 = 0;
-  pbVar3 = in_EDX;
+  byte_ptr = arg_edx;
   do {
-    bVar1 = (char)((int)((*pbVar3 - 0x3f) * local_1c) / 0xc) * '\n' + 0x3f;
-    local_320[local_20 * 3] = bVar1;
-    if (0x3f < bVar1) {
+    flag = (char)((int)((*byte_ptr - 0x3f) * local_1c) / 0xc) * '\n' + 0x3f;
+    local_320[local_20 * 3] = flag;
+    if (0x3f < flag) {
       local_320[local_20 * 3] = 0x3f;
     }
-    bVar1 = (char)((int)((uint)pbVar3[1] * local_1c) / 0xc) * '\n';
-    local_320[local_20 * 3 + 1] = bVar1;
-    if (0x3f < bVar1) {
+    flag = (char)((int)((uint)byte_ptr[1] * local_1c) / 0xc) * '\n';
+    local_320[local_20 * 3 + 1] = flag;
+    if (0x3f < flag) {
       local_320[local_20 * 3 + 1] = 0x3f;
     }
     local_18 = 0xc;
-    bVar1 = (char)((int)((uint)pbVar3[2] * local_1c) / 0xc) * '\n';
-    local_320[local_20 * 3 + 2] = bVar1;
-    if (0x3f < bVar1) {
+    flag = (char)((int)((uint)byte_ptr[2] * local_1c) / 0xc) * '\n';
+    local_320[local_20 * 3 + 2] = flag;
+    if (0x3f < flag) {
       local_320[local_20 * 3 + 2] = 0x3f;
     }
     local_20 = local_20 + 1;
-    pbVar3 = pbVar3 + 3;
+    byte_ptr = byte_ptr + 3;
   } while (local_20 < 0x100);
-  if (in_EAX == &DAT_0019d0c8 + DAT_002f10ce._3_1_ * 0x4ef) {
-    FUN_000e8214();
-    FUN_000e846c(local_320);
+  if (arg_eax == &g_players + g_my_player_word._3_1_ * 0x4ef) {
+    bflib_system_io_fn_0e8214();
+    LbPaletteSet(local_320);
   }
-  *(byte **)(in_EAX + 0x4c9) = in_EDX;
+  *(byte **)(arg_eax + 0x4c9) = arg_edx;
   return;
 }
 
 /******************************************************************************
- * Function : sub_0629cc (Ghidra: FUN_000629cc)
- * Prototype: void sub_0629cc(void);
+ * Function : panmap_fn_0629cc (Original VA: 0x629cc, Ghidra: FUN_000629cc)
+ * Prototype: void panmap_fn_0629cc(void);
  * Address  : 0x629cc (Size: 65 bytes)
  * Module   : panmap.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0x88e2c, 0x890bc, 0x89ae8
+ * Purpose  : Module panmap.cpp procedure @ 0x0629cc
+ * Callers  : 3 -> draw_process_thing_entity_088e2c, draw_update_creature_and_thing_0890bc, draw_update_player_dungeon_089ae8
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_000629cc(void)
+void panmap_fn_0629cc(void)
 
 {
-  int in_EAX;
-  int in_EDX;
-  undefined1 unaff_BL;
+  int arg_eax;
+  int arg_edx;
+  undefined1 arg_bl;
   
-  if ((((-1 < in_EDX) && (in_EDX < 0x74)) && ((int)(&DAT_0035e254)[in_EDX] <= in_EAX)) &&
-     (in_EAX < (int)(&DAT_0035e424)[in_EDX])) {
-    *(undefined1 *)((in_EDX + DAT_0034d250) * DAT_003d9834 + DAT_003d9818 + in_EAX + DAT_0034d24c) =
-         unaff_BL;
+  if ((((-1 < arg_edx) && (arg_edx < 0x74)) && ((int)(&g_bss_0035e254)[arg_edx] <= arg_eax)) &&
+     (arg_eax < (int)(&g_bss_0035e424)[arg_edx])) {
+    *(undefined1 *)((arg_edx + g_bss_0034d250) * g_screen_pitch + g_display_bss_003d9818 + arg_eax + g_bss_0034d24c) =
+         arg_bl;
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_062a0d (Ghidra: FUN_00062a0d)
- * Prototype: void sub_062a0d(void);
+ * Function : panmap_fn_062a0d (Original VA: 0x62a0d, Ghidra: FUN_00062a0d)
+ * Prototype: void panmap_fn_062a0d(void);
  * Address  : 0x62a0d (Size: 341 bytes)
  * Module   : panmap.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x62eb7
+ * Purpose  : Module panmap.cpp procedure @ 0x062a0d
+ * Callers  : 1 -> panmap_fn_062eb7
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_00062a0d(void)
+void panmap_fn_062a0d(void)
 
 {
-  byte bVar1;
-  undefined1 uVar2;
-  undefined1 uVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
-  uint uVar8;
+  byte flag;
+  undefined1 uval;
+  undefined1 uval_2;
+  int val;
+  int loop_i;
+  int val_2;
+  int loop_i_2;
+  uint uval_3;
   int local_28;
   int local_24;
   int local_20;
   
   local_28 = 0x66;
-  iVar4 = 0;
-  uVar8 = DAT_002e8bee & 3;
-  for (iVar7 = 0; iVar7 < DAT_00361b84; iVar7 = iVar7 + 1) {
-    bVar1 = (&DAT_00361a84)[iVar7];
-    if ((DAT_002e8bee & 3) == 0) {
-      (&DAT_0035d257)[iVar4] = bVar1;
-      (&DAT_0035d258)[iVar4] = bVar1;
+  val = 0;
+  uval_3 = g_game_turn & 3;
+  for (loop_i_2 = 0; loop_i_2 < g_bss_00361b84; loop_i_2 = loop_i_2 + 1) {
+    flag = (&g_bss_00361a84)[loop_i_2];
+    if ((g_game_turn & 3) == 0) {
+      (&g_bss_0035d257)[val] = flag;
+      (&g_bss_0035d258)[val] = flag;
     }
     else {
-      (&DAT_0035d257)[iVar4] = (&DAT_00367610)[bVar1];
-      (&DAT_0035d258)[iVar4] = (&DAT_0036e810)[bVar1];
+      (&g_bss_0035d257)[val] = (&g_bss_00367610)[flag];
+      (&g_bss_0035d258)[val] = (&g_bss_0036e810)[flag];
     }
-    (&DAT_0035d256)[iVar4] = 0;
-    (&DAT_0035d25a)[iVar4] = 0x92;
-    (&DAT_0035d25b)[iVar4] = 0x55;
-    uVar2 = (&DAT_00366c10)[bVar1];
-    (&DAT_0035d254)[iVar4] = bVar1;
-    uVar3 = (&DAT_0036e810)[bVar1];
-    (&DAT_0035d255)[iVar4] = uVar2;
-    (&DAT_0035d259)[iVar4] = uVar3;
-    for (iVar5 = iVar4; iVar5 != local_28; iVar5 = iVar5 + 6) {
-      (&DAT_0035d25c)[iVar5] = 0x84;
-      (&DAT_0035d25d)[iVar5] = 0x5c;
-      (&DAT_0035d25e)[iVar5] = 0xa4;
-      (&DAT_0035d25f)[iVar5] = 0xb7;
-      (&DAT_0035d260)[iVar5] = 0x15;
-      (&DAT_0035d261)[iVar5] = (&DAT_00184278)[uVar8];
+    (&g_bss_0035d256)[val] = 0;
+    (&g_bss_0035d25a)[val] = 0x92;
+    (&g_bss_0035d25b)[val] = 0x55;
+    uval = (&g_bss_00366c10)[flag];
+    (&g_bss_0035d254)[val] = flag;
+    uval_2 = (&g_bss_0036e810)[flag];
+    (&g_bss_0035d255)[val] = uval;
+    (&g_bss_0035d259)[val] = uval_2;
+    for (loop_i = val; loop_i != local_28; loop_i = loop_i + 6) {
+      (&g_bss_0035d25c)[loop_i] = 0x84;
+      (&g_bss_0035d25d)[loop_i] = 0x5c;
+      (&g_bss_0035d25e)[loop_i] = 0xa4;
+      (&g_bss_0035d25f)[loop_i] = 0xb7;
+      (&g_bss_0035d260)[loop_i] = 0x15;
+      (&g_bss_0035d261)[loop_i] = (&g_data_00184278)[uval_3];
     }
-    (&DAT_0035d2fe)[iVar4] = 0x83;
-    (&DAT_0035d2ff)[iVar4] = 0x5a;
-    (&DAT_0035d300)[iVar4] = 0xa3;
+    (&g_bss_0035d2fe)[val] = 0x83;
+    (&g_bss_0035d2ff)[val] = 0x5a;
+    (&g_bss_0035d300)[val] = 0xa3;
     local_20 = 0;
-    (&DAT_0035d301)[iVar4] = 0xb5;
-    (&DAT_0035d302)[iVar4] = 0x14;
-    local_24 = iVar4 + 6;
-    (&DAT_0035d303)[iVar4] = 4;
+    (&g_bss_0035d301)[val] = 0xb5;
+    (&g_bss_0035d302)[val] = 0x14;
+    local_24 = val + 6;
+    (&g_bss_0035d303)[val] = 4;
     do {
-      iVar6 = local_20 * 0xc + iVar4;
-      iVar5 = local_24;
+      val_2 = local_20 * 0xc + val;
+      loop_i = local_24;
       do {
-        (&DAT_0035d2c2)[iVar6] = 0x3c;
-        iVar6 = iVar6 + 1;
-        (&DAT_0035d2c2)[iVar5] = 0x4f;
-        iVar5 = iVar5 + 1;
-      } while (iVar6 != local_24);
+        (&g_bss_0035d2c2)[val_2] = 0x3c;
+        val_2 = val_2 + 1;
+        (&g_bss_0035d2c2)[loop_i] = 0x4f;
+        loop_i = loop_i + 1;
+      } while (val_2 != local_24);
       local_20 = local_20 + 1;
       local_24 = local_24 + 0xc;
     } while (local_20 < 5);
     local_28 = local_28 + 0x100;
-    iVar4 = iVar4 + 0x100;
+    val = val + 0x100;
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_062b62 (Ghidra: FUN_00062b62)
- * Prototype: void sub_062b62(void);
+ * Function : panmap_fn_062b62 (Original VA: 0x62b62, Ghidra: FUN_00062b62)
+ * Prototype: void panmap_fn_062b62(void);
  * Address  : 0x62b62 (Size: 526 bytes)
  * Module   : panmap.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x62ee2
+ * Purpose  : Module panmap.cpp procedure @ 0x062b62
+ * Callers  : 1 -> panmap_update_player_view_state_062ee2
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_00062b62(void)
+void panmap_fn_062b62(void)
 
 {
-  undefined1 *puVar1;
-  undefined1 uVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  byte bVar7;
-  uint uVar8;
-  uint uVar9;
-  int iVar10;
+  undefined1 *word_ptr;
+  undefined1 uval;
+  int loop_i;
+  int val;
+  int val_2;
+  int loop_i_2;
+  byte flag;
+  uint uval_2;
+  uint uval_3;
+  int loop_i_3;
   int local_20;
   int local_1c;
   
-  iVar10 = 0x66;
-  uVar9 = DAT_002e8bee & 3;
-  for (iVar6 = 0; iVar6 < DAT_00361b84; iVar6 = iVar6 + 1) {
-    bVar7 = (&DAT_00361a84)[iVar6];
-    iVar3 = iVar6 * 0x100;
-    if ((DAT_002e8bee & 3) == 0) {
-      (&DAT_0035d257)[iVar3] = bVar7;
+  loop_i_3 = 0x66;
+  uval_3 = g_game_turn & 3;
+  for (loop_i_2 = 0; loop_i_2 < g_bss_00361b84; loop_i_2 = loop_i_2 + 1) {
+    flag = (&g_bss_00361a84)[loop_i_2];
+    loop_i = loop_i_2 * 0x100;
+    if ((g_game_turn & 3) == 0) {
+      (&g_bss_0035d257)[loop_i] = flag;
     }
     else {
-      uVar8 = (uint)bVar7;
-      bVar7 = (&DAT_0036e810)[bVar7];
-      (&DAT_0035d257)[iVar3] = (&DAT_00367610)[uVar8];
+      uval_2 = (uint)flag;
+      flag = (&g_bss_0036e810)[flag];
+      (&g_bss_0035d257)[loop_i] = (&g_bss_00367610)[uval_2];
     }
-    (&DAT_0035d258)[iVar3] = bVar7;
-    uVar2 = (&DAT_00184278)[uVar9];
-    iVar3 = iVar6 << 8;
+    (&g_bss_0035d258)[loop_i] = flag;
+    uval = (&g_data_00184278)[uval_3];
+    loop_i = loop_i_2 << 8;
     do {
-      iVar4 = iVar3 + 6;
-      (&DAT_0035d261)[iVar3] = uVar2;
-      iVar3 = iVar4;
-    } while (iVar4 != iVar10);
-    iVar10 = iVar10 + 0x100;
+      val = loop_i + 6;
+      (&g_bss_0035d261)[loop_i] = uval;
+      loop_i = val;
+    } while (val != loop_i_3);
+    loop_i_3 = loop_i_3 + 0x100;
   }
-  iVar6 = (int)DAT_0017d17b._3_1_;
-  if ((DAT_002e8bee & 1) != 0) {
-    iVar6 = -1;
+  loop_i_2 = (int)g_data_0017d17b._3_1_;
+  if ((g_game_turn & 1) != 0) {
+    loop_i_2 = -1;
   }
-  if (iVar6 != DAT_0018427e) {
-    if (-1 < DAT_0018427e) {
-      iVar10 = DAT_0018427e * 6;
-      for (iVar3 = 0; iVar3 < DAT_00361b84; iVar3 = iVar3 + 1) {
-        iVar5 = 0;
-        iVar4 = iVar10;
+  if (loop_i_2 != g_data_0018427e) {
+    if (-1 < g_data_0018427e) {
+      loop_i_3 = g_data_0018427e * 6;
+      for (loop_i = 0; loop_i < g_bss_00361b84; loop_i = loop_i + 1) {
+        val_2 = 0;
+        val = loop_i_3;
         do {
-          puVar1 = &DAT_00184278 + iVar5;
-          iVar5 = iVar5 + 1;
-          (&DAT_0035d25c)[iVar4] = *puVar1;
-          iVar4 = iVar4 + 1;
-        } while (iVar5 < 6);
-        iVar10 = iVar10 + 0x100;
+          word_ptr = &g_data_00184278 + val_2;
+          val_2 = val_2 + 1;
+          (&g_bss_0035d25c)[val] = *word_ptr;
+          val = val + 1;
+        } while (val_2 < 6);
+        loop_i_3 = loop_i_3 + 0x100;
       }
     }
-    DAT_0018427e = iVar6;
-    if (-1 < iVar6) {
-      iVar10 = iVar6 * 6 + 6;
-      for (iVar3 = 0; iVar3 < DAT_00361b84; iVar3 = iVar3 + 1) {
-        iVar4 = iVar3 * 0x100 + iVar6 * 6;
+    g_data_0018427e = loop_i_2;
+    if (-1 < loop_i_2) {
+      loop_i_3 = loop_i_2 * 6 + 6;
+      for (loop_i = 0; loop_i < g_bss_00361b84; loop_i = loop_i + 1) {
+        val = loop_i * 0x100 + loop_i_2 * 6;
         do {
-          iVar5 = iVar4 + 1;
-          (&DAT_0035d25c)[iVar4] = 0x1f;
-          iVar4 = iVar5;
-        } while (iVar5 != iVar10);
-        iVar10 = iVar10 + 0x100;
+          val_2 = val + 1;
+          (&g_bss_0035d25c)[val] = 0x1f;
+          val = val_2;
+        } while (val_2 != loop_i_3);
+        loop_i_3 = loop_i_3 + 0x100;
       }
     }
   }
-  iVar6 = (int)DAT_0017d17f;
-  if ((DAT_002e8bee & 1) != 0) {
-    iVar6 = -1;
+  loop_i_2 = (int)g_data_0017d17f;
+  if ((g_game_turn & 1) != 0) {
+    loop_i_2 = -1;
   }
-  if (iVar6 != DAT_00184282) {
-    if ((-1 < DAT_00184282) && (DAT_00184282 != 5)) {
-      iVar3 = (DAT_00184282 * 2 + 1) * 6;
-      local_20 = DAT_00184282 * 0xc + 6;
-      for (iVar10 = 0; iVar10 < DAT_00361b84; iVar10 = iVar10 + 1) {
-        iVar5 = iVar10 * 0x100 + DAT_00184282 * 0xc;
-        iVar4 = iVar3;
+  if (loop_i_2 != g_data_00184282) {
+    if ((-1 < g_data_00184282) && (g_data_00184282 != 5)) {
+      loop_i = (g_data_00184282 * 2 + 1) * 6;
+      local_20 = g_data_00184282 * 0xc + 6;
+      for (loop_i_3 = 0; loop_i_3 < g_bss_00361b84; loop_i_3 = loop_i_3 + 1) {
+        val_2 = loop_i_3 * 0x100 + g_data_00184282 * 0xc;
+        val = loop_i;
         do {
-          (&DAT_0035d2c2)[iVar5] = 0x3c;
-          iVar5 = iVar5 + 1;
-          (&DAT_0035d2c2)[iVar4] = 0x4f;
-          iVar4 = iVar4 + 1;
-        } while (iVar5 != local_20);
+          (&g_bss_0035d2c2)[val_2] = 0x3c;
+          val_2 = val_2 + 1;
+          (&g_bss_0035d2c2)[val] = 0x4f;
+          val = val + 1;
+        } while (val_2 != local_20);
         local_20 = local_20 + 0x100;
-        iVar3 = iVar3 + 0x100;
+        loop_i = loop_i + 0x100;
       }
     }
-    DAT_00184282 = iVar6;
-    if (-1 < iVar6) {
-      iVar3 = (iVar6 * 2 + 1) * 6;
-      local_1c = iVar6 * 0xc + 6;
-      for (iVar10 = 0; iVar10 < DAT_00361b84; iVar10 = iVar10 + 1) {
-        iVar5 = iVar10 * 0x100 + iVar6 * 0xc;
-        iVar4 = iVar3;
+    g_data_00184282 = loop_i_2;
+    if (-1 < loop_i_2) {
+      loop_i = (loop_i_2 * 2 + 1) * 6;
+      local_1c = loop_i_2 * 0xc + 6;
+      for (loop_i_3 = 0; loop_i_3 < g_bss_00361b84; loop_i_3 = loop_i_3 + 1) {
+        val_2 = loop_i_3 * 0x100 + loop_i_2 * 0xc;
+        val = loop_i;
         do {
-          (&DAT_0035d2c2)[iVar5] = 0x1f;
-          iVar5 = iVar5 + 1;
-          (&DAT_0035d2c2)[iVar4] = 0x1f;
-          iVar4 = iVar4 + 1;
-        } while (iVar5 != local_1c);
+          (&g_bss_0035d2c2)[val_2] = 0x1f;
+          val_2 = val_2 + 1;
+          (&g_bss_0035d2c2)[val] = 0x1f;
+          val = val + 1;
+        } while (val_2 != local_1c);
         local_1c = local_1c + 0x100;
-        iVar3 = iVar3 + 0x100;
+        loop_i = loop_i + 0x100;
       }
     }
   }
@@ -476,28 +476,28 @@ void FUN_00062b62(void)
 }
 
 /******************************************************************************
- * Function : sub_062d70 (Ghidra: FUN_00062d70)
- * Prototype: void sub_062d70(void);
+ * Function : panmap_fn_062d70 (Original VA: 0x62d70, Ghidra: FUN_00062d70)
+ * Prototype: void panmap_fn_062d70(void);
  * Address  : 0x62d70 (Size: 327 bytes)
  * Module   : panmap.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x62eb7
- * Callees  : 1 -> 0xe8cc8
+ * Purpose  : Module panmap.cpp procedure @ 0x062d70
+ * Callers  : 1 -> panmap_fn_062eb7
+ * Callees  : 1 -> bflib_system_io_fn_0e8cc8
  ******************************************************************************/
-void FUN_00062d70(void)
+void panmap_fn_062d70(void)
 
 {
-  char cVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  char *pcVar5;
+  char ch;
+  int val;
+  int val_2;
+  int ui_scale;
+  char *str_ptr;
   int extraout_ECX;
-  int iVar6;
-  int iVar7;
-  int iVar8;
-  int iVar9;
-  undefined8 uVar10;
+  int val_3;
+  int loop_i;
+  int val_4;
+  int val_5;
+  undefined8 uval;
   int local_2c;
   int local_28;
   int local_24;
@@ -505,305 +505,302 @@ void FUN_00062d70(void)
   int local_1c;
   
   local_20 = 0;
-  iVar8 = 0;
+  val_4 = 0;
   while( true ) {
-    iVar2 = DAT_003d9834;
-    iVar3 = DAT_0034d24c;
-    iVar4 = (int)(0x74 / (ulonglong)(longlong)(int)(uint)DAT_0019cba6);
-    if (iVar4 <= local_20) break;
+    val = g_screen_pitch;
+    val_2 = g_bss_0034d24c;
+    ui_scale = (int)(0x74 / (ulonglong)(longlong)(int)(uint)g_units_per_pixel);
+    if (ui_scale <= local_20) break;
     local_20 = local_20 + 1;
-    uVar10 = FUN_000e8cc8();
-    *(int *)((int)&DAT_0035e254 + iVar8) = (int)((ulonglong)uVar10 >> 0x20) - (int)uVar10;
-    iVar3 = FUN_000e8cc8();
-    *(int *)((int)&DAT_0035e424 + iVar8) = iVar3 + extraout_ECX;
-    iVar8 = iVar8 + 4;
+    uval = bflib_system_io_fn_0e8cc8();
+    *(int *)((int)&g_bss_0035e254 + val_4) = (int)((ulonglong)uval >> 0x20) - (int)uval;
+    val_2 = bflib_system_io_fn_0e8cc8();
+    *(int *)((int)&g_bss_0035e424 + val_4) = val_2 + extraout_ECX;
+    val_4 = val_4 + 4;
   }
-  DAT_00361b84 = 0;
-  iVar8 = 0;
-  local_2c = DAT_003d9818 + DAT_003d9834 * DAT_0034d250;
+  g_bss_00361b84 = 0;
+  val_4 = 0;
+  local_2c = g_display_bss_003d9818 + g_screen_pitch * g_bss_0034d250;
   local_28 = 0;
-  for (local_24 = 0; local_24 < (int)(0x74 / (ulonglong)(longlong)(int)(uint)DAT_0019cba6);
+  for (local_24 = 0; local_24 < (int)(0x74 / (ulonglong)(longlong)(int)(uint)g_units_per_pixel);
       local_24 = local_24 + 1) {
-    local_1c = *(int *)((int)&DAT_0035e254 + iVar8);
-    pcVar5 = (char *)(local_1c + local_2c + iVar3);
-    iVar9 = local_1c + local_28;
-    while (local_1c < *(int *)((int)&DAT_0035e424 + iVar8)) {
-      cVar1 = *pcVar5;
-      *pcVar5 = -1;
-      for (iVar7 = 0; (iVar7 < DAT_00361b84 && (cVar1 != (&DAT_00361a84)[iVar7])); iVar7 = iVar7 + 1
+    local_1c = *(int *)((int)&g_bss_0035e254 + val_4);
+    str_ptr = (char *)(local_1c + local_2c + val_2);
+    val_5 = local_1c + local_28;
+    while (local_1c < *(int *)((int)&g_bss_0035e424 + val_4)) {
+      ch = *str_ptr;
+      *str_ptr = -1;
+      for (loop_i = 0; (loop_i < g_bss_00361b84 && (ch != (&g_bss_00361a84)[loop_i])); loop_i = loop_i + 1
           ) {
       }
-      iVar6 = DAT_00361b84;
-      if (iVar7 == DAT_00361b84) {
-        iVar6 = DAT_00361b84 + 1;
-        (&DAT_00361a84)[DAT_00361b84] = cVar1;
+      val_3 = g_bss_00361b84;
+      if (loop_i == g_bss_00361b84) {
+        val_3 = g_bss_00361b84 + 1;
+        (&g_bss_00361a84)[g_bss_00361b84] = ch;
       }
       local_1c = local_1c + 1;
-      pcVar5 = pcVar5 + 1;
-      (&DAT_0035e5f4)[iVar9] = (char)iVar7;
-      DAT_00361b84 = iVar6;
-      iVar9 = iVar9 + 1;
+      str_ptr = str_ptr + 1;
+      (&g_bss_0035e5f4)[val_5] = (char)loop_i;
+      g_bss_00361b84 = val_3;
+      val_5 = val_5 + 1;
     }
-    local_2c = local_2c + iVar2;
-    iVar8 = iVar8 + 4;
-    local_28 = local_28 + iVar4;
+    local_2c = local_2c + val;
+    val_4 = val_4 + 4;
+    local_28 = local_28 + ui_scale;
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_062eb7 (Ghidra: FUN_00062eb7)
- * Prototype: void sub_062eb7(void);
+ * Function : panmap_fn_062eb7 (Original VA: 0x62eb7, Ghidra: FUN_00062eb7)
+ * Prototype: void panmap_fn_062eb7(void);
  * Address  : 0x62eb7 (Size: 43 bytes)
  * Module   : panmap.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x62ee2
- * Callees  : 2 -> 0x62a0d, 0x62d70
+ * Purpose  : Module panmap.cpp procedure @ 0x062eb7
+ * Callers  : 1 -> panmap_update_player_view_state_062ee2
+ * Callees  : 2 -> panmap_fn_062a0d, panmap_fn_062d70
  ******************************************************************************/
-void FUN_00062eb7(void)
+void panmap_fn_062eb7(void)
 
 {
-  int iVar1;
+  int ui_scale;
   
-  iVar1 = (int)(0x100 / (ulonglong)(longlong)(int)(uint)DAT_0019cba6);
-  if (iVar1 != DAT_00184274) {
-    DAT_00184274 = iVar1;
-    FUN_00062d70();
-    FUN_00062a0d();
+  ui_scale = (int)(0x100 / (ulonglong)(longlong)(int)(uint)g_units_per_pixel);
+  if (ui_scale != g_data_00184274) {
+    g_data_00184274 = ui_scale;
+    panmap_fn_062d70();
+    panmap_fn_062a0d();
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_062ee2 (Ghidra: FUN_00062ee2)
- * Prototype: void sub_062ee2(void);
+ * Function : panmap_update_player_view_state_062ee2 (Original VA: 0x62ee2, Ghidra: FUN_00062ee2)
+ * Prototype: void panmap_update_player_view_state_062ee2(void);
  * Address  : 0x62ee2 (Size: 576 bytes)
  * Module   : panmap.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0x872b8, 0x87694, 0x87870
- * Callees  : 2 -> 0x62b62, 0x62eb7
+ * Purpose  : Accesses per-player PlayerInfo state (stride 0x4ef)
+ * Callers  : 3 -> draw_update_player_dungeon_0872b8, draw_fn_087694, draw_update_creature_and_thing_087870
+ * Callees  : 2 -> panmap_fn_062b62, panmap_fn_062eb7
  ******************************************************************************/
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void FUN_00062ee2(void)
+void panmap_update_player_view_state_062ee2(void)
 
 {
-  undefined1 uVar1;
-  int iVar2;
-  uint uVar3;
-  int iVar4;
-  int in_EAX;
-  int iVar5;
-  uint uVar6;
-  int iVar7;
-  int iVar8;
+  undefined1 uval;
+  int val;
+  uint uval_2;
+  int val_2;
+  int arg_eax;
+  int ui_scale;
+  uint uval_3;
+  int val_3;
+  int ui_scale_2;
   int extraout_ECX;
-  int in_EDX;
-  int iVar9;
-  int iVar10;
-  int iVar11;
-  int iVar12;
-  undefined1 *puVar13;
-  int iVar14;
-  int unaff_EBX;
-  undefined *puVar15;
+  int arg_edx;
+  int val_4;
+  int val_5;
+  int loop_i;
+  int val_6;
+  undefined1 *word_ptr;
+  int player_off;
+  int arg_ebx;
+  undefined *word_ptr_2;
   undefined *local_34;
   int local_28;
   int local_24;
   int local_20;
   int local_14;
   
-  DAT_0034d24c = in_EAX / (int)(uint)DAT_0019cba6;
-  iVar5 = in_EDX / (int)(uint)DAT_0019cba6;
-  DAT_0034d250 = iVar5;
-  FUN_00062eb7();
-  FUN_00062b62();
-  iVar4 = DAT_003d9834;
-  iVar14 = *(int *)((int)&DAT_0019d100 + DAT_002f10ce._3_1_ * 0x4ef);
-  uVar6 = -*(int *)(iVar14 + 7) & 0x7ff;
-  iVar2 = (&DAT_001927e0)[uVar6];
-  iVar9 = iVar2 * unaff_EBX >> 0x1f;
-  iVar7 = (int)(&PTR_LAB_00192fe0)[uVar6] * unaff_EBX;
-  iVar10 = iVar7 >> 0x1f;
-  iVar7 = (int)((iVar7 + iVar10 * -0x100) - (uint)(iVar10 << 7 < 0)) >> 8;
-  iVar10 = -unaff_EBX * iVar2 >> 0x1f;
-  iVar10 = (int)((-unaff_EBX * iVar2 + iVar10 * -0x100) - (uint)(iVar10 << 7 < 0)) >> 8;
-  iVar8 = (int)(0x74 / (ulonglong)(longlong)(int)(uint)DAT_0019cba6);
-  iVar11 = iVar8 * unaff_EBX >> 0x1f;
-  iVar11 = (int)((iVar8 * unaff_EBX + iVar11 * -0x200) - (uint)(iVar11 << 8 < 0)) >> 9;
-  iVar12 = (int)(&PTR_LAB_00192fe0)[uVar6] * iVar11;
-  local_20 = (uint)*(byte *)(iVar14 + 3) * 0x10000 - (iVar12 + -iVar11 * iVar2);
-  local_34 = &DAT_0035e5f4;
-  local_24 = (uint)*(byte *)(*(int *)((int)&DAT_0019d100 + DAT_002f10ce._3_1_ * 0x4ef) + 1) *
-             0x10000 - (iVar2 * iVar11 + iVar12);
-  local_28 = extraout_ECX + DAT_003d9818 + iVar5 * DAT_003d9834;
-  _DAT_00361b88 = iVar7;
-  _DAT_00361b8c = iVar10;
-  for (local_14 = 0; local_14 < iVar8 << 2; local_14 = local_14 + 4) {
-    iVar14 = *(int *)((int)&DAT_0035e424 + local_14);
-    iVar5 = *(int *)((int)&DAT_0035e254 + local_14);
-    iVar12 = iVar7 * (iVar14 + -1) + local_24;
-    for (iVar11 = local_20 + (iVar14 + -1) * iVar10;
-        (iVar5 < iVar14 &&
-        ((((iVar12 < 0 || (iVar11 < 0)) || (0xffffff < iVar12)) || (0xffffff < iVar11))));
-        iVar11 = iVar11 - iVar10) {
-      iVar12 = iVar12 - iVar7;
-      iVar14 = iVar14 + -1;
+  g_bss_0034d24c = arg_eax / (int)(uint)g_units_per_pixel;
+  ui_scale = arg_edx / (int)(uint)g_units_per_pixel;
+  g_bss_0034d250 = ui_scale;
+  panmap_fn_062eb7();
+  panmap_fn_062b62();
+  val_2 = g_screen_pitch;
+  player_off = *(int *)((int)&g_player_active_camera + g_my_player_word._3_1_ * 0x4ef);
+  uval_3 = -*(int *)(player_off + 7) & 0x7ff;
+  val = (&g_slab_attr_table)[uval_3];
+  val_4 = val * arg_ebx >> 0x1f;
+  val_3 = (int)(&PTR_LAB_00192fe0)[uval_3] * arg_ebx;
+  val_5 = val_3 >> 0x1f;
+  val_3 = (int)((val_3 + val_5 * -0x100) - (uint)(val_5 << 7 < 0)) >> 8;
+  val_5 = -arg_ebx * val >> 0x1f;
+  val_5 = (int)((-arg_ebx * val + val_5 * -0x100) - (uint)(val_5 << 7 < 0)) >> 8;
+  ui_scale_2 = (int)(0x74 / (ulonglong)(longlong)(int)(uint)g_units_per_pixel);
+  loop_i = ui_scale_2 * arg_ebx >> 0x1f;
+  loop_i = (int)((ui_scale_2 * arg_ebx + loop_i * -0x200) - (uint)(loop_i << 8 < 0)) >> 9;
+  val_6 = (int)(&PTR_LAB_00192fe0)[uval_3] * loop_i;
+  local_20 = (uint)*(byte *)(player_off + 3) * 0x10000 - (val_6 + -loop_i * val);
+  local_34 = &g_bss_0035e5f4;
+  local_24 = (uint)*(byte *)(*(int *)((int)&g_player_active_camera + g_my_player_word._3_1_ * 0x4ef) + 1) *
+             0x10000 - (val * loop_i + val_6);
+  local_28 = extraout_ECX + g_display_bss_003d9818 + ui_scale * g_screen_pitch;
+  g_bss_00361b88 = val_3;
+  g_bss_00361b8c = val_5;
+  for (local_14 = 0; local_14 < ui_scale_2 << 2; local_14 = local_14 + 4) {
+    player_off = *(int *)((int)&g_bss_0035e424 + local_14);
+    ui_scale = *(int *)((int)&g_bss_0035e254 + local_14);
+    val_6 = val_3 * (player_off + -1) + local_24;
+    for (loop_i = local_20 + (player_off + -1) * val_5;
+        (ui_scale < player_off &&
+        ((((val_6 < 0 || (loop_i < 0)) || (0xffffff < val_6)) || (0xffffff < loop_i))));
+        loop_i = loop_i - val_5) {
+      val_6 = val_6 - val_3;
+      player_off = player_off + -1;
     }
-    iVar12 = iVar7 * iVar5 + local_24;
-    for (iVar11 = iVar10 * iVar5 + local_20;
-        (iVar5 < iVar14 &&
-        (((iVar12 < 0 || (iVar11 < 0)) || ((0xffffff < iVar12 || (0xffffff < iVar11))))));
-        iVar11 = iVar11 + iVar10) {
-      iVar12 = iVar12 + iVar7;
-      iVar5 = iVar5 + 1;
+    val_6 = val_3 * ui_scale + local_24;
+    for (loop_i = val_5 * ui_scale + local_20;
+        (ui_scale < player_off &&
+        (((val_6 < 0 || (loop_i < 0)) || ((0xffffff < val_6 || (0xffffff < loop_i))))));
+        loop_i = loop_i + val_5) {
+      val_6 = val_6 + val_3;
+      ui_scale = ui_scale + 1;
     }
-    puVar13 = (undefined1 *)(local_28 + iVar5);
-    iVar14 = iVar14 - iVar5;
-    puVar15 = local_34 + iVar5;
-    if (0 < iVar14) {
+    word_ptr = (undefined1 *)(local_28 + ui_scale);
+    player_off = player_off - ui_scale;
+    word_ptr_2 = local_34 + ui_scale;
+    if (0 < player_off) {
       do {
-        uVar6 = (uint)iVar12 >> 0x10;
-        uVar3 = (uint)iVar11 >> 0x10;
-        uVar1 = *puVar15;
-        iVar12 = iVar12 + _DAT_00361b88;
-        iVar11 = iVar11 + _DAT_00361b8c;
-        puVar15 = puVar15 + 1;
-        *puVar13 = (&DAT_0035d254)
-                   [CONCAT11(uVar1,(&DAT_0034d254)[CONCAT11((char)uVar3,(char)uVar6)])];
-        puVar13 = puVar13 + 1;
-        iVar14 = iVar14 + -1;
-      } while (iVar14 != 0);
+        uval_3 = (uint)val_6 >> 0x10;
+        uval_2 = (uint)loop_i >> 0x10;
+        uval = *word_ptr_2;
+        val_6 = val_6 + g_bss_00361b88;
+        loop_i = loop_i + g_bss_00361b8c;
+        word_ptr_2 = word_ptr_2 + 1;
+        *word_ptr = (&g_bss_0035d254)
+                   [CONCAT11(uval,(&g_bss_0034d254)[CONCAT11((char)uval_2,(char)uval_3)])];
+        word_ptr = word_ptr + 1;
+        player_off = player_off + -1;
+      } while (player_off != 0);
     }
-    local_28 = local_28 + iVar4;
-    local_34 = local_34 + iVar8;
+    local_28 = local_28 + val_2;
+    local_34 = local_34 + ui_scale_2;
     local_24 = local_24 +
-               ((int)((iVar2 * unaff_EBX + iVar9 * -0x100) - (uint)(iVar9 << 7 < 0)) >> 8);
-    local_20 = local_20 + iVar7;
+               ((int)((val * arg_ebx + val_4 * -0x100) - (uint)(val_4 << 7 < 0)) >> 8);
+    local_20 = local_20 + val_3;
   }
   return;
 }
 
 /******************************************************************************
- * Function : dk_door_flagged_position_063122 (Ghidra: FUN_00063122)
- * Prototype: void dk_door_flagged_position_063122(void);
+ * Function : panmap_door_flagged_position_063122 (Original VA: 0x63122, Ghidra: FUN_00063122)
+ * Prototype: void panmap_door_flagged_position_063122(void);
  * Address  : 0x63122 (Size: 671 bytes)
  * Module   : panmap.cpp [direct_file_string_xref]
- * OrigLine : panmap.cpp:591 ("No door for flagged position")
- * Naming   : String 'No door for flagged position'
- * Callers  : 15 -> 0x14614, 0x1495c, 0x23042, 0x230d3, 0x23ad0, 0x2c833, 0x402e5, 0x70c0c, 0x82828, 0x82a04 ...
- * Callees  : 2 -> 0x22b3a, 0xddaf0
- * Strings  :
- *   - 0x16663d: "panmap.cpp"
- *   - 0x166620: "No door for flagged position"
+ * OrigLine : panmap.cpp lines 591
+ * Purpose  : String 'No door for flagged position'
+ * Callers  : 15 -> build_attempt_tag_area_outside_014614, build_attempt_tag_area_outside_01495c, door_fn_023042, door_remove_keyhole_0230d3, dungeon_process_map_subtile_023ad0, file_update_player_dungeon_02c833, inits_non_keeper_keeper_game_0402e5, specials_fn_070c0c ...
+ * Callees  : 2 -> door_process_map_subtile_022b3a, LbErrorLog
  ******************************************************************************/
-void FUN_00063122(void)
+void panmap_door_flagged_position_063122(void)
 
 {
-  int iVar1;
-  byte bVar2;
-  byte bVar3;
-  char cVar4;
-  byte bVar5;
-  int in_EAX;
-  int iVar6;
-  char cVar7;
+  int val;
+  byte player_off;
+  byte flag;
+  char slab_coord;
+  byte slab_coord_2;
+  int arg_eax;
+  int val_2;
+  char room_ptr;
   char extraout_CL;
-  int in_ECX;
-  int in_EDX;
-  int unaff_EBX;
-  int iVar8;
+  int arg_ecx;
+  int subtile_x;
+  int arg_ebx;
+  int loop_i;
   char *local_58;
   int local_28;
   char *local_24;
   int local_1c;
   int local_18;
   
-  local_24 = &DAT_0034d254 + in_EDX * 0x100 + in_EAX;
-  bVar2 = (&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef];
-  iVar1 = in_EDX + in_ECX;
-  local_28 = in_EDX * 0x500;
-  for (; (in_EDX < iVar1 && (in_EDX < 0x100)); in_EDX = in_EDX + 1) {
+  local_24 = &g_bss_0034d254 + subtile_x * 0x100 + arg_eax;
+  player_off = (&g_player_id_number)[g_my_player_word._3_1_ * 0x4ef];
+  val = subtile_x + arg_ecx;
+  local_28 = subtile_x * 0x500;
+  for (; (subtile_x < val && (subtile_x < 0x100)); subtile_x = subtile_x + 1) {
     local_58 = local_24;
-    local_18 = in_EAX * 5 + local_28;
-    local_1c = in_EAX << 2;
-    for (iVar8 = in_EAX; (iVar8 < in_EAX + unaff_EBX && (iVar8 < 0x100)); iVar8 = iVar8 + 1) {
-      iVar6 = in_EDX * 0x100 + iVar8;
-      bVar3 = *(byte *)((int)&DAT_00279203 + local_18);
-      cVar7 = '\0';
-      if ((iVar8 / 3 < 0x55) && (in_EDX / 3 < 0x55)) {
-        cVar4 = (&DAT_002d33c5)
-                [((&DAT_0019033b)[in_EDX] * 0x55 + *(int *)((int)&DAT_0019033b + local_1c)) * 6];
-        bVar5 = (&DAT_002d33ca)
-                [((&DAT_0019033b)[iVar6 % 0x100] +
-                 (&DAT_0019033b)
-                 [(int)((iVar6 + (iVar6 >> 0x1f) * -0x100) - (uint)((iVar6 >> 0x1f) << 7 < 0)) >> 8]
+    local_18 = arg_eax * 5 + local_28;
+    local_1c = arg_eax << 2;
+    for (loop_i = arg_eax; (loop_i < arg_eax + arg_ebx && (loop_i < 0x100)); loop_i = loop_i + 1) {
+      val_2 = subtile_x * 0x100 + loop_i;
+      flag = *(byte *)((int)&g_map_subtiles + local_18);
+      room_ptr = '\0';
+      if ((loop_i / 3 < 0x55) && (subtile_x / 3 < 0x55)) {
+        slab_coord = (&g_slabmap_base)
+                [((&g_subtile_to_slab_lut)[subtile_x] * 0x55 + *(int *)((int)&g_subtile_to_slab_lut + local_1c)) * 6];
+        slab_coord_2 = (&g_slabmap)
+                [((&g_subtile_to_slab_lut)[val_2 % 0x100] +
+                 (&g_subtile_to_slab_lut)
+                 [(int)((val_2 + (val_2 >> 0x1f) * -0x100) - (uint)((val_2 >> 0x1f) << 7 < 0)) >> 8]
                  * 0x55) * 6] & 7;
-        if (6 < bVar5) {
-          bVar5 = bVar5 - 3;
+        if (6 < slab_coord_2) {
+          slab_coord_2 = slab_coord_2 - 3;
         }
-        if ((bVar3 & 4) == 0) {
-          if ((bVar3 & 0x80) == 0) {
-            if ((bVar3 & 1) == 0) {
-              if ((1 << (bVar2 & 0x1f) & *(uint *)((int)&DAT_00279203 + local_18 + 1) >> 0x1c) != 0)
+        if ((flag & 4) == 0) {
+          if ((flag & 0x80) == 0) {
+            if ((flag & 1) == 0) {
+              if ((1 << (player_off & 0x1f) & *(uint *)((int)&g_map_subtiles + local_18 + 1) >> 0x1c) != 0)
               {
-                if ((bVar3 & 2) == 0) {
-                  if (cVar4 == '\0') {
-                    cVar7 = '\x02';
+                if ((flag & 2) == 0) {
+                  if (slab_coord == '\0') {
+                    room_ptr = '\x02';
                   }
-                  else if ((bVar3 & 0x20) == 0) {
-                    if ((bVar3 & 0x40) == 0) {
-                      if ((bVar3 & 0x10) == 0) {
-                        if (cVar4 == '\f') {
-                          cVar7 = '\x06';
+                  else if ((flag & 0x20) == 0) {
+                    if ((flag & 0x40) == 0) {
+                      if ((flag & 0x10) == 0) {
+                        if (slab_coord == '\f') {
+                          room_ptr = '\x06';
                         }
-                        else if (cVar4 == '\r') {
-                          cVar7 = '\a';
+                        else if (slab_coord == '\r') {
+                          room_ptr = '\a';
                         }
                         else {
-                          cVar7 = bVar5 + 0xaa;
+                          room_ptr = slab_coord_2 + 0xaa;
                         }
                       }
                     }
                     else {
-                      iVar6 = FUN_00022b3a();
-                      if (iVar6 == 0) {
-                        FUN_000ddaf0(); /* LbErrorLog("panmap.cpp", line 591, "No door for flagged position") */
-                        cVar7 = extraout_CL;
+                      val_2 = door_process_map_subtile_022b3a();
+                      if (val_2 == 0) {
+                        LbErrorLog(); /* LbErrorLog("panmap.cpp", line 591, "No door for flagged position") */
+                        room_ptr = extraout_CL;
                       }
                       else {
-                        cVar7 = bVar5 + 0x6e +
-                                (*(char *)(iVar6 + 0x1a) * '\x02' +
-                                (*(char *)(iVar6 + 0x18) == '\x01')) * '\x06';
+                        room_ptr = slab_coord_2 + 0x6e +
+                                (*(char *)(val_2 + 0x1a) * '\x02' +
+                                (*(char *)(val_2 + 0x18) == '\x01')) * '\x06';
                       }
                     }
                   }
                   else {
-                    cVar7 = '\x01';
+                    room_ptr = '\x01';
                   }
                 }
                 else {
-                  cVar7 = (char)*(undefined2 *)
-                                 (&DAT_002ddd25 +
-                                 (uint)(byte)(&DAT_002d33c8)
-                                             [((&DAT_0019033b)[in_EDX] * 0x55 +
-                                              *(int *)((int)&DAT_0019033b + local_1c)) * 6] * 0x45)
-                          * '\x06' + '\b' + bVar5;
+                  room_ptr = (char)*(undefined2 *)
+                                 (&g_room_slabs_count +
+                                 (uint)(byte)(&g_bss_002d33c8)
+                                             [((&g_subtile_to_slab_lut)[subtile_x] * 0x55 +
+                                              *(int *)((int)&g_subtile_to_slab_lut + local_1c)) * 6] * 0x45)
+                          * '\x06' + '\b' + slab_coord_2;
                 }
               }
             }
             else {
-              cVar7 = '\x05';
+              room_ptr = '\x05';
             }
           }
           else {
-            cVar7 = '\x04';
+            room_ptr = '\x04';
           }
         }
         else {
-          cVar7 = '\x03';
+          room_ptr = '\x03';
         }
-        *local_58 = cVar7;
+        *local_58 = room_ptr;
       }
       local_58 = local_58 + 1;
       local_18 = local_18 + 5;
@@ -816,32 +813,32 @@ void FUN_00063122(void)
 }
 
 /******************************************************************************
- * Function : sub_0633c4 (Ghidra: FUN_000633c4)
- * Prototype: undefined4 sub_0633c4(void);
+ * Function : panmap_fn_0633c4 (Original VA: 0x633c4, Ghidra: FUN_000633c4)
+ * Prototype: undefined4 panmap_fn_0633c4(void);
  * Address  : 0x633c4 (Size: 78 bytes)
  * Module   : panmap.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x10eec1
- * Callees  : 7 -> 0x36ff4, 0x63412, 0x6a412, 0x6a652, 0xeb818, 0xf071e, 0xf4409
+ * Purpose  : Module panmap.cpp procedure @ 0x0633c4
+ * Callers  : 1 -> watcom_crt_fn_10eec1
+ * Callees  : 7 -> game_out_sync_gameturn_036ff4, person_ERROR_063412, setup_verify_cdrom_installation, setup_shutdown_video_and_audio, LbTimerClock, bflib_system_io_fn_0f071e, bflib_system_io_fn_0f4409
  ******************************************************************************/
-undefined4 FUN_000633c4(void)
+undefined4 panmap_fn_0633c4(void)
 
 {
-  short sVar1;
-  int iVar2;
+  short short_val;
+  int val;
   int extraout_EDX;
   
-  FUN_000eb818();
-  FUN_000f071e();
-  sVar1 = FUN_00063412();
-  if (-1 < sVar1) {
-    iVar2 = FUN_0006a412();
-    if (iVar2 != 0) {
-      FUN_00036ff4();
+  LbTimerClock();
+  bflib_system_io_fn_0f071e();
+  short_val = person_ERROR_063412();
+  if (-1 < short_val) {
+    val = setup_verify_cdrom_installation();
+    if (val != 0) {
+      game_out_sync_gameturn_036ff4();
     }
-    FUN_0006a652();
-    if ((extraout_EDX == 0) || (DAT_00334021 != 0)) {
-      FUN_000f4409(&DAT_00361b90);
+    setup_shutdown_video_and_audio();
+    if ((extraout_EDX == 0) || (g_bss_00334021 != 0)) {
+      bflib_system_io_fn_0f4409(&g_bss_00361b90);
     }
   }
   return 0;

@@ -1,7 +1,7 @@
 /**
- * Dungeon Keeper (KEEPER.EXE) - Reconstructed Source Module: barracks.cpp
+ * Dungeon Keeper (KEEPER.EXE) - Reconstructed & Semantically Named Module: barracks.cpp
  * Binary Subject: /home/merlin/Dungeon Keeper/re/KEEPER.elf
- * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 (x86:LE:32:default)
+ * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 + DK Semantic Analyzer
  * Functions in this translation unit: 12
  */
 
@@ -11,159 +11,159 @@
 #include "../include/dk_functions.h"
 
 /******************************************************************************
- * Function : sub_0130c5 (Ghidra: FUN_000130c5)
- * Prototype: void sub_0130c5(void);
+ * Function : barracks_fn_0130c5 (Original VA: 0x130c5, Ghidra: FUN_000130c5)
+ * Prototype: void barracks_fn_0130c5(void);
  * Address  : 0x130c5 (Size: 64 bytes)
  * Module   : barracks.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x11e00, 0x13105
- * Callees  : 3 -> 0x13359, 0xb28e8, 0xdc354
+ * Purpose  : Module barracks.cpp procedure @ 0x0130c5
+ * Callers  : 2 -> ariadne_update_creature_control_011e00, barracks_fn_013105
+ * Callees  : 3 -> barracks_fn_013359, move_process_map_subtile_0b28e8, get_2d_box_distance
  ******************************************************************************/
-void FUN_000130c5(void)
+void barracks_fn_0130c5(void)
 
 {
-  undefined2 uVar1;
-  undefined4 uVar2;
-  int in_EDX;
+  undefined2 uval;
+  undefined4 uval_2;
+  int arg_edx;
   
-  FUN_00013359(in_EDX + 0xc);
-  uVar1 = FUN_000b28e8();
-  *(undefined2 *)(in_EDX + 0x10) = uVar1;
-  uVar2 = FUN_000dc354();
-  *(undefined4 *)(in_EDX + 0x62) = uVar2;
+  barracks_fn_013359(arg_edx + 0xc);
+  uval = move_process_map_subtile_0b28e8();
+  *(undefined2 *)(arg_edx + 0x10) = uval;
+  uval_2 = get_2d_box_distance();
+  *(undefined4 *)(arg_edx + 0x62) = uval_2;
   return;
 }
 
 /******************************************************************************
- * Function : sub_013105 (Ghidra: FUN_00013105)
- * Prototype: undefined4 sub_013105(void);
+ * Function : barracks_fn_013105 (Original VA: 0x13105, Ghidra: FUN_00013105)
+ * Prototype: undefined4 barracks_fn_013105(void);
  * Address  : 0x13105 (Size: 100 bytes)
  * Module   : barracks.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x12002
- * Callees  : 2 -> 0x11e00, 0x130c5
+ * Purpose  : Module barracks.cpp procedure @ 0x013105
+ * Callers  : 1 -> ariadne_update_creature_control_012002
+ * Callees  : 2 -> ariadne_update_creature_control_011e00, barracks_fn_0130c5
  ******************************************************************************/
-undefined4 FUN_00013105(void)
+undefined4 barracks_fn_013105(void)
 
 {
-  undefined4 uVar1;
-  int in_EDX;
+  undefined4 uval;
+  int arg_edx;
   
-  if (*(byte *)(in_EDX + 0x28) < *(byte *)(in_EDX + 0x51)) {
-    *(char *)(in_EDX + 0x28) = *(char *)(in_EDX + 0x28) + '\x01';
-    if (*(byte *)(in_EDX + 0x51) == *(byte *)(in_EDX + 0x28)) {
-      if (*(byte *)(in_EDX + 0x51) < *(byte *)(in_EDX + 0x52)) {
-        uVar1 = FUN_00011e00();
+  if (*(byte *)(arg_edx + 0x28) < *(byte *)(arg_edx + 0x51)) {
+    *(char *)(arg_edx + 0x28) = *(char *)(arg_edx + 0x28) + '\x01';
+    if (*(byte *)(arg_edx + 0x51) == *(byte *)(arg_edx + 0x28)) {
+      if (*(byte *)(arg_edx + 0x51) < *(byte *)(arg_edx + 0x52)) {
+        uval = ariadne_update_creature_control_011e00();
       }
       else {
-        uVar1 = 1;
+        uval = 1;
       }
     }
     else {
-      FUN_000130c5();
-      FUN_0001211a();
-      uVar1 = 0;
+      barracks_fn_0130c5();
+      ariadne_fn_01211a();
+      uval = 0;
     }
   }
   else {
-    uVar1 = 3;
+    uval = 3;
   }
-  return uVar1;
+  return uval;
 }
 
 /******************************************************************************
- * Function : sub_013359 (Ghidra: FUN_00013359)
- * Prototype: void sub_013359(void);
+ * Function : barracks_fn_013359 (Original VA: 0x13359, Ghidra: FUN_00013359)
+ * Prototype: void barracks_fn_013359(void);
  * Address  : 0x13359 (Size: 209 bytes)
  * Module   : barracks.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x130c5
+ * Purpose  : Module barracks.cpp procedure @ 0x013359
+ * Callers  : 1 -> barracks_fn_0130c5
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_00013359(void)
+void barracks_fn_013359(void)
 
 {
-  char cVar1;
-  char cVar2;
-  short sVar3;
-  ushort uVar4;
-  int in_EAX;
-  short *in_ECX;
-  int in_EDX;
-  short sVar5;
-  int unaff_EBX;
-  int iVar6;
+  char ch;
+  char ch_2;
+  short short_val;
+  ushort uval;
+  int arg_eax;
+  short *arg_ecx;
+  int arg_edx;
+  short short_val_2;
+  int arg_ebx;
+  int val;
   
-  iVar6 = unaff_EBX * 4 + in_EDX;
-  if (unaff_EBX == *(byte *)(in_EDX + 0x52) - 1) {
-    *in_ECX = *(short *)(iVar6 + 0x29);
-    in_ECX[1] = *(short *)(iVar6 + 0x2b);
+  val = arg_ebx * 4 + arg_edx;
+  if (arg_ebx == *(byte *)(arg_edx + 0x52) - 1) {
+    *arg_ecx = *(short *)(val + 0x29);
+    arg_ecx[1] = *(short *)(val + 0x2b);
     return;
   }
-  uVar4 = *(ushort *)(&DAT_0019073b + (uint)*(ushort *)(in_EAX + 0x56) * 2) / 2;
-  cVar1 = *(char *)(iVar6 + 0x29);
-  cVar2 = *(char *)(iVar6 + 0x2b);
-  *in_ECX = *(short *)(iVar6 + 0x29) + 1;
-  sVar3 = *(short *)(iVar6 + 0x2b);
-  *(undefined1 *)in_ECX = 0;
-  sVar5 = uVar4 + 1;
-  in_ECX[1] = sVar3 + 1;
-  *(undefined1 *)(in_ECX + 1) = 0;
-  if (cVar1 == -1) {
-    if (cVar2 == -1) {
-      *in_ECX = *in_ECX - sVar5;
+  uval = *(ushort *)(&g_data_0019073b + (uint)*(ushort *)(arg_eax + 0x56) * 2) / 2;
+  ch = *(char *)(val + 0x29);
+  ch_2 = *(char *)(val + 0x2b);
+  *arg_ecx = *(short *)(val + 0x29) + 1;
+  short_val = *(short *)(val + 0x2b);
+  *(undefined1 *)arg_ecx = 0;
+  short_val_2 = uval + 1;
+  arg_ecx[1] = short_val + 1;
+  *(undefined1 *)(arg_ecx + 1) = 0;
+  if (ch == -1) {
+    if (ch_2 == -1) {
+      *arg_ecx = *arg_ecx - short_val_2;
       goto LAB_000133d9;
     }
-    if (cVar2 == '\0') {
-      *in_ECX = *in_ECX - sVar5;
+    if (ch_2 == '\0') {
+      *arg_ecx = *arg_ecx - short_val_2;
       return;
     }
-    *in_ECX = *in_ECX - sVar5;
+    *arg_ecx = *arg_ecx - short_val_2;
   }
-  else if (cVar1 == '\0') {
-    if (cVar2 == -1) {
+  else if (ch == '\0') {
+    if (ch_2 == -1) {
 LAB_000133d9:
-      in_ECX[1] = in_ECX[1] - sVar5;
+      arg_ecx[1] = arg_ecx[1] - short_val_2;
       return;
     }
-    if (cVar2 == '\0') {
+    if (ch_2 == '\0') {
       return;
     }
   }
   else {
-    if (cVar2 == -1) {
-      *in_ECX = *in_ECX + uVar4;
+    if (ch_2 == -1) {
+      *arg_ecx = *arg_ecx + uval;
       goto LAB_000133d9;
     }
-    if (cVar2 == '\0') {
-      *in_ECX = *in_ECX + uVar4;
+    if (ch_2 == '\0') {
+      *arg_ecx = *arg_ecx + uval;
       return;
     }
-    *in_ECX = *in_ECX + uVar4;
+    *arg_ecx = *arg_ecx + uval;
   }
-  in_ECX[1] = in_ECX[1] + uVar4;
+  arg_ecx[1] = arg_ecx[1] + uval;
   return;
 }
 
 /******************************************************************************
- * Function : sub_01342a (Ghidra: FUN_0001342a)
- * Prototype: void sub_01342a(undefined1 *param_1);
+ * Function : barracks_fn_01342a (Original VA: 0x1342a, Ghidra: FUN_0001342a)
+ * Prototype: void barracks_fn_01342a(undefined1 *param_1);
  * Address  : 0x1342a (Size: 736 bytes)
  * Module   : barracks.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x13169
- * Callees  : 3 -> 0x128cd, 0x12c46, 0xb28e8
+ * Purpose  : Module barracks.cpp procedure @ 0x01342a
+ * Callers  : 1 -> ariadne_fn_013169
+ * Callees  : 3 -> ariadne_fn_0128cd, ariadne_fn_012c46, move_process_map_subtile_0b28e8
  ******************************************************************************/
-void FUN_0001342a(undefined1 *param_1)
+void barracks_fn_01342a(undefined1 *param_1)
 
 {
-  int in_EAX;
-  uint uVar1;
-  int iVar2;
-  undefined2 *in_ECX;
-  int in_EDX;
-  uint unaff_EBX;
-  byte bVar3;
+  int thing;
+  uint uval;
+  int val;
+  undefined2 *arg_ecx;
+  int arg_edx;
+  uint arg_ebx;
+  byte flag;
   undefined4 local_4c;
   undefined2 local_48 [2];
   undefined4 local_44;
@@ -181,32 +181,32 @@ void FUN_0001342a(undefined1 *param_1)
   undefined4 local_14;
   undefined4 local_10;
   
-  bVar3 = 0;
-  local_44 = *(undefined4 *)(in_EAX + 0xd);
-  auStack_40[0] = *(undefined2 *)(in_EAX + 0x11);
-  local_34 = (uint)*(ushort *)(in_EAX + 0x52);
-  local_38 = (uint)*(byte *)(in_EDX + 0x20);
-  local_3c = (int)*(short *)(in_EDX + 0x26);
-  if (unaff_EBX < 0x200) {
-    if (unaff_EBX != 0) goto LAB_000134e1;
+  flag = 0;
+  local_44 = *(undefined4 *)(thing + 0xd); /* thing->mappos.val_x */
+  auStack_40[0] = *(undefined2 *)(thing + 0x11);
+  local_34 = (uint)*(ushort *)(thing + 0x52); /* thing->health */
+  local_38 = (uint)*(byte *)(arg_edx + 0x20);
+  local_3c = (int)*(short *)(arg_edx + 0x26);
+  if (arg_ebx < 0x200) {
+    if (arg_ebx != 0) goto LAB_000134e1;
     local_10 = 0x600;
     local_14 = 2;
     local_1c = 0x200;
   }
-  else if (unaff_EBX < 0x201) {
+  else if (arg_ebx < 0x201) {
     local_10 = 0;
     local_14 = 2;
     local_1c = 0x400;
   }
   else {
-    if (unaff_EBX < 0x400) goto LAB_000134e1;
-    if (unaff_EBX < 0x401) {
+    if (arg_ebx < 0x400) goto LAB_000134e1;
+    if (arg_ebx < 0x401) {
       local_10 = 0x200;
       local_14 = 2;
       local_1c = 0x600;
     }
     else {
-      if (unaff_EBX != 0x600) goto LAB_000134e1;
+      if (arg_ebx != 0x600) goto LAB_000134e1;
       local_10 = 0x400;
       local_14 = 2;
       local_1c = 0;
@@ -215,28 +215,28 @@ void FUN_0001342a(undefined1 *param_1)
   local_14 = 2;
   local_18 = 1;
 LAB_000134e1:
-  *(undefined2 *)(in_EDX + 0x26) = 0x100;
-  local_28 = ((int)(uint)*(ushort *)(&DAT_0019073b + (uint)*(ushort *)(in_EAX + 0x56) * 2) >> 9) + 2
+  *(undefined2 *)(arg_edx + 0x26) = 0x100;
+  local_28 = ((int)(uint)*(ushort *)(&g_data_0019073b + (uint)*(ushort *)(thing + 0x56) * 2) >> 9) + 2
   ;
   local_2c = local_28;
   local_30 = local_28;
-  *(short *)(in_EAX + 0x52) = (short)local_10;
+  *(short *)(thing + 0x52) = (short)local_10; /* thing->health */
   local_24 = 0;
-  *(undefined1 *)(in_EDX + 0x20) = (undefined1)local_14;
+  *(undefined1 *)(arg_edx + 0x20) = (undefined1)local_14;
   for (; local_24 < local_28; local_24 = local_24 + 1) {
-    uVar1 = FUN_000128cd();
-    if (uVar1 != 0xffffffff) {
-      if (uVar1 != unaff_EBX) {
-        local_4c = CONCAT22((short)((uint)-((int)(&PTR_LAB_00192fe0)[uVar1] *
-                                            (int)*(short *)(in_EDX + 0x26) >> 8) >> 8) +
-                            *(short *)(in_EAX + 0xf),
-                            (short)((uint)((int)*(short *)(in_EDX + 0x26) * (&DAT_001927e0)[uVar1])
-                                   >> 0x10) + *(short *)(in_EAX + 0xd));
-        local_48[0] = FUN_000b28e8();
-        iVar2 = FUN_00012c46();
-        if (iVar2 == 0) {
-          *(undefined4 *)(in_EAX + 0xd) = local_4c;
-          *(undefined2 *)(in_EAX + 0x11 + (uint)bVar3 * -8) = local_48[(uint)bVar3 * -4];
+    uval = ariadne_fn_0128cd();
+    if (uval != 0xffffffff) {
+      if (uval != arg_ebx) {
+        local_4c = CONCAT22((short)((uint)-((int)(&PTR_LAB_00192fe0)[uval] *
+                                            (int)*(short *)(arg_edx + 0x26) >> 8) >> 8) +
+                            *(short *)(thing + 0xf), /* thing->mappos.val_y */
+                            (short)((uint)((int)*(short *)(arg_edx + 0x26) * (&g_slab_attr_table)[uval])
+                                   >> 0x10) + *(short *)(thing + 0xd)); /* thing->mappos.val_x */
+        local_48[0] = move_process_map_subtile_0b28e8();
+        val = ariadne_fn_012c46();
+        if (val == 0) {
+          *(undefined4 *)(thing + 0xd) = local_4c; /* thing->mappos.val_x */
+          *(undefined2 *)(thing + 0x11 + (uint)flag * -8) = local_48[(uint)flag * -4];
           goto LAB_0001352e;
         }
       }
@@ -245,46 +245,46 @@ LAB_000134e1:
     }
 LAB_0001352e:
   }
-  *(short *)(in_EAX + 0x52) = (short)local_1c;
-  *(undefined1 *)(in_EDX + 0x20) = (undefined1)local_18;
+  *(short *)(thing + 0x52) = (short)local_1c; /* thing->health */
+  *(undefined1 *)(arg_edx + 0x20) = (undefined1)local_18;
   local_20 = 0;
-  *(undefined4 *)(in_EAX + 0xd) = local_44;
-  *(undefined2 *)(in_EAX + 0x11 + (uint)bVar3 * -8) = auStack_40[(uint)bVar3 * -4];
+  *(undefined4 *)(thing + 0xd) = local_44; /* thing->mappos.val_x */
+  *(undefined2 *)(thing + 0x11 + (uint)flag * -8) = auStack_40[(uint)flag * -4];
   do {
     if (local_28 <= local_20) {
 LAB_0001369c:
-      *(undefined4 *)(in_EAX + 0xd) = local_44;
-      *(undefined2 *)(in_EAX + 0x11 + (uint)bVar3 * -8) = auStack_40[(uint)bVar3 * -4];
-      *(short *)(in_EAX + 0x52) = (short)local_34;
-      *(undefined1 *)(in_EDX + 0x20) = (undefined1)local_38;
-      *(short *)(in_EDX + 0x26) = (short)local_3c;
+      *(undefined4 *)(thing + 0xd) = local_44; /* thing->mappos.val_x */
+      *(undefined2 *)(thing + 0x11 + (uint)flag * -8) = auStack_40[(uint)flag * -4];
+      *(short *)(thing + 0x52) = (short)local_34; /* thing->health */
+      *(undefined1 *)(arg_edx + 0x20) = (undefined1)local_38;
+      *(short *)(arg_edx + 0x26) = (short)local_3c;
       if (local_2c < local_30) {
-        *in_ECX = (short)local_10;
+        *arg_ecx = (short)local_10;
       }
       else if (local_30 < local_2c) {
-        *in_ECX = (short)local_1c;
+        *arg_ecx = (short)local_1c;
         local_14._0_1_ = (undefined1)local_18;
       }
       else {
-        *in_ECX = (short)local_10;
+        *arg_ecx = (short)local_10;
       }
       *param_1 = (undefined1)local_14;
       return;
     }
-    uVar1 = FUN_000128cd();
-    if (uVar1 != 0xffffffff) {
-      if (uVar1 != unaff_EBX) {
-        local_4c = CONCAT22(*(short *)(in_EAX + 0xf) +
-                            (short)((uint)-((int)*(short *)(in_EDX + 0x26) *
-                                            (int)(&PTR_LAB_00192fe0)[uVar1] >> 8) >> 8),
-                            *(short *)(in_EAX + 0xd) +
-                            (short)((uint)((int)*(short *)(in_EDX + 0x26) * (&DAT_001927e0)[uVar1])
+    uval = ariadne_fn_0128cd();
+    if (uval != 0xffffffff) {
+      if (uval != arg_ebx) {
+        local_4c = CONCAT22(*(short *)(thing + 0xf) + /* thing->mappos.val_y */
+                            (short)((uint)-((int)*(short *)(arg_edx + 0x26) *
+                                            (int)(&PTR_LAB_00192fe0)[uval] >> 8) >> 8),
+                            *(short *)(thing + 0xd) + /* thing->mappos.val_x */
+                            (short)((uint)((int)*(short *)(arg_edx + 0x26) * (&g_slab_attr_table)[uval])
                                    >> 0x10));
-        local_48[0] = FUN_000b28e8();
-        iVar2 = FUN_00012c46();
-        if (iVar2 == 0) {
-          *(undefined4 *)(in_EAX + 0xd) = local_4c;
-          *(undefined2 *)(in_EAX + 0x11 + (uint)bVar3 * -8) = local_48[(uint)bVar3 * -4];
+        local_48[0] = move_process_map_subtile_0b28e8();
+        val = ariadne_fn_012c46();
+        if (val == 0) {
+          *(undefined4 *)(thing + 0xd) = local_4c; /* thing->mappos.val_x */
+          *(undefined2 *)(thing + 0x11 + (uint)flag * -8) = local_48[(uint)flag * -4];
           goto LAB_000135f9;
         }
       }
@@ -297,300 +297,297 @@ LAB_000135f9:
 }
 
 /******************************************************************************
- * Function : sub_013730 (Ghidra: FUN_00013730)
- * Prototype: undefined4 sub_013730(void);
+ * Function : barracks_fn_013730 (Original VA: 0x13730, Ghidra: FUN_00013730)
+ * Prototype: undefined4 barracks_fn_013730(void);
  * Address  : 0x13730 (Size: 23 bytes)
  * Module   : barracks.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x137af
- * Callees  : 1 -> 0xce0e4
+ * Purpose  : Module barracks.cpp procedure @ 0x013730
+ * Callers  : 1 -> barracks_fn_0137af
+ * Callees  : 1 -> room_fn_0ce0e4
  ******************************************************************************/
-undefined4 FUN_00013730(void)
+undefined4 barracks_fn_013730(void)
 
 {
-  int in_EAX;
-  int iVar1;
+  int arg_eax;
+  int val;
   
-  iVar1 = FUN_000ce0e4();
-  if (iVar1 != 0) {
-    *(undefined1 *)(in_EAX + 8) = 0x41;
+  val = room_fn_0ce0e4();
+  if (val != 0) {
+    *(undefined1 *)(arg_eax + 8) = 0x41;
   }
   return 1;
 }
 
 /******************************************************************************
- * Function : sub_013747 (Ghidra: FUN_00013747)
- * Prototype: longlong sub_013747(void);
+ * Function : barracks_update_creature_control_013747 (Original VA: 0x13747, Ghidra: FUN_00013747)
+ * Prototype: longlong barracks_update_creature_control_013747(void);
  * Address  : 0x13747 (Size: 104 bytes)
  * Module   : barracks.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
  * Callers  : 0 -> 
- * Callees  : 5 -> 0x63b6d, 0x64ae7, 0xcd85c, 0xcd9b0, 0xd0f50
+ * Callees  : 5 -> person_fn_063b6d, person_update_creature_control_064ae7, room_attempt_add_creature_room_0cd85c, room_attempt_remove_creature_room_0cd9b0, room_update_slab_subtile_columns_0d0f50
  ******************************************************************************/
-longlong FUN_00013747(void)
+longlong barracks_update_creature_control_013747(void)
 
 {
-  char cVar1;
-  int in_EAX;
-  int iVar2;
-  uint in_EDX;
+  char ch;
+  int thing;
+  int val;
+  uint arg_edx;
   
-  *(undefined2 *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 0x80) = 0;
-  iVar2 = FUN_000d0f50();
-  if (((iVar2 != 0) && (*(short *)(iVar2 + 10) == 0xc)) &&
-     (*(char *)(iVar2 + 3) == *(char *)(in_EAX + 6))) {
-    cVar1 = FUN_000cd85c();
-    if (cVar1 != '\0') {
-      FUN_00064ae7();
-      return CONCAT44(in_EDX,1);
+  *(undefined2 *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 0x80) = 0; /* thing->ccontrol_idx */
+  val = room_update_slab_subtile_columns_0d0f50();
+  if (((val != 0) && (*(short *)(val + 10) == 0xc)) &&
+     (*(char *)(val + 3) == *(char *)(thing + 6))) { /* thing->owner */
+    ch = room_attempt_add_creature_room_0cd85c();
+    if (ch != '\0') {
+      person_update_creature_control_064ae7();
+      return CONCAT44(arg_edx,1);
     }
   }
-  FUN_000cd9b0();
-  FUN_00063b6d();
-  return (ulonglong)in_EDX << 0x20;
+  room_attempt_remove_creature_room_0cd9b0();
+  person_fn_063b6d();
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : sub_0137af (Ghidra: FUN_000137af)
- * Prototype: longlong sub_0137af(void);
+ * Function : barracks_fn_0137af (Original VA: 0x137af, Ghidra: FUN_000137af)
+ * Prototype: longlong barracks_fn_0137af(void);
  * Address  : 0x137af (Size: 90 bytes)
  * Module   : barracks.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module barracks.cpp procedure @ 0x0137af
  * Callers  : 0 -> 
- * Callees  : 4 -> 0x13730, 0x63b6d, 0xcd9b0, 0xd0f50
+ * Callees  : 4 -> barracks_fn_013730, person_fn_063b6d, room_attempt_remove_creature_room_0cd9b0, room_update_slab_subtile_columns_0d0f50
  ******************************************************************************/
-longlong FUN_000137af(void)
+longlong barracks_fn_0137af(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  uint in_EDX;
-  undefined8 uVar2;
+  int arg_eax;
+  int val;
+  uint arg_edx;
+  undefined8 uval;
   
-  uVar2 = FUN_000d0f50();
-  iVar1 = (int)uVar2;
-  if ((((iVar1 != 0) && (*(short *)(iVar1 + 10) == 0xc)) &&
-      (*(short *)(iVar1 + 1) == *(short *)((int)((ulonglong)uVar2 >> 0x20) + 0x7e))) &&
-     (*(char *)(iVar1 + 3) == *(char *)(in_EAX + 6))) {
-    FUN_00013730();
-    return CONCAT44(in_EDX,1);
+  uval = room_update_slab_subtile_columns_0d0f50();
+  val = (int)uval;
+  if ((((val != 0) && (*(short *)(val + 10) == 0xc)) &&
+      (*(short *)(val + 1) == *(short *)((int)((ulonglong)uval >> 0x20) + 0x7e))) &&
+     (*(char *)(val + 3) == *(char *)(arg_eax + 6))) {
+    barracks_fn_013730();
+    return CONCAT44(arg_edx,1);
   }
-  FUN_000cd9b0();
-  FUN_00063b6d();
-  return (ulonglong)in_EDX << 0x20;
+  room_attempt_remove_creature_room_0cd9b0();
+  person_fn_063b6d();
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : sub_013809 (Ghidra: FUN_00013809)
- * Prototype: undefined8 sub_013809(void);
+ * Function : barracks_update_creature_control_013809 (Original VA: 0x13809, Ghidra: FUN_00013809)
+ * Prototype: undefined8 barracks_update_creature_control_013809(void);
  * Address  : 0x13809 (Size: 192 bytes)
  * Module   : barracks.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0xe1b88
- * Callees  : 6 -> 0x39d83, 0x63b6d, 0x64a2e, 0x64a5f, 0x64bce, 0xcb33c
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
+ * Callers  : 1 -> update_creature_has_illegal_state_0e1b88
+ * Callees  : 6 -> gravyard_update_creature_and_thing_039d83, person_fn_063b6d, person_fn_064a2e, person_external_change_state_but_064a5f, person_fn_064bce, room_update_creature_control_0cb33c
  ******************************************************************************/
-undefined8 FUN_00013809(void)
+undefined8 barracks_update_creature_control_013809(void)
 
 {
-  ushort uVar1;
-  int in_EAX;
-  byte *pbVar2;
-  undefined4 in_EDX;
-  undefined8 uVar3;
+  ushort cctrl_ptr;
+  int thing;
+  byte *byte_ptr;
+  undefined4 arg_edx;
+  undefined8 uval;
   
-  pbVar2 = (byte *)FUN_00039d83();
-  if (pbVar2 == (byte *)0x0) {
-    FUN_00063b6d();
+  byte_ptr = (byte *)gravyard_update_creature_and_thing_039d83();
+  if (byte_ptr == (byte *)0x0) {
+    person_fn_063b6d();
     goto LAB_000138bf;
   }
-  if ((*pbVar2 & 0x20) == 0) {
-    uVar3 = FUN_00064bce();
-    uVar1 = *(ushort *)((int)uVar3 + 0x21);
-    if (uVar1 == 0) goto LAB_000138bf;
-    if (1 < uVar1) {
-      if (uVar1 == 2) {
-        if ((*(short *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 0x7e) !=
-             *(short *)((&DAT_001b0a00)[*(ushort *)((int)((ulonglong)uVar3 >> 0x20) + 100)] + 0x7e))
-           && (*(short *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 0x80) !=
-               *(short *)((&DAT_001b0a00)[*(ushort *)((int)((ulonglong)uVar3 >> 0x20) + 100)] + 0x7e
+  if ((*byte_ptr & 0x20) == 0) {
+    uval = person_fn_064bce();
+    cctrl_ptr = *(ushort *)((int)uval + 0x21);
+    if (cctrl_ptr == 0) goto LAB_000138bf;
+    if (1 < cctrl_ptr) {
+      if (cctrl_ptr == 2) {
+        if ((*(short *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 0x7e) != /* thing->ccontrol_idx */
+             *(short *)((&g_creature_ctrl_ptrs)[*(ushort *)((int)((ulonglong)uval >> 0x20) + 100)] + 0x7e))
+           && (*(short *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 0x80) != /* thing->ccontrol_idx */
+               *(short *)((&g_creature_ctrl_ptrs)[*(ushort *)((int)((ulonglong)uval >> 0x20) + 100)] + 0x7e
                          ))) {
-          FUN_00064a2e();
-          FUN_000cb33c();
+          person_fn_064a2e();
+          room_update_creature_control_0cb33c();
         }
       }
       goto LAB_000138bf;
     }
   }
-  if (*(char *)(in_EAX + 7) != 'U') {
-    FUN_00064a5f();
+  if (*(char *)(thing + 7) != 'U') {
+    person_external_change_state_but_064a5f();
   }
 LAB_000138bf:
-  return CONCAT44(in_EDX,1);
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : sub_0138c9 (Ghidra: FUN_000138c9)
- * Prototype: undefined8 sub_0138c9(void);
+ * Function : barracks_update_creature_control_0138c9 (Original VA: 0x138c9, Ghidra: FUN_000138c9)
+ * Prototype: undefined8 barracks_update_creature_control_0138c9(void);
  * Address  : 0x138c9 (Size: 516 bytes)
  * Module   : barracks.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
  * Callers  : 0 -> 
- * Callees  : 7 -> 0x10010, 0x39c3e, 0x39d83, 0x39e90, 0x63b6d, 0xb4ac4, 0xdc440
+ * Callees  : 7 -> anger_fn_010010, group_update_creature_and_thing_039c3e, gravyard_update_creature_and_thing_039d83, group_update_creature_and_thing_039e90, person_fn_063b6d, move_fn_0b4ac4, update_fn_0dc440
  ******************************************************************************/
-undefined8 FUN_000138c9(void)
+undefined8 barracks_update_creature_control_0138c9(void)
 
 {
-  byte *pbVar1;
-  bool bVar2;
-  int in_EAX;
-  int iVar3;
-  int iVar4;
-  undefined4 uVar5;
-  int iVar6;
-  undefined4 in_EDX;
+  byte *cctrl_ptr;
+  bool flag;
+  int thing;
+  int thing_ptr;
+  int val;
+  undefined4 uval;
+  int cctrl_ptr_2;
+  undefined4 arg_edx;
   
-  iVar3 = FUN_00039d83();
-  bVar2 = false;
-  if ((iVar3 != 0) && (iVar3 != in_EAX)) {
-    if ((*(byte *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 0xad) & 0x10) == 0) {
-      iVar4 = FUN_00039e90();
-      for (iVar6 = 0; iVar6 < iVar4 * 3; iVar6 = iVar6 + 3) {
-        if (((*(byte *)((&DAT_001b0a00)[*(ushort *)(iVar3 + 100)] + iVar6 + 0x294) & 2) != 0) &&
-           ((*(byte *)((&DAT_001b0a00)[*(ushort *)(iVar3 + 100)] + iVar6 + 0x294) & 1) == 0)) {
-          bVar2 = true;
-          pbVar1 = (byte *)(iVar6 + 0x294 + (&DAT_001b0a00)[*(ushort *)(iVar3 + 100)]);
-          *pbVar1 = *pbVar1 | 1;
+  thing_ptr = gravyard_update_creature_and_thing_039d83();
+  flag = false;
+  if ((thing_ptr != 0) && (thing_ptr != thing)) {
+    if ((*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 0xad) & 0x10) == 0) { /* thing->ccontrol_idx */
+      val = group_update_creature_and_thing_039e90();
+      for (cctrl_ptr_2 = 0; cctrl_ptr_2 < val * 3; cctrl_ptr_2 = cctrl_ptr_2 + 3) {
+        if (((*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + cctrl_ptr_2 + 0x294) & 2) != 0) && /* thing->ccontrol_idx */
+           ((*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + cctrl_ptr_2 + 0x294) & 1) == 0)) { /* thing->ccontrol_idx */
+          flag = true;
+          cctrl_ptr = (byte *)(cctrl_ptr_2 + 0x294 + (&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)]); /* thing->ccontrol_idx */
+          *cctrl_ptr = *cctrl_ptr | 1;
           break;
         }
       }
-      if (bVar2) {
-        iVar3 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-        if (*(byte *)(iVar3 + 0x307) < 9) {
-          if ((*(char *)(iVar3 + 0x307) == '\0') ||
-             (*(int *)(iVar3 + 0x303) + 0x10U <= DAT_002e8bee)) {
-            *(uint *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 0x303) = DAT_002e8bee;
-            iVar3 = FUN_000dc440();
-            if ((iVar3 < 0x601) && ((iVar3 < 0x101 && (iVar3 < 1)))) {
-              FUN_00010010();
+      if (flag) {
+        thing_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+        if (*(byte *)(thing_ptr + 0x307) < 9) {
+          if ((*(char *)(thing_ptr + 0x307) == '\0') ||
+             (*(int *)(thing_ptr + 0x303) + 0x10U <= g_game_turn)) {
+            *(uint *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 0x303) = g_game_turn; /* thing->ccontrol_idx */
+            thing_ptr = update_fn_0dc440();
+            if ((thing_ptr < 0x601) && ((thing_ptr < 0x101 && (thing_ptr < 1)))) {
+              anger_fn_010010();
             }
             else {
-              iVar3 = FUN_000b4ac4(0);
-              if (iVar3 == -1) {
-                uVar5 = 0;
-                *(char *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 0x307) =
-                     *(char *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 0x307) + '\x01';
+              thing_ptr = move_fn_0b4ac4(0);
+              if (thing_ptr == -1) {
+                uval = 0;
+                *(char *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 0x307) = /* thing->ccontrol_idx */
+                     *(char *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 0x307) + '\x01'; /* thing->ccontrol_idx */
                 goto LAB_00013ac6;
               }
             }
-            *(undefined1 *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 0x307) = 0;
+            *(undefined1 *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 0x307) = 0; /* thing->ccontrol_idx */
           }
         }
         else {
-          FUN_00039c3e();
+          group_update_creature_and_thing_039c3e();
         }
-        uVar5 = 0;
+        uval = 0;
         goto LAB_00013ac6;
       }
     }
     else {
-      FUN_00039c3e();
+      group_update_creature_and_thing_039c3e();
     }
   }
-  FUN_00063b6d();
-  uVar5 = 1;
+  person_fn_063b6d();
+  uval = 1;
 LAB_00013ac6:
-  return CONCAT44(in_EDX,uVar5);
+  return CONCAT44(arg_edx,uval);
 }
 
 /******************************************************************************
- * Function : sub_013acd (Ghidra: FUN_00013acd)
- * Prototype: undefined4 sub_013acd(void);
+ * Function : barracks_update_creature_and_thing_013acd (Original VA: 0x13acd, Ghidra: FUN_00013acd)
+ * Prototype: undefined4 barracks_update_creature_and_thing_013acd(void);
  * Address  : 0x13acd (Size: 118 bytes)
  * Module   : barracks.cpp [callgraph_affinity_to_following_unit]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x13b43
- * Callees  : 2 -> 0x39a74, 0x39ba4
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
+ * Callers  : 1 -> barracks_barrack_party_class_013b43
+ * Callees  : 2 -> gravyard_update_creature_control_039a74, gravyard_update_creature_control_039ba4
  ******************************************************************************/
-undefined4 FUN_00013acd(void)
+undefined4 barracks_update_creature_and_thing_013acd(void)
 
 {
-  ushort uVar1;
-  uint uVar2;
-  uint in_EAX;
+  ushort cctrl_ptr;
+  uint thing_ptr;
+  uint thing;
   uint extraout_ECX;
   uint extraout_ECX_00;
-  int in_EDX;
+  int arg_edx;
   
-  uVar1 = *(ushort *)(in_EDX + 0x3d);
+  cctrl_ptr = *(ushort *)(arg_edx + 0x3d);
   do {
-    if ((&DAT_001ae9fc)[uVar1] <= DAT_001ae9fc) {
+    if ((&g_thing_ptrs)[cctrl_ptr] <= g_thing_ptrs) {
 LAB_00013b05:
-      uVar1 = *(ushort *)(in_EDX + 0x3d);
-      while (uVar2 = (&DAT_001ae9fc)[uVar1], DAT_001ae9fc < uVar2) {
-        if (uVar2 != in_EAX) {
-          FUN_00039a74();
-          in_EAX = extraout_ECX_00;
+      cctrl_ptr = *(ushort *)(arg_edx + 0x3d);
+      while (thing_ptr = (&g_thing_ptrs)[cctrl_ptr], g_thing_ptrs < thing_ptr) {
+        if (thing_ptr != thing) {
+          gravyard_update_creature_control_039a74();
+          thing = extraout_ECX_00;
         }
-        uVar1 = *(ushort *)((&DAT_001b0a00)[*(ushort *)(uVar2 + 100)] + 0x2aa);
+        cctrl_ptr = *(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x2aa); /* thing->ccontrol_idx */
       }
       return 1;
     }
-    if ((&DAT_001ae9fc)[uVar1] != in_EAX) {
-      FUN_00039ba4();
-      in_EAX = extraout_ECX;
+    if ((&g_thing_ptrs)[cctrl_ptr] != thing) {
+      gravyard_update_creature_control_039ba4();
+      thing = extraout_ECX;
       goto LAB_00013b05;
     }
-    uVar1 = *(ushort *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 0x2aa);
+    cctrl_ptr = *(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 0x2aa); /* thing->ccontrol_idx */
   } while( true );
 }
 
 /******************************************************************************
- * Function : dk_barrack_party_class_013b43 (Ghidra: FUN_00013b43)
- * Prototype: longlong dk_barrack_party_class_013b43(void);
+ * Function : barracks_barrack_party_class_013b43 (Original VA: 0x13b43, Ghidra: FUN_00013b43)
+ * Prototype: longlong barracks_barrack_party_class_013b43(void);
  * Address  : 0x13b43 (Size: 83 bytes)
  * Module   : barracks.cpp [direct_file_string_xref]
- * OrigLine : barracks.cpp:438 ("INVALID BARRACK PARTY CLASS")
- * Naming   : String 'INVALID BARRACK PARTY CLASS'
- * Callers  : 1 -> 0x80a94
- * Callees  : 3 -> 0x13acd, 0xd0f50, 0xddaf0
- * Strings  :
- *   - 0x160178: "barracks.cpp"
- *   - 0x16015c: "INVALID BARRACK PARTY CLASS"
+ * OrigLine : barracks.cpp lines 438
+ * Purpose  : String 'INVALID BARRACK PARTY CLASS'
+ * Callers  : 1 -> creature_allocate_light_new_hero_080a94
+ * Callees  : 3 -> barracks_update_creature_and_thing_013acd, room_update_slab_subtile_columns_0d0f50, LbErrorLog
  ******************************************************************************/
-longlong FUN_00013b43(void)
+longlong barracks_barrack_party_class_013b43(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  undefined4 uVar2;
-  uint in_EDX;
+  int thing;
+  int val;
+  undefined4 uval;
+  uint arg_edx;
   
-  if (*(char *)(in_EAX + 0x1f) != '\x05') {
-    FUN_000ddaf0(); /* LbErrorLog("barracks.cpp", line 438, "INVALID BARRACK PARTY CLASS") */
-    return (ulonglong)in_EDX << 0x20;
+  if (*(char *)(thing + 0x1f) != '\x05') { /* thing->class_id */
+    LbErrorLog(); /* LbErrorLog("barracks.cpp", line 438, "INVALID BARRACK PARTY CLASS") */
+    return (ulonglong)arg_edx << 0x20;
   }
-  iVar1 = FUN_000d0f50();
-  if (((iVar1 != 0) && (*(short *)(iVar1 + 10) == 0xc)) &&
-     (*(char *)(iVar1 + 3) == *(char *)(in_EAX + 6))) {
-    uVar2 = FUN_00013acd();
-    return CONCAT44(in_EDX,uVar2);
+  val = room_update_slab_subtile_columns_0d0f50();
+  if (((val != 0) && (*(short *)(val + 10) == 0xc)) &&
+     (*(char *)(val + 3) == *(char *)(thing + 6))) { /* thing->owner */
+    uval = barracks_update_creature_and_thing_013acd();
+    return CONCAT44(arg_edx,uval);
   }
-  return (ulonglong)in_EDX << 0x20;
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : sub_013b98 (Ghidra: FUN_00013b98)
- * Prototype: void sub_013b98(void);
+ * Function : barracks_fn_013b98 (Original VA: 0x13b98, Ghidra: FUN_00013b98)
+ * Prototype: void barracks_fn_013b98(void);
  * Address  : 0x13b98 (Size: 22 bytes)
  * Module   : barracks.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x404f7
- * Callees  : 1 -> 0xe6a10
+ * Purpose  : Module barracks.cpp procedure @ 0x013b98
+ * Callers  : 1 -> inits_could_create_ambient_sound_0404f7
+ * Callees  : 1 -> LbScreenWaitVbi
  ******************************************************************************/
-void FUN_00013b98(void)
+void barracks_fn_013b98(void)
 
 {
-  FUN_000e6a10();
+  LbScreenWaitVbi();
   return;
 }
 

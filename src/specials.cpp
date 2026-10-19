@@ -1,7 +1,7 @@
 /**
- * Dungeon Keeper (KEEPER.EXE) - Reconstructed Source Module: specials.cpp
+ * Dungeon Keeper (KEEPER.EXE) - Reconstructed & Semantically Named Module: specials.cpp
  * Binary Subject: /home/merlin/Dungeon Keeper/re/KEEPER.elf
- * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 (x86:LE:32:default)
+ * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 + DK Semantic Analyzer
  * Functions in this translation unit: 31
  */
 
@@ -11,846 +11,834 @@
 #include "../include/dk_functions.h"
 
 /******************************************************************************
- * Function : sub_0701e3 (Ghidra: FUN_000701e3)
- * Prototype: int sub_0701e3(void);
+ * Function : specials_fn_0701e3 (Original VA: 0x701e3, Ghidra: FUN_000701e3)
+ * Prototype: int specials_fn_0701e3(void);
  * Address  : 0x701e3 (Size: 10 bytes)
  * Module   : specials.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 6 -> 0x6f72b, 0x6f7b2, 0x6faa0, 0x6fca5, 0x6ff7f, 0x6ffd9
+ * Purpose  : Module specials.cpp procedure @ 0x0701e3
+ * Callers  : 6 -> sound3d_fn_06f72b, sound_fn_06f7b2, sound3d_fn_06faa0, sound3d_fn_06fca5, sound3d_fn_06ff7f, sound3d_fn_06ffd9
  * Callees  : 0 -> 
  ******************************************************************************/
-int FUN_000701e3(void)
+int specials_fn_0701e3(void)
 
 {
-  int in_EAX;
+  int arg_eax;
   
-  return *(ushort *)(in_EAX + 2) + 4000;
+  return *(ushort *)(arg_eax + 2) + 4000;
 }
 
 /******************************************************************************
- * Function : sub_0701ed (Ghidra: FUN_000701ed)
- * Prototype: int sub_0701ed(void);
+ * Function : specials_fn_0701ed (Original VA: 0x701ed, Ghidra: FUN_000701ed)
+ * Prototype: int specials_fn_0701ed(void);
  * Address  : 0x701ed (Size: 5 bytes)
  * Module   : specials.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x7019c
+ * Purpose  : Module specials.cpp procedure @ 0x0701ed
+ * Callers  : 1 -> sound3d_fn_07019c
  * Callees  : 0 -> 
  ******************************************************************************/
-int FUN_000701ed(void)
+int specials_fn_0701ed(void)
 
 {
-  int in_EAX;
+  int arg_eax;
   
-  return *(int *)(in_EAX + 0x19) + 4000;
+  return *(int *)(arg_eax + 0x19) + 4000;
 }
 
 /******************************************************************************
- * Function : sub_0701f2 (Ghidra: FUN_000701f2)
- * Prototype: undefined4 sub_0701f2(void);
+ * Function : specials_fn_0701f2 (Original VA: 0x701f2, Ghidra: FUN_000701f2)
+ * Prototype: undefined4 specials_fn_0701f2(void);
  * Address  : 0x701f2 (Size: 12 bytes)
  * Module   : specials.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module specials.cpp procedure @ 0x0701f2
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_000701f2(void)
+undefined4 specials_fn_0701f2(void)
 
 {
   return 1;
 }
 
 /******************************************************************************
- * Function : sub_070234 (Ghidra: FUN_00070234)
- * Prototype: int sub_070234(void);
+ * Function : specials_fn_070234 (Original VA: 0x70234, Ghidra: FUN_00070234)
+ * Prototype: int specials_fn_070234(void);
  * Address  : 0x70234 (Size: 71 bytes)
  * Module   : specials.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module specials.cpp procedure @ 0x070234
  * Callers  : 0 -> 
- * Callees  : 1 -> 0xe69fc
+ * Callees  : 1 -> bflib_system_io_fn_0e69fc
  ******************************************************************************/
-int FUN_00070234(void)
+int specials_fn_070234(void)
 
 {
-  int iVar1;
+  int val;
   int extraout_ECX;
   
-  FUN_000e69fc();
-  iVar1 = FUN_000e69fc();
-  if (iVar1 < extraout_ECX) {
-    iVar1 = *(int *)(&DAT_0017a4d0 + ((iVar1 << 8) / extraout_ECX) * 8) * extraout_ECX;
+  bflib_system_io_fn_0e69fc();
+  val = bflib_system_io_fn_0e69fc();
+  if (val < extraout_ECX) {
+    val = *(int *)(&g_data_0017a4d0 + ((val << 8) / extraout_ECX) * 8) * extraout_ECX;
   }
   else {
-    if (iVar1 == 0) {
+    if (val == 0) {
       return 0;
     }
-    iVar1 = *(int *)(&DAT_0017a4d0 + ((extraout_ECX << 8) / iVar1) * 8) * iVar1;
+    val = *(int *)(&g_data_0017a4d0 + ((extraout_ECX << 8) / val) * 8) * val;
   }
-  return iVar1 >> 0xd;
+  return val >> 0xd;
 }
 
 /******************************************************************************
- * Function : sub_07027c (Ghidra: FUN_0007027c)
- * Prototype: longlong sub_07027c(void);
+ * Function : specials_handle_object_thing_07027c (Original VA: 0x7027c, Ghidra: FUN_0007027c)
+ * Prototype: longlong specials_handle_object_thing_07027c(void);
  * Address  : 0x7027c (Size: 32 bytes)
  * Module   : specials.cpp [callgraph_affinity_to_following_unit]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x4e120, 0x708fa
+ * Purpose  : Checks Thing->class_id == 1 (Object) and processes state
+ * Callers  : 2 -> lair_process_thing_entity_04e120, specials_dungeon_special_model_0708fa
  * Callees  : 0 -> 
  ******************************************************************************/
-longlong FUN_0007027c(void)
+longlong specials_handle_object_thing_07027c(void)
 
 {
-  int in_EAX;
-  uint in_EDX;
+  int thing;
+  uint arg_edx;
   
-  if (((*(char *)(in_EAX + 0x1f) == '\x01') && (0x55 < *(byte *)(in_EAX + 0x1a))) &&
-     (*(byte *)(in_EAX + 0x1a) < 0x5e)) {
-    return CONCAT44(in_EDX,1);
+  if (((*(char *)(thing + 0x1f) == '\x01') && (0x55 < *(byte *)(thing + 0x1a))) && /* thing->class_id */
+     (*(byte *)(thing + 0x1a) < 0x5e)) {
+    return CONCAT44(arg_edx,1);
   }
-  return (ulonglong)in_EDX << 0x20;
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : sub_0702e6 (Ghidra: FUN_000702e6)
- * Prototype: void sub_0702e6(void);
+ * Function : specials_fn_0702e6 (Original VA: 0x702e6, Ghidra: FUN_000702e6)
+ * Prototype: void specials_fn_0702e6(void);
  * Address  : 0x702e6 (Size: 58 bytes)
  * Module   : specials.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module specials.cpp procedure @ 0x0702e6
  * Callers  : 0 -> 
- * Callees  : 1 -> 0x5ddee
+ * Callees  : 1 -> set_packet_action
  ******************************************************************************/
-void FUN_000702e6(void)
+void specials_fn_0702e6(void)
 
 {
-  FUN_0005ddee(0,0);
+  set_packet_action(0,0);
   return;
 }
 
 /******************************************************************************
- * Function : sub_070320 (Ghidra: FUN_00070320)
- * Prototype: void sub_070320(void);
+ * Function : specials_draw_text_overlay_070320 (Original VA: 0x70320, Ghidra: FUN_00070320)
+ * Prototype: void specials_draw_text_overlay_070320(void);
  * Address  : 0x70320 (Size: 399 bytes)
  * Module   : specials.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Configures font/flags and draws text on screen
  * Callers  : 0 -> 
- * Callees  : 4 -> 0xe6b20, 0xe6d80, 0xe7714, 0xf0870
- * Strings  :
- *   - 0x167714: " %s"
- *   - 0x167718: "%s %d "
+ * Callees  : 4 -> LbTextDraw, LbTextDrawFormatted, dk_sprintf, bflib_system_io_fn_0f0870
  ******************************************************************************/
-void FUN_00070320(void)
+void specials_draw_text_overlay_070320(void)
 
 {
-  undefined2 uVar1;
-  int in_EAX;
-  int iVar2;
+  undefined2 saved_draw_flags;
+  int thing;
+  int dungeon_off;
   int extraout_ECX;
-  int iVar3;
-  undefined4 uVar4;
+  int val;
+  undefined4 uval;
   
-  uVar1 = DAT_003d9874;
-  uVar4 = 0;
-  DAT_003d9874 = 4;
-  FUN_000f0870(0,(int)*(short *)(in_EAX + 0x1f) / (int)(uint)DAT_0019cba6);
-  DAT_003d98b4 = DAT_001991b8;
-  FUN_000e6b20(uVar4,(int)((ulonglong)*(ushort *)(in_EAX + 0x25) /
-                          (ulonglong)(longlong)(int)(uint)DAT_0019cba6));
-  iVar2 = DAT_002f10ce._3_1_ * 0x1508;
-  if (*(int *)(&DAT_002e1928 + iVar2) == 0x40) {
-    iVar3 = *(short *)(in_EAX + 0x1b) + DAT_003772da;
-    if (iVar3 < 0x40) {
-      iVar3 = (*(int *)(&DAT_002e192c + iVar2) + iVar3) % 0x40;
+  saved_draw_flags = g_lb_display_draw_flags;
+  uval = 0;
+  g_lb_display_draw_flags = 4;
+  bflib_system_io_fn_0f0870(0,(int)*(short *)(thing + 0x1f) / (int)(uint)g_units_per_pixel); /* thing->class_id */
+  g_lb_current_font_ptr = g_frontend_font_ptr;
+  LbTextDraw(uval,(int)((ulonglong)*(ushort *)(thing + 0x25) /
+                          (ulonglong)(longlong)(int)(uint)g_units_per_pixel));
+  dungeon_off = g_my_player_word._3_1_ * 0x1508;
+  if (*(int *)(&g_bss_002e1928 + dungeon_off) == 0x40) {
+    val = *(short *)(thing + 0x1b) + g_bss_003772da; /* thing->index_or_angle */
+    if (val < 0x40) {
+      val = (*(int *)(&g_bss_002e192c + dungeon_off) + val) % 0x40;
       goto LAB_00070400;
     }
   }
   else {
-    iVar3 = *(short *)(in_EAX + 0x1b) + DAT_003772da;
-    if (iVar3 < *(int *)(&DAT_002e1928 + iVar2)) goto LAB_00070400;
+    val = *(short *)(thing + 0x1b) + g_bss_003772da; /* thing->index_or_angle */
+    if (val < *(int *)(&g_bss_002e1928 + dungeon_off)) goto LAB_00070400;
   }
-  iVar3 = -1;
+  val = -1;
 LAB_00070400:
-  if (iVar3 != -1) {
-    DAT_003d9874 = 0x20;
-    FUN_000e7714(&DAT_0019cbac,&DAT_00167714, /* 0x167714=" %s" */
-                 (&DAT_0033319b)
+  if (val != -1) {
+    g_lb_display_draw_flags = 0x20;
+    dk_sprintf(&g_log_sprintf_buf,&g_data_00167714, /* 0x167714=" %s" */
+                 (&g_bss_0033319b)
                  [*(ushort *)
-                   (&DAT_00188bf7 +
-                   (uint)(byte)(&DAT_002e18a8)[DAT_002f10ce._3_1_ * 0x1508 + iVar3 * 2] * 5)]);
-    FUN_000e6d80();
-    DAT_003d9874 = 0x80;
-    FUN_000e7714(&DAT_0019cbac,s__s__d_00167718,DAT_003337f3,
-                 (byte)(&DAT_002e18a9)[DAT_002f10ce._3_1_ * 0x1508 + extraout_ECX] + 1);
-    FUN_000e6d80();
+                   (&g_data_00188bf7 +
+                   (uint)(byte)(&g_bss_002e18a8)[g_my_player_word._3_1_ * 0x1508 + val * 2] * 5)]);
+    LbTextDrawFormatted();
+    g_lb_display_draw_flags = 0x80;
+    dk_sprintf(&g_log_sprintf_buf,s__s__d_00167718,g_bss_003337f3,
+                 (byte)(&g_bss_002e18a9)[g_my_player_word._3_1_ * 0x1508 + extraout_ECX] + 1);
+    LbTextDrawFormatted();
   }
-  DAT_003d9874 = uVar1;
+  g_lb_display_draw_flags = saved_draw_flags;
   return;
 }
 
 /******************************************************************************
- * Function : sub_0704af (Ghidra: FUN_000704af)
- * Prototype: void sub_0704af(void);
+ * Function : specials_fn_0704af (Original VA: 0x704af, Ghidra: FUN_000704af)
+ * Prototype: void specials_fn_0704af(void);
  * Address  : 0x704af (Size: 16 bytes)
  * Module   : specials.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module specials.cpp procedure @ 0x0704af
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_000704af(void)
+void specials_fn_0704af(void)
 
 {
-  if (DAT_003772da != 0) {
-    DAT_003772da = DAT_003772da + -1;
+  if (g_bss_003772da != 0) {
+    g_bss_003772da = g_bss_003772da + -1;
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0704bf (Ghidra: FUN_000704bf)
- * Prototype: void sub_0704bf(void);
+ * Function : specials_update_player_dungeon_0704bf (Original VA: 0x704bf, Ghidra: FUN_000704bf)
+ * Prototype: void specials_update_player_dungeon_0704bf(void);
  * Address  : 0x704bf (Size: 36 bytes)
  * Module   : specials.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses per-player Dungeon state (stride 0x1508)
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_000704bf(void)
+void specials_update_player_dungeon_0704bf(void)
 
 {
-  if (DAT_003772da < *(int *)(&DAT_002e1928 + DAT_002f10ce._3_1_ * 0x1508)) {
-    DAT_003772da = DAT_003772da + 1;
+  if (g_bss_003772da < *(int *)(&g_bss_002e1928 + g_my_player_word._3_1_ * 0x1508)) {
+    g_bss_003772da = g_bss_003772da + 1;
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0704e3 (Ghidra: FUN_000704e3)
- * Prototype: void sub_0704e3(void);
+ * Function : specials_maintain_gui_button_state_0704e3 (Original VA: 0x704e3, Ghidra: FUN_000704e3)
+ * Prototype: void specials_maintain_gui_button_state_0704e3(void);
  * Address  : 0x704e3 (Size: 109 bytes)
  * Module   : specials.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Updates GUI button enabled bit (0x08)
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_000704e3(void)
+void specials_maintain_gui_button_state_0704e3(void)
 
 {
-  byte *in_EAX;
-  int iVar1;
-  bool bVar2;
+  byte *gui_btn;
+  int dungeon_off;
+  bool flag;
   
-  iVar1 = DAT_002f10ce._3_1_ * 0x1508;
-  if ((*(int *)(&DAT_002e1928 + iVar1) <= DAT_003772da) && (*(int *)(&DAT_002e1928 + iVar1) != 0)) {
-    DAT_003772de = *(int *)(&DAT_002e1928 + iVar1) + -1;
+  dungeon_off = g_my_player_word._3_1_ * 0x1508;
+  if ((*(int *)(&g_bss_002e1928 + dungeon_off) <= g_bss_003772da) && (*(int *)(&g_bss_002e1928 + dungeon_off) != 0)) {
+    g_bss_003772de = *(int *)(&g_bss_002e1928 + dungeon_off) + -1;
   }
-  if (*(short *)(in_EAX + 0x1b) == 1) {
-    bVar2 = DAT_003772da != 0;
+  if (*(short *)(gui_btn + 0x1b) == 1) { /* gui_btn->id_num */
+    flag = g_bss_003772da != 0;
   }
   else {
-    bVar2 = DAT_003772da < *(int *)(&DAT_002e1928 + DAT_002f10ce._3_1_ * 0x1508) + -1;
+    flag = g_bss_003772da < *(int *)(&g_bss_002e1928 + g_my_player_word._3_1_ * 0x1508) + -1;
   }
-  *in_EAX = *in_EAX & 0xf7;
-  *in_EAX = *in_EAX | bVar2 << 3;
+  *gui_btn = *gui_btn & 0xf7;
+  *gui_btn = *gui_btn | flag << 3;
   return;
 }
 
 /******************************************************************************
- * Function : sub_070550 (Ghidra: FUN_00070550)
- * Prototype: void sub_070550(void);
+ * Function : specials_update_player_dungeon_070550 (Original VA: 0x70550, Ghidra: FUN_00070550)
+ * Prototype: void specials_update_player_dungeon_070550(void);
  * Address  : 0x70550 (Size: 173 bytes)
  * Module   : specials.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses per-player Dungeon state (stride 0x1508)
  * Callers  : 0 -> 
- * Callees  : 2 -> 0x5c848, 0x5ddee
+ * Callees  : 2 -> newgui_fn_05c848, set_packet_action
  ******************************************************************************/
-void FUN_00070550(void)
+void specials_update_player_dungeon_070550(void)
 
 {
-  int in_EAX;
+  int gui_btn;
   
-  if (*(short *)(in_EAX + 0x1b) + DAT_003772da <
-      *(int *)(&DAT_002e1928 + DAT_002f10ce._3_1_ * 0x1508)) {
-    FUN_0005ddee(0,0);
-    FUN_0005c848();
+  if (*(short *)(gui_btn + 0x1b) + g_bss_003772da < /* gui_btn->id_num */
+      *(int *)(&g_bss_002e1928 + g_my_player_word._3_1_ * 0x1508)) {
+    set_packet_action(0,0);
+    newgui_fn_05c848();
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0705fd (Ghidra: FUN_000705fd)
- * Prototype: void sub_0705fd(void);
+ * Function : specials_maintain_gui_button_state_0705fd (Original VA: 0x705fd, Ghidra: FUN_000705fd)
+ * Prototype: void specials_maintain_gui_button_state_0705fd(void);
  * Address  : 0x705fd (Size: 48 bytes)
  * Module   : specials.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Updates GUI button enabled bit (0x08)
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_000705fd(void)
+void specials_maintain_gui_button_state_0705fd(void)
 
 {
-  int iVar1;
-  byte *in_EAX;
-  int iVar2;
+  int dungeon_off;
+  byte *gui_btn;
+  int val;
   
-  iVar2 = *(short *)(in_EAX + 0x1b) + DAT_003772da;
-  iVar1 = *(int *)(&DAT_002e1928 + DAT_002f10ce._3_1_ * 0x1508);
-  *in_EAX = *in_EAX & 0xf7;
-  *in_EAX = *in_EAX | (iVar2 < iVar1) << 3;
+  val = *(short *)(gui_btn + 0x1b) + g_bss_003772da; /* gui_btn->id_num */
+  dungeon_off = *(int *)(&g_bss_002e1928 + g_my_player_word._3_1_ * 0x1508);
+  *gui_btn = *gui_btn & 0xf7;
+  *gui_btn = *gui_btn | (val < dungeon_off) << 3;
   return;
 }
 
 /******************************************************************************
- * Function : sub_07062d (Ghidra: FUN_0007062d)
- * Prototype: void sub_07062d(void);
+ * Function : specials_draw_text_overlay_07062d (Original VA: 0x7062d, Ghidra: FUN_0007062d)
+ * Prototype: void specials_draw_text_overlay_07062d(void);
  * Address  : 0x7062d (Size: 335 bytes)
  * Module   : specials.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Configures font/flags and draws text on screen
  * Callers  : 0 -> 
- * Callees  : 4 -> 0xe6b20, 0xe6d80, 0xe7714, 0xf0870
- * Strings  :
- *   - 0x16771f: " %s"
- *   - 0x167723: "%s %d "
+ * Callees  : 4 -> LbTextDraw, LbTextDrawFormatted, dk_sprintf, bflib_system_io_fn_0f0870
  ******************************************************************************/
-void FUN_0007062d(void)
+void specials_draw_text_overlay_07062d(void)
 
 {
-  ushort uVar1;
-  uint uVar2;
-  undefined2 uVar3;
-  int in_EAX;
-  int iVar4;
-  undefined4 uVar5;
+  ushort cctrl_ptr;
+  uint thing_ptr;
+  undefined2 saved_draw_flags;
+  int thing;
+  int cctrl_ptr_2;
+  undefined4 uval;
   
-  uVar3 = DAT_003d9874;
-  uVar5 = 0;
-  DAT_003d9874 = 4;
-  FUN_000f0870(0,(int)((ulonglong)*(ushort *)(in_EAX + 0x25) /
-                      (ulonglong)(longlong)(int)(uint)DAT_0019cba6));
-  DAT_003d98b4 = DAT_001991b8;
-  FUN_000e6b20(uVar5,(int)*(short *)(in_EAX + 0x1f) / (int)(uint)DAT_0019cba6);
-  iVar4 = *(short *)(in_EAX + 0x1b) + DAT_003772de;
-  if (iVar4 < (int)(uint)(byte)(&DAT_002e0ea2)[DAT_002f10ce._3_1_ * 0x1508]) {
-    uVar1 = (&DAT_002e05b6)[DAT_002f10ce._3_1_ * 0xa84];
-    for (; (uVar2 = (&DAT_001ae9fc)[uVar1], DAT_001ae9fc < uVar2 && (iVar4 != 0));
-        iVar4 = iVar4 + -1) {
-      uVar1 = *(ushort *)((&DAT_001b0a00)[*(ushort *)(uVar2 + 100)] + 0x1f);
+  saved_draw_flags = g_lb_display_draw_flags;
+  uval = 0;
+  g_lb_display_draw_flags = 4;
+  bflib_system_io_fn_0f0870(0,(int)((ulonglong)*(ushort *)(thing + 0x25) /
+                      (ulonglong)(longlong)(int)(uint)g_units_per_pixel));
+  g_lb_current_font_ptr = g_frontend_font_ptr;
+  LbTextDraw(uval,(int)*(short *)(thing + 0x1f) / (int)(uint)g_units_per_pixel); /* thing->class_id */
+  cctrl_ptr_2 = *(short *)(thing + 0x1b) + g_bss_003772de; /* thing->index_or_angle */
+  if (cctrl_ptr_2 < (int)(uint)(byte)(&g_bss_002e0ea2)[g_my_player_word._3_1_ * 0x1508]) {
+    cctrl_ptr = (&g_bss_002e05b6)[g_my_player_word._3_1_ * 0xa84];
+    for (; (thing_ptr = (&g_thing_ptrs)[cctrl_ptr], g_thing_ptrs < thing_ptr && (cctrl_ptr_2 != 0));
+        cctrl_ptr_2 = cctrl_ptr_2 + -1) {
+      cctrl_ptr = *(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x1f); /* thing->ccontrol_idx */
     }
-    if (DAT_001ae9fc < uVar2) {
-      DAT_003d9874 = 0x20;
-      FUN_000e7714(&DAT_0019cbac,&DAT_0016771f, /* 0x16771f=" %s" */
-                   (&DAT_0033319b)[*(ushort *)(&DAT_00188bf7 + (uint)*(byte *)(uVar2 + 0x1a) * 5)]);
-      FUN_000e6d80();
-      DAT_003d9874 = 0x80;
-      FUN_000e7714(&DAT_0019cbac,s__s__d_00167723,DAT_003337f3,
-                   *(byte *)((&DAT_001b0a00)[*(ushort *)(uVar2 + 100)] + 0x23) + 1);
-      FUN_000e6d80();
+    if (g_thing_ptrs < thing_ptr) {
+      g_lb_display_draw_flags = 0x20;
+      dk_sprintf(&g_log_sprintf_buf,&g_data_0016771f, /* 0x16771f=" %s" */
+                   (&g_bss_0033319b)[*(ushort *)(&g_data_00188bf7 + (uint)*(byte *)(thing_ptr + 0x1a) * 5)]);
+      LbTextDrawFormatted();
+      g_lb_display_draw_flags = 0x80;
+      dk_sprintf(&g_log_sprintf_buf,s__s__d_00167723,g_bss_003337f3,
+                   *(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x23) + 1); /* thing->ccontrol_idx */
+      LbTextDrawFormatted();
     }
   }
-  DAT_003d9874 = uVar3;
+  g_lb_display_draw_flags = saved_draw_flags;
   return;
 }
 
 /******************************************************************************
- * Function : sub_07077c (Ghidra: FUN_0007077c)
- * Prototype: void sub_07077c(void);
+ * Function : specials_maintain_gui_button_state_07077c (Original VA: 0x7077c, Ghidra: FUN_0007077c)
+ * Prototype: void specials_maintain_gui_button_state_07077c(void);
  * Address  : 0x7077c (Size: 39 bytes)
  * Module   : specials.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Updates GUI button enabled bit (0x08)
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_0007077c(void)
+void specials_maintain_gui_button_state_07077c(void)
 
 {
-  byte bVar1;
-  byte *in_EAX;
-  int iVar2;
+  byte dungeon_off;
+  byte *gui_btn;
+  int val;
   
-  bVar1 = (&DAT_002e0ea2)[DAT_002f10ce._3_1_ * 0x1508];
-  iVar2 = *(short *)(in_EAX + 0x1b) + DAT_003772de;
-  *in_EAX = *in_EAX & 0xf7;
-  *in_EAX = *in_EAX | (iVar2 < (int)(uint)bVar1) << 3;
+  dungeon_off = (&g_bss_002e0ea2)[g_my_player_word._3_1_ * 0x1508];
+  val = *(short *)(gui_btn + 0x1b) + g_bss_003772de; /* gui_btn->id_num */
+  *gui_btn = *gui_btn & 0xf7;
+  *gui_btn = *gui_btn | (val < (int)(uint)dungeon_off) << 3;
   return;
 }
 
 /******************************************************************************
- * Function : sub_0707a3 (Ghidra: FUN_000707a3)
- * Prototype: void sub_0707a3(void);
+ * Function : specials_fn_0707a3 (Original VA: 0x707a3, Ghidra: FUN_000707a3)
+ * Prototype: void specials_fn_0707a3(void);
  * Address  : 0x707a3 (Size: 16 bytes)
  * Module   : specials.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module specials.cpp procedure @ 0x0707a3
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_000707a3(void)
+void specials_fn_0707a3(void)
 
 {
-  if (DAT_003772de != 0) {
-    DAT_003772de = DAT_003772de + -1;
+  if (g_bss_003772de != 0) {
+    g_bss_003772de = g_bss_003772de + -1;
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0707b3 (Ghidra: FUN_000707b3)
- * Prototype: void sub_0707b3(void);
+ * Function : specials_update_player_dungeon_0707b3 (Original VA: 0x707b3, Ghidra: FUN_000707b3)
+ * Prototype: void specials_update_player_dungeon_0707b3(void);
  * Address  : 0x707b3 (Size: 35 bytes)
  * Module   : specials.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses per-player Dungeon state (stride 0x1508)
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_000707b3(void)
+void specials_update_player_dungeon_0707b3(void)
 
 {
-  if (DAT_003772de < (int)(uint)(byte)(&DAT_002e0ea2)[DAT_002f10ce._3_1_ * 0x1508]) {
-    DAT_003772de = DAT_003772de + 1;
+  if (g_bss_003772de < (int)(uint)(byte)(&g_bss_002e0ea2)[g_my_player_word._3_1_ * 0x1508]) {
+    g_bss_003772de = g_bss_003772de + 1;
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0707d6 (Ghidra: FUN_000707d6)
- * Prototype: void sub_0707d6(void);
+ * Function : specials_maintain_gui_button_state_0707d6 (Original VA: 0x707d6, Ghidra: FUN_000707d6)
+ * Prototype: void specials_maintain_gui_button_state_0707d6(void);
  * Address  : 0x707d6 (Size: 100 bytes)
  * Module   : specials.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Updates GUI button enabled bit (0x08)
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_000707d6(void)
+void specials_maintain_gui_button_state_0707d6(void)
 
 {
-  byte *in_EAX;
-  bool bVar1;
+  byte *gui_btn;
+  bool flag;
   
-  if ((int)(uint)(byte)(&DAT_002e0ea2)[DAT_002f10ce._3_1_ * 0x1508] <= DAT_003772de) {
-    DAT_003772de = (byte)(&DAT_002e0ea2)[DAT_002f10ce._3_1_ * 0x1508] - 1;
+  if ((int)(uint)(byte)(&g_bss_002e0ea2)[g_my_player_word._3_1_ * 0x1508] <= g_bss_003772de) {
+    g_bss_003772de = (byte)(&g_bss_002e0ea2)[g_my_player_word._3_1_ * 0x1508] - 1;
   }
-  if (*(short *)(in_EAX + 0x1b) == 1) {
-    bVar1 = DAT_003772de != 0;
+  if (*(short *)(gui_btn + 0x1b) == 1) { /* gui_btn->id_num */
+    flag = g_bss_003772de != 0;
   }
   else {
-    bVar1 = DAT_003772de < (int)((byte)(&DAT_002e0ea2)[DAT_002f10ce._3_1_ * 0x1508] - 1);
+    flag = g_bss_003772de < (int)((byte)(&g_bss_002e0ea2)[g_my_player_word._3_1_ * 0x1508] - 1);
   }
-  *in_EAX = *in_EAX & 0xf7;
-  *in_EAX = *in_EAX | bVar1 << 3;
+  *gui_btn = *gui_btn & 0xf7;
+  *gui_btn = *gui_btn | flag << 3;
   return;
 }
 
 /******************************************************************************
- * Function : sub_07083a (Ghidra: FUN_0007083a)
- * Prototype: void sub_07083a(void);
+ * Function : specials_update_creature_and_thing_07083a (Original VA: 0x7083a, Ghidra: FUN_0007083a)
+ * Prototype: void specials_update_creature_and_thing_07083a(void);
  * Address  : 0x7083a (Size: 160 bytes)
  * Module   : specials.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
  * Callers  : 0 -> 
- * Callees  : 2 -> 0x5c848, 0x5ddee
+ * Callees  : 2 -> newgui_fn_05c848, set_packet_action
  ******************************************************************************/
-void FUN_0007083a(void)
+void specials_update_creature_and_thing_07083a(void)
 
 {
-  ushort uVar1;
-  uint uVar2;
-  int in_EAX;
-  int iVar3;
-  undefined4 *puVar4;
+  ushort cctrl_ptr;
+  uint thing_ptr;
+  int gui_btn;
+  int cctrl_ptr_2;
+  undefined4 *word_ptr;
   undefined4 uStack_14;
   undefined4 uStack_10;
   undefined1 auStack_c [8];
   
-  puVar4 = (undefined4 *)auStack_c;
-  iVar3 = *(short *)(in_EAX + 0x1b) + DAT_003772de;
-  if (iVar3 < (int)(uint)(byte)(&DAT_002e0ea2)[DAT_002f10ce._3_1_ * 0x1508]) {
-    uVar1 = (&DAT_002e05b6)[DAT_002f10ce._3_1_ * 0xa84];
-    for (; (uVar2 = (&DAT_001ae9fc)[uVar1], DAT_001ae9fc < uVar2 && (iVar3 != 0));
-        iVar3 = iVar3 + -1) {
-      uVar1 = *(ushort *)((&DAT_001b0a00)[*(ushort *)(uVar2 + 100)] + 0x1f);
+  word_ptr = (undefined4 *)auStack_c;
+  cctrl_ptr_2 = *(short *)(gui_btn + 0x1b) + g_bss_003772de; /* gui_btn->id_num */
+  if (cctrl_ptr_2 < (int)(uint)(byte)(&g_bss_002e0ea2)[g_my_player_word._3_1_ * 0x1508]) {
+    cctrl_ptr = (&g_bss_002e05b6)[g_my_player_word._3_1_ * 0xa84];
+    for (; (thing_ptr = (&g_thing_ptrs)[cctrl_ptr], g_thing_ptrs < thing_ptr && (cctrl_ptr_2 != 0));
+        cctrl_ptr_2 = cctrl_ptr_2 + -1) {
+      cctrl_ptr = *(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x1f); /* thing->ccontrol_idx */
     }
-    if (DAT_001ae9fc < uVar2) {
+    if (g_thing_ptrs < thing_ptr) {
       uStack_10 = 0;
-      puVar4 = &uStack_14;
+      word_ptr = &uStack_14;
       uStack_14 = 0;
-      FUN_0005ddee();
+      set_packet_action();
     }
-    *(undefined4 *)((int)puVar4 + -4) = 0x708d6;
-    FUN_0005c848();
+    *(undefined4 *)((int)word_ptr + -4) = 0x708d6;
+    newgui_fn_05c848();
   }
   return;
 }
 
 /******************************************************************************
- * Function : dk_dungeon_special_model_0708fa (Ghidra: FUN_000708fa)
- * Prototype: void dk_dungeon_special_model_0708fa(void);
+ * Function : specials_dungeon_special_model_0708fa (Original VA: 0x708fa, Ghidra: FUN_000708fa)
+ * Prototype: void specials_dungeon_special_model_0708fa(void);
  * Address  : 0x708fa (Size: 322 bytes)
  * Module   : specials.cpp [direct_file_string_xref]
- * OrigLine : specials.cpp:357
- * Naming   : String 'Invalid dungeon special (Model %d)'
- * Callers  : 3 -> 0x4e120, 0x5eb8d, 0xc599c
- * Callees  : 15 -> 0x2778e, 0x51374, 0x7027c, 0x70c0c, 0x70c96, 0x70d0d, 0x70d86, 0x70e59, 0x711f3, 0x71312 ...
- * Strings  :
- *   - 0x16774d: "specials.cpp"
- *   - 0x16772a: "Invalid dungeon special (Model %d)"
+ * OrigLine : specials.cpp lines 357
+ * Purpose  : String 'Invalid dungeon special (Model %d)'
+ * Callers  : 3 -> lair_process_thing_entity_04e120, process_players_dungeon_control_packet, object_picking_up_object_0c599c
+ * Callees  : 15 -> evil_fn_02778e, moodneed_fn_051374, specials_handle_object_thing_07027c, specials_fn_070c0c, specials_update_creature_and_thing_070c96, specials_bonus_level_assigned_this_070d0d, specials_update_creature_and_thing_070d86, specials_process_slabmap_tile_070e59 ...
  ******************************************************************************/
-void FUN_000708fa(void)
+void specials_dungeon_special_model_0708fa(void)
 
 {
-  bool bVar1;
-  byte *in_EAX;
-  int iVar2;
+  bool flag;
+  byte *arg_eax;
+  int val;
   undefined1 *extraout_ECX;
-  undefined1 *puVar3;
+  undefined1 *word_ptr;
   undefined1 *extraout_ECX_00;
   undefined1 *extraout_ECX_01;
   undefined1 *extraout_ECX_02;
   undefined1 *extraout_ECX_03;
   
-  bVar1 = false;
-  if ((*in_EAX & 1) == 0) {
+  flag = false;
+  if ((*arg_eax & 1) == 0) {
     return;
   }
-  iVar2 = FUN_0007027c(*(undefined4 *)(in_EAX + 0xd),*(undefined2 *)(in_EAX + 0x11),
-                       in_EAX[0x1a] - 0x56);
-  if (iVar2 == 0) {
+  val = specials_handle_object_thing_07027c(*(undefined4 *)(arg_eax + 0xd),*(undefined2 *)(arg_eax + 0x11),
+                       arg_eax[0x1a] - 0x56);
+  if (val == 0) {
     return;
   }
-  switch(in_EAX[0x1a]) {
+  switch(arg_eax[0x1a]) {
   case 0x56:
-    FUN_00070c0c();
+    specials_fn_070c0c();
     break;
   case 0x57:
-    FUN_00071312();
-    puVar3 = extraout_ECX_00;
+    specials_update_player_dungeon_071312();
+    word_ptr = extraout_ECX_00;
     goto LAB_0007095b;
   case 0x58:
-    FUN_00071367();
-    puVar3 = extraout_ECX_01;
+    specials_update_player_dungeon_071367();
+    word_ptr = extraout_ECX_01;
     goto LAB_0007095b;
   case 0x59:
-    iVar2 = FUN_000711f3();
-    puVar3 = extraout_ECX_02;
-    if (iVar2 == 0) goto LAB_0007095b;
+    val = specials_update_creature_and_thing_0711f3();
+    word_ptr = extraout_ECX_02;
+    if (val == 0) goto LAB_0007095b;
     break;
   case 0x5a:
-    FUN_00070d86();
+    specials_update_creature_and_thing_070d86();
     break;
   case 0x5b:
-    FUN_00070c96();
+    specials_update_creature_and_thing_070c96();
     break;
   case 0x5c:
-    FUN_00070e59();
+    specials_process_slabmap_tile_070e59();
     break;
   case 0x5d:
-    FUN_00070d0d();
+    specials_bonus_level_assigned_this_070d0d();
     break;
   default:
-    FUN_000e7714(&DAT_0019cbac,s_Invalid_dungeon_special__Model___0016772a,in_EAX[0x1a]);
-    FUN_000ddaf0(); /* LbErrorLog("specials.cpp", line 357, g_log_buf) */
-    puVar3 = extraout_ECX_03;
+    dk_sprintf(&g_log_sprintf_buf,s_Invalid_dungeon_special__Model___0016772a,arg_eax[0x1a]);
+    LbErrorLog(); /* LbErrorLog("specials.cpp", line 357, g_log_buf) */
+    word_ptr = extraout_ECX_03;
     goto LAB_0007095b;
   }
-  FUN_0002778e();
-  bVar1 = true;
-  FUN_00072af4();
-  puVar3 = extraout_ECX;
+  evil_fn_02778e();
+  flag = true;
+  structs_update_creature_control_072af4();
+  word_ptr = extraout_ECX;
 LAB_0007095b:
-  if (bVar1) {
-    if (&DAT_0019d0c8 + DAT_002f10ce._3_1_ * 0x4ef == puVar3) {
-      FUN_00051374();
+  if (flag) {
+    if (&g_players + g_my_player_word._3_1_ * 0x4ef == word_ptr) {
+      moodneed_fn_051374();
     }
-    FUN_000713bc();
+    specials_fn_0713bc();
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_070a3c (Ghidra: FUN_00070a3c)
- * Prototype: undefined1 sub_070a3c(void);
+ * Function : specials_update_player_view_state_070a3c (Original VA: 0x70a3c, Ghidra: FUN_00070a3c)
+ * Prototype: undefined1 specials_update_player_view_state_070a3c(void);
  * Address  : 0x70a3c (Size: 138 bytes)
  * Module   : specials.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x5eb8d
- * Callees  : 6 -> 0x2778e, 0x43bb3, 0x51374, 0x713bc, 0x72af4, 0x8240c
+ * Purpose  : Accesses per-player PlayerInfo state (stride 0x4ef)
+ * Callers  : 1 -> process_players_dungeon_control_packet
+ * Callees  : 6 -> evil_fn_02778e, inits_told_you_so_create_043bb3, moodneed_fn_051374, specials_fn_0713bc, structs_update_creature_control_072af4, creature_update_creature_control_08240c
  ******************************************************************************/
-undefined1 FUN_00070a3c(void)
+undefined1 specials_update_player_view_state_070a3c(void)
 
 {
-  byte *in_EAX;
-  int iVar1;
-  char in_DL;
-  undefined1 unaff_BL;
+  byte *arg_eax;
+  int val;
+  char arg_dl;
+  undefined1 arg_bl;
   
-  if ((((*in_EAX & 1) != 0) && (in_EAX[0x1f] == 1)) && (in_EAX[0x1a] == 0x57)) {
-    iVar1 = FUN_00043bb3();
-    if (iVar1 != 0) {
-      FUN_0008240c();
-      if (in_DL == (&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef]) {
-        FUN_00051374();
+  if ((((*arg_eax & 1) != 0) && (arg_eax[0x1f] == 1)) && (arg_eax[0x1a] == 0x57)) {
+    val = inits_told_you_so_create_043bb3();
+    if (val != 0) {
+      creature_update_creature_control_08240c();
+      if (arg_dl == (&g_player_id_number)[g_my_player_word._3_1_ * 0x4ef]) {
+        moodneed_fn_051374();
       }
     }
-    FUN_000713bc();
-    FUN_0002778e();
-    unaff_BL = FUN_00072af4();
+    specials_fn_0713bc();
+    evil_fn_02778e();
+    arg_bl = structs_update_creature_control_072af4();
   }
-  return unaff_BL;
+  return arg_bl;
 }
 
 /******************************************************************************
- * Function : sub_070ac6 (Ghidra: FUN_00070ac6)
- * Prototype: void sub_070ac6(void);
+ * Function : specials_update_creature_control_070ac6 (Original VA: 0x70ac6, Ghidra: FUN_00070ac6)
+ * Prototype: void specials_update_creature_control_070ac6(void);
  * Address  : 0x70ac6 (Size: 307 bytes)
  * Module   : specials.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x5eb8d
- * Callees  : 5 -> 0x2778e, 0x51374, 0x713bc, 0x72af4, 0x8608c
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
+ * Callers  : 1 -> process_players_dungeon_control_packet
+ * Callees  : 5 -> evil_fn_02778e, moodneed_fn_051374, specials_fn_0713bc, structs_update_creature_control_072af4, creature_how_hero_have_tend_08608c
  ******************************************************************************/
-void FUN_00070ac6(void)
+void specials_update_creature_control_070ac6(void)
 
 {
-  byte *in_EAX;
-  int iVar1;
-  byte *in_EDX;
-  int iVar2;
-  byte unaff_BL;
-  uint uVar3;
-  undefined2 *puVar4;
+  byte *arg_eax;
+  int loop_i;
+  byte *arg_edx;
+  int dungeon_off;
+  byte arg_bl;
+  uint uval;
+  undefined2 *dungeon_off_2;
   
-  uVar3 = (uint)unaff_BL;
-  iVar2 = uVar3 * 0x1508;
-  if (((((*in_EAX & 1) != 0) && (in_EAX[0x1f] == 1)) && (in_EAX[0x1a] == 0x58)) &&
-     ((((*in_EDX & 1) != 0 && (in_EDX[0x1f] == 5)) && ((int)(char)in_EDX[6] == uVar3)))) {
-    if (unaff_BL == (&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef]) {
-      DAT_002ee892 = in_EDX[0x1a];
-      DAT_002ee893 = *(undefined1 *)((&DAT_001b0a00)[*(ushort *)(in_EDX + 100)] + 0x23);
+  uval = (uint)arg_bl;
+  dungeon_off = uval * 0x1508;
+  if (((((*arg_eax & 1) != 0) && (arg_eax[0x1f] == 1)) && (arg_eax[0x1a] == 0x58)) &&
+     ((((*arg_edx & 1) != 0 && (arg_edx[0x1f] == 5)) && ((int)(char)arg_edx[6] == uval)))) {
+    if (arg_bl == (&g_player_id_number)[g_my_player_word._3_1_ * 0x4ef]) {
+      g_bss_002ee892 = arg_edx[0x1a];
+      g_bss_002ee893 = *(undefined1 *)((&g_creature_ctrl_ptrs)[*(ushort *)(arg_edx + 100)] + 0x23);
     }
-    for (iVar1 = 0; iVar1 < (int)(uint)(byte)(&DAT_002e05ec)[iVar2]; iVar1 = iVar1 + 1) {
-      puVar4 = &DAT_002e0589 + uVar3 * 0xa84 + iVar1;
-      if (*(short *)((int)(&DAT_002e0589 + uVar3 * 0xa84 + iVar1) + 0x33) ==
-          *(short *)(in_EDX + 0x1b)) {
-        for (; iVar1 < (int)((byte)(&DAT_002e05ec)[iVar2] - 1); iVar1 = iVar1 + 1) {
-          *(undefined2 *)((int)puVar4 + 0x33) = *(undefined2 *)((int)puVar4 + 0x35);
-          puVar4 = puVar4 + 1;
+    for (loop_i = 0; loop_i < (int)(uint)(byte)(&g_bss_002e05ec)[dungeon_off]; loop_i = loop_i + 1) {
+      dungeon_off_2 = &g_dungeons + uval * 0xa84 + loop_i;
+      if (*(short *)((int)(&g_dungeons + uval * 0xa84 + loop_i) + 0x33) ==
+          *(short *)(arg_edx + 0x1b)) {
+        for (; loop_i < (int)((byte)(&g_bss_002e05ec)[dungeon_off] - 1); loop_i = loop_i + 1) {
+          *(undefined2 *)((int)dungeon_off_2 + 0x33) = *(undefined2 *)((int)dungeon_off_2 + 0x35);
+          dungeon_off_2 = dungeon_off_2 + 1;
         }
-        (&DAT_002e05ec)[iVar2] = (&DAT_002e05ec)[iVar2] + -1;
-        *(undefined2 *)(&DAT_002e05bc + (uint)(byte)(&DAT_002e05ec)[iVar2] * 2 + iVar2) = 0;
+        (&g_bss_002e05ec)[dungeon_off] = (&g_bss_002e05ec)[dungeon_off] + -1;
+        *(undefined2 *)(&g_bss_002e05bc + (uint)(byte)(&g_bss_002e05ec)[dungeon_off] * 2 + dungeon_off) = 0;
       }
     }
-    FUN_0008608c(0,0);
-    FUN_000713bc();
-    FUN_0002778e();
-    FUN_00072af4();
-    if ((&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef] == unaff_BL) {
-      FUN_00051374();
+    creature_how_hero_have_tend_08608c(0,0);
+    specials_fn_0713bc();
+    evil_fn_02778e();
+    structs_update_creature_control_072af4();
+    if ((&g_player_id_number)[g_my_player_word._3_1_ * 0x4ef] == arg_bl) {
+      moodneed_fn_051374();
     }
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_070bf9 (Ghidra: FUN_00070bf9)
- * Prototype: undefined4 sub_070bf9(void);
+ * Function : specials_fn_070bf9 (Original VA: 0x70bf9, Ghidra: FUN_00070bf9)
+ * Prototype: undefined4 specials_fn_070bf9(void);
  * Address  : 0x70bf9 (Size: 19 bytes)
  * Module   : specials.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 5 -> 0x2dfac, 0x8685c, 0xdd894, 0xde6a8, 0xe5b3c
+ * Purpose  : Module specials.cpp procedure @ 0x070bf9
+ * Callers  : 5 -> frontend_why_are_we_here_02dfac, creature_dene_says_big_hello_08685c, update_update_player_view_state_0dd894, update_go_first_person_without_0de6a8, bflib_system_io_fn_0e5b3c
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_00070bf9(void)
+undefined4 specials_fn_070bf9(void)
 
 {
-  int in_EAX;
+  int arg_eax;
   
-  if ((99 < in_EAX) && (in_EAX < 0x6a)) {
+  if ((99 < arg_eax) && (arg_eax < 0x6a)) {
     return 1;
   }
   return 0;
 }
 
 /******************************************************************************
- * Function : sub_070c0c (Ghidra: FUN_00070c0c)
- * Prototype: void sub_070c0c(void);
+ * Function : specials_fn_070c0c (Original VA: 0x70c0c, Ghidra: FUN_00070c0c)
+ * Prototype: void specials_fn_070c0c(void);
  * Address  : 0x70c0c (Size: 138 bytes)
  * Module   : specials.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0x708fa, 0xdd6c8, 0xde6a8
- * Callees  : 2 -> 0x23de2, 0x63122
+ * Purpose  : Module specials.cpp procedure @ 0x070c0c
+ * Callers  : 3 -> specials_dungeon_special_model_0708fa, update_update_player_dungeon_0dd6c8, update_go_first_person_without_0de6a8
+ * Callees  : 2 -> dungeon_update_slab_subtile_columns_023de2, panmap_door_flagged_position_063122
  ******************************************************************************/
-void FUN_00070c0c(void)
+void specials_fn_070c0c(void)
 
 {
-  byte bVar1;
-  uint uVar2;
-  int in_EAX;
+  byte flag;
+  uint uval;
+  int arg_eax;
   undefined4 *extraout_ECX;
-  undefined4 *puVar3;
-  int iVar4;
+  undefined4 *word_ptr;
+  int val;
   int local_20;
   
-  bVar1 = *(byte *)(in_EAX + 0x2b);
-  iVar4 = 0;
+  flag = *(byte *)(arg_eax + 0x2b);
+  val = 0;
   do {
     local_20 = 0;
     do {
       local_20 = local_20 + 1;
-      FUN_00023de2();
+      dungeon_update_slab_subtile_columns_023de2();
     } while (local_20 < 0x55);
-    iVar4 = iVar4 + 1;
-    puVar3 = extraout_ECX;
-  } while (iVar4 < 0x55);
-  for (; puVar3 < &DAT_002c91ff; puVar3 = (undefined4 *)((int)puVar3 + 5)) {
-    uVar2 = *(uint *)((int)puVar3 + 1);
-    *(uint *)((int)puVar3 + 1) = uVar2 & 0xfffffff;
-    *(uint *)((int)puVar3 + 1) =
-         *(uint *)((int)puVar3 + 1) |
-         ((uint)(byte)('\x01' << (bVar1 & 0x1f)) | uVar2 >> 0x1c) << 0x1c;
+    val = val + 1;
+    word_ptr = extraout_ECX;
+  } while (val < 0x55);
+  for (; word_ptr < &g_bss_002c91ff; word_ptr = (undefined4 *)((int)word_ptr + 5)) {
+    uval = *(uint *)((int)word_ptr + 1);
+    *(uint *)((int)word_ptr + 1) = uval & 0xfffffff;
+    *(uint *)((int)word_ptr + 1) =
+         *(uint *)((int)word_ptr + 1) |
+         ((uint)(byte)('\x01' << (flag & 0x1f)) | uval >> 0x1c) << 0x1c;
   }
-  FUN_00063122();
+  panmap_door_flagged_position_063122();
   return;
 }
 
 /******************************************************************************
- * Function : sub_070c96 (Ghidra: FUN_00070c96)
- * Prototype: void sub_070c96(void);
+ * Function : specials_update_creature_and_thing_070c96 (Original VA: 0x70c96, Ghidra: FUN_00070c96)
+ * Prototype: void specials_update_creature_and_thing_070c96(void);
  * Address  : 0x70c96 (Size: 119 bytes)
  * Module   : specials.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x708fa
- * Callees  : 1 -> 0x81f5c
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
+ * Callers  : 1 -> specials_dungeon_special_model_0708fa
+ * Callees  : 1 -> creature_update_creature_control_081f5c
  ******************************************************************************/
-void FUN_00070c96(void)
+void specials_update_creature_and_thing_070c96(void)
 
 {
-  ushort uVar1;
-  int in_EAX;
+  ushort cctrl_ptr;
+  int arg_eax;
   int extraout_EDX;
   int extraout_EDX_00;
   
-  uVar1 = (&DAT_002e05b6)[(uint)*(byte *)(in_EAX + 0x2b) * 0xa84];
-  while (DAT_001ae9fc < (&DAT_001ae9fc)[uVar1]) {
-    FUN_00081f5c();
-    uVar1 = *(ushort *)((&DAT_001b0a00)[*(ushort *)(extraout_EDX + 100)] + 0x1f);
+  cctrl_ptr = (&g_bss_002e05b6)[(uint)*(byte *)(arg_eax + 0x2b) * 0xa84];
+  while (g_thing_ptrs < (&g_thing_ptrs)[cctrl_ptr]) {
+    creature_update_creature_control_081f5c();
+    cctrl_ptr = *(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(extraout_EDX + 100)] + 0x1f);
   }
-  uVar1 = (&DAT_002e05b8)[(uint)*(byte *)(in_EAX + 0x2b) * 0xa84];
-  while (DAT_001ae9fc < (&DAT_001ae9fc)[uVar1]) {
-    FUN_00081f5c();
-    uVar1 = *(ushort *)((&DAT_001b0a00)[*(ushort *)(extraout_EDX_00 + 100)] + 0x1f);
+  cctrl_ptr = (&g_bss_002e05b8)[(uint)*(byte *)(arg_eax + 0x2b) * 0xa84];
+  while (g_thing_ptrs < (&g_thing_ptrs)[cctrl_ptr]) {
+    creature_update_creature_control_081f5c();
+    cctrl_ptr = *(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(extraout_EDX_00 + 100)] + 0x1f);
   }
   return;
 }
 
 /******************************************************************************
- * Function : dk_bonus_level_assigned_this_070d0d (Ghidra: FUN_00070d0d)
- * Prototype: void dk_bonus_level_assigned_this_070d0d(void);
+ * Function : specials_bonus_level_assigned_this_070d0d (Original VA: 0x70d0d, Ghidra: FUN_00070d0d)
+ * Prototype: void specials_bonus_level_assigned_this_070d0d(void);
  * Address  : 0x70d0d (Size: 121 bytes)
  * Module   : specials.cpp [direct_file_string_xref]
- * OrigLine : specials.cpp:507 ("No Bonus level assigned to this level")
- * Naming   : String 'No Bonus level assigned to this level'
- * Callers  : 1 -> 0x708fa
- * Callees  : 1 -> 0xddaf0
- * Strings  :
- *   - 0x167780: "specials.cpp"
- *   - 0x16775a: "No Bonus level assigned to this level"
+ * OrigLine : specials.cpp lines 507
+ * Purpose  : String 'No Bonus level assigned to this level'
+ * Callers  : 1 -> specials_dungeon_special_model_0708fa
+ * Callees  : 1 -> LbErrorLog
  ******************************************************************************/
-void FUN_00070d0d(void)
+void specials_bonus_level_assigned_this_070d0d(void)
 
 {
-  DAT_0019d0ba = DAT_0019d0ba | 2;
-  if (DAT_002e78e9 < 0xf) {
-    if (7 < DAT_002e78e9) {
-      if (DAT_002e78e9 < 9) {
-        DAT_002ee888 = 1;
+  g_bss_0019d0ba = g_bss_0019d0ba | 2;
+  if (g_bss_002e78e9 < 0xf) {
+    if (7 < g_bss_002e78e9) {
+      if (g_bss_002e78e9 < 9) {
+        g_bss_002ee888 = 1;
         goto LAB_00070d7c;
       }
-      if (DAT_002e78e9 == 9) {
-        DAT_002ee889 = 1;
+      if (g_bss_002e78e9 == 9) {
+        g_bss_002ee889 = 1;
         goto LAB_00070d7c;
       }
     }
   }
   else {
-    if (DAT_002e78e9 < 0x10) {
-      DAT_002ee88a = 1;
+    if (g_bss_002e78e9 < 0x10) {
+      g_bss_002ee88a = 1;
       goto LAB_00070d7c;
     }
-    if (0x10 < DAT_002e78e9) {
-      if (DAT_002e78e9 < 0x12) {
-        DAT_002ee88b = 1;
+    if (0x10 < g_bss_002e78e9) {
+      if (g_bss_002e78e9 < 0x12) {
+        g_bss_002ee88b = 1;
         goto LAB_00070d7c;
       }
-      if (DAT_002e78e9 == 0x12) {
-        DAT_002ee88c = 1;
+      if (g_bss_002e78e9 == 0x12) {
+        g_bss_002ee88c = 1;
         goto LAB_00070d7c;
       }
     }
   }
-  FUN_000ddaf0(); /* LbErrorLog("specials.cpp", line 507, "No Bonus level assigned to this level") */
+  LbErrorLog(); /* LbErrorLog("specials.cpp", line 507, "No Bonus level assigned to this level") */
 LAB_00070d7c:
-  DAT_0019d0b8 = DAT_0019d0b8 & 0xfd;
+  g_game_operation_flags = g_game_operation_flags & 0xfd;
   return;
 }
 
 /******************************************************************************
- * Function : sub_070d86 (Ghidra: FUN_00070d86)
- * Prototype: void sub_070d86(void);
+ * Function : specials_update_creature_and_thing_070d86 (Original VA: 0x70d86, Ghidra: FUN_00070d86)
+ * Prototype: void specials_update_creature_and_thing_070d86(void);
  * Address  : 0x70d86 (Size: 211 bytes)
  * Module   : specials.cpp [callgraph_affinity_to_preceding_unit]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x708fa
- * Callees  : 2 -> 0x43bb3, 0x82204
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
+ * Callers  : 1 -> specials_dungeon_special_model_0708fa
+ * Callees  : 2 -> inits_told_you_so_create_043bb3, creature_update_creature_control_082204
  ******************************************************************************/
-void FUN_00070d86(void)
+void specials_update_creature_and_thing_070d86(void)
 
 {
-  byte bVar1;
-  ushort uVar2;
-  int in_EAX;
-  int iVar3;
+  byte flag;
+  ushort cctrl_ptr;
+  int arg_eax;
+  int val;
   int extraout_ECX;
   int extraout_ECX_00;
   
-  bVar1 = *(byte *)(in_EAX + 0x2b);
-  uVar2 = (&DAT_002e05b6)[(uint)bVar1 * 0xa84];
+  flag = *(byte *)(arg_eax + 0x2b);
+  cctrl_ptr = (&g_bss_002e05b6)[(uint)flag * 0xa84];
   while( true ) {
-    if ((&DAT_001ae9fc)[uVar2] <= DAT_001ae9fc) {
-      uVar2 = (&DAT_002e05b8)[(uint)bVar1 * 0xa84];
-      while ((DAT_001ae9fc < (&DAT_001ae9fc)[uVar2] && (iVar3 = FUN_00043bb3(), iVar3 != 0))) {
-        FUN_00082204();
-        *(undefined2 *)(iVar3 + 0x5e) = *(undefined2 *)(extraout_ECX_00 + 0x5e);
-        uVar2 = *(ushort *)((&DAT_001b0a00)[*(ushort *)(extraout_ECX_00 + 100)] + 0x1f);
+    if ((&g_thing_ptrs)[cctrl_ptr] <= g_thing_ptrs) {
+      cctrl_ptr = (&g_bss_002e05b8)[(uint)flag * 0xa84];
+      while ((g_thing_ptrs < (&g_thing_ptrs)[cctrl_ptr] && (val = inits_told_you_so_create_043bb3(), val != 0))) {
+        creature_update_creature_control_082204();
+        *(undefined2 *)(val + 0x5e) = *(undefined2 *)(extraout_ECX_00 + 0x5e);
+        cctrl_ptr = *(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(extraout_ECX_00 + 100)] + 0x1f);
       }
       return;
     }
-    iVar3 = FUN_00043bb3();
-    if (iVar3 == 0) break;
-    FUN_00082204();
-    *(undefined2 *)(iVar3 + 0x5e) = *(undefined2 *)(extraout_ECX + 0x5e);
-    uVar2 = *(ushort *)((&DAT_001b0a00)[*(ushort *)(extraout_ECX + 100)] + 0x1f);
+    val = inits_told_you_so_create_043bb3();
+    if (val == 0) break;
+    creature_update_creature_control_082204();
+    *(undefined2 *)(val + 0x5e) = *(undefined2 *)(extraout_ECX + 0x5e);
+    cctrl_ptr = *(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(extraout_ECX + 100)] + 0x1f);
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_070e59 (Ghidra: FUN_00070e59)
- * Prototype: void sub_070e59(void);
+ * Function : specials_process_slabmap_tile_070e59 (Original VA: 0x70e59, Ghidra: FUN_00070e59)
+ * Prototype: void specials_process_slabmap_tile_070e59(void);
  * Address  : 0x70e59 (Size: 922 bytes)
  * Module   : specials.cpp [callgraph_affinity_to_preceding_unit]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x708fa
- * Callees  : 4 -> 0x3f80c, 0xd7688, 0xd99f8, 0xe7714
+ * Purpose  : Reads/modifies SlabMap[85x85] tile entry
+ * Callers  : 1 -> specials_dungeon_special_model_0708fa
+ * Callees  : 4 -> imptool_fn_03f80c, slab_attempt_place_animating_slab_0d7688, slab_process_slabmap_tile_0d99f8, dk_sprintf
  ******************************************************************************/
-void FUN_00070e59(void)
+void specials_process_slabmap_tile_070e59(void)
 
 {
-  byte bVar1;
-  char *pcVar2;
-  int in_EAX;
-  char *pcVar3;
-  int iVar4;
-  undefined1 *puVar5;
-  undefined1 *puVar6;
-  uint *puVar7;
-  char *pcVar8;
-  uint uVar9;
-  byte *pbVar10;
+  byte flag;
+  char *str_ptr;
+  int arg_eax;
+  char *str_ptr_2;
+  int val;
+  undefined1 *word_ptr;
+  undefined1 *word_ptr_2;
+  uint *word_ptr_3;
+  char *loop_i;
+  uint uval;
+  byte *byte_ptr;
   uint local_68;
   uint local_64;
   uint local_60;
@@ -872,281 +860,281 @@ void FUN_00070e59(void)
   byte local_20;
   byte local_1c;
   
-  pcVar2 = DAT_00199228;
-  puVar7 = &local_68;
-  local_38 = (uint)*(byte *)(in_EAX + 0x2b);
-  pbVar10 = &DAT_002d33c5;
-  local_2c = DAT_00199228;
-  pcVar3 = DAT_00199228 + 0x1c39;
-  for (pcVar8 = DAT_00199228; pcVar8 < pcVar3; pcVar8 = pcVar8 + 1) {
-    bVar1 = *pbVar10;
-    pbVar10 = pbVar10 + 6;
-    *pcVar8 = ((&DAT_001921c6)[(uint)bVar1 * 0x16] & 0x29) != 0;
+  str_ptr = g_scratch_work_buf;
+  word_ptr_3 = &local_68;
+  local_38 = (uint)*(byte *)(arg_eax + 0x2b);
+  byte_ptr = &g_slabmap_base;
+  local_2c = g_scratch_work_buf;
+  str_ptr_2 = g_scratch_work_buf + 0x1c39;
+  for (loop_i = g_scratch_work_buf; loop_i < str_ptr_2; loop_i = loop_i + 1) {
+    flag = *byte_ptr;
+    byte_ptr = byte_ptr + 6;
+    *loop_i = ((&g_data_001921c6)[(uint)flag * 0x16] & 0x29) != 0;
   }
-  local_64 = (&DAT_0019033b)
-             [*(byte *)((&DAT_001ae9fc)
-                        [(ushort)(&DAT_002e0589)[(uint)*(byte *)(in_EAX + 0x2b) * 0xa84]] + 0x10)];
-  local_3c = (&DAT_0019033b)
-             [*(byte *)((&DAT_001ae9fc)
-                        [(ushort)(&DAT_002e0589)[(uint)*(byte *)(in_EAX + 0x2b) * 0xa84]] + 0xe)];
+  local_64 = (&g_subtile_to_slab_lut)
+             [*(byte *)((&g_thing_ptrs)
+                        [(ushort)(&g_dungeons)[(uint)*(byte *)(arg_eax + 0x2b) * 0xa84]] + 0x10)];
+  local_3c = (&g_subtile_to_slab_lut)
+             [*(byte *)((&g_thing_ptrs)
+                        [(ushort)(&g_dungeons)[(uint)*(byte *)(arg_eax + 0x2b) * 0xa84]] + 0xe)];
   local_34 = 0;
-  uVar9 = 0;
-  pcVar2[local_64 * 0x55 + local_3c] = pcVar2[local_64 * 0x55 + local_3c] | 2;
-  local_30 = pcVar3;
+  uval = 0;
+  str_ptr[local_64 * 0x55 + local_3c] = str_ptr[local_64 * 0x55 + local_3c] | 2;
+  local_30 = str_ptr_2;
   do {
     if (0x9f < local_34) {
-      *(uint *)((int)puVar7 + -4) = uVar9;
-      *(undefined **)((int)puVar7 + -8) = &DAT_0016778d;
-      *(undefined1 **)((int)puVar7 + -0xc) = &DAT_0019cbac;
-      *(undefined4 *)((int)puVar7 + -0x10) = 0x70f04;
-      FUN_000e7714();
+      *(uint *)((int)word_ptr_3 + -4) = uval;
+      *(undefined **)((int)word_ptr_3 + -8) = &g_data_0016778d;
+      *(undefined1 **)((int)word_ptr_3 + -0xc) = &g_log_sprintf_buf;
+      *(undefined4 *)((int)word_ptr_3 + -0x10) = 0x70f04;
+      dk_sprintf();
     }
-    iVar4 = local_64 * 0x55 + local_3c;
+    val = local_64 * 0x55 + local_3c;
     local_1c = (char)local_3c - 1;
-    puVar6 = (undefined1 *)puVar7;
-    if ((local_2c[iVar4 + -1] & 1U) == 0) {
-      if ((local_2c[iVar4 + -1] & 2U) == 0) {
-        local_2c[iVar4 + -1] = local_2c[iVar4 + -1] | 2;
-        iVar4 = uVar9 * 2;
-        local_30[iVar4] = local_1c;
-        uVar9 = uVar9 + 1;
-        (local_30 + iVar4)[1] = (byte)local_64;
+    word_ptr_2 = (undefined1 *)word_ptr_3;
+    if ((local_2c[val + -1] & 1U) == 0) {
+      if ((local_2c[val + -1] & 2U) == 0) {
+        local_2c[val + -1] = local_2c[val + -1] | 2;
+        val = uval * 2;
+        local_30[val] = local_1c;
+        uval = uval + 1;
+        (local_30 + val)[1] = (byte)local_64;
       }
     }
     else {
-      local_2c[iVar4 + -1] = local_2c[iVar4 + -1] | 2;
-      if ((&DAT_001921cf)[(uint)(byte)(&DAT_002d33c5)[(iVar4 + -1) * 6] * 0x16] == '\x01') {
+      local_2c[val + -1] = local_2c[val + -1] | 2;
+      if ((&g_data_001921cf)[(uint)(byte)(&g_slabmap_base)[(val + -1) * 6] * 0x16] == '\x01') {
         local_44 = local_64 & 0xff;
         local_4c = (uint)local_1c;
-        *(undefined4 *)((int)puVar7 + -4) = 0x70f80;
-        iVar4 = FUN_0003f80c();
-        if (iVar4 != 0) {
+        *(undefined4 *)((int)word_ptr_3 + -4) = 0x70f80;
+        val = imptool_fn_03f80c();
+        if (val != 0) {
           local_58 = (uint)(byte)((byte)local_64 * '\x03');
-          puVar6 = (undefined1 *)((int)puVar7 + -4);
-          *(undefined4 *)((int)puVar7 + -4) = 1;
+          word_ptr_2 = (undefined1 *)((int)word_ptr_3 + -4);
+          *(undefined4 *)((int)word_ptr_3 + -4) = 1;
           local_5c = (uint)(byte)(local_1c * '\x03');
-          *(undefined4 *)((int)puVar7 + -8) = 0x70fad;
-          FUN_000d99f8();
-          *(undefined4 *)((int)puVar7 + -8) = 0x70fbb;
-          FUN_000d7688();
+          *(undefined4 *)((int)word_ptr_3 + -8) = 0x70fad;
+          slab_process_slabmap_tile_0d99f8();
+          *(undefined4 *)((int)word_ptr_3 + -8) = 0x70fbb;
+          slab_attempt_place_animating_slab_0d7688();
         }
       }
     }
-    iVar4 = local_64 * 0x55 + local_3c;
+    val = local_64 * 0x55 + local_3c;
     local_28 = (char)local_3c + 1;
-    puVar5 = puVar6;
-    if ((local_2c[iVar4 + 1] & 1U) == 0) {
-      if ((local_2c[iVar4 + 1] & 2U) == 0) {
-        local_2c[iVar4 + 1] = local_2c[iVar4 + 1] | 2;
-        iVar4 = uVar9 * 2;
-        local_30[iVar4] = local_28;
-        uVar9 = uVar9 + 1;
-        (local_30 + iVar4)[1] = (byte)local_64;
+    word_ptr = word_ptr_2;
+    if ((local_2c[val + 1] & 1U) == 0) {
+      if ((local_2c[val + 1] & 2U) == 0) {
+        local_2c[val + 1] = local_2c[val + 1] | 2;
+        val = uval * 2;
+        local_30[val] = local_28;
+        uval = uval + 1;
+        (local_30 + val)[1] = (byte)local_64;
       }
     }
     else {
-      local_2c[iVar4 + 1] = local_2c[iVar4 + 1] | 2;
-      if ((&DAT_001921cf)[(uint)(byte)(&DAT_002d33c5)[(iVar4 + 1) * 6] * 0x16] == '\x01') {
+      local_2c[val + 1] = local_2c[val + 1] | 2;
+      if ((&g_data_001921cf)[(uint)(byte)(&g_slabmap_base)[(val + 1) * 6] * 0x16] == '\x01') {
         local_48 = local_64 & 0xff;
         local_50 = (uint)local_28;
-        *(undefined4 *)(puVar6 + -4) = 0x71034;
-        iVar4 = FUN_0003f80c();
-        if (iVar4 != 0) {
+        *(undefined4 *)(word_ptr_2 + -4) = 0x71034;
+        val = imptool_fn_03f80c();
+        if (val != 0) {
           local_58 = (uint)(byte)((byte)local_64 * '\x03');
-          puVar5 = puVar6 + -4;
-          *(undefined4 *)(puVar6 + -4) = 1;
+          word_ptr = word_ptr_2 + -4;
+          *(undefined4 *)(word_ptr_2 + -4) = 1;
           local_5c = (uint)(byte)(local_28 * '\x03');
-          *(undefined4 *)(puVar6 + -8) = 0x71061;
-          FUN_000d99f8();
-          *(undefined4 *)(puVar6 + -8) = 0x7106f;
-          FUN_000d7688();
+          *(undefined4 *)(word_ptr_2 + -8) = 0x71061;
+          slab_process_slabmap_tile_0d99f8();
+          *(undefined4 *)(word_ptr_2 + -8) = 0x7106f;
+          slab_attempt_place_animating_slab_0d7688();
         }
       }
     }
-    iVar4 = local_3c + (local_64 - 1) * 0x55;
+    val = local_3c + (local_64 - 1) * 0x55;
     local_20 = (byte)local_64 - 1;
-    pbVar10 = (byte *)(local_2c + iVar4);
-    puVar6 = puVar5;
-    if ((*pbVar10 & 1) == 0) {
-      if ((*pbVar10 & 2) == 0) {
-        *pbVar10 = *pbVar10 | 2;
-        iVar4 = uVar9 * 2;
-        local_30[iVar4] = (char)local_3c;
-        uVar9 = uVar9 + 1;
-        (local_30 + iVar4)[1] = local_20;
+    byte_ptr = (byte *)(local_2c + val);
+    word_ptr_2 = word_ptr;
+    if ((*byte_ptr & 1) == 0) {
+      if ((*byte_ptr & 2) == 0) {
+        *byte_ptr = *byte_ptr | 2;
+        val = uval * 2;
+        local_30[val] = (char)local_3c;
+        uval = uval + 1;
+        (local_30 + val)[1] = local_20;
       }
     }
     else {
-      *pbVar10 = *pbVar10 | 2;
-      if ((&DAT_001921cf)[(uint)(byte)(&DAT_002d33c5)[iVar4 * 6] * 0x16] == '\x01') {
+      *byte_ptr = *byte_ptr | 2;
+      if ((&g_data_001921cf)[(uint)(byte)(&g_slabmap_base)[val * 6] * 0x16] == '\x01') {
         local_68 = (uint)local_20;
         local_40 = local_3c & 0xff;
-        *(undefined4 *)(puVar5 + -4) = 0x710e6;
-        iVar4 = FUN_0003f80c();
-        if (iVar4 != 0) {
+        *(undefined4 *)(word_ptr + -4) = 0x710e6;
+        val = imptool_fn_03f80c();
+        if (val != 0) {
           local_5c = (uint)(byte)(local_20 * '\x03');
-          puVar6 = puVar5 + -4;
-          *(undefined4 *)(puVar5 + -4) = 1;
+          word_ptr_2 = word_ptr + -4;
+          *(undefined4 *)(word_ptr + -4) = 1;
           local_58 = (uint)(byte)((char)local_3c * '\x03');
-          *(undefined4 *)(puVar5 + -8) = 0x71113;
-          FUN_000d99f8();
-          *(undefined4 *)(puVar5 + -8) = 0x71121;
-          FUN_000d7688();
+          *(undefined4 *)(word_ptr + -8) = 0x71113;
+          slab_process_slabmap_tile_0d99f8();
+          *(undefined4 *)(word_ptr + -8) = 0x71121;
+          slab_attempt_place_animating_slab_0d7688();
         }
       }
     }
-    iVar4 = local_3c + (local_64 + 1) * 0x55;
+    val = local_3c + (local_64 + 1) * 0x55;
     local_24 = (byte)local_64 + 1;
-    pbVar10 = (byte *)(local_2c + iVar4);
-    puVar7 = (uint *)puVar6;
-    if ((*pbVar10 & 1) == 0) {
-      if ((*pbVar10 & 2) == 0) {
-        *pbVar10 = *pbVar10 | 2;
-        iVar4 = uVar9 * 2;
-        local_30[iVar4] = (char)local_3c;
-        uVar9 = uVar9 + 1;
-        (local_30 + iVar4)[1] = local_24;
+    byte_ptr = (byte *)(local_2c + val);
+    word_ptr_3 = (uint *)word_ptr_2;
+    if ((*byte_ptr & 1) == 0) {
+      if ((*byte_ptr & 2) == 0) {
+        *byte_ptr = *byte_ptr | 2;
+        val = uval * 2;
+        local_30[val] = (char)local_3c;
+        uval = uval + 1;
+        (local_30 + val)[1] = local_24;
       }
     }
     else {
-      *pbVar10 = *pbVar10 | 2;
-      if ((&DAT_001921cf)[(uint)(byte)(&DAT_002d33c5)[iVar4 * 6] * 0x16] == '\x01') {
+      *byte_ptr = *byte_ptr | 2;
+      if ((&g_data_001921cf)[(uint)(byte)(&g_slabmap_base)[val * 6] * 0x16] == '\x01') {
         local_60 = (uint)local_24;
         local_54 = local_3c & 0xff;
-        *(undefined4 *)(puVar6 + -4) = 0x71198;
-        iVar4 = FUN_0003f80c();
-        if (iVar4 != 0) {
+        *(undefined4 *)(word_ptr_2 + -4) = 0x71198;
+        val = imptool_fn_03f80c();
+        if (val != 0) {
           local_5c = (uint)(byte)(local_24 * '\x03');
-          puVar7 = (uint *)(puVar6 + -4);
-          *(undefined4 *)(puVar6 + -4) = 1;
+          word_ptr_3 = (uint *)(word_ptr_2 + -4);
+          *(undefined4 *)(word_ptr_2 + -4) = 1;
           local_58 = (uint)(byte)((char)local_3c * '\x03');
-          *(undefined4 *)(puVar6 + -8) = 0x711c5;
-          FUN_000d99f8();
-          *(undefined4 *)(puVar6 + -8) = 0x711d3;
-          FUN_000d7688();
+          *(undefined4 *)(word_ptr_2 + -8) = 0x711c5;
+          slab_process_slabmap_tile_0d99f8();
+          *(undefined4 *)(word_ptr_2 + -8) = 0x711d3;
+          slab_attempt_place_animating_slab_0d7688();
         }
       }
     }
-    local_3c = (uint)*pcVar3;
+    local_3c = (uint)*str_ptr_2;
     local_34 = local_34 + 1;
-    local_64 = (uint)pcVar3[1];
-    pcVar3 = pcVar3 + 2;
-  } while (local_34 <= uVar9);
-  *(undefined4 *)((int)puVar7 + -4) = 0x70c8f;
-  FUN_00063122();
+    local_64 = (uint)str_ptr_2[1];
+    str_ptr_2 = str_ptr_2 + 2;
+  } while (local_34 <= uval);
+  *(undefined4 *)((int)word_ptr_3 + -4) = 0x70c8f;
+  panmap_door_flagged_position_063122();
   return;
 }
 
 /******************************************************************************
- * Function : sub_0711f3 (Ghidra: FUN_000711f3)
- * Prototype: undefined4 sub_0711f3(void);
+ * Function : specials_update_creature_and_thing_0711f3 (Original VA: 0x711f3, Ghidra: FUN_000711f3)
+ * Prototype: undefined4 specials_update_creature_and_thing_0711f3(void);
  * Address  : 0x711f3 (Size: 287 bytes)
  * Module   : specials.cpp [callgraph_affinity_to_preceding_unit]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x708fa
- * Callees  : 3 -> 0x43bb3, 0x63a25, 0xb3b10
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
+ * Callers  : 1 -> specials_dungeon_special_model_0708fa
+ * Callees  : 3 -> inits_told_you_so_create_043bb3, person_update_creature_control_063a25, move_fn_0b3b10
  ******************************************************************************/
-undefined4 FUN_000711f3(void)
+undefined4 specials_update_creature_and_thing_0711f3(void)
 
 {
-  ushort uVar1;
-  uint uVar2;
-  int iVar3;
-  uint uVar4;
-  uint uVar5;
+  ushort cctrl_ptr;
+  uint thing_ptr;
+  int val;
+  uint uval;
+  uint dungeon_off;
   
-  uVar4 = 0;
-  if ((&DAT_002e0ea2)[(uint)DAT_002eb542 * 0x1508] != '\0') {
-    DAT_002e8bf6 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-    DAT_002e8bf6 = DAT_002e8bf6 >> 0xd | DAT_002e8bf6 * 0x80000;
-    uVar5 = DAT_002e8bf6 % (uint)(byte)(&DAT_002e0ea2)[(uint)DAT_002eb542 * 0x1508];
-    uVar1 = (&DAT_002e05b6)[(uint)DAT_002eb542 * 0xa84];
-    while (uVar2 = (&DAT_001ae9fc)[uVar1], DAT_001ae9fc < uVar2) {
-      if (((*(char *)(uVar2 + 0x1a) != '\x06') && (*(char *)(uVar2 + 0x1a) != '\a')) &&
-         (uVar5 = uVar5 - 1, uVar4 = uVar2, uVar5 == 0)) {
-        if (uVar2 != 0) break;
-        uVar5 = 1;
+  uval = 0;
+  if ((&g_bss_002e0ea2)[(uint)g_bss_002eb542 * 0x1508] != '\0') {
+    g_action_random_seed = g_action_random_seed * 0x24a1 + 0x24df;
+    g_action_random_seed = g_action_random_seed >> 0xd | g_action_random_seed * 0x80000;
+    dungeon_off = g_action_random_seed % (uint)(byte)(&g_bss_002e0ea2)[(uint)g_bss_002eb542 * 0x1508];
+    cctrl_ptr = (&g_bss_002e05b6)[(uint)g_bss_002eb542 * 0xa84];
+    while (thing_ptr = (&g_thing_ptrs)[cctrl_ptr], g_thing_ptrs < thing_ptr) {
+      if (((*(char *)(thing_ptr + 0x1a) != '\x06') && (*(char *)(thing_ptr + 0x1a) != '\a')) &&
+         (dungeon_off = dungeon_off - 1, uval = thing_ptr, dungeon_off == 0)) {
+        if (thing_ptr != 0) break;
+        dungeon_off = 1;
       }
-      uVar1 = *(ushort *)((&DAT_001b0a00)[*(ushort *)(uVar2 + 100)] + 0x1f);
+      cctrl_ptr = *(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x1f); /* thing->ccontrol_idx */
     }
-    if (uVar4 != 0) {
-      FUN_000b3b10();
-      FUN_00063a25();
+    if (uval != 0) {
+      move_fn_0b3b10();
+      person_update_creature_control_063a25();
       return 1;
     }
   }
-  DAT_002e8bf6 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-  DAT_002e8bf6 = DAT_002e8bf6 >> 0xd | DAT_002e8bf6 * 0x80000;
-  iVar3 = FUN_00043bb3();
-  if (iVar3 != 0) {
+  g_action_random_seed = g_action_random_seed * 0x24a1 + 0x24df;
+  g_action_random_seed = g_action_random_seed >> 0xd | g_action_random_seed * 0x80000;
+  val = inits_told_you_so_create_043bb3();
+  if (val != 0) {
     return 1;
   }
   return 0;
 }
 
 /******************************************************************************
- * Function : sub_071312 (Ghidra: FUN_00071312)
- * Prototype: void sub_071312(void);
+ * Function : specials_update_player_dungeon_071312 (Original VA: 0x71312, Ghidra: FUN_00071312)
+ * Prototype: void specials_update_player_dungeon_071312(void);
  * Address  : 0x71312 (Size: 85 bytes)
  * Module   : specials.cpp [callgraph_affinity_to_preceding_unit]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x708fa
- * Callees  : 2 -> 0x5c848, 0x5cf2d
+ * Purpose  : Accesses per-player Dungeon state (stride 0x1508)
+ * Callers  : 1 -> specials_dungeon_special_model_0708fa
+ * Callees  : 2 -> newgui_fn_05c848, newgui_fn_05cf2d
  ******************************************************************************/
-void FUN_00071312(void)
+void specials_update_player_dungeon_071312(void)
 
 {
-  undefined1 *in_EAX;
-  int in_EDX;
+  undefined1 *arg_eax;
+  int arg_edx;
   
-  if ((*(int *)(&DAT_002e1928 + (uint)(byte)in_EAX[0x2b] * 0x1508) != 0) &&
-     (in_EAX == &DAT_0019d0c8 + DAT_002f10ce._3_1_ * 0x4ef)) {
-    DAT_003772d8 = *(undefined2 *)(in_EDX + 0x1b);
-    DAT_003772da = 0;
-    FUN_0005c848();
-    FUN_0005cf2d();
+  if ((*(int *)(&g_bss_002e1928 + (uint)(byte)arg_eax[0x2b] * 0x1508) != 0) &&
+     (arg_eax == &g_players + g_my_player_word._3_1_ * 0x4ef)) {
+    g_bss_003772d8 = *(undefined2 *)(arg_edx + 0x1b);
+    g_bss_003772da = 0;
+    newgui_fn_05c848();
+    newgui_fn_05cf2d();
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_071367 (Ghidra: FUN_00071367)
- * Prototype: void sub_071367(void);
+ * Function : specials_update_player_dungeon_071367 (Original VA: 0x71367, Ghidra: FUN_00071367)
+ * Prototype: void specials_update_player_dungeon_071367(void);
  * Address  : 0x71367 (Size: 85 bytes)
  * Module   : specials.cpp [callgraph_affinity_to_preceding_unit]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x708fa
- * Callees  : 2 -> 0x5c848, 0x5cf2d
+ * Purpose  : Accesses per-player Dungeon state (stride 0x1508)
+ * Callers  : 1 -> specials_dungeon_special_model_0708fa
+ * Callees  : 2 -> newgui_fn_05c848, newgui_fn_05cf2d
  ******************************************************************************/
-void FUN_00071367(void)
+void specials_update_player_dungeon_071367(void)
 
 {
-  undefined1 *in_EAX;
-  int in_EDX;
+  undefined1 *arg_eax;
+  int arg_edx;
   
-  if (((&DAT_002e0ea2)[(uint)(byte)in_EAX[0x2b] * 0x1508] != '\0') &&
-     (in_EAX == &DAT_0019d0c8 + DAT_002f10ce._3_1_ * 0x4ef)) {
-    DAT_003772d8 = *(undefined2 *)(in_EDX + 0x1b);
-    DAT_003772de = 0;
-    FUN_0005c848();
-    FUN_0005cf2d();
+  if (((&g_bss_002e0ea2)[(uint)(byte)arg_eax[0x2b] * 0x1508] != '\0') &&
+     (arg_eax == &g_players + g_my_player_word._3_1_ * 0x4ef)) {
+    g_bss_003772d8 = *(undefined2 *)(arg_edx + 0x1b);
+    g_bss_003772de = 0;
+    newgui_fn_05c848();
+    newgui_fn_05cf2d();
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0713bc (Ghidra: FUN_000713bc)
- * Prototype: void sub_0713bc(void);
+ * Function : specials_fn_0713bc (Original VA: 0x713bc, Ghidra: FUN_000713bc)
+ * Prototype: void specials_fn_0713bc(void);
  * Address  : 0x713bc (Size: 16 bytes)
  * Module   : specials.cpp [callgraph_affinity_to_preceding_unit]
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0x708fa, 0x70a3c, 0x70ac6
- * Callees  : 1 -> 0x24998
+ * Purpose  : Module specials.cpp procedure @ 0x0713bc
+ * Callers  : 3 -> specials_dungeon_special_model_0708fa, specials_update_player_view_state_070a3c, specials_update_creature_control_070ac6
+ * Callees  : 1 -> effect_allocate_light_effect_024998
  ******************************************************************************/
-void FUN_000713bc(void)
+void specials_fn_0713bc(void)
 
 {
-  FUN_00024998();
+  effect_allocate_light_effect_024998();
   return;
 }
 

@@ -1,7 +1,7 @@
 /**
- * Dungeon Keeper (KEEPER.EXE) - Reconstructed Source Module: scavenge.cpp
+ * Dungeon Keeper (KEEPER.EXE) - Reconstructed & Semantically Named Module: scavenge.cpp
  * Binary Subject: /home/merlin/Dungeon Keeper/re/KEEPER.elf
- * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 (x86:LE:32:default)
+ * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 + DK Semantic Analyzer
  * Functions in this translation unit: 18
  */
 
@@ -11,887 +11,865 @@
 #include "../include/dk_functions.h"
 
 /******************************************************************************
- * Function : sub_067018 (Ghidra: FUN_00067018)
- * Prototype: void sub_067018(void);
+ * Function : scavenge_fn_067018 (Original VA: 0x67018, Ghidra: FUN_00067018)
+ * Prototype: void scavenge_fn_067018(void);
  * Address  : 0x67018 (Size: 132 bytes)
  * Module   : scavenge.cpp [callgraph_affinity_to_following_unit]
- * Naming   : Address-based identifier
- * Callers  : 5 -> 0x66379, 0x67920, 0x72fbc, 0x74f40, 0x769ea
+ * Purpose  : Module scavenge.cpp procedure @ 0x067018
+ * Callers  : 5 -> research_update_creature_control_066379, scavenge_take_money_am_supposed_067920, temple_update_creature_control_072fbc, train_take_money_am_supposed_074f40, workshop_update_player_dungeon_0769ea
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_00067018(void)
+void scavenge_fn_067018(void)
 
 {
   return;
 }
 
 /******************************************************************************
- * Function : sub_06709c (Ghidra: FUN_0006709c)
- * Prototype: undefined4 sub_06709c(void);
+ * Function : scavenge_fn_06709c (Original VA: 0x6709c, Ghidra: FUN_0006709c)
+ * Prototype: undefined4 scavenge_fn_06709c(void);
  * Address  : 0x6709c (Size: 22 bytes)
  * Module   : scavenge.cpp [callgraph_affinity_to_following_unit]
- * Naming   : Address-based identifier
- * Callers  : 5 -> 0x65ebd, 0x66379, 0x67920, 0x72fbc, 0x74853
+ * Purpose  : Module scavenge.cpp procedure @ 0x06709c
+ * Callers  : 5 -> prison_update_creature_control_065ebd, research_update_creature_control_066379, scavenge_take_money_am_supposed_067920, temple_update_creature_control_072fbc, torture_update_creature_control_074853
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_0006709c(void)
+undefined4 scavenge_fn_06709c(void)
 
 {
-  byte *in_EAX;
-  uint in_EDX;
+  byte *arg_eax;
+  uint arg_edx;
   
-  if (((*in_EAX & 1) != 0) && (*(ushort *)(in_EAX + 10) == in_EDX)) {
+  if (((*arg_eax & 1) != 0) && (*(ushort *)(arg_eax + 10) == arg_edx)) {
     return 1;
   }
   return 0;
 }
 
 /******************************************************************************
- * Function : sub_0671e9 (Ghidra: FUN_000671e9)
- * Prototype: void sub_0671e9(void);
+ * Function : scavenge_fn_0671e9 (Original VA: 0x671e9, Ghidra: FUN_000671e9)
+ * Prototype: void scavenge_fn_0671e9(void);
  * Address  : 0x671e9 (Size: 84 bytes)
  * Module   : scavenge.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x16640
- * Callees  : 1 -> 0xe69fc
+ * Purpose  : Module scavenge.cpp procedure @ 0x0671e9
+ * Callers  : 1 -> combmove_room_state_016640
+ * Callees  : 1 -> bflib_system_io_fn_0e69fc
  ******************************************************************************/
-void FUN_000671e9(void)
+void scavenge_fn_0671e9(void)
 
 {
-  FUN_000e69fc();
-  FUN_000e69fc();
-  FUN_000e69fc();
+  bflib_system_io_fn_0e69fc();
+  bflib_system_io_fn_0e69fc();
+  bflib_system_io_fn_0e69fc();
   return;
 }
 
 /******************************************************************************
- * Function : sub_06723d (Ghidra: FUN_0006723d)
- * Prototype: int sub_06723d(void);
+ * Function : scavenge_process_dungeon_room_06723d (Original VA: 0x6723d, Ghidra: FUN_0006723d)
+ * Prototype: int scavenge_process_dungeon_room_06723d(void);
  * Address  : 0x6723d (Size: 83 bytes)
  * Module   : scavenge.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x67290
+ * Purpose  : Operates on Room structure in g_rooms (stride 0x45)
+ * Callers  : 1 -> scavenge_update_player_dungeon_067290
  * Callees  : 0 -> 
  ******************************************************************************/
-int FUN_0006723d(void)
+int scavenge_process_dungeon_room_06723d(void)
 
 {
-  ushort uVar1;
-  int in_EAX;
-  int iVar2;
-  uint in_EDX;
-  int iVar3;
-  int iVar4;
+  ushort dungeon_off;
+  int arg_eax;
+  int room_ptr;
+  uint arg_edx;
+  int val;
+  int val_2;
   
-  iVar3 = 0;
-  iVar4 = 0;
-  uVar1 = *(ushort *)(&DAT_002e0594 + in_EAX * 2 + (in_EDX & 0xff) * 0x1508);
-  while (iVar2 = (uint)uVar1 * 0x45, &DAT_002ddd1b < &DAT_002ddd1b + iVar2) {
-    iVar3 = iVar3 + (uint)*(ushort *)(&DAT_002ddd2b + iVar2);
-    iVar4 = iVar4 + (uint)*(ushort *)(&DAT_002ddd29 + iVar2);
-    uVar1 = *(ushort *)(&DAT_002ddd21 + iVar2);
+  val = 0;
+  val_2 = 0;
+  dungeon_off = *(ushort *)(&g_bss_002e0594 + arg_eax * 2 + (arg_edx & 0xff) * 0x1508);
+  while (room_ptr = (uint)dungeon_off * 0x45, &g_rooms < &g_rooms + room_ptr) {
+    val = val + (uint)*(ushort *)(&g_bss_002ddd2b + room_ptr);
+    val_2 = val_2 + (uint)*(ushort *)(&g_bss_002ddd29 + room_ptr);
+    dungeon_off = *(ushort *)(&g_bss_002ddd21 + room_ptr);
   }
-  if (iVar4 == 0) {
+  if (val_2 == 0) {
     return 0;
   }
-  return (iVar3 << 8) / iVar4;
+  return (val << 8) / val_2;
 }
 
 /******************************************************************************
- * Function : sub_067290 (Ghidra: FUN_00067290)
- * Prototype: int sub_067290(void);
+ * Function : scavenge_update_player_dungeon_067290 (Original VA: 0x67290, Ghidra: FUN_00067290)
+ * Prototype: int scavenge_update_player_dungeon_067290(void);
  * Address  : 0x67290 (Size: 228 bytes)
  * Module   : scavenge.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x37f1b
- * Callees  : 2 -> 0x6723d, 0xd11f4
+ * Purpose  : Accesses per-player Dungeon state (stride 0x1508)
+ * Callers  : 1 -> gen2_fn_037f1b
+ * Callees  : 2 -> scavenge_process_dungeon_room_06723d, room_process_dungeon_room_0d11f4
  ******************************************************************************/
-int FUN_00067290(void)
+int scavenge_update_player_dungeon_067290(void)
 
 {
-  byte bVar1;
-  uint in_EAX;
-  int iVar2;
-  int iVar3;
-  uint in_EDX;
-  int iVar4;
-  int unaff_EBX;
+  byte dungeon_off;
+  uint arg_eax;
+  int val;
+  int val_2;
+  uint arg_edx;
+  int val_3;
+  int arg_ebx;
   
-  if (in_EAX < 8) {
-    if (in_EAX < 2) {
-      if (in_EAX == 0) goto LAB_000672bd;
+  if (arg_eax < 8) {
+    if (arg_eax < 2) {
+      if (arg_eax == 0) goto LAB_000672bd;
     }
     else {
-      if (in_EAX < 3) {
-        iVar2 = FUN_000d11f4();
-        iVar3 = FUN_0006723d();
-        iVar4 = iVar3 * iVar2 >> 0x1f;
-        iVar2 = (iVar3 * iVar2 + iVar4 * -0x100) - (uint)(iVar4 << 7 < 0);
-        return (int)(CONCAT44(iVar2 >> 0x1f,iVar2 >> 8) / 3);
+      if (arg_eax < 3) {
+        val = room_process_dungeon_room_0d11f4();
+        val_2 = scavenge_process_dungeon_room_06723d();
+        val_3 = val_2 * val >> 0x1f;
+        val = (val_2 * val + val_3 * -0x100) - (uint)(val_3 << 7 < 0);
+        return (int)(CONCAT44(val >> 0x1f,val >> 8) / 3);
       }
-      if (6 < in_EAX) {
+      if (6 < arg_eax) {
 LAB_000672bd:
-        return -(uint)(byte)(&DAT_002e0ea3)[(in_EDX & 0xff) * 0x1508 + unaff_EBX];
+        return -(uint)(byte)(&g_bss_002e0ea3)[(arg_edx & 0xff) * 0x1508 + arg_ebx];
       }
     }
   }
   else {
-    if (in_EAX < 9) {
+    if (arg_eax < 9) {
 LAB_0006732c:
-      bVar1 = (&DAT_002e0ea3)[unaff_EBX + (in_EDX & 0xff) * 0x1508];
-      iVar2 = FUN_000d11f4();
-      return ((int)((iVar2 + (iVar2 >> 0x1f) * -4) - (uint)((iVar2 >> 0x1f) << 1 < 0)) >> 2) -
-             (uint)bVar1;
+      dungeon_off = (&g_bss_002e0ea3)[arg_ebx + (arg_edx & 0xff) * 0x1508];
+      val = room_process_dungeon_room_0d11f4();
+      return ((int)((val + (val >> 0x1f) * -4) - (uint)((val >> 0x1f) << 1 < 0)) >> 2) -
+             (uint)dungeon_off;
     }
-    if (in_EAX < 0xe) {
-      if (0xc < in_EAX) goto LAB_0006732c;
+    if (arg_eax < 0xe) {
+      if (0xc < arg_eax) goto LAB_0006732c;
     }
     else {
-      if ((in_EAX < 0xf) || (in_EAX < 0x10)) goto LAB_000672bd;
-      if (in_EAX != 0x10) {
+      if ((arg_eax < 0xf) || (arg_eax < 0x10)) goto LAB_000672bd;
+      if (arg_eax != 0x10) {
         return 0;
       }
     }
   }
-  bVar1 = (&DAT_002e0ea3)[unaff_EBX + (in_EDX & 0xff) * 0x1508];
-  iVar2 = FUN_000d11f4();
-  return iVar2 / 3 - (uint)bVar1;
+  dungeon_off = (&g_bss_002e0ea3)[arg_ebx + (arg_edx & 0xff) * 0x1508];
+  val = room_process_dungeon_room_0d11f4();
+  return val / 3 - (uint)dungeon_off;
 }
 
 /******************************************************************************
- * Function : sub_067374 (Ghidra: FUN_00067374)
- * Prototype: bool sub_067374(void);
+ * Function : scavenge_fn_067374 (Original VA: 0x67374, Ghidra: FUN_00067374)
+ * Prototype: bool scavenge_fn_067374(void);
  * Address  : 0x67374 (Size: 23 bytes)
  * Module   : scavenge.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x67d91
- * Callees  : 1 -> 0xce0e4
+ * Purpose  : Module scavenge.cpp procedure @ 0x067374
+ * Callers  : 1 -> scavenge_fn_067d91
+ * Callees  : 1 -> room_fn_0ce0e4
  ******************************************************************************/
-bool FUN_00067374(void)
+bool scavenge_fn_067374(void)
 
 {
-  int in_EAX;
-  int iVar1;
+  int arg_eax;
+  int val;
   
-  iVar1 = FUN_000ce0e4();
-  if (iVar1 != 0) {
-    *(undefined1 *)(in_EAX + 8) = 0x2f;
+  val = room_fn_0ce0e4();
+  if (val != 0) {
+    *(undefined1 *)(arg_eax + 8) = 0x2f;
   }
-  return iVar1 != 0;
+  return val != 0;
 }
 
 /******************************************************************************
- * Function : dk_could_find_valid_position_06738b (Ghidra: FUN_0006738b)
- * Prototype: undefined4 dk_could_find_valid_position_06738b(void);
+ * Function : scavenge_could_find_valid_position_06738b (Original VA: 0x6738b, Ghidra: FUN_0006738b)
+ * Prototype: undefined4 scavenge_could_find_valid_position_06738b(void);
  * Address  : 0x6738b (Size: 248 bytes)
  * Module   : scavenge.cpp [direct_file_string_xref]
- * OrigLine : scavenge.cpp:61 ("SCAVENEGER NOT ON SCAVENGER ROOM")
- * Naming   : String 'COULD NOT FIND VALID POSITION FOR THING'
- * Callers  : 1 -> 0x67920
- * Callees  : 4 -> 0x64a5f, 0xcc968, 0xd0f50, 0xddaf0
- * Strings  :
- *   - 0x166b04: "scavenge.cpp"
- *   - 0x166b32: "scavenge.cpp"
- *   - 0x166adc: "COULD NOT FIND VALID POSITION FOR THING"
- *   - 0x166b11: "SCAVENEGER NOT ON SCAVENGER ROOM"
+ * OrigLine : scavenge.cpp lines 61
+ * Purpose  : String 'COULD NOT FIND VALID POSITION FOR THING'
+ * Callers  : 1 -> scavenge_take_money_am_supposed_067920
+ * Callees  : 4 -> person_external_change_state_but_064a5f, room_number_slabs_room_zero_0cc968, room_update_slab_subtile_columns_0d0f50, LbErrorLog
  ******************************************************************************/
-undefined4 FUN_0006738b(void)
+undefined4 scavenge_could_find_valid_position_06738b(void)
 
 {
-  int iVar1;
-  char cVar2;
-  int in_EAX;
-  int iVar3;
+  int cctrl_ptr;
+  char ch;
+  int thing;
+  int val;
   int extraout_ECX;
-  undefined8 uVar4;
+  undefined8 uval;
   undefined1 local_1b;
   undefined1 local_19;
   
-  iVar1 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  uVar4 = FUN_000d0f50();
-  iVar3 = (int)uVar4;
-  if (iVar3 != 0) {
-    if (*(short *)(iVar3 + 10) != 9) {
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  uval = room_update_slab_subtile_columns_0d0f50();
+  val = (int)uval;
+  if (val != 0) {
+    if (*(short *)(val + 10) != 9) {
       return 0;
     }
-    if (*(char *)(iVar3 + 3) != *(char *)((int)((ulonglong)uVar4 >> 0x20) + 6)) {
+    if (*(char *)(val + 3) != *(char *)((int)((ulonglong)uval >> 0x20) + 6)) {
       return 0;
     }
-    cVar2 = FUN_000cc968();
-    if (cVar2 != '\0') {
-      (&DAT_002e0f14)[*(char *)(extraout_ECX + 6) * 0xa84] =
-           (&DAT_002e0f14)[*(char *)(extraout_ECX + 6) * 0xa84] + 1;
-      *(short *)(&DAT_002e0ed4 +
-                (uint)*(byte *)(in_EAX + 0x1a) * 2 + *(char *)(extraout_ECX + 6) * 0x1508) =
-           *(short *)(&DAT_002e0ed4 +
-                     (uint)*(byte *)(in_EAX + 0x1a) * 2 + *(char *)(extraout_ECX + 6) * 0x1508) + 1;
-      if ((int)*(char *)(in_EAX + 6) != (uint)DAT_002eb543) {
-        (&DAT_002e0f16)[*(char *)(in_EAX + 6) * 0xa84] =
-             (&DAT_002e0f16)[*(char *)(in_EAX + 6) * 0xa84] + 1;
+    ch = room_number_slabs_room_zero_0cc968();
+    if (ch != '\0') {
+      (&g_bss_002e0f14)[*(char *)(extraout_ECX + 6) * 0xa84] =
+           (&g_bss_002e0f14)[*(char *)(extraout_ECX + 6) * 0xa84] + 1;
+      *(short *)(&g_bss_002e0ed4 +
+                (uint)*(byte *)(thing + 0x1a) * 2 + *(char *)(extraout_ECX + 6) * 0x1508) =
+           *(short *)(&g_bss_002e0ed4 +
+                     (uint)*(byte *)(thing + 0x1a) * 2 + *(char *)(extraout_ECX + 6) * 0x1508) + 1;
+      if ((int)*(char *)(thing + 6) != (uint)g_neutral_player_number) { /* thing->owner */
+        (&g_bss_002e0f16)[*(char *)(thing + 6) * 0xa84] = /* thing->owner */
+             (&g_bss_002e0f16)[*(char *)(thing + 6) * 0xa84] + 1; /* thing->owner */
       }
-      *(undefined1 *)(iVar1 + 0x9a) = 8;
-      *(undefined1 *)(iVar1 + 0x9b) = *(undefined1 *)(extraout_ECX + 6);
-      *(undefined1 *)(iVar1 + 0x9d) = local_1b;
-      *(undefined1 *)(iVar1 + 0x9e) = local_19;
-      FUN_00064a5f();
+      *(undefined1 *)(cctrl_ptr + 0x9a) = 8;
+      *(undefined1 *)(cctrl_ptr + 0x9b) = *(undefined1 *)(extraout_ECX + 6);
+      *(undefined1 *)(cctrl_ptr + 0x9d) = local_1b;
+      *(undefined1 *)(cctrl_ptr + 0x9e) = local_19;
+      person_external_change_state_but_064a5f();
       return 1;
     }
   }
-  FUN_000ddaf0(); /* LbErrorLog("scavenge.cpp", line 61, "SCAVENEGER NOT ON SCAVENGER ROOM") */
+  LbErrorLog(); /* LbErrorLog("scavenge.cpp", line 61, "SCAVENEGER NOT ON SCAVENGER ROOM") */
   return 0;
 }
 
 /******************************************************************************
- * Function : dk_could_remove_creature_pool_067483 (Ghidra: FUN_00067483)
- * Prototype: longlong dk_could_remove_creature_pool_067483(void);
+ * Function : scavenge_could_remove_creature_pool_067483 (Original VA: 0x67483, Ghidra: FUN_00067483)
+ * Prototype: longlong scavenge_could_remove_creature_pool_067483(void);
  * Address  : 0x67483 (Size: 250 bytes)
  * Module   : scavenge.cpp [direct_file_string_xref]
- * OrigLine : scavenge.cpp:121 ("SCAVENEGER NOT ON SCAVENGER ROOM")
- * Naming   : String 'COULD REMOVE CREATURE FROM POOL'
- * Callers  : 1 -> 0x67920
- * Callees  : 6 -> 0x37ee4, 0x43bb3, 0x64ae7, 0xcc968, 0xd0f50, 0xddaf0
- * Strings  :
- *   - 0x166b5f: "scavenge.cpp"
- *   - 0x166b86: "scavenge.cpp"
- *   - 0x166bb1: "scavenge.cpp"
- *   - 0x166bd3: "scavenge.cpp"
- *   - 0x166c01: "scavenge.cpp"
- *   - 0x166b3f: "COULD REMOVE CREATURE FROM POOL"
- *   - 0x166b6c: "COULD NOT CREATE CREATURE"
- *   - 0x166b93: "COULD NOT FIND VALID POSITION"
- *   - 0x166bbe: "CREATURE NOT IN POOL"
- *   - 0x166be0: "SCAVENEGER NOT ON SCAVENGER ROOM"
+ * OrigLine : scavenge.cpp lines 121
+ * Purpose  : String 'COULD REMOVE CREATURE FROM POOL'
+ * Callers  : 1 -> scavenge_take_money_am_supposed_067920
+ * Callees  : 6 -> gen2_trying_remove_an_unavailable_037ee4, inits_told_you_so_create_043bb3, person_update_creature_control_064ae7, room_number_slabs_room_zero_0cc968, room_update_slab_subtile_columns_0d0f50, LbErrorLog
  ******************************************************************************/
-longlong FUN_00067483(void)
+longlong scavenge_could_remove_creature_pool_067483(void)
 
 {
-  char cVar1;
-  int iVar2;
+  char dungeon_off;
+  int val;
   int extraout_ECX;
   int extraout_ECX_00;
-  uint in_EDX;
+  uint arg_edx;
   
-  iVar2 = FUN_000d0f50();
-  if ((((iVar2 != 0) && (*(short *)(iVar2 + 10) == 9)) &&
-      (*(char *)(iVar2 + 3) == *(char *)(extraout_ECX + 6))) &&
-     (((*(int *)(&DAT_002ed35d + (uint)*(byte *)(extraout_ECX + 0x1a) * 4) != 0 &&
-       (cVar1 = FUN_000cc968(), cVar1 != '\0')) &&
-      ((iVar2 = FUN_00043bb3(), iVar2 != 0 && (iVar2 = FUN_00037ee4(), iVar2 != 0)))))) {
-    (&DAT_002e0f14)[*(char *)(extraout_ECX_00 + 6) * 0xa84] =
-         (&DAT_002e0f14)[*(char *)(extraout_ECX_00 + 6) * 0xa84] + 1;
-    FUN_00064ae7();
-    return CONCAT44(in_EDX,1);
+  val = room_update_slab_subtile_columns_0d0f50();
+  if ((((val != 0) && (*(short *)(val + 10) == 9)) &&
+      (*(char *)(val + 3) == *(char *)(extraout_ECX + 6))) &&
+     (((*(int *)(&g_bss_002ed35d + (uint)*(byte *)(extraout_ECX + 0x1a) * 4) != 0 &&
+       (dungeon_off = room_number_slabs_room_zero_0cc968(), dungeon_off != '\0')) &&
+      ((val = inits_told_you_so_create_043bb3(), val != 0 && (val = gen2_trying_remove_an_unavailable_037ee4(), val != 0)))))) {
+    (&g_bss_002e0f14)[*(char *)(extraout_ECX_00 + 6) * 0xa84] =
+         (&g_bss_002e0f14)[*(char *)(extraout_ECX_00 + 6) * 0xa84] + 1;
+    person_update_creature_control_064ae7();
+    return CONCAT44(arg_edx,1);
   }
-  FUN_000ddaf0(); /* LbErrorLog("scavenge.cpp", line 121, "SCAVENEGER NOT ON SCAVENGER ROOM") */
-  return (ulonglong)in_EDX << 0x20;
+  LbErrorLog(); /* LbErrorLog("scavenge.cpp", line 121, "SCAVENEGER NOT ON SCAVENGER ROOM") */
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : sub_06757d (Ghidra: FUN_0006757d)
- * Prototype: undefined8 sub_06757d(void);
+ * Function : scavenge_update_creature_and_thing_06757d (Original VA: 0x6757d, Ghidra: FUN_0006757d)
+ * Prototype: undefined8 scavenge_update_creature_and_thing_06757d(void);
  * Address  : 0x6757d (Size: 740 bytes)
  * Module   : scavenge.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x67920
- * Callees  : 1 -> 0x85954
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
+ * Callers  : 1 -> scavenge_take_money_am_supposed_067920
+ * Callees  : 1 -> creature_update_player_view_state_085954
  ******************************************************************************/
-undefined8 FUN_0006757d(void)
+undefined8 scavenge_update_creature_and_thing_06757d(void)
 
 {
-  byte *pbVar1;
-  byte bVar2;
-  int in_EAX;
-  uint uVar3;
-  int iVar4;
-  byte *pbVar5;
-  uint uVar6;
-  undefined4 in_EDX;
-  uint uVar7;
-  uint uVar8;
-  undefined8 uVar9;
+  byte *thing_ptr;
+  byte flag;
+  int arg_eax;
+  uint cctrl_ptr;
+  int player_off;
+  byte *thing_ptr_2;
+  uint player_off_2;
+  undefined4 arg_edx;
+  uint dungeon_off;
+  uint uval;
+  undefined8 uval_2;
   byte *local_20;
   uint local_1c;
   
-  uVar8 = (uint)*(char *)(in_EAX + 6);
+  uval = (uint)*(char *)(arg_eax + 6);
   local_20 = (byte *)0x0;
-  uVar7 = (uint)*(ushort *)(uVar8 * 0x1508 + 0x2e0f98 + (uint)*(byte *)(in_EAX + 0x1a) * 2);
+  dungeon_off = (uint)*(ushort *)(uval * 0x1508 + 0x2e0f98 + (uint)*(byte *)(arg_eax + 0x1a) * 2);
   local_1c = 0x7fffffff;
-  uVar3 = DAT_002e6eb6;
-  if (((((uVar7 != 0) && (pbVar5 = (&DAT_001ae9fc)[uVar7], (*pbVar5 & 1) != 0)) &&
-       (pbVar5[0x1f] == 5)) &&
-      ((pbVar5[0x1a] == *(byte *)(in_EAX + 0x1a) && (pbVar5[6] != *(byte *)(in_EAX + 6))))) &&
-     (((((uVar7 = (uint)DAT_002eb543, uVar8 == uVar7 ||
-         ((uVar6 = (uint)(char)pbVar5[6], uVar7 == uVar6 ||
-          (((uint)(byte)(&DAT_0019d0f2)[uVar8 * 0x4ef] & 1 << (pbVar5[6] & 0x1f)) == 0)))) ||
-        (uVar7 == uVar6)) ||
-       ((uVar8 == uVar7 ||
-        (((uint)(byte)(&DAT_0019d0f2)[uVar6 * 0x4ef] & 1 << (*(byte *)(in_EAX + 6) & 0x1f)) == 0))))
-      && (((*pbVar5 & 0x10) == 0 && ((pbVar5[1] & 2) == 0)))))) {
-    uVar9 = FUN_00085954();
-    pbVar5 = (byte *)((ulonglong)uVar9 >> 0x20);
-    uVar3 = DAT_002e6eb6;
-    if (((int)uVar9 == 0) &&
-       (((int)(char)pbVar5[6] < (int)(uint)DAT_002eb542 ||
-        (*(short *)((int)&DAT_0019d0f7 + (char)pbVar5[6] * 0x4ef) != *(short *)(pbVar5 + 0x1b))))) {
-      if (pbVar5[7] == 0xe) {
-        bVar2 = pbVar5[8];
+  cctrl_ptr = g_bss_002e6eb6;
+  if (((((dungeon_off != 0) && (thing_ptr_2 = (&g_thing_ptrs)[dungeon_off], (*thing_ptr_2 & 1) != 0)) &&
+       (thing_ptr_2[0x1f] == 5)) &&
+      ((thing_ptr_2[0x1a] == *(byte *)(arg_eax + 0x1a) && (thing_ptr_2[6] != *(byte *)(arg_eax + 6))))) &&
+     (((((dungeon_off = (uint)g_neutral_player_number, uval == dungeon_off ||
+         ((player_off_2 = (uint)(char)thing_ptr_2[6], dungeon_off == player_off_2 ||
+          (((uint)(byte)(&g_player_view_flags)[uval * 0x4ef] & 1 << (thing_ptr_2[6] & 0x1f)) == 0)))) ||
+        (dungeon_off == player_off_2)) ||
+       ((uval == dungeon_off ||
+        (((uint)(byte)(&g_player_view_flags)[player_off_2 * 0x4ef] & 1 << (*(byte *)(arg_eax + 6) & 0x1f)) == 0))))
+      && (((*thing_ptr_2 & 0x10) == 0 && ((thing_ptr_2[1] & 2) == 0)))))) {
+    uval_2 = creature_update_player_view_state_085954();
+    thing_ptr_2 = (byte *)((ulonglong)uval_2 >> 0x20);
+    cctrl_ptr = g_bss_002e6eb6;
+    if (((int)uval_2 == 0) &&
+       (((int)(char)thing_ptr_2[6] < (int)(uint)g_bss_002eb542 ||
+        (*(short *)((int)&g_bss_0019d0f7 + (char)thing_ptr_2[6] * 0x4ef) != *(short *)(thing_ptr_2 + 0x1b))))) { /* thing->index_or_angle */
+      if (thing_ptr_2[7] == 0xe) {
+        flag = thing_ptr_2[8];
       }
       else {
-        bVar2 = pbVar5[7];
+        flag = thing_ptr_2[7];
       }
-      if (bVar2 != 0x29) {
-        if (pbVar5[7] == 0xe) {
-          bVar2 = pbVar5[8];
+      if (flag != 0x29) {
+        if (thing_ptr_2[7] == 0xe) {
+          flag = thing_ptr_2[8];
         }
         else {
-          bVar2 = pbVar5[7];
+          flag = thing_ptr_2[7];
         }
-        if (bVar2 != 0x28) {
-          if (pbVar5[7] == 0xe) {
-            bVar2 = pbVar5[8];
+        if (flag != 0x28) {
+          if (thing_ptr_2[7] == 0xe) {
+            flag = thing_ptr_2[8];
           }
           else {
-            bVar2 = pbVar5[7];
+            flag = thing_ptr_2[7];
           }
-          if (bVar2 != 0x2b) {
-            if (pbVar5[7] == 0xe) {
-              bVar2 = pbVar5[8];
+          if (flag != 0x2b) {
+            if (thing_ptr_2[7] == 0xe) {
+              flag = thing_ptr_2[8];
             }
             else {
-              bVar2 = pbVar5[7];
+              flag = thing_ptr_2[7];
             }
-            if ((bVar2 != 0x2a) &&
-               (DAT_002ed44a <
-                (uint)(DAT_002e8bee - *(int *)((&DAT_001b0a00)[*(ushort *)(pbVar5 + 100)] + 0x3d))))
+            if ((flag != 0x2a) &&
+               (g_bss_002ed44a <
+                (uint)(g_game_turn - *(int *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr_2 + 100)] + 0x3d)))) /* thing->ccontrol_idx */
             goto LAB_0006785a;
           }
         }
       }
     }
   }
-  while (pbVar1 = (&DAT_001ae9fc)[uVar3], pbVar5 = local_20, pbVar1 != DAT_001ae9fc) {
-    if ((((pbVar1[0x1a] == *(byte *)(in_EAX + 0x1a)) && (pbVar1[6] != *(byte *)(in_EAX + 6))) &&
-        ((*pbVar1 & 0x10) == 0)) &&
-       ((((pbVar1[1] & 2) == 0 && (iVar4 = FUN_00085954(), iVar4 == 0)) &&
-        (((int)(char)pbVar1[6] < (int)(uint)DAT_002eb542 ||
-         (*(short *)((int)&DAT_0019d0f7 + (char)pbVar1[6] * 0x4ef) != *(short *)(pbVar1 + 0x1b))))))
+  while (thing_ptr = (&g_thing_ptrs)[cctrl_ptr], thing_ptr_2 = local_20, thing_ptr != g_thing_ptrs) {
+    if ((((thing_ptr[0x1a] == *(byte *)(arg_eax + 0x1a)) && (thing_ptr[6] != *(byte *)(arg_eax + 6))) &&
+        ((*thing_ptr & 0x10) == 0)) &&
+       ((((thing_ptr[1] & 2) == 0 && (player_off = creature_update_player_view_state_085954(), player_off == 0)) &&
+        (((int)(char)thing_ptr[6] < (int)(uint)g_bss_002eb542 ||
+         (*(short *)((int)&g_bss_0019d0f7 + (char)thing_ptr[6] * 0x4ef) != *(short *)(thing_ptr + 0x1b)))))) /* thing->index_or_angle */
        ) {
-      if (pbVar1[7] == 0xe) {
-        bVar2 = pbVar1[8];
+      if (thing_ptr[7] == 0xe) {
+        flag = thing_ptr[8];
       }
       else {
-        bVar2 = pbVar1[7];
+        flag = thing_ptr[7];
       }
-      if (bVar2 != 0x29) {
-        if (pbVar1[7] == 0xe) {
-          bVar2 = pbVar1[8];
+      if (flag != 0x29) {
+        if (thing_ptr[7] == 0xe) {
+          flag = thing_ptr[8];
         }
         else {
-          bVar2 = pbVar1[7];
+          flag = thing_ptr[7];
         }
-        if (bVar2 != 0x28) {
-          if (pbVar1[7] == 0xe) {
-            bVar2 = pbVar1[8];
+        if (flag != 0x28) {
+          if (thing_ptr[7] == 0xe) {
+            flag = thing_ptr[8];
           }
           else {
-            bVar2 = pbVar1[7];
+            flag = thing_ptr[7];
           }
-          if (bVar2 != 0x2b) {
-            if (pbVar1[7] == 0xe) {
-              bVar2 = pbVar1[8];
+          if (flag != 0x2b) {
+            if (thing_ptr[7] == 0xe) {
+              flag = thing_ptr[8];
             }
             else {
-              bVar2 = pbVar1[7];
+              flag = thing_ptr[7];
             }
-            if (((bVar2 != 0x2a) &&
-                (DAT_002ed44a <
-                 (uint)(DAT_002e8bee - *(int *)((&DAT_001b0a00)[*(ushort *)(pbVar1 + 100)] + 0x3d)))
-                ) && (uVar3 = ((uint)*(ushort *)(&DAT_002e9130 + (uint)pbVar1[0x1a] * 0xe6) *
-                               (uint)*(byte *)((&DAT_001b0a00)[*(ushort *)(pbVar1 + 100)] + 0x23) *
+            if (((flag != 0x2a) &&
+                (g_bss_002ed44a <
+                 (uint)(g_game_turn - *(int *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x3d))) /* thing->ccontrol_idx */
+                ) && (cctrl_ptr = ((uint)*(ushort *)(&g_bss_002e9130 + (uint)thing_ptr[0x1a] * 0xe6) *
+                               (uint)*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x23) * /* thing->ccontrol_idx */
                               0x23) / 100 +
-                              (uint)*(ushort *)(&DAT_002e9130 + (uint)pbVar1[0x1a] * 0xe6),
-                     uVar3 < local_1c)) {
-              local_20 = pbVar1;
-              local_1c = uVar3;
+                              (uint)*(ushort *)(&g_bss_002e9130 + (uint)thing_ptr[0x1a] * 0xe6),
+                     cctrl_ptr < local_1c)) {
+              local_20 = thing_ptr;
+              local_1c = cctrl_ptr;
             }
           }
         }
       }
     }
-    uVar3 = (uint)*(ushort *)(pbVar1 + 0x67);
+    cctrl_ptr = (uint)*(ushort *)(thing_ptr + 0x67);
   }
 LAB_0006785a:
-  return CONCAT44(in_EDX,pbVar5);
+  return CONCAT44(arg_edx,thing_ptr_2);
 }
 
 /******************************************************************************
- * Function : sub_067861 (Ghidra: FUN_00067861)
- * Prototype: longlong sub_067861(void);
+ * Function : scavenge_update_creature_control_067861 (Original VA: 0x67861, Ghidra: FUN_00067861)
+ * Prototype: longlong scavenge_update_creature_control_067861(void);
  * Address  : 0x67861 (Size: 166 bytes)
  * Module   : scavenge.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
  * Callers  : 0 -> 
- * Callees  : 6 -> 0x51374, 0x63b6d, 0x64ae7, 0x67fa9, 0xcd85c, 0xd0f50
+ * Callees  : 6 -> moodneed_fn_051374, person_fn_063b6d, person_update_creature_control_064ae7, scavenge_fn_067fa9, room_attempt_add_creature_room_0cd85c, room_update_slab_subtile_columns_0d0f50
  ******************************************************************************/
-longlong FUN_00067861(void)
+longlong scavenge_update_creature_control_067861(void)
 
 {
-  int iVar1;
-  char cVar2;
-  int in_EAX;
-  int iVar3;
+  int cctrl_ptr;
+  char ch;
+  int thing;
+  int val;
   int extraout_ECX;
   int extraout_ECX_00;
-  uint in_EDX;
+  uint arg_edx;
   
-  iVar1 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  iVar3 = FUN_000d0f50();
-  if (((iVar3 != 0) && (*(short *)(iVar3 + 10) == 9)) &&
-     (*(char *)(iVar3 + 3) == *(char *)(extraout_ECX + 6))) {
-    iVar3 = FUN_00067fa9();
-    if (iVar3 == 0) {
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  val = room_update_slab_subtile_columns_0d0f50();
+  if (((val != 0) && (*(short *)(val + 10) == 9)) &&
+     (*(char *)(val + 3) == *(char *)(extraout_ECX + 6))) {
+    val = scavenge_fn_067fa9();
+    if (val == 0) {
       if ((int)*(char *)(extraout_ECX_00 + 6) ==
-          (uint)(byte)(&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef]) {
-        FUN_00051374();
+          (uint)(byte)(&g_player_id_number)[g_my_player_word._3_1_ * 0x4ef]) {
+        moodneed_fn_051374();
       }
     }
     else {
-      cVar2 = FUN_000cd85c();
-      if (cVar2 != '\0') {
-        FUN_00064ae7();
-        *(undefined4 *)(iVar1 + 0x82) = 0;
-        return CONCAT44(in_EDX,1);
+      ch = room_attempt_add_creature_room_0cd85c();
+      if (ch != '\0') {
+        person_update_creature_control_064ae7();
+        *(undefined4 *)(cctrl_ptr + 0x82) = 0;
+        return CONCAT44(arg_edx,1);
       }
     }
   }
-  FUN_00063b6d();
-  return (ulonglong)in_EDX << 0x20;
+  person_fn_063b6d();
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : sub_067907 (Ghidra: FUN_00067907)
- * Prototype: undefined8 sub_067907(void);
+ * Function : scavenge_fn_067907 (Original VA: 0x67907, Ghidra: FUN_00067907)
+ * Prototype: undefined8 scavenge_fn_067907(void);
  * Address  : 0x67907 (Size: 25 bytes)
  * Module   : scavenge.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x67920
+ * Purpose  : Module scavenge.cpp procedure @ 0x067907
+ * Callers  : 1 -> scavenge_take_money_am_supposed_067920
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined8 FUN_00067907(void)
+undefined8 scavenge_fn_067907(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  undefined4 in_EDX;
-  int iVar2;
+  int thing;
+  int val;
+  undefined4 arg_edx;
+  int val_2;
   
-  iVar2 = in_EAX;
+  val_2 = thing;
   do {
-    iVar1 = iVar2 + 1;
-    *(undefined1 *)(iVar2 + 0x894) = 0;
-    iVar2 = iVar1;
-  } while (iVar1 != in_EAX + 0x20);
-  return CONCAT44(in_EDX,1);
+    val = val_2 + 1;
+    *(undefined1 *)(val_2 + 0x894) = 0;
+    val_2 = val;
+  } while (val != thing + 0x20); /* thing->model */
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : dk_take_money_am_supposed_067920 (Ghidra: FUN_00067920)
- * Prototype: undefined8 dk_take_money_am_supposed_067920(void);
+ * Function : scavenge_take_money_am_supposed_067920 (Original VA: 0x67920, Ghidra: FUN_00067920)
+ * Prototype: undefined8 scavenge_take_money_am_supposed_067920(void);
  * Address  : 0x67920 (Size: 1137 bytes)
  * Module   : scavenge.cpp [direct_file_string_xref]
- * OrigLine : scavenge.cpp:347 ("CANNOT TAKE MONEY I AM SUPPOSED TO BE ABLE TO AFFORD FROM DUNGEON")
- * Naming   : String 'CANNOT TAKE MONEY I AM SUPPOSED TO BE ABLE TO AFFORD FROM DU'
- * Callers  : 1 -> 0x67d9f
- * Callees  : 14 -> 0x23868, 0x27390, 0x444a9, 0x51374, 0x63b6d, 0x64a5f, 0x67018, 0x6709c, 0x6738b, 0x67483 ...
- * Strings  :
- *   - 0x166c50: "scavenge.cpp"
- *   - 0x166c0e: "CANNOT TAKE MONEY I AM SUPPOSED TO BE ABLE TO AFFORD FROM DUNGEON"
+ * OrigLine : scavenge.cpp lines 347
+ * Purpose  : String 'CANNOT TAKE MONEY I AM SUPPOSED TO BE ABLE TO AFFORD FROM DU'
+ * Callers  : 1 -> scavenge_fn_067d9f
+ * Callees  : 14 -> dungeon_remove_reserve_023868, event_illegal_event_number_created_027390, inits_allocate_dynamic_light_shot_0444a9, moodneed_fn_051374, person_fn_063b6d, person_external_change_state_but_064a5f, scavenge_fn_067018, scavenge_fn_06709c ...
  ******************************************************************************/
-undefined8 FUN_00067920(void)
+undefined8 scavenge_take_money_am_supposed_067920(void)
 
 {
-  int *piVar1;
-  ushort uVar2;
-  byte *pbVar3;
-  char cVar4;
-  int in_EAX;
-  int iVar5;
-  undefined4 uVar6;
+  int *int_ptr;
+  ushort uval;
+  byte *thing_ptr;
+  char ch;
+  int thing;
+  int thing_ptr_2;
+  undefined4 uval_2;
   int extraout_ECX;
-  byte bVar7;
-  undefined4 in_EDX;
+  byte flag;
+  undefined4 arg_edx;
   int extraout_EDX;
-  int iVar8;
-  uint uVar9;
-  uint uVar10;
-  uint *puVar11;
-  uint *puVar12;
-  uint uVar13;
-  undefined8 uVar14;
+  int val;
+  uint cctrl_ptr;
+  uint uval_3;
+  uint *word_ptr;
+  uint *word_ptr_2;
+  uint uval_4;
+  undefined8 uval_5;
   uint uStack_28;
   uint local_24;
   int local_20;
   undefined2 *local_1c;
   
-  puVar11 = &local_24;
-  puVar12 = &local_24;
-  local_1c = &DAT_002e0589 + *(char *)(in_EAX + 6) * 0xa84;
-  local_20 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
+  word_ptr = &local_24;
+  word_ptr_2 = &local_24;
+  local_1c = &g_dungeons + *(char *)(thing + 6) * 0xa84; /* thing->owner */
+  local_20 = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
   uStack_28 = 0x67969;
-  iVar5 = FUN_0006709c();
-  if (iVar5 != 0) {
+  thing_ptr_2 = scavenge_fn_06709c();
+  if (thing_ptr_2 != 0) {
     uStack_28 = 0x67978;
-    iVar5 = FUN_00067fa9();
-    if (iVar5 != 0) {
-      if (*(int *)(local_1c + 0x448) != DAT_002e8bee) {
+    thing_ptr_2 = scavenge_fn_067fa9();
+    if (thing_ptr_2 != 0) {
+      if (*(int *)(local_1c + 0x448) != g_game_turn) {
         uStack_28 = 0x6799c;
-        FUN_00067907();
-        *(int *)(extraout_EDX + 0x890) = DAT_002e8bee;
+        scavenge_fn_067907();
+        *(int *)(extraout_EDX + 0x890) = g_game_turn;
       }
       uStack_28 = 0x679d5;
-      FUN_00067018();
+      scavenge_fn_067018();
       uStack_28 = 0x679ee;
-      uVar14 = FUN_0006757d();
-      iVar8 = (int)((ulonglong)uVar14 >> 0x20);
-      iVar5 = (int)uVar14;
-      if (iVar5 == 0) {
-        iVar5 = (uint)*(byte *)(in_EAX + 0x1a) * 4;
-        if ((*(int *)(&DAT_002ed35d + iVar5) != 0) &&
+      uval_5 = scavenge_update_creature_and_thing_06757d();
+      val = (int)((ulonglong)uval_5 >> 0x20);
+      thing_ptr_2 = (int)uval_5;
+      if (thing_ptr_2 == 0) {
+        thing_ptr_2 = (uint)*(byte *)(thing + 0x1a) * 4;
+        if ((*(int *)(&g_bss_002ed35d + thing_ptr_2) != 0) &&
            ((int)(uint)*(byte *)((int)local_1c + 0x919) < *(int *)(local_1c + 0x82e))) {
-          piVar1 = (int *)((int)local_1c + iVar5 + 0x98f);
-          *piVar1 = *piVar1 + iVar8;
-          if (*(int *)((int)local_1c + (uint)*(byte *)(in_EAX + 0x1a) * 4 + 0x98f) <=
-              (int)((((uint)*(ushort *)(&DAT_002e9130 + (uint)*(byte *)(in_EAX + 0x1a) * 0xe6) *
-                      (uint)*(byte *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 0x23) * 0x23) /
-                     100 + (uint)*(ushort *)(&DAT_002e9130 + (uint)*(byte *)(in_EAX + 0x1a) * 0xe6))
+          int_ptr = (int *)((int)local_1c + thing_ptr_2 + 0x98f);
+          *int_ptr = *int_ptr + val;
+          if (*(int *)((int)local_1c + (uint)*(byte *)(thing + 0x1a) * 4 + 0x98f) <=
+              (int)((((uint)*(ushort *)(&g_bss_002e9130 + (uint)*(byte *)(thing + 0x1a) * 0xe6) *
+                      (uint)*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 0x23) * 0x23) / /* thing->ccontrol_idx */
+                     100 + (uint)*(ushort *)(&g_bss_002e9130 + (uint)*(byte *)(thing + 0x1a) * 0xe6))
                    * 0x100)) goto LAB_00067be4;
           uStack_28 = 0x67cf2;
-          FUN_00067483();
-          uVar10 = (uint)*(byte *)(in_EAX + 0x1a);
-          uVar13 = (uint)*(ushort *)(&DAT_002e9130 + uVar10 * 0xe6);
-          uVar9 = (uVar13 * *(byte *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 0x23) * 0x23) /
+          scavenge_could_remove_creature_pool_067483();
+          uval_3 = (uint)*(byte *)(thing + 0x1a);
+          uval_4 = (uint)*(ushort *)(&g_bss_002e9130 + uval_3 * 0xe6);
+          cctrl_ptr = (uval_4 * *(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 0x23) * 0x23) / /* thing->ccontrol_idx */
                   100;
 LAB_00067bd3:
-          piVar1 = (int *)((int)local_1c + uVar10 * 4 + 0x98f);
-          *piVar1 = *piVar1 + (uVar9 + uVar13) * -0x100;
-          puVar12 = puVar11;
+          int_ptr = (int *)((int)local_1c + uval_3 * 4 + 0x98f);
+          *int_ptr = *int_ptr + (cctrl_ptr + uval_4) * -0x100;
+          word_ptr_2 = word_ptr;
           goto LAB_00067be4;
         }
-        if ((&DAT_002e915f)[(uint)*(byte *)(in_EAX + 0x1a) * 0xe6] != '\0') {
-          uVar6 = 0;
+        if ((&g_bss_002e915f)[(uint)*(byte *)(thing + 0x1a) * 0xe6] != '\0') {
+          uval_2 = 0;
           *(int *)((int)local_1c + 0x1485) = *(int *)((int)local_1c + 0x1485) + 1;
           goto LAB_0006785a;
         }
       }
       else {
-        if ((int)*(char *)(iVar5 + 6) == (uint)DAT_002eb543) {
+        if ((int)*(char *)(thing_ptr_2 + 6) == (uint)g_neutral_player_number) { /* thing->owner */
 LAB_00067a3d:
-          uVar9 = (uint)*(byte *)(in_EAX + 0x1a);
-          if (*(short *)(iVar5 + 0x1b) == *(short *)((int)local_1c + uVar9 * 2 + 0xa0f)) {
-            piVar1 = (int *)((int)local_1c + uVar9 * 4 + 0x98f);
-            *piVar1 = *piVar1 + iVar8;
-            puVar11 = &local_24;
+          cctrl_ptr = (uint)*(byte *)(thing + 0x1a);
+          if (*(short *)(thing_ptr_2 + 0x1b) == *(short *)((int)local_1c + cctrl_ptr * 2 + 0xa0f)) { /* thing->index_or_angle */
+            int_ptr = (int *)((int)local_1c + cctrl_ptr * 4 + 0x98f);
+            *int_ptr = *int_ptr + val;
+            word_ptr = &local_24;
           }
           else {
-            *(int *)((int)local_1c + uVar9 * 4 + 0x98f) = iVar8;
-            if (((*(short *)((int)local_1c + (uint)*(byte *)(in_EAX + 0x1a) * 2 + 0xa0f) != 0) &&
-                (pbVar3 = (byte *)(&DAT_001ae9fc)
+            *(int *)((int)local_1c + cctrl_ptr * 4 + 0x98f) = val;
+            if (((*(short *)((int)local_1c + (uint)*(byte *)(thing + 0x1a) * 2 + 0xa0f) != 0) &&
+                (thing_ptr = (byte *)(&g_thing_ptrs)
                                   [*(ushort *)
-                                    ((int)local_1c + (uint)*(byte *)(in_EAX + 0x1a) * 2 + 0xa0f)],
-                (*pbVar3 & 1) != 0)) && (pbVar3[0x1a] == *(byte *)(in_EAX + 0x1a))) {
-              if (pbVar3[7] == 0xe) {
-                bVar7 = pbVar3[8];
+                                    ((int)local_1c + (uint)*(byte *)(thing + 0x1a) * 2 + 0xa0f)],
+                (*thing_ptr & 1) != 0)) && (thing_ptr[0x1a] == *(byte *)(thing + 0x1a))) {
+              if (thing_ptr[7] == 0xe) {
+                flag = thing_ptr[8];
               }
               else {
-                bVar7 = pbVar3[7];
+                flag = thing_ptr[7];
               }
-              if (bVar7 == 0x8e) {
+              if (flag == 0x8e) {
                 uStack_28 = 0x67aba;
-                FUN_00063b6d();
+                person_fn_063b6d();
               }
             }
-            *(undefined2 *)((int)local_1c + (uint)*(byte *)(in_EAX + 0x1a) * 2 + 0xa0f) =
-                 *(undefined2 *)(iVar5 + 0x1b);
-            if ((int)*(char *)(iVar5 + 6) == (uint)(byte)(&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef]
+            *(undefined2 *)((int)local_1c + (uint)*(byte *)(thing + 0x1a) * 2 + 0xa0f) =
+                 *(undefined2 *)(thing_ptr_2 + 0x1b); /* thing->index_or_angle */
+            if ((int)*(char *)(thing_ptr_2 + 6) == (uint)(byte)(&g_player_id_number)[g_my_player_word._3_1_ * 0x4ef] /* thing->owner */
                ) {
               uStack_28 = 0x67afe;
-              FUN_00051374();
+              moodneed_fn_051374();
             }
-            uStack_28 = (uint)*(ushort *)(iVar5 + 0x1b);
-            puVar11 = &uStack_28;
-            FUN_00027390();
+            uStack_28 = (uint)*(ushort *)(thing_ptr_2 + 0x1b); /* thing->index_or_angle */
+            word_ptr = &uStack_28;
+            event_illegal_event_number_created_027390();
           }
-          if (*(char *)(iVar5 + 7) == '\x0e') {
-            cVar4 = *(char *)(iVar5 + 8);
+          if (*(char *)(thing_ptr_2 + 7) == '\x0e') {
+            ch = *(char *)(thing_ptr_2 + 8); /* thing->active_state */
           }
           else {
-            cVar4 = *(char *)(iVar5 + 7);
+            ch = *(char *)(thing_ptr_2 + 7);
           }
-          if ((cVar4 != -0x72) && ((int)*(char *)(iVar5 + 6) != (uint)DAT_002eb543)) {
-            *(undefined4 *)((int)puVar11 + -4) = 0x67b4f;
-            FUN_00064a5f();
+          if ((ch != -0x72) && ((int)*(char *)(thing_ptr_2 + 6) != (uint)g_neutral_player_number)) { /* thing->owner */
+            *(undefined4 *)((int)word_ptr + -4) = 0x67b4f;
+            person_external_change_state_but_064a5f();
           }
-          puVar12 = puVar11;
-          if ((int)((((uint)*(ushort *)(&DAT_002e9130 + (uint)*(byte *)(iVar5 + 0x1a) * 0xe6) *
-                      (uint)*(byte *)((&DAT_001b0a00)[*(ushort *)(iVar5 + 100)] + 0x23) * 0x23) /
-                     100 + (uint)*(ushort *)(&DAT_002e9130 + (uint)*(byte *)(iVar5 + 0x1a) * 0xe6))
-                   * 0x100) < *(int *)((int)local_1c + (uint)*(byte *)(in_EAX + 0x1a) * 4 + 0x98f))
+          word_ptr_2 = word_ptr;
+          if ((int)((((uint)*(ushort *)(&g_bss_002e9130 + (uint)*(byte *)(thing_ptr_2 + 0x1a) * 0xe6) *
+                      (uint)*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr_2 + 100)] + 0x23) * 0x23) / /* thing->ccontrol_idx */
+                     100 + (uint)*(ushort *)(&g_bss_002e9130 + (uint)*(byte *)(thing_ptr_2 + 0x1a) * 0xe6))
+                   * 0x100) < *(int *)((int)local_1c + (uint)*(byte *)(thing + 0x1a) * 4 + 0x98f))
           {
-            *(undefined4 *)((int)puVar11 + -4) = 0x67ba4;
-            FUN_0006738b();
-            uVar13 = (uint)*(ushort *)(&DAT_002e9130 + (uint)*(byte *)(iVar5 + 0x1a) * 0xe6);
-            uVar9 = (uint)((longlong)
+            *(undefined4 *)((int)word_ptr + -4) = 0x67ba4;
+            scavenge_could_find_valid_position_06738b();
+            uval_4 = (uint)*(ushort *)(&g_bss_002e9130 + (uint)*(byte *)(thing_ptr_2 + 0x1a) * 0xe6);
+            cctrl_ptr = (uint)((longlong)
                            (ulonglong)
-                           (uVar13 * *(byte *)((&DAT_001b0a00)[*(ushort *)(iVar5 + 100)] + 0x23) *
+                           (uval_4 * *(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr_2 + 100)] + 0x23) * /* thing->ccontrol_idx */
                            0x23) / (longlong)extraout_ECX);
-            uVar10 = (uint)*(byte *)(in_EAX + 0x1a);
+            uval_3 = (uint)*(byte *)(thing + 0x1a);
             goto LAB_00067bd3;
           }
         }
         else {
-          uVar9 = (uint)*(byte *)(in_EAX + 0x1a);
-          local_24 = (uint)(byte)(&DAT_002e0e3d)[*(char *)(iVar5 + 6) * 0x1508 + uVar9] * 2;
-          bVar7 = *(byte *)((int)local_1c + uVar9 + 0x894);
-          *(byte *)((int)local_1c + uVar9 + 0x894) = bVar7 + 1;
-          puVar12 = &local_24;
-          if (local_24 <= bVar7) goto LAB_00067a3d;
+          cctrl_ptr = (uint)*(byte *)(thing + 0x1a);
+          local_24 = (uint)(byte)(&g_bss_002e0e3d)[*(char *)(thing_ptr_2 + 6) * 0x1508 + cctrl_ptr] * 2; /* thing->owner */
+          flag = *(byte *)((int)local_1c + cctrl_ptr + 0x894);
+          *(byte *)((int)local_1c + cctrl_ptr + 0x894) = flag + 1;
+          word_ptr_2 = &local_24;
+          if (local_24 <= flag) goto LAB_00067a3d;
         }
 LAB_00067be4:
-        iVar5 = *(int *)(local_20 + 0x82);
-        *(int *)(local_20 + 0x82) = iVar5 + 1;
-        if (DAT_002ed446 < iVar5) {
-          *(int *)(local_20 + 0x82) = *(int *)(local_20 + 0x82) - DAT_002ed446;
-          uVar2 = *(ushort *)(&DAT_002e912e + (uint)*(byte *)(in_EAX + 0x1a) * 0xe6);
-          *(undefined4 *)((int)puVar12 + -4) = 0x67c31;
-          iVar5 = FUN_00023868();
-          if (iVar5 < 0) {
-            *(undefined4 *)((int)puVar12 + -4) = 0x67c49;
-            FUN_000ddaf0(); /* LbErrorLog("scavenge.cpp", line 347, "CANNOT TAKE MONEY I AM SUPPOSED TO BE ABLE TO AFFORD FROM DUNGEON") */
+        thing_ptr_2 = *(int *)(local_20 + 0x82);
+        *(int *)(local_20 + 0x82) = thing_ptr_2 + 1;
+        if (g_bss_002ed446 < thing_ptr_2) {
+          *(int *)(local_20 + 0x82) = *(int *)(local_20 + 0x82) - g_bss_002ed446;
+          uval = *(ushort *)(&g_bss_002e912e + (uint)*(byte *)(thing + 0x1a) * 0xe6);
+          *(undefined4 *)((int)word_ptr_2 + -4) = 0x67c31;
+          thing_ptr_2 = dungeon_remove_reserve_023868();
+          if (thing_ptr_2 < 0) {
+            *(undefined4 *)((int)word_ptr_2 + -4) = 0x67c49;
+            LbErrorLog(); /* LbErrorLog("scavenge.cpp", line 347, "CANNOT TAKE MONEY I AM SUPPOSED TO BE ABLE TO AFFORD FROM DUNGEON") */
           }
-          *(undefined4 *)((int)puVar12 + -4) = 0x67c5a;
-          iVar5 = FUN_000444a9();
-          if (iVar5 != 0) {
-            *(uint *)(iVar5 + 0x13) = (uint)uVar2;
+          *(undefined4 *)((int)word_ptr_2 + -4) = 0x67c5a;
+          thing_ptr_2 = inits_allocate_dynamic_light_shot_0444a9();
+          if (thing_ptr_2 != 0) {
+            *(uint *)(thing_ptr_2 + 0x13) = (uint)uval; /* thing->anim_sprite */
           }
         }
       }
-      uVar6 = 0;
+      uval_2 = 0;
       goto LAB_0006785a;
     }
-    if ((int)*(char *)(in_EAX + 6) == (uint)(byte)(&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef]) {
+    if ((int)*(char *)(thing + 6) == (uint)(byte)(&g_player_id_number)[g_my_player_word._3_1_ * 0x4ef]) { /* thing->owner */
       uStack_28 = 0x67d80;
-      FUN_00051374();
+      moodneed_fn_051374();
     }
   }
   uStack_28 = 0x67d87;
-  FUN_00063b6d();
-  uVar6 = 1;
+  person_fn_063b6d();
+  uval_2 = 1;
 LAB_0006785a:
-  return CONCAT44(in_EDX,uVar6);
+  return CONCAT44(arg_edx,uval_2);
 }
 
 /******************************************************************************
- * Function : sub_067d91 (Ghidra: FUN_00067d91)
- * Prototype: bool sub_067d91(void);
+ * Function : scavenge_fn_067d91 (Original VA: 0x67d91, Ghidra: FUN_00067d91)
+ * Prototype: bool scavenge_fn_067d91(void);
  * Address  : 0x67d91 (Size: 14 bytes)
  * Module   : scavenge.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x67d9f
- * Callees  : 1 -> 0x67374
+ * Purpose  : Module scavenge.cpp procedure @ 0x067d91
+ * Callers  : 1 -> scavenge_fn_067d9f
+ * Callees  : 1 -> scavenge_fn_067374
  ******************************************************************************/
-bool FUN_00067d91(void)
+bool scavenge_fn_067d91(void)
 
 {
-  int iVar1;
+  int val;
   
-  iVar1 = FUN_00067374();
-  return iVar1 != 0;
+  val = scavenge_fn_067374();
+  return val != 0;
 }
 
 /******************************************************************************
- * Function : sub_067d9f (Ghidra: FUN_00067d9f)
- * Prototype: longlong sub_067d9f(void);
+ * Function : scavenge_fn_067d9f (Original VA: 0x67d9f, Ghidra: FUN_00067d9f)
+ * Prototype: longlong scavenge_fn_067d9f(void);
  * Address  : 0x67d9f (Size: 101 bytes)
  * Module   : scavenge.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Module scavenge.cpp procedure @ 0x067d9f
  * Callers  : 0 -> 
- * Callees  : 5 -> 0x63b6d, 0x67920, 0x67d91, 0xcd9b0, 0xd0f50
+ * Callees  : 5 -> person_fn_063b6d, scavenge_take_money_am_supposed_067920, scavenge_fn_067d91, room_attempt_remove_creature_room_0cd9b0, room_update_slab_subtile_columns_0d0f50
  ******************************************************************************/
-longlong FUN_00067d9f(void)
+longlong scavenge_fn_067d9f(void)
 
 {
-  int in_EAX;
-  int iVar1;
+  int arg_eax;
+  int val;
   int extraout_ECX;
-  uint in_EDX;
+  uint arg_edx;
   
-  iVar1 = FUN_000d0f50();
-  if ((((iVar1 != 0) && (*(short *)(iVar1 + 10) == 9)) &&
-      (*(short *)(iVar1 + 1) == *(short *)(extraout_ECX + 0x7e))) &&
-     (*(char *)(iVar1 + 3) == *(char *)(in_EAX + 6))) {
-    iVar1 = FUN_00067920();
-    if (iVar1 == 0) {
-      FUN_00067d91();
+  val = room_update_slab_subtile_columns_0d0f50();
+  if ((((val != 0) && (*(short *)(val + 10) == 9)) &&
+      (*(short *)(val + 1) == *(short *)(extraout_ECX + 0x7e))) &&
+     (*(char *)(val + 3) == *(char *)(arg_eax + 6))) {
+    val = scavenge_take_money_am_supposed_067920();
+    if (val == 0) {
+      scavenge_fn_067d91();
     }
-    return CONCAT44(in_EDX,1);
+    return CONCAT44(arg_edx,1);
   }
-  FUN_000cd9b0();
-  FUN_00063b6d();
-  return (ulonglong)in_EDX << 0x20;
+  room_attempt_remove_creature_room_0cd9b0();
+  person_fn_063b6d();
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : dk_scavenged_room_disappeared_valid_067e04 (Ghidra: FUN_00067e04)
- * Prototype: undefined8 dk_scavenged_room_disappeared_valid_067e04(void);
+ * Function : scavenged_room_disappeared_valid_067e04 (Original VA: 0x67e04, Ghidra: FUN_00067e04)
+ * Prototype: undefined8 scavenged_room_disappeared_valid_067e04(void);
  * Address  : 0x67e04 (Size: 373 bytes)
  * Module   : scavenge.cpp [direct_file_string_xref]
- * OrigLine : scavenge.cpp:464 ("Scavenged room disappeared or no valid position???")
- * Naming   : String 'Scavenged room disappeared or no valid position???'
+ * OrigLine : scavenge.cpp lines 464
+ * Purpose  : String 'Scavenged room disappeared or no valid position???'
  * Callers  : 0 -> 
- * Callees  : 9 -> 0x10ad6, 0x24998, 0x51374, 0x63a25, 0x64ae7, 0x8608c, 0xb3b10, 0xcc968, 0xddaf0
- * Strings  :
- *   - 0x166c90: "scavenge.cpp"
- *   - 0x166c5d: "Scavenged room disappeared or no valid position???"
+ * Callees  : 9 -> anger_fn_010ad6, effect_allocate_light_effect_024998, moodneed_fn_051374, person_update_creature_control_063a25, person_update_creature_control_064ae7, creature_how_hero_have_tend_08608c, move_fn_0b3b10, room_number_slabs_room_zero_0cc968 ...
  ******************************************************************************/
-undefined8 FUN_00067e04(void)
+undefined8 scavenged_room_disappeared_valid_067e04(void)
 
 {
-  char cVar1;
-  undefined4 uVar2;
-  int in_EAX;
+  char ch;
+  undefined4 uval;
+  int thing;
   int extraout_ECX;
   int extraout_ECX_00;
-  int iVar3;
-  undefined4 in_EDX;
-  int iVar4;
+  int cctrl_ptr;
+  undefined4 arg_edx;
+  int val;
   
-  iVar3 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  *(char *)(iVar3 + 0x9a) = *(char *)(iVar3 + 0x9a) + -1;
-  if (*(char *)(iVar3 + 0x9a) < '\x01') {
-    if (*(short *)(&DAT_002ddd25 +
-                  (uint)(byte)(&DAT_002d33c8)
-                              [((&DAT_0019033b)[(uint)*(ushort *)(iVar3 + 0x9d) % 0x100] +
-                               (&DAT_0019033b)[(int)(uint)*(ushort *)(iVar3 + 0x9d) >> 8] * 0x55) *
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  *(char *)(cctrl_ptr + 0x9a) = *(char *)(cctrl_ptr + 0x9a) + -1;
+  if (*(char *)(cctrl_ptr + 0x9a) < '\x01') {
+    if (*(short *)(&g_room_slabs_count +
+                  (uint)(byte)(&g_bss_002d33c8)
+                              [((&g_subtile_to_slab_lut)[(uint)*(ushort *)(cctrl_ptr + 0x9d) % 0x100] +
+                               (&g_subtile_to_slab_lut)[(int)(uint)*(ushort *)(cctrl_ptr + 0x9d) >> 8] * 0x55) *
                                6] * 0x45) == 9) {
-      cVar1 = FUN_000cc968();
-      if (cVar1 != '\0') {
-        FUN_000b3b10();
-        FUN_00010ad6();
-        iVar4 = (int)DAT_002f10ce._3_1_;
-        (&DAT_002e0f14)[(uint)*(byte *)(extraout_ECX + 0x9b) * 0xa84] =
-             (&DAT_002e0f14)[(uint)*(byte *)(extraout_ECX + 0x9b) * 0xa84] + 1;
-        iVar3 = extraout_ECX;
-        if ((int)*(char *)(in_EAX + 6) == (uint)(byte)(&DAT_0019d0f3)[iVar4 * 0x4ef]) {
-          FUN_00051374();
-          iVar3 = extraout_ECX_00;
+      ch = room_number_slabs_room_zero_0cc968();
+      if (ch != '\0') {
+        move_fn_0b3b10();
+        anger_fn_010ad6();
+        val = (int)g_my_player_word._3_1_;
+        (&g_bss_002e0f14)[(uint)*(byte *)(extraout_ECX + 0x9b) * 0xa84] =
+             (&g_bss_002e0f14)[(uint)*(byte *)(extraout_ECX + 0x9b) * 0xa84] + 1;
+        cctrl_ptr = extraout_ECX;
+        if ((int)*(char *)(thing + 6) == (uint)(byte)(&g_player_id_number)[val * 0x4ef]) { /* thing->owner */
+          moodneed_fn_051374();
+          cctrl_ptr = extraout_ECX_00;
         }
-        *(undefined1 *)(iVar3 + 0x9c) = *(undefined1 *)(in_EAX + 6);
-        FUN_00063a25();
-        FUN_00064ae7();
+        *(undefined1 *)(cctrl_ptr + 0x9c) = *(undefined1 *)(thing + 6); /* thing->owner */
+        person_update_creature_control_063a25();
+        person_update_creature_control_064ae7();
         goto LAB_00067c65;
       }
     }
-    FUN_000ddaf0(); /* LbErrorLog("scavenge.cpp", line 464, "Scavenged room disappeared or no valid position???") */
-    FUN_0008608c(0,0);
-    uVar2 = 0xffffffff;
+    LbErrorLog(); /* LbErrorLog("scavenge.cpp", line 464, "Scavenged room disappeared or no valid position???") */
+    creature_how_hero_have_tend_08608c(0,0);
+    uval = 0xffffffff;
   }
   else {
-    if (*(char *)(iVar3 + 0x9a) == '\a') {
-      FUN_00024998();
+    if (*(char *)(cctrl_ptr + 0x9a) == '\a') {
+      effect_allocate_light_effect_024998();
     }
 LAB_00067c65:
-    uVar2 = 0;
+    uval = 0;
   }
-  return CONCAT44(in_EDX,uVar2);
+  return CONCAT44(arg_edx,uval);
 }
 
 /******************************************************************************
- * Function : sub_067f79 (Ghidra: FUN_00067f79)
- * Prototype: longlong sub_067f79(void);
+ * Function : scavenge_fn_067f79 (Original VA: 0x67f79, Ghidra: FUN_00067f79)
+ * Prototype: longlong scavenge_fn_067f79(void);
  * Address  : 0x67f79 (Size: 48 bytes)
  * Module   : scavenge.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module scavenge.cpp procedure @ 0x067f79
  * Callers  : 0 -> 
- * Callees  : 1 -> 0x24998
+ * Callees  : 1 -> effect_allocate_light_effect_024998
  ******************************************************************************/
-longlong FUN_00067f79(void)
+longlong scavenge_fn_067f79(void)
 
 {
-  uint in_EDX;
+  uint arg_edx;
   
-  FUN_00024998();
-  FUN_00063b6d();
-  return (ulonglong)in_EDX << 0x20;
+  effect_allocate_light_effect_024998();
+  person_fn_063b6d();
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : sub_067fa9 (Ghidra: FUN_00067fa9)
- * Prototype: undefined8 sub_067fa9(void);
+ * Function : scavenge_fn_067fa9 (Original VA: 0x67fa9, Ghidra: FUN_00067fa9)
+ * Prototype: undefined8 scavenge_fn_067fa9(void);
  * Address  : 0x67fa9 (Size: 42 bytes)
  * Module   : scavenge.cpp [callgraph_affinity_to_preceding_unit]
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0x2796f, 0x67861, 0x67920
+ * Purpose  : Module scavenge.cpp procedure @ 0x067fa9
+ * Callers  : 3 -> evil_update_creature_control_02796f, scavenge_update_creature_control_067861, scavenge_take_money_am_supposed_067920
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined8 FUN_00067fa9(void)
+undefined8 scavenge_fn_067fa9(void)
 
 {
-  int in_EAX;
-  undefined4 in_EDX;
+  int arg_eax;
+  undefined4 arg_edx;
   
-  return CONCAT44(in_EDX,(uint)((int)(uint)*(ushort *)
-                                            (&DAT_002e912e + (uint)*(byte *)(in_EAX + 0x1a) * 0xe6)
-                               < (int)(&DAT_002e1082)[*(char *)(in_EAX + 6) * 0x542]));
+  return CONCAT44(arg_edx,(uint)((int)(uint)*(ushort *)
+                                            (&g_bss_002e912e + (uint)*(byte *)(arg_eax + 0x1a) * 0xe6)
+                               < (int)(&g_bss_002e1082)[*(char *)(arg_eax + 6) * 0x542]));
 }
 
 /******************************************************************************
- * Function : sub_067fd3 (Ghidra: FUN_00067fd3)
- * Prototype: longlong sub_067fd3(void);
+ * Function : scavenge_update_creature_and_thing_067fd3 (Original VA: 0x67fd3, Ghidra: FUN_00067fd3)
+ * Prototype: longlong scavenge_update_creature_and_thing_067fd3(void);
  * Address  : 0x67fd3 (Size: 201 bytes)
  * Module   : scavenge.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
  * Callers  : 0 -> 
- * Callees  : 3 -> 0x6e538, 0x6f865, 0xb3be4
+ * Callees  : 3 -> sound_fn_06e538, sound_fn_06f865, move_fn_0b3be4
  ******************************************************************************/
-longlong FUN_00067fd3(void)
+longlong scavenge_update_creature_and_thing_067fd3(void)
 
 {
-  ushort uVar1;
-  short sVar2;
-  int in_EAX;
-  int iVar3;
-  uint in_EDX;
-  uint uVar4;
-  undefined4 *puVar5;
+  ushort thing_ptr;
+  short short_val;
+  int arg_eax;
+  int val;
+  uint arg_edx;
+  uint thing_ptr_2;
+  undefined4 *word_ptr;
   undefined4 uStack_20;
   undefined4 uStack_1c;
   undefined4 uStack_18;
   undefined4 uStack_14;
   
-  puVar5 = (undefined4 *)&stack0xfffffff0;
-  DAT_002e8bf6 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-  DAT_002e8bf6 = DAT_002e8bf6 >> 0xd | DAT_002e8bf6 * 0x80000;
-  uVar1 = (&DAT_002e05b6)[*(char *)(in_EAX + 6) * 0xa84];
-  for (uVar4 = DAT_002e8bf6 % (uint)(byte)(&DAT_002e0ea2)[*(char *)(in_EAX + 6) * 0x1508];
-      (DAT_001ae9fc < (&DAT_001ae9fc)[uVar1] && (-1 < (int)uVar4)); uVar4 = uVar4 - 1) {
-    uVar1 = *(ushort *)((&DAT_001b0a00)[*(ushort *)((&DAT_001ae9fc)[uVar1] + 100)] + 0x1f);
+  word_ptr = (undefined4 *)&stack0xfffffff0;
+  g_action_random_seed = g_action_random_seed * 0x24a1 + 0x24df;
+  g_action_random_seed = g_action_random_seed >> 0xd | g_action_random_seed * 0x80000;
+  thing_ptr = (&g_bss_002e05b6)[*(char *)(arg_eax + 6) * 0xa84];
+  for (thing_ptr_2 = g_action_random_seed % (uint)(byte)(&g_bss_002e0ea2)[*(char *)(arg_eax + 6) * 0x1508];
+      (g_thing_ptrs < (&g_thing_ptrs)[thing_ptr] && (-1 < (int)thing_ptr_2)); thing_ptr_2 = thing_ptr_2 - 1) {
+    thing_ptr = *(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)((&g_thing_ptrs)[thing_ptr] + 100)] + 0x1f);
   }
   uStack_14 = 0x68050;
-  sVar2 = FUN_000b3be4();
-  if (0 < sVar2) {
-    *(undefined1 *)(in_EAX + 8) = 0x8e;
+  short_val = move_fn_0b3be4();
+  if (0 < short_val) {
+    *(undefined1 *)(arg_eax + 8) = 0x8e;
     uStack_14 = 0x68069;
-    iVar3 = FUN_0006f865();
-    if (iVar3 == 0) {
+    val = sound_fn_06f865();
+    if (val == 0) {
       uStack_14 = 0x100;
       uStack_18 = 2;
       uStack_1c = 1;
-      puVar5 = &uStack_20;
+      word_ptr = &uStack_20;
       uStack_20 = 3;
-      FUN_0006e538();
+      sound_fn_06e538();
     }
-    return CONCAT44(*(undefined4 *)((int)puVar5 + 4),1);
+    return CONCAT44(*(undefined4 *)((int)word_ptr + 4),1);
   }
-  return (ulonglong)in_EDX << 0x20;
+  return (ulonglong)arg_edx << 0x20;
 }
 

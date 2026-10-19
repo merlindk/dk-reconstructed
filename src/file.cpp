@@ -1,7 +1,7 @@
 /**
- * Dungeon Keeper (KEEPER.EXE) - Reconstructed Source Module: file.cpp
+ * Dungeon Keeper (KEEPER.EXE) - Reconstructed & Semantically Named Module: file.cpp
  * Binary Subject: /home/merlin/Dungeon Keeper/re/KEEPER.elf
- * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 (x86:LE:32:default)
+ * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 + DK Semantic Analyzer
  * Functions in this translation unit: 50
  */
 
@@ -11,502 +11,471 @@
 #include "../include/dk_functions.h"
 
 /******************************************************************************
- * Function : sub_029979 (Ghidra: FUN_00029979)
- * Prototype: longlong sub_029979(void);
+ * Function : file_process_map_subtile_029979 (Original VA: 0x29979, Ghidra: FUN_00029979)
+ * Prototype: longlong file_process_map_subtile_029979(void);
  * Address  : 0x29979 (Size: 127 bytes)
  * Module   : file.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x2a25c
- * Callees  : 5 -> 0x150f0, 0xdd920, 0xe7714, 0xe8960, 0xe984c
- * Strings  :
- *   - 0x162a3d: "LEVELS"
- *   - 0x162a46: "%s\MAP%05d.flg"
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 1 -> file_fn_02a25c
+ * Callees  : 5 -> cdtest_ldata_dkwind00_dat_0150f0, prepare_file_path, dk_sprintf, bflib_system_io_fn_0e8960, bflib_system_io_fn_0e984c
  ******************************************************************************/
-longlong FUN_00029979(void)
+longlong file_process_map_subtile_029979(void)
 
 {
-  undefined1 uVar1;
-  char cVar2;
-  undefined4 uVar3;
-  undefined4 *puVar4;
-  uint in_EDX;
-  undefined2 *puVar5;
-  int iVar6;
+  undefined1 uval;
+  char ch;
+  undefined4 uval_2;
+  undefined4 *word_ptr;
+  uint arg_edx;
+  undefined2 *word_ptr_2;
+  int val;
   
-  FUN_000dd920();
-  uVar3 = FUN_000dd920();
-  FUN_000e7714(&DAT_0019cbac,s__s_MAP_05d_flg_00162a46,uVar3);
-  FUN_000150f0();
-  cVar2 = FUN_000e8960();
-  if (cVar2 != '\0') {
-    FUN_000e984c();
-    iVar6 = 0;
-    puVar5 = &DAT_00279203;
-    puVar4 = &DAT_002f317f;
+  prepare_file_path();
+  uval_2 = prepare_file_path();
+  dk_sprintf(&g_log_sprintf_buf,s__s_MAP_05d_flg_00162a46,uval_2);
+  cdtest_ldata_dkwind00_dat_0150f0();
+  ch = bflib_system_io_fn_0e8960();
+  if (ch != '\0') {
+    bflib_system_io_fn_0e984c();
+    val = 0;
+    word_ptr_2 = &g_map_subtiles;
+    word_ptr = &g_render_poly_buf_start;
     do {
-      iVar6 = iVar6 + 1;
-      uVar1 = *(undefined1 *)puVar4;
-      puVar4 = (undefined4 *)((int)puVar4 + 2);
-      *(undefined1 *)puVar5 = uVar1;
-      puVar5 = (undefined2 *)((int)puVar5 + 5);
-    } while (iVar6 < 0x10000);
-    return CONCAT44(in_EDX,1);
+      val = val + 1;
+      uval = *(undefined1 *)word_ptr;
+      word_ptr = (undefined4 *)((int)word_ptr + 2);
+      *(undefined1 *)word_ptr_2 = uval;
+      word_ptr_2 = (undefined2 *)((int)word_ptr_2 + 5);
+    } while (val < 0x10000);
+    return CONCAT44(arg_edx,1);
   }
-  return (ulonglong)in_EDX << 0x20;
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : sub_0299f8 (Ghidra: FUN_000299f8)
- * Prototype: undefined8 sub_0299f8(void);
+ * Function : file_process_slabmap_tile_0299f8 (Original VA: 0x299f8, Ghidra: FUN_000299f8)
+ * Prototype: undefined8 file_process_slabmap_tile_0299f8(void);
  * Address  : 0x299f8 (Size: 202 bytes)
  * Module   : file.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x2a25c
- * Callees  : 5 -> 0x150f0, 0xdd920, 0xe7714, 0xe8960, 0xe984c
- * Strings  :
- *   - 0x162a55: "LEVELS"
- *   - 0x162a5e: "%s\MAP%05d.own"
+ * Purpose  : Reads/modifies SlabMap[85x85] tile entry
+ * Callers  : 1 -> file_fn_02a25c
+ * Callees  : 5 -> cdtest_ldata_dkwind00_dat_0150f0, prepare_file_path, dk_sprintf, bflib_system_io_fn_0e8960, bflib_system_io_fn_0e984c
  ******************************************************************************/
-undefined8 FUN_000299f8(void)
+undefined8 file_process_slabmap_tile_0299f8(void)
 
 {
-  byte bVar1;
-  char cVar2;
-  undefined4 uVar3;
-  int iVar4;
+  byte flag;
+  char ch;
+  undefined4 uval;
+  int slab_coord;
   byte *extraout_ECX;
-  byte *pbVar5;
-  undefined4 in_EDX;
-  int iVar6;
+  byte *byte_ptr;
+  undefined4 arg_edx;
+  int val;
   undefined1 local_ac [152];
   
-  FUN_000dd920();
-  uVar3 = FUN_000dd920();
-  FUN_000e7714(local_ac,s__s_MAP_05d_own_00162a5e,uVar3);
-  FUN_000150f0();
-  cVar2 = FUN_000e8960();
-  if (cVar2 == '\0') {
-    uVar3 = 0;
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(local_ac,s__s_MAP_05d_own_00162a5e,uval);
+  cdtest_ldata_dkwind00_dat_0150f0();
+  ch = bflib_system_io_fn_0e8960();
+  if (ch == '\0') {
+    uval = 0;
   }
   else {
-    FUN_000e984c();
-    iVar6 = 0;
-    pbVar5 = extraout_ECX;
+    bflib_system_io_fn_0e984c();
+    val = 0;
+    byte_ptr = extraout_ECX;
     do {
-      if ((iVar6 % 0x100 < 0xff) &&
-         (iVar4 = (int)((iVar6 + (iVar6 >> 0x1f) * -0x100) - (uint)((iVar6 >> 0x1f) << 7 < 0)) >> 8,
-         iVar4 < 0xff)) {
-        iVar4 = ((&DAT_0019033b)[iVar4] * 0x55 + (&DAT_0019033b)[iVar6 % 0x100]) * 6;
-        bVar1 = *pbVar5;
-        (&DAT_002d33ca)[iVar4] = (&DAT_002d33ca)[iVar4] & 0xf8;
-        (&DAT_002d33ca)[iVar4] = (&DAT_002d33ca)[iVar4] | bVar1 & 7;
+      if ((val % 0x100 < 0xff) &&
+         (slab_coord = (int)((val + (val >> 0x1f) * -0x100) - (uint)((val >> 0x1f) << 7 < 0)) >> 8,
+         slab_coord < 0xff)) {
+        slab_coord = ((&g_subtile_to_slab_lut)[slab_coord] * 0x55 + (&g_subtile_to_slab_lut)[val % 0x100]) * 6;
+        flag = *byte_ptr;
+        (&g_slabmap)[slab_coord] = (&g_slabmap)[slab_coord] & 0xf8;
+        (&g_slabmap)[slab_coord] = (&g_slabmap)[slab_coord] | flag & 7;
       }
-      iVar6 = iVar6 + 1;
-      pbVar5 = pbVar5 + 1;
-    } while (iVar6 < 0x10000);
-    uVar3 = 1;
+      val = val + 1;
+      byte_ptr = byte_ptr + 1;
+    } while (val < 0x10000);
+    uval = 1;
   }
-  return CONCAT44(in_EDX,uVar3);
+  return CONCAT44(arg_edx,uval);
 }
 
 /******************************************************************************
- * Function : sub_029ac2 (Ghidra: FUN_00029ac2)
- * Prototype: longlong sub_029ac2(void);
+ * Function : file_process_map_subtile_029ac2 (Original VA: 0x29ac2, Ghidra: FUN_00029ac2)
+ * Prototype: longlong file_process_map_subtile_029ac2(void);
  * Address  : 0x29ac2 (Size: 146 bytes)
  * Module   : file.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x2a25c
- * Callees  : 5 -> 0x150f0, 0xdd920, 0xe7714, 0xe8960, 0xe984c
- * Strings  :
- *   - 0x162a6d: "LEVELS"
- *   - 0x162a76: "%s\MAP%05d.wib"
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 1 -> file_fn_02a25c
+ * Callees  : 5 -> cdtest_ldata_dkwind00_dat_0150f0, prepare_file_path, dk_sprintf, bflib_system_io_fn_0e8960, bflib_system_io_fn_0e984c
  ******************************************************************************/
-longlong FUN_00029ac2(void)
+longlong file_process_map_subtile_029ac2(void)
 
 {
-  byte *pbVar1;
-  uint *puVar2;
-  byte bVar3;
-  char cVar4;
-  undefined4 uVar5;
-  int iVar6;
-  int iVar7;
-  uint in_EDX;
-  byte *pbVar8;
+  byte *byte_ptr;
+  uint *word_ptr;
+  byte flag;
+  char ch;
+  undefined4 uval;
+  int val;
+  int val_2;
+  uint arg_edx;
+  byte *byte_ptr_2;
   undefined1 local_a4 [152];
   
-  pbVar8 = DAT_00199228;
-  FUN_000dd920();
-  uVar5 = FUN_000dd920();
-  FUN_000e7714(local_a4,s__s_MAP_05d_wib_00162a76,uVar5);
-  FUN_000150f0();
-  cVar4 = FUN_000e8960();
-  if (cVar4 != '\0') {
-    FUN_000e984c();
-    iVar6 = 0;
+  byte_ptr_2 = g_scratch_work_buf;
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(local_a4,s__s_MAP_05d_wib_00162a76,uval);
+  cdtest_ldata_dkwind00_dat_0150f0();
+  ch = bflib_system_io_fn_0e8960();
+  if (ch != '\0') {
+    bflib_system_io_fn_0e984c();
+    val = 0;
     do {
-      bVar3 = *pbVar8;
-      iVar7 = iVar6 + 5;
-      pbVar1 = (byte *)((int)&DAT_00279205 + iVar6 + 1);
-      *pbVar1 = *pbVar1 & 0x3f;
-      pbVar8 = pbVar8 + 1;
-      puVar2 = (uint *)((int)&DAT_00279203 + iVar6 + 1);
-      *puVar2 = *puVar2 | (bVar3 & 3) << 0x16;
-      iVar6 = iVar7;
-    } while (iVar7 != 0x50000);
-    return CONCAT44(in_EDX,1);
+      flag = *byte_ptr_2;
+      val_2 = val + 5;
+      byte_ptr = (byte *)((int)&g_bss_00279205 + val + 1);
+      *byte_ptr = *byte_ptr & 0x3f;
+      byte_ptr_2 = byte_ptr_2 + 1;
+      word_ptr = (uint *)((int)&g_map_subtiles + val + 1);
+      *word_ptr = *word_ptr | (flag & 3) << 0x16;
+      val = val_2;
+    } while (val_2 != 0x50000);
+    return CONCAT44(arg_edx,1);
   }
-  return (ulonglong)in_EDX << 0x20;
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : sub_029b54 (Ghidra: FUN_00029b54)
- * Prototype: longlong sub_029b54(void);
+ * Function : file_fn_029b54 (Original VA: 0x29b54, Ghidra: FUN_00029b54)
+ * Prototype: longlong file_fn_029b54(void);
  * Address  : 0x29b54 (Size: 170 bytes)
  * Module   : file.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x2a25c
- * Callees  : 7 -> 0x150f0, 0xac630, 0xacaf8, 0xdd920, 0xe7714, 0xe8960, 0xe984c
- * Strings  :
- *   - 0x162a85: "LEVELS"
- *   - 0x162a8e: "%s\MAP%05d.lgt"
+ * Purpose  : Module file.cpp procedure @ 0x029b54
+ * Callers  : 1 -> file_fn_02a25c
+ * Callees  : 7 -> cdtest_ldata_dkwind00_dat_0150f0, light_fn_0ac630, light_already_list_0acaf8, prepare_file_path, dk_sprintf, bflib_system_io_fn_0e8960, bflib_system_io_fn_0e984c
  ******************************************************************************/
-longlong FUN_00029b54(void)
+longlong file_fn_029b54(void)
 
 {
-  char cVar1;
-  undefined4 uVar2;
-  int iVar3;
+  char ch;
+  undefined4 uval;
+  int val;
   int extraout_ECX;
-  uint in_EDX;
-  int iVar4;
+  uint arg_edx;
+  int val_2;
   int extraout_EDX;
   undefined1 local_a8 [152];
   
-  FUN_000dd920();
-  uVar2 = FUN_000dd920();
-  FUN_000e7714(local_a8,s__s_MAP_05d_lgt_00162a8e,uVar2);
-  FUN_000150f0();
-  cVar1 = FUN_000e8960();
-  if (cVar1 != '\0') {
-    FUN_000ac630();
-    FUN_000e984c();
-    iVar4 = *DAT_00199228;
-    if (iVar4 < 0) {
-      iVar4 = 0;
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(local_a8,s__s_MAP_05d_lgt_00162a8e,uval);
+  cdtest_ldata_dkwind00_dat_0150f0();
+  ch = bflib_system_io_fn_0e8960();
+  if (ch != '\0') {
+    light_fn_0ac630();
+    bflib_system_io_fn_0e984c();
+    val_2 = *g_scratch_work_buf;
+    if (val_2 < 0) {
+      val_2 = 0;
     }
-    else if (399 < iVar4) {
-      iVar4 = 399;
+    else if (399 < val_2) {
+      val_2 = 399;
     }
-    iVar3 = 0;
-    while (iVar3 < iVar4) {
-      FUN_000acaf8();
-      iVar4 = extraout_EDX;
-      iVar3 = extraout_ECX + 1;
+    val = 0;
+    while (val < val_2) {
+      light_already_list_0acaf8();
+      val_2 = extraout_EDX;
+      val = extraout_ECX + 1;
     }
-    return CONCAT44(in_EDX,1);
+    return CONCAT44(arg_edx,1);
   }
-  return (ulonglong)in_EDX << 0x20;
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : sub_029bfe (Ghidra: FUN_00029bfe)
- * Prototype: undefined8 sub_029bfe(void);
+ * Function : file_fn_029bfe (Original VA: 0x29bfe, Ghidra: FUN_00029bfe)
+ * Prototype: undefined8 file_fn_029bfe(void);
  * Address  : 0x29bfe (Size: 308 bytes)
  * Module   : file.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x2a25c
- * Callees  : 8 -> 0x150f0, 0x157ac, 0x2cb2b, 0xb21f0, 0xdd920, 0xe7714, 0xe8960, 0xe984c
- * Strings  :
- *   - 0x162a9d: "LEVELS"
- *   - 0x162aa6: "%s\MAP%05d.clm"
+ * Purpose  : Module file.cpp procedure @ 0x029bfe
+ * Callers  : 1 -> file_fn_02a25c
+ * Callees  : 8 -> cdtest_ldata_dkwind00_dat_0150f0, column_fn_0157ac, file_process_map_subtile_02cb2b, light_fn_0b21f0, prepare_file_path, dk_sprintf, bflib_system_io_fn_0e8960, bflib_system_io_fn_0e984c
  ******************************************************************************/
 /* WARNING: Removing unreachable block (ram,0x00029cad) */
 
-undefined8 FUN_00029bfe(void)
+undefined8 file_fn_029bfe(void)
 
 {
-  byte *pbVar1;
-  char cVar2;
-  undefined4 uVar3;
+  byte *byte_ptr;
+  char ch;
+  undefined4 uval;
   int extraout_ECX;
-  int *piVar4;
-  undefined4 in_EDX;
-  int iVar5;
-  int iVar6;
-  int *piVar7;
-  int *piVar8;
-  int *piVar9;
-  byte bVar10;
-  undefined8 uVar11;
+  int *int_ptr;
+  undefined4 arg_edx;
+  int val;
+  int val_2;
+  int *int_ptr_2;
+  int *int_ptr_3;
+  int *int_ptr_4;
+  byte flag;
+  undefined8 uval_2;
   undefined1 local_bc [152];
   int local_24;
   undefined4 local_20;
   undefined4 *local_1c;
   
-  bVar10 = 0;
-  FUN_000dd920();
-  uVar3 = FUN_000dd920();
-  FUN_000e7714(local_bc,s__s_MAP_05d_clm_00162aa6,uVar3);
-  if ((DAT_0019d0b8 & 8) != 0) {
-    FUN_0002cb2b();
-    DAT_0019d0b8 = DAT_0019d0b8 & 0xf7;
+  flag = 0;
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(local_bc,s__s_MAP_05d_clm_00162aa6,uval);
+  if ((g_game_operation_flags & 8) != 0) {
+    file_process_map_subtile_02cb2b();
+    g_game_operation_flags = g_game_operation_flags & 0xf7;
   }
-  FUN_000150f0();
-  cVar2 = FUN_000e8960();
-  if (cVar2 == '\0') {
-    uVar3 = 0;
+  cdtest_ldata_dkwind00_dat_0150f0();
+  ch = bflib_system_io_fn_0e8960();
+  if (ch == '\0') {
+    uval = 0;
   }
   else {
-    FUN_000b21f0();
-    FUN_000e984c();
-    iVar6 = *DAT_00199228;
-    if (iVar6 < 0) {
-      iVar6 = 0;
+    light_fn_0b21f0();
+    bflib_system_io_fn_0e984c();
+    val_2 = *g_scratch_work_buf;
+    if (val_2 < 0) {
+      val_2 = 0;
     }
-    else if (0x7ff < iVar6) {
-      iVar6 = 0x7ff;
+    else if (0x7ff < val_2) {
+      val_2 = 0x7ff;
     }
-    DAT_002e7beb = *(ushort *)(DAT_00199228 + 4);
-    if (0x7ff < DAT_002e7beb) {
-      DAT_002e7beb = 0x7ff;
+    g_bss_002e7beb = *(ushort *)(g_scratch_work_buf + 4);
+    if (0x7ff < g_bss_002e7beb) {
+      g_bss_002e7beb = 0x7ff;
     }
     local_24 = 0;
-    local_1c = &DAT_0019e973;
-    piVar4 = DAT_00199228 + 2;
-    while (local_24 <= iVar6) {
-      piVar8 = &DAT_0019e977 + local_24 * 6 + (uint)bVar10 * -2;
-      piVar7 = piVar4 + (uint)bVar10 * -2 + 1;
-      (&DAT_0019e973)[local_24 * 6] = *piVar4;
-      piVar9 = piVar8 + (uint)bVar10 * -2 + 1;
-      piVar4 = piVar7 + (uint)bVar10 * -2 + 1;
-      *piVar8 = *piVar7;
-      piVar8 = piVar9 + (uint)bVar10 * -2 + 1;
-      piVar7 = piVar4 + (uint)bVar10 * -2 + 1;
-      *piVar9 = *piVar4;
-      *piVar8 = *piVar7;
-      piVar8[(uint)bVar10 * -2 + 1] = piVar7[(uint)bVar10 * -2 + 1];
-      (piVar8 + (uint)bVar10 * -2 + 1)[(uint)bVar10 * -2 + 1] =
-           (piVar7 + (uint)bVar10 * -2 + 1)[(uint)bVar10 * -2 + 1];
-      uVar11 = FUN_000157ac();
-      iVar5 = (int)((ulonglong)uVar11 >> 0x20);
+    local_1c = &g_bss_0019e973;
+    int_ptr = g_scratch_work_buf + 2;
+    while (local_24 <= val_2) {
+      int_ptr_3 = &g_bss_0019e977 + local_24 * 6 + (uint)flag * -2;
+      int_ptr_2 = int_ptr + (uint)flag * -2 + 1;
+      (&g_bss_0019e973)[local_24 * 6] = *int_ptr;
+      int_ptr_4 = int_ptr_3 + (uint)flag * -2 + 1;
+      int_ptr = int_ptr_2 + (uint)flag * -2 + 1;
+      *int_ptr_3 = *int_ptr_2;
+      int_ptr_3 = int_ptr_4 + (uint)flag * -2 + 1;
+      int_ptr_2 = int_ptr + (uint)flag * -2 + 1;
+      *int_ptr_4 = *int_ptr;
+      *int_ptr_3 = *int_ptr_2;
+      int_ptr_3[(uint)flag * -2 + 1] = int_ptr_2[(uint)flag * -2 + 1];
+      (int_ptr_3 + (uint)flag * -2 + 1)[(uint)flag * -2 + 1] =
+           (int_ptr_2 + (uint)flag * -2 + 1)[(uint)flag * -2 + 1];
+      uval_2 = column_fn_0157ac();
+      val = (int)((ulonglong)uval_2 >> 0x20);
       local_1c = local_1c + 6;
-      local_20._0_1_ = (char)uVar11;
-      piVar4 = (int *)(extraout_ECX + 0x18);
-      pbVar1 = (byte *)((int)&DAT_0019e973 + iVar5 + 2);
-      *pbVar1 = *pbVar1 & 0xf;
+      local_20._0_1_ = (char)uval_2;
+      int_ptr = (int *)(extraout_ECX + 0x18);
+      byte_ptr = (byte *)((int)&g_bss_0019e973 + val + 2);
+      *byte_ptr = *byte_ptr & 0xf;
       local_24 = local_24 + 1;
-      pbVar1 = (byte *)((int)&DAT_0019e973 + iVar5 + 2);
-      *pbVar1 = *pbVar1 | (char)local_20 << 4;
-      local_20 = (int)uVar11;
+      byte_ptr = (byte *)((int)&g_bss_0019e973 + val + 2);
+      *byte_ptr = *byte_ptr | (char)local_20 << 4;
+      local_20 = (int)uval_2;
     }
-    uVar3 = 1;
+    uval = 1;
   }
-  return CONCAT44(in_EDX,uVar3);
+  return CONCAT44(arg_edx,uval);
 }
 
 /******************************************************************************
- * Function : sub_029d32 (Ghidra: FUN_00029d32)
- * Prototype: longlong sub_029d32(void);
+ * Function : file_fn_029d32 (Original VA: 0x29d32, Ghidra: FUN_00029d32)
+ * Prototype: longlong file_fn_029d32(void);
  * Address  : 0x29d32 (Size: 100 bytes)
  * Module   : file.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x401ec
- * Callees  : 5 -> 0x150f0, 0xdd920, 0xe7714, 0xe8960, 0xe984c
- * Strings  :
- *   - 0x162ab5: "DATA"
- *   - 0x162abc: "%s\tmapanim.dat"
+ * Purpose  : Module file.cpp procedure @ 0x029d32
+ * Callers  : 1 -> inits_fn_0401ec
+ * Callees  : 5 -> cdtest_ldata_dkwind00_dat_0150f0, prepare_file_path, dk_sprintf, bflib_system_io_fn_0e8960, bflib_system_io_fn_0e984c
  ******************************************************************************/
-longlong FUN_00029d32(void)
+longlong file_fn_029d32(void)
 
 {
-  char cVar1;
-  undefined4 uVar2;
-  uint in_EDX;
+  char ch;
+  undefined4 uval;
+  uint arg_edx;
   undefined1 local_a0 [152];
   
-  FUN_000dd920();
-  uVar2 = FUN_000dd920();
-  FUN_000e7714(local_a0,s__s_tmapanim_dat_00162abc,uVar2);
-  FUN_000150f0();
-  cVar1 = FUN_000e8960();
-  if (cVar1 != '\0') {
-    FUN_000e984c();
-    return CONCAT44(in_EDX,1);
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(local_a0,s__s_tmapanim_dat_00162abc,uval);
+  cdtest_ldata_dkwind00_dat_0150f0();
+  ch = bflib_system_io_fn_0e8960();
+  if (ch != '\0') {
+    bflib_system_io_fn_0e984c();
+    return CONCAT44(arg_edx,1);
   }
-  return (ulonglong)in_EDX << 0x20;
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : sub_029d96 (Ghidra: FUN_00029d96)
- * Prototype: undefined4 sub_029d96(void);
+ * Function : file_fn_029d96 (Original VA: 0x29d96, Ghidra: FUN_00029d96)
+ * Prototype: undefined4 file_fn_029d96(void);
  * Address  : 0x29d96 (Size: 99 bytes)
  * Module   : file.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x2a25c, 0x2ca74
- * Callees  : 5 -> 0x150f0, 0xdd920, 0xe7714, 0xe8960, 0xe984c
- * Strings  :
- *   - 0x162acc: "DATA"
- *   - 0x162ad3: "%s\TMAPA%03d.dat"
+ * Purpose  : Module file.cpp procedure @ 0x029d96
+ * Callers  : 2 -> file_fn_02a25c, file_update_player_dungeon_02ca74
+ * Callees  : 5 -> cdtest_ldata_dkwind00_dat_0150f0, prepare_file_path, dk_sprintf, bflib_system_io_fn_0e8960, bflib_system_io_fn_0e984c
  ******************************************************************************/
-undefined4 FUN_00029d96(void)
+undefined4 file_fn_029d96(void)
 
 {
-  char cVar1;
-  undefined4 uVar2;
+  char ch;
+  undefined4 uval;
   undefined1 local_9c [152];
   
-  FUN_000dd920();
-  uVar2 = FUN_000dd920();
-  FUN_000e7714(local_9c,s__s_TMAPA_03d_dat_00162ad3,uVar2);
-  FUN_000150f0();
-  cVar1 = FUN_000e8960();
-  if (cVar1 != '\0') {
-    FUN_000e984c();
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(local_9c,s__s_TMAPA_03d_dat_00162ad3,uval);
+  cdtest_ldata_dkwind00_dat_0150f0();
+  ch = bflib_system_io_fn_0e8960();
+  if (ch != '\0') {
+    bflib_system_io_fn_0e984c();
     return 1;
   }
   return 0;
 }
 
 /******************************************************************************
- * Function : dk_allocate_action_point_during_029df9 (Ghidra: FUN_00029df9)
- * Prototype: undefined8 dk_allocate_action_point_during_029df9(void);
+ * Function : file_allocate_action_point_during_029df9 (Original VA: 0x29df9, Ghidra: FUN_00029df9)
+ * Prototype: undefined8 file_allocate_action_point_during_029df9(void);
  * Address  : 0x29df9 (Size: 214 bytes)
  * Module   : file.cpp [direct_file_string_xref]
- * OrigLine : file.cpp:457 ("Cannot allocate action point during load")
- * Naming   : String 'Cannot allocate action point during load'
- * Callers  : 1 -> 0x2a25c
- * Callees  : 7 -> 0x150f0, 0x72a7a, 0xdd920, 0xddaf0, 0xe7714, 0xe8960, 0xe984c
- * Strings  :
- *   - 0x162b25: "file.cpp"
- *   - 0x162ae4: "LEVELS"
- *   - 0x162aed: "%s\MAP%05d.apt"
- *   - 0x162afc: "Cannot allocate action point during load"
+ * OrigLine : file.cpp lines 457
+ * Purpose  : String 'Cannot allocate action point during load'
+ * Callers  : 1 -> file_fn_02a25c
+ * Callees  : 7 -> cdtest_ldata_dkwind00_dat_0150f0, structs_attempt_allocate_action_point_072a7a, prepare_file_path, LbErrorLog, dk_sprintf, bflib_system_io_fn_0e8960, bflib_system_io_fn_0e984c
  ******************************************************************************/
-undefined8 FUN_00029df9(void)
+undefined8 file_allocate_action_point_during_029df9(void)
 
 {
-  char cVar1;
-  undefined4 uVar2;
-  undefined *puVar3;
-  int iVar4;
+  char ch;
+  undefined4 uval;
+  undefined *word_ptr;
+  int val;
   int extraout_ECX;
-  undefined4 in_EDX;
-  undefined2 *puVar5;
-  int iVar6;
-  undefined8 uVar7;
+  undefined4 arg_edx;
+  undefined2 *word_ptr_2;
+  int val_2;
+  undefined8 uval_2;
   undefined1 local_ac [152];
   
-  FUN_000dd920();
-  uVar2 = FUN_000dd920();
-  FUN_000e7714(local_ac,s__s_MAP_05d_apt_00162aed,uVar2);
-  FUN_000150f0();
-  cVar1 = FUN_000e8960();
-  if (cVar1 == '\0') {
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(local_ac,s__s_MAP_05d_apt_00162aed,uval);
+  cdtest_ldata_dkwind00_dat_0150f0();
+  ch = bflib_system_io_fn_0e8960();
+  if (ch == '\0') {
 LAB_00029ec7:
-    uVar2 = 0;
+    uval = 0;
   }
   else {
-    FUN_000e984c();
-    iVar6 = *DAT_00199228;
-    if (iVar6 < 0) {
-      iVar6 = 0;
+    bflib_system_io_fn_0e984c();
+    val_2 = *g_scratch_work_buf;
+    if (val_2 < 0) {
+      val_2 = 0;
     }
-    else if (0x1f < iVar6) {
-      iVar6 = 0x1f;
+    else if (0x1f < val_2) {
+      val_2 = 0x1f;
     }
-    iVar4 = 0;
-    while (iVar4 < iVar6) {
-      uVar7 = FUN_00072a7a();
-      puVar5 = (undefined2 *)((ulonglong)uVar7 >> 0x20);
-      puVar3 = (undefined *)uVar7;
-      if (puVar3 < &DAT_002eb402) {
-        FUN_000ddaf0(); /* LbErrorLog("file.cpp", line 457, "Cannot allocate action point during load") */
+    val = 0;
+    while (val < val_2) {
+      uval_2 = structs_attempt_allocate_action_point_072a7a();
+      word_ptr_2 = (undefined2 *)((ulonglong)uval_2 >> 0x20);
+      word_ptr = (undefined *)uval_2;
+      if (word_ptr < &g_bss_002eb402) {
+        LbErrorLog(); /* LbErrorLog("file.cpp", line 457, "Cannot allocate action point during load") */
         goto LAB_00029ec7;
       }
-      *(undefined2 *)(puVar3 + 1) = *puVar5;
-      *(undefined2 *)(puVar3 + 3) = puVar5[1];
-      *(undefined2 *)(puVar3 + 5) = puVar5[2];
-      iVar4 = extraout_ECX + 1;
+      *(undefined2 *)(word_ptr + 1) = *word_ptr_2;
+      *(undefined2 *)(word_ptr + 3) = word_ptr_2[1];
+      *(undefined2 *)(word_ptr + 5) = word_ptr_2[2];
+      val = extraout_ECX + 1;
     }
-    uVar2 = 1;
+    uval = 1;
   }
-  return CONCAT44(in_EDX,uVar2);
+  return CONCAT44(arg_edx,uval);
 }
 
 /******************************************************************************
- * Function : dk_install_path_029eef (Ghidra: FUN_00029eef)
- * Prototype: undefined8 dk_install_path_029eef(void);
+ * Function : file_install_path_029eef (Original VA: 0x29eef, Ghidra: FUN_00029eef)
+ * Prototype: undefined8 file_install_path_029eef(void);
  * Address  : 0x29eef (Size: 439 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : String 'INSTALL_PATH='
- * Callers  : 1 -> 0x6a412
- * Callees  : 5 -> 0xe7714, 0xe8960, 0xe984c, 0xe9d7a, 0xe9dd0
- * Strings  :
- *   - 0x162b4e: "%s\keeper.cfg"
- *   - 0x162b5c: "INSTALL_PATH="
- *   - 0x162b6a: "INSTALL_TYPE="
- *   - 0x162b78: "LANGUAGE="
+ * Purpose  : String 'INSTALL_PATH='
+ * Callers  : 1 -> setup_verify_cdrom_installation
+ * Callees  : 5 -> dk_sprintf, bflib_system_io_fn_0e8960, bflib_system_io_fn_0e984c, bflib_system_io_fn_0e9d7a, bflib_system_io_fn_0e9dd0
  ******************************************************************************/
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined8 FUN_00029eef(void)
+undefined8 file_install_path_029eef(void)
 
 {
-  char cVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  undefined4 uVar5;
-  char *pcVar6;
+  char ch;
+  int val;
+  int loop_i;
+  int val_2;
+  undefined4 uval;
+  char *loop_i_2;
   int extraout_ECX;
   char *extraout_ECX_00;
   char *extraout_ECX_01;
-  undefined4 in_EDX;
+  undefined4 arg_edx;
   undefined1 local_a8 [144];
   
-  FUN_000e7714(local_a8,s__s_keeper_cfg_00162b4e,&DAT_00333f77);
-  DAT_002ee923 = '\0';
-  _DAT_002ee9bd = 0;
-  cVar1 = FUN_000e8960();
-  if (cVar1 == '\0') {
-    uVar5 = 0;
+  dk_sprintf(local_a8,s__s_keeper_cfg_00162b4e,&g_bss_00333f77);
+  g_bss_002ee923 = '\0';
+  g_bss_002ee9bd = 0;
+  ch = bflib_system_io_fn_0e8960();
+  if (ch == '\0') {
+    uval = 0;
     goto LAB_0002a4dc;
   }
-  iVar2 = FUN_000e984c();
-  if (iVar2 != -1) {
-    for (pcVar6 = &DAT_0019cbac; pcVar6 < &DAT_0019cbac + iVar2; pcVar6 = pcVar6 + 1) {
-      iVar3 = FUN_000e9d7a();
-      pcVar6 = (char *)(extraout_ECX + 0xd);
-      if (iVar3 == 0) {
-        iVar3 = 0;
-        for (; (*pcVar6 != '\r' && (*pcVar6 != '\0')); pcVar6 = pcVar6 + 1) {
-          (&DAT_002ee923)[iVar3] = *pcVar6;
-          iVar3 = iVar3 + 1;
+  val = bflib_system_io_fn_0e984c();
+  if (val != -1) {
+    for (loop_i_2 = &g_log_sprintf_buf; loop_i_2 < &g_log_sprintf_buf + val; loop_i_2 = loop_i_2 + 1) {
+      loop_i = bflib_system_io_fn_0e9d7a();
+      loop_i_2 = (char *)(extraout_ECX + 0xd);
+      if (loop_i == 0) {
+        loop_i = 0;
+        for (; (*loop_i_2 != '\r' && (*loop_i_2 != '\0')); loop_i_2 = loop_i_2 + 1) {
+          (&g_bss_002ee923)[loop_i] = *loop_i_2;
+          loop_i = loop_i + 1;
         }
-        if (((1 < iVar3) && ((&DAT_002ee922)[iVar3] == '\\')) && ((&DAT_002ee921)[iVar3] == '\\')) {
-          (&DAT_002ee922)[iVar3] = 0;
+        if (((1 < loop_i) && ((&g_bss_002ee922)[loop_i] == '\\')) && ((&g_bss_002ee921)[loop_i] == '\\')) {
+          (&g_bss_002ee922)[loop_i] = 0;
         }
       }
       else {
-        iVar3 = FUN_000e9d7a();
-        if ((iVar3 != 0) && (iVar3 = FUN_000e9d7a(), pcVar6 = extraout_ECX_00, iVar3 == 0)) {
-          pcVar6 = extraout_ECX_00 + 9;
-          for (iVar3 = 0; *(int *)((int)&PTR_DAT_00179c78 + iVar3) != 0; iVar3 = iVar3 + 8) {
-            iVar4 = FUN_000e9d7a();
-            pcVar6 = extraout_ECX_01;
-            if (iVar4 == 0) {
-              DAT_002ee9b9 = *(int *)((int)&DAT_00179c7c + iVar3);
+        loop_i = bflib_system_io_fn_0e9d7a();
+        if ((loop_i != 0) && (loop_i = bflib_system_io_fn_0e9d7a(), loop_i_2 = extraout_ECX_00, loop_i == 0)) {
+          loop_i_2 = extraout_ECX_00 + 9;
+          for (loop_i = 0; *(int *)((int)&PTR_DAT_00179c78 + loop_i) != 0; loop_i = loop_i + 8) {
+            val_2 = bflib_system_io_fn_0e9d7a();
+            loop_i_2 = extraout_ECX_01;
+            if (val_2 == 0) {
+              g_bss_002ee9b9 = *(int *)((int)&g_data_00179c7c + loop_i);
               break;
             }
           }
         }
       }
-      for (; (*pcVar6 != '\n' && (pcVar6 < &DAT_0019cbac + iVar2)); pcVar6 = pcVar6 + 1) {
+      for (; (*loop_i_2 != '\n' && (loop_i_2 < &g_log_sprintf_buf + val)); loop_i_2 = loop_i_2 + 1) {
       }
     }
   }
-  switch(DAT_002ee9b9) {
+  switch(g_bss_002ee9b9) {
   case 1:
     break;
   case 2:
@@ -526,496 +495,451 @@ undefined8 FUN_00029eef(void)
   default:
     goto switchD_0002a097_default;
   }
-  FUN_000e9dd0();
+  bflib_system_io_fn_0e9dd0();
 switchD_0002a097_default:
-  if ((DAT_002ee9b9 == 0) || (DAT_002ee923 == '\0')) {
-    uVar5 = 0;
+  if ((g_bss_002ee9b9 == 0) || (g_bss_002ee923 == '\0')) {
+    uval = 0;
   }
   else {
-    uVar5 = 1;
+    uval = 1;
   }
 LAB_0002a4dc:
-  return CONCAT44(in_EDX,uVar5);
+  return CONCAT44(arg_edx,uval);
 }
 
 /******************************************************************************
- * Function : dk_keeper_cfg_02a0be (Ghidra: FUN_0002a0be)
- * Prototype: bool dk_keeper_cfg_02a0be(void);
+ * Function : file_keeper_cfg_02a0be (Original VA: 0x2a0be, Ghidra: FUN_0002a0be)
+ * Prototype: bool file_keeper_cfg_02a0be(void);
  * Address  : 0x2a0be (Size: 242 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : String 'KEEPER.CFG'
+ * Purpose  : String 'KEEPER.CFG'
  * Callers  : 0 -> 
- * Callees  : 5 -> 0xe8ca8, 0xe9dd6, 0xe9fd7, 0xea08b, 0xea0ac
- * Strings  :
- *   - 0x162b84: "KEEPER.CFG"
- *   - 0x162b8f: "FRA"
- *   - 0x162b93: "ENG"
- *   - 0x162b97: "GER"
- *   - 0x162b9b: "SPA"
- *   - 0x162b9f: "SWE"
- *   - 0x162ba3: "ITA"
- *   - 0x162ba7: "MAX"
- *   - 0x162bab: "MED"
- *   - 0x162baf: "MIN"
- *   - 0x162bb6: "INSTALL_PATH=%s\n"
- *   - 0x162bc7: "INSTALL_TYPE=%s\n"
- *   - 0x162bd8: "LANGUAGE=%s\n"
+ * Callees  : 5 -> LbMemoryCopy, bflib_system_io_fn_0e9dd6, bflib_system_io_fn_0e9fd7, bflib_system_io_fn_0ea08b, bflib_system_io_fn_0ea0ac
  ******************************************************************************/
-bool FUN_0002a0be(void)
+bool file_keeper_cfg_02a0be(void)
 
 {
-  undefined4 in_EAX;
-  int iVar1;
+  undefined4 arg_eax;
+  int val;
   undefined4 extraout_ECX;
-  uint in_EDX;
+  uint arg_edx;
   undefined4 extraout_EDX;
   undefined4 extraout_EDX_00;
   undefined *unaff_ESI;
   undefined *local_10;
   
-  FUN_000e8ca8();
-  FUN_000e9dd6();
-  FUN_000e9dd6();
-  switch(in_EAX) {
+  LbMemoryCopy();
+  bflib_system_io_fn_0e9dd6();
+  bflib_system_io_fn_0e9dd6();
+  switch(arg_eax) {
   case 1:
-    unaff_ESI = &DAT_00162b93; /* 0x162b93="ENG" */
+    unaff_ESI = &g_data_00162b93; /* 0x162b93="ENG" */
     break;
   case 2:
-    unaff_ESI = &DAT_00162b8f; /* 0x162b8f="FRA" */
+    unaff_ESI = &g_data_00162b8f; /* 0x162b8f="FRA" */
     break;
   case 3:
-    unaff_ESI = &DAT_00162b97; /* 0x162b97="GER" */
+    unaff_ESI = &g_data_00162b97; /* 0x162b97="GER" */
     break;
   case 4:
-    unaff_ESI = &DAT_00162ba3; /* 0x162ba3="ITA" */
+    unaff_ESI = &g_data_00162ba3; /* 0x162ba3="ITA" */
     break;
   case 5:
-    unaff_ESI = &DAT_00162b9b; /* 0x162b9b="SPA" */
+    unaff_ESI = &g_data_00162b9b; /* 0x162b9b="SPA" */
     break;
   case 6:
-    unaff_ESI = &DAT_00162b9f; /* 0x162b9f="SWE" */
+    unaff_ESI = &g_data_00162b9f; /* 0x162b9f="SWE" */
   }
-  if (in_EDX < 2) {
-    if (in_EDX == 1) {
-      local_10 = &DAT_00162ba7; /* 0x162ba7="MAX" */
+  if (arg_edx < 2) {
+    if (arg_edx == 1) {
+      local_10 = &g_data_00162ba7; /* 0x162ba7="MAX" */
     }
   }
-  else if (in_EDX < 3) {
-    local_10 = &DAT_00162bab; /* 0x162bab="MED" */
+  else if (arg_edx < 3) {
+    local_10 = &g_data_00162bab; /* 0x162bab="MED" */
   }
-  else if (in_EDX == 3) {
-    local_10 = &DAT_00162baf; /* 0x162baf="MIN" */
+  else if (arg_edx == 3) {
+    local_10 = &g_data_00162baf; /* 0x162baf="MIN" */
   }
-  iVar1 = FUN_000e9fd7();
-  if (iVar1 != 0) {
-    FUN_000ea08b(iVar1,s_INSTALL_PATH__s_00162bb6,extraout_ECX);
-    FUN_000ea08b(extraout_EDX,s_INSTALL_TYPE__s_00162bc7,local_10);
-    FUN_000ea08b(extraout_EDX_00,s_LANGUAGE__s_00162bd8,unaff_ESI);
-    FUN_000ea0ac();
+  val = bflib_system_io_fn_0e9fd7();
+  if (val != 0) {
+    bflib_system_io_fn_0ea08b(val,s_INSTALL_PATH__s_00162bb6,extraout_ECX);
+    bflib_system_io_fn_0ea08b(extraout_EDX,s_INSTALL_TYPE__s_00162bc7,local_10);
+    bflib_system_io_fn_0ea08b(extraout_EDX_00,s_LANGUAGE__s_00162bd8,unaff_ESI);
+    bflib_system_io_fn_0ea0ac();
   }
-  return iVar1 != 0;
+  return val != 0;
 }
 
 /******************************************************************************
- * Function : sub_02a1b0 (Ghidra: FUN_0002a1b0)
- * Prototype: undefined8 sub_02a1b0(void);
+ * Function : file_fn_02a1b0 (Original VA: 0x2a1b0, Ghidra: FUN_0002a1b0)
+ * Prototype: undefined8 file_fn_02a1b0(void);
  * Address  : 0x2a1b0 (Size: 105 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x2a25c
- * Callees  : 5 -> 0x150f0, 0xdd920, 0xe7714, 0xe8960, 0xe984c
- * Strings  :
- *   - 0x162be5: "LEVELS"
- *   - 0x162bee: "%s\MAP%05d.inf"
+ * Purpose  : Module file.cpp procedure @ 0x02a1b0
+ * Callers  : 1 -> file_fn_02a25c
+ * Callees  : 5 -> cdtest_ldata_dkwind00_dat_0150f0, prepare_file_path, dk_sprintf, bflib_system_io_fn_0e8960, bflib_system_io_fn_0e984c
  ******************************************************************************/
-undefined8 FUN_0002a1b0(void)
+undefined8 file_fn_02a1b0(void)
 
 {
-  char cVar1;
-  undefined1 uVar2;
-  undefined4 uVar3;
-  undefined4 in_EDX;
+  char ch;
+  undefined1 uval;
+  undefined4 uval_2;
+  undefined4 arg_edx;
   undefined1 local_a4 [152];
   undefined1 local_c;
   
-  FUN_000dd920();
-  uVar3 = FUN_000dd920();
-  FUN_000e7714(local_a4,s__s_MAP_05d_inf_00162bee,uVar3);
-  FUN_000150f0();
-  cVar1 = FUN_000e8960();
-  uVar2 = 0;
-  if (cVar1 != '\0') {
-    FUN_000e984c();
-    uVar2 = local_c;
+  prepare_file_path();
+  uval_2 = prepare_file_path();
+  dk_sprintf(local_a4,s__s_MAP_05d_inf_00162bee,uval_2);
+  cdtest_ldata_dkwind00_dat_0150f0();
+  ch = bflib_system_io_fn_0e8960();
+  uval = 0;
+  if (ch != '\0') {
+    bflib_system_io_fn_0e984c();
+    uval = local_c;
   }
-  DAT_002e7bed = uVar2;
-  return CONCAT44(in_EDX,1);
+  g_bss_002e7bed = uval;
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : sub_02a219 (Ghidra: FUN_0002a219)
- * Prototype: void sub_02a219(void);
+ * Function : file_process_dungeon_room_02a219 (Original VA: 0x2a219, Ghidra: FUN_0002a219)
+ * Prototype: void file_process_dungeon_room_02a219(void);
  * Address  : 0x2a219 (Size: 67 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x2a25c
- * Callees  : 1 -> 0xcb144
+ * Purpose  : Operates on Room structure in g_rooms (stride 0x45)
+ * Callers  : 1 -> file_fn_02a25c
+ * Callees  : 1 -> room_process_dungeon_room_0cb144
  ******************************************************************************/
-void FUN_0002a219(void)
+void file_process_dungeon_room_02a219(void)
 
 {
-  ushort uVar1;
-  int iVar2;
+  ushort loop_i;
+  int val;
   int extraout_ECX;
   
-  iVar2 = 0;
+  val = 0;
   do {
-    for (uVar1 = *(ushort *)((int)&DAT_002e0598 + iVar2);
-        &DAT_002ddd1b < &DAT_002ddd1b + (uint)uVar1 * 0x45;
-        uVar1 = *(ushort *)(&DAT_002ddd21 + (uint)uVar1 * 0x45)) {
-      FUN_000cb144();
-      iVar2 = extraout_ECX;
+    for (loop_i = *(ushort *)((int)&g_bss_002e0598 + val);
+        &g_rooms < &g_rooms + (uint)loop_i * 0x45;
+        loop_i = *(ushort *)(&g_bss_002ddd21 + (uint)loop_i * 0x45)) {
+      room_process_dungeon_room_0cb144();
+      val = extraout_ECX;
     }
-    iVar2 = iVar2 + 0x1508;
-  } while (iVar2 != 0x6928);
+    val = val + 0x1508;
+  } while (val != 0x6928);
   return;
 }
 
 /******************************************************************************
- * Function : sub_02a25c (Ghidra: FUN_0002a25c)
- * Prototype: ulonglong sub_02a25c(void);
+ * Function : file_fn_02a25c (Original VA: 0x2a25c, Ghidra: FUN_0002a25c)
+ * Prototype: ulonglong file_fn_02a25c(void);
  * Address  : 0x2a25c (Size: 249 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x404f7
- * Callees  : 21 -> 0x150f0, 0x158a6, 0x298b5, 0x29979, 0x299f8, 0x29ac2, 0x29b54, 0x29bfe, 0x29d96, 0x29df9 ...
- * Strings  :
- *   - 0x162bfd: "LEVELS"
- *   - 0x162c06: "%s\MAP%05d.dat"
+ * Purpose  : Module file.cpp procedure @ 0x02a25c
+ * Callers  : 1 -> inits_could_create_ambient_sound_0404f7
+ * Callees  : 21 -> cdtest_ldata_dkwind00_dat_0150f0, combat_fn_0158a6, evil_process_map_subtile_0298b5, file_process_map_subtile_029979, file_process_slabmap_tile_0299f8, file_process_map_subtile_029ac2, file_fn_029b54, file_fn_029bfe ...
  ******************************************************************************/
-ulonglong FUN_0002a25c(void)
+ulonglong file_fn_02a25c(void)
 
 {
-  char cVar1;
-  undefined4 uVar2;
-  undefined4 in_EDX;
+  char ch;
+  undefined4 uval;
+  undefined4 arg_edx;
   undefined1 local_a4 [152];
   
-  FUN_000dd920();
-  uVar2 = FUN_000dd920();
-  FUN_000e7714(local_a4,s__s_MAP_05d_dat_00162c06,uVar2);
-  FUN_000150f0();
-  cVar1 = FUN_000e8960();
-  if (cVar1 != '\0') {
-    FUN_000298b5();
-    FUN_00029979();
-    FUN_00029bfe();
-    FUN_00040f98();
-    FUN_0002cdc8();
-    FUN_000158a6();
-    FUN_00029b54();
-    FUN_000299f8();
-    FUN_00029ac2();
-    FUN_0002a1b0();
-    FUN_00029d96();
-    FUN_00029df9();
-    FUN_0002d168();
-    FUN_0002ab14();
-    FUN_0002a219();
-    uVar2 = FUN_0007c3c8();
-    return CONCAT44(in_EDX,CONCAT31((int3)((uint)uVar2 >> 8),1));
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(local_a4,s__s_MAP_05d_dat_00162c06,uval);
+  cdtest_ldata_dkwind00_dat_0150f0();
+  ch = bflib_system_io_fn_0e8960();
+  if (ch != '\0') {
+    evil_process_map_subtile_0298b5();
+    file_process_map_subtile_029979();
+    file_fn_029bfe();
+    inits_fn_040f98();
+    file_e14r432q_system_should_able_02cdc8();
+    combat_fn_0158a6();
+    file_fn_029b54();
+    file_process_slabmap_tile_0299f8();
+    file_process_map_subtile_029ac2();
+    file_fn_02a1b0();
+    file_fn_029d96();
+    file_allocate_action_point_during_029df9();
+    file_slab_type_increase_size_02d168();
+    file_buff_struct_num_02ab14();
+    file_process_dungeon_room_02a219();
+    uval = ceiling_process_map_subtile_07c3c8();
+    return CONCAT44(arg_edx,CONCAT31((int3)((uint)uval >> 8),1));
   }
-  FUN_00040f98();
-  FUN_0002cdc8();
-  FUN_000158a6();
-  DAT_002e7bed = 0;
-  FUN_00029d96();
-  uVar2 = FUN_000b2280();
-  return CONCAT44(in_EDX,uVar2) & 0xffffffffffffff00;
+  inits_fn_040f98();
+  file_e14r432q_system_should_able_02cdc8();
+  combat_fn_0158a6();
+  g_bss_002e7bed = 0;
+  file_fn_029d96();
+  uval = light_fn_0b2280();
+  return CONCAT44(arg_edx,uval) & 0xffffffffffffff00;
 }
 
 /******************************************************************************
- * Function : dk_settings_dat_02a355 (Ghidra: FUN_0002a355)
- * Prototype: undefined8 dk_settings_dat_02a355(void);
+ * Function : file_settings_dat_02a355 (Original VA: 0x2a355, Ghidra: FUN_0002a355)
+ * Prototype: undefined8 file_settings_dat_02a355(void);
  * Address  : 0x2a355 (Size: 87 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : String 'SETTINGS.DAT'
- * Callers  : 10 -> 0x29738, 0x2e8a7, 0x2f755, 0x2f7e0, 0x30e88, 0x5a2c7, 0x5a3ce, 0x5a417, 0x5b5e1, 0x5c848
- * Callees  : 3 -> 0xdd920, 0xe7714, 0xe98c8
- * Strings  :
- *   - 0x162c15: "SETTINGS.DAT"
- *   - 0x162c22: "SAVE"
- *   - 0x162c29: "%s\%s"
+ * Purpose  : String 'SETTINGS.DAT'
+ * Callers  : 10 -> evil_settings_dat_029738, frontend_load_frontend_palette_02e8a7, frontend_fn_02f755, frontend_fn_02f7e0, frontend_fn_030e88, newgui_fn_05a2c7, newgui_fn_05a3ce, newgui_fn_05a417 ...
+ * Callees  : 3 -> prepare_file_path, dk_sprintf, bflib_system_io_fn_0e98c8
  ******************************************************************************/
-undefined8 FUN_0002a355(void)
+undefined8 file_settings_dat_02a355(void)
 
 {
-  undefined4 uVar1;
-  undefined4 in_EDX;
+  undefined4 uval;
+  undefined4 arg_edx;
   undefined1 local_a4 [152];
   
-  FUN_000dd920(s_SETTINGS_DAT_00162c15); /* 0x162c15="SETTINGS.DAT" */
-  uVar1 = FUN_000dd920();
-  FUN_000e7714(local_a4,s__s__s_00162c29,uVar1);
-  FUN_000e98c8();
-  return CONCAT44(in_EDX,1);
+  prepare_file_path(s_SETTINGS_DAT_00162c15); /* 0x162c15="SETTINGS.DAT" */
+  uval = prepare_file_path();
+  dk_sprintf(local_a4,s__s__s_00162c29,uval);
+  bflib_system_io_fn_0e98c8();
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : sub_02a3ac (Ghidra: FUN_0002a3ac)
- * Prototype: undefined8 sub_02a3ac(void);
+ * Function : file_process_map_subtile_02a3ac (Original VA: 0x2a3ac, Ghidra: FUN_0002a3ac)
+ * Prototype: undefined8 file_process_map_subtile_02a3ac(void);
  * Address  : 0x2a3ac (Size: 123 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Reads/modifies Map[256x256] subtile data
  * Callers  : 0 -> 
- * Callees  : 3 -> 0xdd920, 0xe7714, 0xe98c8
- * Strings  :
- *   - 0x162c2f: "LEVELS"
- *   - 0x162c38: "%s\MAP%05d.dat"
+ * Callees  : 3 -> prepare_file_path, dk_sprintf, bflib_system_io_fn_0e98c8
  ******************************************************************************/
-undefined8 FUN_0002a3ac(void)
+undefined8 file_process_map_subtile_02a3ac(void)
 
 {
-  int iVar1;
-  int iVar2;
-  undefined4 uVar3;
-  undefined4 in_EDX;
-  short *psVar4;
+  int val;
+  int val_2;
+  undefined4 uval;
+  undefined4 arg_edx;
+  short *val_3;
   undefined1 local_a8 [152];
   
-  psVar4 = &DAT_00279203;
-  iVar2 = 0;
+  val_3 = &g_map_subtiles;
+  val_2 = 0;
   do {
-    iVar1 = iVar2 + 1;
-    iVar2 = iVar2 + 5;
-    *psVar4 = -((ushort)*(undefined4 *)((int)&DAT_00279203 + iVar1) & 0x7ff);
-    psVar4 = psVar4 + 1;
-  } while (iVar2 != 0x50000);
-  FUN_000dd920();
-  uVar3 = FUN_000dd920();
-  FUN_000e7714(local_a8,s__s_MAP_05d_dat_00162c38,uVar3);
-  FUN_000e98c8();
-  return CONCAT44(in_EDX,1);
+    val = val_2 + 1;
+    val_2 = val_2 + 5;
+    *val_3 = -((ushort)*(undefined4 *)((int)&g_map_subtiles + val) & 0x7ff);
+    val_3 = val_3 + 1;
+  } while (val_2 != 0x50000);
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(local_a8,s__s_MAP_05d_dat_00162c38,uval);
+  bflib_system_io_fn_0e98c8();
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : sub_02a427 (Ghidra: FUN_0002a427)
- * Prototype: undefined8 sub_02a427(void);
+ * Function : file_process_slabmap_tile_02a427 (Original VA: 0x2a427, Ghidra: FUN_0002a427)
+ * Prototype: undefined8 file_process_slabmap_tile_02a427(void);
  * Address  : 0x2a427 (Size: 188 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Reads/modifies SlabMap[85x85] tile entry
  * Callers  : 0 -> 
- * Callees  : 3 -> 0xdd920, 0xe7714, 0xe98c8
- * Strings  :
- *   - 0x162c47: "LEVELS"
- *   - 0x162c50: "%s\MAP%05d.own"
+ * Callees  : 3 -> prepare_file_path, dk_sprintf, bflib_system_io_fn_0e98c8
  ******************************************************************************/
-undefined8 FUN_0002a427(void)
+undefined8 file_process_slabmap_tile_02a427(void)
 
 {
-  int iVar1;
-  undefined4 uVar2;
-  byte *pbVar3;
-  undefined4 in_EDX;
-  int iVar4;
+  int slab_coord;
+  undefined4 uval;
+  byte *byte_ptr;
+  undefined4 arg_edx;
+  int val;
   undefined1 local_b4 [152];
   int local_1c;
   
-  iVar4 = 0;
-  pbVar3 = DAT_00199228;
+  val = 0;
+  byte_ptr = g_scratch_work_buf;
   do {
-    if ((iVar4 % 0x100 < 0xff) &&
-       (iVar1 = (int)((iVar4 + (iVar4 >> 0x1f) * -0x100) - (uint)((iVar4 >> 0x1f) << 7 < 0)) >> 8,
-       iVar1 < 0xff)) {
-      local_1c = (&DAT_0019033b)[iVar1] * 0x55;
-      *pbVar3 = (&DAT_002d33ca)[((&DAT_0019033b)[iVar4 % 0x100] + local_1c) * 6] & 7;
+    if ((val % 0x100 < 0xff) &&
+       (slab_coord = (int)((val + (val >> 0x1f) * -0x100) - (uint)((val >> 0x1f) << 7 < 0)) >> 8,
+       slab_coord < 0xff)) {
+      local_1c = (&g_subtile_to_slab_lut)[slab_coord] * 0x55;
+      *byte_ptr = (&g_slabmap)[((&g_subtile_to_slab_lut)[val % 0x100] + local_1c) * 6] & 7;
     }
-    iVar4 = iVar4 + 1;
-    pbVar3 = pbVar3 + 1;
-  } while (iVar4 < 0x10000);
-  FUN_000dd920();
-  uVar2 = FUN_000dd920();
-  FUN_000e7714(local_b4,s__s_MAP_05d_own_00162c50,uVar2);
-  FUN_000e98c8();
-  return CONCAT44(in_EDX,1);
+    val = val + 1;
+    byte_ptr = byte_ptr + 1;
+  } while (val < 0x10000);
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(local_b4,s__s_MAP_05d_own_00162c50,uval);
+  bflib_system_io_fn_0e98c8();
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : sub_02a4e3 (Ghidra: FUN_0002a4e3)
- * Prototype: undefined8 sub_02a4e3(void);
+ * Function : file_process_map_subtile_02a4e3 (Original VA: 0x2a4e3, Ghidra: FUN_0002a4e3)
+ * Prototype: undefined8 file_process_map_subtile_02a4e3(void);
  * Address  : 0x2a4e3 (Size: 117 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Reads/modifies Map[256x256] subtile data
  * Callers  : 0 -> 
- * Callees  : 2 -> 0xdd920, 0xe7714
- * Strings  :
- *   - 0x162c5f: "LEVELS"
- *   - 0x162c68: "%s\MAP%05d.wib"
+ * Callees  : 2 -> prepare_file_path, dk_sprintf
  ******************************************************************************/
-undefined8 FUN_0002a4e3(void)
+undefined8 file_process_map_subtile_02a4e3(void)
 
 {
-  int iVar1;
-  undefined4 uVar2;
-  undefined4 in_EDX;
-  undefined1 *puVar3;
+  int val;
+  undefined4 uval;
+  undefined4 arg_edx;
+  undefined1 *word_ptr;
   undefined1 local_ac [152];
   uint local_14;
   
-  iVar1 = 0;
-  puVar3 = DAT_00199228;
+  val = 0;
+  word_ptr = g_scratch_work_buf;
   do {
-    local_14 = (*(uint *)((int)&DAT_00279203 + iVar1 + 1) & 0xffffff) >> 0x16;
-    iVar1 = iVar1 + 5;
-    *puVar3 = (undefined1)local_14;
-    puVar3 = puVar3 + 1;
-  } while (iVar1 != 0x50000);
-  FUN_000dd920();
-  uVar2 = FUN_000dd920();
-  FUN_000e7714(local_ac,s__s_MAP_05d_wib_00162c68,uVar2);
-  FUN_000e98c8();
-  return CONCAT44(in_EDX,1);
+    local_14 = (*(uint *)((int)&g_map_subtiles + val + 1) & 0xffffff) >> 0x16;
+    val = val + 5;
+    *word_ptr = (undefined1)local_14;
+    word_ptr = word_ptr + 1;
+  } while (val != 0x50000);
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(local_ac,s__s_MAP_05d_wib_00162c68,uval);
+  bflib_system_io_fn_0e98c8();
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : sub_02a558 (Ghidra: FUN_0002a558)
- * Prototype: undefined8 sub_02a558(void);
+ * Function : file_fn_02a558 (Original VA: 0x2a558, Ghidra: FUN_0002a558)
+ * Prototype: undefined8 file_fn_02a558(void);
  * Address  : 0x2a558 (Size: 131 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Module file.cpp procedure @ 0x02a558
  * Callers  : 0 -> 
- * Callees  : 3 -> 0xdd920, 0xe7714, 0xe98c8
- * Strings  :
- *   - 0x162c77: "DATA"
- *   - 0x162c7e: "%s\Cube.dat"
+ * Callees  : 3 -> prepare_file_path, dk_sprintf, bflib_system_io_fn_0e98c8
  ******************************************************************************/
-undefined8 FUN_0002a558(void)
+undefined8 file_fn_02a558(void)
 
 {
-  int iVar1;
-  int iVar2;
-  undefined4 uVar3;
-  undefined4 in_EDX;
-  undefined4 *puVar4;
+  int val;
+  int val_2;
+  undefined4 uval;
+  undefined4 arg_edx;
+  undefined4 *word_ptr;
   undefined1 local_ac [152];
   
-  puVar4 = DAT_00199228;
-  *DAT_00199228 = 0x200;
-  iVar1 = 0;
-  puVar4 = puVar4 + 1;
+  word_ptr = g_scratch_work_buf;
+  *g_scratch_work_buf = 0x200;
+  val = 0;
+  word_ptr = word_ptr + 1;
   do {
-    iVar2 = iVar1 + 0x12;
-    *puVar4 = *(undefined4 *)((int)&DAT_001aa973 + iVar1);
-    puVar4[1] = *(undefined4 *)((int)&DAT_001aa977 + iVar1);
-    puVar4[2] = *(undefined4 *)((int)&DAT_001aa97b + iVar1);
-    puVar4[3] = *(undefined4 *)((int)&DAT_001aa97f + iVar1);
-    *(undefined2 *)(puVar4 + 4) = *(undefined2 *)((int)&DAT_001aa983 + iVar1);
-    iVar1 = iVar2;
-    puVar4 = (undefined4 *)((int)puVar4 + 0x12);
-  } while (iVar2 != 0x2400);
-  FUN_000dd920();
-  uVar3 = FUN_000dd920();
-  FUN_000e7714(local_ac,s__s_Cube_dat_00162c7e,uVar3);
-  FUN_000e98c8();
-  return CONCAT44(in_EDX,1);
+    val_2 = val + 0x12;
+    *word_ptr = *(undefined4 *)((int)&g_bss_001aa973 + val);
+    word_ptr[1] = *(undefined4 *)((int)&g_bss_001aa977 + val);
+    word_ptr[2] = *(undefined4 *)((int)&g_bss_001aa97b + val);
+    word_ptr[3] = *(undefined4 *)((int)&g_bss_001aa97f + val);
+    *(undefined2 *)(word_ptr + 4) = *(undefined2 *)((int)&g_bss_001aa983 + val);
+    val = val_2;
+    word_ptr = (undefined4 *)((int)word_ptr + 0x12);
+  } while (val_2 != 0x2400);
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(local_ac,s__s_Cube_dat_00162c7e,uval);
+  bflib_system_io_fn_0e98c8();
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : sub_02a5db (Ghidra: FUN_0002a5db)
- * Prototype: undefined8 sub_02a5db(void);
+ * Function : file_fn_02a5db (Original VA: 0x2a5db, Ghidra: FUN_0002a5db)
+ * Prototype: undefined8 file_fn_02a5db(void);
  * Address  : 0x2a5db (Size: 120 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x2cb2b
- * Callees  : 2 -> 0xdd920, 0xe7714
- * Strings  :
- *   - 0x162c8a: "LEVELS"
- *   - 0x162c93: "%s\MAP%05d.clm"
+ * Purpose  : Module file.cpp procedure @ 0x02a5db
+ * Callers  : 1 -> file_process_map_subtile_02cb2b
+ * Callees  : 2 -> prepare_file_path, dk_sprintf
  ******************************************************************************/
-undefined8 FUN_0002a5db(void)
+undefined8 file_fn_02a5db(void)
 
 {
-  int iVar1;
-  int iVar2;
-  undefined4 uVar3;
-  undefined4 in_EDX;
-  undefined4 *puVar4;
+  int val;
+  int val_2;
+  undefined4 uval;
+  undefined4 arg_edx;
+  undefined4 *word_ptr;
   undefined1 local_ac [152];
   
-  puVar4 = DAT_00199228;
-  *DAT_00199228 = 0x800;
-  puVar4[1] = (uint)DAT_002e7beb;
-  iVar1 = 0;
-  puVar4 = puVar4 + 2;
+  word_ptr = g_scratch_work_buf;
+  *g_scratch_work_buf = 0x800;
+  word_ptr[1] = (uint)g_bss_002e7beb;
+  val = 0;
+  word_ptr = word_ptr + 2;
   do {
-    iVar2 = iVar1 + 0x18;
-    *puVar4 = *(undefined4 *)((int)&DAT_0019e973 + iVar1);
-    puVar4[1] = *(undefined4 *)((int)&DAT_0019e977 + iVar1);
-    puVar4[2] = *(undefined4 *)((int)&DAT_0019e97b + iVar1);
-    puVar4[3] = *(undefined4 *)((int)&DAT_0019e97f + iVar1);
-    puVar4[4] = *(undefined4 *)((int)&DAT_0019e983 + iVar1);
-    puVar4[5] = *(undefined4 *)((int)&DAT_0019e987 + iVar1);
-    iVar1 = iVar2;
-    puVar4 = puVar4 + 6;
-  } while (iVar2 != 0xc000);
-  FUN_000dd920();
-  uVar3 = FUN_000dd920();
-  FUN_000e7714(local_ac,s__s_MAP_05d_clm_00162c93,uVar3);
-  FUN_000e98c8();
-  return CONCAT44(in_EDX,1);
+    val_2 = val + 0x18;
+    *word_ptr = *(undefined4 *)((int)&g_bss_0019e973 + val);
+    word_ptr[1] = *(undefined4 *)((int)&g_bss_0019e977 + val);
+    word_ptr[2] = *(undefined4 *)((int)&g_bss_0019e97b + val);
+    word_ptr[3] = *(undefined4 *)((int)&g_bss_0019e97f + val);
+    word_ptr[4] = *(undefined4 *)((int)&g_bss_0019e983 + val);
+    word_ptr[5] = *(undefined4 *)((int)&g_bss_0019e987 + val);
+    val = val_2;
+    word_ptr = word_ptr + 6;
+  } while (val_2 != 0xc000);
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(local_ac,s__s_MAP_05d_clm_00162c93,uval);
+  bflib_system_io_fn_0e98c8();
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : sub_02a653 (Ghidra: FUN_0002a653)
- * Prototype: undefined8 sub_02a653(void);
+ * Function : file_fn_02a653 (Original VA: 0x2a653, Ghidra: FUN_0002a653)
+ * Prototype: undefined8 file_fn_02a653(void);
  * Address  : 0x2a653 (Size: 114 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Module file.cpp procedure @ 0x02a653
  * Callers  : 0 -> 
- * Callees  : 4 -> 0xdd920, 0xe6a10, 0xe7714, 0xe98c8
- * Strings  :
- *   - 0x162ca2: "LEVELS"
- *   - 0x162cab: "%s\MAP%05d.inf"
+ * Callees  : 4 -> prepare_file_path, LbScreenWaitVbi, dk_sprintf, bflib_system_io_fn_0e98c8
  ******************************************************************************/
-undefined8 FUN_0002a653(void)
+undefined8 file_fn_02a653(void)
 
 {
-  undefined4 uVar1;
+  undefined4 uval;
   undefined4 extraout_ECX;
-  undefined4 in_EDX;
+  undefined4 arg_edx;
   undefined1 local_ac [152];
   undefined1 local_14;
   
-  FUN_000e6a10();
-  FUN_000dd920(extraout_ECX);
-  uVar1 = FUN_000dd920();
-  FUN_000e7714(local_ac,s__s_MAP_05d_inf_00162cab,uVar1);
-  local_14 = DAT_002e7bed;
-  FUN_000e98c8();
-  return CONCAT44(in_EDX,1);
+  LbScreenWaitVbi();
+  prepare_file_path(extraout_ECX);
+  uval = prepare_file_path();
+  dk_sprintf(local_ac,s__s_MAP_05d_inf_00162cab,uval);
+  local_14 = g_bss_002e7bed;
+  bflib_system_io_fn_0e98c8();
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : sub_02a6c5 (Ghidra: FUN_0002a6c5)
- * Prototype: undefined8 sub_02a6c5(void);
+ * Function : file_process_thing_entity_02a6c5 (Original VA: 0x2a6c5, Ghidra: FUN_0002a6c5)
+ * Prototype: undefined8 file_process_thing_entity_02a6c5(void);
  * Address  : 0x2a6c5 (Size: 468 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Looks up Thing* in g_thing_ptrs[2048] and updates state
  * Callers  : 0 -> 
- * Callees  : 10 -> 0xacef0, 0xacf7c, 0xad0f4, 0xad23c, 0xad37c, 0xd9640, 0xdd920, 0xe6a10, 0xe7714, 0xe98c8
- * Strings  :
- *   - 0x162cba: "LEVELS"
- *   - 0x162cc3: "%s\MAP%05d.lgt"
+ * Callees  : 10 -> light_fn_0acef0, light_attempt_get_anglexy_unallocated_0acf7c, light_attempt_get_width_unallocated_0ad0f4, light_attempt_get_intensity_unallocated_0ad23c, light_attempt_get_size_unallocated_0ad37c, slab_fn_0d9640, prepare_file_path, LbScreenWaitVbi ...
  ******************************************************************************/
-undefined8 FUN_0002a6c5(void)
+undefined8 file_process_thing_entity_02a6c5(void)
 
 {
-  undefined1 uVar1;
-  undefined2 uVar2;
-  undefined4 in_EAX;
-  undefined4 *puVar3;
-  int iVar4;
-  undefined4 uVar5;
+  undefined1 uval;
+  undefined2 uval_2;
+  undefined4 arg_eax;
+  undefined4 *word_ptr;
+  int val;
+  undefined4 uval_3;
   undefined2 *extraout_ECX;
   int extraout_ECX_00;
   int extraout_ECX_01;
@@ -1026,568 +950,508 @@ undefined8 FUN_0002a6c5(void)
   int extraout_ECX_06;
   int extraout_ECX_07;
   int extraout_ECX_08;
-  undefined4 in_EDX;
-  byte bVar6;
+  undefined4 arg_edx;
+  byte flag;
   undefined1 local_c0 [152];
   int local_28;
   int local_24;
   byte *local_20;
   byte *local_1c;
   
-  bVar6 = 0;
+  flag = 0;
   local_24 = 0;
   local_28 = 0;
   do {
-    local_20 = *(byte **)((int)&DAT_001ae9fc + local_28);
+    local_20 = *(byte **)((int)&g_thing_ptrs + local_28);
     if (((*local_20 & 1) != 0) && (local_20[0x1f] == 0xe)) {
-      FUN_000e6a10();
-      uVar2 = FUN_000ad37c();
-      *extraout_ECX = uVar2;
-      uVar1 = FUN_000ad23c();
-      *(undefined1 *)(extraout_ECX_00 + 2) = uVar1;
-      puVar3 = (undefined4 *)FUN_000acef0();
-      *(undefined4 *)(extraout_ECX_01 + 10) = *puVar3;
-      *(undefined2 *)(extraout_ECX_01 + 0xe + (uint)bVar6 * -8) =
-           *(undefined2 *)(puVar3 + (uint)bVar6 * -2 + 1);
-      uVar2 = FUN_000acf7c();
-      *(undefined2 *)(extraout_ECX_02 + 4) = uVar2;
-      uVar2 = FUN_000ad0f4();
-      *(undefined2 *)(extraout_ECX_03 + 8) = uVar2;
+      LbScreenWaitVbi();
+      uval_2 = light_attempt_get_size_unallocated_0ad37c();
+      *extraout_ECX = uval_2;
+      uval = light_attempt_get_intensity_unallocated_0ad23c();
+      *(undefined1 *)(extraout_ECX_00 + 2) = uval;
+      word_ptr = (undefined4 *)light_fn_0acef0();
+      *(undefined4 *)(extraout_ECX_01 + 10) = *word_ptr;
+      *(undefined2 *)(extraout_ECX_01 + 0xe + (uint)flag * -8) =
+           *(undefined2 *)(word_ptr + (uint)flag * -2 + 1);
+      uval_2 = light_attempt_get_anglexy_unallocated_0acf7c();
+      *(undefined2 *)(extraout_ECX_02 + 4) = uval_2;
+      uval_2 = light_attempt_get_width_unallocated_0ad0f4();
+      *(undefined2 *)(extraout_ECX_03 + 8) = uval_2;
       *(undefined1 *)(extraout_ECX_03 + 0x11) = 0;
       local_24 = local_24 + 1;
       *(undefined2 *)(extraout_ECX_03 + 0x12) =
-           *(undefined2 *)(&DAT_001bd5ff + (uint)*(ushort *)(local_20 + 0x62) * 0x2e);
+           *(undefined2 *)(&g_bss_001bd5ff + (uint)*(ushort *)(local_20 + 0x62) * 0x2e);
     }
     local_28 = local_28 + 4;
   } while (local_28 != 0x2000);
   local_28 = 0x2000;
-  for (local_1c = &DAT_001bd61b; local_1c < &DAT_001c1dcd; local_1c = local_1c + 0x2e) {
+  for (local_1c = &g_bss_001bd61b; local_1c < &g_bss_001c1dcd; local_1c = local_1c + 0x2e) {
     if ((*local_1c & 1) != 0) {
-      iVar4 = FUN_000d9640();
-      if (iVar4 == 0) {
-        FUN_000e6a10();
-        uVar2 = FUN_000ad37c();
-        *extraout_ECX_04 = uVar2;
-        uVar1 = FUN_000ad23c();
-        *(undefined1 *)(extraout_ECX_05 + 2) = uVar1;
-        puVar3 = (undefined4 *)FUN_000acef0();
-        *(undefined4 *)(extraout_ECX_06 + 10) = *puVar3;
-        *(undefined2 *)(extraout_ECX_06 + 0xe + (uint)bVar6 * -8) =
-             *(undefined2 *)(puVar3 + (uint)bVar6 * -2 + 1);
-        uVar2 = FUN_000acf7c();
-        *(undefined2 *)(extraout_ECX_07 + 4) = uVar2;
-        uVar2 = FUN_000ad0f4();
-        *(undefined2 *)(extraout_ECX_08 + 8) = uVar2;
+      val = slab_fn_0d9640();
+      if (val == 0) {
+        LbScreenWaitVbi();
+        uval_2 = light_attempt_get_size_unallocated_0ad37c();
+        *extraout_ECX_04 = uval_2;
+        uval = light_attempt_get_intensity_unallocated_0ad23c();
+        *(undefined1 *)(extraout_ECX_05 + 2) = uval;
+        word_ptr = (undefined4 *)light_fn_0acef0();
+        *(undefined4 *)(extraout_ECX_06 + 10) = *word_ptr;
+        *(undefined2 *)(extraout_ECX_06 + 0xe + (uint)flag * -8) =
+             *(undefined2 *)(word_ptr + (uint)flag * -2 + 1);
+        uval_2 = light_attempt_get_anglexy_unallocated_0acf7c();
+        *(undefined2 *)(extraout_ECX_07 + 4) = uval_2;
+        uval_2 = light_attempt_get_width_unallocated_0ad0f4();
+        *(undefined2 *)(extraout_ECX_08 + 8) = uval_2;
         *(undefined1 *)(extraout_ECX_08 + 0x11) = 0;
         local_24 = local_24 + 1;
         *(undefined2 *)(extraout_ECX_08 + 0x12) = *(undefined2 *)(local_1c + 0x12);
       }
     }
   }
-  *DAT_00199228 = local_24;
-  FUN_000dd920(in_EAX);
-  uVar5 = FUN_000dd920();
-  FUN_000e7714(local_c0,s__s_MAP_05d_lgt_00162cc3,uVar5);
-  FUN_000e98c8();
-  return CONCAT44(in_EDX,1);
+  *g_scratch_work_buf = local_24;
+  prepare_file_path(arg_eax);
+  uval_3 = prepare_file_path();
+  dk_sprintf(local_c0,s__s_MAP_05d_lgt_00162cc3,uval_3);
+  bflib_system_io_fn_0e98c8();
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : sub_02a899 (Ghidra: FUN_0002a899)
- * Prototype: undefined8 sub_02a899(void);
+ * Function : file_fn_02a899 (Original VA: 0x2a899, Ghidra: FUN_0002a899)
+ * Prototype: undefined8 file_fn_02a899(void);
  * Address  : 0x2a899 (Size: 189 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Module file.cpp procedure @ 0x02a899
  * Callers  : 0 -> 
- * Callees  : 3 -> 0xdd920, 0xe6a10, 0xe7714
- * Strings  :
- *   - 0x162cd2: "LEVELS"
- *   - 0x162cdb: "%s\MAP%05d.apt"
+ * Callees  : 3 -> prepare_file_path, LbScreenWaitVbi, dk_sprintf
  ******************************************************************************/
-undefined8 FUN_0002a899(void)
+undefined8 file_fn_02a899(void)
 
 {
-  undefined4 in_EAX;
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 arg_eax;
+  undefined4 uval;
+  int val;
   int extraout_ECX;
-  undefined4 in_EDX;
-  int *piVar3;
-  int *piVar4;
-  int iVar5;
+  undefined4 arg_edx;
+  int *int_ptr;
+  int *int_ptr_2;
+  int val_2;
   undefined1 local_b0 [152];
   
-  iVar2 = 10;
-  iVar5 = 0;
-  piVar4 = DAT_00199228 + 1;
+  val = 10;
+  val_2 = 0;
+  int_ptr_2 = g_scratch_work_buf + 1;
   do {
-    piVar3 = piVar4;
-    if (((&DAT_002eb401)[iVar2] & 1) != 0) {
-      FUN_000e6a10();
-      *(undefined2 *)piVar4 = *(undefined2 *)(&DAT_002eb402 + extraout_ECX);
-      *(undefined2 *)((int)piVar4 + 2) = *(undefined2 *)(&DAT_002eb404 + extraout_ECX);
-      *(undefined2 *)(piVar4 + 1) = *(undefined2 *)(&DAT_002eb406 + extraout_ECX);
-      piVar3 = piVar4 + 2;
-      iVar5 = iVar5 + 1;
-      *(undefined2 *)((int)piVar4 + 6) = *(undefined2 *)(&DAT_002eb408 + extraout_ECX);
-      iVar2 = extraout_ECX;
+    int_ptr = int_ptr_2;
+    if (((&g_bss_002eb401)[val] & 1) != 0) {
+      LbScreenWaitVbi();
+      *(undefined2 *)int_ptr_2 = *(undefined2 *)(&g_bss_002eb402 + extraout_ECX);
+      *(undefined2 *)((int)int_ptr_2 + 2) = *(undefined2 *)(&g_bss_002eb404 + extraout_ECX);
+      *(undefined2 *)(int_ptr_2 + 1) = *(undefined2 *)(&g_bss_002eb406 + extraout_ECX);
+      int_ptr = int_ptr_2 + 2;
+      val_2 = val_2 + 1;
+      *(undefined2 *)((int)int_ptr_2 + 6) = *(undefined2 *)(&g_bss_002eb408 + extraout_ECX);
+      val = extraout_ECX;
     }
-    iVar2 = iVar2 + 10;
-    piVar4 = piVar3;
-  } while (iVar2 != 0x140);
-  *DAT_00199228 = iVar5;
-  FUN_000dd920(in_EAX);
-  uVar1 = FUN_000dd920();
-  FUN_000e7714(local_b0,s__s_MAP_05d_apt_00162cdb,uVar1);
-  FUN_000e98c8();
-  return CONCAT44(in_EDX,1);
+    val = val + 10;
+    int_ptr_2 = int_ptr;
+  } while (val != 0x140);
+  *g_scratch_work_buf = val_2;
+  prepare_file_path(arg_eax);
+  uval = prepare_file_path();
+  dk_sprintf(local_b0,s__s_MAP_05d_apt_00162cdb,uval);
+  bflib_system_io_fn_0e98c8();
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : sub_02a9f0 (Ghidra: FUN_0002a9f0)
- * Prototype: void sub_02a9f0(void);
+ * Function : file_update_creature_and_thing_02a9f0 (Original VA: 0x2a9f0, Ghidra: FUN_0002a9f0)
+ * Prototype: void file_update_creature_and_thing_02a9f0(void);
  * Address  : 0x2a9f0 (Size: 292 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
  * Callers  : 0 -> 
- * Callees  : 3 -> 0xdd920, 0xe7714, 0xe98c8
- * Strings  :
- *   - 0x162d01: "LEVELS"
- *   - 0x162d0a: "%s\MAP%05d.tng"
+ * Callees  : 3 -> prepare_file_path, dk_sprintf, bflib_system_io_fn_0e98c8
  ******************************************************************************/
-void FUN_0002a9f0(void)
+void file_update_creature_and_thing_02a9f0(void)
 
 {
-  byte *pbVar1;
-  undefined4 uVar2;
-  short *psVar3;
-  short *psVar4;
-  short sVar5;
+  byte *thing_ptr;
+  undefined4 uval;
+  short *val;
+  short *val_2;
+  short short_val;
   undefined1 local_b4 [152];
   uint local_1c;
   
-  sVar5 = 0;
-  psVar3 = DAT_00199228 + 1;
+  short_val = 0;
+  val = g_scratch_work_buf + 1;
   for (local_1c = 1; (local_1c & 0xffff) < 0x800; local_1c = local_1c + 1) {
-    pbVar1 = (byte *)(&DAT_001ae9fc)[local_1c & 0xffff];
-    psVar4 = psVar3;
-    if ((((*pbVar1 & 1) != 0) && (pbVar1[0x1f] != 0xe)) && (pbVar1[0x1f] != 0xf)) {
-      *(undefined4 *)psVar3 = *(undefined4 *)(pbVar1 + 0xd);
-      psVar3[2] = *(short *)(pbVar1 + 0x11);
-      *(byte *)(psVar3 + 3) = pbVar1[0x1f];
-      *(byte *)((int)psVar3 + 7) = pbVar1[0x1a];
-      *(byte *)(psVar3 + 4) = pbVar1[6];
-      if (pbVar1[0x1f] == 7) {
-        *(undefined2 *)((int)psVar3 + 9) = *(undefined2 *)(pbVar1 + 0x13);
+    thing_ptr = (byte *)(&g_thing_ptrs)[local_1c & 0xffff];
+    val_2 = val;
+    if ((((*thing_ptr & 1) != 0) && (thing_ptr[0x1f] != 0xe)) && (thing_ptr[0x1f] != 0xf)) {
+      *(undefined4 *)val = *(undefined4 *)(thing_ptr + 0xd); /* thing->mappos.val_x */
+      val[2] = *(short *)(thing_ptr + 0x11);
+      *(byte *)(val + 3) = thing_ptr[0x1f];
+      *(byte *)((int)val + 7) = thing_ptr[0x1a];
+      *(byte *)(val + 4) = thing_ptr[6];
+      if (thing_ptr[0x1f] == 7) {
+        *(undefined2 *)((int)val + 9) = *(undefined2 *)(thing_ptr + 0x13); /* thing->anim_sprite */
       }
-      if (pbVar1[0x1f] == 9) {
-        *(byte *)((int)psVar3 + 0xd) = pbVar1[0x13];
-        *(byte *)(psVar3 + 7) = pbVar1[0x18];
+      if (thing_ptr[0x1f] == 9) {
+        *(byte *)((int)val + 0xd) = thing_ptr[0x13];
+        *(byte *)(val + 7) = thing_ptr[0x18];
       }
-      if (pbVar1[0x1f] == 5) {
-        *(undefined1 *)(psVar3 + 7) =
-             *(undefined1 *)((&DAT_001b0a00)[*(ushort *)(pbVar1 + 100)] + 0x23);
+      if (thing_ptr[0x1f] == 5) {
+        *(undefined1 *)(val + 7) =
+             *(undefined1 *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x23); /* thing->ccontrol_idx */
       }
-      if ((pbVar1[0x1f] == 1) && (pbVar1[0x1a] == 0x31)) {
-        *(byte *)(psVar3 + 7) = pbVar1[0x13];
+      if ((thing_ptr[0x1f] == 1) && (thing_ptr[0x1a] == 0x31)) {
+        *(byte *)(val + 7) = thing_ptr[0x13];
       }
-      psVar4 = (short *)((int)psVar3 + 0x15);
-      sVar5 = sVar5 + 1;
-      *(undefined2 *)((int)psVar3 + 0xb) = *(undefined2 *)(pbVar1 + 0x1d);
+      val_2 = (short *)((int)val + 0x15);
+      short_val = short_val + 1;
+      *(undefined2 *)((int)val + 0xb) = *(undefined2 *)(thing_ptr + 0x1d);
     }
-    psVar3 = psVar4;
+    val = val_2;
   }
-  *DAT_00199228 = sVar5;
-  FUN_000dd920();
-  uVar2 = FUN_000dd920();
-  FUN_000e7714(local_b4,s__s_MAP_05d_tng_00162d0a,uVar2);
-  FUN_000e98c8();
+  *g_scratch_work_buf = short_val;
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(local_b4,s__s_MAP_05d_tng_00162d0a,uval);
+  bflib_system_io_fn_0e98c8();
   return;
 }
 
 /******************************************************************************
- * Function : dk_buff_struct_num_02ab14 (Ghidra: FUN_0002ab14)
- * Prototype: void dk_buff_struct_num_02ab14(void);
+ * Function : file_buff_struct_num_02ab14 (Original VA: 0x2ab14, Ghidra: FUN_0002ab14)
+ * Prototype: void file_buff_struct_num_02ab14(void);
  * Address  : 0x2ab14 (Size: 782 bytes)
  * Module   : file.cpp [direct_file_string_xref]
- * OrigLine : file.cpp:1196; file.cpp:1210; file.cpp:1216; file.cpp:1204; file.cpp:1292 ("CANNOT LOAD THING FILE")
- * Naming   : String 'BUFF=%d, STRUCT=%d, NUM=%d'
- * Callers  : 1 -> 0x2a25c
- * Callees  : 14 -> 0x150f0, 0x43ac3, 0x43bb3, 0x449a4, 0x44ca6, 0x5117d, 0x72af4, 0x8240c, 0xd0f50, 0xdd920 ...
- * Strings  :
- *   - 0x162d4c: "file.cpp"
- *   - 0x162d7c: "file.cpp"
- *   - 0x162dac: "file.cpp"
- *   - 0x162dd5: "file.cpp"
- *   - 0x162df2: "file.cpp"
- *   - 0x162e12: "file.cpp"
- *   - 0x162d19: "LEVELS"
- *   - 0x162d22: "%s\MAP%05d.tng"
- *   - 0x162d31: "BUFF=%d, STRUCT=%d, NUM=%d"
- *   - 0x162d85: "Invalid player %d, Fixing to player %d"
- *   - 0x162db5: "Invalid player %d Unable to fix"
- *   - 0x162d55: "Invalid player %d, Fixing to player %d"
- *   - 0x162dde: "INVALID THING CLASS"
- *   - 0x162dfb: "CANNOT LOAD THING FILE"
+ * OrigLine : file.cpp lines 1196, 1204, 1210, 1216, 1292
+ * Purpose  : String 'BUFF=%d, STRUCT=%d, NUM=%d'
+ * Callers  : 1 -> file_fn_02a25c
+ * Callees  : 14 -> cdtest_ldata_dkwind00_dat_0150f0, inits_fn_043ac3, inits_told_you_so_create_043bb3, inits_told_you_so_create_0449a4, inits_told_you_so_create_044ca6, mapwho_fn_05117d, structs_update_creature_control_072af4, creature_update_creature_control_08240c ...
  ******************************************************************************/
 /* WARNING: Removing unreachable block (ram,0x0002ab84) */
 
-void FUN_0002ab14(void)
+void file_buff_struct_num_02ab14(void)
 
 {
-  char cVar1;
-  byte bVar2;
-  undefined4 uVar3;
-  int iVar4;
+  char ch;
+  byte flag;
+  undefined4 uval;
+  int val;
   int extraout_ECX;
-  undefined1 *puVar5;
-  undefined1 *puVar6;
-  int iVar7;
-  ushort uVar8;
+  undefined1 *word_ptr;
+  undefined1 *word_ptr_2;
+  int val_2;
+  ushort uval_2;
   undefined1 local_b4 [152];
   int local_1c;
   
-  FUN_000dd920();
-  uVar3 = FUN_000dd920();
-  FUN_000e7714(local_b4,s__s_MAP_05d_tng_00162d22,uVar3);
-  FUN_000150f0();
-  iVar7 = 0x2f3181;
-  cVar1 = FUN_000e8960();
-  if (cVar1 == '\0') {
-    FUN_000ddaf0(); /* LbErrorLog("file.cpp", line 1196, g_log_buf) */
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(local_b4,s__s_MAP_05d_tng_00162d22,uval);
+  cdtest_ldata_dkwind00_dat_0150f0();
+  val_2 = 0x2f3181;
+  ch = bflib_system_io_fn_0e8960();
+  if (ch == '\0') {
+    LbErrorLog(); /* LbErrorLog("file.cpp", line 1196, g_log_buf) */
   }
   else {
-    FUN_000e984c();
-    uVar8 = (ushort)DAT_002f317f;
-    if (0x7fe < (ushort)DAT_002f317f) {
-      uVar8 = 0x7fe;
+    bflib_system_io_fn_0e984c();
+    uval_2 = (ushort)g_render_poly_buf_start;
+    if (0x7fe < (ushort)g_render_poly_buf_start) {
+      uval_2 = 0x7fe;
     }
-    if (0x30c3 < uVar8) {
-      FUN_000e7714(&DAT_0019cbac,s_BUFF__d__STRUCT__d__NUM__d_00162d31,0x40000,0x15,uVar8);
-      FUN_000ddaf0(); /* LbErrorLog("file.cpp", line 1210, g_log_buf) */
+    if (0x30c3 < uval_2) {
+      dk_sprintf(&g_log_sprintf_buf,s_BUFF__d__STRUCT__d__NUM__d_00162d31,0x40000,0x15,uval_2);
+      LbErrorLog(); /* LbErrorLog("file.cpp", line 1210, g_log_buf) */
     }
-    puVar6 = local_b4;
-    for (local_1c = 1; local_1c <= (int)(uint)uVar8; local_1c = local_1c + 1) {
-      bVar2 = *(byte *)(iVar7 + 8);
-      puVar5 = puVar6;
-      if (bVar2 == 7) {
-        *(uint *)(puVar6 + -4) = (uint)DAT_002eb542;
-        *(undefined4 *)(puVar6 + -8) = 7;
-        *(char **)(puVar6 + -0xc) = s_Invalid_player__d__Fixing_to_pla_00162d55;
-        *(undefined1 **)(puVar6 + -0x10) = &DAT_0019cbac;
-        *(undefined4 *)(puVar6 + -0x14) = 0x2ac8d;
-        FUN_000e7714();
-        *(undefined4 *)(puVar6 + -4) = 0x2ac9f;
-        FUN_000ddaf0(); /* LbErrorLog("file.cpp", line 1216, g_log_buf) */
-        bVar2 = DAT_002eb542;
+    word_ptr_2 = local_b4;
+    for (local_1c = 1; local_1c <= (int)(uint)uval_2; local_1c = local_1c + 1) {
+      flag = *(byte *)(val_2 + 8);
+      word_ptr = word_ptr_2;
+      if (flag == 7) {
+        *(uint *)(word_ptr_2 + -4) = (uint)g_bss_002eb542;
+        *(undefined4 *)(word_ptr_2 + -8) = 7;
+        *(char **)(word_ptr_2 + -0xc) = s_Invalid_player__d__Fixing_to_pla_00162d55;
+        *(undefined1 **)(word_ptr_2 + -0x10) = &g_log_sprintf_buf;
+        *(undefined4 *)(word_ptr_2 + -0x14) = 0x2ac8d;
+        dk_sprintf();
+        *(undefined4 *)(word_ptr_2 + -4) = 0x2ac9f;
+        LbErrorLog(); /* LbErrorLog("file.cpp", line 1216, g_log_buf) */
+        flag = g_bss_002eb542;
 LAB_0002aca4:
-        *(byte *)(iVar7 + 8) = bVar2;
+        *(byte *)(val_2 + 8) = flag;
 LAB_0002aca7:
-        bVar2 = *(byte *)(iVar7 + 6);
-        if (bVar2 < 7) {
-          if (bVar2 == 0) goto LAB_0002ac4c;
-          if (bVar2 < 2) {
-            *(uint *)(puVar6 + -4) = (uint)*(ushort *)(iVar7 + 0xb);
-            *(undefined4 *)(puVar6 + -8) = 0x2ad20;
-            iVar4 = FUN_00043ac3();
-            if (*(char *)(iVar7 + 7) == '1') {
-              *(undefined1 *)(iVar4 + 0x13) = *(undefined1 *)(iVar7 + 0xe);
+        flag = *(byte *)(val_2 + 6);
+        if (flag < 7) {
+          if (flag == 0) goto LAB_0002ac4c;
+          if (flag < 2) {
+            *(uint *)(word_ptr_2 + -4) = (uint)*(ushort *)(val_2 + 0xb);
+            *(undefined4 *)(word_ptr_2 + -8) = 0x2ad20;
+            val = inits_fn_043ac3();
+            if (*(char *)(val_2 + 7) == '1') {
+              *(undefined1 *)(val + 0x13) = *(undefined1 *)(val_2 + 0xe);
             }
-            puVar5 = puVar6 + -4;
-            if ((0x33 < *(byte *)(iVar7 + 7)) && (puVar5 = puVar6 + -4, *(byte *)(iVar7 + 7) < 0x39)
+            word_ptr = word_ptr_2 + -4;
+            if ((0x33 < *(byte *)(val_2 + 7)) && (word_ptr = word_ptr_2 + -4, *(byte *)(val_2 + 7) < 0x39)
                ) {
-              *(undefined4 *)(puVar6 + -8) = 0x2ad57;
-              iVar4 = FUN_000d0f50();
-              if (iVar4 == 0) {
-                *(undefined4 *)(puVar6 + -8) = 0x2ad78;
-                FUN_00072af4();
-                puVar5 = puVar6 + -4;
+              *(undefined4 *)(word_ptr_2 + -8) = 0x2ad57;
+              val = room_update_slab_subtile_columns_0d0f50();
+              if (val == 0) {
+                *(undefined4 *)(word_ptr_2 + -8) = 0x2ad78;
+                structs_update_creature_control_072af4();
+                word_ptr = word_ptr_2 + -4;
               }
               else {
-                *(undefined1 *)(extraout_ECX + 6) = *(undefined1 *)(iVar4 + 3);
-                *(undefined4 *)(puVar6 + -8) = 0x2ad6a;
-                FUN_0005117d();
-                puVar5 = puVar6 + -4;
+                *(undefined1 *)(extraout_ECX + 6) = *(undefined1 *)(val + 3);
+                *(undefined4 *)(word_ptr_2 + -8) = 0x2ad6a;
+                mapwho_fn_05117d();
+                word_ptr = word_ptr_2 + -4;
               }
             }
           }
           else {
-            if (bVar2 != 5) goto LAB_0002ac4c;
-            *(undefined4 *)(puVar6 + -4) = 0x2acf1;
-            iVar4 = FUN_00043bb3();
-            if (iVar4 != 0) {
-              *(undefined4 *)(puVar6 + -4) = 0x2ad02;
-              FUN_0008240c();
+            if (flag != 5) goto LAB_0002ac4c;
+            *(undefined4 *)(word_ptr_2 + -4) = 0x2acf1;
+            val = inits_told_you_so_create_043bb3();
+            if (val != 0) {
+              *(undefined4 *)(word_ptr_2 + -4) = 0x2ad02;
+              creature_update_creature_control_08240c();
             }
           }
         }
-        else if (bVar2 < 8) {
-          *(uint *)(puVar6 + -4) = (uint)*(ushort *)(iVar7 + 0xb);
-          *(undefined4 *)(puVar6 + -8) = 0x2adb3;
-          FUN_00044ca6();
-          puVar5 = puVar6 + -4;
+        else if (flag < 8) {
+          *(uint *)(word_ptr_2 + -4) = (uint)*(ushort *)(val_2 + 0xb);
+          *(undefined4 *)(word_ptr_2 + -8) = 0x2adb3;
+          inits_told_you_so_create_044ca6();
+          word_ptr = word_ptr_2 + -4;
         }
         else {
-          if (bVar2 < 9) {
-            *(uint *)(puVar6 + -4) = (uint)*(ushort *)(iVar7 + 0xb);
+          if (flag < 9) {
+            *(uint *)(word_ptr_2 + -4) = (uint)*(ushort *)(val_2 + 0xb);
           }
           else {
-            if (bVar2 < 10) {
-              *(uint *)(puVar6 + -4) = (uint)*(byte *)(iVar7 + 0xe);
-              *(undefined4 *)(puVar6 + -8) = 0x2ade2;
-              FUN_000449a4();
-              puVar5 = puVar6 + -4;
+            if (flag < 10) {
+              *(uint *)(word_ptr_2 + -4) = (uint)*(byte *)(val_2 + 0xe);
+              *(undefined4 *)(word_ptr_2 + -8) = 0x2ade2;
+              inits_told_you_so_create_0449a4();
+              word_ptr = word_ptr_2 + -4;
               goto LAB_0002ac51;
             }
-            if (0xb < bVar2) goto LAB_0002ac4c;
-            *(uint *)(puVar6 + -4) = (uint)*(ushort *)(iVar7 + 0xb);
+            if (0xb < flag) goto LAB_0002ac4c;
+            *(uint *)(word_ptr_2 + -4) = (uint)*(ushort *)(val_2 + 0xb);
           }
-          *(undefined4 *)(puVar6 + -8) = 0x2ad96;
-          FUN_00043ac3();
-          puVar5 = puVar6 + -4;
+          *(undefined4 *)(word_ptr_2 + -8) = 0x2ad96;
+          inits_fn_043ac3();
+          word_ptr = word_ptr_2 + -4;
         }
       }
       else {
-        if (bVar2 == 8) {
-          *(uint *)(puVar6 + -4) = (uint)DAT_002eb542;
-          *(undefined4 *)(puVar6 + -8) = 8;
-          *(char **)(puVar6 + -0xc) = s_Invalid_player__d__Fixing_to_pla_00162d85;
-          *(undefined1 **)(puVar6 + -0x10) = &DAT_0019cbac;
-          *(undefined4 *)(puVar6 + -0x14) = 0x2abfd;
-          FUN_000e7714();
-          *(undefined4 *)(puVar6 + -4) = 0x2ac0f;
-          FUN_000ddaf0(); /* LbErrorLog("file.cpp", line 1204, g_log_buf) */
-          bVar2 = DAT_002eb543;
+        if (flag == 8) {
+          *(uint *)(word_ptr_2 + -4) = (uint)g_bss_002eb542;
+          *(undefined4 *)(word_ptr_2 + -8) = 8;
+          *(char **)(word_ptr_2 + -0xc) = s_Invalid_player__d__Fixing_to_pla_00162d85;
+          *(undefined1 **)(word_ptr_2 + -0x10) = &g_log_sprintf_buf;
+          *(undefined4 *)(word_ptr_2 + -0x14) = 0x2abfd;
+          dk_sprintf();
+          *(undefined4 *)(word_ptr_2 + -4) = 0x2ac0f;
+          LbErrorLog(); /* LbErrorLog("file.cpp", line 1204, g_log_buf) */
+          flag = g_neutral_player_number;
           goto LAB_0002aca4;
         }
-        if (bVar2 < 6) goto LAB_0002aca7;
-        *(uint *)(puVar6 + -4) = (uint)*(byte *)(iVar7 + 8);
-        *(char **)(puVar6 + -8) = s_Invalid_player__d_Unable_to_fix_00162db5;
-        *(undefined1 **)(puVar6 + -0xc) = &DAT_0019cbac;
-        *(undefined4 *)(puVar6 + -0x10) = 0x2ac3f;
-        FUN_000e7714();
+        if (flag < 6) goto LAB_0002aca7;
+        *(uint *)(word_ptr_2 + -4) = (uint)*(byte *)(val_2 + 8);
+        *(char **)(word_ptr_2 + -8) = s_Invalid_player__d_Unable_to_fix_00162db5;
+        *(undefined1 **)(word_ptr_2 + -0xc) = &g_log_sprintf_buf;
+        *(undefined4 *)(word_ptr_2 + -0x10) = 0x2ac3f;
+        dk_sprintf();
 LAB_0002ac4c:
-        *(undefined4 *)(puVar6 + -4) = 0x2ac51;
-        FUN_000ddaf0(); /* LbErrorLog("file.cpp", line 1292, "CANNOT LOAD THING FILE") */
+        *(undefined4 *)(word_ptr_2 + -4) = 0x2ac51;
+        LbErrorLog(); /* LbErrorLog("file.cpp", line 1292, "CANNOT LOAD THING FILE") */
       }
 LAB_0002ac51:
-      iVar7 = iVar7 + 0x15;
-      puVar6 = puVar5;
+      val_2 = val_2 + 0x15;
+      word_ptr_2 = word_ptr;
     }
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_02ae22 (Ghidra: FUN_0002ae22)
- * Prototype: undefined8 sub_02ae22(void);
+ * Function : file_fn_02ae22 (Original VA: 0x2ae22, Ghidra: FUN_0002ae22)
+ * Prototype: undefined8 file_fn_02ae22(void);
  * Address  : 0x2ae22 (Size: 71 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Module file.cpp procedure @ 0x02ae22
  * Callers  : 0 -> 
- * Callees  : 3 -> 0xdd920, 0xe7714, 0xea1ef
- * Strings  :
- *   - 0x162e1b: "LEVELS"
- *   - 0x162e24: "%s\MAP%05d.dat"
+ * Callees  : 3 -> prepare_file_path, dk_sprintf, dk_strcpy
  ******************************************************************************/
-undefined8 FUN_0002ae22(void)
+undefined8 file_fn_02ae22(void)
 
 {
-  undefined4 uVar1;
-  undefined4 in_EDX;
+  undefined4 uval;
+  undefined4 arg_edx;
   undefined1 local_a0 [152];
   
-  FUN_000dd920();
-  uVar1 = FUN_000dd920();
-  FUN_000e7714(local_a0,s__s_MAP_05d_dat_00162e24,uVar1);
-  FUN_000ea1ef();
-  return CONCAT44(in_EDX,1);
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(local_a0,s__s_MAP_05d_dat_00162e24,uval);
+  dk_strcpy();
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : sub_02ae69 (Ghidra: FUN_0002ae69)
- * Prototype: undefined8 sub_02ae69(void);
+ * Function : file_fn_02ae69 (Original VA: 0x2ae69, Ghidra: FUN_0002ae69)
+ * Prototype: undefined8 file_fn_02ae69(void);
  * Address  : 0x2ae69 (Size: 39 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Module file.cpp procedure @ 0x02ae69
  * Callers  : 0 -> 
- * Callees  : 1 -> 0xdd920
- * Strings  :
- *   - 0x162e33: "LEVELS"
- *   - 0x162e3c: "%s\MAP%05d.own"
+ * Callees  : 1 -> prepare_file_path
  ******************************************************************************/
-undefined8 FUN_0002ae69(void)
+undefined8 file_fn_02ae69(void)
 
 {
-  undefined4 uVar1;
-  undefined4 in_EDX;
+  undefined4 uval;
+  undefined4 arg_edx;
   undefined1 auStack_a0 [152];
   
-  FUN_000dd920();
-  uVar1 = FUN_000dd920();
-  FUN_000e7714(auStack_a0,s__s_MAP_05d_own_00162e3c,uVar1);
-  FUN_000ea1ef();
-  return CONCAT44(in_EDX,1);
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(auStack_a0,s__s_MAP_05d_own_00162e3c,uval);
+  dk_strcpy();
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : sub_02ae90 (Ghidra: FUN_0002ae90)
- * Prototype: undefined8 sub_02ae90(void);
+ * Function : file_fn_02ae90 (Original VA: 0x2ae90, Ghidra: FUN_0002ae90)
+ * Prototype: undefined8 file_fn_02ae90(void);
  * Address  : 0x2ae90 (Size: 39 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Module file.cpp procedure @ 0x02ae90
  * Callers  : 0 -> 
- * Callees  : 1 -> 0xdd920
- * Strings  :
- *   - 0x162e4b: "LEVELS"
- *   - 0x162e54: "%s\MAP%05d.wib"
+ * Callees  : 1 -> prepare_file_path
  ******************************************************************************/
-undefined8 FUN_0002ae90(void)
+undefined8 file_fn_02ae90(void)
 
 {
-  undefined4 uVar1;
-  undefined4 in_EDX;
+  undefined4 uval;
+  undefined4 arg_edx;
   undefined1 auStack_a0 [152];
   
-  FUN_000dd920();
-  uVar1 = FUN_000dd920();
-  FUN_000e7714(auStack_a0,s__s_MAP_05d_wib_00162e54,uVar1);
-  FUN_000ea1ef();
-  return CONCAT44(in_EDX,1);
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(auStack_a0,s__s_MAP_05d_wib_00162e54,uval);
+  dk_strcpy();
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : sub_02aeb7 (Ghidra: FUN_0002aeb7)
- * Prototype: undefined8 sub_02aeb7(void);
+ * Function : file_fn_02aeb7 (Original VA: 0x2aeb7, Ghidra: FUN_0002aeb7)
+ * Prototype: undefined8 file_fn_02aeb7(void);
  * Address  : 0x2aeb7 (Size: 42 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Module file.cpp procedure @ 0x02aeb7
  * Callers  : 0 -> 
- * Callees  : 1 -> 0xdd920
- * Strings  :
- *   - 0x162e63: "LEVELS"
- *   - 0x162e6c: "%s\MAP%05d.clm"
+ * Callees  : 1 -> prepare_file_path
  ******************************************************************************/
-undefined8 FUN_0002aeb7(void)
+undefined8 file_fn_02aeb7(void)
 
 {
-  undefined4 uVar1;
-  undefined4 in_EDX;
+  undefined4 uval;
+  undefined4 arg_edx;
   undefined1 auStack_a0 [152];
   
-  FUN_000dd920();
-  uVar1 = FUN_000dd920();
-  FUN_000e7714(auStack_a0,s__s_MAP_05d_clm_00162e6c,uVar1);
-  FUN_000ea1ef();
-  return CONCAT44(in_EDX,1);
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(auStack_a0,s__s_MAP_05d_clm_00162e6c,uval);
+  dk_strcpy();
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : sub_02aee1 (Ghidra: FUN_0002aee1)
- * Prototype: undefined8 sub_02aee1(void);
+ * Function : file_fn_02aee1 (Original VA: 0x2aee1, Ghidra: FUN_0002aee1)
+ * Prototype: undefined8 file_fn_02aee1(void);
  * Address  : 0x2aee1 (Size: 42 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Module file.cpp procedure @ 0x02aee1
  * Callers  : 0 -> 
- * Callees  : 1 -> 0xdd920
- * Strings  :
- *   - 0x162e7b: "LEVELS"
- *   - 0x162e84: "%s\MAP%05d.lgt"
+ * Callees  : 1 -> prepare_file_path
  ******************************************************************************/
-undefined8 FUN_0002aee1(void)
+undefined8 file_fn_02aee1(void)
 
 {
-  undefined4 uVar1;
-  undefined4 in_EDX;
+  undefined4 uval;
+  undefined4 arg_edx;
   undefined1 auStack_a0 [152];
   
-  FUN_000dd920();
-  uVar1 = FUN_000dd920();
-  FUN_000e7714(auStack_a0,s__s_MAP_05d_lgt_00162e84,uVar1);
-  FUN_000ea1ef();
-  return CONCAT44(in_EDX,1);
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(auStack_a0,s__s_MAP_05d_lgt_00162e84,uval);
+  dk_strcpy();
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : sub_02af6d (Ghidra: FUN_0002af6d)
- * Prototype: void sub_02af6d(void);
+ * Function : file_fn_02af6d (Original VA: 0x2af6d, Ghidra: FUN_0002af6d)
+ * Prototype: void file_fn_02af6d(void);
  * Address  : 0x2af6d (Size: 66 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Module file.cpp procedure @ 0x02af6d
  * Callers  : 0 -> 
- * Callees  : 3 -> 0xdd920, 0xe7714, 0xea1ef
- * Strings  :
- *   - 0x162ec4: "LEVELS"
- *   - 0x162ecd: "%s\MAP%05d.tng"
+ * Callees  : 3 -> prepare_file_path, dk_sprintf, dk_strcpy
  ******************************************************************************/
-void FUN_0002af6d(void)
+void file_fn_02af6d(void)
 
 {
-  undefined4 uVar1;
+  undefined4 uval;
   undefined1 local_a0 [152];
   
-  FUN_000dd920();
-  uVar1 = FUN_000dd920();
-  FUN_000e7714(local_a0,s__s_MAP_05d_tng_00162ecd,uVar1);
-  FUN_000ea1ef();
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(local_a0,s__s_MAP_05d_tng_00162ecd,uval);
+  dk_strcpy();
   return;
 }
 
 /******************************************************************************
- * Function : dk_data_creature_txt_02b36c (Ghidra: FUN_0002b36c)
- * Prototype: undefined8 dk_data_creature_txt_02b36c(void);
+ * Function : file_data_creature_txt_02b36c (Original VA: 0x2b36c, Ghidra: FUN_0002b36c)
+ * Prototype: undefined8 file_data_creature_txt_02b36c(void);
  * Address  : 0x2b36c (Size: 3036 bytes)
  * Module   : file.cpp [direct_file_string_xref]
- * OrigLine : file.cpp:1487 ("Cannot load XLS file")
- * Naming   : String 'data\creature.txt'
- * Callers  : 2 -> 0x401ec, 0x40832
- * Callees  : 8 -> 0x150f0, 0x66fcb, 0xddaf0, 0xe6a10, 0xe8a98, 0xe984c, 0xea1f4, 0xea21d
- * Strings  :
- *   - 0x162f03: "file.cpp"
- *   - 0x162f34: "file.cpp"
- *   - 0x162f64: "file.cpp"
- *   - 0x162edc: "data\creature.txt"
- *   - 0x162eee: "Cannot load XLS file"
- *   - 0x162f0c: "Cannot load XLS file, scratch too small"
- *   - 0x162f3d: "data\creature.txt"
- *   - 0x162f4f: "Cannot load XLS file"
- *   - 0x162f6d: "CREATURE"
- *   - 0x162f76: "ROOM"
- *   - 0x162f7b: "MAGIC"
- *   - 0x162f81: "INSTANCE"
- *   - 0x162f8a: "SHOT"
- *   - 0x162f8f: "TRAP"
- *   - 0x162f94: "DOOR"
- *   - 0x162f99: "HEALTH"
- *   - 0x162fa0: "GAME"
- *   - 0x162fa5: "BLOCK"
- *   - 0x162fab: "SPELL"
- *   - 0x162fb1: "RESEARCH_ROOM"
+ * OrigLine : file.cpp lines 1487
+ * Purpose  : String 'data\creature.txt'
+ * Callers  : 2 -> inits_fn_0401ec, inits_update_player_dungeon_040832
+ * Callees  : 8 -> cdtest_ldata_dkwind00_dat_0150f0, research_fn_066fcb, LbErrorLog, LbScreenWaitVbi, bflib_system_io_fn_0e8a98, bflib_system_io_fn_0e984c, bflib_system_io_fn_0ea1f4, dk_atoi
  ******************************************************************************/
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined8 FUN_0002b36c(void)
+undefined8 file_data_creature_txt_02b36c(void)
 
 {
-  char *pcVar1;
-  undefined4 uVar2;
-  undefined1 uVar3;
-  uint uVar4;
-  uint uVar5;
-  int iVar6;
-  char *pcVar7;
-  int iVar8;
-  undefined2 uVar9;
-  undefined4 in_EDX;
-  undefined4 uVar10;
+  char *str_ptr;
+  undefined4 uval;
+  undefined1 uval_2;
+  uint uval_3;
+  uint uval_4;
+  int loop_i;
+  char *loop_i_2;
+  int val;
+  undefined2 uval_5;
+  undefined4 arg_edx;
+  undefined4 uval_6;
   int extraout_EDX;
   uint extraout_EDX_00;
   uint extraout_EDX_01;
   uint extraout_EDX_02;
-  uint uVar11;
-  char *pcVar12;
-  undefined8 uVar13;
-  ulonglong uVar14;
+  uint uval_7;
+  char *str_ptr_2;
+  undefined8 uval_8;
+  ulonglong uval_9;
   uint local_134;
   int local_130;
   int local_12c;
@@ -1613,521 +1477,521 @@ undefined8 FUN_0002b36c(void)
   int local_20;
   int local_1c;
   
-  FUN_000150f0();
-  uVar4 = FUN_000e8a98();
-  if ((0 < (int)uVar4) && (uVar4 < 0x40000)) {
-    FUN_000150f0();
-    uVar5 = FUN_000e984c();
-    if (uVar5 == uVar4) {
-      local_f4 = (char *)&DAT_002f317f;
+  cdtest_ldata_dkwind00_dat_0150f0();
+  uval_3 = bflib_system_io_fn_0e8a98();
+  if ((0 < (int)uval_3) && (uval_3 < 0x40000)) {
+    cdtest_ldata_dkwind00_dat_0150f0();
+    uval_4 = bflib_system_io_fn_0e984c();
+    if (uval_4 == uval_3) {
+      local_f4 = (char *)&g_render_poly_buf_start;
 LAB_0002c312:
-      pcVar1 = local_f4;
-      if (local_f4 < (char *)((int)&DAT_002f317f + uVar4)) {
-        for (; (local_f4 < (char *)((int)&DAT_002f317f + uVar4) && (*local_f4 != '\n'));
+      str_ptr = local_f4;
+      if (local_f4 < (char *)((int)&g_render_poly_buf_start + uval_3)) {
+        for (; (local_f4 < (char *)((int)&g_render_poly_buf_start + uval_3) && (*local_f4 != '\n'));
             local_f4 = local_f4 + 1) {
         }
-        pcVar7 = local_f4 + 1;
+        loop_i_2 = local_f4 + 1;
         *local_f4 = '\0';
-        uVar5 = (int)pcVar7 - (int)pcVar1;
-        iVar6 = FUN_000ea1f4();
-        pcVar12 = pcVar1 + uVar5;
-        local_f4 = pcVar7;
-        if (iVar6 == 0) {
-          uVar11 = 0;
+        uval_4 = (int)loop_i_2 - (int)str_ptr;
+        loop_i = bflib_system_io_fn_0ea1f4();
+        str_ptr_2 = str_ptr + uval_4;
+        local_f4 = loop_i_2;
+        if (loop_i == 0) {
+          uval_7 = 0;
           local_a4 = 0;
           for (local_3c = 0; (int)local_3c < 0x96; local_3c = local_3c + 1) {
-            for (pcVar7 = pcVar1 + uVar11; (pcVar7 < pcVar12 && (*pcVar7 != '\t'));
-                pcVar7 = pcVar7 + 1) {
-              uVar11 = uVar11 + 1;
+            for (loop_i_2 = str_ptr + uval_7; (loop_i_2 < str_ptr_2 && (*loop_i_2 != '\t'));
+                loop_i_2 = loop_i_2 + 1) {
+              uval_7 = uval_7 + 1;
             }
-            for (pcVar7 = pcVar1 + uVar11; (pcVar7 < pcVar12 && (*pcVar7 == '\t'));
-                pcVar7 = pcVar7 + 1) {
-              uVar11 = uVar11 + 1;
+            for (loop_i_2 = str_ptr + uval_7; (loop_i_2 < str_ptr_2 && (*loop_i_2 == '\t'));
+                loop_i_2 = loop_i_2 + 1) {
+              uval_7 = uval_7 + 1;
             }
-            FUN_000ea21d();
-            if (uVar5 <= uVar11) break;
+            dk_atoi();
+            if (uval_4 <= uval_7) break;
             if (local_3c < 0x7b) {
                     /* WARNING: Could not recover jumptable at 0x0002b868. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-              uVar13 = (**(code **)((int)&PTR_LAB_0002afdc + local_a4))();
-              return uVar13;
+              uval_8 = (**(code **)((int)&PTR_LAB_0002afdc + local_a4))();
+              return uval_8;
             }
             local_a4 = local_a4 + 4;
           }
         }
         else {
-          iVar6 = FUN_000ea1f4();
-          if (iVar6 == 0) {
-            uVar11 = 0;
+          loop_i = bflib_system_io_fn_0ea1f4();
+          if (loop_i == 0) {
+            uval_7 = 0;
             for (local_38 = 0; (int)local_38 < 3; local_38 = local_38 + 1) {
-              for (pcVar7 = pcVar1 + uVar11; (pcVar7 < pcVar12 && (*pcVar7 != '\t'));
-                  pcVar7 = pcVar7 + 1) {
-                uVar11 = uVar11 + 1;
+              for (loop_i_2 = str_ptr + uval_7; (loop_i_2 < str_ptr_2 && (*loop_i_2 != '\t'));
+                  loop_i_2 = loop_i_2 + 1) {
+                uval_7 = uval_7 + 1;
               }
-              for (pcVar7 = pcVar1 + uVar11; (pcVar7 < pcVar12 && (*pcVar7 == '\t'));
-                  pcVar7 = pcVar7 + 1) {
-                uVar11 = uVar11 + 1;
+              for (loop_i_2 = str_ptr + uval_7; (loop_i_2 < str_ptr_2 && (*loop_i_2 == '\t'));
+                  loop_i_2 = loop_i_2 + 1) {
+                uval_7 = uval_7 + 1;
               }
-              iVar6 = FUN_000ea21d();
-              if (uVar5 <= uVar11) break;
+              loop_i = dk_atoi();
+              if (uval_4 <= uval_7) break;
               if (local_38 == 0) {
-                local_11c = (undefined2 *)(&DAT_002eadcd + iVar6 * 4);
+                local_11c = (undefined2 *)(&g_bss_002eadcd + loop_i * 4);
               }
               else if (local_38 < 2) {
-                *local_11c = (short)iVar6;
+                *local_11c = (short)loop_i;
               }
               else if (local_38 == 2) {
-                local_11c[1] = (short)iVar6;
+                local_11c[1] = (short)loop_i;
               }
             }
           }
           else {
-            iVar6 = FUN_000ea1f4();
-            if (iVar6 == 0) {
-              uVar11 = 0;
+            loop_i = bflib_system_io_fn_0ea1f4();
+            if (loop_i == 0) {
+              uval_7 = 0;
               local_ac = 0;
-              for (iVar6 = 0; iVar6 < 0x32; iVar6 = iVar6 + 1) {
-                for (pcVar7 = pcVar1 + uVar11; (pcVar7 < pcVar12 && (*pcVar7 != '\t'));
-                    pcVar7 = pcVar7 + 1) {
-                  uVar11 = uVar11 + 1;
+              for (loop_i = 0; loop_i < 0x32; loop_i = loop_i + 1) {
+                for (loop_i_2 = str_ptr + uval_7; (loop_i_2 < str_ptr_2 && (*loop_i_2 != '\t'));
+                    loop_i_2 = loop_i_2 + 1) {
+                  uval_7 = uval_7 + 1;
                 }
-                for (local_b4 = pcVar1 + uVar11; (local_b4 < pcVar12 && (*local_b4 == '\t'));
+                for (local_b4 = str_ptr + uval_7; (local_b4 < str_ptr_2 && (*local_b4 == '\t'));
                     local_b4 = local_b4 + 1) {
-                  uVar11 = uVar11 + 1;
+                  uval_7 = uval_7 + 1;
                 }
-                uVar14 = FUN_000ea21d();
-                iVar6 = (int)(uVar14 >> 0x20);
-                iVar8 = (int)uVar14;
-                if (uVar5 <= uVar11) break;
-                if (iVar6 == 0) {
-                  local_118 = &DAT_002eae11 + iVar8 * 0x4c;
+                uval_9 = dk_atoi();
+                loop_i = (int)(uval_9 >> 0x20);
+                val = (int)uval_9;
+                if (uval_4 <= uval_7) break;
+                if (loop_i == 0) {
+                  local_118 = &g_bss_002eae11 + val * 0x4c;
                 }
-                else if (uVar14 < 0xa00000000) {
+                else if (uval_9 < 0xa00000000) {
 LAB_0002b9b7:
-                  *(int *)(local_118 + local_ac + -4) = iVar8;
+                  *(int *)(local_118 + local_ac + -4) = val;
                 }
-                else if (uVar14 < 0xb00000000) {
-                  *(int *)(local_118 + 0x24) = iVar8;
+                else if (uval_9 < 0xb00000000) {
+                  *(int *)(local_118 + 0x24) = val;
                 }
-                else if (uVar14 < 0x1400000000) goto LAB_0002b9b7;
+                else if (uval_9 < 0x1400000000) goto LAB_0002b9b7;
                 local_ac = local_ac + 4;
               }
             }
             else {
-              iVar6 = FUN_000ea1f4();
-              if (iVar6 == 0) {
-                uVar11 = 0;
+              loop_i = bflib_system_io_fn_0ea1f4();
+              if (loop_i == 0) {
+                uval_7 = 0;
                 local_bc = 0;
                 for (local_134 = 0; (int)local_134 < 0x32; local_134 = local_134 + 1) {
-                  for (pcVar7 = pcVar1 + uVar11; (pcVar7 < pcVar12 && (*pcVar7 != '\t'));
-                      pcVar7 = pcVar7 + 1) {
-                    uVar11 = uVar11 + 1;
+                  for (loop_i_2 = str_ptr + uval_7; (loop_i_2 < str_ptr_2 && (*loop_i_2 != '\t'));
+                      loop_i_2 = loop_i_2 + 1) {
+                    uval_7 = uval_7 + 1;
                   }
-                  for (pcVar7 = pcVar1 + uVar11; (pcVar7 < pcVar12 && (*pcVar7 == '\t'));
-                      pcVar7 = pcVar7 + 1) {
-                    uVar11 = uVar11 + 1;
+                  for (loop_i_2 = str_ptr + uval_7; (loop_i_2 < str_ptr_2 && (*loop_i_2 == '\t'));
+                      loop_i_2 = loop_i_2 + 1) {
+                    uval_7 = uval_7 + 1;
                   }
-                  FUN_000ea21d();
-                  if (uVar5 <= uVar11) break;
+                  dk_atoi();
+                  if (uval_4 <= uval_7) break;
                   if (local_134 < 8) {
                     /* WARNING: Could not recover jumptable at 0x0002bad8. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-                    uVar13 = (**(code **)((int)&PTR_LAB_0002b1c8 + local_bc))();
-                    return uVar13;
+                    uval_8 = (**(code **)((int)&PTR_LAB_0002b1c8 + local_bc))();
+                    return uval_8;
                   }
                   local_bc = local_bc + 4;
                 }
               }
               else {
-                iVar6 = FUN_000ea1f4();
-                if (iVar6 == 0) {
-                  uVar11 = 0;
+                loop_i = bflib_system_io_fn_0ea1f4();
+                if (loop_i == 0) {
+                  uval_7 = 0;
                   local_c0 = 0;
                   for (local_34 = 0; (int)local_34 < 4; local_34 = local_34 + 1) {
-                    for (pcVar7 = pcVar1 + uVar11; (pcVar7 < pcVar12 && (*pcVar7 != '\t'));
-                        pcVar7 = pcVar7 + 1) {
-                      uVar11 = uVar11 + 1;
+                    for (loop_i_2 = str_ptr + uval_7; (loop_i_2 < str_ptr_2 && (*loop_i_2 != '\t'));
+                        loop_i_2 = loop_i_2 + 1) {
+                      uval_7 = uval_7 + 1;
                     }
-                    for (pcVar7 = pcVar1 + uVar11; (pcVar7 < pcVar12 && (*pcVar7 == '\t'));
-                        pcVar7 = pcVar7 + 1) {
-                      uVar11 = uVar11 + 1;
+                    for (loop_i_2 = str_ptr + uval_7; (loop_i_2 < str_ptr_2 && (*loop_i_2 == '\t'));
+                        loop_i_2 = loop_i_2 + 1) {
+                      uval_7 = uval_7 + 1;
                     }
-                    FUN_000ea21d();
-                    if (uVar5 <= uVar11) break;
+                    dk_atoi();
+                    if (uval_4 <= uval_7) break;
                     if (local_34 < 4) {
                     /* WARNING: Could not recover jumptable at 0x0002bb8f. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-                      uVar13 = (**(code **)((int)&PTR_LAB_0002b1e8 + local_c0))();
-                      return uVar13;
+                      uval_8 = (**(code **)((int)&PTR_LAB_0002b1e8 + local_c0))();
+                      return uval_8;
                     }
                     local_c0 = local_c0 + 4;
                   }
                 }
                 else {
-                  iVar6 = FUN_000ea1f4();
-                  if (iVar6 == 0) {
-                    uVar11 = 0;
+                  loop_i = bflib_system_io_fn_0ea1f4();
+                  if (loop_i == 0) {
+                    uval_7 = 0;
                     for (local_30 = 0; (int)local_30 < 100; local_30 = local_30 + 1) {
-                      for (pcVar7 = pcVar1 + uVar11; (pcVar7 < pcVar12 && (*pcVar7 != '\t'));
-                          pcVar7 = pcVar7 + 1) {
-                        uVar11 = uVar11 + 1;
+                      for (loop_i_2 = str_ptr + uval_7; (loop_i_2 < str_ptr_2 && (*loop_i_2 != '\t'));
+                          loop_i_2 = loop_i_2 + 1) {
+                        uval_7 = uval_7 + 1;
                       }
-                      for (pcVar7 = pcVar1 + uVar11; (pcVar7 < pcVar12 && (*pcVar7 == '\t'));
-                          pcVar7 = pcVar7 + 1) {
-                        uVar11 = uVar11 + 1;
+                      for (loop_i_2 = str_ptr + uval_7; (loop_i_2 < str_ptr_2 && (*loop_i_2 == '\t'));
+                          loop_i_2 = loop_i_2 + 1) {
+                        uval_7 = uval_7 + 1;
                       }
-                      FUN_000ea21d();
-                      if (uVar5 <= uVar11) break;
+                      dk_atoi();
+                      if (uval_4 <= uval_7) break;
                       if (local_30 < 6) {
                     /* WARNING: Could not recover jumptable at 0x0002bc57. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-                        uVar13 = (**(code **)((int)&PTR_LAB_0002b1f8 + extraout_EDX))();
-                        return uVar13;
+                        uval_8 = (**(code **)((int)&PTR_LAB_0002b1f8 + extraout_EDX))();
+                        return uval_8;
                       }
                     }
                   }
                   else {
-                    iVar6 = FUN_000ea1f4();
-                    if (iVar6 == 0) {
-                      uVar11 = 0;
-                      iVar6 = 0;
+                    loop_i = bflib_system_io_fn_0ea1f4();
+                    if (loop_i == 0) {
+                      uval_7 = 0;
+                      loop_i = 0;
                       for (local_2c = 0; (int)local_2c < 100; local_2c = local_2c + 1) {
-                        for (pcVar7 = pcVar1 + uVar11; (pcVar7 < pcVar12 && (*pcVar7 != '\t'));
-                            pcVar7 = pcVar7 + 1) {
-                          uVar11 = uVar11 + 1;
+                        for (loop_i_2 = str_ptr + uval_7; (loop_i_2 < str_ptr_2 && (*loop_i_2 != '\t'));
+                            loop_i_2 = loop_i_2 + 1) {
+                          uval_7 = uval_7 + 1;
                         }
-                        for (pcVar7 = pcVar1 + uVar11; (pcVar7 < pcVar12 && (*pcVar7 == '\t'));
-                            pcVar7 = pcVar7 + 1) {
+                        for (loop_i_2 = str_ptr + uval_7; (loop_i_2 < str_ptr_2 && (*loop_i_2 == '\t'));
+                            loop_i_2 = loop_i_2 + 1) {
                         }
-                        FUN_000ea21d();
-                        if (uVar5 <= extraout_EDX_00) break;
+                        dk_atoi();
+                        if (uval_4 <= extraout_EDX_00) break;
                         if (local_2c < 5) {
                     /* WARNING: Could not recover jumptable at 0x0002bd2b. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-                          uVar13 = (**(code **)((int)&PTR_LAB_0002b210 + iVar6))();
-                          return uVar13;
+                          uval_8 = (**(code **)((int)&PTR_LAB_0002b210 + loop_i))();
+                          return uval_8;
                         }
-                        iVar6 = iVar6 + 4;
-                        uVar11 = extraout_EDX_00;
+                        loop_i = loop_i + 4;
+                        uval_7 = extraout_EDX_00;
                       }
                     }
                     else {
-                      iVar6 = FUN_000ea1f4();
-                      if (iVar6 == 0) {
-                        uVar11 = 0;
+                      loop_i = bflib_system_io_fn_0ea1f4();
+                      if (loop_i == 0) {
+                        uval_7 = 0;
                         for (local_28 = 0; local_28 < 100; local_28 = local_28 + 1) {
-                          for (pcVar7 = pcVar1 + uVar11; (pcVar7 < pcVar12 && (*pcVar7 != '\t'));
-                              pcVar7 = pcVar7 + 1) {
-                            uVar11 = uVar11 + 1;
+                          for (loop_i_2 = str_ptr + uval_7; (loop_i_2 < str_ptr_2 && (*loop_i_2 != '\t'));
+                              loop_i_2 = loop_i_2 + 1) {
+                            uval_7 = uval_7 + 1;
                           }
-                          for (pcVar7 = pcVar1 + uVar11; (pcVar7 < pcVar12 && (*pcVar7 == '\t'));
-                              pcVar7 = pcVar7 + 1) {
-                            uVar11 = uVar11 + 1;
+                          for (loop_i_2 = str_ptr + uval_7; (loop_i_2 < str_ptr_2 && (*loop_i_2 == '\t'));
+                              loop_i_2 = loop_i_2 + 1) {
+                            uval_7 = uval_7 + 1;
                           }
-                          uVar10 = FUN_000ea21d();
-                          if (uVar5 <= uVar11) break;
-                          uVar2 = uVar10;
-                          if ((local_28 != 0) && (uVar2 = local_128, local_28 == 1)) {
-                            uVar9 = (undefined2)uVar10;
+                          uval_6 = dk_atoi();
+                          if (uval_4 <= uval_7) break;
+                          uval = uval_6;
+                          if ((local_28 != 0) && (uval = local_128, local_28 == 1)) {
+                            uval_5 = (undefined2)uval_6;
                             switch(local_128) {
                             case 0:
-                              DAT_002ebc46 = uVar9;
+                              g_bss_002ebc46 = uval_5;
                               break;
                             case 1:
-                              DAT_002ebc48 = uVar9;
+                              g_bss_002ebc48 = uval_5;
                               break;
                             case 2:
-                              DAT_002ebc4a = uVar9;
+                              g_bss_002ebc4a = uval_5;
                               break;
                             case 5:
-                              DAT_002ebc4d = uVar9;
+                              g_bss_002ebc4d = uval_5;
                               break;
                             case 6:
-                              DAT_002ebc4f = uVar9;
+                              g_bss_002ebc4f = uval_5;
                             }
                           }
-                          local_128 = uVar2;
+                          local_128 = uval;
                         }
                       }
                       else {
-                        iVar6 = FUN_000ea1f4();
-                        if (iVar6 == 0) {
-                          uVar11 = 0;
+                        loop_i = bflib_system_io_fn_0ea1f4();
+                        if (loop_i == 0) {
+                          uval_7 = 0;
                           for (local_24 = 0; local_24 < 100; local_24 = local_24 + 1) {
-                            for (pcVar7 = pcVar1 + uVar11; (pcVar7 < pcVar12 && (*pcVar7 != '\t'));
-                                pcVar7 = pcVar7 + 1) {
-                              uVar11 = uVar11 + 1;
+                            for (loop_i_2 = str_ptr + uval_7; (loop_i_2 < str_ptr_2 && (*loop_i_2 != '\t'));
+                                loop_i_2 = loop_i_2 + 1) {
+                              uval_7 = uval_7 + 1;
                             }
-                            for (pcVar7 = pcVar1 + uVar11; (pcVar7 < pcVar12 && (*pcVar7 == '\t'));
-                                pcVar7 = pcVar7 + 1) {
-                              uVar11 = uVar11 + 1;
+                            for (loop_i_2 = str_ptr + uval_7; (loop_i_2 < str_ptr_2 && (*loop_i_2 == '\t'));
+                                loop_i_2 = loop_i_2 + 1) {
+                              uval_7 = uval_7 + 1;
                             }
-                            iVar6 = FUN_000ea21d();
-                            if (uVar5 <= uVar11) break;
-                            iVar8 = iVar6;
-                            if ((local_24 != 0) && (iVar8 = local_12c, local_24 == 1)) {
-                              uVar3 = (undefined1)iVar6;
-                              uVar9 = (undefined2)iVar6;
+                            loop_i = dk_atoi();
+                            if (uval_4 <= uval_7) break;
+                            val = loop_i;
+                            if ((local_24 != 0) && (val = local_12c, local_24 == 1)) {
+                              uval_2 = (undefined1)loop_i;
+                              uval_5 = (undefined2)loop_i;
                               switch(local_12c) {
                               case 0:
-                                DAT_002eb9e8 = uVar9;
+                                g_bss_002eb9e8 = uval_5;
                                 break;
                               case 1:
-                                _DAT_002eb9ea = uVar9;
+                                g_bss_002eb9ea = uval_5;
                                 break;
                               case 2:
-                                DAT_002eb9ee = uVar9;
+                                g_bss_002eb9ee = uval_5;
                                 break;
                               case 3:
-                                DAT_002eb9f0 = uVar9;
+                                g_bss_002eb9f0 = uval_5;
                                 break;
                               case 4:
-                                DAT_002ebaef = uVar3;
+                                g_bss_002ebaef = uval_2;
                                 break;
                               case 5:
-                                DAT_002eb9f2 = uVar9;
+                                g_bss_002eb9f2 = uval_5;
                                 break;
                               case 6:
-                                _DAT_002eb9f4 = uVar9;
+                                g_bss_002eb9f4 = uval_5;
                                 break;
                               case 7:
-                                DAT_002eb9f6 = uVar9;
+                                g_bss_002eb9f6 = uval_5;
                                 break;
                               case 8:
-                                DAT_002eb9f8 = uVar9;
+                                g_bss_002eb9f8 = uval_5;
                                 break;
                               case 9:
-                                DAT_002eb9fa = uVar9;
+                                g_bss_002eb9fa = uval_5;
                                 break;
                               case 0xc:
-                                DAT_002ed417 = uVar3;
+                                g_bss_002ed417 = uval_2;
                                 break;
                               case 0xd:
-                                DAT_002ed418 = iVar6;
+                                g_bss_002ed418 = loop_i;
                                 break;
                               case 0xe:
-                                DAT_002ed41c = iVar6;
+                                g_bss_002ed41c = loop_i;
                                 break;
                               case 0x15:
-                                DAT_002ebc51 = uVar3;
+                                g_bss_002ebc51 = uval_2;
                                 break;
                               case 0x1c:
-                                _DAT_002ee7b0 = iVar6;
+                                g_bss_002ee7b0 = loop_i;
                                 break;
                               case 0x1d:
-                                _DAT_002ee7ac = iVar6;
+                                g_bss_002ee7ac = loop_i;
                                 break;
                               case 0x1e:
-                                _DAT_002ee7b4 = iVar6;
+                                g_bss_002ee7b4 = loop_i;
                                 break;
                               case 0x1f:
-                                _DAT_002eba00 = uVar9;
+                                g_bss_002eba00 = uval_5;
                                 break;
                               case 0x20:
-                                _DAT_002eba02 = uVar9;
+                                g_bss_002eba02 = uval_5;
                                 break;
                               case 0x21:
-                                DAT_002ee894 = iVar6;
+                                g_bss_002ee894 = loop_i;
                                 break;
                               case 0x22:
-                                DAT_002ee898 = iVar6;
+                                g_bss_002ee898 = loop_i;
                                 break;
                               case 0x23:
-                                _DAT_002eb9c6 = uVar9;
+                                g_bss_002eb9c6 = uval_5;
                                 break;
                               case 0x24:
-                                _DAT_002eb9c8 = uVar9;
+                                g_bss_002eb9c8 = uval_5;
                                 break;
                               case 0x25:
-                                _DAT_002eb9ca = uVar9;
+                                g_bss_002eb9ca = uval_5;
                                 break;
                               case 0x26:
-                                _DAT_002eb9cc = uVar9;
+                                g_bss_002eb9cc = uval_5;
                                 break;
                               case 0x27:
-                                _DAT_002eb9ce = uVar9;
+                                g_bss_002eb9ce = uval_5;
                                 break;
                               case 0x28:
-                                _DAT_002eb9d0 = uVar9;
+                                g_bss_002eb9d0 = uval_5;
                                 break;
                               case 0x29:
-                                _DAT_002eb9d2 = uVar9;
+                                g_bss_002eb9d2 = uval_5;
                                 break;
                               case 0x2a:
-                                _DAT_002eb9d4 = uVar9;
+                                g_bss_002eb9d4 = uval_5;
                                 break;
                               case 0x2b:
-                                DAT_002eb9d6 = uVar9;
+                                g_bss_002eb9d6 = uval_5;
                                 break;
                               case 0x2d:
-                                DAT_002ebaf4 = uVar9;
+                                g_bss_002ebaf4 = uval_5;
                                 break;
                               case 0x2f:
-                                DAT_002ebc38 = iVar6;
+                                g_bss_002ebc38 = loop_i;
                                 break;
                               case 0x30:
-                                DAT_002ebc3c = iVar6;
+                                g_bss_002ebc3c = loop_i;
                                 break;
                               case 0x31:
-                                DAT_002ebc40 = iVar6;
+                                g_bss_002ebc40 = loop_i;
                                 break;
                               case 0x32:
-                                DAT_002ebc4c = uVar3;
+                                g_bss_002ebc4c = uval_2;
                                 break;
                               case 0x34:
-                                DAT_002ebc44 = uVar9;
+                                g_bss_002ebc44 = uval_5;
                                 break;
                               case 0x35:
-                                DAT_002ed442 = iVar6;
+                                g_bss_002ed442 = loop_i;
                                 break;
                               case 0x37:
-                                DAT_002ed3e2 = iVar6;
+                                g_bss_002ed3e2 = loop_i;
                                 break;
                               case 0x38:
-                                DAT_002eb9ec = uVar9;
+                                g_bss_002eb9ec = uval_5;
                                 break;
                               case 0x3a:
-                                DAT_001ace04 = iVar6;
-                                _DAT_002ed3fb = iVar6;
+                                g_bss_001ace04 = loop_i;
+                                g_bss_002ed3fb = loop_i;
                                 break;
                               case 0x3b:
-                                _DAT_002ed3ea = iVar6;
+                                g_bss_002ed3ea = loop_i;
                                 break;
                               case 0x3c:
-                                DAT_002ed3f3 = iVar6;
+                                g_bss_002ed3f3 = loop_i;
                                 break;
                               case 0x3d:
-                                _DAT_002ed3f7 = iVar6;
+                                g_bss_002ed3f7 = loop_i;
                                 break;
                               case 0x3e:
-                                _DAT_002ed3ef = iVar6;
+                                g_bss_002ed3ef = loop_i;
                                 break;
                               case 0x3f:
-                                DAT_002ed3ff = uVar3;
+                                g_bss_002ed3ff = uval_2;
                                 break;
                               case 0x40:
-                                DAT_002ed400 = uVar3;
+                                g_bss_002ed400 = uval_2;
                                 break;
                               case 0x41:
-                                DAT_002ed401 = uVar3;
+                                g_bss_002ed401 = uval_2;
                                 break;
                               case 0x42:
-                                DAT_002ed40b = iVar6;
+                                g_bss_002ed40b = loop_i;
                                 break;
                               case 0x43:
-                                DAT_002ed40f = iVar6;
+                                g_bss_002ed40f = loop_i;
                                 break;
                               case 0x44:
-                                DAT_002ed413 = iVar6;
+                                g_bss_002ed413 = loop_i;
                                 break;
                               case 0x45:
-                                DAT_002ed446 = iVar6;
+                                g_bss_002ed446 = loop_i;
                                 break;
                               case 0x46:
-                                DAT_002ed44a = iVar6;
+                                g_bss_002ed44a = loop_i;
                                 break;
                               case 0x47:
-                                DAT_002ed44f = uVar3;
+                                g_bss_002ed44f = uval_2;
                                 break;
                               case 0x48:
-                                _DAT_002eb9fc = uVar9;
+                                g_bss_002eb9fc = uval_5;
                                 break;
                               case 0x49:
-                                DAT_002eb9fe = uVar9;
+                                g_bss_002eb9fe = uval_5;
                                 break;
                               case 0x4a:
-                                DAT_002ebaee = uVar3;
+                                g_bss_002ebaee = uval_2;
                               }
                             }
-                            local_12c = iVar8;
+                            local_12c = val;
                           }
                         }
                         else {
-                          iVar6 = FUN_000ea1f4();
-                          if (iVar6 == 0) {
-                            uVar11 = 0;
+                          loop_i = bflib_system_io_fn_0ea1f4();
+                          if (loop_i == 0) {
+                            uval_7 = 0;
                             for (local_20 = 0; local_20 < 100; local_20 = local_20 + 1) {
-                              for (pcVar7 = pcVar1 + uVar11; (pcVar7 < pcVar12 && (*pcVar7 != '\t'))
-                                  ; pcVar7 = pcVar7 + 1) {
-                                uVar11 = uVar11 + 1;
+                              for (loop_i_2 = str_ptr + uval_7; (loop_i_2 < str_ptr_2 && (*loop_i_2 != '\t'))
+                                  ; loop_i_2 = loop_i_2 + 1) {
+                                uval_7 = uval_7 + 1;
                               }
-                              for (pcVar7 = pcVar1 + uVar11; (pcVar7 < pcVar12 && (*pcVar7 == '\t'))
-                                  ; pcVar7 = pcVar7 + 1) {
-                                uVar11 = uVar11 + 1;
+                              for (loop_i_2 = str_ptr + uval_7; (loop_i_2 < str_ptr_2 && (*loop_i_2 == '\t'))
+                                  ; loop_i_2 = loop_i_2 + 1) {
+                                uval_7 = uval_7 + 1;
                               }
-                              iVar6 = FUN_000ea21d();
-                              if (uVar5 <= uVar11) break;
-                              iVar8 = iVar6;
-                              if ((local_20 != 0) && (iVar8 = local_12c, local_20 == 1)) {
-                                *(short *)(&DAT_002eb9b4 + local_12c * 2) = (short)iVar6;
+                              loop_i = dk_atoi();
+                              if (uval_4 <= uval_7) break;
+                              val = loop_i;
+                              if ((local_20 != 0) && (val = local_12c, local_20 == 1)) {
+                                *(short *)(&g_bss_002eb9b4 + local_12c * 2) = (short)loop_i;
                               }
-                              local_12c = iVar8;
+                              local_12c = val;
                             }
                           }
                           else {
-                            iVar6 = FUN_000ea1f4();
-                            if (iVar6 == 0) {
-                              uVar11 = 0;
-                              for (iVar6 = 0; iVar6 < 100; iVar6 = iVar6 + 1) {
-                                for (pcVar7 = pcVar1 + uVar11;
-                                    (pcVar7 < pcVar12 && (*pcVar7 != '\t')); pcVar7 = pcVar7 + 1) {
-                                  uVar11 = uVar11 + 1;
+                            loop_i = bflib_system_io_fn_0ea1f4();
+                            if (loop_i == 0) {
+                              uval_7 = 0;
+                              for (loop_i = 0; loop_i < 100; loop_i = loop_i + 1) {
+                                for (loop_i_2 = str_ptr + uval_7;
+                                    (loop_i_2 < str_ptr_2 && (*loop_i_2 != '\t')); loop_i_2 = loop_i_2 + 1) {
+                                  uval_7 = uval_7 + 1;
                                 }
-                                for (pcVar7 = pcVar1 + uVar11;
-                                    (pcVar7 < pcVar12 && (*pcVar7 == '\t')); pcVar7 = pcVar7 + 1) {
-                                  uVar11 = uVar11 + 1;
+                                for (loop_i_2 = str_ptr + uval_7;
+                                    (loop_i_2 < str_ptr_2 && (*loop_i_2 == '\t')); loop_i_2 = loop_i_2 + 1) {
+                                  uval_7 = uval_7 + 1;
                                 }
-                                uVar13 = FUN_000ea21d();
-                                iVar6 = (int)((ulonglong)uVar13 >> 0x20);
-                                if (uVar5 <= uVar11) break;
-                                iVar8 = (int)uVar13;
-                                if ((iVar6 != 0) && (iVar8 = local_124, iVar6 == 1)) {
-                                  *(int *)(&DAT_001ae984 + local_124 * 4) = (int)uVar13;
+                                uval_8 = dk_atoi();
+                                loop_i = (int)((ulonglong)uval_8 >> 0x20);
+                                if (uval_4 <= uval_7) break;
+                                val = (int)uval_8;
+                                if ((loop_i != 0) && (val = local_124, loop_i == 1)) {
+                                  *(int *)(&g_bss_001ae984 + local_124 * 4) = (int)uval_8;
                                 }
-                                local_124 = iVar8;
+                                local_124 = val;
                               }
                             }
                             else {
-                              iVar6 = FUN_000ea1f4();
-                              if (iVar6 == 0) {
+                              loop_i = bflib_system_io_fn_0ea1f4();
+                              if (loop_i == 0) {
                                 local_40 = 0;
                                 for (local_1c = 0; local_1c < 3; local_1c = local_1c + 1) {
-                                  for (pcVar7 = pcVar1 + local_40;
-                                      (pcVar7 < pcVar12 && (*pcVar7 != '\t')); pcVar7 = pcVar7 + 1)
+                                  for (loop_i_2 = str_ptr + local_40;
+                                      (loop_i_2 < str_ptr_2 && (*loop_i_2 != '\t')); loop_i_2 = loop_i_2 + 1)
                                   {
                                     local_40 = local_40 + 1;
                                   }
-                                  for (pcVar7 = pcVar1 + local_40;
-                                      (pcVar7 < pcVar12 && (*pcVar7 == '\t')); pcVar7 = pcVar7 + 1)
+                                  for (loop_i_2 = str_ptr + local_40;
+                                      (loop_i_2 < str_ptr_2 && (*loop_i_2 == '\t')); loop_i_2 = loop_i_2 + 1)
                                   {
                                     local_40 = local_40 + 1;
                                   }
-                                  FUN_000ea21d();
-                                  if (uVar5 <= extraout_EDX_01) break;
+                                  dk_atoi();
+                                  if (uval_4 <= extraout_EDX_01) break;
                                   if ((local_1c != 0) && (local_1c == 1)) {
-                                    FUN_00066fcb();
+                                    research_fn_066fcb();
                                   }
                                 }
                               }
                               else {
-                                iVar6 = FUN_000ea1f4();
-                                if (iVar6 == 0) {
+                                loop_i = bflib_system_io_fn_0ea1f4();
+                                if (loop_i == 0) {
                                   local_130 = 0;
                                   for (local_120 = 0; local_120 < 3; local_120 = local_120 + 1) {
-                                    for (pcVar7 = pcVar1 + local_130;
-                                        (pcVar7 < pcVar12 && (*pcVar7 != '\t')); pcVar7 = pcVar7 + 1
+                                    for (loop_i_2 = str_ptr + local_130;
+                                        (loop_i_2 < str_ptr_2 && (*loop_i_2 != '\t')); loop_i_2 = loop_i_2 + 1
                                         ) {
                                       local_130 = local_130 + 1;
                                     }
-                                    for (pcVar7 = pcVar1 + local_130;
-                                        (pcVar7 < pcVar12 && (*pcVar7 == '\t')); pcVar7 = pcVar7 + 1
+                                    for (loop_i_2 = str_ptr + local_130;
+                                        (loop_i_2 < str_ptr_2 && (*loop_i_2 == '\t')); loop_i_2 = loop_i_2 + 1
                                         ) {
                                       local_130 = local_130 + 1;
                                     }
-                                    FUN_000ea21d();
-                                    if (uVar5 <= extraout_EDX_02) break;
+                                    dk_atoi();
+                                    if (uval_4 <= extraout_EDX_02) break;
                                     if ((local_120 != 0) && (local_120 == 1)) {
-                                      FUN_00066fcb();
+                                      research_fn_066fcb();
                                     }
                                   }
                                 }
@@ -2145,523 +2009,474 @@ LAB_0002b9b7:
         }
         goto LAB_0002c312;
       }
-      DAT_002e6f27 = DAT_002eba00;
-      FUN_000e6a10();
-      uVar10 = 1;
+      g_bss_002e6f27 = g_bss_002eba00;
+      LbScreenWaitVbi();
+      uval_6 = 1;
       goto LAB_0002a4dd;
     }
   }
-  FUN_000ddaf0(); /* LbErrorLog("file.cpp", line 1487, "Cannot load XLS file") */
-  uVar10 = 0;
+  LbErrorLog(); /* LbErrorLog("file.cpp", line 1487, "Cannot load XLS file") */
+  uval_6 = 0;
 LAB_0002a4dd:
-  return CONCAT44(in_EDX,uVar10);
+  return CONCAT44(arg_edx,uval_6);
 }
 
 /******************************************************************************
- * Function : sub_02c3d0 (Ghidra: FUN_0002c3d0)
- * Prototype: undefined8 sub_02c3d0(void);
+ * Function : file_fn_02c3d0 (Original VA: 0x2c3d0, Ghidra: FUN_0002c3d0)
+ * Prototype: undefined8 file_fn_02c3d0(void);
  * Address  : 0x2c3d0 (Size: 5 bytes)
  * Module   : file.cpp [direct_file_string_xref]
- * OrigLine : file.cpp:2568 ("Cannot open source file"); file.cpp:2575 ("Cannot find source or destination path")
- * Naming   : Address-based identifier
- * Callers  : 6 -> 0x2f8a2, 0x430ba, 0x457bd, 0x69c7f, 0x69edc, 0x8cc24
+ * OrigLine : file.cpp lines 2568, 2575
+ * Purpose  : Module file.cpp procedure @ 0x02c3d0
+ * Callers  : 6 -> frontend_fn_02f8a2, inits_fn_0430ba, inits_wlb_file_muddled_fixing_0457bd, setup_load_vga_256_palettes, setup_load_alpha_and_light_tables, draw_load_palette_file_08cc24
  * Callees  : 0 -> 
- * Strings  :
- *   - 0x163009: "file.cpp"
- *   - 0x16302a: "file.cpp"
- *   - 0x16305a: "file.cpp"
  ******************************************************************************/
-undefined8 FUN_0002c3d0(void)
+undefined8 file_fn_02c3d0(void)
 
 {
-  int iVar1;
-  undefined4 in_EDX;
+  int val;
+  undefined4 arg_edx;
   
-  iVar1 = FUN_000f78b2();
-  return CONCAT44(in_EDX,(uint)(iVar1 == 0));
+  val = bflib_system_io_fn_0f78b2();
+  return CONCAT44(arg_edx,(uint)(val == 0));
 }
 
 /******************************************************************************
- * Function : dk_load_script_file_02c502 (Ghidra: FUN_0002c502)
- * Prototype: undefined8 dk_load_script_file_02c502(void);
+ * Function : file_load_script_file_02c502 (Original VA: 0x2c502, Ghidra: FUN_0002c502)
+ * Prototype: undefined8 file_load_script_file_02c502(void);
  * Address  : 0x2c502 (Size: 480 bytes)
  * Module   : file.cpp [direct_file_string_xref]
- * OrigLine : file.cpp:2740 ("Cannot load SCRIPT file"); file.cpp:2786 ("No WIN GAME conditions in script file."); file.cpp:2790 ("Missing ENDIF's in script file.")
- * Naming   : String 'Cannot load SCRIPT file'
- * Callers  : 1 -> 0x40832
- * Callees  : 9 -> 0x150f0, 0x5cc4a, 0x78ada, 0xdd920, 0xddaf0, 0xe6a10, 0xe7714, 0xe8a98, 0xe984c
- * Strings  :
- *   - 0x163093: "file.cpp"
- *   - 0x1630b4: "file.cpp"
- *   - 0x1630e4: "file.cpp"
- *   - 0x16310d: "file.cpp"
- *   - 0x163063: "LEVELS"
- *   - 0x16306c: "%s\map%05d.txt"
- *   - 0x16307b: "Cannot load SCRIPT file"
- *   - 0x16309c: "Cannot load SCRIPT file"
- *   - 0x1630bd: "No WIN GAME conditions in script file."
- *   - 0x1630ed: "Missing ENDIF's in script file."
+ * OrigLine : file.cpp lines 2740, 2786, 2790
+ * Purpose  : String 'Cannot load SCRIPT file'
+ * Callers  : 1 -> inits_update_player_dungeon_040832
+ * Callees  : 9 -> cdtest_ldata_dkwind00_dat_0150f0, newgui_fn_05cc4a, command_script_number_parameters_078ada, prepare_file_path, LbErrorLog, LbScreenWaitVbi, dk_sprintf, bflib_system_io_fn_0e8a98 ...
  ******************************************************************************/
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined8 FUN_0002c502(void)
+undefined8 file_load_script_file_02c502(void)
 
 {
-  undefined4 in_EAX;
-  int iVar1;
-  undefined4 uVar2;
+  undefined4 arg_eax;
+  int val;
+  undefined4 uval;
   int extraout_ECX;
-  int iVar3;
+  int val_2;
   int extraout_ECX_00;
   int extraout_ECX_01;
-  char *pcVar4;
+  char *str_ptr;
   char *extraout_ECX_02;
-  undefined4 in_EDX;
-  int iVar5;
-  int iVar6;
+  undefined4 arg_edx;
+  int val_3;
+  int dungeon_off;
   int extraout_EDX;
-  char *pcVar7;
+  char *str_ptr_2;
   
-  FUN_0005cc4a();
-  FUN_000e6a10();
-  DAT_00179c04 = 1;
-  _DAT_00179c08 = -1;
-  DAT_002ee88e = 0;
-  iVar5 = 0x80;
-  DAT_0019d0bd = DAT_0019d0bd | 8;
-  iVar3 = extraout_ECX;
+  newgui_fn_05cc4a();
+  LbScreenWaitVbi();
+  g_data_00179c04 = 1;
+  g_data_00179c08 = -1;
+  g_bss_002ee88e = 0;
+  val_3 = 0x80;
+  g_bss_0019d0bd = g_bss_0019d0bd | 8;
+  val_2 = extraout_ECX;
   do {
-    iVar6 = iVar3 * 0x1508 + 4;
+    dungeon_off = val_2 * 0x1508 + 4;
     do {
-      iVar1 = iVar6 + 4;
-      *(undefined4 *)((int)&DAT_002e0fd8 + iVar6) = 0xb;
-      iVar6 = iVar1;
-    } while (iVar1 != iVar5);
-    iVar3 = iVar3 + 1;
-    iVar5 = iVar5 + 0x1508;
-  } while (iVar3 < 5);
-  iVar5 = 0x28;
-  iVar3 = 0;
+      val = dungeon_off + 4;
+      *(undefined4 *)((int)&g_bss_002e0fd8 + dungeon_off) = 0xb;
+      dungeon_off = val;
+    } while (val != val_3);
+    val_2 = val_2 + 1;
+    val_3 = val_3 + 0x1508;
+  } while (val_2 < 5);
+  val_3 = 0x28;
+  val_2 = 0;
   do {
-    iVar3 = iVar3 * 0x1508;
-    for (iVar6 = iVar3; iVar6 != iVar5; iVar6 = iVar6 + 5) {
-      (&DAT_002e15b9)[iVar6] = 0;
+    val_2 = val_2 * 0x1508;
+    for (dungeon_off = val_2; dungeon_off != val_3; dungeon_off = dungeon_off + 5) {
+      (&g_bss_002e15b9)[dungeon_off] = 0;
     }
-    (&DAT_002e158f)[iVar3] = 1;
-    (&DAT_002e157b)[iVar3] = 1;
-    iVar5 = iVar5 + 0x1508;
-    FUN_000e6a10();
-    FUN_000e6a10();
-    iVar3 = extraout_ECX_00;
+    (&g_bss_002e158f)[val_2] = 1;
+    (&g_bss_002e157b)[val_2] = 1;
+    val_3 = val_3 + 0x1508;
+    LbScreenWaitVbi();
+    LbScreenWaitVbi();
+    val_2 = extraout_ECX_00;
   } while (extraout_ECX_00 < 5);
-  FUN_000150f0();
-  FUN_000dd920(in_EAX);
-  uVar2 = FUN_000dd920();
-  FUN_000e7714(&DAT_0019cbac,s__s_map_05d_txt_0016306c,uVar2);
-  iVar3 = FUN_000e8a98();
-  if (0 < iVar3) {
-    FUN_000150f0();
-    iVar3 = FUN_000e984c();
-    if (iVar3 == extraout_ECX_01) {
-      pcVar4 = DAT_00199228 + extraout_ECX_01;
-      pcVar7 = DAT_00199228;
-      while (pcVar7 < pcVar4) {
-        for (; (pcVar7 < pcVar4 && (*pcVar7 != '\n')); pcVar7 = pcVar7 + 1) {
+  cdtest_ldata_dkwind00_dat_0150f0();
+  prepare_file_path(arg_eax);
+  uval = prepare_file_path();
+  dk_sprintf(&g_log_sprintf_buf,s__s_map_05d_txt_0016306c,uval);
+  val_2 = bflib_system_io_fn_0e8a98();
+  if (0 < val_2) {
+    cdtest_ldata_dkwind00_dat_0150f0();
+    val_2 = bflib_system_io_fn_0e984c();
+    if (val_2 == extraout_ECX_01) {
+      str_ptr = g_scratch_work_buf + extraout_ECX_01;
+      str_ptr_2 = g_scratch_work_buf;
+      while (str_ptr_2 < str_ptr) {
+        for (; (str_ptr_2 < str_ptr && (*str_ptr_2 != '\n')); str_ptr_2 = str_ptr_2 + 1) {
         }
-        *pcVar7 = '\0';
-        FUN_00078ada();
-        DAT_00179c04 = DAT_00179c04 + 1;
-        pcVar4 = extraout_ECX_02;
-        pcVar7 = (char *)(extraout_EDX + 1);
+        *str_ptr_2 = '\0';
+        command_script_number_parameters_078ada();
+        g_data_00179c04 = g_data_00179c04 + 1;
+        str_ptr = extraout_ECX_02;
+        str_ptr_2 = (char *)(extraout_EDX + 1);
       }
-      if (DAT_002ed33e == 0) {
-        FUN_000ddaf0(); /* LbErrorLog("file.cpp", line 2740, "Cannot load SCRIPT file") */
+      if (g_bss_002ed33e == 0) {
+        LbErrorLog(); /* LbErrorLog("file.cpp", line 2740, "Cannot load SCRIPT file") */
       }
-      if (_DAT_00179c08 != -1) {
-        FUN_000ddaf0(); /* LbErrorLog("file.cpp", line 2786, "No WIN GAME conditions in script file.") */
+      if (g_data_00179c08 != -1) {
+        LbErrorLog(); /* LbErrorLog("file.cpp", line 2786, "No WIN GAME conditions in script file.") */
       }
-      uVar2 = 1;
+      uval = 1;
       goto LAB_0002a4dc;
     }
   }
-  FUN_000ddaf0(); /* LbErrorLog("file.cpp", line 2790, "Missing ENDIF's in script file.") */
-  uVar2 = 0;
+  LbErrorLog(); /* LbErrorLog("file.cpp", line 2790, "Missing ENDIF's in script file.") */
+  uval = 0;
 LAB_0002a4dc:
-  return CONCAT44(in_EDX,uVar2);
+  return CONCAT44(arg_edx,uval);
 }
 
 /******************************************************************************
- * Function : sub_02c6e2 (Ghidra: FUN_0002c6e2)
- * Prototype: void sub_02c6e2(void);
+ * Function : file_fn_02c6e2 (Original VA: 0x2c6e2, Ghidra: FUN_0002c6e2)
+ * Prototype: void file_fn_02c6e2(void);
  * Address  : 0x2c6e2 (Size: 84 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0x2feca, 0x52c6d, 0x52ced
- * Callees  : 4 -> 0xdd920, 0xe6a10, 0xe7714, 0xe984c
- * Strings  :
- *   - 0x163116: "SAVE"
- *   - 0x16311d: "%s\SAVE.CAT"
+ * Purpose  : Module file.cpp procedure @ 0x02c6e2
+ * Callers  : 3 -> frontend_fn_02feca, newgui_fn_052c6d, newgui_fn_052ced
+ * Callees  : 4 -> prepare_file_path, LbScreenWaitVbi, dk_sprintf, bflib_system_io_fn_0e984c
  ******************************************************************************/
-void FUN_0002c6e2(void)
+void file_fn_02c6e2(void)
 
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 uval;
+  int val;
   
-  FUN_000dd920();
-  uVar1 = FUN_000dd920();
-  FUN_000e7714(&DAT_0019cbac,s__s_SAVE_CAT_0016311d,uVar1);
-  iVar2 = FUN_000e984c();
-  if (iVar2 == -1) {
-    FUN_000e6a10();
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(&g_log_sprintf_buf,s__s_SAVE_CAT_0016311d,uval);
+  val = bflib_system_io_fn_0e984c();
+  if (val == -1) {
+    LbScreenWaitVbi();
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_02c736 (Ghidra: FUN_0002c736)
- * Prototype: undefined8 sub_02c736(void);
+ * Function : file_fn_02c736 (Original VA: 0x2c736, Ghidra: FUN_0002c736)
+ * Prototype: undefined8 file_fn_02c736(void);
  * Address  : 0x2c736 (Size: 79 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0x2c785, 0x2c833, 0x2e6c4
- * Callees  : 3 -> 0xdd920, 0xe7714, 0xe98c8
- * Strings  :
- *   - 0x163129: "SAVE"
- *   - 0x163130: "%s\SAVE.CAT"
+ * Purpose  : Module file.cpp procedure @ 0x02c736
+ * Callers  : 3 -> file_fn_02c785, file_update_player_dungeon_02c833, frontend_fn_02e6c4
+ * Callees  : 3 -> prepare_file_path, dk_sprintf, bflib_system_io_fn_0e98c8
  ******************************************************************************/
-undefined8 FUN_0002c736(void)
+undefined8 file_fn_02c736(void)
 
 {
-  undefined4 uVar1;
-  int iVar2;
-  undefined4 in_EDX;
+  undefined4 uval;
+  int val;
+  undefined4 arg_edx;
   
-  FUN_000dd920();
-  uVar1 = FUN_000dd920();
-  FUN_000e7714(&DAT_0019cbac,s__s_SAVE_CAT_00163130,uVar1);
-  iVar2 = FUN_000e98c8();
-  return CONCAT44(in_EDX,(uint)(iVar2 != -1));
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(&g_log_sprintf_buf,s__s_SAVE_CAT_00163130,uval);
+  val = bflib_system_io_fn_0e98c8();
+  return CONCAT44(arg_edx,(uint)(val != -1));
 }
 
 /******************************************************************************
- * Function : sub_02c785 (Ghidra: FUN_0002c785)
- * Prototype: longlong sub_02c785(void);
+ * Function : file_fn_02c785 (Original VA: 0x2c785, Ghidra: FUN_0002c785)
+ * Prototype: longlong file_fn_02c785(void);
  * Address  : 0x2c785 (Size: 174 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x5a47f
- * Callees  : 6 -> 0x2c736, 0x51374, 0x5b4e7, 0xdd920, 0xe7714, 0xe98c8
- * Strings  :
- *   - 0x16313c: "SAVE"
- *   - 0x163143: "%s\GAME%04d.SAV"
+ * Purpose  : Module file.cpp procedure @ 0x02c785
+ * Callers  : 1 -> newgui_fn_05a47f
+ * Callees  : 6 -> file_fn_02c736, moodneed_fn_051374, newgui_copy_state_struct_05b4e7, prepare_file_path, dk_sprintf, bflib_system_io_fn_0e98c8
  ******************************************************************************/
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-longlong FUN_0002c785(void)
+longlong file_fn_02c785(void)
 
 {
-  undefined4 uVar1;
-  int iVar2;
-  uint in_EDX;
-  undefined8 uVar3;
+  undefined4 uval;
+  int val;
+  uint arg_edx;
+  undefined8 uval_2;
   undefined1 local_a4 [152];
   
-  uVar3 = FUN_0002c736();
-  if ((int)uVar3 != 0) {
-    DAT_0019d0ac._0_1_ = DAT_002e78e9;
-    ram0x0019d0ad = DAT_00179bfc;
-    ram0x0019d0b1 = DAT_00179c00;
-    DAT_0019d0b4._1_1_ = 0;
-    FUN_000dd920((int)((ulonglong)uVar3 >> 0x20));
-    uVar1 = FUN_000dd920();
-    FUN_000e7714(local_a4,s__s_GAME_04d_SAV_00163143,uVar1);
-    iVar2 = FUN_000e98c8();
-    if (iVar2 != -1) {
-      FUN_00051374();
-      return CONCAT44(in_EDX,1);
+  uval_2 = file_fn_02c736();
+  if ((int)uval_2 != 0) {
+    g_bss_0019d0ac._0_1_ = g_bss_002e78e9;
+    ram0x0019d0ad = g_data_00179bfc;
+    ram0x0019d0b1 = g_data_00179c00;
+    g_bss_0019d0b4._1_1_ = 0;
+    prepare_file_path((int)((ulonglong)uval_2 >> 0x20));
+    uval = prepare_file_path();
+    dk_sprintf(local_a4,s__s_GAME_04d_SAV_00163143,uval);
+    val = bflib_system_io_fn_0e98c8();
+    if (val != -1) {
+      moodneed_fn_051374();
+      return CONCAT44(arg_edx,1);
     }
   }
-  FUN_0005b4e7();
-  return (ulonglong)in_EDX << 0x20;
+  newgui_copy_state_struct_05b4e7();
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : sub_02c833 (Ghidra: FUN_0002c833)
- * Prototype: undefined8 sub_02c833(void);
+ * Function : file_update_player_dungeon_02c833 (Original VA: 0x2c833, Ghidra: FUN_0002c833)
+ * Prototype: undefined8 file_update_player_dungeon_02c833(void);
  * Address  : 0x2c833 (Size: 571 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x2dfac, 0x5a432
- * Callees  : 17 -> 0x270e0, 0x27320, 0x2c736, 0x2ca74, 0x35e3c, 0x44eb6, 0x51374, 0x5d35c, 0x627b5, 0x63122 ...
- * Strings  :
- *   - 0x163153: "SAVE"
- *   - 0x16315a: "%s\GAME%04d.SAV"
+ * Purpose  : Accesses per-player Dungeon state (stride 0x1508)
+ * Callers  : 2 -> frontend_why_are_we_here_02dfac, newgui_fn_05a432
+ * Callees  : 17 -> eyelens_fn_0270e0, eyelens_fn_027320, file_fn_02c736, file_update_player_dungeon_02ca74, frontnet_update_player_dungeon_035e3c, inits_update_creature_and_thing_044eb6, moodneed_fn_051374, packet_resync_network_game_state ...
  ******************************************************************************/
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined8 FUN_0002c833(void)
+undefined8 file_update_player_dungeon_02c833(void)
 
 {
-  int in_EAX;
-  undefined4 uVar1;
-  int iVar2;
-  undefined4 in_EDX;
+  int arg_eax;
+  undefined4 uval;
+  int file_handle;
+  undefined4 arg_edx;
   undefined1 local_c0 [152];
   undefined1 local_28;
   int local_27;
   int local_23;
   double local_1c;
   
-  FUN_000270e0();
-  FUN_000dd920();
-  uVar1 = FUN_000dd920();
-  FUN_000e7714(local_c0,s__s_GAME_04d_SAV_0016315a,uVar1);
-  iVar2 = FUN_000e8980();
-  if (iVar2 == -1) {
+  eyelens_fn_0270e0();
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(local_c0,s__s_GAME_04d_SAV_0016315a,uval);
+  file_handle = LbFileOpen();
+  if (file_handle == -1) {
 LAB_0002c88b:
-    (&DAT_002e6ff4)[in_EAX * 0x11] = 0;
-    FUN_0002c736();
+    (&g_bss_002e6ff4)[arg_eax * 0x11] = 0;
+    file_fn_02c736();
   }
   else {
-    iVar2 = FUN_000e8a80();
-    if (iVar2 != 10) {
-      FUN_000e8a1c();
+    file_handle = LbFileRead();
+    if (file_handle != 10) {
+      bflib_system_io_fn_0e8a1c();
       goto LAB_0002c88b;
     }
-    FUN_000e8a1c();
-    iVar2 = FUN_000e8a98();
-    if (((iVar2 != 0x151825) || (local_27 != DAT_00179bfc)) || (local_23 != DAT_00179c00)) {
-      iVar2 = FUN_000e8a98();
-      if (((iVar2 == 0x151825) && (local_27 == DAT_00179bfc)) &&
-         ((local_23 < 9 && (DAT_00179c00 == 10)))) goto LAB_0002c961;
-      *(undefined4 *)(&DAT_0019d0cf + DAT_002f10ce._3_1_ * 0x4ef) = 0;
-      DAT_002f10ce._3_1_ = '\0';
-      DAT_002ebaf6 = 2;
-      DAT_0019d0f4 = 1;
-      DAT_0019d0b6 = DAT_0019d0b6 & 0xfe;
-      DAT_002e78e9 = local_28;
-      DAT_002e78ea = local_28;
-      FUN_0005d35c();
+    bflib_system_io_fn_0e8a1c();
+    file_handle = bflib_system_io_fn_0e8a98();
+    if (((file_handle != 0x151825) || (local_27 != g_data_00179bfc)) || (local_23 != g_data_00179c00)) {
+      file_handle = bflib_system_io_fn_0e8a98();
+      if (((file_handle == 0x151825) && (local_27 == g_data_00179bfc)) &&
+         ((local_23 < 9 && (g_data_00179c00 == 10)))) goto LAB_0002c961;
+      *(undefined4 *)(&g_bss_0019d0cf + g_my_player_word._3_1_ * 0x4ef) = 0;
+      g_my_player_word._3_1_ = '\0';
+      g_game_type = 2;
+      g_bss_0019d0f4 = 1;
+      g_game_system_flags = g_game_system_flags & 0xfe;
+      g_bss_002e78e9 = local_28;
+      g_bss_002e78ea = local_28;
+      packet_resync_network_game_state();
 LAB_0002ca5d:
-      uVar1 = 1;
+      uval = 1;
       goto LAB_0002ca62;
     }
 LAB_0002c961:
-    iVar2 = FUN_000e984c();
-    if (iVar2 == 0x151825) {
-      FUN_00044eb6();
-      FUN_0002ca74();
-      FUN_00051374();
-      FUN_00063122();
-      local_1c = (double)_DAT_0033401d;
-      if ((_DAT_0033401d <= (float)_DAT_0016316a) || (_DAT_00163172 <= local_1c)) {
-        DAT_002ee88d = 0;
+    file_handle = bflib_system_io_fn_0e984c();
+    if (file_handle == 0x151825) {
+      inits_update_creature_and_thing_044eb6();
+      file_update_player_dungeon_02ca74();
+      moodneed_fn_051374();
+      panmap_door_flagged_position_063122();
+      local_1c = (double)g_bss_0033401d;
+      if ((g_bss_0033401d <= (float)g_data_0016316a) || (g_data_00163172 <= local_1c)) {
+        g_bss_002ee88d = 0;
       }
       else {
-        DAT_002ee88d = 1;
+        g_bss_002ee88d = 1;
       }
-      iVar2 = DAT_002f10ce._3_1_ * 0x4ef;
-      *(undefined4 *)(&DAT_0019d589 + iVar2) = 0;
-      *(undefined4 *)(&DAT_0019d58d + iVar2) = 0;
-      *(undefined4 *)(&DAT_0019d0cf + iVar2) = 0;
-      (&DAT_0019d0cb)[iVar2] = (&DAT_0019d0cb)[iVar2] & 0xf3;
-      FUN_000627b5();
-      FUN_00027320();
-      if ((&DAT_0019d0f1)[DAT_002f10ce._3_1_ * 0x4ef] != '\0') {
-        FUN_00035e3c();
-        iVar2 = (int)DAT_002f10ce._3_1_;
-        *(undefined4 *)(&DAT_002e18a4 + iVar2 * 0x1508) = 0;
-        *(undefined4 *)(&DAT_002e18a0 + iVar2 * 0x1508) = 1;
+      file_handle = g_my_player_word._3_1_ * 0x4ef;
+      *(undefined4 *)(&g_bss_0019d589 + file_handle) = 0;
+      *(undefined4 *)(&g_bss_0019d58d + file_handle) = 0;
+      *(undefined4 *)(&g_bss_0019d0cf + file_handle) = 0;
+      (&g_bss_0019d0cb)[file_handle] = (&g_bss_0019d0cb)[file_handle] & 0xf3;
+      panmap_update_player_view_state_0627b5();
+      eyelens_fn_027320();
+      if ((&g_bss_0019d0f1)[g_my_player_word._3_1_ * 0x4ef] != '\0') {
+        frontnet_update_player_dungeon_035e3c();
+        file_handle = (int)g_my_player_word._3_1_;
+        *(undefined4 *)(&g_bss_002e18a4 + file_handle * 0x1508) = 0;
+        *(undefined4 *)(&g_bss_002e18a0 + file_handle * 0x1508) = 1;
       }
       goto LAB_0002ca5d;
     }
   }
-  uVar1 = 0;
+  uval = 0;
 LAB_0002ca62:
-  return CONCAT44(in_EDX,uVar1);
+  return CONCAT44(arg_edx,uval);
 }
 
 /******************************************************************************
- * Function : sub_02ca74 (Ghidra: FUN_0002ca74)
- * Prototype: void sub_02ca74(void);
+ * Function : file_update_player_dungeon_02ca74 (Original VA: 0x2ca74, Ghidra: FUN_0002ca74)
+ * Prototype: void file_update_player_dungeon_02ca74(void);
  * Address  : 0x2ca74 (Size: 183 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x2c833, 0x5d7b5
- * Callees  : 10 -> 0x21216, 0x29d96, 0x41019, 0x44eb6, 0x45402, 0x543dd, 0x5d280, 0x6f3d6, 0x784ae, 0xd17a8
+ * Purpose  : Accesses per-player Dungeon state (stride 0x1508)
+ * Callers  : 2 -> file_update_player_dungeon_02c833, packet_build_local_player_turn_packet
+ * Callees  : 10 -> compturn_update_player_dungeon_021216, file_fn_029d96, inits_fn_041019, inits_update_creature_and_thing_044eb6, inits_process_map_subtile_045402, newgui_fn_0543dd, newgui_update_player_view_state_05d280, sound_process_thing_entity_06f3d6 ...
  ******************************************************************************/
-void FUN_0002ca74(void)
+void file_update_player_dungeon_02ca74(void)
 
 {
-  int iVar1;
+  int val;
   
-  *(undefined4 *)(&DAT_0019d0cf + DAT_002f10ce._3_1_ * 0x4ef) = 0;
-  FUN_00044eb6();
-  FUN_000d17a8();
-  DAT_00377768 = 0;
-  iVar1 = 0;
+  *(undefined4 *)(&g_bss_0019d0cf + g_my_player_word._3_1_ * 0x4ef) = 0;
+  inits_update_creature_and_thing_044eb6();
+  routes_fn_0d17a8();
+  g_bss_00377768 = 0;
+  val = 0;
   do {
-    if (((&DAT_0019d0c8)[iVar1] & 1) != 0) {
-      FUN_000784ae();
+    if (((&g_players)[val] & 1) != 0) {
+      command_update_player_view_state_0784ae();
     }
-    iVar1 = iVar1 + 0x4ef;
-  } while (iVar1 != 0x18ab);
-  DAT_002f10d2 = &DAT_002ddd60;
-  DAT_002f10d6 = &DAT_002e0589;
-  FUN_00029d96();
-  FUN_00041019();
-  FUN_000543dd();
-  FUN_0005d280();
-  FUN_00045402();
-  FUN_00021216();
-  FUN_0006f3d6();
+    val = val + 0x4ef;
+  } while (val != 0x18ab);
+  g_bss_002f10d2 = &g_bss_002ddd60;
+  g_bss_002f10d6 = &g_dungeons;
+  file_fn_029d96();
+  inits_fn_041019();
+  newgui_fn_0543dd();
+  newgui_update_player_view_state_05d280();
+  inits_process_map_subtile_045402();
+  compturn_update_player_dungeon_021216();
+  sound_process_thing_entity_06f3d6();
   return;
 }
 
 /******************************************************************************
- * Function : sub_02cb2b (Ghidra: FUN_0002cb2b)
- * Prototype: undefined8 sub_02cb2b(void);
+ * Function : file_process_map_subtile_02cb2b (Original VA: 0x2cb2b, Ghidra: FUN_0002cb2b)
+ * Prototype: undefined8 file_process_map_subtile_02cb2b(void);
  * Address  : 0x2cb2b (Size: 405 bytes)
  * Module   : file.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x29bfe
- * Callees  : 9 -> 0x150f0, 0x157ac, 0x2a5db, 0xb21f0, 0xdd920, 0xe6a10, 0xe7714, 0xe8960, 0xe984c
- * Strings  :
- *   - 0x16317a: "LEVELS"
- *   - 0x163183: "%s\MAP%05d.clm"
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 1 -> file_fn_029bfe
+ * Callees  : 9 -> cdtest_ldata_dkwind00_dat_0150f0, column_fn_0157ac, file_fn_02a5db, light_fn_0b21f0, prepare_file_path, LbScreenWaitVbi, dk_sprintf, bflib_system_io_fn_0e8960 ...
  ******************************************************************************/
 /* WARNING: Removing unreachable block (ram,0x0002cbc7) */
 
-undefined8 FUN_0002cb2b(void)
+undefined8 file_process_map_subtile_02cb2b(void)
 
 {
-  byte *pbVar1;
-  int iVar2;
-  char cVar3;
-  undefined4 uVar4;
-  int *piVar5;
-  int iVar6;
+  byte *byte_ptr;
+  int val;
+  char ch;
+  undefined4 uval;
+  int *loop_i;
+  int val_2;
   int extraout_ECX;
   int extraout_ECX_00;
-  undefined4 in_EDX;
+  undefined4 arg_edx;
   int extraout_EDX;
-  int *piVar7;
+  int *int_ptr;
   undefined1 local_c0 [152];
   int local_28;
   int *local_24;
   undefined4 *local_20;
   int *local_1c;
   
-  FUN_000dd920();
-  uVar4 = FUN_000dd920();
-  FUN_000e7714(local_c0,s__s_MAP_05d_clm_00163183,uVar4);
-  FUN_000150f0();
-  cVar3 = FUN_000e8960();
-  if (cVar3 == '\0') {
-    uVar4 = 0;
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(local_c0,s__s_MAP_05d_clm_00163183,uval);
+  cdtest_ldata_dkwind00_dat_0150f0();
+  ch = bflib_system_io_fn_0e8960();
+  if (ch == '\0') {
+    uval = 0;
   }
   else {
-    FUN_000b21f0();
-    FUN_000150f0();
-    FUN_000e984c();
-    local_28 = *DAT_00199228;
+    light_fn_0b21f0();
+    cdtest_ldata_dkwind00_dat_0150f0();
+    bflib_system_io_fn_0e984c();
+    local_28 = *g_scratch_work_buf;
     if (local_28 < 0) {
       local_28 = 0;
     }
     else if (0x7ff < local_28) {
       local_28 = 0x7ff;
     }
-    DAT_002e7beb = *(ushort *)(DAT_00199228 + 4);
-    if (0x7ff < DAT_002e7beb) {
-      DAT_002e7beb = 0x7ff;
+    g_bss_002e7beb = *(ushort *)(g_scratch_work_buf + 4);
+    if (0x7ff < g_bss_002e7beb) {
+      g_bss_002e7beb = 0x7ff;
     }
     local_28 = local_28 * 0x18;
-    piVar7 = DAT_00199228 + 2;
-    local_20 = &DAT_0019e973;
-    local_1c = DAT_00199228 + 6;
-    iVar6 = 0;
-    while (iVar6 <= local_28) {
-      FUN_000e6a10();
-      *(short *)((int)&DAT_0019e973 + extraout_ECX_00 + 3) = (short)*piVar7;
+    int_ptr = g_scratch_work_buf + 2;
+    local_20 = &g_bss_0019e973;
+    local_1c = g_scratch_work_buf + 6;
+    val_2 = 0;
+    while (val_2 <= local_28) {
+      LbScreenWaitVbi();
+      *(short *)((int)&g_bss_0019e973 + extraout_ECX_00 + 3) = (short)*int_ptr;
       local_24 = local_1c;
-      *(undefined2 *)((int)&DAT_0019e977 + extraout_ECX_00 + 1) = *(undefined2 *)((int)piVar7 + 2);
-      *(char *)((int)&DAT_0019e977 + extraout_ECX_00 + 3) = (char)piVar7[1];
-      iVar6 = extraout_ECX_00;
-      for (piVar5 = piVar7; piVar5 != local_1c; piVar5 = (int *)((int)piVar5 + 2)) {
-        *(undefined2 *)((int)&DAT_0019e97b + iVar6) = *(undefined2 *)((int)piVar5 + 6);
-        iVar6 = iVar6 + 2;
+      *(undefined2 *)((int)&g_bss_0019e977 + extraout_ECX_00 + 1) = *(undefined2 *)((int)int_ptr + 2);
+      *(char *)((int)&g_bss_0019e977 + extraout_ECX_00 + 3) = (char)int_ptr[1];
+      val_2 = extraout_ECX_00;
+      for (loop_i = int_ptr; loop_i != local_1c; loop_i = (int *)((int)loop_i + 2)) {
+        *(undefined2 *)((int)&g_bss_0019e97b + val_2) = *(undefined2 *)((int)loop_i + 6);
+        val_2 = val_2 + 2;
       }
       local_1c = (int *)((int)local_1c + 0x16);
       local_20 = local_20 + 6;
-      piVar7 = (int *)((int)piVar7 + 0x16);
-      cVar3 = FUN_000157ac();
-      pbVar1 = (byte *)((int)&DAT_0019e973 + extraout_EDX + 2);
-      *pbVar1 = *pbVar1 & 0xf;
-      pbVar1 = (byte *)((int)&DAT_0019e973 + extraout_EDX + 2);
-      *pbVar1 = *pbVar1 | cVar3 << 4;
-      iVar6 = extraout_ECX + 0x18;
+      int_ptr = (int *)((int)int_ptr + 0x16);
+      ch = column_fn_0157ac();
+      byte_ptr = (byte *)((int)&g_bss_0019e973 + extraout_EDX + 2);
+      *byte_ptr = *byte_ptr & 0xf;
+      byte_ptr = (byte *)((int)&g_bss_0019e973 + extraout_EDX + 2);
+      *byte_ptr = *byte_ptr | ch << 4;
+      val_2 = extraout_ECX + 0x18;
     }
-    iVar6 = 0;
+    val_2 = 0;
     do {
-      iVar2 = iVar6 + 1;
-      iVar6 = iVar6 + 5;
-      *(short *)(&DAT_0019e973 + (*(uint *)((int)&DAT_00279203 + iVar2) & 0x7ff) * 6) =
-           *(short *)(&DAT_0019e973 + (*(uint *)((int)&DAT_00279203 + iVar2) & 0x7ff) * 6) + 1;
-    } while (iVar6 != 0x50000);
-    FUN_0002a5db();
-    uVar4 = 1;
+      val = val_2 + 1;
+      val_2 = val_2 + 5;
+      *(short *)(&g_bss_0019e973 + (*(uint *)((int)&g_map_subtiles + val) & 0x7ff) * 6) =
+           *(short *)(&g_bss_0019e973 + (*(uint *)((int)&g_map_subtiles + val) & 0x7ff) * 6) + 1;
+    } while (val_2 != 0x50000);
+    file_fn_02a5db();
+    uval = 1;
   }
-  return CONCAT44(in_EDX,uVar4);
+  return CONCAT44(arg_edx,uval);
 }
 
 /******************************************************************************
- * Function : dk_e14r432q_system_should_able_02cdc8 (Ghidra: FUN_0002cdc8)
- * Prototype: void dk_e14r432q_system_should_able_02cdc8(void);
+ * Function : file_e14r432q_system_should_able_02cdc8 (Original VA: 0x2cdc8, Ghidra: FUN_0002cdc8)
+ * Prototype: void file_e14r432q_system_should_able_02cdc8(void);
  * Address  : 0x2cdc8 (Size: 928 bytes)
  * Module   : file.cpp [direct_file_string_xref]
- * OrigLine : file.cpp:3175; file.cpp:3200; file.cpp:3247 ("E14R432Q#222564-3; SYSTEM ERROR I should be able to find a column here"); file.cpp:3273 ("Could not load column set")
- * Naming   : String 'E14R432Q#222564-3; SYSTEM ERROR I should be able to find a c'
- * Callers  : 1 -> 0x2a25c
- * Callees  : 10 -> 0x150f0, 0x15318, 0x1534a, 0x15386, 0xdd920, 0xddaf0, 0xe6a10, 0xe7714, 0xe8960, 0xe984c
- * Strings  :
- *   - 0x163206: "file.cpp"
- *   - 0x163245: "file.cpp"
- *   - 0x163295: "file.cpp"
- *   - 0x1632b6: "file.cpp"
- *   - 0x1632d9: "file.cpp"
- *   - 0x163315: "file.cpp"
- *   - 0x1631ce: "DATA"
- *   - 0x1631d5: "%s\SLABS.CLM"
- *   - 0x1631e2: "%d columns in slab set, limit is %d"
- *   - 0x16320f: "DATA"
- *   - 0x163216: "%s\SLABS.DAT"
- *   - 0x163223: "%d slabs in slab set, limit is %d"
- *   - 0x16324e: "E14R432Q#222564-3; SYSTEM ERROR I should be able to find a column here"
- *   - 0x16329e: "Could not load slab set"
- *   - 0x1632bf: "Could not load column set"
- *   - 0x1632e2: "DATA"
- *   - 0x1632e9: "%s\SLABS.TNG"
- *   - 0x1632f6: "Could not load slab object set"
+ * OrigLine : file.cpp lines 3175, 3200, 3247, 3273
+ * Purpose  : String 'E14R432Q#222564-3; SYSTEM ERROR I should be able to find a c'
+ * Callers  : 1 -> file_fn_02a25c
+ * Callees  : 10 -> cdtest_ldata_dkwind00_dat_0150f0, column_fn_015318, column_fn_01534a, column_could_create_column_none_015386, prepare_file_path, LbErrorLog, LbScreenWaitVbi, dk_sprintf ...
  ******************************************************************************/
-void FUN_0002cdc8(void)
+void file_e14r432q_system_should_able_02cdc8(void)
 
 {
-  byte *pbVar1;
-  char cVar2;
-  undefined4 uVar3;
-  int *piVar4;
-  int iVar5;
-  int iVar6;
+  byte *byte_ptr;
+  char ch;
+  undefined4 uval;
+  int *int_ptr;
+  int val;
+  int loop_i;
   int *extraout_ECX;
   int *extraout_ECX_00;
   short *extraout_ECX_01;
-  short *psVar7;
+  short *val_2;
   short *extraout_ECX_02;
   short *extraout_ECX_03;
   short *extraout_ECX_04;
-  int iVar8;
-  int iVar9;
+  int val_3;
+  int loop_i_2;
   undefined1 local_ec [157];
   short local_4f;
   undefined2 local_4c;
@@ -2675,553 +2490,539 @@ void FUN_0002cdc8(void)
   undefined2 *local_20;
   int local_1c;
   
-  local_3c = DAT_00334624;
-  uStack_38 = DAT_00334628;
-  FUN_000e6a10();
-  FUN_000dd920();
-  uVar3 = FUN_000dd920();
-  FUN_000e7714(local_ec,s__s_SLABS_CLM_001631d5,uVar3);
-  FUN_000150f0();
-  cVar2 = FUN_000e8960();
-  if (cVar2 != '\0') {
-    FUN_000e984c();
-    iVar8 = *DAT_00199228;
-    if (0x800 < iVar8) {
-      FUN_000e7714(&DAT_0019cbac,s__d_columns_in_slab_set__limit_is_001631e2,iVar8,0x800);
-      FUN_000ddaf0(); /* LbErrorLog("file.cpp", line 3175, g_log_buf) */
+  local_3c = g_frontnet_bss_00334624;
+  uStack_38 = g_frontnet_bss_00334628;
+  LbScreenWaitVbi();
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(local_ec,s__s_SLABS_CLM_001631d5,uval);
+  cdtest_ldata_dkwind00_dat_0150f0();
+  ch = bflib_system_io_fn_0e8960();
+  if (ch != '\0') {
+    bflib_system_io_fn_0e984c();
+    val_3 = *g_scratch_work_buf;
+    if (0x800 < val_3) {
+      dk_sprintf(&g_log_sprintf_buf,s__d_columns_in_slab_set__limit_is_001631e2,val_3,0x800);
+      LbErrorLog(); /* LbErrorLog("file.cpp", line 3175, g_log_buf) */
     }
-    if (iVar8 < 0) {
-      iVar8 = 0;
+    if (val_3 < 0) {
+      val_3 = 0;
     }
-    else if (0x800 < iVar8) {
-      iVar8 = 0x800;
+    else if (0x800 < val_3) {
+      val_3 = 0x800;
     }
-    piVar4 = DAT_00199228 + 7;
-    for (iVar9 = 1; iVar9 < iVar8; iVar9 = iVar9 + 1) {
-      *(undefined2 *)piVar4 = 0;
-      piVar4 = piVar4 + 6;
+    int_ptr = g_scratch_work_buf + 7;
+    for (loop_i_2 = 1; loop_i_2 < val_3; loop_i_2 = loop_i_2 + 1) {
+      *(undefined2 *)int_ptr = 0;
+      int_ptr = int_ptr + 6;
     }
-    FUN_000dd920();
-    uVar3 = FUN_000dd920();
-    FUN_000e7714(local_ec,s__s_SLABS_DAT_00163216,uVar3); /* 0x163216="%s\SLABS.DAT" */
-    FUN_000150f0();
-    cVar2 = FUN_000e8960();
-    if (cVar2 != '\0') {
-      FUN_000e984c();
-      iVar9 = (int)DAT_001b2e08;
-      if (0x518 < iVar9) {
-        FUN_000e7714(&DAT_0019cbac,s__d_slabs_in_slab_set__limit_is___00163223,iVar9,0x518);
-        FUN_000ddaf0(); /* LbErrorLog("file.cpp", line 3200, g_log_buf) */
+    prepare_file_path();
+    uval = prepare_file_path();
+    dk_sprintf(local_ec,s__s_SLABS_DAT_00163216,uval); /* 0x163216="%s\SLABS.DAT" */
+    cdtest_ldata_dkwind00_dat_0150f0();
+    ch = bflib_system_io_fn_0e8960();
+    if (ch != '\0') {
+      bflib_system_io_fn_0e984c();
+      loop_i_2 = (int)g_bss_001b2e08;
+      if (0x518 < loop_i_2) {
+        dk_sprintf(&g_log_sprintf_buf,s__d_slabs_in_slab_set__limit_is___00163223,loop_i_2,0x518);
+        LbErrorLog(); /* LbErrorLog("file.cpp", line 3200, g_log_buf) */
       }
-      if (iVar9 < 0) {
-        iVar9 = 0;
+      if (loop_i_2 < 0) {
+        loop_i_2 = 0;
       }
-      else if (0x518 < iVar9) {
-        iVar9 = 0x518;
+      else if (0x518 < loop_i_2) {
+        loop_i_2 = 0x518;
       }
-      piVar4 = DAT_00199228 + 1;
-      local_28 = iVar9 * 0x12;
-      local_20 = &DAT_001b2e0a;
-      for (iVar6 = 0; iVar6 < local_28; iVar6 = iVar6 + 0x12) {
-        local_34 = (int)&DAT_001b2e0a + iVar6;
-        iVar5 = 0;
+      int_ptr = g_scratch_work_buf + 1;
+      local_28 = loop_i_2 * 0x12;
+      local_20 = &g_bss_001b2e0a;
+      for (loop_i = 0; loop_i < local_28; loop_i = loop_i + 0x12) {
+        local_34 = (int)&g_bss_001b2e0a + loop_i;
+        val = 0;
         do {
-          if (*(short *)(local_34 + iVar5) < 0) {
-            *(short *)(piVar4 + *(short *)(local_34 + iVar5) * -6) =
-                 (short)piVar4[*(short *)(local_34 + iVar5) * -6] + 1;
+          if (*(short *)(local_34 + val) < 0) {
+            *(short *)(int_ptr + *(short *)(local_34 + val) * -6) =
+                 (short)int_ptr[*(short *)(local_34 + val) * -6] + 1;
           }
-          iVar5 = iVar5 + 2;
-        } while (iVar5 != 0x12);
+          val = val + 2;
+        } while (val != 0x12);
       }
-      local_30 = piVar4;
-      for (iVar6 = 1; piVar4 = piVar4 + 6, iVar6 < iVar8; iVar6 = iVar6 + 1) {
-        if ((short)*piVar4 != 0) {
-          iVar5 = FUN_0001534a();
-          piVar4 = extraout_ECX;
-          if (iVar5 == 0) {
-            iVar5 = FUN_00015386();
-            piVar4 = extraout_ECX_00;
+      local_30 = int_ptr;
+      for (loop_i = 1; int_ptr = int_ptr + 6, loop_i < val_3; loop_i = loop_i + 1) {
+        if ((short)*int_ptr != 0) {
+          val = column_fn_01534a();
+          int_ptr = extraout_ECX;
+          if (val == 0) {
+            val = column_could_create_column_none_015386();
+            int_ptr = extraout_ECX_00;
           }
-          pbVar1 = (byte *)((int)&DAT_0019e973 + iVar5 * 0x18 + 2);
-          *pbVar1 = *pbVar1 | 1;
+          byte_ptr = (byte *)((int)&g_bss_0019e973 + val * 0x18 + 2);
+          *byte_ptr = *byte_ptr | 1;
         }
       }
-      for (local_2c = 0; local_2c < iVar9; local_2c = local_2c + 1) {
-        psVar7 = local_20 + local_2c * 9;
-        local_24 = psVar7 + 9;
+      for (local_2c = 0; local_2c < loop_i_2; local_2c = local_2c + 1) {
+        val_2 = local_20 + local_2c * 9;
+        local_24 = val_2 + 9;
         do {
-          if (*psVar7 < 0) {
-            iVar8 = FUN_0001534a();
-            psVar7 = extraout_ECX_02;
-            if (iVar8 != 0) goto LAB_0002d031;
-            FUN_000ddaf0(); /* LbErrorLog("file.cpp", line 3247, "E14R432Q#222564-3; SYSTEM ERROR I should be able to find a column here") */
-            psVar7 = extraout_ECX_01;
+          if (*val_2 < 0) {
+            val_3 = column_fn_01534a();
+            val_2 = extraout_ECX_02;
+            if (val_3 != 0) goto LAB_0002d031;
+            LbErrorLog(); /* LbErrorLog("file.cpp", line 3247, "E14R432Q#222564-3; SYSTEM ERROR I should be able to find a column here") */
+            val_2 = extraout_ECX_01;
           }
           else {
-            local_4f = *psVar7;
-            iVar8 = FUN_0001534a();
-            psVar7 = extraout_ECX_03;
-            if (iVar8 == 0) {
-              iVar8 = FUN_00015386();
-              pbVar1 = (byte *)((int)&DAT_0019e973 + iVar8 * 0x18 + 2);
-              *pbVar1 = *pbVar1 | 1;
-              psVar7 = extraout_ECX_04;
+            local_4f = *val_2;
+            val_3 = column_fn_01534a();
+            val_2 = extraout_ECX_03;
+            if (val_3 == 0) {
+              val_3 = column_could_create_column_none_015386();
+              byte_ptr = (byte *)((int)&g_bss_0019e973 + val_3 * 0x18 + 2);
+              *byte_ptr = *byte_ptr | 1;
+              val_2 = extraout_ECX_04;
             }
 LAB_0002d031:
-            *psVar7 = -(short)iVar8;
+            *val_2 = -(short)val_3;
           }
-          psVar7 = psVar7 + 1;
-        } while (psVar7 != local_24);
+          val_2 = val_2 + 1;
+        } while (val_2 != local_24);
       }
       goto LAB_0002d088;
     }
   }
-  FUN_000ddaf0(); /* LbErrorLog("file.cpp", line 3273, "Could not load column set") */
+  LbErrorLog(); /* LbErrorLog("file.cpp", line 3273, "Could not load column set") */
 LAB_0002d088:
   local_1c = 0;
-  iVar8 = 0;
+  val_3 = 0;
   do {
-    iVar9 = local_1c;
-    FUN_000e6a10();
-    local_4f = *(short *)((int)&local_3c + iVar8);
-    iVar6 = 0;
+    loop_i_2 = local_1c;
+    LbScreenWaitVbi();
+    local_4f = *(short *)((int)&local_3c + val_3);
+    loop_i = 0;
     do {
-      local_4c = (&DAT_00179cc0)[iVar6];
-      FUN_00015318();
-      iVar5 = FUN_0001534a();
-      if (iVar5 == 0) {
-        iVar5 = FUN_00015386();
+      local_4c = (&g_data_00179cc0)[loop_i];
+      column_fn_015318();
+      val = column_fn_01534a();
+      if (val == 0) {
+        val = column_could_create_column_none_015386();
       }
-      pbVar1 = (byte *)((int)&DAT_0019e973 + iVar5 * 0x18 + 2);
-      *pbVar1 = *pbVar1 | 1;
-      iVar6 = iVar6 + 1;
-      *(short *)(&DAT_002e78c4 + iVar9) = -(short)iVar5;
-      iVar9 = iVar9 + 2;
-    } while (iVar6 < 6);
-    iVar8 = iVar8 + 2;
+      byte_ptr = (byte *)((int)&g_bss_0019e973 + val * 0x18 + 2);
+      *byte_ptr = *byte_ptr | 1;
+      loop_i = loop_i + 1;
+      *(short *)(&g_bss_002e78c4 + loop_i_2) = -(short)val;
+      loop_i_2 = loop_i_2 + 2;
+    } while (loop_i < 6);
+    val_3 = val_3 + 2;
     local_1c = local_1c + 0xc;
-  } while (iVar8 != 6);
-  FUN_000dd920();
-  uVar3 = FUN_000dd920();
-  FUN_000e7714(local_ec,s__s_SLABS_TNG_001632e9,uVar3);
-  FUN_000150f0();
-  cVar2 = FUN_000e8960();
-  if (cVar2 == '\0') {
-    FUN_000ddaf0();
+  } while (val_3 != 6);
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(local_ec,s__s_SLABS_TNG_001632e9,uval);
+  cdtest_ldata_dkwind00_dat_0150f0();
+  ch = bflib_system_io_fn_0e8960();
+  if (ch == '\0') {
+    LbErrorLog();
   }
   else {
-    FUN_000e984c();
+    bflib_system_io_fn_0e984c();
   }
   return;
 }
 
 /******************************************************************************
- * Function : dk_slab_type_increase_size_02d168 (Ghidra: FUN_0002d168)
- * Prototype: undefined8 dk_slab_type_increase_size_02d168(void);
+ * Function : file_slab_type_increase_size_02d168 (Original VA: 0x2d168, Ghidra: FUN_0002d168)
+ * Prototype: undefined8 file_slab_type_increase_size_02d168(void);
  * Address  : 0x2d168 (Size: 209 bytes)
  * Module   : file.cpp [direct_file_string_xref]
- * OrigLine : file.cpp:3332 ("Slab Type > 255, increase size of SlabMap.Slab"); file.cpp:3361 ("Could not find slab map file")
- * Naming   : String 'Slab Type > 255, increase size of SlabMap.Slab'
- * Callers  : 1 -> 0x2a25c
- * Callees  : 9 -> 0x150f0, 0x457bd, 0xd96c0, 0xd988c, 0xdd920, 0xddaf0, 0xe7714, 0xe8960, 0xe984c
- * Strings  :
- *   - 0x163365: "file.cpp"
- *   - 0x16338b: "file.cpp"
- *   - 0x16331e: "LEVELS"
- *   - 0x163327: "%s\map%05d.slb"
- *   - 0x163336: "Slab Type > 255, increase size of SlabMap.Slab"
- *   - 0x16336e: "Could not find slab map file"
+ * OrigLine : file.cpp lines 3332, 3361
+ * Purpose  : String 'Slab Type > 255, increase size of SlabMap.Slab'
+ * Callers  : 1 -> file_fn_02a25c
+ * Callees  : 9 -> cdtest_ldata_dkwind00_dat_0150f0, inits_wlb_file_muddled_fixing_0457bd, slab_process_map_subtile_0d96c0, slab_process_slabmap_tile_0d988c, prepare_file_path, LbErrorLog, dk_sprintf, bflib_system_io_fn_0e8960 ...
  ******************************************************************************/
-undefined8 FUN_0002d168(void)
+undefined8 file_slab_type_increase_size_02d168(void)
 
 {
-  ushort uVar1;
-  char cVar2;
-  undefined4 uVar3;
-  uint uVar4;
+  ushort uval;
+  char ch;
+  undefined4 uval_2;
+  uint uval_3;
   ushort *extraout_ECX;
-  ushort *puVar5;
+  ushort *word_ptr;
   ushort *extraout_ECX_00;
-  undefined4 in_EDX;
-  int iVar6;
-  int iVar7;
+  undefined4 arg_edx;
+  int val;
+  int val_2;
   undefined1 local_b0 [152];
   
-  FUN_000dd920();
-  uVar3 = FUN_000dd920();
-  FUN_000e7714(local_b0,s__s_map_05d_slb_00163327,uVar3);
-  FUN_000150f0();
-  cVar2 = FUN_000e8960();
-  if (cVar2 == '\0') {
-    uVar4 = FUN_000ddaf0(); /* LbErrorLog("file.cpp", line 3332, "Slab Type > 255, increase size of SlabMap.Slab") */
-    uVar4 = uVar4 & 0xffffff00;
+  prepare_file_path();
+  uval_2 = prepare_file_path();
+  dk_sprintf(local_b0,s__s_map_05d_slb_00163327,uval_2);
+  cdtest_ldata_dkwind00_dat_0150f0();
+  ch = bflib_system_io_fn_0e8960();
+  if (ch == '\0') {
+    uval_3 = LbErrorLog(); /* LbErrorLog("file.cpp", line 3332, "Slab Type > 255, increase size of SlabMap.Slab") */
+    uval_3 = uval_3 & 0xffffff00;
   }
   else {
-    FUN_000e984c();
-    puVar5 = extraout_ECX;
-    iVar7 = 0;
+    bflib_system_io_fn_0e984c();
+    word_ptr = extraout_ECX;
+    val_2 = 0;
     do {
-      if (0xff < *puVar5) {
-        FUN_000ddaf0(); /* LbErrorLog("file.cpp", line 3361, "Could not find slab map file") */
-        puVar5 = extraout_ECX_00;
+      if (0xff < *word_ptr) {
+        LbErrorLog(); /* LbErrorLog("file.cpp", line 3361, "Could not find slab map file") */
+        word_ptr = extraout_ECX_00;
       }
-      iVar6 = iVar7 + 6;
-      uVar1 = *puVar5;
-      puVar5 = puVar5 + 1;
-      (&DAT_002d33c5)[iVar7] = (char)uVar1;
-      iVar7 = iVar6;
-    } while (iVar6 != 0xa956);
-    FUN_000d96c0();
-    FUN_000d988c();
-    uVar3 = FUN_000457bd();
-    uVar4 = CONCAT31((int3)((uint)uVar3 >> 8),1);
+      val = val_2 + 6;
+      uval = *word_ptr;
+      word_ptr = word_ptr + 1;
+      (&g_slabmap_base)[val_2] = (char)uval;
+      val_2 = val;
+    } while (val != 0xa956);
+    slab_process_map_subtile_0d96c0();
+    slab_process_slabmap_tile_0d988c();
+    uval_2 = inits_wlb_file_muddled_fixing_0457bd();
+    uval_3 = CONCAT31((int3)((uint)uval_2 >> 8),1);
   }
-  return CONCAT44(in_EDX,uVar4);
+  return CONCAT44(arg_edx,uval_3);
 }
 
 /******************************************************************************
- * Function : sub_02d239 (Ghidra: FUN_0002d239)
- * Prototype: undefined8 sub_02d239(void);
+ * Function : file_process_slabmap_tile_02d239 (Original VA: 0x2d239, Ghidra: FUN_0002d239)
+ * Prototype: undefined8 file_process_slabmap_tile_02d239(void);
  * Address  : 0x2d239 (Size: 218 bytes)
  * Module   : file.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Reads/modifies SlabMap[85x85] tile entry
  * Callers  : 0 -> 
- * Callees  : 3 -> 0xdd920, 0xe7714, 0xe98c8
- * Strings  :
- *   - 0x163394: "LEVELS"
- *   - 0x16339d: "%s\map%05d.slb"
- *   - 0x1633ac: "LEVELS"
- *   - 0x1633b5: "%s\map%05d.wlb"
+ * Callees  : 3 -> prepare_file_path, dk_sprintf, bflib_system_io_fn_0e98c8
  ******************************************************************************/
-undefined8 FUN_0002d239(void)
+undefined8 file_process_slabmap_tile_02d239(void)
 
 {
-  byte *pbVar1;
-  undefined4 uVar2;
-  int iVar3;
+  byte *byte_ptr;
+  undefined4 uval;
+  int val;
   undefined4 extraout_ECX;
-  undefined4 in_EDX;
-  ushort *puVar4;
+  undefined4 arg_edx;
+  ushort *word_ptr;
   undefined1 local_a8 [152];
   
-  FUN_000dd920();
-  uVar2 = FUN_000dd920();
-  FUN_000e7714(local_a8,s__s_map_05d_slb_0016339d,uVar2);
-  iVar3 = 0;
-  puVar4 = DAT_00199228;
+  prepare_file_path();
+  uval = prepare_file_path();
+  dk_sprintf(local_a8,s__s_map_05d_slb_0016339d,uval);
+  val = 0;
+  word_ptr = g_scratch_work_buf;
   do {
-    pbVar1 = &DAT_002d33c5 + iVar3;
-    iVar3 = iVar3 + 6;
-    *puVar4 = (ushort)*pbVar1;
-    puVar4 = puVar4 + 1;
-  } while (iVar3 != 0xa956);
-  FUN_000e98c8();
-  FUN_000dd920(extraout_ECX);
-  uVar2 = FUN_000dd920();
-  FUN_000e7714(local_a8,s__s_map_05d_wlb_001633b5,uVar2);
-  iVar3 = 0;
-  puVar4 = DAT_00199228;
+    byte_ptr = &g_slabmap_base + val;
+    val = val + 6;
+    *word_ptr = (ushort)*byte_ptr;
+    word_ptr = word_ptr + 1;
+  } while (val != 0xa956);
+  bflib_system_io_fn_0e98c8();
+  prepare_file_path(extraout_ECX);
+  uval = prepare_file_path();
+  dk_sprintf(local_a8,s__s_map_05d_wlb_001633b5,uval);
+  val = 0;
+  word_ptr = g_scratch_work_buf;
   do {
-    pbVar1 = &DAT_002d33ca + iVar3;
-    iVar3 = iVar3 + 6;
-    *(byte *)puVar4 = (*pbVar1 & 0x1f) >> 3;
-    puVar4 = (ushort *)((int)puVar4 + 1);
-  } while (iVar3 != 0xa956);
-  uVar2 = FUN_000e98c8();
-  return CONCAT44(in_EDX,CONCAT31((int3)((uint)uVar2 >> 8),1));
+    byte_ptr = &g_slabmap + val;
+    val = val + 6;
+    *(byte *)word_ptr = (*byte_ptr & 0x1f) >> 3;
+    word_ptr = (ushort *)((int)word_ptr + 1);
+  } while (val != 0xa956);
+  uval = bflib_system_io_fn_0e98c8();
+  return CONCAT44(arg_edx,CONCAT31((int3)((uint)uval >> 8),1));
 }
 
 /******************************************************************************
- * Function : sub_02d313 (Ghidra: FUN_0002d313)
- * Prototype: undefined1 sub_02d313(void);
+ * Function : file_fn_02d313 (Original VA: 0x2d313, Ghidra: FUN_0002d313)
+ * Prototype: undefined1 file_fn_02d313(void);
  * Address  : 0x2d313 (Size: 26 bytes)
  * Module   : file.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x2d32d
+ * Purpose  : Module file.cpp procedure @ 0x02d313
+ * Callers  : 1 -> file_data_ceiling_txt_02d32d
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined1 FUN_0002d313(void)
+undefined1 file_fn_02d313(void)
 
 {
-  char in_AL;
+  char arg_al;
   
-  if ((((in_AL != '\n') && (in_AL != ',')) && (in_AL != ' ')) &&
-     ((in_AL != '\t' && (in_AL != '\r')))) {
+  if ((((arg_al != '\n') && (arg_al != ',')) && (arg_al != ' ')) &&
+     ((arg_al != '\t' && (arg_al != '\r')))) {
     return 1;
   }
   return 0;
 }
 
 /******************************************************************************
- * Function : dk_data_ceiling_txt_02d32d (Ghidra: FUN_0002d32d)
- * Prototype: void dk_data_ceiling_txt_02d32d(void);
+ * Function : file_data_ceiling_txt_02d32d (Original VA: 0x2d32d, Ghidra: FUN_0002d32d)
+ * Prototype: void file_data_ceiling_txt_02d32d(void);
  * Address  : 0x2d32d (Size: 197 bytes)
  * Module   : file.cpp [address_order_boundary_interpolation]
- * Naming   : String 'data\ceiling.txt'
- * Callers  : 1 -> 0x929c0
- * Callees  : 7 -> 0x150f0, 0x2d313, 0xe6a10, 0xe8980, 0xe8a1c, 0xe8a80, 0xea21d
- * Strings  :
- *   - 0x1633c4: "data\ceiling.txt"
+ * Purpose  : String 'data\ceiling.txt'
+ * Callers  : 1 -> draw_fn_0929c0
+ * Callees  : 7 -> cdtest_ldata_dkwind00_dat_0150f0, file_fn_02d313, LbScreenWaitVbi, LbFileOpen, bflib_system_io_fn_0e8a1c, LbFileRead, dk_atoi
  ******************************************************************************/
-void FUN_0002d32d(void)
+void file_data_ceiling_txt_02d32d(void)
 
 {
-  char cVar1;
-  undefined2 uVar2;
-  int iVar3;
-  int iVar4;
+  char ch;
+  undefined2 uval;
+  int file_handle;
+  int val;
   int extraout_EDX;
   int extraout_EDX_00;
-  int iVar5;
+  int val_2;
   undefined1 local_20 [4];
   undefined1 local_1c;
   
-  FUN_000150f0();
-  iVar3 = FUN_000e8980();
-  if (iVar3 != -1) {
-    iVar3 = 1;
-    iVar5 = 0;
+  cdtest_ldata_dkwind00_dat_0150f0();
+  file_handle = LbFileOpen();
+  if (file_handle != -1) {
+    file_handle = 1;
+    val_2 = 0;
     do {
-      if (iVar3 != 1) break;
+      if (file_handle != 1) break;
       do {
-        iVar3 = FUN_000e8a80();
-        if (iVar3 != 1) break;
-        cVar1 = FUN_0002d313();
-        iVar3 = extraout_EDX;
-      } while (cVar1 == '\0');
-      if (iVar3 != 1) break;
-      FUN_000e6a10();
-      iVar3 = 0;
+        file_handle = LbFileRead();
+        if (file_handle != 1) break;
+        ch = file_fn_02d313();
+        file_handle = extraout_EDX;
+      } while (ch == '\0');
+      if (file_handle != 1) break;
+      LbScreenWaitVbi();
+      file_handle = 0;
       do {
-        local_20[iVar3] = local_1c;
-        iVar3 = iVar3 + 1;
-        iVar4 = FUN_000e8a80();
-        if (iVar4 != 1) break;
-        cVar1 = FUN_0002d313();
-      } while (cVar1 != '\0');
-      iVar4 = iVar5 + 2;
-      uVar2 = FUN_000ea21d();
-      *(undefined2 *)((int)&DAT_00387e1c + iVar5) = uVar2;
-      iVar3 = extraout_EDX_00;
-      iVar5 = iVar4;
-    } while (iVar4 < 0x4a0);
-    FUN_000e8a1c();
+        local_20[file_handle] = local_1c;
+        file_handle = file_handle + 1;
+        val = LbFileRead();
+        if (val != 1) break;
+        ch = file_fn_02d313();
+      } while (ch != '\0');
+      val = val_2 + 2;
+      uval = dk_atoi();
+      *(undefined2 *)((int)&g_engine3_bss_00387e1c + val_2) = uval;
+      file_handle = extraout_EDX_00;
+      val_2 = val;
+    } while (val < 0x4a0);
+    bflib_system_io_fn_0e8a1c();
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_02d3f4 (Ghidra: FUN_0002d3f4)
- * Prototype: void sub_02d3f4(undefined1 param_1);
+ * Function : file_fn_02d3f4 (Original VA: 0x2d3f4, Ghidra: FUN_0002d3f4)
+ * Prototype: void file_fn_02d3f4(undefined1 param_1);
  * Address  : 0x2d3f4 (Size: 179 bytes)
  * Module   : file.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x2d6f0
+ * Purpose  : Module file.cpp procedure @ 0x02d3f4
+ * Callers  : 1 -> file_fn_02d6f0
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_0002d3f4(undefined1 param_1)
+void file_fn_02d3f4(undefined1 param_1)
 
 {
-  int *in_EAX;
-  undefined1 in_CL;
-  uint in_EDX;
-  int *piVar1;
-  int iVar2;
-  int unaff_EBX;
-  int iVar3;
-  int iVar4;
+  int *thing;
+  undefined1 arg_cl;
+  uint arg_edx;
+  int *int_ptr;
+  int thing_ptr;
+  int arg_ebx;
+  int val;
+  int thing_ptr_2;
   int local_14;
   
-  if ((int)in_EDX < 0) {
-    in_EDX = 0;
+  if ((int)arg_edx < 0) {
+    arg_edx = 0;
   }
-  if ((DAT_0033463c <= (int)in_EDX) || (unaff_EBX <= (int)in_EDX)) {
+  if ((g_frontnet_bss_0033463c <= (int)arg_edx) || (arg_ebx <= (int)arg_edx)) {
     return;
   }
-  iVar4 = 0;
-  piVar1 = in_EAX;
+  thing_ptr_2 = 0;
+  int_ptr = thing;
   do {
-    if (*in_EAX <= iVar4) {
-      *(short *)((int)in_EAX + *in_EAX * 2 + 4) = (short)in_EDX;
-      *(undefined1 *)(*in_EAX + 0x38 + (int)in_EAX) = in_CL;
-      *(undefined1 *)(*in_EAX + 0x52 + (int)in_EAX) = param_1;
+    if (*thing <= thing_ptr_2) {
+      *(short *)((int)thing + *thing * 2 + 4) = (short)arg_edx;
+      *(undefined1 *)(*thing + 0x38 + (int)thing) = arg_cl;
+      *(undefined1 *)(*thing + 0x52 + (int)thing) = param_1; /* thing->health */
 LAB_0002d49f:
-      *in_EAX = *in_EAX + 1;
+      *thing = *thing + 1;
       return;
     }
-    if (in_EDX == *(ushort *)(piVar1 + 1)) {
-      *(undefined1 *)(iVar4 + 0x38 + (int)in_EAX) = in_CL;
-      *(undefined1 *)(iVar4 + 0x52 + (int)in_EAX) = param_1;
+    if (arg_edx == *(ushort *)(int_ptr + 1)) {
+      *(undefined1 *)(thing_ptr_2 + 0x38 + (int)thing) = arg_cl;
+      *(undefined1 *)(thing_ptr_2 + 0x52 + (int)thing) = param_1; /* thing->health */
       return;
     }
-    if ((int)in_EDX < (int)(uint)*(ushort *)(piVar1 + 1)) {
-      local_14 = *in_EAX;
-      iVar3 = local_14 * 2 + (int)in_EAX;
-      iVar2 = local_14 + (int)in_EAX;
-      while (iVar4 < local_14) {
-        *(undefined2 *)(iVar3 + 4) = *(undefined2 *)(iVar3 + 2);
-        *(undefined1 *)(iVar2 + 0x38) = *(undefined1 *)(iVar2 + 0x37);
+    if ((int)arg_edx < (int)(uint)*(ushort *)(int_ptr + 1)) {
+      local_14 = *thing;
+      val = local_14 * 2 + (int)thing;
+      thing_ptr = local_14 + (int)thing;
+      while (thing_ptr_2 < local_14) {
+        *(undefined2 *)(val + 4) = *(undefined2 *)(val + 2);
+        *(undefined1 *)(thing_ptr + 0x38) = *(undefined1 *)(thing_ptr + 0x37);
         local_14 = local_14 + -1;
-        iVar3 = iVar3 + -2;
-        *(undefined1 *)(iVar2 + 0x52) = *(undefined1 *)(iVar2 + 0x51);
-        iVar2 = iVar2 + -1;
+        val = val + -2;
+        *(undefined1 *)(thing_ptr + 0x52) = *(undefined1 *)(thing_ptr + 0x51); /* thing->health */
+        thing_ptr = thing_ptr + -1;
       }
-      *(short *)((int)in_EAX + iVar4 * 2 + 4) = (short)in_EDX;
-      *(undefined1 *)(iVar4 + 0x38 + (int)in_EAX) = in_CL;
-      *(undefined1 *)(iVar4 + 0x52 + (int)in_EAX) = param_1;
+      *(short *)((int)thing + thing_ptr_2 * 2 + 4) = (short)arg_edx;
+      *(undefined1 *)(thing_ptr_2 + 0x38 + (int)thing) = arg_cl;
+      *(undefined1 *)(thing_ptr_2 + 0x52 + (int)thing) = param_1; /* thing->health */
       goto LAB_0002d49f;
     }
-    piVar1 = (int *)((int)piVar1 + 2);
-    iVar4 = iVar4 + 1;
+    int_ptr = (int *)((int)int_ptr + 2);
+    thing_ptr_2 = thing_ptr_2 + 1;
   } while( true );
 }
 
 /******************************************************************************
- * Function : sub_02d4a7 (Ghidra: FUN_0002d4a7)
- * Prototype: void sub_02d4a7(void);
+ * Function : file_fn_02d4a7 (Original VA: 0x2d4a7, Ghidra: FUN_0002d4a7)
+ * Prototype: void file_fn_02d4a7(void);
  * Address  : 0x2d4a7 (Size: 158 bytes)
  * Module   : file.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x2d8e2
- * Callees  : 1 -> 0xe8c83
+ * Purpose  : Module file.cpp procedure @ 0x02d4a7
+ * Callers  : 1 -> frontend_fn_02d8e2
+ * Callees  : 1 -> LbFileClose
  ******************************************************************************/
-void FUN_0002d4a7(void)
+void file_fn_02d4a7(void)
 
 {
-  char *pcVar1;
-  int *piVar2;
-  ushort *puVar3;
-  int *in_EAX;
+  char *str_ptr;
+  int *int_ptr;
+  ushort *word_ptr;
+  int *arg_eax;
   int *extraout_ECX;
-  int in_EDX;
-  int *piVar4;
-  int *piVar5;
+  int arg_edx;
+  int *int_ptr_2;
+  int *thing_ptr;
   int local_18;
   
   local_18 = 0;
-  piVar4 = in_EAX;
-  piVar5 = in_EAX;
-  while (local_18 < *in_EAX) {
-    puVar3 = (ushort *)(piVar4 + 1);
-    pcVar1 = (char *)((int)piVar5 + 0x52);
-    piVar2 = piVar5 + 0xe;
+  int_ptr_2 = arg_eax;
+  thing_ptr = arg_eax;
+  while (local_18 < *arg_eax) {
+    word_ptr = (ushort *)(int_ptr_2 + 1);
+    str_ptr = (char *)((int)thing_ptr + 0x52); /* thing->health */
+    int_ptr = thing_ptr + 0xe;
     local_18 = local_18 + 1;
-    piVar4 = (int *)((int)piVar4 + 2);
-    piVar5 = (int *)((int)piVar5 + 1);
-    FUN_000e8c83(in_EDX * DAT_00334634,
-                 DAT_00334630 + (in_EDX + *pcVar1) * DAT_00334638 + (uint)*puVar3 +
-                 (int)(char)*piVar2);
-    in_EAX = extraout_ECX;
+    int_ptr_2 = (int *)((int)int_ptr_2 + 2);
+    thing_ptr = (int *)((int)thing_ptr + 1);
+    LbFileClose(arg_edx * g_frontnet_bss_00334634,
+                 g_frontnet_bss_00334630 + (arg_edx + *str_ptr) * g_frontnet_bss_00334638 + (uint)*word_ptr +
+                 (int)(char)*int_ptr);
+    arg_eax = extraout_ECX;
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_02d545 (Ghidra: FUN_0002d545)
- * Prototype: void sub_02d545(void);
+ * Function : file_fn_02d545 (Original VA: 0x2d545, Ghidra: FUN_0002d545)
+ * Prototype: void file_fn_02d545(void);
  * Address  : 0x2d545 (Size: 356 bytes)
  * Module   : file.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x2d861
- * Callees  : 1 -> 0xe8d50
+ * Purpose  : Module file.cpp procedure @ 0x02d545
+ * Callers  : 1 -> file_fn_02d861
+ * Callees  : 1 -> bflib_system_io_fn_0e8d50
  ******************************************************************************/
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void FUN_0002d545(void)
+void file_fn_02d545(void)
 
 {
-  int *in_EAX;
-  int iVar1;
+  int *arg_eax;
+  int val;
   int extraout_ECX;
   int extraout_ECX_00;
-  uint in_EDX;
+  uint arg_edx;
   int *extraout_EDX;
   int *extraout_EDX_00;
-  int unaff_EBX;
-  int iVar2;
-  longdouble lVar3;
+  int arg_ebx;
+  int val_2;
+  longdouble val_3;
   
-  iVar2 = in_EDX * 0x32;
-  iVar1 = unaff_EBX * 0x3c;
-  if ((in_EDX & 1) != 0) {
-    iVar1 = iVar1 + 0x1e;
+  val_2 = arg_edx * 0x32;
+  val = arg_ebx * 0x3c;
+  if ((arg_edx & 1) != 0) {
+    val = val + 0x1e;
   }
-  *in_EAX = iVar2 + -0x23;
-  in_EAX[6] = iVar1 + 0x1e;
-  in_EAX[1] = iVar2 + -0xf;
-  in_EAX[2] = iVar2 + 0xf;
-  in_EAX[7] = iVar1;
-  in_EAX[8] = iVar1;
-  in_EAX[3] = iVar2 + 0x23;
-  in_EAX[9] = iVar1 + 0x1e;
-  in_EAX[4] = iVar2 + 0xf;
-  in_EAX[10] = iVar1 + 0x3c;
-  in_EAX[0xb] = iVar1 + 0x3c;
-  in_EAX[5] = iVar2 + -0xf;
+  *arg_eax = val_2 + -0x23;
+  arg_eax[6] = val + 0x1e;
+  arg_eax[1] = val_2 + -0xf;
+  arg_eax[2] = val_2 + 0xf;
+  arg_eax[7] = val;
+  arg_eax[8] = val;
+  arg_eax[3] = val_2 + 0x23;
+  arg_eax[9] = val + 0x1e;
+  arg_eax[4] = val_2 + 0xf;
+  arg_eax[10] = val + 0x3c;
+  arg_eax[0xb] = val + 0x3c;
+  arg_eax[5] = val_2 + -0xf;
   do {
-    lVar3 = (longdouble)FUN_000e8d50();
-    *extraout_EDX = (int)ROUND(lVar3);
-    lVar3 = (longdouble)FUN_000e8d50();
-    extraout_EDX_00[5] = (int)ROUND(lVar3);
-  } while (extraout_EDX_00 != in_EAX + 6);
-  lVar3 = (longdouble)FUN_000e8d50();
-  *(int *)(extraout_ECX + 0x30) = (int)ROUND(lVar3);
-  lVar3 = (longdouble)FUN_000e8d50();
-  *(int *)(extraout_ECX_00 + 0x34) = (int)ROUND(lVar3);
+    val_3 = (longdouble)bflib_system_io_fn_0e8d50();
+    *extraout_EDX = (int)ROUND(val_3);
+    val_3 = (longdouble)bflib_system_io_fn_0e8d50();
+    extraout_EDX_00[5] = (int)ROUND(val_3);
+  } while (extraout_EDX_00 != arg_eax + 6);
+  val_3 = (longdouble)bflib_system_io_fn_0e8d50();
+  *(int *)(extraout_ECX + 0x30) = (int)ROUND(val_3);
+  val_3 = (longdouble)bflib_system_io_fn_0e8d50();
+  *(int *)(extraout_ECX_00 + 0x34) = (int)ROUND(val_3);
   return;
 }
 
 /******************************************************************************
- * Function : sub_02d6a9 (Ghidra: FUN_0002d6a9)
- * Prototype: void sub_02d6a9(void);
+ * Function : file_fn_02d6a9 (Original VA: 0x2d6a9, Ghidra: FUN_0002d6a9)
+ * Prototype: void file_fn_02d6a9(void);
  * Address  : 0x2d6a9 (Size: 71 bytes)
  * Module   : file.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module file.cpp procedure @ 0x02d6a9
  * Callers  : 0 -> 
- * Callees  : 1 -> 0xea430
+ * Callees  : 1 -> bflib_system_io_fn_0ea430
  ******************************************************************************/
-void FUN_0002d6a9(void)
+void file_fn_02d6a9(void)
 
 {
-  int iVar1;
-  undefined1 *puVar2;
+  int val;
+  undefined1 *word_ptr;
   undefined4 auStack_24 [2];
   undefined1 local_1c [4];
   
-  iVar1 = 0;
-  puVar2 = local_1c;
+  val = 0;
+  word_ptr = local_1c;
   do {
-    iVar1 = iVar1 + 1;
-    *(undefined4 *)(puVar2 + -4) = 0xff;
-    *(undefined4 *)(puVar2 + -8) = 0x2d6df;
-    FUN_000ea430();
-    puVar2 = puVar2 + -4;
-  } while (iVar1 < 6);
+    val = val + 1;
+    *(undefined4 *)(word_ptr + -4) = 0xff;
+    *(undefined4 *)(word_ptr + -8) = 0x2d6df;
+    bflib_system_io_fn_0ea430();
+    word_ptr = word_ptr + -4;
+  } while (val < 6);
   return;
 }
 
 /******************************************************************************
- * Function : sub_02d6f0 (Ghidra: FUN_0002d6f0)
- * Prototype: undefined8 sub_02d6f0(void);
+ * Function : file_fn_02d6f0 (Original VA: 0x2d6f0, Ghidra: FUN_0002d6f0)
+ * Prototype: undefined8 file_fn_02d6f0(void);
  * Address  : 0x2d6f0 (Size: 369 bytes)
  * Module   : file.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x2d861
- * Callees  : 1 -> 0x2d3f4
+ * Purpose  : Module file.cpp procedure @ 0x02d6f0
+ * Callers  : 1 -> file_fn_02d861
+ * Callees  : 1 -> file_fn_02d3f4
  ******************************************************************************/
-undefined8 FUN_0002d6f0(void)
+undefined8 file_fn_02d6f0(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  int *piVar2;
-  undefined4 in_EDX;
-  int iVar3;
-  int *piVar4;
-  int iVar5;
-  int **ppiVar6;
-  undefined1 *puVar7;
-  int iVar8;
+  int arg_eax;
+  int val;
+  int *int_ptr;
+  undefined4 arg_edx;
+  int val_2;
+  int *int_ptr_2;
+  int val_3;
+  int **val_4;
+  undefined1 *word_ptr;
+  int loop_i;
   int *apiStack_48 [5];
   int local_34;
   int *local_30;
@@ -3231,59 +3032,59 @@ undefined8 FUN_0002d6f0(void)
   int local_20;
   undefined4 local_1c;
   
-  iVar5 = 0;
-  iVar3 = in_EAX;
-  for (iVar8 = 0; iVar1 = iVar5 * 4 + in_EAX, iVar8 < 6; iVar8 = iVar8 + 1) {
-    if (*(int *)(iVar3 + 0x18) < *(int *)(iVar1 + 0x18)) {
-      iVar5 = iVar8;
+  val_3 = 0;
+  val_2 = arg_eax;
+  for (loop_i = 0; val = val_3 * 4 + arg_eax, loop_i < 6; loop_i = loop_i + 1) {
+    if (*(int *)(val_2 + 0x18) < *(int *)(val + 0x18)) {
+      val_3 = loop_i;
     }
-    iVar3 = iVar3 + 4;
+    val_2 = val_2 + 4;
   }
-  local_2c = *(int *)(iVar1 + 0x18);
-  local_28 = (iVar5 + 1) % 6;
+  local_2c = *(int *)(val + 0x18);
+  local_28 = (val_3 + 1) % 6;
   apiStack_48[4] = (int *)(local_2c * 0x6c);
   local_20 = 0;
   local_24 = 0;
-  piVar2 = apiStack_48[4];
-  iVar3 = local_28;
-  iVar5 = (iVar5 + 5) % 6;
-  ppiVar6 = apiStack_48 + 2;
+  int_ptr = apiStack_48[4];
+  val_2 = local_28;
+  val_3 = (val_3 + 5) % 6;
+  val_4 = apiStack_48 + 2;
   while( true ) {
-    while (iVar8 = iVar5, local_20 == 0) {
-      piVar2 = (int *)((local_28 + 5) / 6);
+    while (loop_i = val_3, local_20 == 0) {
+      int_ptr = (int *)((local_28 + 5) / 6);
       local_28 = (local_28 + 5) % 6;
-      if (iVar3 == local_28) goto LAB_0002d6e9;
-      iVar8 = *(int *)(in_EAX + local_28 * 4);
-      local_34 = iVar8 * 0x10000;
+      if (val_2 == local_28) goto LAB_0002d6e9;
+      loop_i = *(int *)(arg_eax + local_28 * 4);
+      local_34 = loop_i * 0x10000;
       local_1c = 6;
-      piVar2 = (int *)(in_EAX + ((local_28 + 5) % 6) * 4);
-      local_20 = piVar2[6] - *(int *)(in_EAX + 0x18 + local_28 * 4);
+      int_ptr = (int *)(arg_eax + ((local_28 + 5) % 6) * 4);
+      local_20 = int_ptr[6] - *(int *)(arg_eax + 0x18 + local_28 * 4);
       if (0 < local_20) {
-        apiStack_48[3] = (int *)((*piVar2 * 0x10000 + iVar8 * -0x10000) / local_20);
-        piVar2 = apiStack_48[3];
+        apiStack_48[3] = (int *)((*int_ptr * 0x10000 + loop_i * -0x10000) / local_20);
+        int_ptr = apiStack_48[3];
       }
     }
     while (local_24 == 0) {
-      piVar2 = (int *)((iVar8 + 1) / 6);
-      iVar8 = (iVar8 + 1) % 6;
-      if (iVar8 == iVar5) goto LAB_0002d6e9;
-      piVar4 = (int *)(((iVar8 + 1) % 6) * 4 + in_EAX);
-      local_24 = piVar4[6] - *(int *)(in_EAX + 0x18 + iVar8 * 4);
-      iVar3 = *(int *)(in_EAX + iVar8 * 4);
-      local_30 = (int *)(iVar3 * 0x10000);
-      piVar2 = local_30;
+      int_ptr = (int *)((loop_i + 1) / 6);
+      loop_i = (loop_i + 1) % 6;
+      if (loop_i == val_3) goto LAB_0002d6e9;
+      int_ptr_2 = (int *)(((loop_i + 1) % 6) * 4 + arg_eax);
+      local_24 = int_ptr_2[6] - *(int *)(arg_eax + 0x18 + loop_i * 4);
+      val_2 = *(int *)(arg_eax + loop_i * 4);
+      local_30 = (int *)(val_2 * 0x10000);
+      int_ptr = local_30;
       if (0 < local_24) {
-        piVar2 = (int *)((*piVar4 * 0x10000 + iVar3 * -0x10000) / local_24);
-        apiStack_48[2] = piVar2;
+        int_ptr = (int *)((*int_ptr_2 * 0x10000 + val_2 * -0x10000) / local_24);
+        apiStack_48[2] = int_ptr;
       }
     }
     if ((local_20 < 1) || (local_24 < 1)) break;
-    puVar7 = (undefined1 *)ppiVar6;
-    if ((local_2c < DAT_00334640) && (-1 < local_2c)) {
-      puVar7 = (undefined1 *)((int)ppiVar6 + -4);
-      *(undefined4 *)((int)ppiVar6 + -4) = *(undefined4 *)(in_EAX + 0x34);
-      *(undefined4 *)((int)ppiVar6 + -8) = 0x2d843;
-      FUN_0002d3f4();
+    word_ptr = (undefined1 *)val_4;
+    if ((local_2c < g_frontnet_bss_00334640) && (-1 < local_2c)) {
+      word_ptr = (undefined1 *)((int)val_4 + -4);
+      *(undefined4 *)((int)val_4 + -4) = *(undefined4 *)(arg_eax + 0x34);
+      *(undefined4 *)((int)val_4 + -8) = 0x2d843;
+      file_fn_02d3f4();
     }
     local_20 = local_20 + -1;
     local_24 = local_24 + -1;
@@ -3291,53 +3092,53 @@ undefined8 FUN_0002d6f0(void)
     local_34 = local_34 + (int)apiStack_48[3];
     local_2c = local_2c + 1;
     local_30 = (int *)((int)local_30 + (int)apiStack_48[2]);
-    piVar2 = apiStack_48[2];
-    iVar3 = local_28;
-    iVar5 = iVar8;
-    ppiVar6 = (int **)puVar7;
+    int_ptr = apiStack_48[2];
+    val_2 = local_28;
+    val_3 = loop_i;
+    val_4 = (int **)word_ptr;
   }
 LAB_0002d6e9:
-  return CONCAT44(in_EDX,piVar2);
+  return CONCAT44(arg_edx,int_ptr);
 }
 
 /******************************************************************************
- * Function : sub_02d861 (Ghidra: FUN_0002d861)
- * Prototype: void sub_02d861(void);
+ * Function : file_fn_02d861 (Original VA: 0x2d861, Ghidra: FUN_0002d861)
+ * Prototype: void file_fn_02d861(void);
  * Address  : 0x2d861 (Size: 129 bytes)
  * Module   : file.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x27130
- * Callees  : 2 -> 0x2d545, 0x2d6f0
+ * Purpose  : Module file.cpp procedure @ 0x02d861
+ * Callers  : 1 -> eyelens_data_frac_dat_027130
+ * Callees  : 2 -> file_fn_02d545, file_fn_02d6f0
  ******************************************************************************/
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void FUN_0002d861(void)
+void file_fn_02d861(void)
 
 {
-  int in_EAX;
+  int arg_eax;
   int extraout_ECX;
-  int in_EDX;
-  int iVar1;
-  int iVar2;
+  int arg_edx;
+  int val;
+  int loop_i;
   
-  _DAT_00334644 = in_EAX >> 1;
-  DAT_0033464c = DAT_00333193;
-  _DAT_00334648 = in_EDX >> 1;
-  iVar1 = 0;
-  DAT_0033463c = in_EAX;
-  DAT_00334640 = in_EDX;
-  for (iVar2 = 0; iVar2 < DAT_00334640; iVar2 = iVar2 + 1) {
-    *(undefined4 *)(iVar1 + DAT_0033464c) = 0;
-    iVar1 = iVar1 + 0x6c;
+  g_frontnet_bss_00334644 = arg_eax >> 1;
+  g_frontnet_bss_0033464c = g_bss_00333193;
+  g_frontnet_bss_00334648 = arg_edx >> 1;
+  val = 0;
+  g_frontnet_bss_0033463c = arg_eax;
+  g_frontnet_bss_00334640 = arg_edx;
+  for (loop_i = 0; loop_i < g_frontnet_bss_00334640; loop_i = loop_i + 1) {
+    *(undefined4 *)(val + g_frontnet_bss_0033464c) = 0;
+    val = val + 0x6c;
   }
-  iVar1 = -0xc;
+  val = -0xc;
   do {
     do {
-      FUN_0002d545();
-      FUN_0002d6f0();
+      file_fn_02d545();
+      file_fn_02d6f0();
     } while (extraout_ECX < 0xd);
-    iVar1 = iVar1 + 1;
-  } while (iVar1 < 0xd);
+    val = val + 1;
+  } while (val < 0xd);
   return;
 }
 

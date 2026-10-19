@@ -1,7 +1,7 @@
 /**
- * Dungeon Keeper (KEEPER.EXE) - Reconstructed Source Module: script.cpp
+ * Dungeon Keeper (KEEPER.EXE) - Reconstructed & Semantically Named Module: script.cpp
  * Binary Subject: /home/merlin/Dungeon Keeper/re/KEEPER.elf
- * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 (x86:LE:32:default)
+ * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 + DK Semantic Analyzer
  * Functions in this translation unit: 13
  */
 
@@ -11,117 +11,117 @@
 #include "../include/dk_functions.h"
 
 /******************************************************************************
- * Function : sub_06809c (Ghidra: FUN_0006809c)
- * Prototype: void sub_06809c(void);
+ * Function : script_update_player_view_state_06809c (Original VA: 0x6809c, Ghidra: FUN_0006809c)
+ * Prototype: void script_update_player_view_state_06809c(void);
  * Address  : 0x6809c (Size: 552 bytes)
  * Module   : script.cpp [callgraph_affinity_to_following_unit]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0xde6a8
- * Callees  : 8 -> 0x68340, 0x68873, 0x688a4, 0x689a7, 0x68ab1, 0x68ac4, 0x68ad7, 0x68b37
+ * Purpose  : Accesses per-player PlayerInfo state (stride 0x4ef)
+ * Callers  : 1 -> update_go_first_person_without_0de6a8
+ * Callees  : 8 -> script_fn_068340, script_fn_068873, script_party_big_0688a4, script_process_thing_entity_0689a7, script_fn_068ab1, script_fn_068ac4, script_process_thing_entity_068ad7, script_fn_068b37
  ******************************************************************************/
-void FUN_0006809c(void)
+void script_update_player_view_state_06809c(void)
 
 {
   int extraout_EDX;
   int extraout_EDX_00;
-  int iVar1;
-  uint *puVar2;
-  undefined1 *puVar3;
-  undefined1 *puVar4;
-  undefined1 *puVar5;
-  byte *pbVar6;
-  int iVar7;
+  int loop_i;
+  uint *word_ptr;
+  undefined1 *word_ptr_2;
+  undefined1 *word_ptr_3;
+  undefined1 *word_ptr_4;
+  byte *byte_ptr;
+  int loop_i_2;
   uint auStack_2c [4];
   undefined *local_1c;
   
-  puVar2 = auStack_2c + 3;
-  if (((DAT_0019d0b6 & 1) != 0) || ((&DAT_0019d0f1)[DAT_002f10ce._3_1_ * 0x4ef] == '\0')) {
-    FUN_00068b37();
-    pbVar6 = &DAT_002ebd76;
-    for (iVar7 = 0; iVar7 < DAT_002ebfe6; iVar7 = iVar7 + 1) {
-      if (((*pbVar6 & 2) == 0) &&
-         (((char)pbVar6[1] == -1 || (((&DAT_002ec3f0)[(char)pbVar6[1] * 0xc] & 1) != 0)))) {
-        if ((char)pbVar6[2] < 1) {
-          auStack_2c[3] = *(uint *)(pbVar6 + 4);
-          local_1c = &DAT_002ec632 + (char)pbVar6[2] * -0xd0;
-          *(undefined4 *)((int)puVar2 + -4) = 0x68105;
-          FUN_000688a4();
+  word_ptr = auStack_2c + 3;
+  if (((g_game_system_flags & 1) != 0) || ((&g_bss_0019d0f1)[g_my_player_word._3_1_ * 0x4ef] == '\0')) {
+    script_fn_068b37();
+    byte_ptr = &g_bss_002ebd76;
+    for (loop_i_2 = 0; loop_i_2 < g_bss_002ebfe6; loop_i_2 = loop_i_2 + 1) {
+      if (((*byte_ptr & 2) == 0) &&
+         (((char)byte_ptr[1] == -1 || (((&g_bss_002ec3f0)[(char)byte_ptr[1] * 0xc] & 1) != 0)))) {
+        if ((char)byte_ptr[2] < 1) {
+          auStack_2c[3] = *(uint *)(byte_ptr + 4);
+          local_1c = &g_bss_002ec632 + (char)byte_ptr[2] * -0xd0;
+          *(undefined4 *)((int)word_ptr + -4) = 0x68105;
+          script_party_big_0688a4();
         }
         else {
-          *(uint *)((int)puVar2 + -4) = (uint)pbVar6[8];
-          *(uint *)((int)puVar2 + -8) = (uint)*(ushort *)(pbVar6 + 9);
-          *(undefined4 *)((int)puVar2 + -0xc) = 0x6815b;
-          FUN_00068873();
-          puVar2 = (uint *)((int)puVar2 + -8);
+          *(uint *)((int)word_ptr + -4) = (uint)byte_ptr[8];
+          *(uint *)((int)word_ptr + -8) = (uint)*(ushort *)(byte_ptr + 9);
+          *(undefined4 *)((int)word_ptr + -0xc) = 0x6815b;
+          script_fn_068873();
+          word_ptr = (uint *)((int)word_ptr + -8);
         }
-        if ((*pbVar6 & 1) == 0) {
-          *pbVar6 = *pbVar6 | 2;
+        if ((*byte_ptr & 1) == 0) {
+          *byte_ptr = *byte_ptr | 2;
         }
       }
-      pbVar6 = pbVar6 + 0xd;
+      byte_ptr = byte_ptr + 0xd;
     }
-    pbVar6 = &DAT_002ebc52;
-    puVar4 = (undefined1 *)puVar2;
-    for (iVar7 = 0; iVar7 < DAT_002ebd72; iVar7 = iVar7 + 1) {
-      puVar3 = puVar4;
-      if (((*pbVar6 & 2) == 0) &&
-         (((char)pbVar6[1] == -1 || (((&DAT_002ec3f0)[(char)pbVar6[1] * 0xc] & 1) != 0)))) {
-        if (pbVar6[0x11] == 0) {
-          *(undefined4 *)(puVar4 + -4) = *(undefined4 *)(pbVar6 + 0xc);
-          puVar3 = puVar4 + -8;
-          *(uint *)(puVar4 + -8) = (uint)pbVar6[0x10];
-          *(undefined4 *)(puVar4 + -0xc) = 0x68181;
-          FUN_000689a7();
+    byte_ptr = &g_bss_002ebc52;
+    word_ptr_3 = (undefined1 *)word_ptr;
+    for (loop_i_2 = 0; loop_i_2 < g_bss_002ebd72; loop_i_2 = loop_i_2 + 1) {
+      word_ptr_2 = word_ptr_3;
+      if (((*byte_ptr & 2) == 0) &&
+         (((char)byte_ptr[1] == -1 || (((&g_bss_002ec3f0)[(char)byte_ptr[1] * 0xc] & 1) != 0)))) {
+        if (byte_ptr[0x11] == 0) {
+          *(undefined4 *)(word_ptr_3 + -4) = *(undefined4 *)(byte_ptr + 0xc);
+          word_ptr_2 = word_ptr_3 + -8;
+          *(uint *)(word_ptr_3 + -8) = (uint)byte_ptr[0x10];
+          *(undefined4 *)(word_ptr_3 + -0xc) = 0x68181;
+          script_process_thing_entity_0689a7();
         }
         else {
-          *(undefined4 *)(puVar4 + -4) = *(undefined4 *)(pbVar6 + 0xc);
-          *(uint *)(puVar4 + -8) = (uint)pbVar6[0x10];
-          puVar3 = puVar4 + -0xc;
-          *(undefined4 *)(puVar4 + -0xc) = *(undefined4 *)(pbVar6 + 8);
-          *(undefined4 *)(puVar4 + -0x10) = 0x681db;
-          FUN_00068ad7();
+          *(undefined4 *)(word_ptr_3 + -4) = *(undefined4 *)(byte_ptr + 0xc);
+          *(uint *)(word_ptr_3 + -8) = (uint)byte_ptr[0x10];
+          word_ptr_2 = word_ptr_3 + -0xc;
+          *(undefined4 *)(word_ptr_3 + -0xc) = *(undefined4 *)(byte_ptr + 8);
+          *(undefined4 *)(word_ptr_3 + -0x10) = 0x681db;
+          script_process_thing_entity_068ad7();
         }
-        if ((*pbVar6 & 1) == 0) {
-          *pbVar6 = *pbVar6 | 2;
+        if ((*byte_ptr & 1) == 0) {
+          *byte_ptr = *byte_ptr | 2;
         }
       }
-      pbVar6 = pbVar6 + 0x12;
-      puVar4 = puVar3;
+      byte_ptr = byte_ptr + 0x12;
+      word_ptr_3 = word_ptr_2;
     }
-    pbVar6 = &DAT_002ebfea;
-    for (iVar7 = 0; iVar7 < DAT_002ec3ea; iVar7 = iVar7 + 1) {
-      if (((*pbVar6 & 2) == 0) &&
-         (((char)pbVar6[1] == -1 || (((&DAT_002ec3f0)[(char)pbVar6[1] * 0xc] & 1) != 0)))) {
-        puVar5 = puVar4 + -4;
-        *(undefined4 *)(puVar4 + -4) = *(undefined4 *)(pbVar6 + 0xc);
-        *(undefined4 *)(puVar4 + -8) = 0x68228;
-        FUN_00068340();
-        puVar4 = puVar4 + -4;
-        if ((*pbVar6 & 1) == 0) {
-          *pbVar6 = *pbVar6 | 2;
-          puVar4 = puVar5;
+    byte_ptr = &g_bss_002ebfea;
+    for (loop_i_2 = 0; loop_i_2 < g_bss_002ec3ea; loop_i_2 = loop_i_2 + 1) {
+      if (((*byte_ptr & 2) == 0) &&
+         (((char)byte_ptr[1] == -1 || (((&g_bss_002ec3f0)[(char)byte_ptr[1] * 0xc] & 1) != 0)))) {
+        word_ptr_4 = word_ptr_3 + -4;
+        *(undefined4 *)(word_ptr_3 + -4) = *(undefined4 *)(byte_ptr + 0xc);
+        *(undefined4 *)(word_ptr_3 + -8) = 0x68228;
+        script_fn_068340();
+        word_ptr_3 = word_ptr_3 + -4;
+        if ((*byte_ptr & 1) == 0) {
+          *byte_ptr = *byte_ptr | 2;
+          word_ptr_3 = word_ptr_4;
         }
       }
-      pbVar6 = pbVar6 + 0x10;
+      byte_ptr = byte_ptr + 0x10;
     }
-    if ((DAT_0019d0b6 & 1) == 0) {
-      iVar7 = 0;
-      for (iVar1 = 0; iVar1 < DAT_002ed33e; iVar1 = iVar1 + 1) {
-        if (((&DAT_002ec3f0)[*(short *)((int)&DAT_002ed336 + iVar7) * 0xc] & 1) != 0) {
-          *(undefined4 *)(puVar4 + -4) = 0x6827c;
-          FUN_00068ab1();
-          iVar7 = extraout_EDX;
+    if ((g_game_system_flags & 1) == 0) {
+      loop_i_2 = 0;
+      for (loop_i = 0; loop_i < g_bss_002ed33e; loop_i = loop_i + 1) {
+        if (((&g_bss_002ec3f0)[*(short *)((int)&g_bss_002ed336 + loop_i_2) * 0xc] & 1) != 0) {
+          *(undefined4 *)(word_ptr_3 + -4) = 0x6827c;
+          script_fn_068ab1();
+          loop_i_2 = extraout_EDX;
         }
-        iVar7 = iVar7 + 2;
+        loop_i_2 = loop_i_2 + 2;
       }
-      iVar7 = 0;
-      for (iVar1 = 0; iVar1 < DAT_002ed34a; iVar1 = iVar1 + 1) {
-        if (((&DAT_002ec3f0)[*(short *)((int)&DAT_002ed342 + iVar7) * 0xc] & 1) != 0) {
-          *(undefined4 *)(puVar4 + -4) = 0x682bb;
-          FUN_00068ac4();
-          iVar7 = extraout_EDX_00;
+      loop_i_2 = 0;
+      for (loop_i = 0; loop_i < g_bss_002ed34a; loop_i = loop_i + 1) {
+        if (((&g_bss_002ec3f0)[*(short *)((int)&g_bss_002ed342 + loop_i_2) * 0xc] & 1) != 0) {
+          *(undefined4 *)(word_ptr_3 + -4) = 0x682bb;
+          script_fn_068ac4();
+          loop_i_2 = extraout_EDX_00;
         }
-        iVar7 = iVar7 + 2;
+        loop_i_2 = loop_i_2 + 2;
       }
     }
   }
@@ -129,597 +129,591 @@ void FUN_0006809c(void)
 }
 
 /******************************************************************************
- * Function : sub_0682c4 (Ghidra: FUN_000682c4)
- * Prototype: void sub_0682c4(void);
+ * Function : script_fn_0682c4 (Original VA: 0x682c4, Ghidra: FUN_000682c4)
+ * Prototype: void script_fn_0682c4(void);
  * Address  : 0x682c4 (Size: 123 bytes)
  * Module   : script.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module script.cpp procedure @ 0x0682c4
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_000682c4(void)
+void script_fn_0682c4(void)
 
 {
-  char *pcVar1;
-  code cVar2;
-  int iVar3;
-  int in_EAX;
-  uint uVar4;
-  undefined3 uVar5;
-  int in_ECX;
-  int iVar6;
-  char *pcVar7;
-  int iVar8;
-  char cVar10;
-  char cVar11;
-  int in_EDX;
-  char cVar13;
-  int unaff_EBX;
-  char *pcVar12;
+  char *str_ptr;
+  code ch;
+  int val;
+  int arg_eax;
+  uint uval;
+  undefined3 uval_2;
+  int arg_ecx;
+  int val_2;
+  char *str_ptr_2;
+  int val_3;
+  char ch_3;
+  char ch_4;
+  int arg_edx;
+  char ch_5;
+  int arg_ebx;
+  char *str_ptr_3;
   int unaff_EBP;
   int *unaff_ESI;
   byte *unaff_EDI;
-  code *pcVar14;
-  char cVar9;
+  code *str_ptr_4;
+  char ch_2;
   
-  pcVar12 = (char *)(unaff_EBX + 1);
-  iVar6 = in_ECX + 1;
-  uVar4 = in_EAX + 1U ^ 0x21222e33;
-  *unaff_EDI = *unaff_EDI | (char)uVar4 - 0x16U;
+  str_ptr_3 = (char *)(arg_ebx + 1);
+  val_2 = arg_ecx + 1;
+  uval = arg_eax + 1U ^ 0x21222e33;
+  *unaff_EDI = *unaff_EDI | (char)uval - 0x16U;
   LOCK();
-  iVar8 = *unaff_ESI;
-  *unaff_ESI = uVar4 + 0x77eeeeee;
+  val_3 = *unaff_ESI;
+  *unaff_ESI = uval + 0x77eeeeee;
   UNLOCK();
-  pcVar1 = (char *)(unaff_EBX + -0x7c5afff9 + iVar8 * 4);
-  *pcVar1 = *pcVar1 + (char)iVar6;
-  cVar11 = (char)((uint)in_EDX >> 8);
-  *(char *)(unaff_EBX + 0x11000684) = *(char *)(unaff_EBX + 0x11000684) + cVar11;
-  cVar10 = (char)((uint)iVar6 >> 8);
-  unaff_EDI[-0x7c] = unaff_EDI[-0x7c] + cVar10;
-  cVar9 = cVar10 + (char)iVar8;
-  pcVar7 = (char *)CONCAT22((short)((uint)iVar6 >> 0x10),CONCAT11(cVar9,(char)iVar6 + cVar10));
-  *(char *)unaff_ESI = (char)*unaff_ESI + (char)((uint)iVar8 >> 8);
+  str_ptr = (char *)(arg_ebx + -0x7c5afff9 + val_3 * 4);
+  *str_ptr = *str_ptr + (char)val_2;
+  ch_4 = (char)((uint)arg_edx >> 8);
+  *(char *)(arg_ebx + 0x11000684) = *(char *)(arg_ebx + 0x11000684) + ch_4;
+  ch_3 = (char)((uint)val_2 >> 8);
+  unaff_EDI[-0x7c] = unaff_EDI[-0x7c] + ch_3;
+  ch_2 = ch_3 + (char)val_3;
+  str_ptr_2 = (char *)CONCAT22((short)((uint)val_2 >> 0x10),CONCAT11(ch_2,(char)val_2 + ch_3));
+  *(char *)unaff_ESI = (char)*unaff_ESI + (char)((uint)val_3 >> 8);
   LOCK();
-  cVar10 = (char)*unaff_ESI;
-  *(char *)unaff_ESI = (char)iVar8;
-  uVar5 = (undefined3)((uint)iVar8 >> 8);
+  ch_3 = (char)*unaff_ESI;
+  *(char *)unaff_ESI = (char)val_3;
+  uval_2 = (undefined3)((uint)val_3 >> 8);
   UNLOCK();
-  *(char *)(unaff_EBX + -0x79) = *(char *)(unaff_EBX + -0x79) + cVar10;
-  pcVar7[-0x7a] = pcVar7[-0x7a] + (char)in_EDX;
-  *(char *)(in_EDX + -0x7b) = *(char *)(in_EDX + -0x7b) + cVar9;
-  pcVar7[-0x57fff97a] = pcVar7[-0x57fff97a] + cVar10;
+  *(char *)(arg_ebx + -0x79) = *(char *)(arg_ebx + -0x79) + ch_3;
+  str_ptr_2[-0x7a] = str_ptr_2[-0x7a] + (char)arg_edx;
+  *(char *)(arg_edx + -0x7b) = *(char *)(arg_edx + -0x7b) + ch_2;
+  str_ptr_2[-0x57fff97a] = str_ptr_2[-0x57fff97a] + ch_3;
   LOCK();
-  iVar8 = *unaff_ESI;
-  *(char *)unaff_ESI = cVar10;
+  val_3 = *unaff_ESI;
+  *(char *)unaff_ESI = ch_3;
   UNLOCK();
-  pcVar1 = (char *)(CONCAT31(uVar5,(char)iVar8) + -0x35fff97a);
-  cVar13 = (char)((uint)pcVar12 >> 8);
-  *pcVar1 = *pcVar1 + cVar13;
+  str_ptr = (char *)(CONCAT31(uval_2,(char)val_3) + -0x35fff97a);
+  ch_5 = (char)((uint)str_ptr_3 >> 8);
+  *str_ptr = *str_ptr + ch_5;
   LOCK();
-  iVar6 = *unaff_ESI;
-  *(char *)unaff_ESI = (char)iVar8;
+  val_2 = *unaff_ESI;
+  *(char *)unaff_ESI = (char)val_3;
   UNLOCK();
-  unaff_EDI[-0x79] = unaff_EDI[-0x79] + cVar11;
-  cVar10 = (char)in_EDX + (char)pcVar12;
+  unaff_EDI[-0x79] = unaff_EDI[-0x79] + ch_4;
+  ch_3 = (char)arg_edx + (char)str_ptr_3;
   LOCK();
-  iVar3 = *unaff_ESI;
-  *(char *)unaff_ESI = (char)iVar6;
+  val = *unaff_ESI;
+  *(char *)unaff_ESI = (char)val_2;
   UNLOCK();
-  *pcVar7 = *pcVar7 + cVar10;
+  *str_ptr_2 = *str_ptr_2 + ch_3;
   LOCK();
-  iVar8 = *unaff_ESI;
-  *unaff_ESI = CONCAT31(uVar5,(char)iVar3);
+  val_3 = *unaff_ESI;
+  *unaff_ESI = CONCAT31(uval_2,(char)val);
   UNLOCK();
-  DAT_28000687 = DAT_28000687 + (char)pcVar12;
+  g_bss_28000687 = g_bss_28000687 + (char)str_ptr_3;
   LOCK();
-  iVar6 = *unaff_ESI;
-  *unaff_ESI = iVar8;
+  val_2 = *unaff_ESI;
+  *unaff_ESI = val_3;
   UNLOCK();
-  *pcVar12 = *pcVar12 + cVar11;
+  *str_ptr_3 = *str_ptr_3 + ch_4;
   LOCK();
-  iVar8 = *unaff_ESI;
-  *unaff_ESI = iVar6;
+  val_3 = *unaff_ESI;
+  *unaff_ESI = val_2;
   UNLOCK();
-  *(char *)unaff_ESI = (char)*unaff_ESI + cVar13;
+  *(char *)unaff_ESI = (char)*unaff_ESI + ch_5;
   LOCK();
-  iVar6 = *unaff_ESI;
-  *unaff_ESI = iVar8;
+  val_2 = *unaff_ESI;
+  *unaff_ESI = val_3;
   UNLOCK();
-  *(char *)((int)unaff_ESI + -0x79) = *(char *)((int)unaff_ESI + -0x79) + cVar10;
-  *(char *)(unaff_EBP + -0x79) = *(char *)(unaff_EBP + -0x79) + cVar9;
-  *(char *)((int)unaff_ESI + 0x57) = *(char *)((int)unaff_ESI + 0x57) + cVar10;
-  if (0x43 < iVar6 - 8U) {
+  *(char *)((int)unaff_ESI + -0x79) = *(char *)((int)unaff_ESI + -0x79) + ch_3;
+  *(char *)(unaff_EBP + -0x79) = *(char *)(unaff_EBP + -0x79) + ch_2;
+  *(char *)((int)unaff_ESI + 0x57) = *(char *)((int)unaff_ESI + 0x57) + ch_3;
+  if (0x43 < val_2 - 8U) {
     return;
   }
-  iVar8 = 0x19;
-  pcVar14 = FUN_000682c4;
+  val_3 = 0x19;
+  str_ptr_4 = script_fn_0682c4;
   do {
-    if (iVar8 == 0) break;
-    iVar8 = iVar8 + -1;
-    cVar2 = *pcVar14;
-    pcVar14 = pcVar14 + 1;
-  } while (SUB41(iVar6 - 8U,0) != cVar2);
+    if (val_3 == 0) break;
+    val_3 = val_3 + -1;
+    ch = *str_ptr_4;
+    str_ptr_4 = str_ptr_4 + 1;
+  } while (SUB41(val_2 - 8U,0) != ch);
                     /* WARNING: Could not recover jumptable at 0x00068384. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(iVar8 * 4 + 0x682dc))(pcVar7,pcVar12);
+  (**(code **)(val_3 * 4 + 0x682dc))(str_ptr_2,str_ptr_3);
   return;
 }
 
 /******************************************************************************
- * Function : sub_068340 (Ghidra: FUN_00068340)
- * Prototype: void sub_068340(void);
+ * Function : script_fn_068340 (Original VA: 0x68340, Ghidra: FUN_00068340)
+ * Prototype: void script_fn_068340(void);
  * Address  : 0x68340 (Size: 82 bytes)
  * Module   : script.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x6809c, 0x79eb1
+ * Purpose  : Module script.cpp procedure @ 0x068340
+ * Callers  : 2 -> script_update_player_view_state_06809c, command_script_values_script_079eb1
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_00068340(void)
+void script_fn_068340(void)
 
 {
-  code cVar1;
-  int in_EAX;
-  int iVar2;
-  code *pcVar3;
+  code ch;
+  int arg_eax;
+  int val;
+  code *str_ptr;
   
-  if (0x43 < in_EAX - 8U) {
+  if (0x43 < arg_eax - 8U) {
     return;
   }
-  iVar2 = 0x19;
-  pcVar3 = FUN_000682c4;
+  val = 0x19;
+  str_ptr = script_fn_0682c4;
   do {
-    if (iVar2 == 0) break;
-    iVar2 = iVar2 + -1;
-    cVar1 = *pcVar3;
-    pcVar3 = pcVar3 + 1;
-  } while (SUB41(in_EAX - 8U,0) != cVar1);
+    if (val == 0) break;
+    val = val + -1;
+    ch = *str_ptr;
+    str_ptr = str_ptr + 1;
+  } while (SUB41(arg_eax - 8U,0) != ch);
                     /* WARNING: Could not recover jumptable at 0x00068384. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(iVar2 * 4 + 0x682dc))();
+  (**(code **)(val * 4 + 0x682dc))();
   return;
 }
 
 /******************************************************************************
- * Function : sub_068788 (Ghidra: FUN_00068788)
- * Prototype: uint sub_068788(void);
+ * Function : script_update_creature_and_thing_068788 (Original VA: 0x68788, Ghidra: FUN_00068788)
+ * Prototype: uint script_update_creature_and_thing_068788(void);
  * Address  : 0x68788 (Size: 235 bytes)
  * Module   : script.cpp [callgraph_affinity_to_following_unit]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x68873, 0x688a4
- * Callees  : 7 -> 0x24998, 0x64b0c, 0x69268, 0x694d4, 0x6972c, 0x8240c, 0xb2440
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
+ * Callers  : 2 -> script_fn_068873, script_party_big_0688a4
+ * Callees  : 7 -> effect_allocate_light_effect_024998, person_initialise_state_but_thing_064b0c, scrsupp_allocate_light_new_hero_069268, scrsupp_script_could_find_hero_0694d4, scrsupp_allocate_light_new_hero_06972c, creature_update_creature_control_08240c, light_process_map_subtile_0b2440
  ******************************************************************************/
-uint FUN_00068788(void)
+uint script_update_creature_and_thing_068788(void)
 
 {
-  undefined2 uVar1;
-  uint uVar2;
-  undefined4 in_ECX;
+  undefined2 uval;
+  uint thing_ptr;
+  undefined4 arg_ecx;
   int extraout_ECX;
   uint extraout_ECX_00;
   uint extraout_ECX_01;
-  int unaff_EBX;
-  char *pcVar3;
-  undefined4 *puVar4;
+  int arg_ebx;
+  char *str_ptr;
+  undefined4 *word_ptr;
   undefined4 uStack_14;
   char local_10 [4];
   
-  pcVar3 = local_10;
-  if (unaff_EBX < -1000) {
-    pcVar3 = (char *)&uStack_14;
+  str_ptr = local_10;
+  if (arg_ebx < -1000) {
+    str_ptr = (char *)&uStack_14;
     uStack_14 = 1;
-    uVar2 = FUN_000694d4();
+    thing_ptr = scrsupp_script_could_find_hero_0694d4();
   }
   else {
-    if (unaff_EBX < 0) {
+    if (arg_ebx < 0) {
       uStack_14 = 1;
-      uVar2 = FUN_00069268();
-      uVar2 = (&DAT_001ae9fc)[uVar2 & 0xffff];
-      puVar4 = &uStack_14;
-      if ((DAT_001ae9fc < uVar2) && (puVar4 = &uStack_14, local_10[0] == DAT_002eb542)) {
-        uVar1 = FUN_000b2440();
-        *(undefined2 *)(extraout_ECX + 0x11) = uVar1;
-        FUN_00024998();
-        FUN_00064b0c();
+      thing_ptr = scrsupp_allocate_light_new_hero_069268();
+      thing_ptr = (&g_thing_ptrs)[thing_ptr & 0xffff];
+      word_ptr = &uStack_14;
+      if ((g_thing_ptrs < thing_ptr) && (word_ptr = &uStack_14, local_10[0] == g_bss_002eb542)) {
+        uval = light_process_map_subtile_0b2440();
+        *(undefined2 *)(extraout_ECX + 0x11) = uval;
+        effect_allocate_light_effect_024998();
+        person_initialise_state_but_thing_064b0c();
         *(byte *)(extraout_ECX_00 + 0x4f) = *(byte *)(extraout_ECX_00 + 0x4f) | 1;
-        *(undefined2 *)((&DAT_001b0a00)[*(ushort *)(extraout_ECX_00 + 100)] + 0x282) = 0x18;
-        uVar2 = extraout_ECX_00;
-        puVar4 = &uStack_14;
+        *(undefined2 *)((&g_creature_ctrl_ptrs)[*(ushort *)(extraout_ECX_00 + 100)] + 0x282) = 0x18;
+        thing_ptr = extraout_ECX_00;
+        word_ptr = &uStack_14;
       }
       goto LAB_00068857;
     }
     uStack_14 = 0x6884d;
-    uVar2 = FUN_0006972c();
+    thing_ptr = scrsupp_allocate_light_new_hero_06972c();
   }
-  uVar2 = (&DAT_001ae9fc)[uVar2 & 0xffff];
-  puVar4 = (undefined4 *)pcVar3;
+  thing_ptr = (&g_thing_ptrs)[thing_ptr & 0xffff];
+  word_ptr = (undefined4 *)str_ptr;
 LAB_00068857:
-  if (DAT_001ae9fc < uVar2) {
-    *(undefined4 *)(uVar2 + 0x13) = in_ECX;
-    *(undefined4 *)((int)puVar4 + -4) = 0x6886c;
-    FUN_0008240c();
-    uVar2 = extraout_ECX_01;
+  if (g_thing_ptrs < thing_ptr) {
+    *(undefined4 *)(thing_ptr + 0x13) = arg_ecx; /* thing->anim_sprite */
+    *(undefined4 *)((int)word_ptr + -4) = 0x6886c;
+    creature_update_creature_control_08240c();
+    thing_ptr = extraout_ECX_01;
   }
-  return uVar2;
+  return thing_ptr;
 }
 
 /******************************************************************************
- * Function : sub_068873 (Ghidra: FUN_00068873)
- * Prototype: void sub_068873(undefined4 param_1,undefined4 param_2);
+ * Function : script_fn_068873 (Original VA: 0x68873, Ghidra: FUN_00068873)
+ * Prototype: void script_fn_068873(undefined4 param_1,undefined4 param_2);
  * Address  : 0x68873 (Size: 49 bytes)
  * Module   : script.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x6809c, 0x79b68
- * Callees  : 1 -> 0x68788
+ * Purpose  : Module script.cpp procedure @ 0x068873
+ * Callers  : 2 -> script_update_player_view_state_06809c, command_script_creature_level_parameter_079b68
+ * Callees  : 1 -> script_update_creature_and_thing_068788
  ******************************************************************************/
-void FUN_00068873(undefined4 param_1,undefined4 param_2)
+void script_fn_068873(undefined4 param_1,undefined4 param_2)
 
 {
-  int in_ECX;
-  undefined1 *puVar1;
+  int arg_ecx;
+  undefined1 *word_ptr;
   undefined4 auStack_1c [2];
   undefined1 local_14 [8];
   
-  puVar1 = local_14;
-  for (; in_ECX != 0; in_ECX = in_ECX + -1) {
-    *(undefined4 *)(puVar1 + -4) = param_2;
-    *(undefined4 *)(puVar1 + -8) = 0x68899;
-    FUN_00068788();
-    puVar1 = puVar1 + -4;
+  word_ptr = local_14;
+  for (; arg_ecx != 0; arg_ecx = arg_ecx + -1) {
+    *(undefined4 *)(word_ptr + -4) = param_2;
+    *(undefined4 *)(word_ptr + -8) = 0x68899;
+    script_update_creature_and_thing_068788();
+    word_ptr = word_ptr + -4;
   }
   return;
 }
 
 /******************************************************************************
- * Function : dk_party_big_0688a4 (Ghidra: FUN_000688a4)
- * Prototype: int dk_party_big_0688a4(void);
+ * Function : script_party_big_0688a4 (Original VA: 0x688a4, Ghidra: FUN_000688a4)
+ * Prototype: int script_party_big_0688a4(void);
  * Address  : 0x688a4 (Size: 243 bytes)
  * Module   : script.cpp [direct_file_string_xref]
- * OrigLine : script.cpp:551 ("Party too big")
- * Naming   : String 'Party too big'
- * Callers  : 3 -> 0x6809c, 0x68ad7, 0x798e3
- * Callees  : 5 -> 0x39a74, 0x39ba4, 0x39e36, 0x68788, 0xddaf0
- * Strings  :
- *   - 0x166cae: "script.cpp"
- *   - 0x166ca0: "Party too big"
+ * OrigLine : script.cpp lines 551
+ * Purpose  : String 'Party too big'
+ * Callers  : 3 -> script_update_player_view_state_06809c, script_process_thing_entity_068ad7, command_script_number_parameter_0798e3
+ * Callees  : 5 -> gravyard_update_creature_control_039a74, gravyard_update_creature_control_039ba4, group_update_creature_and_thing_039e36, script_update_creature_and_thing_068788, LbErrorLog
  ******************************************************************************/
-int FUN_000688a4(void)
+int script_party_big_0688a4(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  int in_ECX;
+  int arg_eax;
+  int thing_ptr;
+  int arg_ecx;
   int extraout_ECX;
-  int iVar2;
+  int val;
   int extraout_ECX_00;
-  uint *puVar3;
-  uint uVar4;
-  int iVar5;
-  undefined8 uVar6;
+  uint *word_ptr;
+  uint uval;
+  int val_2;
+  undefined8 uval_2;
   uint auStack_30 [5];
   int local_18;
   int local_14;
   
-  puVar3 = auStack_30 + 3;
+  word_ptr = auStack_30 + 3;
   local_18 = 0;
-  auStack_30[3] = in_EAX;
-  for (local_14 = in_ECX; local_14 != 0; local_14 = local_14 + -1) {
+  auStack_30[3] = arg_eax;
+  for (local_14 = arg_ecx; local_14 != 0; local_14 = local_14 + -1) {
     if (*(int *)(auStack_30[3] + 0xcc) < 9) {
-      uVar4 = auStack_30[3];
-      iVar5 = 0;
+      uval = auStack_30[3];
+      val_2 = 0;
       for (auStack_30[4] = 0; (int)auStack_30[4] < *(int *)(auStack_30[3] + 0xcc);
           auStack_30[4] = auStack_30[4] + 1) {
-        *(uint *)((int)puVar3 + -4) = (uint)*(byte *)(uVar4 + 0x6c);
-        *(undefined4 *)((int)puVar3 + -8) = 0x6892d;
-        iVar1 = FUN_00068788();
-        iVar2 = iVar1;
-        if (iVar1 != 0) {
-          *(undefined1 *)((&DAT_001b0a00)[*(ushort *)(iVar1 + 100)] + 4) =
-               *(undefined1 *)(uVar4 + 0x67);
-          *(int *)((&DAT_001b0a00)[*(ushort *)(iVar1 + 100)] + 5) =
-               DAT_002e8bee + *(int *)(uVar4 + 0x68);
-          if (iVar5 != 0) {
-            *(undefined4 *)((int)puVar3 + -8) = 0x68977;
-            uVar6 = FUN_00039e36();
-            if ((int)uVar6 < (int)((ulonglong)uVar6 >> 0x20)) {
-              *(undefined4 *)((int)puVar3 + -8) = 0x68988;
-              FUN_00039ba4();
-              iVar2 = extraout_ECX_00;
-              local_18 = iVar1;
+        *(uint *)((int)word_ptr + -4) = (uint)*(byte *)(uval + 0x6c);
+        *(undefined4 *)((int)word_ptr + -8) = 0x6892d;
+        thing_ptr = script_update_creature_and_thing_068788();
+        val = thing_ptr;
+        if (thing_ptr != 0) {
+          *(undefined1 *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 4) = /* thing->ccontrol_idx */
+               *(undefined1 *)(uval + 0x67);
+          *(int *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 5) = /* thing->ccontrol_idx */
+               g_game_turn + *(int *)(uval + 0x68);
+          if (val_2 != 0) {
+            *(undefined4 *)((int)word_ptr + -8) = 0x68977;
+            uval_2 = group_update_creature_and_thing_039e36();
+            if ((int)uval_2 < (int)((ulonglong)uval_2 >> 0x20)) {
+              *(undefined4 *)((int)word_ptr + -8) = 0x68988;
+              gravyard_update_creature_control_039ba4();
+              val = extraout_ECX_00;
+              local_18 = thing_ptr;
             }
             else {
-              *(undefined4 *)((int)puVar3 + -8) = 0x688fe;
-              FUN_00039a74();
-              iVar2 = extraout_ECX;
+              *(undefined4 *)((int)word_ptr + -8) = 0x688fe;
+              gravyard_update_creature_control_039a74();
+              val = extraout_ECX;
             }
           }
         }
-        uVar4 = uVar4 + 0xd;
-        puVar3 = (uint *)((int)puVar3 + -4);
-        iVar5 = iVar2;
+        uval = uval + 0xd;
+        word_ptr = (uint *)((int)word_ptr + -4);
+        val_2 = val;
       }
     }
     else {
-      *(undefined4 *)((int)puVar3 + -4) = 0x688ec;
-      FUN_000ddaf0(); /* LbErrorLog("script.cpp", line 551, "Party too big") */
+      *(undefined4 *)((int)word_ptr + -4) = 0x688ec;
+      LbErrorLog(); /* LbErrorLog("script.cpp", line 551, "Party too big") */
     }
   }
   return local_18;
 }
 
 /******************************************************************************
- * Function : sub_0689a7 (Ghidra: FUN_000689a7)
- * Prototype: undefined4 sub_0689a7(undefined4 param_1,undefined4 param_2);
+ * Function : script_process_thing_entity_0689a7 (Original VA: 0x689a7, Ghidra: FUN_000689a7)
+ * Prototype: undefined4 script_process_thing_entity_0689a7(undefined4 param_1,undefined4 param_2);
  * Address  : 0x689a7 (Size: 266 bytes)
  * Module   : script.cpp [direct_file_string_xref]
- * OrigLine : script.cpp:624 ("Invalid HEAD_FOR")
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0x6809c, 0x68ad7, 0x7a754
- * Callees  : 9 -> 0x69268, 0x694d4, 0x6972c, 0x698da, 0x6992a, 0x69987, 0x699e0, 0x8240c, 0xddaf0
- * Strings  :
- *   - 0x166cca: "script.cpp"
- *   - 0x166cb9: "Invalid HEAD_FOR"
+ * OrigLine : script.cpp lines 624
+ * Purpose  : Looks up Thing* in g_thing_ptrs[2048] and updates state
+ * Callers  : 3 -> script_update_player_view_state_06809c, script_process_thing_entity_068ad7, command_script_tunnellers_script_07a754
+ * Callees  : 9 -> scrsupp_allocate_light_new_hero_069268, scrsupp_script_could_find_hero_0694d4, scrsupp_allocate_light_new_hero_06972c, scrsupp_script_support_dungeon_heart_0698da, scrsupp_script_support_dungeon_heart_06992a, scrsupp_script_support_could_find_069987, scrsupp_fn_0699e0, creature_update_creature_control_08240c ...
  ******************************************************************************/
-undefined4 FUN_000689a7(undefined4 param_1,undefined4 param_2)
+undefined4 script_process_thing_entity_0689a7(undefined4 param_1,undefined4 param_2)
 
 {
-  int iVar1;
+  int val;
   int extraout_ECX;
   int extraout_ECX_00;
   int extraout_ECX_01;
   int extraout_ECX_02;
-  int in_EDX;
-  undefined1 unaff_BL;
-  undefined4 *puVar2;
+  int arg_edx;
+  undefined1 arg_bl;
+  undefined4 *word_ptr;
   undefined4 uStack_14;
   undefined1 local_10 [8];
   undefined1 local_8;
   
-  puVar2 = (undefined4 *)local_10;
-  local_8 = unaff_BL;
-  if (in_EDX < -1000) {
-    puVar2 = &uStack_14;
+  word_ptr = (undefined4 *)local_10;
+  local_8 = arg_bl;
+  if (arg_edx < -1000) {
+    word_ptr = &uStack_14;
     uStack_14 = 1;
-    iVar1 = FUN_000694d4();
+    val = scrsupp_script_could_find_hero_0694d4();
   }
-  else if (in_EDX < 0) {
-    puVar2 = &uStack_14;
+  else if (arg_edx < 0) {
+    word_ptr = &uStack_14;
     uStack_14 = 1;
-    iVar1 = FUN_00069268();
+    val = scrsupp_allocate_light_new_hero_069268();
   }
   else {
     uStack_14 = 0x68a0b;
-    iVar1 = FUN_0006972c();
+    val = scrsupp_allocate_light_new_hero_06972c();
   }
-  if (iVar1 == 0) {
-    iVar1 = 0;
+  if (val == 0) {
+    val = 0;
   }
   else {
-    *(undefined4 *)((&DAT_001ae9fc)[iVar1] + 0x13) = param_2;
-    *(undefined4 *)((int)puVar2 + -4) = 0x68a92;
-    FUN_0008240c();
+    *(undefined4 *)((&g_thing_ptrs)[val] + 0x13) = param_2;
+    *(undefined4 *)((int)word_ptr + -4) = 0x68a92;
+    creature_update_creature_control_08240c();
     switch(local_8) {
     case 1:
-      *(undefined4 *)((int)puVar2 + -4) = 0x68a49;
-      FUN_000699e0();
-      iVar1 = extraout_ECX_01;
+      *(undefined4 *)((int)word_ptr + -4) = 0x68a49;
+      scrsupp_fn_0699e0();
+      val = extraout_ECX_01;
       break;
     case 2:
-      *(undefined4 *)((int)puVar2 + -4) = 0x68a25;
-      FUN_0006992a();
-      iVar1 = extraout_ECX;
+      *(undefined4 *)((int)word_ptr + -4) = 0x68a25;
+      scrsupp_script_support_dungeon_heart_06992a();
+      val = extraout_ECX;
       break;
     case 3:
-      *(undefined4 *)((int)puVar2 + -4) = 0x68a39;
-      FUN_000698da();
-      iVar1 = extraout_ECX_00;
+      *(undefined4 *)((int)word_ptr + -4) = 0x68a39;
+      scrsupp_script_support_dungeon_heart_0698da();
+      val = extraout_ECX_00;
       break;
     case 4:
-      *(undefined4 *)((int)puVar2 + -4) = 0x68a56;
-      FUN_00069987();
-      iVar1 = extraout_ECX_02;
+      *(undefined4 *)((int)word_ptr + -4) = 0x68a56;
+      scrsupp_script_support_could_find_069987();
+      val = extraout_ECX_02;
       break;
     default:
-      *(undefined4 *)((int)puVar2 + -4) = 0x68a6c;
-      FUN_000ddaf0(); /* LbErrorLog("script.cpp", line 624, "Invalid HEAD_FOR") */
+      *(undefined4 *)((int)word_ptr + -4) = 0x68a6c;
+      LbErrorLog(); /* LbErrorLog("script.cpp", line 624, "Invalid HEAD_FOR") */
       return 0;
     }
   }
-  return (&DAT_001ae9fc)[iVar1];
+  return (&g_thing_ptrs)[val];
 }
 
 /******************************************************************************
- * Function : sub_068ab1 (Ghidra: FUN_00068ab1)
- * Prototype: void sub_068ab1(void);
+ * Function : script_fn_068ab1 (Original VA: 0x68ab1, Ghidra: FUN_00068ab1)
+ * Prototype: void script_fn_068ab1(void);
  * Address  : 0x68ab1 (Size: 19 bytes)
  * Module   : script.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x6809c
- * Callees  : 1 -> 0xdd500
+ * Purpose  : Module script.cpp procedure @ 0x068ab1
+ * Callers  : 1 -> script_update_player_view_state_06809c
+ * Callees  : 1 -> update_update_player_dungeon_0dd500
  ******************************************************************************/
-void FUN_00068ab1(void)
+void script_fn_068ab1(void)
 
 {
-  FUN_000dd500();
+  update_update_player_dungeon_0dd500();
   return;
 }
 
 /******************************************************************************
- * Function : sub_068ac4 (Ghidra: FUN_00068ac4)
- * Prototype: void sub_068ac4(void);
+ * Function : script_fn_068ac4 (Original VA: 0x68ac4, Ghidra: FUN_00068ac4)
+ * Prototype: void script_fn_068ac4(void);
  * Address  : 0x68ac4 (Size: 19 bytes)
  * Module   : script.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x6809c
- * Callees  : 1 -> 0xdd6c8
+ * Purpose  : Module script.cpp procedure @ 0x068ac4
+ * Callers  : 1 -> script_update_player_view_state_06809c
+ * Callees  : 1 -> update_update_player_dungeon_0dd6c8
  ******************************************************************************/
-void FUN_00068ac4(void)
+void script_fn_068ac4(void)
 
 {
-  FUN_000dd6c8();
+  update_update_player_dungeon_0dd6c8();
   return;
 }
 
 /******************************************************************************
- * Function : sub_068ad7 (Ghidra: FUN_00068ad7)
- * Prototype: void sub_068ad7(undefined4 param_1,undefined1 param_2,undefined4 param_3);
+ * Function : script_process_thing_entity_068ad7 (Original VA: 0x68ad7, Ghidra: FUN_00068ad7)
+ * Prototype: void script_process_thing_entity_068ad7(undefined4 param_1,undefined1 param_2,undefined4 param_3);
  * Address  : 0x68ad7 (Size: 96 bytes)
  * Module   : script.cpp [callgraph_affinity_to_preceding_unit]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x6809c, 0x7ad6f
- * Callees  : 3 -> 0x39ba4, 0x688a4, 0x689a7
+ * Purpose  : Looks up Thing* in g_thing_ptrs[2048] and updates state
+ * Callers  : 2 -> script_update_player_view_state_06809c, command_script_tunnellers_script_07ad6f
+ * Callees  : 3 -> gravyard_update_creature_control_039ba4, script_party_big_0688a4, script_process_thing_entity_0689a7
  ******************************************************************************/
-void FUN_00068ad7(undefined4 param_1,undefined1 param_2,undefined4 param_3)
+void script_process_thing_entity_068ad7(undefined4 param_1,undefined1 param_2,undefined4 param_3)
 
 {
-  uint uVar1;
+  uint uval;
   
-  uVar1 = FUN_000689a7(param_2,param_3);
-  if (DAT_001ae9fc < uVar1) {
-    uVar1 = FUN_000688a4();
-    if (DAT_001ae9fc < uVar1) {
-      FUN_00039ba4();
+  uval = script_process_thing_entity_0689a7(param_2,param_3);
+  if (g_thing_ptrs < uval) {
+    uval = script_party_big_0688a4();
+    if (g_thing_ptrs < uval) {
+      gravyard_update_creature_control_039ba4();
     }
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_068b37 (Ghidra: FUN_00068b37)
- * Prototype: void sub_068b37(void);
+ * Function : script_fn_068b37 (Original VA: 0x68b37, Ghidra: FUN_00068b37)
+ * Prototype: void script_fn_068b37(void);
  * Address  : 0x68b37 (Size: 344 bytes)
  * Module   : script.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x6809c
- * Callees  : 4 -> 0x68ca7, 0x68d79, 0x6916d, 0x69220
+ * Purpose  : Module script.cpp procedure @ 0x068b37
+ * Callers  : 1 -> script_update_player_view_state_06809c
+ * Callees  : 4 -> script_fn_068ca7, scrsupp_fn_068d79, scrsupp_fn_06916d, scrsupp_update_player_dungeon_069220
  ******************************************************************************/
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void FUN_00068b37(void)
+void script_fn_068b37(void)
 
 {
-  char cVar1;
-  int iVar2;
-  uint uVar3;
+  char ch;
+  int val;
+  uint uval;
   int extraout_ECX;
   int extraout_ECX_00;
-  short *psVar4;
-  uint uVar5;
+  short *val_2;
+  uint uval_2;
   int local_1c;
   
-  psVar4 = &DAT_002ec3ee;
-  uVar5 = 0;
+  val_2 = &g_bss_002ec3ee;
+  uval_2 = 0;
   do {
-    if (_DAT_002ec62e <= (int)(uVar5 & 0xffff)) {
+    if (g_bss_002ec62e <= (int)(uval_2 & 0xffff)) {
       return;
     }
-    if ((*psVar4 == -1) ||
-       ((iVar2 = *psVar4 * 0xc, ((&DAT_002ec3f0)[iVar2] & 1) != 0 &&
-        (((&DAT_002ec3f0)[iVar2] & 4) == 0)))) {
-      if (*(char *)((int)psVar4 + 3) == '\b') {
-        if ((char)psVar4[2] == '\x13') {
+    if ((*val_2 == -1) ||
+       ((val = *val_2 * 0xc, ((&g_bss_002ec3f0)[val] & 1) != 0 &&
+        (((&g_bss_002ec3f0)[val] & 4) == 0)))) {
+      if (*(char *)((int)val_2 + 3) == '\b') {
+        if ((char)val_2[2] == '\x13') {
           local_1c = 0;
-          uVar3 = 0;
-          while ((local_1c == 0 && ((uVar3 & 0xffff) < (uint)DAT_002eb542))) {
-            local_1c = FUN_0006916d();
-            uVar3 = extraout_ECX + 1;
+          uval = 0;
+          while ((local_1c == 0 && ((uval & 0xffff) < (uint)g_bss_002eb542))) {
+            local_1c = scrsupp_fn_06916d();
+            uval = extraout_ECX + 1;
           }
         }
         else {
           local_1c = 0;
-          uVar3 = 0;
-          while ((local_1c == 0 && ((uVar3 & 0xffff) < (uint)DAT_002eb542))) {
-            FUN_00068d79();
-            cVar1 = FUN_00068ca7(*(undefined1 *)((int)psVar4 + 7));
-            local_1c = (int)cVar1;
-            uVar3 = extraout_ECX_00 + 1;
+          uval = 0;
+          while ((local_1c == 0 && ((uval & 0xffff) < (uint)g_bss_002eb542))) {
+            scrsupp_fn_068d79();
+            ch = script_fn_068ca7(*(undefined1 *)((int)val_2 + 7));
+            local_1c = (int)ch;
+            uval = extraout_ECX_00 + 1;
           }
         }
-        *(byte *)(psVar4 + 1) = *(byte *)(psVar4 + 1) & 0xfe;
+        *(byte *)(val_2 + 1) = *(byte *)(val_2 + 1) & 0xfe;
         local_1c._0_1_ = (byte)local_1c & 1;
       }
       else {
-        if ((char)psVar4[2] == '\x13') {
-          local_1c._0_1_ = FUN_0006916d();
+        if ((char)val_2[2] == '\x13') {
+          local_1c._0_1_ = scrsupp_fn_06916d();
         }
         else {
-          if ((char)psVar4[2] != 'B') {
-            FUN_00068d79();
-            local_1c._0_1_ = FUN_00068ca7();
+          if ((char)val_2[2] != 'B') {
+            scrsupp_fn_068d79();
+            local_1c._0_1_ = script_fn_068ca7();
             local_1c._0_1_ = (byte)local_1c & 1;
-            *(byte *)(psVar4 + 1) = *(byte *)(psVar4 + 1) & 0xfe;
+            *(byte *)(val_2 + 1) = *(byte *)(val_2 + 1) & 0xfe;
             goto LAB_00068c31;
           }
-          local_1c._0_1_ = FUN_00069220();
+          local_1c._0_1_ = scrsupp_update_player_dungeon_069220();
         }
         local_1c._0_1_ = (byte)local_1c & 1;
-        *(byte *)(psVar4 + 1) = *(byte *)(psVar4 + 1) & 0xfe;
+        *(byte *)(val_2 + 1) = *(byte *)(val_2 + 1) & 0xfe;
       }
 LAB_00068c31:
-      *(byte *)(psVar4 + 1) = *(byte *)(psVar4 + 1) | (byte)local_1c;
-      if (((*(byte *)(psVar4 + 1) & 1) == 0) || ((*(byte *)(psVar4 + 1) & 2) != 0)) {
-        *(byte *)(psVar4 + 1) = *(byte *)(psVar4 + 1) & 0xfb;
+      *(byte *)(val_2 + 1) = *(byte *)(val_2 + 1) | (byte)local_1c;
+      if (((*(byte *)(val_2 + 1) & 1) == 0) || ((*(byte *)(val_2 + 1) & 2) != 0)) {
+        *(byte *)(val_2 + 1) = *(byte *)(val_2 + 1) & 0xfb;
       }
       else {
-        *(byte *)(psVar4 + 1) = *(byte *)(psVar4 + 1) | 6;
+        *(byte *)(val_2 + 1) = *(byte *)(val_2 + 1) | 6;
       }
     }
     else {
-      *(byte *)(psVar4 + 1) = *(byte *)(psVar4 + 1) & 0xfe;
+      *(byte *)(val_2 + 1) = *(byte *)(val_2 + 1) & 0xfe;
     }
-    uVar5 = uVar5 + 1;
-    psVar4 = psVar4 + 6;
+    uval_2 = uval_2 + 1;
+    val_2 = val_2 + 6;
   } while( true );
 }
 
 /******************************************************************************
- * Function : sub_068ca7 (Ghidra: FUN_00068ca7)
- * Prototype: bool sub_068ca7(void);
+ * Function : script_fn_068ca7 (Original VA: 0x68ca7, Ghidra: FUN_00068ca7)
+ * Prototype: bool script_fn_068ca7(void);
  * Address  : 0x68ca7 (Size: 64 bytes)
  * Module   : script.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x68b37
+ * Purpose  : Module script.cpp procedure @ 0x068ca7
+ * Callers  : 1 -> script_fn_068b37
  * Callees  : 0 -> 
  ******************************************************************************/
-bool FUN_00068ca7(void)
+bool script_fn_068ca7(void)
 
 {
-  undefined1 in_AL;
-  int in_EDX;
-  int unaff_EBX;
+  undefined1 arg_al;
+  int arg_edx;
+  int arg_ebx;
   
-  switch(in_AL) {
+  switch(arg_al) {
   case 1:
-    return in_EDX == unaff_EBX;
+    return arg_edx == arg_ebx;
   case 2:
-    return in_EDX != unaff_EBX;
+    return arg_edx != arg_ebx;
   case 3:
-    return in_EDX < unaff_EBX;
+    return arg_edx < arg_ebx;
   case 4:
-    return unaff_EBX < in_EDX;
+    return arg_ebx < arg_edx;
   case 5:
-    return in_EDX <= unaff_EBX;
+    return arg_edx <= arg_ebx;
   case 6:
-    return unaff_EBX <= in_EDX;
+    return arg_ebx <= arg_edx;
   default:
     return false;
   }
 }
 
 /******************************************************************************
- * Function : sub_068cc0 (Ghidra: FUN_00068cc0)
- * Prototype: bool sub_068cc0(void);
+ * Function : script_fn_068cc0 (Original VA: 0x68cc0, Ghidra: FUN_00068cc0)
+ * Prototype: bool script_fn_068cc0(void);
  * Address  : 0x68cc0 (Size: 7 bytes)
  * Module   : script.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module script.cpp procedure @ 0x068cc0
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-bool FUN_00068cc0(void)
+bool script_fn_068cc0(void)
 
 {
-  int in_EAX;
-  int unaff_EBX;
+  int arg_eax;
+  int arg_ebx;
   
-  return in_EAX == unaff_EBX;
+  return arg_eax == arg_ebx;
 }
 

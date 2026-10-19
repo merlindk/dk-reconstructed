@@ -1,7 +1,7 @@
 /**
- * Dungeon Keeper (KEEPER.EXE) - Reconstructed Source Module: compevnt.cpp
+ * Dungeon Keeper (KEEPER.EXE) - Reconstructed & Semantically Named Module: compevnt.cpp
  * Binary Subject: /home/merlin/Dungeon Keeper/re/KEEPER.elf
- * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 (x86:LE:32:default)
+ * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 + DK Semantic Analyzer
  * Functions in this translation unit: 32
  */
 
@@ -11,45 +11,45 @@
 #include "../include/dk_functions.h"
 
 /******************************************************************************
- * Function : sub_018d28 (Ghidra: FUN_00018d28)
- * Prototype: undefined4 sub_018d28(void);
+ * Function : compevnt_process_dungeon_room_018d28 (Original VA: 0x18d28, Ghidra: FUN_00018d28)
+ * Prototype: undefined4 compevnt_process_dungeon_room_018d28(void);
  * Address  : 0x18d28 (Size: 165 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Operates on Room structure in g_rooms (stride 0x45)
  * Callers  : 0 -> 
- * Callees  : 2 -> 0x1ba46, 0x203f0
+ * Callees  : 2 -> comptask_fn_01ba46, compturn_fn_0203f0
  ******************************************************************************/
-undefined4 FUN_00018d28(void)
+undefined4 compevnt_process_dungeon_room_018d28(void)
 
 {
-  ushort uVar1;
-  undefined2 uVar2;
-  int in_EAX;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int in_EDX;
+  ushort uval;
+  undefined2 uval_2;
+  int arg_eax;
+  int val;
+  int val_2;
+  int room_ptr;
+  int arg_edx;
   
-  iVar5 = *(int *)(in_EAX + 0x24);
-  iVar3 = (int)((uint)*(byte *)(iVar5 + 0x919) * *(int *)(in_EDX + 0x10)) / 100;
-  if (iVar3 != 0) {
-    iVar4 = FUN_000203f0();
-    if (iVar4 == 0) {
-      uVar1 = *(ushort *)(iVar5 + 0xb + *(int *)(in_EDX + 0x14) * 2);
-      while (iVar5 = (uint)uVar1 * 0x45, &DAT_002ddd1b < &DAT_002ddd1b + iVar5) {
-        if (*(ushort *)(&DAT_002ddd2b + iVar5) < *(ushort *)(&DAT_002ddd29 + iVar5)) {
-          iVar4 = FUN_0001ba46();
-          if (iVar4 != 0) {
-            *(undefined1 *)(iVar4 + 2) = 10;
-            uVar2 = *(undefined2 *)(&DAT_002ddd1c + iVar5);
-            *(undefined2 *)(iVar4 + 0x70) = uVar2;
-            *(undefined2 *)(iVar4 + 0x80) = uVar2;
-            *(int *)(iVar4 + 0x7c) = iVar3;
-            *(undefined4 *)(iVar4 + 10) = DAT_002e8bee;
+  room_ptr = *(int *)(arg_eax + 0x24);
+  val = (int)((uint)*(byte *)(room_ptr + 0x919) * *(int *)(arg_edx + 0x10)) / 100;
+  if (val != 0) {
+    val_2 = compturn_fn_0203f0();
+    if (val_2 == 0) {
+      uval = *(ushort *)(room_ptr + 0xb + *(int *)(arg_edx + 0x14) * 2);
+      while (room_ptr = (uint)uval * 0x45, &g_rooms < &g_rooms + room_ptr) {
+        if (*(ushort *)(&g_bss_002ddd2b + room_ptr) < *(ushort *)(&g_bss_002ddd29 + room_ptr)) {
+          val_2 = comptask_fn_01ba46();
+          if (val_2 != 0) {
+            *(undefined1 *)(val_2 + 2) = 10;
+            uval_2 = *(undefined2 *)(&g_bss_002ddd1c + room_ptr);
+            *(undefined2 *)(val_2 + 0x70) = uval_2;
+            *(undefined2 *)(val_2 + 0x80) = uval_2;
+            *(int *)(val_2 + 0x7c) = val;
+            *(undefined4 *)(val_2 + 10) = g_game_turn;
             return 1;
           }
         }
-        uVar1 = *(ushort *)(&DAT_002ddd21 + iVar5);
+        uval = *(ushort *)(&g_bss_002ddd21 + room_ptr);
       }
     }
   }
@@ -57,35 +57,35 @@ undefined4 FUN_00018d28(void)
 }
 
 /******************************************************************************
- * Function : sub_018dcd (Ghidra: FUN_00018dcd)
- * Prototype: undefined4 sub_018dcd(void);
+ * Function : compevnt_fn_018dcd (Original VA: 0x18dcd, Ghidra: FUN_00018dcd)
+ * Prototype: undefined4 compevnt_fn_018dcd(void);
  * Address  : 0x18dcd (Size: 111 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module compevnt.cpp procedure @ 0x018dcd
  * Callers  : 0 -> 
- * Callees  : 2 -> 0x1ba46, 0x203f0
+ * Callees  : 2 -> comptask_fn_01ba46, compturn_fn_0203f0
  ******************************************************************************/
-undefined4 FUN_00018dcd(void)
+undefined4 compevnt_fn_018dcd(void)
 
 {
-  undefined4 uVar1;
-  int in_EAX;
-  int iVar2;
+  undefined4 uval;
+  int arg_eax;
+  int val;
   undefined4 extraout_ECX;
-  int in_EDX;
+  int arg_edx;
   
-  if ((int)((uint)*(byte *)(*(int *)(in_EAX + 0x24) + 0x919) * *(int *)(in_EDX + 0x10)) / 100 != 0)
+  if ((int)((uint)*(byte *)(*(int *)(arg_eax + 0x24) + 0x919) * *(int *)(arg_edx + 0x10)) / 100 != 0)
   {
-    iVar2 = FUN_000203f0();
-    if (iVar2 == 0) {
-      iVar2 = FUN_0001ba46();
-      if (iVar2 != 0) {
-        *(undefined1 *)(iVar2 + 2) = 10;
-        *(undefined2 *)(iVar2 + 0x70) = 0;
-        *(undefined2 *)(iVar2 + 0x80) = 0;
-        uVar1 = DAT_002e8bee;
-        *(undefined4 *)(iVar2 + 0x7c) = extraout_ECX;
-        *(undefined4 *)(iVar2 + 10) = uVar1;
+    val = compturn_fn_0203f0();
+    if (val == 0) {
+      val = comptask_fn_01ba46();
+      if (val != 0) {
+        *(undefined1 *)(val + 2) = 10;
+        *(undefined2 *)(val + 0x70) = 0;
+        *(undefined2 *)(val + 0x80) = 0;
+        uval = g_game_turn;
+        *(undefined4 *)(val + 0x7c) = extraout_ECX;
+        *(undefined4 *)(val + 10) = uval;
         return 1;
       }
     }
@@ -94,93 +94,93 @@ undefined4 FUN_00018dcd(void)
 }
 
 /******************************************************************************
- * Function : sub_018e3c (Ghidra: FUN_00018e3c)
- * Prototype: int sub_018e3c(void);
+ * Function : compevnt_process_thing_entity_018e3c (Original VA: 0x18e3c, Ghidra: FUN_00018e3c)
+ * Prototype: int compevnt_process_thing_entity_018e3c(void);
  * Address  : 0x18e3c (Size: 151 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Looks up Thing* in g_thing_ptrs[2048] and updates state
  * Callers  : 0 -> 
- * Callees  : 3 -> 0x1dd33, 0x1df28, 0x1e38d
+ * Callees  : 3 -> comptool_process_slabmap_tile_01dd33, comptask_fn_01df28, comptool_update_player_dungeon_01e38d
  ******************************************************************************/
-int FUN_00018e3c(void)
+int compevnt_process_thing_entity_018e3c(void)
 
 {
-  ushort *puVar1;
-  int in_EAX;
-  int iVar2;
+  ushort *word_ptr;
+  int arg_eax;
+  int val;
   uint extraout_ECX;
-  int in_EDX;
-  uint uVar3;
-  int iVar4;
+  int arg_edx;
+  uint thing_ptr;
+  int thing_ptr_2;
   
-  puVar1 = *(ushort **)(in_EAX + 0x24);
-  iVar4 = 4;
-  if ((int)(uint)(byte)puVar1[0x48c] < *(int *)(in_EDX + 0x10)) {
-    iVar4 = FUN_0001e38d();
-    if (iVar4 == 1) {
-      uVar3 = (uint)*(byte *)((&DAT_001ae9fc)[*puVar1] + 0x10);
-      iVar2 = FUN_0001dd33(1,uVar3);
-      if (iVar2 != 0) {
-        iVar2 = FUN_0001df28(extraout_ECX & 0xffff,uVar3 & 0xffff,1,1);
-        if (0 < iVar2) {
-          iVar4 = 1;
+  word_ptr = *(ushort **)(arg_eax + 0x24);
+  thing_ptr_2 = 4;
+  if ((int)(uint)(byte)word_ptr[0x48c] < *(int *)(arg_edx + 0x10)) {
+    thing_ptr_2 = comptool_update_player_dungeon_01e38d();
+    if (thing_ptr_2 == 1) {
+      thing_ptr = (uint)*(byte *)((&g_thing_ptrs)[*word_ptr] + 0x10);
+      val = comptool_process_slabmap_tile_01dd33(1,thing_ptr);
+      if (val != 0) {
+        val = comptask_fn_01df28(extraout_ECX & 0xffff,thing_ptr & 0xffff,1,1);
+        if (0 < val) {
+          thing_ptr_2 = 1;
         }
       }
     }
   }
-  return iVar4;
+  return thing_ptr_2;
 }
 
 /******************************************************************************
- * Function : sub_018ed3 (Ghidra: FUN_00018ed3)
- * Prototype: undefined4 sub_018ed3(void);
+ * Function : compevnt_roll_action_random_018ed3 (Original VA: 0x18ed3, Ghidra: FUN_00018ed3)
+ * Prototype: undefined4 compevnt_roll_action_random_018ed3(void);
  * Address  : 0x18ed3 (Size: 299 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Evaluates deterministic lockstep PRNG (g_action_random_seed)
  * Callers  : 0 -> 
- * Callees  : 2 -> 0x1ba46, 0x1f754
+ * Callees  : 2 -> comptask_fn_01ba46, comptool_update_creature_and_thing_01f754
  ******************************************************************************/
-undefined4 FUN_00018ed3(void)
+undefined4 compevnt_roll_action_random_018ed3(void)
 
 {
-  undefined2 uVar1;
-  int in_EAX;
-  int iVar2;
-  int in_EDX;
-  uint uVar3;
-  int iVar4;
+  undefined2 uval;
+  int arg_eax;
+  int val;
+  int arg_edx;
+  uint rand_seed;
+  int val_2;
   undefined1 local_18;
   undefined1 local_14;
   
-  iVar2 = *(int *)(in_EAX + 0x24);
-  if ((*(int *)(iVar2 + 0x116f) != 0) &&
-     ((int)((uint)*(ushort *)(iVar2 + 0x93d) * *(int *)(in_EDX + 0x10)) / 100 <
-      *(int *)(iVar2 + 0x116f))) {
-    DAT_002e8bf6 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-    DAT_002e8bf6 = DAT_002e8bf6 >> 0xd | DAT_002e8bf6 * 0x80000;
-    iVar4 = 0;
-    for (uVar3 = DAT_002e8bf6 % *(uint *)(iVar2 + 0x116f);
-        (iVar4 < *(int *)(iVar2 + 0x116f) && (*(short *)(iVar2 + 0x106d + uVar3 * 4) != 1));
-        uVar3 = (int)(uVar3 + 1) % *(int *)(iVar2 + 0x116f)) {
-      iVar4 = iVar4 + 1;
+  val = *(int *)(arg_eax + 0x24);
+  if ((*(int *)(val + 0x116f) != 0) &&
+     ((int)((uint)*(ushort *)(val + 0x93d) * *(int *)(arg_edx + 0x10)) / 100 <
+      *(int *)(val + 0x116f))) {
+    g_action_random_seed = g_action_random_seed * 0x24a1 + 0x24df;
+    g_action_random_seed = g_action_random_seed >> 0xd | g_action_random_seed * 0x80000;
+    val_2 = 0;
+    for (rand_seed = g_action_random_seed % *(uint *)(val + 0x116f);
+        (val_2 < *(int *)(val + 0x116f) && (*(short *)(val + 0x106d + rand_seed * 4) != 1));
+        rand_seed = (int)(rand_seed + 1) % *(int *)(val + 0x116f)) {
+      val_2 = val_2 + 1;
     }
-    if (iVar4 < *(int *)(iVar2 + 0x116f)) {
-      uVar3 = (uint)*(ushort *)(iVar2 + 0x106b + uVar3 * 4);
-      iVar2 = FUN_0001f754();
-      if (iVar2 != 0) {
-        iVar4 = FUN_0001ba46();
-        if (iVar4 != 0) {
-          *(undefined1 *)(iVar4 + 2) = 0xb;
-          *(undefined1 *)(iVar4 + 0x86) = 0;
-          local_14 = (undefined1)(uVar3 % 0x100);
-          *(undefined1 *)(iVar4 + 0x88) = 0;
-          *(undefined1 *)(iVar4 + 0x87) = local_14;
-          local_18 = (undefined1)(uVar3 / 0x100);
-          *(undefined1 *)(iVar4 + 0x89) = local_18;
-          uVar1 = *(undefined2 *)(iVar2 + 0x1b);
-          *(undefined2 *)(iVar4 + 0x80) = 0;
-          *(undefined2 *)(iVar4 + 0x76) = uVar1;
-          *(undefined4 *)(iVar4 + 10) = DAT_002e8bee;
+    if (val_2 < *(int *)(val + 0x116f)) {
+      rand_seed = (uint)*(ushort *)(val + 0x106b + rand_seed * 4);
+      val = comptool_update_creature_and_thing_01f754();
+      if (val != 0) {
+        val_2 = comptask_fn_01ba46();
+        if (val_2 != 0) {
+          *(undefined1 *)(val_2 + 2) = 0xb;
+          *(undefined1 *)(val_2 + 0x86) = 0;
+          local_14 = (undefined1)(rand_seed % 0x100);
+          *(undefined1 *)(val_2 + 0x88) = 0;
+          *(undefined1 *)(val_2 + 0x87) = local_14;
+          local_18 = (undefined1)(rand_seed / 0x100);
+          *(undefined1 *)(val_2 + 0x89) = local_18;
+          uval = *(undefined2 *)(val + 0x1b);
+          *(undefined2 *)(val_2 + 0x80) = 0;
+          *(undefined2 *)(val_2 + 0x76) = uval;
+          *(undefined4 *)(val_2 + 10) = g_game_turn;
           return 1;
         }
       }
@@ -190,99 +190,99 @@ undefined4 FUN_00018ed3(void)
 }
 
 /******************************************************************************
- * Function : sub_018ffe (Ghidra: FUN_00018ffe)
- * Prototype: undefined4 sub_018ffe(void);
+ * Function : compevnt_roll_action_random_018ffe (Original VA: 0x18ffe, Ghidra: FUN_00018ffe)
+ * Prototype: undefined4 compevnt_roll_action_random_018ffe(void);
  * Address  : 0x18ffe (Size: 364 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Evaluates deterministic lockstep PRNG (g_action_random_seed)
  * Callers  : 0 -> 
- * Callees  : 9 -> 0x18d16, 0x1ba46, 0x1dbbc, 0x1e38d, 0x1e425, 0x2002c, 0x2035a, 0x20596, 0x51374
+ * Callees  : 9 -> combtool_fn_018d16, comptask_fn_01ba46, comptool_fn_01dbbc, comptool_update_player_dungeon_01e38d, comptool_process_dungeon_room_01e425, comptool_update_creature_and_thing_02002c, compturn_fn_02035a, compturn_fn_020596 ...
  ******************************************************************************/
-undefined4 FUN_00018ffe(void)
+undefined4 compevnt_roll_action_random_018ffe(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  int iVar2;
-  undefined4 uVar3;
+  int arg_eax;
+  int val;
+  int val_2;
+  undefined4 uval;
   int extraout_ECX;
   int extraout_ECX_00;
-  int in_EDX;
-  int iVar4;
-  byte bVar5;
+  int arg_edx;
+  int loop_i;
+  byte flag;
   int local_74 [20];
   int local_24;
   undefined2 local_20 [2];
   int local_1c;
   int local_18;
   
-  bVar5 = 0;
-  local_18 = (int)((uint)*(byte *)(*(int *)(in_EAX + 0x24) + 0x919) * *(int *)(in_EDX + 0x10)) / 100
+  flag = 0;
+  local_18 = (int)((uint)*(byte *)(*(int *)(arg_eax + 0x24) + 0x919) * *(int *)(arg_edx + 0x10)) / 100
   ;
-  if ((((*(int *)(in_EDX + 0x18) < local_18) &&
-       (local_1c = in_EDX, iVar1 = FUN_0001e38d(), iVar1 == 1)) &&
-      (iVar1 = FUN_0002035a(), iVar1 == 1)) && (iVar1 = FUN_00020596(), iVar1 == 0)) {
-    FUN_0001dbbc();
-    iVar1 = 0;
-    for (iVar4 = 0; iVar4 < 5; iVar4 = iVar4 + 1) {
-      if (((*(int *)((int)local_74 + iVar1 + 8) != 0) &&
-          (*(int *)(local_1c + 0x18) < *(int *)((int)local_74 + iVar1))) &&
-         (iVar2 = FUN_0001e425(), iVar1 = extraout_ECX, iVar2 != 0)) {
-        local_24 = (uint)CONCAT21((ushort)*(byte *)(iVar2 + 9) << 8,*(undefined1 *)(iVar2 + 8)) << 8
+  if ((((*(int *)(arg_edx + 0x18) < local_18) &&
+       (local_1c = arg_edx, val = comptool_update_player_dungeon_01e38d(), val == 1)) &&
+      (val = compturn_fn_02035a(), val == 1)) && (val = compturn_fn_020596(), val == 0)) {
+    comptool_fn_01dbbc();
+    val = 0;
+    for (loop_i = 0; loop_i < 5; loop_i = loop_i + 1) {
+      if (((*(int *)((int)local_74 + val + 8) != 0) &&
+          (*(int *)(local_1c + 0x18) < *(int *)((int)local_74 + val))) &&
+         (val_2 = comptool_process_dungeon_room_01e425(), val = extraout_ECX, val_2 != 0)) {
+        local_24 = (uint)CONCAT21((ushort)*(byte *)(val_2 + 9) << 8,*(undefined1 *)(val_2 + 8)) << 8
         ;
         local_20[0] = 0x100;
-        iVar1 = FUN_0002002c();
-        if (iVar1 <= *(int *)(local_1c + 0x18)) {
+        val = comptool_update_creature_and_thing_02002c();
+        if (val <= *(int *)(local_1c + 0x18)) {
           return 4;
         }
-        iVar1 = FUN_0001ba46();
-        if (iVar1 == 0) {
+        val = comptask_fn_01ba46();
+        if (val == 0) {
           return 4;
         }
-        DAT_002e8bf6 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-        DAT_002e8bf6 = DAT_002e8bf6 >> 0xd | DAT_002e8bf6 * 0x80000;
-        FUN_00051374();
+        g_action_random_seed = g_action_random_seed * 0x24a1 + 0x24df;
+        g_action_random_seed = g_action_random_seed >> 0xd | g_action_random_seed * 0x80000;
+        moodneed_fn_051374();
         *(undefined1 *)(extraout_ECX_00 + 2) = 8;
         *(undefined1 *)(extraout_ECX_00 + 1) = 0;
         *(int *)(extraout_ECX_00 + 0x76) = local_24;
-        *(undefined2 *)(extraout_ECX_00 + 0x7a + (uint)bVar5 * -8) = local_20[(uint)bVar5 * -4];
+        *(undefined2 *)(extraout_ECX_00 + 0x7a + (uint)flag * -8) = local_20[(uint)flag * -4];
         *(undefined4 *)(extraout_ECX_00 + 0x60) = 0x19;
         *(int *)(extraout_ECX_00 + 0x7c) = local_18;
-        iVar1 = DAT_002e8bee;
-        *(int *)(extraout_ECX_00 + 10) = DAT_002e8bee;
-        *(int *)(extraout_ECX_00 + 0x5c) = iVar1 - *(int *)(extraout_ECX_00 + 0x60);
+        val = g_game_turn;
+        *(int *)(extraout_ECX_00 + 10) = g_game_turn;
+        *(int *)(extraout_ECX_00 + 0x5c) = val - *(int *)(extraout_ECX_00 + 0x60);
         *(undefined4 *)(extraout_ECX_00 + 0x8e) = *(undefined4 *)(local_1c + 0x14);
-        uVar3 = FUN_00018d16();
-        return uVar3;
+        uval = combtool_fn_018d16();
+        return uval;
       }
-      iVar1 = iVar1 + 0x10;
+      val = val + 0x10;
     }
   }
   return 4;
 }
 
 /******************************************************************************
- * Function : sub_01916a (Ghidra: FUN_0001916a)
- * Prototype: undefined4 sub_01916a(void);
+ * Function : compevnt_update_creature_and_thing_01916a (Original VA: 0x1916a, Ghidra: FUN_0001916a)
+ * Prototype: undefined4 compevnt_update_creature_and_thing_01916a(void);
  * Address  : 0x1916a (Size: 343 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
  * Callers  : 0 -> 
- * Callees  : 4 -> 0x18d16, 0x1df28, 0x1e38d, 0x720ce
+ * Callees  : 4 -> combtool_fn_018d16, comptask_fn_01df28, comptool_update_player_dungeon_01e38d, spell_update_creature_control_0720ce
  ******************************************************************************/
-undefined4 FUN_0001916a(void)
+undefined4 compevnt_update_creature_and_thing_01916a(void)
 
 {
-  ushort uVar1;
-  uint uVar2;
-  byte bVar3;
-  int in_EAX;
-  int iVar4;
-  undefined4 uVar5;
-  int in_EDX;
-  uint uVar6;
-  undefined1 *puVar7;
-  uint *puVar8;
+  ushort cctrl_ptr;
+  uint thing_ptr;
+  byte flag;
+  int arg_eax;
+  int val;
+  undefined4 uval;
+  int arg_edx;
+  uint uval_2;
+  undefined1 *word_ptr;
+  uint *word_ptr_2;
   uint auStack_48 [7];
   undefined4 local_2c;
   undefined1 uStack_28;
@@ -291,86 +291,86 @@ undefined4 FUN_0001916a(void)
   int local_1c;
   undefined1 *local_18;
   
-  puVar8 = auStack_48 + 5;
+  word_ptr_2 = auStack_48 + 5;
   local_24 = 5;
-  local_20 = *(int *)(in_EAX + 0x24);
-  local_2c = DAT_00174db0;
-  uStack_28 = DAT_00174db4;
-  auStack_48[5] = in_EDX;
-  iVar4 = FUN_0001e38d();
-  if (iVar4 == 1) {
-    uVar6 = *(uint *)(auStack_48[5] + 0x10);
-    if (uVar6 == 0) {
-      DAT_002e8bf6 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-      DAT_002e8bf6 = DAT_002e8bf6 >> 0xd | DAT_002e8bf6 * 0x80000;
-      uVar6 = DAT_002e8bf6 % 5;
+  local_20 = *(int *)(arg_eax + 0x24);
+  local_2c = g_data_00174db0;
+  uStack_28 = g_data_00174db4;
+  auStack_48[5] = arg_edx;
+  val = comptool_update_player_dungeon_01e38d();
+  if (val == 1) {
+    uval_2 = *(uint *)(auStack_48[5] + 0x10);
+    if (uval_2 == 0) {
+      g_action_random_seed = g_action_random_seed * 0x24a1 + 0x24df;
+      g_action_random_seed = g_action_random_seed >> 0xd | g_action_random_seed * 0x80000;
+      uval_2 = g_action_random_seed % 5;
     }
     for (local_1c = 0; local_1c < local_24; local_1c = local_1c + 1) {
-      uVar1 = *(ushort *)((uint)*(byte *)((int)&local_2c + uVar6) * 2 + local_20 + 0xb);
-      while (local_18 = &DAT_002ddd1b + (uint)uVar1 * 0x45, &DAT_002ddd1b < local_18) {
-        uVar1 = *(ushort *)((int)&DAT_002ddd58 + (uint)uVar1 * 0x45);
-        while (uVar2 = (&DAT_001ae9fc)[uVar1], DAT_001ae9fc < uVar2) {
-          *(undefined4 *)((int)puVar8 + -4) = 0x1926a;
-          iVar4 = FUN_000720ce();
-          puVar7 = (undefined1 *)puVar8;
-          if (iVar4 == 0) {
-            if (*(char *)(uVar2 + 7) == '\x0e') {
-              bVar3 = *(byte *)(uVar2 + 8);
+      cctrl_ptr = *(ushort *)((uint)*(byte *)((int)&local_2c + uval_2) * 2 + local_20 + 0xb);
+      while (local_18 = &g_rooms + (uint)cctrl_ptr * 0x45, &g_rooms < local_18) {
+        cctrl_ptr = *(ushort *)((int)&g_bss_002ddd58 + (uint)cctrl_ptr * 0x45);
+        while (thing_ptr = (&g_thing_ptrs)[cctrl_ptr], g_thing_ptrs < thing_ptr) {
+          *(undefined4 *)((int)word_ptr_2 + -4) = 0x1926a;
+          val = spell_update_creature_control_0720ce();
+          word_ptr = (undefined1 *)word_ptr_2;
+          if (val == 0) {
+            if (*(char *)(thing_ptr + 7) == '\x0e') {
+              flag = *(byte *)(thing_ptr + 8); /* thing->active_state */
             }
             else {
-              bVar3 = *(byte *)(uVar2 + 7);
+              flag = *(byte *)(thing_ptr + 7);
             }
-            if ((&DAT_0018c4be)[(uint)bVar3 * 0x29] == '\x01') {
-              *(undefined4 *)((int)puVar8 + -4) = 0;
-              *(uint *)((int)puVar8 + -8) = (uint)*(ushort *)(uVar2 + 0x1b);
-              *(undefined4 *)((int)puVar8 + -0xc) = 0;
-              puVar7 = (undefined1 *)((int)puVar8 + -0x10);
-              *(undefined4 *)((int)puVar8 + -0x10) = 0;
-              *(undefined4 *)((int)puVar8 + -0x14) = 0x192b8;
-              iVar4 = FUN_0001df28();
-              if (0 < iVar4) {
-                uVar5 = FUN_00018d16();
-                return uVar5;
+            if ((&g_data_0018c4be)[(uint)flag * 0x29] == '\x01') {
+              *(undefined4 *)((int)word_ptr_2 + -4) = 0;
+              *(uint *)((int)word_ptr_2 + -8) = (uint)*(ushort *)(thing_ptr + 0x1b); /* thing->index_or_angle */
+              *(undefined4 *)((int)word_ptr_2 + -0xc) = 0;
+              word_ptr = (undefined1 *)((int)word_ptr_2 + -0x10);
+              *(undefined4 *)((int)word_ptr_2 + -0x10) = 0;
+              *(undefined4 *)((int)word_ptr_2 + -0x14) = 0x192b8;
+              val = comptask_fn_01df28();
+              if (0 < val) {
+                uval = combtool_fn_018d16();
+                return uval;
               }
             }
           }
-          puVar8 = (uint *)puVar7;
-          uVar1 = *(ushort *)((&DAT_001b0a00)[*(ushort *)(uVar2 + 100)] + 0x2aa);
+          word_ptr_2 = (uint *)word_ptr;
+          cctrl_ptr = *(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x2aa); /* thing->ccontrol_idx */
         }
-        uVar1 = *(ushort *)(local_18 + 6);
+        cctrl_ptr = *(ushort *)(local_18 + 6);
       }
-      uVar6 = (int)(uVar6 + 1) % local_24;
+      uval_2 = (int)(uval_2 + 1) % local_24;
     }
   }
   return 4;
 }
 
 /******************************************************************************
- * Function : sub_0192c1 (Ghidra: FUN_000192c1)
- * Prototype: undefined4 sub_0192c1(void);
+ * Function : compevnt_fn_0192c1 (Original VA: 0x192c1, Ghidra: FUN_000192c1)
+ * Prototype: undefined4 compevnt_fn_0192c1(void);
  * Address  : 0x192c1 (Size: 91 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module compevnt.cpp procedure @ 0x0192c1
  * Callers  : 0 -> 
- * Callees  : 2 -> 0x1ba46, 0x203f0
+ * Callees  : 2 -> comptask_fn_01ba46, compturn_fn_0203f0
  ******************************************************************************/
-undefined4 FUN_000192c1(void)
+undefined4 compevnt_fn_0192c1(void)
 
 {
-  int iVar1;
-  int in_EAX;
-  int iVar2;
+  int val;
+  int arg_eax;
+  int val_2;
   int extraout_ECX;
   
-  iVar1 = *(int *)(in_EAX + 0x24);
-  iVar2 = FUN_000203f0();
-  if (iVar2 == 0) {
-    iVar2 = FUN_0001ba46();
-    if (iVar2 != 0) {
-      *(undefined1 *)(iVar2 + 2) = 0xd;
-      *(int *)(iVar2 + 0x7c) =
-           (int)((uint)*(byte *)(iVar1 + 0x918) * *(int *)(extraout_ECX + 0x10)) / 100;
-      *(undefined4 *)(iVar2 + 10) = DAT_002e8bee;
+  val = *(int *)(arg_eax + 0x24);
+  val_2 = compturn_fn_0203f0();
+  if (val_2 == 0) {
+    val_2 = comptask_fn_01ba46();
+    if (val_2 != 0) {
+      *(undefined1 *)(val_2 + 2) = 0xd;
+      *(int *)(val_2 + 0x7c) =
+           (int)((uint)*(byte *)(val + 0x918) * *(int *)(extraout_ECX + 0x10)) / 100;
+      *(undefined4 *)(val_2 + 10) = g_game_turn;
       return 1;
     }
   }
@@ -378,28 +378,28 @@ undefined4 FUN_000192c1(void)
 }
 
 /******************************************************************************
- * Function : sub_01931c (Ghidra: FUN_0001931c)
- * Prototype: undefined4 sub_01931c(void);
+ * Function : compevnt_process_dungeon_room_01931c (Original VA: 0x1931c, Ghidra: FUN_0001931c)
+ * Prototype: undefined4 compevnt_process_dungeon_room_01931c(void);
  * Address  : 0x1931c (Size: 460 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Operates on Room structure in g_rooms (stride 0x45)
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_0001931c(void)
+undefined4 compevnt_process_dungeon_room_01931c(void)
 
 {
-  byte bVar1;
-  ushort uVar2;
-  short sVar3;
-  int iVar4;
-  int in_EAX;
-  int iVar5;
-  short *psVar6;
-  int iVar7;
-  uint uVar8;
-  uint uVar9;
-  int iVar10;
+  byte flag;
+  ushort uval;
+  short short_val;
+  int val;
+  int arg_eax;
+  int room_ptr;
+  short *room_ptr_2;
+  int val_2;
+  uint uval_2;
+  uint uval_3;
+  int val_3;
   int local_4c;
   int local_44;
   undefined4 local_2c;
@@ -408,42 +408,42 @@ undefined4 FUN_0001931c(void)
   uint local_20;
   
   local_2c = 4;
-  iVar4 = *(int *)(in_EAX + 0x24);
+  val = *(int *)(arg_eax + 0x24);
   local_20 = 0;
-  local_24 = (short *)(in_EAX + 0xb9a);
+  local_24 = (short *)(arg_eax + 0xb9a);
   local_4c = 0;
-  local_28 = (short *)(in_EAX + 0xa1a);
-  iVar10 = 0;
-  local_44 = in_EAX;
+  local_28 = (short *)(arg_eax + 0xa1a);
+  val_3 = 0;
+  local_44 = arg_eax;
   do {
-    if ((int)*(char *)(iVar4 + 0xe9f) != local_20) {
-      uVar8 = (uint)*(char *)(*(int *)(in_EAX + 0x24) + 0xe9f);
-      uVar9 = (uint)DAT_002eb543;
-      if (((((uVar9 == uVar8) || (uVar9 == local_20)) ||
-           (((uint)(byte)(&DAT_0019d0f2)[uVar8 * 0x4ef] & 1 << ((byte)local_20 & 0x1f)) == 0)) ||
-          ((uVar9 == local_20 || (uVar9 == uVar8)))) ||
-         (((uint)(byte)(&DAT_0019d0f2)[local_4c] &
-          1 << (*(byte *)(*(int *)(in_EAX + 0x24) + 0xe9f) & 0x1f)) == 0)) {
-        uVar2 = *(ushort *)((int)&DAT_002e0596 + iVar10);
-        while (iVar5 = (uint)uVar2 * 0x45, psVar6 = local_28, &DAT_002ddd1b < &DAT_002ddd1b + iVar5)
+    if ((int)*(char *)(val + 0xe9f) != local_20) {
+      uval_2 = (uint)*(char *)(*(int *)(arg_eax + 0x24) + 0xe9f);
+      uval_3 = (uint)g_neutral_player_number;
+      if (((((uval_3 == uval_2) || (uval_3 == local_20)) ||
+           (((uint)(byte)(&g_player_view_flags)[uval_2 * 0x4ef] & 1 << ((byte)local_20 & 0x1f)) == 0)) ||
+          ((uval_3 == local_20 || (uval_3 == uval_2)))) ||
+         (((uint)(byte)(&g_player_view_flags)[local_4c] &
+          1 << (*(byte *)(*(int *)(arg_eax + 0x24) + 0xe9f) & 0x1f)) == 0)) {
+        uval = *(ushort *)((int)&g_bss_002e0596 + val_3);
+        while (room_ptr = (uint)uval * 0x45, room_ptr_2 = local_28, &g_rooms < &g_rooms + room_ptr)
         {
-          for (; (psVar6 < local_24 &&
-                 ((*psVar6 != (ushort)((ushort)(byte)(&DAT_002ddd23)[iVar5] << 8) ||
-                  (psVar6[1] != (ushort)((ushort)(byte)(&DAT_002ddd24)[iVar5] << 8)))));
-              psVar6 = psVar6 + 3) {
+          for (; (room_ptr_2 < local_24 &&
+                 ((*room_ptr_2 != (ushort)((ushort)(byte)(&g_bss_002ddd23)[room_ptr] << 8) ||
+                  (room_ptr_2[1] != (ushort)((ushort)(byte)(&g_bss_002ddd24)[room_ptr] << 8)))));
+              room_ptr_2 = room_ptr_2 + 3) {
           }
-          if (psVar6 == local_24) {
-            sVar3 = *(short *)(local_44 + 0xa14);
-            *(short *)(local_44 + 0xa14) = (short)((sVar3 + 1) % 0x40);
-            *(undefined4 *)(local_44 + 0xa10) = DAT_002e8bee;
-            iVar7 = sVar3 * 6;
-            *(ushort *)(local_44 + 0xa1a + iVar7) = (ushort)(byte)(&DAT_002ddd23)[iVar5] << 8;
-            bVar1 = (&DAT_002ddd24)[iVar5];
+          if (room_ptr_2 == local_24) {
+            short_val = *(short *)(local_44 + 0xa14);
+            *(short *)(local_44 + 0xa14) = (short)((short_val + 1) % 0x40);
+            *(undefined4 *)(local_44 + 0xa10) = g_game_turn;
+            val_2 = short_val * 6;
+            *(ushort *)(local_44 + 0xa1a + val_2) = (ushort)(byte)(&g_bss_002ddd23)[room_ptr] << 8;
+            flag = (&g_bss_002ddd24)[room_ptr];
             local_2c = 2;
-            *(undefined2 *)(local_44 + 0xa1e + iVar7) = 0x100;
-            *(ushort *)(local_44 + 0xa1c + iVar7) = (ushort)bVar1 << 8;
+            *(undefined2 *)(local_44 + 0xa1e + val_2) = 0x100;
+            *(ushort *)(local_44 + 0xa1c + val_2) = (ushort)flag << 8;
           }
-          uVar2 = *(ushort *)(&DAT_002ddd21 + iVar5);
+          uval = *(ushort *)(&g_bss_002ddd21 + room_ptr);
         }
       }
     }
@@ -452,37 +452,37 @@ undefined4 FUN_0001931c(void)
     local_28 = local_28 + 0xc5;
     local_44 = local_44 + 0x18a;
     local_20 = local_20 + 1;
-    iVar10 = iVar10 + 0x1508;
+    val_3 = val_3 + 0x1508;
   } while ((int)local_20 < 5);
   return local_2c;
 }
 
 /******************************************************************************
- * Function : sub_0194e8 (Ghidra: FUN_000194e8)
- * Prototype: undefined4 sub_0194e8(void);
+ * Function : compevnt_process_dungeon_room_0194e8 (Original VA: 0x194e8, Ghidra: FUN_000194e8)
+ * Prototype: undefined4 compevnt_process_dungeon_room_0194e8(void);
  * Address  : 0x194e8 (Size: 705 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Operates on Room structure in g_rooms (stride 0x45)
  * Callers  : 0 -> 
- * Callees  : 4 -> 0x18d16, 0x1df28, 0x22b3a, 0x8f924
+ * Callees  : 4 -> combtool_fn_018d16, comptask_fn_01df28, door_process_map_subtile_022b3a, draw_update_slab_subtile_columns_08f924
  ******************************************************************************/
-undefined4 FUN_000194e8(void)
+undefined4 compevnt_process_dungeon_room_0194e8(void)
 
 {
-  ushort uVar1;
-  bool bVar2;
-  char cVar3;
-  int in_EAX;
-  undefined4 uVar4;
-  uint uVar5;
+  ushort uval;
+  bool flag;
+  char ch;
+  int arg_eax;
+  undefined4 uval_2;
+  uint uval_3;
   uint extraout_ECX;
   uint extraout_ECX_00;
-  int in_EDX;
-  int iVar6;
-  undefined1 *puVar7;
-  undefined1 *puVar8;
-  uint uVar9;
-  int iVar10;
+  int arg_edx;
+  int val;
+  undefined1 *word_ptr;
+  undefined1 *word_ptr_2;
+  uint uval_4;
+  int val_2;
   uint auStack_5c [5];
   undefined1 local_48 [4];
   int local_44;
@@ -498,8 +498,8 @@ undefined4 FUN_000194e8(void)
   undefined1 *local_1c;
   undefined4 local_18;
   
-  puVar8 = local_48;
-  local_44 = *(int *)(in_EAX + 0x24);
+  word_ptr_2 = local_48;
+  local_44 = *(int *)(arg_eax + 0x24);
   local_30 = (uint)*(char *)(local_44 + 0xe9f);
   local_40 = 0;
   local_28 = local_44;
@@ -508,83 +508,83 @@ undefined4 FUN_000194e8(void)
       return 4;
     }
     if (*(char *)(local_44 + 0x101d) != '\0') {
-      iVar6 = *(int *)(in_EDX + 0x10);
-      if (iVar6 == 0) {
-        iVar6 = (*(int *)(in_EDX + 0x14) + 1) % 0x11;
-        *(int *)(in_EDX + 0x14) = iVar6;
+      val = *(int *)(arg_edx + 0x10);
+      if (val == 0) {
+        val = (*(int *)(arg_edx + 0x14) + 1) % 0x11;
+        *(int *)(arg_edx + 0x14) = val;
       }
-      uVar1 = *(ushort *)(iVar6 * 2 + local_28 + 0xb);
-      while (local_1c = &DAT_002ddd1b + (uint)uVar1 * 0x45, &DAT_002ddd1b < local_1c) {
-        DAT_002e8bf6 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-        DAT_002e8bf6 = DAT_002e8bf6 >> 0xd | DAT_002e8bf6 * 0x80000;
-        local_20 = DAT_002e8bf6 % 0x6b & 3;
+      uval = *(ushort *)(val * 2 + local_28 + 0xb);
+      while (local_1c = &g_rooms + (uint)uval * 0x45, &g_rooms < local_1c) {
+        g_action_random_seed = g_action_random_seed * 0x24a1 + 0x24df;
+        g_action_random_seed = g_action_random_seed >> 0xd | g_action_random_seed * 0x80000;
+        local_20 = g_action_random_seed % 0x6b & 3;
         for (local_2c = 4; local_2c != 0; local_2c = local_2c + -1) {
-          uVar5 = (uint)(byte)local_1c[8];
-          uVar9 = (uint)(byte)local_1c[9];
-          while (&DAT_002ddd1b +
-                 (uint)(byte)(&DAT_002d33c8)
-                             [((&DAT_0019033b)[uVar9] * 0x55 + (&DAT_0019033b)[uVar5]) * 6] * 0x45
+          uval_3 = (uint)(byte)local_1c[8];
+          uval_4 = (uint)(byte)local_1c[9];
+          while (&g_rooms +
+                 (uint)(byte)(&g_bss_002d33c8)
+                             [((&g_subtile_to_slab_lut)[uval_4] * 0x55 + (&g_subtile_to_slab_lut)[uval_3]) * 6] * 0x45
                  == local_1c) {
-            uVar5 = uVar5 + *(char *)((int)&DAT_0018b67b + local_20 * 2 + 3) * 3;
-            uVar9 = uVar9 + (char)(&DAT_0018b67f)[local_20 * 2] * 3;
+            uval_3 = uval_3 + *(char *)((int)&g_data_0018b67b + local_20 * 2 + 3) * 3;
+            uval_4 = uval_4 + (char)(&g_data_0018b67f)[local_20 * 2] * 3;
           }
           local_34 = local_20 * 2;
           for (local_24 = 4; local_24 != 0; local_24 = local_24 + -1) {
-            if ((((&DAT_002d33ca)[((&DAT_0019033b)[uVar5] + (&DAT_0019033b)[uVar9] * 0x55) * 6] & 7)
+            if ((((&g_slabmap)[((&g_subtile_to_slab_lut)[uval_3] + (&g_subtile_to_slab_lut)[uval_4] * 0x55) * 6] & 7)
                  == local_30) &&
                (local_18 = 3,
-               (&DAT_002d33c5)[((int)uVar5 / 3 + ((int)uVar9 / 3) * 0x55) * 6] == '\v')) {
-              bVar2 = false;
+               (&g_slabmap_base)[((int)uval_3 / 3 + ((int)uval_4 / 3) * 0x55) * 6] == '\v')) {
+              flag = false;
             }
             else {
-              bVar2 = true;
+              flag = true;
             }
-            if (bVar2) {
+            if (flag) {
               local_24 = 0;
               break;
             }
-            *(undefined4 *)(puVar8 + -4) = 0x196c5;
-            cVar3 = FUN_0008f924();
-            uVar5 = extraout_ECX;
-            if (cVar3 != '\0') {
-              *(undefined4 *)(puVar8 + -4) = 0x196d6;
-              iVar6 = FUN_00022b3a();
-              uVar5 = extraout_ECX_00;
-              if (iVar6 == 0) break;
+            *(undefined4 *)(word_ptr_2 + -4) = 0x196c5;
+            ch = draw_update_slab_subtile_columns_08f924();
+            uval_3 = extraout_ECX;
+            if (ch != '\0') {
+              *(undefined4 *)(word_ptr_2 + -4) = 0x196d6;
+              val = door_process_map_subtile_022b3a();
+              uval_3 = extraout_ECX_00;
+              if (val == 0) break;
             }
-            uVar5 = uVar5 + *(char *)((int)&DAT_0018b67b + local_34 + 3) * 3;
-            uVar9 = uVar9 + (char)(&DAT_0018b67f)[local_34] * 3;
+            uval_3 = uval_3 + *(char *)((int)&g_data_0018b67b + local_34 + 3) * 3;
+            uval_4 = uval_4 + (char)(&g_data_0018b67f)[local_34] * 3;
           }
-          puVar7 = puVar8;
+          word_ptr = word_ptr_2;
           if (local_24 != 0) {
-            iVar10 = uVar9 + (char)(&DAT_0018b67f)[local_20 * 2] * 3;
-            iVar6 = uVar5 + *(char *)((int)&DAT_0018b67b + local_20 * 2 + 3) * 3;
-            local_3c = uVar5;
-            local_38 = uVar9;
-            if ((((&DAT_002d33ca)[((&DAT_0019033b)[iVar6] + (&DAT_0019033b)[iVar10] * 0x55) * 6] & 7
+            val_2 = uval_4 + (char)(&g_data_0018b67f)[local_20 * 2] * 3;
+            val = uval_3 + *(char *)((int)&g_data_0018b67b + local_20 * 2 + 3) * 3;
+            local_3c = uval_3;
+            local_38 = uval_4;
+            if ((((&g_slabmap)[((&g_subtile_to_slab_lut)[val] + (&g_subtile_to_slab_lut)[val_2] * 0x55) * 6] & 7
                  ) == local_30) &&
-               (local_18 = 3, (&DAT_002d33c5)[(iVar6 / 3 + (iVar10 / 3) * 0x55) * 6] == '\v')) {
-              *(undefined4 *)(puVar8 + -4) = 0x1976b;
-              iVar6 = FUN_00022b3a();
-              if (iVar6 == 0) {
-                *(undefined4 *)(puVar8 + -4) = 0;
-                *(uint *)(puVar8 + -8) = local_40 & 0xffff;
-                *(uint *)(puVar8 + -0xc) = local_38 & 0xffff;
-                puVar7 = puVar8 + -0x10;
-                *(uint *)(puVar8 + -0x10) = local_3c & 0xffff;
-                *(undefined4 *)(puVar8 + -0x14) = 0x1979c;
-                iVar6 = FUN_0001df28();
-                if (0 < iVar6) {
-                  uVar4 = FUN_00018d16();
-                  return uVar4;
+               (local_18 = 3, (&g_slabmap_base)[(val / 3 + (val_2 / 3) * 0x55) * 6] == '\v')) {
+              *(undefined4 *)(word_ptr_2 + -4) = 0x1976b;
+              val = door_process_map_subtile_022b3a();
+              if (val == 0) {
+                *(undefined4 *)(word_ptr_2 + -4) = 0;
+                *(uint *)(word_ptr_2 + -8) = local_40 & 0xffff;
+                *(uint *)(word_ptr_2 + -0xc) = local_38 & 0xffff;
+                word_ptr = word_ptr_2 + -0x10;
+                *(uint *)(word_ptr_2 + -0x10) = local_3c & 0xffff;
+                *(undefined4 *)(word_ptr_2 + -0x14) = 0x1979c;
+                val = comptask_fn_01df28();
+                if (0 < val) {
+                  uval_2 = combtool_fn_018d16();
+                  return uval_2;
                 }
               }
             }
           }
           local_20 = (int)(local_20 + 1) % 4;
-          puVar8 = puVar7;
+          word_ptr_2 = word_ptr;
         }
-        uVar1 = *(ushort *)(local_1c + 6);
+        uval = *(ushort *)(local_1c + 6);
       }
     }
     local_44 = local_44 + 1;
@@ -593,101 +593,101 @@ undefined4 FUN_000194e8(void)
 }
 
 /******************************************************************************
- * Function : sub_0197a9 (Ghidra: FUN_000197a9)
- * Prototype: undefined4 sub_0197a9(void);
+ * Function : compevnt_fn_0197a9 (Original VA: 0x197a9, Ghidra: FUN_000197a9)
+ * Prototype: undefined4 compevnt_fn_0197a9(void);
  * Address  : 0x197a9 (Size: 292 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module compevnt.cpp procedure @ 0x0197a9
  * Callers  : 0 -> 
- * Callees  : 5 -> 0x18d16, 0x1ba46, 0x1d2ff, 0x1de8c, 0xe69fc
+ * Callees  : 5 -> combtool_fn_018d16, comptask_fn_01ba46, comptask_fn_01d2ff, comptool_process_dungeon_room_01de8c, bflib_system_io_fn_0e69fc
  ******************************************************************************/
-undefined4 FUN_000197a9(void)
+undefined4 compevnt_fn_0197a9(void)
 
 {
-  byte bVar1;
-  int in_EAX;
-  int iVar2;
-  short *psVar3;
-  int iVar4;
-  byte *pbVar5;
-  undefined4 uVar6;
+  byte flag;
+  int arg_eax;
+  int val;
+  short *val_2;
+  int val_3;
+  byte *byte_ptr;
+  undefined4 uval;
   undefined4 *extraout_ECX;
   undefined2 *extraout_ECX_00;
-  byte bVar7;
-  undefined8 uVar8;
+  byte flag_2;
+  undefined8 uval_2;
   int local_28;
   int local_1c;
   int local_18;
   
-  bVar7 = 0;
-  iVar2 = (uint)DAT_002eb543 * 0x18a + in_EAX + 0xa10;
+  flag_2 = 0;
+  val = (uint)g_neutral_player_number * 0x18a + arg_eax + 0xa10;
   local_18 = 0;
-  psVar3 = (short *)(iVar2 + 10);
+  val_2 = (short *)(val + 10);
   local_1c = 0x7fffffff;
   do {
-    if (*psVar3 != 0) {
-      iVar4 = FUN_0001de8c();
-      if (iVar4 != 0) {
-        FUN_000e69fc();
-        uVar8 = FUN_000e69fc();
-        iVar4 = (int)uVar8 + (int)((ulonglong)uVar8 >> 0x20);
-        if (iVar4 < local_1c) {
+    if (*val_2 != 0) {
+      val_3 = comptool_process_dungeon_room_01de8c();
+      if (val_3 != 0) {
+        bflib_system_io_fn_0e69fc();
+        uval_2 = bflib_system_io_fn_0e69fc();
+        val_3 = (int)uval_2 + (int)((ulonglong)uval_2 >> 0x20);
+        if (val_3 < local_1c) {
           local_18 = local_28;
-          local_1c = iVar4;
+          local_1c = val_3;
         }
       }
     }
-    psVar3 = psVar3 + 3;
-  } while (psVar3 != (short *)(iVar2 + 0x18a));
+    val_2 = val_2 + 3;
+  } while (val_2 != (short *)(val + 0x18a));
   if (local_18 != 0) {
-    pbVar5 = (byte *)FUN_0001ba46();
-    if (pbVar5 != (byte *)0x0) {
-      pbVar5[2] = 0xe;
-      uVar6 = DAT_002e8bee;
-      pbVar5[0x80] = 0;
-      *(undefined4 *)(pbVar5 + 10) = uVar6;
-      *(ushort *)(pbVar5 + 0x70) = (ushort)*(byte *)(local_28 + 8) << 8;
-      bVar1 = *(byte *)(local_28 + 9);
-      pbVar5[0x74] = 0;
-      pbVar5[0x75] = 1;
-      *(ushort *)(pbVar5 + 0x72) = (ushort)bVar1 << 8;
-      *(undefined4 *)(pbVar5 + 0x76) = *extraout_ECX;
-      *(undefined2 *)(pbVar5 + (uint)bVar7 * -8 + 0x7a) =
-           *(undefined2 *)(extraout_ECX + (uint)bVar7 * -2 + 1);
-      *pbVar5 = *pbVar5 | 4;
-      FUN_0001d2ff(*(undefined4 *)(pbVar5 + 0x70),*(undefined4 *)(pbVar5 + 0x74),
-                   *(undefined4 *)(pbVar5 + 0x76),*(undefined4 *)(pbVar5 + 0x7a));
+    byte_ptr = (byte *)comptask_fn_01ba46();
+    if (byte_ptr != (byte *)0x0) {
+      byte_ptr[2] = 0xe;
+      uval = g_game_turn;
+      byte_ptr[0x80] = 0;
+      *(undefined4 *)(byte_ptr + 10) = uval;
+      *(ushort *)(byte_ptr + 0x70) = (ushort)*(byte *)(local_28 + 8) << 8;
+      flag = *(byte *)(local_28 + 9);
+      byte_ptr[0x74] = 0;
+      byte_ptr[0x75] = 1;
+      *(ushort *)(byte_ptr + 0x72) = (ushort)flag << 8;
+      *(undefined4 *)(byte_ptr + 0x76) = *extraout_ECX;
+      *(undefined2 *)(byte_ptr + (uint)flag_2 * -8 + 0x7a) =
+           *(undefined2 *)(extraout_ECX + (uint)flag_2 * -2 + 1);
+      *byte_ptr = *byte_ptr | 4;
+      comptask_fn_01d2ff(*(undefined4 *)(byte_ptr + 0x70),*(undefined4 *)(byte_ptr + 0x74),
+                   *(undefined4 *)(byte_ptr + 0x76),*(undefined4 *)(byte_ptr + 0x7a));
       extraout_ECX_00[2] = 0;
       extraout_ECX_00[1] = extraout_ECX_00[2];
       *extraout_ECX_00 = extraout_ECX_00[2];
-      uVar6 = FUN_00018d16();
-      return uVar6;
+      uval = combtool_fn_018d16();
+      return uval;
     }
   }
   return 4;
 }
 
 /******************************************************************************
- * Function : sub_0198cd (Ghidra: FUN_000198cd)
- * Prototype: undefined4 sub_0198cd(void);
+ * Function : compevnt_process_slabmap_tile_0198cd (Original VA: 0x198cd, Ghidra: FUN_000198cd)
+ * Prototype: undefined4 compevnt_process_slabmap_tile_0198cd(void);
  * Address  : 0x198cd (Size: 555 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Reads/modifies SlabMap[85x85] tile entry
  * Callers  : 0 -> 
- * Callees  : 2 -> 0x1df28, 0x401aa
+ * Callees  : 2 -> comptask_fn_01df28, imptool_update_player_dungeon_0401aa
  ******************************************************************************/
-undefined4 FUN_000198cd(void)
+undefined4 compevnt_process_slabmap_tile_0198cd(void)
 
 {
-  int iVar1;
-  int in_EAX;
-  uint uVar2;
-  int in_EDX;
-  int iVar3;
-  uint uVar4;
-  undefined1 *puVar5;
-  int iVar6;
-  short *psVar7;
+  int val;
+  int arg_eax;
+  uint uval;
+  int arg_edx;
+  int loop_i;
+  uint uval_2;
+  undefined1 *word_ptr;
+  int val_2;
+  short *loop_i_2;
   uint auStack_4c [5];
   undefined1 local_38 [4];
   int local_34;
@@ -699,25 +699,25 @@ undefined4 FUN_000198cd(void)
   uint local_1c;
   undefined4 local_18;
   
-  puVar5 = local_38;
-  iVar1 = *(int *)(in_EAX + 0x24);
+  word_ptr = local_38;
+  val = *(int *)(arg_eax + 0x24);
   local_30 = 0;
-  iVar6 = iVar1 + 1;
+  val_2 = val + 1;
   local_34 = 0;
   do {
-    if ((*(char *)(iVar6 + 0x100f) != '\0') && (1 < *(byte *)(iVar6 + 0x1008))) {
+    if ((*(char *)(val_2 + 0x100f) != '\0') && (1 < *(byte *)(val_2 + 0x1008))) {
       local_34 = local_34 + 1;
     }
-    iVar6 = iVar6 + 1;
-  } while (iVar6 != iVar1 + 7);
-  iVar6 = iVar1;
-  for (iVar3 = 1; iVar3 < 7; iVar3 = iVar3 + 1) {
-    if (*(char *)(iVar6 + 0x1010) != '\0') {
-      if (*(char *)(iVar6 + 0x1009) == '\0') {
-        if ((local_34 == 0) && (*(int *)(in_EDX + 0x10) == 0)) {
+    val_2 = val_2 + 1;
+  } while (val_2 != val + 7);
+  val_2 = val;
+  for (loop_i = 1; loop_i < 7; loop_i = loop_i + 1) {
+    if (*(char *)(val_2 + 0x1010) != '\0') {
+      if (*(char *)(val_2 + 0x1009) == '\0') {
+        if ((local_34 == 0) && (*(int *)(arg_edx + 0x10) == 0)) {
           return 4;
         }
-        if (iVar3 == *(int *)(in_EDX + 0x14)) {
+        if (loop_i == *(int *)(arg_edx + 0x14)) {
           return 4;
         }
       }
@@ -725,57 +725,57 @@ undefined4 FUN_000198cd(void)
         local_30 = local_30 + 1;
       }
     }
-    iVar6 = iVar6 + 1;
+    val_2 = val_2 + 1;
   }
   if (local_30 != 0) {
-    local_1c = *(uint *)(in_EDX + 0x14);
+    local_1c = *(uint *)(arg_edx + 0x14);
     if (local_1c == 0) {
-      DAT_002e8bf6 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-      DAT_002e8bf6 = DAT_002e8bf6 >> 0xd | DAT_002e8bf6 * 0x80000;
+      g_action_random_seed = g_action_random_seed * 0x24a1 + 0x24df;
+      g_action_random_seed = g_action_random_seed >> 0xd | g_action_random_seed * 0x80000;
       local_1c = 1;
-      iVar6 = DAT_002e8bf6 % local_30 + 1;
-      iVar3 = iVar1;
+      val_2 = g_action_random_seed % local_30 + 1;
+      loop_i = val;
       while (((int)local_1c < 7 &&
-             (((*(char *)(iVar3 + 0x1010) == '\0' || (*(char *)(iVar3 + 0x1009) == '\0')) ||
-              (iVar6 = iVar6 + -1, iVar6 != 0))))) {
+             (((*(char *)(loop_i + 0x1010) == '\0' || (*(char *)(loop_i + 0x1009) == '\0')) ||
+              (val_2 = val_2 + -1, val_2 != 0))))) {
         local_1c = local_1c + 1;
-        iVar3 = iVar3 + 1;
+        loop_i = loop_i + 1;
       }
     }
-    local_28 = (short *)(in_EAX + 0x13c4);
-    local_20 = (byte *)(in_EAX + 0x134d);
-    for (psVar7 = (short *)(in_EAX + 0x134c); psVar7 < local_28; psVar7 = psVar7 + 3) {
-      if (*psVar7 != 0) {
-        uVar2 = (uint)*(byte *)((int)psVar7 + 3);
-        uVar4 = (uint)*local_20;
-        local_24 = (uint)*(char *)(iVar1 + 0xe9f);
-        if (((&DAT_002d33ca)[((&DAT_0019033b)[uVar4] + (&DAT_0019033b)[uVar2] * 0x55) * 6] & 7) ==
+    local_28 = (short *)(arg_eax + 0x13c4);
+    local_20 = (byte *)(arg_eax + 0x134d);
+    for (loop_i_2 = (short *)(arg_eax + 0x134c); loop_i_2 < local_28; loop_i_2 = loop_i_2 + 3) {
+      if (*loop_i_2 != 0) {
+        uval = (uint)*(byte *)((int)loop_i_2 + 3);
+        uval_2 = (uint)*local_20;
+        local_24 = (uint)*(char *)(val + 0xe9f);
+        if (((&g_slabmap)[((&g_subtile_to_slab_lut)[uval_2] + (&g_subtile_to_slab_lut)[uval] * 0x55) * 6] & 7) ==
             local_24) {
-          local_2c = (uVar2 / 3) * 0x55;
+          local_2c = (uval / 3) * 0x55;
           local_18 = 3;
-          if ((&DAT_002d33c5)[(uVar4 / 3 + local_2c) * 6] != '\v') goto LAB_000199de;
-          *(undefined4 *)(puVar5 + -4) = 0;
-          *(uint *)(puVar5 + -8) = local_1c & 0xffff;
-          *(uint *)(puVar5 + -0xc) = uVar2;
-          *(uint *)(puVar5 + -0x10) = uVar4;
-          *(undefined4 *)(puVar5 + -0x14) = 0x19ad8;
-          iVar6 = FUN_0001df28();
-          puVar5 = puVar5 + -0x10;
-          if (0 < iVar6) {
-            *psVar7 = 0;
+          if ((&g_slabmap_base)[(uval_2 / 3 + local_2c) * 6] != '\v') goto LAB_000199de;
+          *(undefined4 *)(word_ptr + -4) = 0;
+          *(uint *)(word_ptr + -8) = local_1c & 0xffff;
+          *(uint *)(word_ptr + -0xc) = uval;
+          *(uint *)(word_ptr + -0x10) = uval_2;
+          *(undefined4 *)(word_ptr + -0x14) = 0x19ad8;
+          val_2 = comptask_fn_01df28();
+          word_ptr = word_ptr + -0x10;
+          if (0 < val_2) {
+            *loop_i_2 = 0;
             return 1;
           }
 LAB_00019a27:
-          *psVar7 = 0;
+          *loop_i_2 = 0;
         }
         else {
 LAB_000199de:
-          local_2c = (uVar2 / 3) * 0x55;
+          local_2c = (uval / 3) * 0x55;
           local_18 = 3;
-          if ((&DAT_002d33c5)[(uVar4 / 3 + local_2c) * 6] != '\n') {
-            *(undefined4 *)(puVar5 + -4) = 0x19a23;
-            iVar6 = FUN_000401aa();
-            if (iVar6 < 0) goto LAB_00019a27;
+          if ((&g_slabmap_base)[(uval_2 / 3 + local_2c) * 6] != '\n') {
+            *(undefined4 *)(word_ptr + -4) = 0x19a23;
+            val_2 = imptool_update_player_dungeon_0401aa();
+            if (val_2 < 0) goto LAB_00019a27;
           }
         }
       }
@@ -786,26 +786,26 @@ LAB_000199de:
 }
 
 /******************************************************************************
- * Function : sub_019af8 (Ghidra: FUN_00019af8)
- * Prototype: undefined4 sub_019af8(void);
+ * Function : compevnt_process_dungeon_room_019af8 (Original VA: 0x19af8, Ghidra: FUN_00019af8)
+ * Prototype: undefined4 compevnt_process_dungeon_room_019af8(void);
  * Address  : 0x19af8 (Size: 570 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Operates on Room structure in g_rooms (stride 0x45)
  * Callers  : 0 -> 
- * Callees  : 2 -> 0x1df28, 0x203f0
+ * Callees  : 2 -> comptask_fn_01df28, compturn_fn_0203f0
  ******************************************************************************/
-undefined4 FUN_00019af8(void)
+undefined4 compevnt_process_dungeon_room_019af8(void)
 
 {
-  char cVar1;
-  ushort uVar2;
-  int in_EAX;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  undefined1 *puVar6;
-  undefined1 *puVar7;
-  byte *pbVar8;
+  char ch;
+  ushort uval;
+  int arg_eax;
+  int room_ptr;
+  int val;
+  int val_2;
+  undefined1 *word_ptr;
+  undefined1 *word_ptr_2;
+  byte *loop_i;
   uint auStack_58 [5];
   undefined1 local_44 [4];
   int local_40;
@@ -820,59 +820,59 @@ undefined4 FUN_00019af8(void)
   uint local_1c;
   uint local_18;
   
-  puVar7 = local_44;
-  local_30 = *(int *)(in_EAX + 0x24);
-  DAT_002e8bf6 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-  DAT_002e8bf6 = DAT_002e8bf6 >> 0xd | DAT_002e8bf6 * 0x80000;
-  local_1c = DAT_002e8bf6 % 0x77 & 3;
-  iVar3 = FUN_000203f0();
-  if (iVar3 == 0) {
-    for (pbVar8 = &DAT_00174db5; *pbVar8 != 0; pbVar8 = pbVar8 + 2) {
-      uVar2 = *(ushort *)((uint)*pbVar8 * 2 + local_30 + 0xb);
-      while (iVar3 = (uint)uVar2 * 0x45, &DAT_002ddd1b < &DAT_002ddd1b + iVar3) {
-        if ((*(ushort *)(&DAT_002ddd56 + iVar3) < (ushort)pbVar8[1]) &&
-           (*(short *)(&DAT_002ddd56 + iVar3) != 0)) {
-          DAT_002e8bf6 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-          DAT_002e8bf6 = DAT_002e8bf6 >> 0xd | DAT_002e8bf6 * 0x80000;
-          local_18 = (uint)*(ushort *)(&DAT_002ddd52 + iVar3);
-          for (local_3c = (uint)*(ushort *)(&DAT_002ddd56 + iVar3); local_3c != 0;
+  word_ptr_2 = local_44;
+  local_30 = *(int *)(arg_eax + 0x24);
+  g_action_random_seed = g_action_random_seed * 0x24a1 + 0x24df;
+  g_action_random_seed = g_action_random_seed >> 0xd | g_action_random_seed * 0x80000;
+  local_1c = g_action_random_seed % 0x77 & 3;
+  room_ptr = compturn_fn_0203f0();
+  if (room_ptr == 0) {
+    for (loop_i = &g_data_00174db5; *loop_i != 0; loop_i = loop_i + 2) {
+      uval = *(ushort *)((uint)*loop_i * 2 + local_30 + 0xb);
+      while (room_ptr = (uint)uval * 0x45, &g_rooms < &g_rooms + room_ptr) {
+        if ((*(ushort *)(&g_bss_002ddd56 + room_ptr) < (ushort)loop_i[1]) &&
+           (*(short *)(&g_bss_002ddd56 + room_ptr) != 0)) {
+          g_action_random_seed = g_action_random_seed * 0x24a1 + 0x24df;
+          g_action_random_seed = g_action_random_seed >> 0xd | g_action_random_seed * 0x80000;
+          local_18 = (uint)*(ushort *)(&g_bss_002ddd52 + room_ptr);
+          for (local_3c = (uint)*(ushort *)(&g_bss_002ddd56 + room_ptr); local_3c != 0;
               local_3c = local_3c - 1) {
             local_2c = (local_18 % 0x55) * 3;
             local_20 = 0;
             local_28 = (local_18 / 0x55) * 3;
             for (local_40 = 0; local_40 < 4; local_40 = local_40 + 1) {
-              iVar4 = local_1c * 2;
-              local_34 = local_28 + (char)(&DAT_0018b67f)[iVar4] * 3;
+              val = local_1c * 2;
+              local_34 = local_28 + (char)(&g_data_0018b67f)[val] * 3;
               local_38 = (local_34 / 3) * 0x55;
-              iVar5 = local_2c + *(char *)((int)&DAT_0018b67b + iVar4 + 3) * 3;
+              val_2 = local_2c + *(char *)((int)&g_data_0018b67b + val + 3) * 3;
               local_24 = 3;
-              puVar6 = puVar7;
-              if ((((&DAT_002d33c5)[(iVar5 / 3 + local_38) * 6] == '\v') &&
-                  ((uint)((&DAT_002d33ca)
-                          [((&DAT_0019033b)[local_34] * 0x55 + (&DAT_0019033b)[iVar5]) * 6] & 7) ==
+              word_ptr = word_ptr_2;
+              if ((((&g_slabmap_base)[(val_2 / 3 + local_38) * 6] == '\v') &&
+                  ((uint)((&g_slabmap)
+                          [((&g_subtile_to_slab_lut)[local_34] * 0x55 + (&g_subtile_to_slab_lut)[val_2]) * 6] & 7) ==
                    (int)*(char *)(local_30 + 0xe9f))) && (local_20 = local_20 + 1, 1 < local_20)) {
-                *(uint *)(puVar7 + -4) = (uint)*(ushort *)(&DAT_002ddd25 + iVar3);
-                cVar1 = (&DAT_0018b67f)[iVar4];
-                *(undefined4 *)(puVar7 + -8) = 1;
-                *(uint *)(puVar7 + -0xc) = (uint)(ushort)(short)cVar1 * 3 + local_28 & 0xffff;
-                puVar6 = puVar7 + -0x10;
-                *(uint *)(puVar7 + -0x10) =
-                     (uint)(ushort)(short)*(char *)((int)&DAT_0018b67b + iVar4 + 3) * 3 + local_2c &
+                *(uint *)(word_ptr_2 + -4) = (uint)*(ushort *)(&g_room_slabs_count + room_ptr);
+                ch = (&g_data_0018b67f)[val];
+                *(undefined4 *)(word_ptr_2 + -8) = 1;
+                *(uint *)(word_ptr_2 + -0xc) = (uint)(ushort)(short)ch * 3 + local_28 & 0xffff;
+                word_ptr = word_ptr_2 + -0x10;
+                *(uint *)(word_ptr_2 + -0x10) =
+                     (uint)(ushort)(short)*(char *)((int)&g_data_0018b67b + val + 3) * 3 + local_2c &
                      0xffff;
-                *(undefined4 *)(puVar7 + -0x14) = 0x19cc6;
-                iVar4 = FUN_0001df28();
-                if (0 < iVar4) {
+                *(undefined4 *)(word_ptr_2 + -0x14) = 0x19cc6;
+                val = comptask_fn_01df28();
+                if (0 < val) {
                   return 1;
                 }
               }
               local_1c = (int)(local_1c + 1) % 4;
-              puVar7 = puVar6;
+              word_ptr_2 = word_ptr;
             }
-            local_18 = (uint)*(ushort *)(&DAT_002d33c6 + local_18 * 6);
+            local_18 = (uint)*(ushort *)(&g_bss_002d33c6 + local_18 * 6);
             if (local_18 == 0) break;
           }
         }
-        uVar2 = *(ushort *)(&DAT_002ddd21 + iVar3);
+        uval = *(ushort *)(&g_bss_002ddd21 + room_ptr);
       }
     }
   }
@@ -880,117 +880,117 @@ undefined4 FUN_00019af8(void)
 }
 
 /******************************************************************************
- * Function : sub_019d32 (Ghidra: FUN_00019d32)
- * Prototype: undefined4 sub_019d32(void);
+ * Function : compevnt_update_creature_and_thing_019d32 (Original VA: 0x19d32, Ghidra: FUN_00019d32)
+ * Prototype: undefined4 compevnt_update_creature_and_thing_019d32(void);
  * Address  : 0x19d32 (Size: 641 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
  * Callers  : 0 -> 
- * Callees  : 3 -> 0x1ba46, 0x1d917, 0x203f0
+ * Callees  : 3 -> comptask_fn_01ba46, comptool_update_creature_and_thing_01d917, compturn_fn_0203f0
  ******************************************************************************/
-undefined4 FUN_00019d32(void)
+undefined4 compevnt_update_creature_and_thing_019d32(void)
 
 {
-  undefined2 uVar1;
-  ushort uVar2;
-  char cVar3;
-  int in_EAX;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  uint uVar7;
+  undefined2 uval;
+  ushort cctrl_ptr;
+  char ch;
+  int arg_eax;
+  int loop_i;
+  int val;
+  int val_2;
+  uint thing_ptr;
   uint extraout_ECX;
-  undefined8 uVar8;
+  undefined8 uval_2;
   uint local_1c;
   undefined4 local_18;
   
-  uVar8 = FUN_0001d917();
-  iVar4 = (int)((ulonglong)uVar8 >> 0x20);
+  uval_2 = comptool_update_creature_and_thing_01d917();
+  loop_i = (int)((ulonglong)uval_2 >> 0x20);
   local_18 = 4;
-  if (((int)uVar8 < *(int *)(iVar4 + 0x14)) || ((int)uVar8 < *(int *)(iVar4 + 0x10))) {
-    for (iVar4 = in_EAX + 0x38; (*(byte *)(iVar4 + 0x44) & 2) == 0; iVar4 = iVar4 + 0x48) {
-      if ((*(code **)(iVar4 + 0x18) == FUN_0001b119) &&
-         (*(int *)(iVar4 + 4) = *(int *)(iVar4 + 4) + 1,
-         0x14 < (uint)(DAT_002e8bee - *(int *)(iVar4 + 0x3c)))) {
-        *(undefined4 *)(iVar4 + 0x3c) = 0;
+  if (((int)uval_2 < *(int *)(loop_i + 0x14)) || ((int)uval_2 < *(int *)(loop_i + 0x10))) {
+    for (loop_i = arg_eax + 0x38; (*(byte *)(loop_i + 0x44) & 2) == 0; loop_i = loop_i + 0x48) {
+      if ((*(code **)(loop_i + 0x18) == comptask_process_dungeon_room_01b119) &&
+         (*(int *)(loop_i + 4) = *(int *)(loop_i + 4) + 1,
+         0x14 < (uint)(g_game_turn - *(int *)(loop_i + 0x3c)))) {
+        *(undefined4 *)(loop_i + 0x3c) = 0;
       }
     }
   }
-  iVar4 = *(int *)(in_EAX + 0x24);
-  if ((((*(int *)(iVar4 + 0xaf9) < *(int *)(iVar4 + 0x14b8)) && (*(short *)(iVar4 + 0x1b) != 0)) &&
-      (iVar5 = FUN_000203f0(), iVar5 == 0)) && (iVar5 = FUN_0001ba46(), iVar5 != 0)) {
-    *(undefined1 *)(iVar5 + 2) = 0x12;
-    *(undefined4 *)(iVar5 + 0x70) = 0;
-    iVar6 = DAT_002e8bee;
-    *(undefined4 *)(iVar5 + 0x60) = 1;
-    *(undefined4 *)(iVar5 + 0x70) = 5;
-    *(undefined4 *)(iVar5 + 0x76) = 0;
-    *(int *)(iVar5 + 10) = iVar6;
-    *(int *)(iVar5 + 0x5c) = iVar6;
-    *(int *)(iVar5 + 0x7c) = (*(int *)(iVar4 + 0x14b8) * 3) / 2;
-    iVar6 = *(int *)(iVar4 + 0x14b8);
-    *(undefined4 *)(iVar5 + 0x86) = 0;
+  loop_i = *(int *)(arg_eax + 0x24);
+  if ((((*(int *)(loop_i + 0xaf9) < *(int *)(loop_i + 0x14b8)) && (*(short *)(loop_i + 0x1b) != 0)) &&
+      (val = compturn_fn_0203f0(), val == 0)) && (val = comptask_fn_01ba46(), val != 0)) {
+    *(undefined1 *)(val + 2) = 0x12;
+    *(undefined4 *)(val + 0x70) = 0;
+    val_2 = g_game_turn;
+    *(undefined4 *)(val + 0x60) = 1;
+    *(undefined4 *)(val + 0x70) = 5;
+    *(undefined4 *)(val + 0x76) = 0;
+    *(int *)(val + 10) = val_2;
+    *(int *)(val + 0x5c) = val_2;
+    *(int *)(val + 0x7c) = (*(int *)(loop_i + 0x14b8) * 3) / 2;
+    val_2 = *(int *)(loop_i + 0x14b8);
+    *(undefined4 *)(val + 0x86) = 0;
     local_18 = 1;
-    *(int *)(iVar5 + 0x80) = (iVar6 * 3) / 2;
+    *(int *)(val + 0x80) = (val_2 * 3) / 2;
   }
-  if ((*(int *)(iVar4 + 0xaf9) < (*(int *)(iVar4 + 0x14b8) * 3) / 2) &&
-     (*(short *)(iVar4 + 0x27) != 0)) {
-    iVar5 = (uint)*(ushort *)(iVar4 + 0x27) * 0x45;
+  if ((*(int *)(loop_i + 0xaf9) < (*(int *)(loop_i + 0x14b8) * 3) / 2) &&
+     (*(short *)(loop_i + 0x27) != 0)) {
+    val = (uint)*(ushort *)(loop_i + 0x27) * 0x45;
     local_1c = 0;
-    for (uVar7 = (&DAT_001ae9fc)[*(ushort *)(iVar4 + 0x2d)]; DAT_001ae9fc < uVar7;
-        uVar7 = (&DAT_001ae9fc)[*(ushort *)((&DAT_001b0a00)[*(ushort *)(uVar7 + 100)] + 0x1f)]) {
-      if (*(char *)(uVar7 + 7) == '\x0e') {
-        cVar3 = *(char *)(uVar7 + 8);
+    for (thing_ptr = (&g_thing_ptrs)[*(ushort *)(loop_i + 0x2d)]; g_thing_ptrs < thing_ptr;
+        thing_ptr = (&g_thing_ptrs)[*(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x1f)]) { /* thing->ccontrol_idx */
+      if (*(char *)(thing_ptr + 7) == '\x0e') {
+        ch = *(char *)(thing_ptr + 8); /* thing->active_state */
       }
       else {
-        cVar3 = *(char *)(uVar7 + 7);
+        ch = *(char *)(thing_ptr + 7);
       }
-      if (cVar3 == '!') {
-        iVar6 = FUN_0001ba46();
-        if (iVar6 == 0) {
+      if (ch == '!') {
+        val_2 = comptask_fn_01ba46();
+        if (val_2 == 0) {
           return local_18;
         }
-        *(undefined1 *)(iVar6 + 2) = 0xb;
-        *(ushort *)(iVar6 + 0x86) = (ushort)(byte)(&DAT_002ddd23)[iVar5] << 8;
-        *(ushort *)(iVar6 + 0x88) = (ushort)(byte)(&DAT_002ddd24)[iVar5] << 8;
-        uVar1 = *(undefined2 *)(extraout_ECX + 0x1b);
-        *(undefined2 *)(iVar6 + 0x80) = 0;
-        *(undefined2 *)(iVar6 + 0x76) = uVar1;
+        *(undefined1 *)(val_2 + 2) = 0xb;
+        *(ushort *)(val_2 + 0x86) = (ushort)(byte)(&g_bss_002ddd23)[val] << 8;
+        *(ushort *)(val_2 + 0x88) = (ushort)(byte)(&g_bss_002ddd24)[val] << 8;
+        uval = *(undefined2 *)(extraout_ECX + 0x1b);
+        *(undefined2 *)(val_2 + 0x80) = 0;
+        *(undefined2 *)(val_2 + 0x76) = uval;
         local_18 = 1;
         local_1c = local_1c + 1;
-        *(int *)(iVar6 + 10) = DAT_002e8bee;
-        uVar7 = extraout_ECX;
+        *(int *)(val_2 + 10) = g_game_turn;
+        thing_ptr = extraout_ECX;
         if (2 < local_1c) break;
       }
     }
     if (local_1c < 3) {
-      uVar2 = *(ushort *)(iVar4 + 0x2f);
-      while (uVar7 = (&DAT_001ae9fc)[uVar2], DAT_001ae9fc < uVar7) {
-        if (*(char *)(uVar7 + 7) == '\x0e') {
-          cVar3 = *(char *)(uVar7 + 8);
+      cctrl_ptr = *(ushort *)(loop_i + 0x2f);
+      while (thing_ptr = (&g_thing_ptrs)[cctrl_ptr], g_thing_ptrs < thing_ptr) {
+        if (*(char *)(thing_ptr + 7) == '\x0e') {
+          ch = *(char *)(thing_ptr + 8); /* thing->active_state */
         }
         else {
-          cVar3 = *(char *)(uVar7 + 7);
+          ch = *(char *)(thing_ptr + 7);
         }
-        if (cVar3 == '!') {
-          iVar4 = FUN_0001ba46();
-          if (iVar4 == 0) {
+        if (ch == '!') {
+          loop_i = comptask_fn_01ba46();
+          if (loop_i == 0) {
             return local_18;
           }
-          *(undefined1 *)(iVar4 + 2) = 0xb;
-          *(ushort *)(iVar4 + 0x86) = (ushort)(byte)(&DAT_002ddd23)[iVar5] << 8;
-          *(ushort *)(iVar4 + 0x88) = (ushort)(byte)(&DAT_002ddd24)[iVar5] << 8;
-          uVar1 = *(undefined2 *)(uVar7 + 0x1b);
-          *(undefined2 *)(iVar4 + 0x80) = 0;
-          *(undefined2 *)(iVar4 + 0x76) = uVar1;
+          *(undefined1 *)(loop_i + 2) = 0xb;
+          *(ushort *)(loop_i + 0x86) = (ushort)(byte)(&g_bss_002ddd23)[val] << 8;
+          *(ushort *)(loop_i + 0x88) = (ushort)(byte)(&g_bss_002ddd24)[val] << 8;
+          uval = *(undefined2 *)(thing_ptr + 0x1b); /* thing->index_or_angle */
+          *(undefined2 *)(loop_i + 0x80) = 0;
+          *(undefined2 *)(loop_i + 0x76) = uval;
           local_18 = 1;
           local_1c = local_1c + 1;
-          *(int *)(iVar4 + 10) = DAT_002e8bee;
+          *(int *)(loop_i + 10) = g_game_turn;
           if (2 < local_1c) {
             return 1;
           }
         }
-        uVar2 = *(ushort *)((&DAT_001b0a00)[*(ushort *)(uVar7 + 100)] + 0x1f);
+        cctrl_ptr = *(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x1f); /* thing->ccontrol_idx */
       }
     }
   }
@@ -998,107 +998,104 @@ undefined4 FUN_00019d32(void)
 }
 
 /******************************************************************************
- * Function : dk_unhandled_event_type_019fb4 (Ghidra: FUN_00019fb4)
- * Prototype: void dk_unhandled_event_type_019fb4(void);
+ * Function : compevnt_unhandled_event_type_019fb4 (Original VA: 0x19fb4, Ghidra: FUN_00019fb4)
+ * Prototype: void compevnt_unhandled_event_type_019fb4(void);
  * Address  : 0x19fb4 (Size: 216 bytes)
  * Module   : compevnt.cpp [direct_file_string_xref]
- * OrigLine : compevnt.cpp:57 ("Unhandled Event Type")
- * Naming   : String 'Unhandled Event Type'
- * Callers  : 1 -> 0x21416
- * Callees  : 1 -> 0xddaf0
- * Strings  :
- *   - 0x160a61: "compevnt.cpp"
- *   - 0x160a4c: "Unhandled Event Type"
+ * OrigLine : compevnt.cpp lines 57
+ * Purpose  : String 'Unhandled Event Type'
+ * Callers  : 1 -> compturn_process_computer_player_021416
+ * Callees  : 1 -> LbErrorLog
  ******************************************************************************/
-void FUN_00019fb4(void)
+void compevnt_unhandled_event_type_019fb4(void)
 
 {
-  int iVar1;
-  int in_EAX;
-  int iVar2;
-  int *piVar3;
+  int val;
+  int arg_eax;
+  int val_2;
+  int *loop_i;
   int *extraout_ECX;
   int *extraout_ECX_00;
   int *extraout_ECX_01;
-  byte *pbVar4;
+  byte *loop_i_2;
   
-  iVar1 = *(int *)(in_EAX + 0x24);
-  for (piVar3 = (int *)(in_EAX + 0x800); (*piVar3 != 0 && (piVar3 < (int *)(in_EAX + 0xa10)));
-      piVar3 = piVar3 + 0xb) {
-    if (piVar3[1] == 0) {
-      for (pbVar4 = &DAT_002e707c; pbVar4 < &DAT_002e78b0; pbVar4 = pbVar4 + 0x15) {
-        if (((((*pbVar4 & 1) != 0) && ((uint)pbVar4[10] == (int)*(char *)(iVar1 + 0xe9f))) &&
-            (piVar3[5] == *(int *)(pbVar4 + 0x10))) && ((uint)pbVar4[0xb] == piVar3[2])) {
-          iVar2 = (*(code *)piVar3[3])();
-          piVar3 = extraout_ECX;
-          if (iVar2 == 1) {
-            extraout_ECX[10] = DAT_002e8bee;
+  val = *(int *)(arg_eax + 0x24);
+  for (loop_i = (int *)(arg_eax + 0x800); (*loop_i != 0 && (loop_i < (int *)(arg_eax + 0xa10)));
+      loop_i = loop_i + 0xb) {
+    if (loop_i[1] == 0) {
+      for (loop_i_2 = &g_bss_002e707c; loop_i_2 < &g_bss_002e78b0; loop_i_2 = loop_i_2 + 0x15) {
+        if (((((*loop_i_2 & 1) != 0) && ((uint)loop_i_2[10] == (int)*(char *)(val + 0xe9f))) &&
+            (loop_i[5] == *(int *)(loop_i_2 + 0x10))) && ((uint)loop_i_2[0xb] == loop_i[2])) {
+          val_2 = (*(code *)loop_i[3])();
+          loop_i = extraout_ECX;
+          if (val_2 == 1) {
+            extraout_ECX[10] = g_game_turn;
           }
         }
       }
     }
-    else if ((uint)piVar3[1] < 5) {
-      if ((uint)(piVar3[10] + piVar3[5]) <= DAT_002e8bee) {
-        (*(code *)piVar3[4])();
-        extraout_ECX_00[10] = DAT_002e8bee;
-        piVar3 = extraout_ECX_00;
+    else if ((uint)loop_i[1] < 5) {
+      if ((uint)(loop_i[10] + loop_i[5]) <= g_game_turn) {
+        (*(code *)loop_i[4])();
+        extraout_ECX_00[10] = g_game_turn;
+        loop_i = extraout_ECX_00;
       }
     }
     else {
-      FUN_000ddaf0(); /* LbErrorLog("compevnt.cpp", line 57, "Unhandled Event Type") */
-      piVar3 = extraout_ECX_01;
+      LbErrorLog(); /* LbErrorLog("compevnt.cpp", line 57, "Unhandled Event Type") */
+      loop_i = extraout_ECX_01;
     }
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_01a08c (Ghidra: FUN_0001a08c)
- * Prototype: undefined4 sub_01a08c(void);
+ * Function : compevnt_fn_01a08c (Original VA: 0x1a08c, Ghidra: FUN_0001a08c)
+ * Prototype: undefined4 compevnt_fn_01a08c(void);
  * Address  : 0x1a08c (Size: 204 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module compevnt.cpp procedure @ 0x01a08c
  * Callers  : 0 -> 
- * Callees  : 3 -> 0x1ba46, 0x1e061, 0x1e4a8
+ * Callees  : 3 -> comptask_fn_01ba46, comptool_fn_01e061, comptool_update_creature_and_thing_01e4a8
  ******************************************************************************/
-undefined4 FUN_0001a08c(void)
+undefined4 compevnt_fn_01a08c(void)
 
 {
-  undefined4 uVar1;
-  short sVar2;
-  int in_EAX;
-  int iVar3;
-  int iVar4;
-  int in_EDX;
-  int unaff_EBX;
-  byte bVar5;
+  undefined4 uval;
+  short short_val;
+  int arg_eax;
+  int val;
+  int val_2;
+  int arg_edx;
+  int arg_ebx;
+  byte flag;
   undefined4 local_18;
   undefined2 auStack_14 [2];
   
-  bVar5 = 0;
-  local_18._0_3_ = (uint3)*(byte *)(unaff_EBX + 2) << 8;
-  sVar2 = (short)local_18;
-  local_18 = CONCAT13(*(undefined1 *)(unaff_EBX + 6),(int3)local_18);
-  if ((sVar2 != 0) && (local_18._2_2_ != 0)) {
-    iVar3 = FUN_0001e4a8();
-    iVar4 = (*(int *)(in_EDX + 0x1c) * iVar3) / 100;
-    if ((iVar4 == 0) && (iVar3 != 0)) {
-      iVar4 = 1;
+  flag = 0;
+  local_18._0_3_ = (uint3)*(byte *)(arg_ebx + 2) << 8;
+  short_val = (short)local_18;
+  local_18 = CONCAT13(*(undefined1 *)(arg_ebx + 6),(int3)local_18);
+  if ((short_val != 0) && (local_18._2_2_ != 0)) {
+    val = comptool_update_creature_and_thing_01e4a8();
+    val_2 = (*(int *)(arg_edx + 0x1c) * val) / 100;
+    if ((val_2 == 0) && (val != 0)) {
+      val_2 = 1;
     }
-    if (iVar4 != 0) {
-      iVar3 = FUN_0001e061();
-      if (iVar3 != 0) {
-        iVar3 = FUN_0001ba46();
-        if (iVar3 != 0) {
-          *(undefined1 *)(iVar3 + 2) = 0xc;
-          *(undefined4 *)(iVar3 + 0x76) = local_18;
-          *(undefined2 *)(iVar3 + 0x7a + (uint)bVar5 * -8) = auStack_14[(uint)bVar5 * -4];
-          *(int *)(iVar3 + 0x7c) = iVar4;
-          *(undefined4 *)(iVar3 + 0x70) = *(undefined4 *)(in_EDX + 0x20);
-          uVar1 = DAT_002e8bee;
-          *(undefined4 *)(iVar3 + 10) = DAT_002e8bee;
-          *(undefined4 *)(iVar3 + 0x5c) = uVar1;
-          *(undefined4 *)(iVar3 + 0x60) = *(undefined4 *)(in_EAX + 0x34);
+    if (val_2 != 0) {
+      val = comptool_fn_01e061();
+      if (val != 0) {
+        val = comptask_fn_01ba46();
+        if (val != 0) {
+          *(undefined1 *)(val + 2) = 0xc;
+          *(undefined4 *)(val + 0x76) = local_18;
+          *(undefined2 *)(val + 0x7a + (uint)flag * -8) = auStack_14[(uint)flag * -4];
+          *(int *)(val + 0x7c) = val_2;
+          *(undefined4 *)(val + 0x70) = *(undefined4 *)(arg_edx + 0x20);
+          uval = g_game_turn;
+          *(undefined4 *)(val + 10) = g_game_turn;
+          *(undefined4 *)(val + 0x5c) = uval;
+          *(undefined4 *)(val + 0x60) = *(undefined4 *)(arg_eax + 0x34);
           return 1;
         }
       }
@@ -1109,71 +1106,71 @@ undefined4 FUN_0001a08c(void)
 }
 
 /******************************************************************************
- * Function : sub_01a158 (Ghidra: FUN_0001a158)
- * Prototype: undefined4 sub_01a158(void);
+ * Function : compevnt_fn_01a158 (Original VA: 0x1a158, Ghidra: FUN_0001a158)
+ * Prototype: undefined4 compevnt_fn_01a158(void);
  * Address  : 0x1a158 (Size: 383 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module compevnt.cpp procedure @ 0x01a158
  * Callers  : 0 -> 
- * Callees  : 6 -> 0x1ba46, 0x1e061, 0x1e38d, 0x1f352, 0x2035a, 0x203f0
+ * Callees  : 6 -> comptask_fn_01ba46, comptool_fn_01e061, comptool_update_player_dungeon_01e38d, comptool_update_creature_and_thing_01f352, compturn_fn_02035a, compturn_fn_0203f0
  ******************************************************************************/
-undefined4 FUN_0001a158(void)
+undefined4 compevnt_fn_01a158(void)
 
 {
-  int iVar1;
-  short sVar2;
-  int in_EAX;
-  int iVar3;
-  int in_EDX;
-  int unaff_EBX;
-  byte bVar4;
-  undefined8 uVar5;
+  int val;
+  short short_val;
+  int arg_eax;
+  int val_2;
+  int arg_edx;
+  int arg_ebx;
+  byte flag;
+  undefined8 uval;
   undefined4 local_1c;
   undefined2 auStack_18 [2];
   int local_14;
   
-  bVar4 = 0;
-  local_1c._0_3_ = (uint3)*(byte *)(unaff_EBX + 2) << 8;
-  sVar2 = (short)local_1c;
-  local_1c = CONCAT13(*(undefined1 *)(unaff_EBX + 6),(int3)local_1c);
-  if ((sVar2 != 0) && (local_1c._2_2_ != 0)) {
-    uVar5 = FUN_0001f352();
-    local_14 = (*(int *)((int)((ulonglong)uVar5 >> 0x20) + 0x1c) * (int)uVar5) / 100;
-    if ((local_14 == 0) && ((int)uVar5 != 0)) {
+  flag = 0;
+  local_1c._0_3_ = (uint3)*(byte *)(arg_ebx + 2) << 8;
+  short_val = (short)local_1c;
+  local_1c = CONCAT13(*(undefined1 *)(arg_ebx + 6),(int3)local_1c);
+  if ((short_val != 0) && (local_1c._2_2_ != 0)) {
+    uval = comptool_update_creature_and_thing_01f352();
+    local_14 = (*(int *)((int)((ulonglong)uval >> 0x20) + 0x1c) * (int)uval) / 100;
+    if ((local_14 == 0) && ((int)uval != 0)) {
       local_14 = 1;
     }
-    if ((local_14 != 0) && (iVar3 = FUN_0001e061(), iVar3 != 0)) {
-      iVar3 = FUN_000203f0();
-      if ((iVar3 == 0) || ((*(byte *)(in_EDX + 0x20) & 2) != 0)) {
-        iVar3 = FUN_0001ba46();
-        if (iVar3 != 0) {
-          *(undefined1 *)(iVar3 + 2) = 0xc;
-          *(undefined4 *)(iVar3 + 0x76) = local_1c;
-          *(undefined2 *)(iVar3 + 0x7a + (uint)bVar4 * -8) = auStack_18[(uint)bVar4 * -4];
-          *(int *)(iVar3 + 0x7c) = local_14;
-          *(undefined4 *)(iVar3 + 0x70) = *(undefined4 *)(in_EDX + 0x20);
-          iVar1 = DAT_002e8bee;
-          *(int *)(iVar3 + 10) = DAT_002e8bee;
-          *(int *)(iVar3 + 0x5c) = iVar1;
-          *(undefined4 *)(iVar3 + 0x60) = *(undefined4 *)(in_EAX + 0x34);
+    if ((local_14 != 0) && (val_2 = comptool_fn_01e061(), val_2 != 0)) {
+      val_2 = compturn_fn_0203f0();
+      if ((val_2 == 0) || ((*(byte *)(arg_edx + 0x20) & 2) != 0)) {
+        val_2 = comptask_fn_01ba46();
+        if (val_2 != 0) {
+          *(undefined1 *)(val_2 + 2) = 0xc;
+          *(undefined4 *)(val_2 + 0x76) = local_1c;
+          *(undefined2 *)(val_2 + 0x7a + (uint)flag * -8) = auStack_18[(uint)flag * -4];
+          *(int *)(val_2 + 0x7c) = local_14;
+          *(undefined4 *)(val_2 + 0x70) = *(undefined4 *)(arg_edx + 0x20);
+          val = g_game_turn;
+          *(int *)(val_2 + 10) = g_game_turn;
+          *(int *)(val_2 + 0x5c) = val;
+          *(undefined4 *)(val_2 + 0x60) = *(undefined4 *)(arg_eax + 0x34);
           return 1;
         }
       }
       else {
-        iVar3 = FUN_0001e38d();
-        if (((iVar3 == 1) &&
-            (((iVar3 = FUN_000203f0(), iVar3 == 0 || ((*(byte *)(in_EDX + 0x20) & 2) != 0)) &&
-             (iVar3 = FUN_0002035a(), iVar3 != 0)))) && (iVar3 = FUN_0001ba46(), iVar3 != 0)) {
-          *(undefined1 *)(iVar3 + 2) = 8;
-          *(undefined1 *)(iVar3 + 1) = 0;
-          *(undefined4 *)(iVar3 + 0x76) = local_1c;
-          *(undefined2 *)(iVar3 + 0x7a + (uint)bVar4 * -8) = auStack_18[(uint)bVar4 * -4];
-          *(undefined4 *)(iVar3 + 0x60) = 0x19;
-          *(int *)(iVar3 + 0x7c) = local_14;
-          iVar1 = DAT_002e8bee;
-          *(undefined4 *)(iVar3 + 0x8e) = 0x9c4;
-          *(int *)(iVar3 + 10) = iVar1;
-          *(int *)(iVar3 + 0x5c) = iVar1 - *(int *)(iVar3 + 0x60);
+        val_2 = comptool_update_player_dungeon_01e38d();
+        if (((val_2 == 1) &&
+            (((val_2 = compturn_fn_0203f0(), val_2 == 0 || ((*(byte *)(arg_edx + 0x20) & 2) != 0)) &&
+             (val_2 = compturn_fn_02035a(), val_2 != 0)))) && (val_2 = comptask_fn_01ba46(), val_2 != 0)) {
+          *(undefined1 *)(val_2 + 2) = 8;
+          *(undefined1 *)(val_2 + 1) = 0;
+          *(undefined4 *)(val_2 + 0x76) = local_1c;
+          *(undefined2 *)(val_2 + 0x7a + (uint)flag * -8) = auStack_18[(uint)flag * -4];
+          *(undefined4 *)(val_2 + 0x60) = 0x19;
+          *(int *)(val_2 + 0x7c) = local_14;
+          val = g_game_turn;
+          *(undefined4 *)(val_2 + 0x8e) = 0x9c4;
+          *(int *)(val_2 + 10) = val;
+          *(int *)(val_2 + 0x5c) = val - *(int *)(val_2 + 0x60);
           return 1;
         }
       }
@@ -1183,175 +1180,175 @@ undefined4 FUN_0001a158(void)
 }
 
 /******************************************************************************
- * Function : sub_01a2d7 (Ghidra: FUN_0001a2d7)
- * Prototype: undefined8 sub_01a2d7(void);
+ * Function : compevnt_update_creature_and_thing_01a2d7 (Original VA: 0x1a2d7, Ghidra: FUN_0001a2d7)
+ * Prototype: undefined8 compevnt_update_creature_and_thing_01a2d7(void);
  * Address  : 0x1a2d7 (Size: 173 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x1a384
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
+ * Callers  : 1 -> compevnt_update_creature_and_thing_01a384
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined8 FUN_0001a2d7(void)
+undefined8 compevnt_update_creature_and_thing_01a2d7(void)
 
 {
-  int in_EAX;
-  undefined4 uVar1;
-  int iVar2;
-  int iVar3;
-  undefined4 in_EDX;
-  int iVar4;
+  int thing;
+  undefined4 uval;
+  int thing_ptr;
+  int cctrl_ptr;
+  undefined4 arg_edx;
+  int thing_ptr_2;
   
-  iVar3 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  if ((int)*(short *)(in_EAX + 0x5e) <
-      ((int)((int)(short)(&DAT_002e9114)[(uint)*(byte *)(in_EAX + 0x1a) * 0x73] *
-             (uint)*(byte *)(iVar3 + 0x23) * 0x23) / 100 +
-      (int)(short)(&DAT_002e9114)[(uint)*(byte *)(in_EAX + 0x1a) * 0x73]) / 2) {
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  if ((int)*(short *)(thing + 0x5e) <
+      ((int)((int)(short)(&g_bss_002e9114)[(uint)*(byte *)(thing + 0x1a) * 0x73] *
+             (uint)*(byte *)(cctrl_ptr + 0x23) * 0x23) / 100 +
+      (int)(short)(&g_bss_002e9114)[(uint)*(byte *)(thing + 0x1a) * 0x73]) / 2) {
 LAB_0001a31d:
-    uVar1 = 1;
+    uval = 1;
   }
   else {
-    iVar2 = iVar3;
-    for (iVar4 = 0; iVar4 < 4; iVar4 = iVar4 + 1) {
-      if ((*(short *)(iVar2 + 0x13) != 0) &&
-         (*(char *)((&DAT_001ae9fc)[*(ushort *)(iVar2 + 0x13)] + 0x1a) != '\x17'))
+    thing_ptr = cctrl_ptr;
+    for (thing_ptr_2 = 0; thing_ptr_2 < 4; thing_ptr_2 = thing_ptr_2 + 1) {
+      if ((*(short *)(thing_ptr + 0x13) != 0) && /* thing->anim_sprite */
+         (*(char *)((&g_thing_ptrs)[*(ushort *)(thing_ptr + 0x13)] + 0x1a) != '\x17')) /* thing->anim_sprite */
       goto LAB_0001a31d;
-      iVar2 = iVar2 + 2;
+      thing_ptr = thing_ptr + 2;
     }
-    for (iVar2 = 0; iVar2 < 4; iVar2 = iVar2 + 1) {
-      if ((*(short *)(iVar3 + 0xb) != 0) &&
-         (*(char *)((&DAT_001ae9fc)[*(ushort *)(iVar3 + 0xb)] + 0x1a) != '\x17')) goto LAB_0001a31d;
-      iVar3 = iVar3 + 2;
+    for (thing_ptr = 0; thing_ptr < 4; thing_ptr = thing_ptr + 1) {
+      if ((*(short *)(cctrl_ptr + 0xb) != 0) &&
+         (*(char *)((&g_thing_ptrs)[*(ushort *)(cctrl_ptr + 0xb)] + 0x1a) != '\x17')) goto LAB_0001a31d;
+      cctrl_ptr = cctrl_ptr + 2;
     }
-    uVar1 = 0;
+    uval = 0;
   }
-  return CONCAT44(in_EDX,uVar1);
+  return CONCAT44(arg_edx,uval);
 }
 
 /******************************************************************************
- * Function : sub_01a384 (Ghidra: FUN_0001a384)
- * Prototype: undefined4 sub_01a384(void);
+ * Function : compevnt_update_creature_and_thing_01a384 (Original VA: 0x1a384, Ghidra: FUN_0001a384)
+ * Prototype: undefined4 compevnt_update_creature_and_thing_01a384(void);
  * Address  : 0x1a384 (Size: 285 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
  * Callers  : 0 -> 
- * Callees  : 3 -> 0x1a2d7, 0x1ba46, 0x84ff8
+ * Callees  : 3 -> compevnt_update_creature_and_thing_01a2d7, comptask_fn_01ba46, creature_update_creature_control_084ff8
  ******************************************************************************/
-undefined4 FUN_0001a384(void)
+undefined4 compevnt_update_creature_and_thing_01a384(void)
 
 {
-  ushort uVar1;
-  undefined2 uVar2;
-  int iVar3;
-  char cVar4;
-  int in_EAX;
-  int iVar5;
+  ushort cctrl_ptr;
+  undefined2 uval;
+  int thing_ptr;
+  char ch;
+  int arg_eax;
+  int val;
   ushort *extraout_ECX;
   undefined4 local_18;
   
   local_18 = 4;
-  if (*(int *)(*(int *)(in_EAX + 0x24) + 0x14a9) != 0) {
-    uVar1 = *(ushort *)(*(int *)(in_EAX + 0x24) + 0x2f);
-    while (iVar3 = (&DAT_001ae9fc)[uVar1], iVar3 != DAT_001ae9fc) {
-      if (((((*(byte *)((&DAT_001b0a00)[*(ushort *)(iVar3 + 100)] + 3) & 1) != 0) ||
-           ((*(byte *)((&DAT_001b0a00)[*(ushort *)(iVar3 + 100)] + 3) & 2) != 0)) &&
-          (*(char *)(iVar3 + 7) != 'C')) &&
-         ((*(byte *)((&DAT_001b0a00)[*(ushort *)(iVar3 + 100)] + 0xad) & 2) == 0)) {
-        if (*(char *)(iVar3 + 7) == '\x0e') {
-          cVar4 = *(char *)(iVar3 + 8);
+  if (*(int *)(*(int *)(arg_eax + 0x24) + 0x14a9) != 0) {
+    cctrl_ptr = *(ushort *)(*(int *)(arg_eax + 0x24) + 0x2f);
+    while (thing_ptr = (&g_thing_ptrs)[cctrl_ptr], thing_ptr != g_thing_ptrs) {
+      if (((((*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 3) & 1) != 0) || /* thing->ccontrol_idx */
+           ((*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 3) & 2) != 0)) && /* thing->ccontrol_idx */
+          (*(char *)(thing_ptr + 7) != 'C')) &&
+         ((*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0xad) & 2) == 0)) { /* thing->ccontrol_idx */
+        if (*(char *)(thing_ptr + 7) == '\x0e') {
+          ch = *(char *)(thing_ptr + 8); /* thing->active_state */
         }
         else {
-          cVar4 = *(char *)(iVar3 + 7);
+          ch = *(char *)(thing_ptr + 7);
         }
-        if (cVar4 != '[') {
-          iVar5 = FUN_00084ff8();
-          if (iVar5 != 0) {
-            iVar5 = FUN_0001a2d7();
-            if (iVar5 != 0) {
-              iVar5 = FUN_0001ba46();
-              if (iVar5 != 0) {
-                *(undefined1 *)(iVar5 + 2) = 0xb;
-                *(undefined2 *)(iVar5 + 0x86) =
-                     *(undefined2 *)((&DAT_001ae9fc)[*extraout_ECX] + 0xd);
-                *(undefined2 *)(iVar5 + 0x88) =
-                     *(undefined2 *)((&DAT_001ae9fc)[*extraout_ECX] + 0xf);
-                uVar2 = *(undefined2 *)(iVar3 + 0x1b);
-                *(undefined2 *)(iVar5 + 0x80) = 0;
-                *(undefined2 *)(iVar5 + 0x76) = uVar2;
+        if (ch != '[') {
+          val = creature_update_creature_control_084ff8();
+          if (val != 0) {
+            val = compevnt_update_creature_and_thing_01a2d7();
+            if (val != 0) {
+              val = comptask_fn_01ba46();
+              if (val != 0) {
+                *(undefined1 *)(val + 2) = 0xb;
+                *(undefined2 *)(val + 0x86) =
+                     *(undefined2 *)((&g_thing_ptrs)[*extraout_ECX] + 0xd);
+                *(undefined2 *)(val + 0x88) =
+                     *(undefined2 *)((&g_thing_ptrs)[*extraout_ECX] + 0xf);
+                uval = *(undefined2 *)(thing_ptr + 0x1b); /* thing->index_or_angle */
+                *(undefined2 *)(val + 0x80) = 0;
+                *(undefined2 *)(val + 0x76) = uval;
                 local_18 = 1;
-                *(undefined4 *)(iVar5 + 10) = DAT_002e8bee;
+                *(undefined4 *)(val + 10) = g_game_turn;
               }
             }
           }
         }
       }
-      uVar1 = *(ushort *)((&DAT_001b0a00)[*(ushort *)(iVar3 + 100)] + 0x1f);
+      cctrl_ptr = *(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x1f); /* thing->ccontrol_idx */
     }
   }
   return local_18;
 }
 
 /******************************************************************************
- * Function : sub_01a4a1 (Ghidra: FUN_0001a4a1)
- * Prototype: undefined4 sub_01a4a1(void);
+ * Function : compevnt_fn_01a4a1 (Original VA: 0x1a4a1, Ghidra: FUN_0001a4a1)
+ * Prototype: undefined4 compevnt_fn_01a4a1(void);
  * Address  : 0x1a4a1 (Size: 364 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module compevnt.cpp procedure @ 0x01a4a1
  * Callers  : 0 -> 
- * Callees  : 7 -> 0x1ba46, 0x1e061, 0x1e38d, 0x1f352, 0x201ed, 0x2035a, 0x203f0
+ * Callees  : 7 -> comptask_fn_01ba46, comptool_fn_01e061, comptool_update_player_dungeon_01e38d, comptool_update_creature_and_thing_01f352, compturn_update_creature_and_thing_0201ed, compturn_fn_02035a, compturn_fn_0203f0
  ******************************************************************************/
-undefined4 FUN_0001a4a1(void)
+undefined4 compevnt_fn_01a4a1(void)
 
 {
-  undefined4 uVar1;
-  int iVar2;
-  int in_EAX;
-  int iVar3;
-  int in_EDX;
-  byte bVar4;
-  undefined8 uVar5;
+  undefined4 uval;
+  int val;
+  int arg_eax;
+  int val_2;
+  int arg_edx;
+  byte flag;
+  undefined8 uval_2;
   undefined2 auStack_1c [2];
   int local_18;
   
-  bVar4 = 0;
-  if ((*(int *)(*(int *)(in_EAX + 0x24) + 0x14a9) != 0) && (iVar3 = FUN_000201ed(), iVar3 != 0)) {
-    uVar1 = *(undefined4 *)(iVar3 + 0xd);
-    auStack_1c[(uint)bVar4 * -4] = *(undefined2 *)(iVar3 + 0x11 + (uint)bVar4 * -8);
-    uVar5 = FUN_0001f352();
-    local_18 = (*(int *)((int)((ulonglong)uVar5 >> 0x20) + 0x1c) * (int)uVar5) / 100;
-    if ((local_18 == 0) && ((int)uVar5 != 0)) {
+  flag = 0;
+  if ((*(int *)(*(int *)(arg_eax + 0x24) + 0x14a9) != 0) && (val_2 = compturn_update_creature_and_thing_0201ed(), val_2 != 0)) {
+    uval = *(undefined4 *)(val_2 + 0xd);
+    auStack_1c[(uint)flag * -4] = *(undefined2 *)(val_2 + 0x11 + (uint)flag * -8);
+    uval_2 = comptool_update_creature_and_thing_01f352();
+    local_18 = (*(int *)((int)((ulonglong)uval_2 >> 0x20) + 0x1c) * (int)uval_2) / 100;
+    if ((local_18 == 0) && ((int)uval_2 != 0)) {
       local_18 = 1;
     }
-    if ((local_18 != 0) && (iVar3 = FUN_0001e061(), iVar3 != 0)) {
-      iVar3 = FUN_000203f0();
-      if (iVar3 == 0) {
-        iVar3 = FUN_0001ba46();
-        if (iVar3 != 0) {
-          *(undefined1 *)(iVar3 + 2) = 0xc;
-          *(undefined4 *)(iVar3 + 0x76) = uVar1;
-          *(undefined2 *)(iVar3 + 0x7a + (uint)bVar4 * -8) = auStack_1c[(uint)bVar4 * -4];
-          *(int *)(iVar3 + 0x7c) = local_18;
-          *(undefined4 *)(iVar3 + 0x70) = *(undefined4 *)(in_EDX + 0x20);
-          iVar2 = DAT_002e8bee;
-          *(int *)(iVar3 + 10) = DAT_002e8bee;
-          *(int *)(iVar3 + 0x5c) = iVar2;
-          *(undefined4 *)(iVar3 + 0x60) = *(undefined4 *)(in_EAX + 0x34);
+    if ((local_18 != 0) && (val_2 = comptool_fn_01e061(), val_2 != 0)) {
+      val_2 = compturn_fn_0203f0();
+      if (val_2 == 0) {
+        val_2 = comptask_fn_01ba46();
+        if (val_2 != 0) {
+          *(undefined1 *)(val_2 + 2) = 0xc;
+          *(undefined4 *)(val_2 + 0x76) = uval;
+          *(undefined2 *)(val_2 + 0x7a + (uint)flag * -8) = auStack_1c[(uint)flag * -4];
+          *(int *)(val_2 + 0x7c) = local_18;
+          *(undefined4 *)(val_2 + 0x70) = *(undefined4 *)(arg_edx + 0x20);
+          val = g_game_turn;
+          *(int *)(val_2 + 10) = g_game_turn;
+          *(int *)(val_2 + 0x5c) = val;
+          *(undefined4 *)(val_2 + 0x60) = *(undefined4 *)(arg_eax + 0x34);
           return 1;
         }
       }
       else {
-        iVar3 = FUN_0001e38d();
-        if ((((iVar3 == 1) && (iVar3 = FUN_000203f0(), iVar3 == 0)) &&
-            (iVar3 = FUN_0002035a(), iVar3 != 0)) && (iVar3 = FUN_0001ba46(), iVar3 != 0)) {
-          *(undefined1 *)(iVar3 + 2) = 8;
-          *(undefined1 *)(iVar3 + 1) = 0;
-          *(undefined4 *)(iVar3 + 0x76) = uVar1;
-          *(undefined2 *)(iVar3 + 0x7a + (uint)bVar4 * -8) = auStack_1c[(uint)bVar4 * -4];
-          *(undefined4 *)(iVar3 + 0x60) = 0x19;
-          *(int *)(iVar3 + 0x7c) = local_18;
-          iVar2 = DAT_002e8bee;
-          *(undefined4 *)(iVar3 + 0x8e) = 0x9c4;
-          *(int *)(iVar3 + 10) = iVar2;
-          *(int *)(iVar3 + 0x5c) = iVar2 - *(int *)(iVar3 + 0x60);
+        val_2 = comptool_update_player_dungeon_01e38d();
+        if ((((val_2 == 1) && (val_2 = compturn_fn_0203f0(), val_2 == 0)) &&
+            (val_2 = compturn_fn_02035a(), val_2 != 0)) && (val_2 = comptask_fn_01ba46(), val_2 != 0)) {
+          *(undefined1 *)(val_2 + 2) = 8;
+          *(undefined1 *)(val_2 + 1) = 0;
+          *(undefined4 *)(val_2 + 0x76) = uval;
+          *(undefined2 *)(val_2 + 0x7a + (uint)flag * -8) = auStack_1c[(uint)flag * -4];
+          *(undefined4 *)(val_2 + 0x60) = 0x19;
+          *(int *)(val_2 + 0x7c) = local_18;
+          val = g_game_turn;
+          *(undefined4 *)(val_2 + 0x8e) = 0x9c4;
+          *(int *)(val_2 + 10) = val;
+          *(int *)(val_2 + 0x5c) = val - *(int *)(val_2 + 0x60);
           return 1;
         }
       }
@@ -1361,33 +1358,33 @@ undefined4 FUN_0001a4a1(void)
 }
 
 /******************************************************************************
- * Function : sub_01a60d (Ghidra: FUN_0001a60d)
- * Prototype: undefined4 sub_01a60d(void);
+ * Function : compevnt_fn_01a60d (Original VA: 0x1a60d, Ghidra: FUN_0001a60d)
+ * Prototype: undefined4 compevnt_fn_01a60d(void);
  * Address  : 0x1a60d (Size: 126 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module compevnt.cpp procedure @ 0x01a60d
  * Callers  : 0 -> 
- * Callees  : 3 -> 0x1ba46, 0x1e38d, 0x200e0
+ * Callees  : 3 -> comptask_fn_01ba46, comptool_update_player_dungeon_01e38d, comptool_update_creature_and_thing_0200e0
  ******************************************************************************/
-undefined4 FUN_0001a60d(void)
+undefined4 compevnt_fn_01a60d(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  int iVar2;
-  int in_EDX;
+  int arg_eax;
+  int val;
+  int val_2;
+  int arg_edx;
   
-  if (*(int *)(*(int *)(in_EAX + 0x24) + 0x14a9) != 0) {
-    iVar1 = FUN_0001e38d();
-    if (iVar1 == 1) {
-      iVar1 = FUN_000200e0();
-      if (iVar1 != 0) {
-        iVar2 = FUN_0001ba46();
-        if (iVar2 != 0) {
-          *(undefined1 *)(iVar2 + 2) = 0xf;
-          *(undefined2 *)(iVar2 + 0x76) = *(undefined2 *)(iVar1 + 0x1b);
-          *(undefined4 *)(iVar2 + 0x70) = *(undefined4 *)(in_EDX + 0x1c);
-          *(undefined4 *)(iVar2 + 10) = DAT_002e8bee;
+  if (*(int *)(*(int *)(arg_eax + 0x24) + 0x14a9) != 0) {
+    val = comptool_update_player_dungeon_01e38d();
+    if (val == 1) {
+      val = comptool_update_creature_and_thing_0200e0();
+      if (val != 0) {
+        val_2 = comptask_fn_01ba46();
+        if (val_2 != 0) {
+          *(undefined1 *)(val_2 + 2) = 0xf;
+          *(undefined2 *)(val_2 + 0x76) = *(undefined2 *)(val + 0x1b);
+          *(undefined4 *)(val_2 + 0x70) = *(undefined4 *)(arg_edx + 0x1c);
+          *(undefined4 *)(val_2 + 10) = g_game_turn;
           return 1;
         }
       }
@@ -1397,24 +1394,24 @@ undefined4 FUN_0001a60d(void)
 }
 
 /******************************************************************************
- * Function : sub_01a68b (Ghidra: FUN_0001a68b)
- * Prototype: undefined4 sub_01a68b(void);
+ * Function : compevnt_update_creature_and_thing_01a68b (Original VA: 0x1a68b, Ghidra: FUN_0001a68b)
+ * Prototype: undefined4 compevnt_update_creature_and_thing_01a68b(void);
  * Address  : 0x1a68b (Size: 463 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
  * Callers  : 0 -> 
- * Callees  : 4 -> 0x1ba46, 0x1e38d, 0x200e0, 0x720ce
+ * Callees  : 4 -> comptask_fn_01ba46, comptool_update_player_dungeon_01e38d, comptool_update_creature_and_thing_0200e0, spell_update_creature_control_0720ce
  ******************************************************************************/
-undefined4 FUN_0001a68b(void)
+undefined4 compevnt_update_creature_and_thing_01a68b(void)
 
 {
-  byte bVar1;
-  char cVar2;
-  uint uVar3;
-  int in_EAX;
-  int iVar4;
-  int in_EDX;
-  int iVar5;
+  byte slab_coord;
+  char ch;
+  uint thing_ptr;
+  int arg_eax;
+  int thing_ptr_2;
+  int arg_edx;
+  int val;
   int local_30;
   uint local_28;
   int local_24;
@@ -1423,45 +1420,45 @@ undefined4 FUN_0001a68b(void)
   
   local_1c = -1;
   local_20 = 0;
-  iVar5 = *(int *)(in_EAX + 0x24);
+  val = *(int *)(arg_eax + 0x24);
   local_24 = 0;
   local_28 = 0;
-  if ((((*(int *)(iVar5 + 0x14a9) != 0) && (iVar4 = FUN_000200e0(), iVar4 != 0)) &&
-      (uVar3 = (&DAT_001ae9fc)[*(ushort *)((&DAT_001b0a00)[*(ushort *)(iVar4 + 100)] + 0xa2)],
-      DAT_001ae9fc < uVar3)) && (0 < *(short *)(uVar3 + 0x5e))) {
-    bVar1 = (&DAT_002d33ca)
-            [((&DAT_0019033b)[*(byte *)(uVar3 + 0xe)] +
-             (&DAT_0019033b)[*(byte *)(uVar3 + 0x10)] * 0x55) * 6];
-    cVar2 = *(char *)(iVar5 + 0xe9f);
-    iVar5 = *(int *)(in_EDX + 0x24);
-    for (local_30 = 0; iVar5 = (iVar5 + 1) % 4, local_30 < 4; local_30 = local_30 + 1) {
-      local_1c = (int)(char)(&DAT_00174e1b)[iVar5 * 0xf];
+  if ((((*(int *)(val + 0x14a9) != 0) && (thing_ptr_2 = comptool_update_creature_and_thing_0200e0(), thing_ptr_2 != 0)) &&
+      (thing_ptr = (&g_thing_ptrs)[*(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr_2 + 100)] + 0xa2)], /* thing->ccontrol_idx */
+      g_thing_ptrs < thing_ptr)) && (0 < *(short *)(thing_ptr + 0x5e))) {
+    slab_coord = (&g_slabmap)
+            [((&g_subtile_to_slab_lut)[*(byte *)(thing_ptr + 0xe)] +
+             (&g_subtile_to_slab_lut)[*(byte *)(thing_ptr + 0x10)] * 0x55) * 6];
+    ch = *(char *)(val + 0xe9f);
+    val = *(int *)(arg_edx + 0x24);
+    for (local_30 = 0; val = (val + 1) % 4, local_30 < 4; local_30 = local_30 + 1) {
+      local_1c = (int)(char)(&g_data_00174e1b)[val * 0xf];
       if (local_1c == -1) break;
-      if (((&DAT_00174e1d)[iVar5 * 0xf] == '\0') || ((uint)(bVar1 & 7) == (int)cVar2)) {
-        local_20 = *(int *)(&DAT_00174e1e + iVar5 * 0xf);
+      if (((&g_data_00174e1d)[val * 0xf] == '\0') || ((uint)(slab_coord & 7) == (int)ch)) {
+        local_20 = *(int *)(&g_data_00174e1e + val * 0xf);
         if (local_20 < 0) {
-          local_20 = *(int *)(in_EDX + 0x20);
+          local_20 = *(int *)(arg_edx + 0x20);
         }
-        local_24 = *(int *)(&DAT_00174e22 + iVar5 * 0xf);
+        local_24 = *(int *)(&g_data_00174e22 + val * 0xf);
         if (local_24 < 0) {
-          local_20 = *(int *)(in_EDX + 0x1c);
+          local_20 = *(int *)(arg_edx + 0x1c);
         }
-        local_28 = (uint)(byte)(&DAT_00174e1c)[iVar5 * 0xf];
-        iVar4 = FUN_000720ce();
-        if ((iVar4 == 0) && (iVar4 = FUN_0001e38d(), iVar4 == 1)) break;
+        local_28 = (uint)(byte)(&g_data_00174e1c)[val * 0xf];
+        thing_ptr_2 = spell_update_creature_control_0720ce();
+        if ((thing_ptr_2 == 0) && (thing_ptr_2 = comptool_update_player_dungeon_01e38d(), thing_ptr_2 == 1)) break;
       }
     }
     if (local_1c != -1) {
-      *(int *)(in_EDX + 0x24) = iVar5;
-      iVar5 = FUN_0001ba46();
-      if (iVar5 != 0) {
-        *(undefined1 *)(iVar5 + 2) = 0x11;
-        *(undefined2 *)(iVar5 + 0x76) = *(undefined2 *)(uVar3 + 0x1b);
-        *(int *)(iVar5 + 0x70) = local_24;
-        *(int *)(iVar5 + 0x7c) = local_20;
-        *(uint *)(iVar5 + 0x80) = local_28;
-        *(undefined4 *)(iVar5 + 10) = DAT_002e8bee;
-        *(int *)(iVar5 + 0x86) = local_1c;
+      *(int *)(arg_edx + 0x24) = val;
+      val = comptask_fn_01ba46();
+      if (val != 0) {
+        *(undefined1 *)(val + 2) = 0x11;
+        *(undefined2 *)(val + 0x76) = *(undefined2 *)(thing_ptr + 0x1b); /* thing->index_or_angle */
+        *(int *)(val + 0x70) = local_24;
+        *(int *)(val + 0x7c) = local_20;
+        *(uint *)(val + 0x80) = local_28;
+        *(undefined4 *)(val + 10) = g_game_turn;
+        *(int *)(val + 0x86) = local_1c;
         return 1;
       }
     }
@@ -1470,78 +1467,78 @@ undefined4 FUN_0001a68b(void)
 }
 
 /******************************************************************************
- * Function : sub_01a85a (Ghidra: FUN_0001a85a)
- * Prototype: undefined4 sub_01a85a(void);
+ * Function : compevnt_fn_01a85a (Original VA: 0x1a85a, Ghidra: FUN_0001a85a)
+ * Prototype: undefined4 compevnt_fn_01a85a(void);
  * Address  : 0x1a85a (Size: 113 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module compevnt.cpp procedure @ 0x01a85a
  * Callers  : 0 -> 
- * Callees  : 1 -> 0x207b3
+ * Callees  : 1 -> compturn_process_dungeon_room_0207b3
  ******************************************************************************/
-undefined4 FUN_0001a85a(void)
+undefined4 compevnt_fn_01a85a(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  undefined4 uVar4;
+  int arg_eax;
+  int val;
+  int val_2;
+  int loop_i;
+  undefined4 uval;
   
-  uVar4 = 4;
-  for (iVar3 = 0; *(int *)((int)&DAT_001792db + iVar3) != -1; iVar3 = iVar3 + 8) {
-    iVar1 = FUN_000207b3();
-    iVar2 = in_EAX + 0x38;
-    if (iVar1 < 1) {
-      for (; (*(byte *)(iVar2 + 0x44) & 2) == 0; iVar2 = iVar2 + 0x48) {
-        if (*(int *)(iVar2 + 0x2c) == *(int *)((int)&PTR_PTR_001792df + iVar3)) {
-          *(undefined4 *)(iVar2 + 0x3c) = 0;
-          *(undefined4 *)(iVar2 + 0x38) = 0;
-          uVar4 = 1;
-          *(byte *)(iVar2 + 0x44) = *(byte *)(iVar2 + 0x44) & 0xf6;
+  uval = 4;
+  for (loop_i = 0; *(int *)((int)&g_data_001792db + loop_i) != -1; loop_i = loop_i + 8) {
+    val = compturn_process_dungeon_room_0207b3();
+    val_2 = arg_eax + 0x38;
+    if (val < 1) {
+      for (; (*(byte *)(val_2 + 0x44) & 2) == 0; val_2 = val_2 + 0x48) {
+        if (*(int *)(val_2 + 0x2c) == *(int *)((int)&PTR_PTR_001792df + loop_i)) {
+          *(undefined4 *)(val_2 + 0x3c) = 0;
+          *(undefined4 *)(val_2 + 0x38) = 0;
+          uval = 1;
+          *(byte *)(val_2 + 0x44) = *(byte *)(val_2 + 0x44) & 0xf6;
         }
       }
     }
   }
-  return uVar4;
+  return uval;
 }
 
 /******************************************************************************
- * Function : sub_01a8cb (Ghidra: FUN_0001a8cb)
- * Prototype: undefined4 sub_01a8cb(void);
+ * Function : compevnt_fn_01a8cb (Original VA: 0x1a8cb, Ghidra: FUN_0001a8cb)
+ * Prototype: undefined4 compevnt_fn_01a8cb(void);
  * Address  : 0x1a8cb (Size: 165 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module compevnt.cpp procedure @ 0x01a8cb
  * Callers  : 0 -> 
- * Callees  : 2 -> 0x1ba46, 0x203f0
+ * Callees  : 2 -> comptask_fn_01ba46, compturn_fn_0203f0
  ******************************************************************************/
-undefined4 FUN_0001a8cb(void)
+undefined4 compevnt_fn_01a8cb(void)
 
 {
-  undefined4 uVar1;
-  int iVar2;
-  int in_EAX;
-  int iVar3;
+  undefined4 uval;
+  int val;
+  int arg_eax;
+  int val_2;
   int extraout_ECX;
-  int in_EDX;
+  int arg_edx;
   
-  if (*(int *)(*(int *)(in_EAX + 0x24) + 0xaf9) <= *(int *)(*(int *)(in_EAX + 0x24) + 0x14b8)) {
-    iVar3 = FUN_000203f0();
-    if (iVar3 == 0) {
-      iVar3 = FUN_0001ba46();
-      if (iVar3 != 0) {
-        *(undefined1 *)(iVar3 + 2) = 0x12;
-        uVar1 = *(undefined4 *)(in_EDX + 0x20);
-        *(undefined4 *)(iVar3 + 0x60) = 1;
-        *(undefined4 *)(iVar3 + 0x76) = 0;
-        *(undefined4 *)(iVar3 + 0x70) = uVar1;
-        uVar1 = DAT_002e8bee;
-        *(undefined4 *)(iVar3 + 0x70) = 5;
-        *(undefined4 *)(iVar3 + 10) = uVar1;
-        *(undefined4 *)(iVar3 + 0x5c) = uVar1;
-        *(int *)(iVar3 + 0x7c) = (*(int *)(extraout_ECX + 0x14b8) * 3) / 2;
-        iVar2 = *(int *)(extraout_ECX + 0x14b8);
-        *(undefined4 *)(iVar3 + 0x86) = 0;
-        *(int *)(iVar3 + 0x80) = (iVar2 * 3) / 2;
+  if (*(int *)(*(int *)(arg_eax + 0x24) + 0xaf9) <= *(int *)(*(int *)(arg_eax + 0x24) + 0x14b8)) {
+    val_2 = compturn_fn_0203f0();
+    if (val_2 == 0) {
+      val_2 = comptask_fn_01ba46();
+      if (val_2 != 0) {
+        *(undefined1 *)(val_2 + 2) = 0x12;
+        uval = *(undefined4 *)(arg_edx + 0x20);
+        *(undefined4 *)(val_2 + 0x60) = 1;
+        *(undefined4 *)(val_2 + 0x76) = 0;
+        *(undefined4 *)(val_2 + 0x70) = uval;
+        uval = g_game_turn;
+        *(undefined4 *)(val_2 + 0x70) = 5;
+        *(undefined4 *)(val_2 + 10) = uval;
+        *(undefined4 *)(val_2 + 0x5c) = uval;
+        *(int *)(val_2 + 0x7c) = (*(int *)(extraout_ECX + 0x14b8) * 3) / 2;
+        val = *(int *)(extraout_ECX + 0x14b8);
+        *(undefined4 *)(val_2 + 0x86) = 0;
+        *(int *)(val_2 + 0x80) = (val * 3) / 2;
         return 1;
       }
     }
@@ -1550,225 +1547,225 @@ undefined4 FUN_0001a8cb(void)
 }
 
 /******************************************************************************
- * Function : sub_01a970 (Ghidra: FUN_0001a970)
- * Prototype: undefined8 sub_01a970(void);
+ * Function : compevnt_fn_01a970 (Original VA: 0x1a970, Ghidra: FUN_0001a970)
+ * Prototype: undefined8 compevnt_fn_01a970(void);
  * Address  : 0x1a970 (Size: 145 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x21416
- * Callees  : 1 -> 0x1aa01
+ * Purpose  : Module compevnt.cpp procedure @ 0x01a970
+ * Callers  : 1 -> compturn_process_computer_player_021416
+ * Callees  : 1 -> compevnt_fn_01aa01
  ******************************************************************************/
-undefined8 FUN_0001a970(void)
+undefined8 compevnt_fn_01a970(void)
 
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 uval;
+  int val;
   undefined4 *extraout_ECX;
   undefined4 *extraout_ECX_00;
   undefined4 *extraout_ECX_01;
-  undefined4 *puVar3;
-  undefined4 in_EDX;
-  int iVar4;
+  undefined4 *word_ptr;
+  undefined4 arg_edx;
+  int val_2;
   
-  iVar2 = FUN_0001aa01();
-  iVar4 = 0;
-  puVar3 = extraout_ECX;
-  if (iVar2 != 0) {
-    iVar4 = (**(code **)(iVar2 + 0x18))();
-    puVar3 = extraout_ECX_00;
-    if (iVar4 == 1) {
-      *(short *)(extraout_ECX_00 + 0x531) = (short)((iVar2 - (int)(extraout_ECX_00 + 0xe)) / 0x48);
-      iVar4 = (**(code **)(iVar2 + 0x1c))();
-      puVar3 = extraout_ECX_01;
-      if (iVar4 == 1) {
-        *(undefined4 *)(iVar2 + 0x30) = DAT_002e8bee;
+  val = compevnt_fn_01aa01();
+  val_2 = 0;
+  word_ptr = extraout_ECX;
+  if (val != 0) {
+    val_2 = (**(code **)(val + 0x18))();
+    word_ptr = extraout_ECX_00;
+    if (val_2 == 1) {
+      *(short *)(extraout_ECX_00 + 0x531) = (short)((val - (int)(extraout_ECX_00 + 0xe)) / 0x48);
+      val_2 = (**(code **)(val + 0x1c))();
+      word_ptr = extraout_ECX_01;
+      if (val_2 == 1) {
+        *(undefined4 *)(val + 0x30) = g_game_turn;
         *extraout_ECX_01 = 3;
       }
     }
-    uVar1 = DAT_002e8bee;
-    if (iVar4 == 4) {
-      *(undefined4 *)(iVar2 + 0x38) = 0;
-      *(undefined4 *)(iVar2 + 0x3c) = uVar1;
+    uval = g_game_turn;
+    if (val_2 == 4) {
+      *(undefined4 *)(val + 0x38) = 0;
+      *(undefined4 *)(val + 0x3c) = uval;
     }
-    uVar1 = DAT_002e8bee;
-    if (iVar4 == 0) {
-      *(undefined4 *)(iVar2 + 0x3c) = 0;
-      *(undefined4 *)(iVar2 + 0x38) = uVar1;
+    uval = g_game_turn;
+    if (val_2 == 0) {
+      *(undefined4 *)(val + 0x3c) = 0;
+      *(undefined4 *)(val + 0x38) = uval;
     }
   }
-  if (iVar4 != 1) {
-    *(undefined2 *)(puVar3 + 0x531) = 0;
+  if (val_2 != 1) {
+    *(undefined2 *)(word_ptr + 0x531) = 0;
   }
-  return CONCAT44(in_EDX,iVar4);
+  return CONCAT44(arg_edx,val_2);
 }
 
 /******************************************************************************
- * Function : sub_01aa01 (Ghidra: FUN_0001aa01)
- * Prototype: undefined8 sub_01aa01(void);
+ * Function : compevnt_fn_01aa01 (Original VA: 0x1aa01, Ghidra: FUN_0001aa01)
+ * Prototype: undefined8 compevnt_fn_01aa01(void);
  * Address  : 0x1aa01 (Size: 186 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x1a970
+ * Purpose  : Module compevnt.cpp procedure @ 0x01aa01
+ * Callers  : 1 -> compevnt_fn_01a970
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined8 FUN_0001aa01(void)
+undefined8 compevnt_fn_01aa01(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  int iVar2;
-  undefined4 in_EDX;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
+  int arg_eax;
+  int loop_i;
+  int val;
+  undefined4 arg_edx;
+  int val_2;
+  int val_3;
+  int val_4;
+  int val_5;
   undefined4 local_20;
   undefined4 local_1c;
   
-  iVar6 = -0x80000000;
+  val_5 = -0x80000000;
   local_20 = 0x96;
   local_1c = 100;
-  iVar4 = 0;
-  iVar2 = 0;
-  iVar3 = 0;
-  for (iVar1 = in_EAX + 0x38; (*(byte *)(iVar1 + 0x44) & 2) == 0; iVar1 = iVar1 + 0x48) {
-    if (((((*(byte *)(iVar1 + 0x44) & 4) == 0) && ((*(byte *)(iVar1 + 0x44) & 8) == 0)) &&
-        ((*(byte *)(iVar1 + 0x44) & 0x10) == 0)) &&
-       (((*(byte *)(iVar1 + 0x44) & 0x20) == 0 && ((*(byte *)(iVar1 + 0x44) & 1) == 0)))) {
-      if (*(int *)(iVar1 + 0x3c) == 0) {
-        if (*(int *)(iVar1 + 0x38) == 0) {
-          if (iVar6 < *(int *)(iVar1 + 4)) {
-            iVar6 = *(int *)(iVar1 + 4);
-            iVar3 = iVar1;
+  val_3 = 0;
+  val = 0;
+  val_2 = 0;
+  for (loop_i = arg_eax + 0x38; (*(byte *)(loop_i + 0x44) & 2) == 0; loop_i = loop_i + 0x48) {
+    if (((((*(byte *)(loop_i + 0x44) & 4) == 0) && ((*(byte *)(loop_i + 0x44) & 8) == 0)) &&
+        ((*(byte *)(loop_i + 0x44) & 0x10) == 0)) &&
+       (((*(byte *)(loop_i + 0x44) & 0x20) == 0 && ((*(byte *)(loop_i + 0x44) & 1) == 0)))) {
+      if (*(int *)(loop_i + 0x3c) == 0) {
+        if (*(int *)(loop_i + 0x38) == 0) {
+          if (val_5 < *(int *)(loop_i + 4)) {
+            val_5 = *(int *)(loop_i + 4);
+            val_2 = loop_i;
           }
         }
         else {
-          iVar5 = DAT_002e8bee - *(int *)(iVar1 + 0x38);
-          if (local_20 < iVar5) {
-            iVar4 = iVar1;
-            local_20 = iVar5;
+          val_4 = g_game_turn - *(int *)(loop_i + 0x38);
+          if (local_20 < val_4) {
+            val_3 = loop_i;
+            local_20 = val_4;
           }
         }
       }
       else {
-        iVar5 = DAT_002e8bee - *(int *)(iVar1 + 0x3c);
-        if (local_1c < iVar5) {
-          iVar2 = iVar1;
-          local_1c = iVar5;
+        val_4 = g_game_turn - *(int *)(loop_i + 0x3c);
+        if (local_1c < val_4) {
+          val = loop_i;
+          local_1c = val_4;
         }
       }
     }
   }
-  if ((iVar2 != 0) && ((iVar3 == 0 || (*(int *)(iVar3 + 4) < *(int *)(iVar2 + 4))))) {
-    iVar3 = iVar2;
+  if ((val != 0) && ((val_2 == 0 || (*(int *)(val_2 + 4) < *(int *)(val + 4))))) {
+    val_2 = val;
   }
-  if ((iVar4 != 0) && ((iVar3 == 0 || (*(int *)(iVar3 + 4) < *(int *)(iVar4 + 4))))) {
-    iVar3 = iVar4;
+  if ((val_3 != 0) && ((val_2 == 0 || (*(int *)(val_2 + 4) < *(int *)(val_3 + 4))))) {
+    val_2 = val_3;
   }
-  return CONCAT44(in_EDX,iVar3);
+  return CONCAT44(arg_edx,val_2);
 }
 
 /******************************************************************************
- * Function : sub_01aabb (Ghidra: FUN_0001aabb)
- * Prototype: void sub_01aabb(void);
+ * Function : compevnt_fn_01aabb (Original VA: 0x1aabb, Ghidra: FUN_0001aabb)
+ * Prototype: void compevnt_fn_01aabb(void);
  * Address  : 0x1aabb (Size: 31 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 4 -> 0x1ac13, 0x1ac93, 0x1b3ad, 0x1b9ad
+ * Purpose  : Module compevnt.cpp procedure @ 0x01aabb
+ * Callers  : 4 -> compevnt_fn_01ac13, compevnt_fn_01ac93, comptask_fn_01b3ad, comptask_fn_01b9ad
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_0001aabb(void)
+void compevnt_fn_01aabb(void)
 
 {
-  int in_EDX;
+  int arg_edx;
   
-  if (in_EDX != 0) {
-    *(byte *)(in_EDX + 0x44) = *(byte *)(in_EDX + 0x44) | 8;
-    *(byte *)(in_EDX + 0x44) = *(byte *)(in_EDX + 0x44) & 0xdf;
-    *(undefined4 *)(in_EDX + 0x34) = DAT_002e8bee;
-    (**(code **)(in_EDX + 0x24))();
+  if (arg_edx != 0) {
+    *(byte *)(arg_edx + 0x44) = *(byte *)(arg_edx + 0x44) | 8;
+    *(byte *)(arg_edx + 0x44) = *(byte *)(arg_edx + 0x44) & 0xdf;
+    *(undefined4 *)(arg_edx + 0x34) = g_game_turn;
+    (**(code **)(arg_edx + 0x24))();
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_01aada (Ghidra: FUN_0001aada)
- * Prototype: void sub_01aada(void);
+ * Function : compevnt_fn_01aada (Original VA: 0x1aada, Ghidra: FUN_0001aada)
+ * Prototype: void compevnt_fn_01aada(void);
  * Address  : 0x1aada (Size: 27 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 5 -> 0x1ae5c, 0x1b15c, 0x1b3d7, 0x1b561, 0x1ba1e
+ * Purpose  : Module compevnt.cpp procedure @ 0x01aada
+ * Callers  : 5 -> comptask_update_player_dungeon_01ae5c, comptask_fn_01b15c, comptask_process_slabmap_tile_01b3d7, comptask_update_player_dungeon_01b561, comptask_fn_01ba1e
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_0001aada(void)
+void compevnt_fn_01aada(void)
 
 {
-  undefined4 uVar1;
-  int in_EDX;
+  undefined4 uval;
+  int arg_edx;
   
-  if (in_EDX != 0) {
-    *(undefined4 *)(in_EDX + 0x38) = 0;
-    uVar1 = DAT_002e8bee;
-    *(byte *)(in_EDX + 0x44) = *(byte *)(in_EDX + 0x44) & 0xdf;
-    *(undefined4 *)(in_EDX + 0x3c) = uVar1;
-    *(undefined4 *)(in_EDX + 0x34) = uVar1;
+  if (arg_edx != 0) {
+    *(undefined4 *)(arg_edx + 0x38) = 0;
+    uval = g_game_turn;
+    *(byte *)(arg_edx + 0x44) = *(byte *)(arg_edx + 0x44) & 0xdf;
+    *(undefined4 *)(arg_edx + 0x3c) = uval;
+    *(undefined4 *)(arg_edx + 0x34) = uval;
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_01aaf5 (Ghidra: FUN_0001aaf5)
- * Prototype: void sub_01aaf5(void);
+ * Function : compevnt_fn_01aaf5 (Original VA: 0x1aaf5, Ghidra: FUN_0001aaf5)
+ * Prototype: void compevnt_fn_01aaf5(void);
  * Address  : 0x1aaf5 (Size: 31 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x1ac13, 0x1ac93
+ * Purpose  : Module compevnt.cpp procedure @ 0x01aaf5
+ * Callers  : 2 -> compevnt_fn_01ac13, compevnt_fn_01ac93
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_0001aaf5(void)
+void compevnt_fn_01aaf5(void)
 
 {
-  undefined4 uVar1;
-  int in_EDX;
+  undefined4 uval;
+  int arg_edx;
   
-  if (in_EDX != 0) {
-    *(undefined4 *)(in_EDX + 0x3c) = 0;
-    *(undefined4 *)(in_EDX + 0x38) = 0;
-    uVar1 = DAT_002e8bee;
-    *(byte *)(in_EDX + 0x44) = *(byte *)(in_EDX + 0x44) & 0xdf;
-    *(undefined4 *)(in_EDX + 0x34) = uVar1;
+  if (arg_edx != 0) {
+    *(undefined4 *)(arg_edx + 0x3c) = 0;
+    *(undefined4 *)(arg_edx + 0x38) = 0;
+    uval = g_game_turn;
+    *(byte *)(arg_edx + 0x44) = *(byte *)(arg_edx + 0x44) & 0xdf;
+    *(undefined4 *)(arg_edx + 0x34) = uval;
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_01ab14 (Ghidra: FUN_0001ab14)
- * Prototype: undefined4 sub_01ab14(void);
+ * Function : compevnt_fn_01ab14 (Original VA: 0x1ab14, Ghidra: FUN_0001ab14)
+ * Prototype: undefined4 compevnt_fn_01ab14(void);
  * Address  : 0x1ab14 (Size: 96 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module compevnt.cpp procedure @ 0x01ab14
  * Callers  : 0 -> 
- * Callees  : 2 -> 0x1db99, 0x2008f
+ * Callees  : 2 -> comptool_fn_01db99, comptool_fn_02008f
  ******************************************************************************/
-undefined4 FUN_0001ab14(void)
+undefined4 compevnt_fn_01ab14(void)
 
 {
-  int iVar1;
-  int iVar2;
-  int in_EAX;
-  int iVar3;
-  int iVar4;
+  int val;
+  int val_2;
+  int arg_eax;
+  int loop_i;
+  int val_3;
   int extraout_ECX;
-  int in_EDX;
+  int arg_edx;
   
-  iVar1 = *(int *)(in_EAX + 0x24);
-  iVar3 = FUN_0002008f();
-  if (iVar3 < *(int *)(in_EAX + 0x30)) {
-    for (iVar3 = 0; *(int *)((int)&DAT_001792db + iVar3) != -1; iVar3 = iVar3 + 8) {
-      iVar2 = *(int *)((int)&DAT_001792db + iVar3);
-      if ((*(short *)(iVar2 * 2 + iVar1 + 0xb) == 0) &&
-         (iVar4 = FUN_0001db99(), iVar3 = extraout_ECX, iVar4 == 1)) {
-        *(int *)(in_EDX + 0x10) = iVar2;
+  val = *(int *)(arg_eax + 0x24);
+  loop_i = comptool_fn_02008f();
+  if (loop_i < *(int *)(arg_eax + 0x30)) {
+    for (loop_i = 0; *(int *)((int)&g_data_001792db + loop_i) != -1; loop_i = loop_i + 8) {
+      val_2 = *(int *)((int)&g_data_001792db + loop_i);
+      if ((*(short *)(val_2 * 2 + val + 0xb) == 0) &&
+         (val_3 = comptool_fn_01db99(), loop_i = extraout_ECX, val_3 == 1)) {
+        *(int *)(arg_edx + 0x10) = val_2;
         return 1;
       }
     }
@@ -1777,48 +1774,48 @@ undefined4 FUN_0001ab14(void)
 }
 
 /******************************************************************************
- * Function : sub_01ab74 (Ghidra: FUN_0001ab74)
- * Prototype: int sub_01ab74(void);
+ * Function : compevnt_process_dungeon_room_01ab74 (Original VA: 0x1ab74, Ghidra: FUN_0001ab74)
+ * Prototype: int compevnt_process_dungeon_room_01ab74(void);
  * Address  : 0x1ab74 (Size: 159 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Operates on Room structure in g_rooms (stride 0x45)
  * Callers  : 0 -> 
- * Callees  : 3 -> 0x1db99, 0x2008f, 0x207b3
+ * Callees  : 3 -> comptool_fn_01db99, comptool_fn_02008f, compturn_process_dungeon_room_0207b3
  ******************************************************************************/
-int FUN_0001ab74(void)
+int compevnt_process_dungeon_room_01ab74(void)
 
 {
-  ushort uVar1;
-  int in_EAX;
-  int iVar2;
-  int iVar3;
+  ushort uval;
+  int arg_eax;
+  int val;
+  int room_ptr;
   int extraout_ECX;
-  int in_EDX;
+  int arg_edx;
   
-  iVar3 = *(int *)(in_EAX + 0x24);
-  iVar2 = FUN_0001db99();
-  if (iVar2 != 1) {
-    if (iVar2 == 0) {
-      *(byte *)(in_EDX + 0x44) = *(byte *)(in_EDX + 0x44) | 4;
+  room_ptr = *(int *)(arg_eax + 0x24);
+  val = comptool_fn_01db99();
+  if (val != 1) {
+    if (val == 0) {
+      *(byte *)(arg_edx + 0x44) = *(byte *)(arg_edx + 0x44) | 4;
     }
-    return iVar2;
+    return val;
   }
-  iVar2 = FUN_0002008f();
-  if (iVar2 < *(int *)(extraout_ECX + 0x30)) {
-    iVar2 = 0;
-    uVar1 = *(ushort *)(iVar3 + 0xb + *(int *)(in_EDX + 0x10) * 2);
-    while (iVar3 = (uint)uVar1 * 0x45, &DAT_002ddd1b < &DAT_002ddd1b + iVar3) {
-      iVar2 = iVar2 + (uint)*(ushort *)(&DAT_002ddd29 + iVar3);
-      uVar1 = *(ushort *)(&DAT_002ddd21 + iVar3);
+  val = comptool_fn_02008f();
+  if (val < *(int *)(extraout_ECX + 0x30)) {
+    val = 0;
+    uval = *(ushort *)(room_ptr + 0xb + *(int *)(arg_edx + 0x10) * 2);
+    while (room_ptr = (uint)uval * 0x45, &g_rooms < &g_rooms + room_ptr) {
+      val = val + (uint)*(ushort *)(&g_bss_002ddd29 + room_ptr);
+      uval = *(ushort *)(&g_bss_002ddd21 + room_ptr);
     }
-    if (iVar2 != 0) {
-      iVar3 = FUN_000207b3();
-      if (iVar3 == 9999) {
-        if (*(int *)(in_EDX + 0x10) == 0xd) {
+    if (val != 0) {
+      room_ptr = compturn_process_dungeon_room_0207b3();
+      if (room_ptr == 9999) {
+        if (*(int *)(arg_edx + 0x10) == 0xd) {
           return 4;
         }
       }
-      else if ((iVar2 * 10) / 100 <= iVar3) {
+      else if ((val * 10) / 100 <= room_ptr) {
         return 4;
       }
     }
@@ -1828,82 +1825,82 @@ int FUN_0001ab74(void)
 }
 
 /******************************************************************************
- * Function : sub_01ac13 (Ghidra: FUN_0001ac13)
- * Prototype: undefined4 sub_01ac13(void);
+ * Function : compevnt_fn_01ac13 (Original VA: 0x1ac13, Ghidra: FUN_0001ac13)
+ * Prototype: undefined4 compevnt_fn_01ac13(void);
  * Address  : 0x1ac13 (Size: 128 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module compevnt.cpp procedure @ 0x01ac13
  * Callers  : 0 -> 
- * Callees  : 3 -> 0x1aabb, 0x1aaf5, 0x1cf1c
+ * Callees  : 3 -> compevnt_fn_01aabb, compevnt_fn_01aaf5, comptask_process_dungeon_room_01cf1c
  ******************************************************************************/
-undefined4 FUN_0001ac13(void)
+undefined4 compevnt_fn_01ac13(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  int in_EDX;
+  int arg_eax;
+  int val;
+  int arg_edx;
   
-  iVar1 = FUN_0001cf1c(*(undefined4 *)(in_EDX + 0x14));
-  if (iVar1 == 0) {
-    if (*(int *)(in_EDX + 0xc) < *(int *)(in_EDX + 8)) {
-      if (*(int *)(in_EDX + 8) < 3) {
+  val = comptask_process_dungeon_room_01cf1c(*(undefined4 *)(arg_edx + 0x14));
+  if (val == 0) {
+    if (*(int *)(arg_edx + 0xc) < *(int *)(arg_edx + 8)) {
+      if (*(int *)(arg_edx + 8) < 3) {
         return 0;
       }
-      *(int *)(in_EDX + 8) = *(int *)(in_EDX + 8) + -1;
+      *(int *)(arg_edx + 8) = *(int *)(arg_edx + 8) + -1;
     }
     else {
-      if (*(int *)(in_EDX + 0xc) < 3) {
+      if (*(int *)(arg_edx + 0xc) < 3) {
         return 0;
       }
-      *(int *)(in_EDX + 0xc) = *(int *)(in_EDX + 0xc) + -1;
+      *(int *)(arg_edx + 0xc) = *(int *)(arg_edx + 0xc) + -1;
     }
-    FUN_0001aaf5();
+    compevnt_fn_01aaf5();
   }
   else {
-    *(byte *)(in_EDX + 0x44) = *(byte *)(in_EDX + 0x44) | 0x20;
-    *(short *)(iVar1 + 0x8c) = (short)((in_EDX - (in_EAX + 0x38)) / 0x48);
-    FUN_0001aabb();
+    *(byte *)(arg_edx + 0x44) = *(byte *)(arg_edx + 0x44) | 0x20;
+    *(short *)(val + 0x8c) = (short)((arg_edx - (arg_eax + 0x38)) / 0x48);
+    compevnt_fn_01aabb();
   }
   return 2;
 }
 
 /******************************************************************************
- * Function : sub_01ac93 (Ghidra: FUN_0001ac93)
- * Prototype: undefined4 sub_01ac93(void);
+ * Function : compevnt_fn_01ac93 (Original VA: 0x1ac93, Ghidra: FUN_0001ac93)
+ * Prototype: undefined4 compevnt_fn_01ac93(void);
  * Address  : 0x1ac93 (Size: 140 bytes)
  * Module   : compevnt.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module compevnt.cpp procedure @ 0x01ac93
  * Callers  : 0 -> 
- * Callees  : 3 -> 0x1aabb, 0x1aaf5, 0x1cf1c
+ * Callees  : 3 -> compevnt_fn_01aabb, compevnt_fn_01aaf5, comptask_process_dungeon_room_01cf1c
  ******************************************************************************/
-undefined4 FUN_0001ac93(void)
+undefined4 compevnt_fn_01ac93(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  int in_EDX;
+  int arg_eax;
+  int val;
+  int arg_edx;
   
-  iVar1 = FUN_0001cf1c(*(undefined4 *)(in_EDX + 0x14));
-  if (iVar1 != 0) {
-    *(byte *)(in_EDX + 0x44) = *(byte *)(in_EDX + 0x44) | 0x20;
-    *(short *)(iVar1 + 0x8c) = (short)((in_EDX - (in_EAX + 0x38)) / 0x48);
-    FUN_0001aabb();
-    *(byte *)(in_EDX + 0x44) = *(byte *)(in_EDX + 0x44) & 0xf7;
+  val = comptask_process_dungeon_room_01cf1c(*(undefined4 *)(arg_edx + 0x14));
+  if (val != 0) {
+    *(byte *)(arg_edx + 0x44) = *(byte *)(arg_edx + 0x44) | 0x20;
+    *(short *)(val + 0x8c) = (short)((arg_edx - (arg_eax + 0x38)) / 0x48);
+    compevnt_fn_01aabb();
+    *(byte *)(arg_edx + 0x44) = *(byte *)(arg_edx + 0x44) & 0xf7;
     return 2;
   }
-  if (*(int *)(in_EDX + 0xc) < *(int *)(in_EDX + 8)) {
-    if (*(int *)(in_EDX + 8) < 3) {
+  if (*(int *)(arg_edx + 0xc) < *(int *)(arg_edx + 8)) {
+    if (*(int *)(arg_edx + 8) < 3) {
       return 0;
     }
-    *(int *)(in_EDX + 8) = *(int *)(in_EDX + 8) + -1;
+    *(int *)(arg_edx + 8) = *(int *)(arg_edx + 8) + -1;
   }
   else {
-    if (*(int *)(in_EDX + 0xc) < 3) {
+    if (*(int *)(arg_edx + 0xc) < 3) {
       return 0;
     }
-    *(int *)(in_EDX + 0xc) = *(int *)(in_EDX + 0xc) + -1;
+    *(int *)(arg_edx + 0xc) = *(int *)(arg_edx + 0xc) + -1;
   }
-  FUN_0001aaf5();
+  compevnt_fn_01aaf5();
   return 2;
 }
 

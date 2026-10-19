@@ -1,7 +1,7 @@
 /**
- * Dungeon Keeper (KEEPER.EXE) - Reconstructed Source Module: ariadne.cpp
+ * Dungeon Keeper (KEEPER.EXE) - Reconstructed & Semantically Named Module: ariadne.cpp
  * Binary Subject: /home/merlin/Dungeon Keeper/re/KEEPER.elf
- * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 (x86:LE:32:default)
+ * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 + DK Semantic Analyzer
  * Functions in this translation unit: 19
  */
 
@@ -11,209 +11,209 @@
 #include "../include/dk_functions.h"
 
 /******************************************************************************
- * Function : sub_011e00 (Ghidra: FUN_00011e00)
- * Prototype: undefined4 sub_011e00(void);
+ * Function : ariadne_update_creature_control_011e00 (Original VA: 0x11e00, Ghidra: FUN_00011e00)
+ * Prototype: undefined4 ariadne_update_creature_control_011e00(void);
  * Address  : 0x11e00 (Size: 514 bytes)
  * Module   : ariadne.cpp [callgraph_affinity_to_following_unit]
- * Naming   : Address-based identifier
- * Callers  : 6 -> 0x12002, 0x12230, 0x123ba, 0x1264b, 0x13105, 0x827fc
- * Callees  : 7 -> 0x1211a, 0x1305f, 0x130a6, 0x130c5, 0xc241c, 0xd5ac0, 0xe6a10
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
+ * Callers  : 6 -> ariadne_update_creature_control_012002, ariadne_fn_012230, ariadne_fn_0123ba, ariadne_manoeuvre_state_01264b, barracks_fn_013105, creature_fn_0827fc
+ * Callees  : 7 -> ariadne_fn_01211a, ariadne_fn_01305f, ariadne_fn_0130a6, barracks_fn_0130c5, navigate_path_init8_0c241c, routes_fn_0d5ac0, LbScreenWaitVbi
  ******************************************************************************/
-undefined4 FUN_00011e00(void)
+undefined4 ariadne_update_creature_control_011e00(void)
 
 {
-  char cVar1;
-  undefined2 uVar2;
-  ushort uVar3;
-  int iVar4;
-  int in_EAX;
-  int iVar5;
-  undefined1 in_CL;
+  char ch;
+  undefined2 uval;
+  ushort uval_2;
+  int cctrl_ptr;
+  int thing;
+  int val;
+  undefined1 arg_cl;
   char extraout_CL;
-  undefined4 *in_EDX;
-  undefined2 unaff_BX;
-  uint *puVar6;
-  byte bVar7;
+  undefined4 *arg_edx;
+  undefined2 arg_bx;
+  uint *word_ptr;
+  byte flag;
   uint auStack_840 [3];
   int local_818;
   
-  bVar7 = 0;
-  puVar6 = (uint *)&stack0xfffff7cc;
-  iVar4 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
+  flag = 0;
+  word_ptr = (uint *)&stack0xfffff7cc;
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
   auStack_840[2] = 0x11e37;
-  FUN_000e6a10();
+  LbScreenWaitVbi();
   auStack_840[2] = 0x11e42;
-  iVar5 = FUN_000130a6();
-  if (iVar5 == 0) {
-    *(undefined4 *)(iVar4 + 0x217) = *(undefined4 *)(in_EAX + 0xd);
-    *(undefined2 *)(iVar4 + 0x21b + (uint)bVar7 * -8) =
-         *(undefined2 *)(in_EAX + 0x11 + (uint)bVar7 * -8);
-    *(undefined4 *)(iVar4 + 0x21d) = *in_EDX;
-    *(undefined2 *)(iVar4 + 0x221 + (uint)bVar7 * -8) =
-         *(undefined2 *)(in_EDX + (uint)bVar7 * -2 + 1);
+  val = ariadne_fn_0130a6();
+  if (val == 0) {
+    *(undefined4 *)(cctrl_ptr + 0x217) = *(undefined4 *)(thing + 0xd); /* thing->mappos.val_x */
+    *(undefined2 *)(cctrl_ptr + 0x21b + (uint)flag * -8) =
+         *(undefined2 *)(thing + 0x11 + (uint)flag * -8);
+    *(undefined4 *)(cctrl_ptr + 0x21d) = *arg_edx;
+    *(undefined2 *)(cctrl_ptr + 0x221 + (uint)flag * -8) =
+         *(undefined2 *)(arg_edx + (uint)flag * -2 + 1);
     auStack_840[2] = 0x11ee5;
-    DAT_003d9528 = FUN_000d5ac0();
+    g_bss_003d9528 = routes_fn_0d5ac0();
     if (extraout_CL == '\0') {
-      DAT_003d9524 = (int)*(char *)(in_EAX + 6);
-      cVar1 = (&DAT_00190d3d)[*(ushort *)(in_EAX + 0x56)];
-      uVar3 = *(ushort *)(iVar4 + 0x21f);
+      g_bss_003d9524 = (int)*(char *)(thing + 6); /* thing->owner */
+      ch = (&g_data_00190d3d)[*(ushort *)(thing + 0x56)];
+      uval_2 = *(ushort *)(cctrl_ptr + 0x21f);
     }
     else {
-      cVar1 = (&DAT_00190d3d)[*(ushort *)(in_EAX + 0x56)];
-      uVar3 = *(ushort *)(iVar4 + 0x21f);
-      DAT_003d9524 = -1;
+      ch = (&g_data_00190d3d)[*(ushort *)(thing + 0x56)];
+      uval_2 = *(ushort *)(cctrl_ptr + 0x21f);
+      g_bss_003d9524 = -1;
     }
-    auStack_840[2] = (uint)(byte)(cVar1 - 1);
-    auStack_840[0] = (uint)uVar3;
+    auStack_840[2] = (uint)(byte)(ch - 1);
+    auStack_840[0] = (uint)uval_2;
     auStack_840[1] = 0xfffffffe;
-    puVar6 = auStack_840;
-    FUN_000c241c();
-    DAT_003d9528 = 0;
+    word_ptr = auStack_840;
+    navigate_path_init8_0c241c();
+    g_bss_003d9528 = 0;
     if (local_818 == 0) {
-      DAT_003d9528 = 0;
+      g_bss_003d9528 = 0;
       return 2;
     }
-    FUN_0001305f();
-    *(undefined1 *)(iVar4 + 0x23f) = 0;
-    *(undefined1 *)(iVar4 + 0x235) = in_CL;
-    *(undefined4 *)(iVar4 + 0x229) = *(undefined4 *)(in_EAX + 0xd);
-    *(undefined2 *)(iVar4 + 0x22d + (uint)bVar7 * -8) =
-         *(undefined2 *)(in_EAX + 0x11 + (uint)bVar7 * -8);
-    *(undefined2 *)(iVar4 + 0x23d) = unaff_BX;
-    FUN_000130c5();
+    ariadne_fn_01305f();
+    *(undefined1 *)(cctrl_ptr + 0x23f) = 0;
+    *(undefined1 *)(cctrl_ptr + 0x235) = arg_cl;
+    *(undefined4 *)(cctrl_ptr + 0x229) = *(undefined4 *)(thing + 0xd); /* thing->mappos.val_x */
+    *(undefined2 *)(cctrl_ptr + 0x22d + (uint)flag * -8) =
+         *(undefined2 *)(thing + 0x11 + (uint)flag * -8);
+    *(undefined2 *)(cctrl_ptr + 0x23d) = arg_bx;
+    barracks_fn_0130c5();
   }
   else {
-    *(undefined2 *)(iVar4 + 0x240) = *(undefined2 *)(in_EAX + 0xd);
-    *(undefined2 *)(iVar4 + 0x242) = *(undefined2 *)(in_EAX + 0xf);
-    *(undefined2 *)(iVar4 + 0x223) = *(undefined2 *)(in_EAX + 0xd);
-    *(undefined2 *)(iVar4 + 0x225) = *(undefined2 *)(in_EAX + 0xf);
-    uVar2 = *(undefined2 *)(in_EAX + 0x11);
-    *(undefined1 *)(iVar4 + 0x23f) = 0;
-    *(undefined2 *)(iVar4 + 0x227) = uVar2;
-    *(undefined4 *)(iVar4 + 0x229) = *(undefined4 *)(in_EAX + 0xd);
-    *(undefined2 *)(iVar4 + 0x22d + (uint)bVar7 * -8) =
-         *(undefined2 *)(in_EAX + 0x11 + (uint)bVar7 * -8);
-    *(undefined1 *)(iVar4 + 0x268) = 1;
-    *(undefined1 *)(iVar4 + 0x269) = 1;
-    *(undefined4 *)(iVar4 + 0x217) = *(undefined4 *)(in_EAX + 0xd);
-    *(undefined2 *)(iVar4 + 0x21b + (uint)bVar7 * -8) =
-         *(undefined2 *)(in_EAX + 0x11 + (uint)bVar7 * -8);
-    *(undefined4 *)(iVar4 + 0x21d) = *in_EDX;
-    *(undefined2 *)(iVar4 + 0x221 + (uint)bVar7 * -8) =
-         *(undefined2 *)(in_EDX + (uint)bVar7 * -2 + 1);
-    *(undefined1 *)(iVar4 + 0x235) = 0;
+    *(undefined2 *)(cctrl_ptr + 0x240) = *(undefined2 *)(thing + 0xd); /* thing->mappos.val_x */
+    *(undefined2 *)(cctrl_ptr + 0x242) = *(undefined2 *)(thing + 0xf); /* thing->mappos.val_y */
+    *(undefined2 *)(cctrl_ptr + 0x223) = *(undefined2 *)(thing + 0xd); /* thing->mappos.val_x */
+    *(undefined2 *)(cctrl_ptr + 0x225) = *(undefined2 *)(thing + 0xf); /* thing->mappos.val_y */
+    uval = *(undefined2 *)(thing + 0x11);
+    *(undefined1 *)(cctrl_ptr + 0x23f) = 0;
+    *(undefined2 *)(cctrl_ptr + 0x227) = uval;
+    *(undefined4 *)(cctrl_ptr + 0x229) = *(undefined4 *)(thing + 0xd); /* thing->mappos.val_x */
+    *(undefined2 *)(cctrl_ptr + 0x22d + (uint)flag * -8) =
+         *(undefined2 *)(thing + 0x11 + (uint)flag * -8);
+    *(undefined1 *)(cctrl_ptr + 0x268) = 1;
+    *(undefined1 *)(cctrl_ptr + 0x269) = 1;
+    *(undefined4 *)(cctrl_ptr + 0x217) = *(undefined4 *)(thing + 0xd); /* thing->mappos.val_x */
+    *(undefined2 *)(cctrl_ptr + 0x21b + (uint)flag * -8) =
+         *(undefined2 *)(thing + 0x11 + (uint)flag * -8);
+    *(undefined4 *)(cctrl_ptr + 0x21d) = *arg_edx;
+    *(undefined2 *)(cctrl_ptr + 0x221 + (uint)flag * -8) =
+         *(undefined2 *)(arg_edx + (uint)flag * -2 + 1);
+    *(undefined1 *)(cctrl_ptr + 0x235) = 0;
   }
-  *(undefined4 *)((int)puVar6 + -4) = 0x11ff6;
-  FUN_0001211a();
+  *(undefined4 *)((int)word_ptr + -4) = 0x11ff6;
+  ariadne_fn_01211a();
   return 0;
 }
 
 /******************************************************************************
- * Function : sub_012002 (Ghidra: FUN_00012002)
- * Prototype: undefined1 sub_012002(void);
+ * Function : ariadne_update_creature_control_012002 (Original VA: 0x12002, Ghidra: FUN_00012002)
+ * Prototype: undefined1 ariadne_update_creature_control_012002(void);
  * Address  : 0x12002 (Size: 280 bytes)
  * Module   : ariadne.cpp [callgraph_affinity_to_following_unit]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0xd18d0
- * Callees  : 7 -> 0x11e00, 0x1211a, 0x12230, 0x123ba, 0x1264b, 0x130a3, 0x13105
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
+ * Callers  : 1 -> routes_update_creature_control_0d18d0
+ * Callees  : 7 -> ariadne_update_creature_control_011e00, ariadne_fn_01211a, ariadne_fn_012230, ariadne_fn_0123ba, ariadne_manoeuvre_state_01264b, ariadne_fn_0130a3, barracks_fn_013105
  ******************************************************************************/
-undefined1 FUN_00012002(void)
+undefined1 ariadne_update_creature_control_012002(void)
 
 {
-  byte bVar1;
-  int iVar2;
-  char cVar3;
+  byte flag;
+  int cctrl_ptr;
+  char ch;
   char extraout_AL;
-  undefined1 uVar4;
-  int in_EAX;
-  int iVar5;
-  undefined4 *in_ECX;
-  short *in_EDX;
-  int unaff_EBX;
-  undefined4 *puVar6;
-  byte bVar7;
+  undefined1 uval;
+  int thing;
+  int val;
+  undefined4 *arg_ecx;
+  short *arg_edx;
+  int arg_ebx;
+  undefined4 *word_ptr;
+  byte flag_2;
   
-  bVar7 = 0;
-  iVar2 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  *(undefined1 *)(iVar2 + 0x239) = 0;
-  if (((*in_EDX != *(short *)(iVar2 + 0x21d)) || (in_EDX[1] != *(short *)(iVar2 + 0x21f))) ||
-     (*(short *)(iVar2 + 0x23d) != unaff_EBX)) {
-    cVar3 = FUN_00011e00();
-    if (cVar3 != '\0') {
+  flag_2 = 0;
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  *(undefined1 *)(cctrl_ptr + 0x239) = 0;
+  if (((*arg_edx != *(short *)(cctrl_ptr + 0x21d)) || (arg_edx[1] != *(short *)(cctrl_ptr + 0x21f))) ||
+     (*(short *)(cctrl_ptr + 0x23d) != arg_ebx)) {
+    ch = ariadne_update_creature_control_011e00();
+    if (ch != '\0') {
       return 2;
     }
-    *(short *)(iVar2 + 0x23d) = (short)unaff_EBX;
-    if (*(char *)(iVar2 + 0x239) != '\0') {
-      puVar6 = (undefined4 *)(iVar2 + 0x229);
-      uVar4 = 0;
+    *(short *)(cctrl_ptr + 0x23d) = (short)arg_ebx;
+    if (*(char *)(cctrl_ptr + 0x239) != '\0') {
+      word_ptr = (undefined4 *)(cctrl_ptr + 0x229);
+      uval = 0;
       goto LAB_000120e2;
     }
   }
-  iVar5 = FUN_000130a3();
-  if (iVar5 != 0) {
-    cVar3 = FUN_00013105();
-    if (cVar3 == '\x01') {
-      *(undefined2 *)(iVar2 + 0x21d) = 0;
-      *(undefined2 *)(iVar2 + 0x21f) = 0;
-      *(undefined2 *)(iVar2 + 0x221) = 0;
-      puVar6 = (undefined4 *)(in_EAX + 0xd);
-      uVar4 = 1;
+  val = ariadne_fn_0130a3();
+  if (val != 0) {
+    ch = barracks_fn_013105();
+    if (ch == '\x01') {
+      *(undefined2 *)(cctrl_ptr + 0x21d) = 0;
+      *(undefined2 *)(cctrl_ptr + 0x21f) = 0;
+      *(undefined2 *)(cctrl_ptr + 0x221) = 0;
+      word_ptr = (undefined4 *)(thing + 0xd); /* thing->mappos.val_x */
+      uval = 1;
       goto LAB_000120e2;
     }
-    if (cVar3 == '\0') {
-      FUN_0001211a();
+    if (ch == '\0') {
+      ariadne_fn_01211a();
     }
     else {
-      FUN_00011e00();
+      ariadne_update_creature_control_011e00();
       if (extraout_AL != '\0') {
         return 3;
       }
     }
   }
-  bVar1 = *(byte *)(iVar2 + 0x238);
-  if (bVar1 < 2) {
-    if (bVar1 != 1) {
+  flag = *(byte *)(cctrl_ptr + 0x238);
+  if (flag < 2) {
+    if (flag != 1) {
       return 3;
     }
-    uVar4 = FUN_00012230();
+    uval = ariadne_fn_012230();
   }
-  else if (bVar1 < 3) {
-    uVar4 = FUN_000123ba();
+  else if (flag < 3) {
+    uval = ariadne_fn_0123ba();
   }
   else {
-    if (bVar1 != 3) {
+    if (flag != 3) {
       return 3;
     }
-    uVar4 = FUN_0001264b();
+    uval = ariadne_manoeuvre_state_01264b();
   }
-  puVar6 = (undefined4 *)(iVar2 + 0x229);
+  word_ptr = (undefined4 *)(cctrl_ptr + 0x229);
 LAB_000120e2:
-  *in_ECX = *puVar6;
-  *(undefined2 *)(in_ECX + (uint)bVar7 * -2 + 1) = *(undefined2 *)(puVar6 + (uint)bVar7 * -2 + 1);
-  return uVar4;
+  *arg_ecx = *word_ptr;
+  *(undefined2 *)(arg_ecx + (uint)flag_2 * -2 + 1) = *(undefined2 *)(word_ptr + (uint)flag_2 * -2 + 1);
+  return uval;
 }
 
 /******************************************************************************
- * Function : sub_01211a (Ghidra: FUN_0001211a)
- * Prototype: undefined4 sub_01211a(void);
+ * Function : ariadne_fn_01211a (Original VA: 0x1211a, Ghidra: FUN_0001211a)
+ * Prototype: undefined4 ariadne_fn_01211a(void);
  * Address  : 0x1211a (Size: 278 bytes)
  * Module   : ariadne.cpp [callgraph_affinity_to_following_unit]
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0x11e00, 0x12002, 0x123ba
- * Callees  : 7 -> 0x10c1a, 0x1277d, 0x12a2e, 0x12a67, 0x12b04, 0x22d5c, 0xb28e8
+ * Purpose  : Module ariadne.cpp procedure @ 0x01211a
+ * Callers  : 3 -> ariadne_update_creature_control_011e00, ariadne_update_creature_control_012002, ariadne_fn_0123ba
+ * Callees  : 7 -> anger_fn_010c1a, ariadne_speed_01277d, ariadne_fn_012a2e, ariadne_fn_012a67, ariadne_fn_012b04, door_process_map_subtile_022d5c, move_process_map_subtile_0b28e8
  ******************************************************************************/
-undefined4 FUN_0001211a(void)
+undefined4 ariadne_fn_01211a(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  int iVar2;
+  int arg_eax;
+  int val;
+  int val_2;
   int extraout_ECX;
   int extraout_ECX_00;
   int extraout_ECX_01;
   int extraout_ECX_02;
   int extraout_ECX_03;
-  byte bVar3;
+  byte flag;
   undefined4 local_2c;
   short asStack_28 [2];
   undefined4 local_24;
@@ -221,671 +221,665 @@ undefined4 FUN_0001211a(void)
   uint local_1c;
   uint local_18;
   
-  bVar3 = 0;
-  iVar1 = FUN_00010c1a();
-  local_24 = CONCAT22(*(short *)(in_EAX + 0xf) +
+  flag = 0;
+  val = anger_fn_010c1a();
+  local_24 = CONCAT22(*(short *)(arg_eax + 0xf) +
                       (short)((uint)-((int)*(short *)(extraout_ECX + 0x26) *
-                                      (int)(&PTR_LAB_00192fe0)[iVar1] >> 8) >> 8),
-                      (short)((uint)((int)*(short *)(extraout_ECX + 0x26) * (&DAT_001927e0)[iVar1])
-                             >> 0x10) + *(short *)(in_EAX + 0xd));
-  local_20[0] = FUN_000b28e8();
-  iVar2 = FUN_00012a2e();
-  iVar1 = extraout_ECX_00;
-  if (iVar2 != 0) {
-    local_1c = FUN_00012a67();
+                                      (int)(&PTR_LAB_00192fe0)[val] >> 8) >> 8),
+                      (short)((uint)((int)*(short *)(extraout_ECX + 0x26) * (&g_slab_attr_table)[val])
+                             >> 0x10) + *(short *)(arg_eax + 0xd));
+  local_20[0] = move_process_map_subtile_0b28e8();
+  val_2 = ariadne_fn_012a2e();
+  val = extraout_ECX_00;
+  if (val_2 != 0) {
+    local_1c = ariadne_fn_012a67();
     local_18 = local_1c;
-    iVar2 = FUN_00022d5c();
-    iVar1 = extraout_ECX_01;
-    if (iVar2 == 0) {
-      FUN_00012b04();
-      if ((((local_1c & 1) == 0) || (*(short *)(in_EAX + 0xd) != (short)local_2c)) &&
-         (((local_18 & 2) == 0 || (*(short *)(in_EAX + 0xf) != local_2c._2_2_)))) {
+    val_2 = door_process_map_subtile_022d5c();
+    val = extraout_ECX_01;
+    if (val_2 == 0) {
+      ariadne_fn_012b04();
+      if ((((local_1c & 1) == 0) || (*(short *)(arg_eax + 0xd) != (short)local_2c)) &&
+         (((local_18 & 2) == 0 || (*(short *)(arg_eax + 0xf) != local_2c._2_2_)))) {
         *(undefined1 *)(extraout_ECX_02 + 0x21) = 3;
         *(undefined1 *)(extraout_ECX_02 + 0x5f) = 1;
         *(undefined4 *)(extraout_ECX_02 + 0x53) = local_2c;
-        *(short *)(extraout_ECX_02 + 0x57 + (uint)bVar3 * -8) = asStack_28[(uint)bVar3 * -4];
+        *(short *)(extraout_ECX_02 + 0x57 + (uint)flag * -8) = asStack_28[(uint)flag * -4];
         *(undefined4 *)(extraout_ECX_02 + 0x59) = local_24;
-        *(undefined2 *)(extraout_ECX_02 + 0x5d + (uint)bVar3 * -8) = local_20[(uint)bVar3 * -4];
+        *(undefined2 *)(extraout_ECX_02 + 0x5d + (uint)flag * -8) = local_20[(uint)flag * -4];
         *(undefined4 *)(extraout_ECX_02 + 0x12) = local_2c;
-        *(short *)(extraout_ECX_02 + 0x16 + (uint)bVar3 * -8) = asStack_28[(uint)bVar3 * -4];
+        *(short *)(extraout_ECX_02 + 0x16 + (uint)flag * -8) = asStack_28[(uint)flag * -4];
         return 1;
       }
-      FUN_0001277d();
+      ariadne_speed_01277d();
       *(undefined1 *)(extraout_ECX_03 + 0x22) = 1;
       return 1;
     }
   }
-  *(undefined1 *)(iVar1 + 0x21) = 1;
+  *(undefined1 *)(val + 0x21) = 1;
   return 1;
 }
 
 /******************************************************************************
- * Function : sub_012230 (Ghidra: FUN_00012230)
- * Prototype: undefined4 sub_012230(void);
+ * Function : ariadne_fn_012230 (Original VA: 0x12230, Ghidra: FUN_00012230)
+ * Prototype: undefined4 ariadne_fn_012230(void);
  * Address  : 0x12230 (Size: 394 bytes)
  * Module   : ariadne.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x12002
- * Callees  : 8 -> 0x10c1a, 0x11e00, 0x12a2e, 0x12a67, 0x12b04, 0x22d5c, 0xb28e8, 0xdc354
+ * Purpose  : Module ariadne.cpp procedure @ 0x012230
+ * Callers  : 1 -> ariadne_update_creature_control_012002
+ * Callees  : 8 -> anger_fn_010c1a, ariadne_update_creature_control_011e00, ariadne_fn_012a2e, ariadne_fn_012a67, ariadne_fn_012b04, door_process_map_subtile_022d5c, move_process_map_subtile_0b28e8, get_2d_box_distance
  ******************************************************************************/
-undefined4 FUN_00012230(void)
+undefined4 ariadne_fn_012230(void)
 
 {
-  char cVar1;
-  undefined2 uVar2;
-  int in_EAX;
-  int iVar3;
-  undefined4 uVar4;
-  int in_EDX;
-  byte bVar5;
+  char ch;
+  undefined2 uval;
+  int arg_eax;
+  int val;
+  undefined4 uval_2;
+  int arg_edx;
+  byte flag;
   undefined4 local_28;
   undefined2 auStack_24 [2];
   undefined4 local_20;
   undefined2 auStack_1c [2];
   int local_18;
   
-  bVar5 = 0;
-  iVar3 = FUN_00010c1a();
-  local_18 = FUN_000dc354();
-  if (local_18 - *(int *)(in_EDX + 0x62) < 0x401) {
-    if (*(short *)(in_EDX + 0x26) < local_18) {
-      *(short *)(in_EDX + 0x12) =
-           *(short *)(in_EAX + 0xd) +
-           (short)((uint)((int)*(short *)(in_EDX + 0x26) * (&DAT_001927e0)[iVar3]) >> 0x10);
-      *(short *)(in_EDX + 0x14) =
-           *(short *)(in_EAX + 0xf) +
-           (short)((uint)-((int)*(short *)(in_EDX + 0x26) * (int)(&PTR_LAB_00192fe0)[iVar3] >> 8) >>
+  flag = 0;
+  val = anger_fn_010c1a();
+  local_18 = get_2d_box_distance();
+  if (local_18 - *(int *)(arg_edx + 0x62) < 0x401) {
+    if (*(short *)(arg_edx + 0x26) < local_18) {
+      *(short *)(arg_edx + 0x12) =
+           *(short *)(arg_eax + 0xd) +
+           (short)((uint)((int)*(short *)(arg_edx + 0x26) * (&g_slab_attr_table)[val]) >> 0x10);
+      *(short *)(arg_edx + 0x14) =
+           *(short *)(arg_eax + 0xf) +
+           (short)((uint)-((int)*(short *)(arg_edx + 0x26) * (int)(&PTR_LAB_00192fe0)[val] >> 8) >>
                   8);
-      uVar2 = FUN_000b28e8();
-      *(undefined2 *)(in_EDX + 0x16) = uVar2;
+      uval = move_process_map_subtile_0b28e8();
+      *(undefined2 *)(arg_edx + 0x16) = uval;
     }
     else {
-      *(undefined2 *)(in_EDX + 0x12) = *(undefined2 *)(in_EDX + 0xc);
-      *(undefined2 *)(in_EDX + 0x14) = *(undefined2 *)(in_EDX + 0xe);
+      *(undefined2 *)(arg_edx + 0x12) = *(undefined2 *)(arg_edx + 0xc);
+      *(undefined2 *)(arg_edx + 0x14) = *(undefined2 *)(arg_edx + 0xe);
     }
 LAB_00012302:
-    if (local_18 < *(int *)(in_EDX + 0x62)) {
-      *(int *)(in_EDX + 0x62) = local_18;
+    if (local_18 < *(int *)(arg_edx + 0x62)) {
+      *(int *)(arg_edx + 0x62) = local_18;
     }
-    iVar3 = FUN_00012a2e();
-    if (iVar3 != 0) {
-      if (*(char *)(in_EDX + 0x23) == '\0') {
-        FUN_00012a67();
-        iVar3 = FUN_00022d5c();
-        if (iVar3 == 0) {
-          FUN_00012b04();
-          *(undefined1 *)(in_EDX + 0x21) = 3;
-          *(undefined1 *)(in_EDX + 0x5f) = 1;
-          *(undefined4 *)(in_EDX + 0x53) = local_28;
-          *(undefined2 *)(in_EDX + 0x57 + (uint)bVar5 * -8) = auStack_24[(uint)bVar5 * -4];
-          *(undefined4 *)(in_EDX + 0x59) = *(undefined4 *)(in_EDX + 0x12);
-          *(undefined2 *)(in_EDX + 0x5d + (uint)bVar5 * -8) =
-               *(undefined2 *)(in_EDX + 0x16 + (uint)bVar5 * -8);
-          *(undefined4 *)(in_EDX + 0x12) = local_28;
-          *(undefined2 *)(in_EDX + 0x16 + (uint)bVar5 * -8) = auStack_24[(uint)bVar5 * -4];
+    val = ariadne_fn_012a2e();
+    if (val != 0) {
+      if (*(char *)(arg_edx + 0x23) == '\0') {
+        ariadne_fn_012a67();
+        val = door_process_map_subtile_022d5c();
+        if (val == 0) {
+          ariadne_fn_012b04();
+          *(undefined1 *)(arg_edx + 0x21) = 3;
+          *(undefined1 *)(arg_edx + 0x5f) = 1;
+          *(undefined4 *)(arg_edx + 0x53) = local_28;
+          *(undefined2 *)(arg_edx + 0x57 + (uint)flag * -8) = auStack_24[(uint)flag * -4];
+          *(undefined4 *)(arg_edx + 0x59) = *(undefined4 *)(arg_edx + 0x12);
+          *(undefined2 *)(arg_edx + 0x5d + (uint)flag * -8) =
+               *(undefined2 *)(arg_edx + 0x16 + (uint)flag * -8);
+          *(undefined4 *)(arg_edx + 0x12) = local_28;
+          *(undefined2 *)(arg_edx + 0x16 + (uint)flag * -8) = auStack_24[(uint)flag * -4];
         }
       }
       else {
-        local_20 = *(undefined4 *)(in_EDX + 6);
-        auStack_1c[(uint)bVar5 * -4] = *(undefined2 *)(in_EDX + 10 + (uint)bVar5 * -8);
-        cVar1 = FUN_00011e00();
-        if (cVar1 != '\0') goto LAB_00012297;
+        local_20 = *(undefined4 *)(arg_edx + 6);
+        auStack_1c[(uint)flag * -4] = *(undefined2 *)(arg_edx + 10 + (uint)flag * -8);
+        ch = ariadne_update_creature_control_011e00();
+        if (ch != '\0') goto LAB_00012297;
       }
     }
-    uVar4 = 0;
+    uval_2 = 0;
   }
   else {
-    *(undefined4 *)(in_EDX + 0x12) = *(undefined4 *)(in_EAX + 0xd);
-    *(undefined2 *)(in_EDX + 0x16 + (uint)bVar5 * -8) =
-         *(undefined2 *)(in_EAX + 0x11 + (uint)bVar5 * -8);
-    local_20 = *(undefined4 *)(in_EDX + 6);
-    auStack_1c[(uint)bVar5 * -4] = *(undefined2 *)(in_EDX + 10 + (uint)bVar5 * -8);
-    cVar1 = FUN_00011e00();
-    if (cVar1 == '\0') goto LAB_00012302;
+    *(undefined4 *)(arg_edx + 0x12) = *(undefined4 *)(arg_eax + 0xd);
+    *(undefined2 *)(arg_edx + 0x16 + (uint)flag * -8) =
+         *(undefined2 *)(arg_eax + 0x11 + (uint)flag * -8);
+    local_20 = *(undefined4 *)(arg_edx + 6);
+    auStack_1c[(uint)flag * -4] = *(undefined2 *)(arg_edx + 10 + (uint)flag * -8);
+    ch = ariadne_update_creature_control_011e00();
+    if (ch == '\0') goto LAB_00012302;
 LAB_00012297:
-    uVar4 = 3;
+    uval_2 = 3;
   }
-  return uVar4;
+  return uval_2;
 }
 
 /******************************************************************************
- * Function : sub_0123ba (Ghidra: FUN_000123ba)
- * Prototype: undefined1 sub_0123ba(void);
+ * Function : ariadne_fn_0123ba (Original VA: 0x123ba, Ghidra: FUN_000123ba)
+ * Prototype: undefined1 ariadne_fn_0123ba(void);
  * Address  : 0x123ba (Size: 657 bytes)
  * Module   : ariadne.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x12002
- * Callees  : 10 -> 0x11e00, 0x1211a, 0x128cd, 0x12a2e, 0x12b04, 0x12c46, 0x12edf, 0x12fef, 0xb28e8, 0xdc354
+ * Purpose  : Module ariadne.cpp procedure @ 0x0123ba
+ * Callers  : 1 -> ariadne_update_creature_control_012002
+ * Callees  : 10 -> ariadne_update_creature_control_011e00, ariadne_fn_01211a, ariadne_fn_0128cd, ariadne_fn_012a2e, ariadne_fn_012b04, ariadne_fn_012c46, ariadne_fn_012edf, ariadne_fn_012fef ...
  ******************************************************************************/
-undefined1 FUN_000123ba(void)
+undefined1 ariadne_fn_0123ba(void)
 
 {
-  char cVar1;
-  undefined2 uVar2;
-  int in_EAX;
-  int iVar3;
-  int iVar4;
+  char ch;
+  undefined2 uval;
+  int thing;
+  int val;
+  int val_2;
   uint extraout_ECX;
-  int in_EDX;
-  byte bVar5;
+  int arg_edx;
+  byte flag;
   undefined4 local_24;
   undefined2 auStack_20 [2];
   undefined4 local_1c;
   undefined2 auStack_18 [2];
   
-  bVar5 = 0;
-  iVar3 = FUN_000dc354();
-  if (iVar3 - *(int *)(in_EDX + 0x62) < 0x401) {
-    if (*(short *)(in_EDX + 0x26) < iVar3) {
-      if (*(short *)(in_EAX + 0x52) != *(short *)(in_EDX + 0x60)) {
+  flag = 0;
+  val = get_2d_box_distance();
+  if (val - *(int *)(arg_edx + 0x62) < 0x401) {
+    if (*(short *)(arg_edx + 0x26) < val) {
+      if (*(short *)(thing + 0x52) != *(short *)(arg_edx + 0x60)) { /* thing->health */
         return 0;
       }
-      if ((*(short *)(in_EAX + 0xd) != *(short *)(in_EDX + 0x12)) ||
-         (*(short *)(in_EAX + 0xf) != *(short *)(in_EDX + 0x14))) {
+      if ((*(short *)(thing + 0xd) != *(short *)(arg_edx + 0x12)) || /* thing->mappos.val_x */
+         (*(short *)(thing + 0xf) != *(short *)(arg_edx + 0x14))) { /* thing->mappos.val_y */
 LAB_00012440:
-        FUN_0001211a();
+        ariadne_fn_01211a();
         return 0;
       }
-      if (iVar3 < *(int *)(in_EDX + 0x62)) {
-        iVar4 = FUN_00012edf();
-        if (iVar4 != 0) {
-          iVar3 = FUN_0001211a();
-          if (iVar3 == 0) {
+      if (val < *(int *)(arg_edx + 0x62)) {
+        val_2 = ariadne_fn_012edf();
+        if (val_2 != 0) {
+          val = ariadne_fn_01211a();
+          if (val == 0) {
             return 3;
           }
           return 0;
         }
-        *(int *)(in_EDX + 0x62) = iVar3;
+        *(int *)(arg_edx + 0x62) = val;
       }
-      iVar3 = FUN_000128cd();
-      if (iVar3 == -1) goto LAB_00012440;
-      *(short *)(in_EDX + 0x12) =
-           (short)((uint)((int)*(short *)(in_EDX + 0x26) * (&DAT_001927e0)[iVar3]) >> 0x10) +
-           *(short *)(in_EAX + 0xd);
-      *(short *)(in_EDX + 0x14) =
-           (short)((uint)-((int)(&PTR_LAB_00192fe0)[iVar3] * (int)*(short *)(in_EDX + 0x26) >> 8) >>
-                  8) + *(short *)(in_EAX + 0xf);
-      uVar2 = FUN_000b28e8();
-      *(undefined2 *)(in_EDX + 0x16) = uVar2;
-      if ((extraout_ECX == *(ushort *)(in_EAX + 0x52)) && (iVar4 = FUN_00012c46(), iVar4 != 0)) {
-        *(undefined1 *)(in_EDX + 0x21) = 3;
-        *(undefined1 *)(in_EDX + 0x5f) = 2;
-        *(undefined4 *)(in_EDX + 0x53) = *(undefined4 *)(in_EDX + 0x12);
-        *(undefined2 *)(in_EDX + 0x57 + (uint)bVar5 * -8) =
-             *(undefined2 *)(in_EDX + 0x16 + (uint)bVar5 * -8);
+      val = ariadne_fn_0128cd();
+      if (val == -1) goto LAB_00012440;
+      *(short *)(arg_edx + 0x12) =
+           (short)((uint)((int)*(short *)(arg_edx + 0x26) * (&g_slab_attr_table)[val]) >> 0x10) +
+           *(short *)(thing + 0xd); /* thing->mappos.val_x */
+      *(short *)(arg_edx + 0x14) =
+           (short)((uint)-((int)(&PTR_LAB_00192fe0)[val] * (int)*(short *)(arg_edx + 0x26) >> 8) >>
+                  8) + *(short *)(thing + 0xf); /* thing->mappos.val_y */
+      uval = move_process_map_subtile_0b28e8();
+      *(undefined2 *)(arg_edx + 0x16) = uval;
+      if ((extraout_ECX == *(ushort *)(thing + 0x52)) && (val_2 = ariadne_fn_012c46(), val_2 != 0)) { /* thing->health */
+        *(undefined1 *)(arg_edx + 0x21) = 3;
+        *(undefined1 *)(arg_edx + 0x5f) = 2;
+        *(undefined4 *)(arg_edx + 0x53) = *(undefined4 *)(arg_edx + 0x12);
+        *(undefined2 *)(arg_edx + 0x57 + (uint)flag * -8) =
+             *(undefined2 *)(arg_edx + 0x16 + (uint)flag * -8);
         return 0;
       }
-      *(short *)(in_EDX + 0x60) = (short)iVar3;
-      iVar3 = FUN_00012fef();
-      if (iVar3 != 0) {
-        *(undefined4 *)(in_EDX + 0x12) = *(undefined4 *)(in_EAX + 0xd);
-        *(undefined2 *)(in_EDX + 0x16 + (uint)bVar5 * -8) =
-             *(undefined2 *)(in_EAX + 0x11 + (uint)bVar5 * -8);
-        local_1c = *(undefined4 *)(in_EDX + 6);
-        auStack_18[(uint)bVar5 * -4] = *(undefined2 *)(in_EDX + 10 + (uint)bVar5 * -8);
-        cVar1 = FUN_00011e00();
-        if (cVar1 != '\0') {
+      *(short *)(arg_edx + 0x60) = (short)val;
+      val = ariadne_fn_012fef();
+      if (val != 0) {
+        *(undefined4 *)(arg_edx + 0x12) = *(undefined4 *)(thing + 0xd); /* thing->mappos.val_x */
+        *(undefined2 *)(arg_edx + 0x16 + (uint)flag * -8) =
+             *(undefined2 *)(thing + 0x11 + (uint)flag * -8);
+        local_1c = *(undefined4 *)(arg_edx + 6);
+        auStack_18[(uint)flag * -4] = *(undefined2 *)(arg_edx + 10 + (uint)flag * -8);
+        ch = ariadne_update_creature_control_011e00();
+        if (ch != '\0') {
           return 3;
         }
         return 0;
       }
-      iVar3 = FUN_00012a2e();
-      if (iVar3 == 0) {
+      val = ariadne_fn_012a2e();
+      if (val == 0) {
         return 0;
       }
-      if (*(char *)(in_EDX + 0x23) == '\0') {
-        FUN_00012b04();
-        *(undefined1 *)(in_EDX + 0x21) = 3;
-        *(undefined1 *)(in_EDX + 0x5f) = 2;
+      if (*(char *)(arg_edx + 0x23) == '\0') {
+        ariadne_fn_012b04();
+        *(undefined1 *)(arg_edx + 0x21) = 3;
+        *(undefined1 *)(arg_edx + 0x5f) = 2;
         goto LAB_0001262b;
       }
     }
     else {
-      *(undefined2 *)(in_EDX + 0x12) = *(undefined2 *)(in_EDX + 0xc);
-      *(undefined2 *)(in_EDX + 0x14) = *(undefined2 *)(in_EDX + 0xe);
-      iVar3 = FUN_00012a2e();
-      if (iVar3 == 0) {
+      *(undefined2 *)(arg_edx + 0x12) = *(undefined2 *)(arg_edx + 0xc);
+      *(undefined2 *)(arg_edx + 0x14) = *(undefined2 *)(arg_edx + 0xe);
+      val = ariadne_fn_012a2e();
+      if (val == 0) {
         return 0;
       }
-      if (*(char *)(in_EDX + 0x23) == '\0') {
-        FUN_00012b04();
-        *(undefined1 *)(in_EDX + 0x21) = 3;
-        *(undefined1 *)(in_EDX + 0x5f) = 1;
+      if (*(char *)(arg_edx + 0x23) == '\0') {
+        ariadne_fn_012b04();
+        *(undefined1 *)(arg_edx + 0x21) = 3;
+        *(undefined1 *)(arg_edx + 0x5f) = 1;
 LAB_0001262b:
-        *(undefined4 *)(in_EDX + 0x53) = local_24;
-        *(undefined2 *)(in_EDX + 0x57 + (uint)bVar5 * -8) = auStack_20[(uint)bVar5 * -4];
-        *(undefined4 *)(in_EDX + 0x59) = *(undefined4 *)(in_EDX + 0x12);
-        *(undefined2 *)(in_EDX + 0x5d + (uint)bVar5 * -8) =
-             *(undefined2 *)(in_EDX + 0x16 + (uint)bVar5 * -8);
-        *(undefined4 *)(in_EDX + 0x12) = local_24;
-        *(undefined2 *)(in_EDX + 0x16 + (uint)bVar5 * -8) = auStack_20[(uint)bVar5 * -4];
+        *(undefined4 *)(arg_edx + 0x53) = local_24;
+        *(undefined2 *)(arg_edx + 0x57 + (uint)flag * -8) = auStack_20[(uint)flag * -4];
+        *(undefined4 *)(arg_edx + 0x59) = *(undefined4 *)(arg_edx + 0x12);
+        *(undefined2 *)(arg_edx + 0x5d + (uint)flag * -8) =
+             *(undefined2 *)(arg_edx + 0x16 + (uint)flag * -8);
+        *(undefined4 *)(arg_edx + 0x12) = local_24;
+        *(undefined2 *)(arg_edx + 0x16 + (uint)flag * -8) = auStack_20[(uint)flag * -4];
         return 0;
       }
     }
-    local_1c = *(undefined4 *)(in_EDX + 6);
-    auStack_18[(uint)bVar5 * -4] = *(undefined2 *)(in_EDX + 10 + (uint)bVar5 * -8);
+    local_1c = *(undefined4 *)(arg_edx + 6);
+    auStack_18[(uint)flag * -4] = *(undefined2 *)(arg_edx + 10 + (uint)flag * -8);
   }
   else {
-    *(undefined4 *)(in_EDX + 0x12) = *(undefined4 *)(in_EAX + 0xd);
-    *(undefined2 *)(in_EDX + 0x16 + (uint)bVar5 * -8) =
-         *(undefined2 *)(in_EAX + 0x11 + (uint)bVar5 * -8);
-    local_1c = *(undefined4 *)(in_EDX + 6);
-    auStack_18[(uint)bVar5 * -4] = *(undefined2 *)(in_EDX + 10 + (uint)bVar5 * -8);
+    *(undefined4 *)(arg_edx + 0x12) = *(undefined4 *)(thing + 0xd); /* thing->mappos.val_x */
+    *(undefined2 *)(arg_edx + 0x16 + (uint)flag * -8) =
+         *(undefined2 *)(thing + 0x11 + (uint)flag * -8);
+    local_1c = *(undefined4 *)(arg_edx + 6);
+    auStack_18[(uint)flag * -4] = *(undefined2 *)(arg_edx + 10 + (uint)flag * -8);
   }
-  cVar1 = FUN_00011e00();
-  if (cVar1 == '\0') {
+  ch = ariadne_update_creature_control_011e00();
+  if (ch == '\0') {
     return 0;
   }
   return 3;
 }
 
 /******************************************************************************
- * Function : dk_manoeuvre_state_01264b (Ghidra: FUN_0001264b)
- * Prototype: undefined4 dk_manoeuvre_state_01264b(void);
+ * Function : ariadne_manoeuvre_state_01264b (Original VA: 0x1264b, Ghidra: FUN_0001264b)
+ * Prototype: undefined4 ariadne_manoeuvre_state_01264b(void);
  * Address  : 0x1264b (Size: 306 bytes)
  * Module   : ariadne.cpp [direct_file_string_xref]
- * OrigLine : ariadne.cpp:798 ("Unknown Manoeuvre state")
- * Naming   : String 'Unknown Manoeuvre state'
- * Callers  : 1 -> 0x12002
- * Callees  : 6 -> 0x11e00, 0x1277d, 0x128cd, 0x12a2e, 0xdc354, 0xddaf0
- * Strings  :
- *   - 0x160130: "ariadne.cpp"
- *   - 0x160118: "Unknown Manoeuvre state"
+ * OrigLine : ariadne.cpp lines 798
+ * Purpose  : String 'Unknown Manoeuvre state'
+ * Callers  : 1 -> ariadne_update_creature_control_012002
+ * Callees  : 6 -> ariadne_update_creature_control_011e00, ariadne_speed_01277d, ariadne_fn_0128cd, ariadne_fn_012a2e, get_2d_box_distance, LbErrorLog
  ******************************************************************************/
-undefined4 FUN_0001264b(void)
+undefined4 ariadne_manoeuvre_state_01264b(void)
 
 {
-  short sVar1;
-  undefined *puVar2;
-  char cVar3;
-  ushort uVar4;
-  int in_EAX;
-  int iVar5;
-  undefined4 uVar6;
-  int in_EDX;
-  byte bVar7;
+  short short_val;
+  undefined *word_ptr;
+  char ch;
+  ushort uval;
+  int arg_eax;
+  int val;
+  undefined4 uval_2;
+  int arg_edx;
+  byte flag;
   undefined2 auStack_18 [2];
   
-  bVar7 = 0;
-  iVar5 = FUN_00012a2e();
-  if (iVar5 != 0) {
-    auStack_18[(uint)bVar7 * -4] = *(undefined2 *)(in_EDX + 10 + (uint)bVar7 * -8);
-    cVar3 = FUN_00011e00();
-    if (cVar3 != '\0') {
+  flag = 0;
+  val = ariadne_fn_012a2e();
+  if (val != 0) {
+    auStack_18[(uint)flag * -4] = *(undefined2 *)(arg_edx + 10 + (uint)flag * -8);
+    ch = ariadne_update_creature_control_011e00();
+    if (ch != '\0') {
       return 3;
     }
   }
-  iVar5 = FUN_000dc354();
-  if (iVar5 < *(int *)(in_EDX + 0x62)) {
-    *(int *)(in_EDX + 0x62) = iVar5;
+  val = get_2d_box_distance();
+  if (val < *(int *)(arg_edx + 0x62)) {
+    *(int *)(arg_edx + 0x62) = val;
   }
-  if ((*(short *)(in_EAX + 0xd) == *(short *)(in_EDX + 0x53)) &&
-     (*(short *)(in_EAX + 0xf) == *(short *)(in_EDX + 0x55))) {
-    bVar7 = *(byte *)(in_EDX + 0x5f);
-    if (bVar7 != 0) {
-      if (bVar7 < 2) {
-        uVar6 = FUN_0001277d();
-        return uVar6;
+  if ((*(short *)(arg_eax + 0xd) == *(short *)(arg_edx + 0x53)) &&
+     (*(short *)(arg_eax + 0xf) == *(short *)(arg_edx + 0x55))) {
+    flag = *(byte *)(arg_edx + 0x5f);
+    if (flag != 0) {
+      if (flag < 2) {
+        uval_2 = ariadne_speed_01277d();
+        return uval_2;
       }
-      if (bVar7 == 2) {
-        uVar4 = FUN_000128cd();
-        *(ushort *)(in_EDX + 0x60) = uVar4;
-        *(short *)(in_EDX + 0x12) =
-             (short)((uint)((&DAT_001927e0)[uVar4] * (int)*(short *)(in_EDX + 0x26)) >> 0x10) +
-             *(short *)(in_EAX + 0xd);
-        puVar2 = (&PTR_LAB_00192fe0)[*(ushort *)(in_EDX + 0x60)];
-        sVar1 = *(short *)(in_EAX + 0xf);
-        *(undefined1 *)(in_EDX + 0x21) = 2;
-        *(short *)(in_EDX + 0x14) =
-             sVar1 + (short)((uint)-((int)*(short *)(in_EDX + 0x26) * (int)puVar2 >> 8) >> 8);
+      if (flag == 2) {
+        uval = ariadne_fn_0128cd();
+        *(ushort *)(arg_edx + 0x60) = uval;
+        *(short *)(arg_edx + 0x12) =
+             (short)((uint)((&g_slab_attr_table)[uval] * (int)*(short *)(arg_edx + 0x26)) >> 0x10) +
+             *(short *)(arg_eax + 0xd);
+        word_ptr = (&PTR_LAB_00192fe0)[*(ushort *)(arg_edx + 0x60)];
+        short_val = *(short *)(arg_eax + 0xf);
+        *(undefined1 *)(arg_edx + 0x21) = 2;
+        *(short *)(arg_edx + 0x14) =
+             short_val + (short)((uint)-((int)*(short *)(arg_edx + 0x26) * (int)word_ptr >> 8) >> 8);
         return 0;
       }
     }
-    FUN_000ddaf0(); /* LbErrorLog("ariadne.cpp", line 798, "Unknown Manoeuvre state") */
+    LbErrorLog(); /* LbErrorLog("ariadne.cpp", line 798, "Unknown Manoeuvre state") */
   }
   else {
-    *(undefined4 *)(in_EDX + 0x12) = *(undefined4 *)(in_EDX + 0x53);
-    *(undefined2 *)(in_EDX + 0x16 + (uint)bVar7 * -8) =
-         *(undefined2 *)(in_EDX + 0x57 + (uint)bVar7 * -8);
+    *(undefined4 *)(arg_edx + 0x12) = *(undefined4 *)(arg_edx + 0x53);
+    *(undefined2 *)(arg_edx + 0x16 + (uint)flag * -8) =
+         *(undefined2 *)(arg_edx + 0x57 + (uint)flag * -8);
   }
   return 0;
 }
 
 /******************************************************************************
- * Function : dk_ariadne_speed_01277d (Ghidra: FUN_0001277d)
- * Prototype: uint dk_ariadne_speed_01277d(void);
+ * Function : ariadne_speed_01277d (Original VA: 0x1277d, Ghidra: FUN_0001277d)
+ * Prototype: uint ariadne_speed_01277d(void);
  * Address  : 0x1277d (Size: 336 bytes)
  * Module   : ariadne.cpp [direct_file_string_xref]
- * OrigLine : ariadne.cpp:825 ("Ariadne Speed == 0")
- * Naming   : String 'Ariadne Speed == 0'
- * Callers  : 2 -> 0x1211a, 0x1264b
- * Callees  : 6 -> 0x12a2e, 0x12b04, 0x12c46, 0x13169, 0xb28e8, 0xddaf0
- * Strings  :
- *   - 0x16014f: "ariadne.cpp"
- *   - 0x16013c: "Ariadne Speed == 0"
+ * OrigLine : ariadne.cpp lines 825
+ * Purpose  : String 'Ariadne Speed == 0'
+ * Callers  : 2 -> ariadne_fn_01211a, ariadne_manoeuvre_state_01264b
+ * Callees  : 6 -> ariadne_fn_012a2e, ariadne_fn_012b04, ariadne_fn_012c46, ariadne_fn_013169, move_process_map_subtile_0b28e8, LbErrorLog
  ******************************************************************************/
-uint FUN_0001277d(void)
+uint ariadne_speed_01277d(void)
 
 {
-  undefined2 uVar1;
-  int in_EAX;
-  int iVar2;
-  uint uVar3;
-  uint in_EDX;
-  undefined4 *puVar4;
-  undefined4 *puVar5;
-  byte bVar6;
+  undefined2 uval;
+  int arg_eax;
+  int val;
+  uint uval_2;
+  uint arg_edx;
+  undefined4 *word_ptr;
+  undefined4 *word_ptr_2;
+  byte flag;
   undefined4 local_1c;
   undefined2 auStack_18 [2];
   int local_14;
   
-  bVar6 = 0;
-  if (*(short *)(in_EDX + 0x26) == 0) {
-    FUN_000ddaf0(); /* LbErrorLog("ariadne.cpp", line 825, "Ariadne Speed == 0") */
+  flag = 0;
+  if (*(short *)(arg_edx + 0x26) == 0) {
+    LbErrorLog(); /* LbErrorLog("ariadne.cpp", line 825, "Ariadne Speed == 0") */
   }
-  iVar2 = FUN_00013169(in_EDX + 0x20);
-  if (iVar2 == 0) {
-    *(undefined1 *)(in_EDX + 0x21) = 1;
-    puVar5 = (undefined4 *)(in_EDX + 0x12);
-    puVar4 = (undefined4 *)(in_EAX + 0xd);
+  val = ariadne_fn_013169(arg_edx + 0x20);
+  if (val == 0) {
+    *(undefined1 *)(arg_edx + 0x21) = 1;
+    word_ptr_2 = (undefined4 *)(arg_edx + 0x12);
+    word_ptr = (undefined4 *)(arg_eax + 0xd);
   }
   else {
-    *(undefined1 *)(in_EDX + 0x21) = 2;
-    *(short *)(in_EDX + 0x12) =
-         (short)((uint)((&DAT_001927e0)[*(ushort *)(in_EDX + 0x60)] * (int)*(short *)(in_EDX + 0x26)
-                       ) >> 0x10) + *(short *)(in_EAX + 0xd);
-    *(short *)(in_EDX + 0x14) =
-         (short)((uint)-((int)*(short *)(in_EDX + 0x26) *
-                         (int)(&PTR_LAB_00192fe0)[*(ushort *)(in_EDX + 0x60)] >> 8) >> 8) +
-         *(short *)(in_EAX + 0xf);
-    local_14 = in_EDX + 0x12;
-    uVar1 = FUN_000b28e8();
-    *(undefined2 *)(in_EDX + 0x16) = uVar1;
-    *(undefined4 *)(in_EDX + 0x18) = *(undefined4 *)(in_EAX + 0xd);
-    *(undefined2 *)(in_EDX + 0x1c + (uint)bVar6 * -8) =
-         *(undefined2 *)(in_EAX + 0x11 + (uint)bVar6 * -8);
-    *(undefined2 *)(in_EDX + 0x24) = *(undefined2 *)(in_EDX + 0x60);
-    iVar2 = FUN_00012c46();
-    if (iVar2 == 0) {
-      iVar2 = FUN_00012a2e();
-      uVar3 = 0;
-      if (iVar2 == 0) goto LAB_000128c6;
-      FUN_00012b04();
-      *(undefined1 *)(in_EDX + 0x21) = 3;
-      *(undefined1 *)(in_EDX + 0x5f) = 1;
-      *(undefined4 *)(in_EDX + 0x53) = local_1c;
-      *(undefined2 *)(in_EDX + 0x57 + (uint)bVar6 * -8) = auStack_18[(uint)bVar6 * -4];
-      puVar5 = (undefined4 *)(in_EDX + 0x59);
+    *(undefined1 *)(arg_edx + 0x21) = 2;
+    *(short *)(arg_edx + 0x12) =
+         (short)((uint)((&g_slab_attr_table)[*(ushort *)(arg_edx + 0x60)] * (int)*(short *)(arg_edx + 0x26)
+                       ) >> 0x10) + *(short *)(arg_eax + 0xd);
+    *(short *)(arg_edx + 0x14) =
+         (short)((uint)-((int)*(short *)(arg_edx + 0x26) *
+                         (int)(&PTR_LAB_00192fe0)[*(ushort *)(arg_edx + 0x60)] >> 8) >> 8) +
+         *(short *)(arg_eax + 0xf);
+    local_14 = arg_edx + 0x12;
+    uval = move_process_map_subtile_0b28e8();
+    *(undefined2 *)(arg_edx + 0x16) = uval;
+    *(undefined4 *)(arg_edx + 0x18) = *(undefined4 *)(arg_eax + 0xd);
+    *(undefined2 *)(arg_edx + 0x1c + (uint)flag * -8) =
+         *(undefined2 *)(arg_eax + 0x11 + (uint)flag * -8);
+    *(undefined2 *)(arg_edx + 0x24) = *(undefined2 *)(arg_edx + 0x60);
+    val = ariadne_fn_012c46();
+    if (val == 0) {
+      val = ariadne_fn_012a2e();
+      uval_2 = 0;
+      if (val == 0) goto LAB_000128c6;
+      ariadne_fn_012b04();
+      *(undefined1 *)(arg_edx + 0x21) = 3;
+      *(undefined1 *)(arg_edx + 0x5f) = 1;
+      *(undefined4 *)(arg_edx + 0x53) = local_1c;
+      *(undefined2 *)(arg_edx + 0x57 + (uint)flag * -8) = auStack_18[(uint)flag * -4];
+      word_ptr_2 = (undefined4 *)(arg_edx + 0x59);
     }
     else {
-      *(undefined1 *)(in_EDX + 0x21) = 3;
-      *(undefined1 *)(in_EDX + 0x5f) = 2;
-      puVar5 = (undefined4 *)(in_EDX + 0x53);
+      *(undefined1 *)(arg_edx + 0x21) = 3;
+      *(undefined1 *)(arg_edx + 0x5f) = 2;
+      word_ptr_2 = (undefined4 *)(arg_edx + 0x53);
     }
-    puVar4 = (undefined4 *)(in_EDX + 0x12);
+    word_ptr = (undefined4 *)(arg_edx + 0x12);
   }
-  *puVar5 = *puVar4;
-  *(undefined2 *)(puVar5 + (uint)bVar6 * -2 + 1) = *(undefined2 *)(puVar4 + (uint)bVar6 * -2 + 1);
-  uVar3 = in_EDX;
+  *word_ptr_2 = *word_ptr;
+  *(undefined2 *)(word_ptr_2 + (uint)flag * -2 + 1) = *(undefined2 *)(word_ptr + (uint)flag * -2 + 1);
+  uval_2 = arg_edx;
 LAB_000128c6:
-  return uVar3 & 0xffffff00;
+  return uval_2 & 0xffffff00;
 }
 
 /******************************************************************************
- * Function : sub_0128cd (Ghidra: FUN_000128cd)
- * Prototype: int sub_0128cd(void);
+ * Function : ariadne_fn_0128cd (Original VA: 0x128cd, Ghidra: FUN_000128cd)
+ * Prototype: int ariadne_fn_0128cd(void);
  * Address  : 0x128cd (Size: 270 bytes)
  * Module   : ariadne.cpp [callgraph_affinity_to_preceding_unit]
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0x123ba, 0x1264b, 0x1342a
- * Callees  : 2 -> 0x10d93, 0x129db
+ * Purpose  : Module ariadne.cpp procedure @ 0x0128cd
+ * Callers  : 3 -> ariadne_fn_0123ba, ariadne_manoeuvre_state_01264b, barracks_fn_01342a
+ * Callees  : 2 -> anger_fn_010d93, ariadne_fn_0129db
  ******************************************************************************/
-int FUN_000128cd(void)
+int ariadne_fn_0128cd(void)
 
 {
-  int iVar1;
-  int iVar2;
-  uint uVar3;
-  int in_EDX;
+  int val;
+  int val_2;
+  uint uval;
+  int arg_edx;
   
-  if (*(char *)(in_EDX + 0x20) == '\x01') {
-    iVar1 = FUN_00010d93();
-    iVar2 = FUN_000129db();
-    if (iVar2 != 0) {
-      return (iVar1 - 1U & 3) << 9;
+  if (*(char *)(arg_edx + 0x20) == '\x01') {
+    val = anger_fn_010d93();
+    val_2 = ariadne_fn_0129db();
+    if (val_2 != 0) {
+      return (val - 1U & 3) << 9;
     }
-    uVar3 = FUN_00010d93();
-    iVar1 = FUN_000129db();
-    if (iVar1 != 0) {
-      return (uVar3 & 3) << 9;
+    uval = anger_fn_010d93();
+    val = ariadne_fn_0129db();
+    if (val != 0) {
+      return (uval & 3) << 9;
     }
-    iVar1 = FUN_00010d93();
-    uVar3 = iVar1 + 1;
+    val = anger_fn_010d93();
+    uval = val + 1;
   }
   else {
-    if (*(char *)(in_EDX + 0x20) != '\x02') {
+    if (*(char *)(arg_edx + 0x20) != '\x02') {
       return -1;
     }
-    iVar1 = FUN_00010d93();
-    iVar2 = FUN_000129db();
-    if (iVar2 != 0) {
-      return (iVar1 + 1U & 3) << 9;
+    val = anger_fn_010d93();
+    val_2 = ariadne_fn_0129db();
+    if (val_2 != 0) {
+      return (val + 1U & 3) << 9;
     }
-    uVar3 = FUN_00010d93();
-    iVar1 = FUN_000129db();
-    if (iVar1 != 0) {
-      return (uVar3 & 3) << 9;
+    uval = anger_fn_010d93();
+    val = ariadne_fn_0129db();
+    if (val != 0) {
+      return (uval & 3) << 9;
     }
-    iVar1 = FUN_00010d93();
-    uVar3 = iVar1 - 1;
+    val = anger_fn_010d93();
+    uval = val - 1;
   }
-  iVar1 = FUN_000129db();
-  if (iVar1 == 0) {
-    iVar1 = FUN_00010d93();
-    uVar3 = iVar1 + 2;
-    iVar1 = FUN_000129db();
-    if (iVar1 == 0) {
+  val = ariadne_fn_0129db();
+  if (val == 0) {
+    val = anger_fn_010d93();
+    uval = val + 2;
+    val = ariadne_fn_0129db();
+    if (val == 0) {
       return -1;
     }
   }
-  return (uVar3 & 3) << 9;
+  return (uval & 3) << 9;
 }
 
 /******************************************************************************
- * Function : sub_0129db (Ghidra: FUN_000129db)
- * Prototype: bool sub_0129db(void);
+ * Function : ariadne_fn_0129db (Original VA: 0x129db, Ghidra: FUN_000129db)
+ * Prototype: bool ariadne_fn_0129db(void);
  * Address  : 0x129db (Size: 83 bytes)
  * Module   : ariadne.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x128cd, 0x12c46
- * Callees  : 1 -> 0x12a2e
+ * Purpose  : Module ariadne.cpp procedure @ 0x0129db
+ * Callers  : 2 -> ariadne_fn_0128cd, ariadne_fn_012c46
+ * Callees  : 1 -> ariadne_fn_012a2e
  ******************************************************************************/
-bool FUN_000129db(void)
+bool ariadne_fn_0129db(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  int in_EDX;
-  int unaff_EBX;
+  int arg_eax;
+  int val;
+  int arg_edx;
+  int arg_ebx;
   
-  iVar1 = FUN_00012a2e((short)((uint)((int)*(short *)(in_EDX + 0x26) * (&DAT_001927e0)[unaff_EBX])
-                              >> 0x10) + *(short *)(in_EAX + 0xd));
-  return iVar1 == 0;
+  val = ariadne_fn_012a2e((short)((uint)((int)*(short *)(arg_edx + 0x26) * (&g_slab_attr_table)[arg_ebx])
+                              >> 0x10) + *(short *)(arg_eax + 0xd));
+  return val == 0;
 }
 
 /******************************************************************************
- * Function : sub_012a2e (Ghidra: FUN_00012a2e)
- * Prototype: void sub_012a2e(void);
+ * Function : ariadne_fn_012a2e (Original VA: 0x12a2e, Ghidra: FUN_00012a2e)
+ * Prototype: void ariadne_fn_012a2e(void);
  * Address  : 0x12a2e (Size: 57 bytes)
  * Module   : ariadne.cpp [callgraph_affinity_to_preceding_unit]
- * Naming   : Address-based identifier
- * Callers  : 8 -> 0x1211a, 0x12230, 0x123ba, 0x1264b, 0x1277d, 0x129db, 0x12a67, 0x12edf
- * Callees  : 2 -> 0x7e134, 0xb3040
+ * Purpose  : Module ariadne.cpp procedure @ 0x012a2e
+ * Callers  : 8 -> ariadne_fn_01211a, ariadne_fn_012230, ariadne_fn_0123ba, ariadne_manoeuvre_state_01264b, ariadne_speed_01277d, ariadne_fn_0129db, ariadne_fn_012a67, ariadne_fn_012edf
+ * Callees  : 2 -> creature_fn_07e134, move_process_map_subtile_0b3040
  ******************************************************************************/
-void FUN_00012a2e(void)
+void ariadne_fn_012a2e(void)
 
 {
-  undefined2 uVar1;
-  int in_EAX;
+  undefined2 uval;
+  int arg_eax;
   undefined2 extraout_CX;
-  undefined4 *in_EDX;
-  undefined4 uVar2;
+  undefined4 *arg_edx;
+  undefined4 uval_2;
   
-  uVar2 = *in_EDX;
-  uVar1 = FUN_000b3040(uVar2,*(undefined2 *)(in_EDX + 1));
-  *(undefined2 *)(in_EAX + 0x11) = uVar1;
-  FUN_0007e134(uVar2,uVar1);
-  *(undefined2 *)(in_EAX + 0x11) = extraout_CX;
+  uval_2 = *arg_edx;
+  uval = move_process_map_subtile_0b3040(uval_2,*(undefined2 *)(arg_edx + 1));
+  *(undefined2 *)(arg_eax + 0x11) = uval;
+  creature_fn_07e134(uval_2,uval);
+  *(undefined2 *)(arg_eax + 0x11) = extraout_CX;
   return;
 }
 
 /******************************************************************************
- * Function : sub_012a67 (Ghidra: FUN_00012a67)
- * Prototype: byte sub_012a67(void);
+ * Function : ariadne_fn_012a67 (Original VA: 0x12a67, Ghidra: FUN_00012a67)
+ * Prototype: byte ariadne_fn_012a67(void);
  * Address  : 0x12a67 (Size: 157 bytes)
  * Module   : ariadne.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 4 -> 0x1211a, 0x12230, 0x12b04, 0x13169
- * Callees  : 1 -> 0x12a2e
+ * Purpose  : Module ariadne.cpp procedure @ 0x012a67
+ * Callers  : 4 -> ariadne_fn_01211a, ariadne_fn_012230, ariadne_fn_012b04, ariadne_fn_013169
+ * Callees  : 1 -> ariadne_fn_012a2e
  ******************************************************************************/
-byte FUN_00012a67(void)
+byte ariadne_fn_012a67(void)
 
 {
-  int in_EAX;
-  int iVar1;
+  int arg_eax;
+  int val;
   undefined2 *extraout_ECX;
-  undefined2 *in_EDX;
-  byte bVar2;
+  undefined2 *arg_edx;
+  byte flag;
   
-  iVar1 = FUN_00012a2e(*in_EDX,*(undefined2 *)(in_EAX + 0x11));
-  bVar2 = iVar1 != 0;
-  iVar1 = FUN_00012a2e(*(undefined2 *)(in_EAX + 0xd),*(undefined2 *)(in_EAX + 0x11));
-  if (iVar1 != 0) {
-    bVar2 = bVar2 | 2;
+  val = ariadne_fn_012a2e(*arg_edx,*(undefined2 *)(arg_eax + 0x11));
+  flag = val != 0;
+  val = ariadne_fn_012a2e(*(undefined2 *)(arg_eax + 0xd),*(undefined2 *)(arg_eax + 0x11));
+  if (val != 0) {
+    flag = flag | 2;
   }
-  if ((bVar2 == 0) &&
-     (iVar1 = FUN_00012a2e(*extraout_ECX,*(undefined2 *)(in_EAX + 0x11)), iVar1 != 0)) {
-    bVar2 = 4;
+  if ((flag == 0) &&
+     (val = ariadne_fn_012a2e(*extraout_ECX,*(undefined2 *)(arg_eax + 0x11)), val != 0)) {
+    flag = 4;
   }
-  return bVar2;
+  return flag;
 }
 
 /******************************************************************************
- * Function : sub_012b04 (Ghidra: FUN_00012b04)
- * Prototype: uint sub_012b04(void);
+ * Function : ariadne_fn_012b04 (Original VA: 0x12b04, Ghidra: FUN_00012b04)
+ * Prototype: uint ariadne_fn_012b04(void);
  * Address  : 0x12b04 (Size: 322 bytes)
  * Module   : ariadne.cpp [callgraph_affinity_to_preceding_unit]
- * Naming   : Address-based identifier
- * Callers  : 4 -> 0x1211a, 0x12230, 0x123ba, 0x1277d
- * Callees  : 2 -> 0x12a67, 0xb28e8
+ * Purpose  : Module ariadne.cpp procedure @ 0x012b04
+ * Callers  : 4 -> ariadne_fn_01211a, ariadne_fn_012230, ariadne_fn_0123ba, ariadne_speed_01277d
+ * Callees  : 2 -> ariadne_fn_012a67, move_process_map_subtile_0b28e8
  ******************************************************************************/
-uint FUN_00012b04(void)
+uint ariadne_fn_012b04(void)
 
 {
-  short sVar1;
-  undefined2 uVar2;
+  short short_val;
+  undefined2 uval;
   int extraout_ECX;
   int extraout_ECX_00;
   int extraout_ECX_01;
-  int iVar3;
-  ushort *in_EDX;
-  ushort uVar4;
-  undefined4 *unaff_EBX;
-  byte bVar5;
+  int val;
+  ushort *arg_edx;
+  ushort uval_2;
+  undefined4 *arg_ebx;
+  byte flag;
   undefined4 local_20;
   undefined2 local_1c [2];
   uint local_18;
   uint local_14;
   
-  bVar5 = 0;
-  local_18 = FUN_00012a67();
+  flag = 0;
+  local_18 = ariadne_fn_012a67();
   local_14 = local_18;
-  uVar4 = *(ushort *)(&DAT_0019073b + (uint)*(ushort *)(extraout_ECX + 0x56) * 2) / 2;
-  local_20 = *(int *)in_EDX;
-  iVar3 = extraout_ECX;
+  uval_2 = *(ushort *)(&g_data_0019073b + (uint)*(ushort *)(extraout_ECX + 0x56) * 2) / 2;
+  local_20 = *(int *)arg_edx;
+  val = extraout_ECX;
   if ((local_18 & 1) != 0) {
     local_20._2_2_ = (short)((uint)local_20 >> 0x10);
-    uVar2 = local_20._2_2_;
-    if (*in_EDX < *(ushort *)(extraout_ECX + 0xd)) {
-      local_20._0_2_ = *(short *)(extraout_ECX + 0xd) - uVar4 & 0xff00;
-      sVar1 = (ushort)local_20 + uVar4;
+    uval = local_20._2_2_;
+    if (*arg_edx < *(ushort *)(extraout_ECX + 0xd)) {
+      local_20._0_2_ = *(short *)(extraout_ECX + 0xd) - uval_2 & 0xff00;
+      short_val = (ushort)local_20 + uval_2;
     }
     else {
-      local_20 = CONCAT22(local_20._2_2_,*(short *)(extraout_ECX + 0xd) + uVar4);
+      local_20 = CONCAT22(local_20._2_2_,*(short *)(extraout_ECX + 0xd) + uval_2);
       local_20 = CONCAT31(local_20._1_3_,0xff);
-      sVar1 = (ushort)local_20 - uVar4;
+      short_val = (ushort)local_20 - uval_2;
     }
-    local_20 = CONCAT22(uVar2,sVar1);
-    local_1c[0] = FUN_000b28e8();
-    iVar3 = extraout_ECX_00;
+    local_20 = CONCAT22(uval,short_val);
+    local_1c[0] = move_process_map_subtile_0b28e8();
+    val = extraout_ECX_00;
   }
   if ((local_14 & 2) != 0) {
-    uVar2 = (ushort)local_20;
-    if (in_EDX[1] < *(ushort *)(iVar3 + 0xf)) {
-      local_20._3_1_ = (byte)((ushort)(*(short *)(iVar3 + 0xf) - uVar4) >> 8);
+    uval = (ushort)local_20;
+    if (arg_edx[1] < *(ushort *)(val + 0xf)) {
+      local_20._3_1_ = (byte)((ushort)(*(short *)(val + 0xf) - uval_2) >> 8);
       local_20 = (uint)local_20._3_1_ << 0x18;
-      local_20._2_2_ = local_20._2_2_ + uVar4;
+      local_20._2_2_ = local_20._2_2_ + uval_2;
     }
     else {
-      local_20._3_1_ = (byte)((ushort)(*(short *)(iVar3 + 0xf) + uVar4) >> 8);
+      local_20._3_1_ = (byte)((ushort)(*(short *)(val + 0xf) + uval_2) >> 8);
       local_20._0_3_ = CONCAT12(0xff,(ushort)local_20);
-      local_20._2_2_ = local_20._2_2_ - uVar4;
+      local_20._2_2_ = local_20._2_2_ - uval_2;
     }
-    local_20 = CONCAT22(local_20._2_2_,uVar2);
-    local_1c[0] = FUN_000b28e8();
-    iVar3 = extraout_ECX_01;
+    local_20 = CONCAT22(local_20._2_2_,uval);
+    local_1c[0] = move_process_map_subtile_0b28e8();
+    val = extraout_ECX_01;
   }
   if ((local_14 & 4) != 0) {
-    if (*in_EDX < *(ushort *)(iVar3 + 0xd)) {
-      local_20._0_2_ = *(short *)(iVar3 + 0xd) - uVar4 & 0xff00;
-      sVar1 = (ushort)local_20 + uVar4;
+    if (*arg_edx < *(ushort *)(val + 0xd)) {
+      local_20._0_2_ = *(short *)(val + 0xd) - uval_2 & 0xff00;
+      short_val = (ushort)local_20 + uval_2;
     }
     else {
-      local_20._1_3_ = (uint3)(byte)((ushort)(*(short *)(iVar3 + 0xd) + uVar4) >> 8);
+      local_20._1_3_ = (uint3)(byte)((ushort)(*(short *)(val + 0xd) + uval_2) >> 8);
       local_20 = CONCAT31(local_20._1_3_,0xff);
-      sVar1 = (ushort)local_20 - uVar4;
+      short_val = (ushort)local_20 - uval_2;
     }
-    if (in_EDX[1] < *(ushort *)(iVar3 + 0xf)) {
-      local_20._3_1_ = (byte)((ushort)(*(short *)(iVar3 + 0xf) - uVar4) >> 8);
+    if (arg_edx[1] < *(ushort *)(val + 0xf)) {
+      local_20._3_1_ = (byte)((ushort)(*(short *)(val + 0xf) - uval_2) >> 8);
       local_20 = (uint)local_20._3_1_ << 0x18;
-      local_20._2_2_ = local_20._2_2_ + uVar4;
+      local_20._2_2_ = local_20._2_2_ + uval_2;
     }
     else {
-      local_20._3_1_ = (byte)((ushort)(*(short *)(iVar3 + 0xf) + uVar4) >> 8);
-      local_20._0_3_ = CONCAT12(0xff,sVar1);
-      local_20._2_2_ = local_20._2_2_ - uVar4;
+      local_20._3_1_ = (byte)((ushort)(*(short *)(val + 0xf) + uval_2) >> 8);
+      local_20._0_3_ = CONCAT12(0xff,short_val);
+      local_20._2_2_ = local_20._2_2_ - uval_2;
     }
-    local_20 = CONCAT22(local_20._2_2_,sVar1);
-    local_1c[0] = FUN_000b28e8();
+    local_20 = CONCAT22(local_20._2_2_,short_val);
+    local_1c[0] = move_process_map_subtile_0b28e8();
   }
-  *unaff_EBX = local_20;
-  *(undefined2 *)(unaff_EBX + (uint)bVar5 * -2 + 1) = local_1c[(uint)bVar5 * -4];
+  *arg_ebx = local_20;
+  *(undefined2 *)(arg_ebx + (uint)flag * -2 + 1) = local_1c[(uint)flag * -4];
   return local_14;
 }
 
 /******************************************************************************
- * Function : sub_012c46 (Ghidra: FUN_00012c46)
- * Prototype: undefined4 sub_012c46(void);
+ * Function : ariadne_fn_012c46 (Original VA: 0x12c46, Ghidra: FUN_00012c46)
+ * Prototype: undefined4 ariadne_fn_012c46(void);
  * Address  : 0x12c46 (Size: 665 bytes)
  * Module   : ariadne.cpp [callgraph_affinity_to_preceding_unit]
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0x123ba, 0x1277d, 0x1342a
- * Callees  : 3 -> 0x10d93, 0x129db, 0xb28e8
+ * Purpose  : Module ariadne.cpp procedure @ 0x012c46
+ * Callers  : 3 -> ariadne_fn_0123ba, ariadne_speed_01277d, barracks_fn_01342a
+ * Callees  : 3 -> anger_fn_010d93, ariadne_fn_0129db, move_process_map_subtile_0b28e8
  ******************************************************************************/
-undefined4 FUN_00012c46(void)
+undefined4 ariadne_fn_012c46(void)
 
 {
-  bool bVar1;
-  undefined2 uVar2;
-  int in_EAX;
-  uint uVar3;
-  int iVar4;
-  int in_ECX;
-  short sVar5;
-  int in_EDX;
-  ushort *unaff_EBX;
-  undefined4 *puVar6;
-  byte bVar7;
+  bool flag;
+  undefined2 uval;
+  int arg_eax;
+  uint uval_2;
+  int val;
+  int arg_ecx;
+  short short_val;
+  int arg_edx;
+  ushort *arg_ebx;
+  undefined4 *word_ptr;
+  byte flag_2;
   undefined2 auStack_818 [1012];
   undefined4 local_24;
   undefined2 auStack_20 [2];
@@ -894,120 +888,120 @@ undefined4 FUN_00012c46(void)
   undefined4 local_14;
   ushort auStack_10 [2];
   
-  bVar7 = 0;
-  uVar3 = *(ushort *)(&DAT_0019073b + (uint)*(ushort *)(in_EAX + 0x56) * 2) / 2;
-  bVar1 = false;
-  sVar5 = (short)uVar3;
-  if (in_ECX == 0) {
-    if ((int)(unaff_EBX[1] - uVar3) >> 8 < (int)(*(ushort *)(in_EAX + 0xf) - uVar3) >> 8) {
-      local_14._3_1_ = (byte)((ushort)(*(short *)(in_EAX + 0xf) - sVar5) >> 8);
+  flag_2 = 0;
+  uval_2 = *(ushort *)(&g_data_0019073b + (uint)*(ushort *)(arg_eax + 0x56) * 2) / 2;
+  flag = false;
+  short_val = (short)uval_2;
+  if (arg_ecx == 0) {
+    if ((int)(arg_ebx[1] - uval_2) >> 8 < (int)(*(ushort *)(arg_eax + 0xf) - uval_2) >> 8) {
+      local_14._3_1_ = (byte)((ushort)(*(short *)(arg_eax + 0xf) - short_val) >> 8);
       local_14 = (uint)local_14._3_1_ << 0x18;
-      bVar1 = true;
-      local_14 = CONCAT22(local_14._2_2_ + sVar5,*unaff_EBX);
+      flag = true;
+      local_14 = CONCAT22(local_14._2_2_ + short_val,*arg_ebx);
     }
   }
-  else if (in_ECX == 0x400) {
-    if ((uint)((int)(*(ushort *)(in_EAX + 0xf) + uVar3) >> 8) <
-        (uint)((int)(unaff_EBX[1] + uVar3) >> 8)) {
-      local_14._3_1_ = (byte)((ushort)(*(short *)(in_EAX + 0xf) + sVar5) >> 8);
-      local_14._0_3_ = CONCAT12(0xff,*unaff_EBX);
-      bVar1 = true;
-      local_14 = CONCAT22(local_14._2_2_ - sVar5,*unaff_EBX);
+  else if (arg_ecx == 0x400) {
+    if ((uint)((int)(*(ushort *)(arg_eax + 0xf) + uval_2) >> 8) <
+        (uint)((int)(arg_ebx[1] + uval_2) >> 8)) {
+      local_14._3_1_ = (byte)((ushort)(*(short *)(arg_eax + 0xf) + short_val) >> 8);
+      local_14._0_3_ = CONCAT12(0xff,*arg_ebx);
+      flag = true;
+      local_14 = CONCAT22(local_14._2_2_ - short_val,*arg_ebx);
     }
   }
-  else if (in_ECX == 0x600) {
-    if ((int)(*unaff_EBX - uVar3) >> 8 < (int)(*(ushort *)(in_EAX + 0xd) - uVar3) >> 8) {
-      local_14._0_2_ = *(short *)(in_EAX + 0xd) - sVar5 & 0xff00;
-      bVar1 = true;
-      local_14 = CONCAT22(unaff_EBX[1],(ushort)local_14 + sVar5);
+  else if (arg_ecx == 0x600) {
+    if ((int)(*arg_ebx - uval_2) >> 8 < (int)(*(ushort *)(arg_eax + 0xd) - uval_2) >> 8) {
+      local_14._0_2_ = *(short *)(arg_eax + 0xd) - short_val & 0xff00;
+      flag = true;
+      local_14 = CONCAT22(arg_ebx[1],(ushort)local_14 + short_val);
     }
   }
-  else if ((in_ECX == 0x200) &&
-          ((uint)((int)(*(ushort *)(in_EAX + 0xd) + uVar3) >> 8) <
-           (uint)((int)(*unaff_EBX + uVar3) >> 8))) {
-    local_14 = CONCAT22(unaff_EBX[1],*(short *)(in_EAX + 0xd) + sVar5);
+  else if ((arg_ecx == 0x200) &&
+          ((uint)((int)(*(ushort *)(arg_eax + 0xd) + uval_2) >> 8) <
+           (uint)((int)(*arg_ebx + uval_2) >> 8))) {
+    local_14 = CONCAT22(arg_ebx[1],*(short *)(arg_eax + 0xd) + short_val);
     local_14 = CONCAT31(local_14._1_3_,0xff);
-    bVar1 = true;
-    local_14 = CONCAT22(unaff_EBX[1],(ushort)local_14 - sVar5);
+    flag = true;
+    local_14 = CONCAT22(arg_ebx[1],(ushort)local_14 - short_val);
   }
-  if (!bVar1) {
+  if (!flag) {
     return 0;
   }
-  if (*(char *)(in_EDX + 0x20) == '\x01') {
-    FUN_00010d93();
-    iVar4 = FUN_000129db();
-    if (iVar4 == 0) {
-      local_24 = *(undefined4 *)(in_EAX + 0xd);
-      auStack_20[(uint)bVar7 * -4] = *(undefined2 *)(in_EAX + 0x11 + (uint)bVar7 * -8);
-      *(int *)(in_EAX + 0xd) = local_14;
-      *(ushort *)(in_EAX + 0x11 + (uint)bVar7 * -8) = auStack_10[(uint)bVar7 * -4];
-      uVar2 = FUN_000b28e8();
-      *(undefined2 *)(in_EAX + 0x11) = uVar2;
-      FUN_00010d93();
-      iVar4 = FUN_000129db();
-      if (iVar4 != 0) {
-        *(int *)unaff_EBX = local_14;
-        unaff_EBX[(uint)bVar7 * -4 + 2] = auStack_10[(uint)bVar7 * -4];
-        puVar6 = &local_24;
+  if (*(char *)(arg_edx + 0x20) == '\x01') {
+    anger_fn_010d93();
+    val = ariadne_fn_0129db();
+    if (val == 0) {
+      local_24 = *(undefined4 *)(arg_eax + 0xd);
+      auStack_20[(uint)flag_2 * -4] = *(undefined2 *)(arg_eax + 0x11 + (uint)flag_2 * -8);
+      *(int *)(arg_eax + 0xd) = local_14;
+      *(ushort *)(arg_eax + 0x11 + (uint)flag_2 * -8) = auStack_10[(uint)flag_2 * -4];
+      uval = move_process_map_subtile_0b28e8();
+      *(undefined2 *)(arg_eax + 0x11) = uval;
+      anger_fn_010d93();
+      val = ariadne_fn_0129db();
+      if (val != 0) {
+        *(int *)arg_ebx = local_14;
+        arg_ebx[(uint)flag_2 * -4 + 2] = auStack_10[(uint)flag_2 * -4];
+        word_ptr = &local_24;
         goto LAB_00012e1e;
       }
-      puVar6 = &local_24;
+      word_ptr = &local_24;
       goto LAB_00012ed3;
     }
   }
-  if (*(char *)(in_EDX + 0x20) != '\x02') {
+  if (*(char *)(arg_edx + 0x20) != '\x02') {
     return 0;
   }
-  FUN_00010d93();
-  iVar4 = FUN_000129db();
-  if (iVar4 != 0) {
+  anger_fn_010d93();
+  val = ariadne_fn_0129db();
+  if (val != 0) {
     return 0;
   }
-  local_1c = *(undefined4 *)(in_EAX + 0xd);
-  auStack_18[(uint)bVar7 * -4] = *(undefined2 *)(in_EAX + 0x11 + (uint)bVar7 * -8);
-  *(int *)(in_EAX + 0xd) = local_14;
-  *(ushort *)(in_EAX + 0x11 + (uint)bVar7 * -8) = auStack_10[(uint)bVar7 * -4];
-  uVar2 = FUN_000b28e8();
-  *(undefined2 *)(in_EAX + 0x11) = uVar2;
-  FUN_00010d93();
-  iVar4 = FUN_000129db();
-  if (iVar4 != 0) {
-    *(int *)unaff_EBX = local_14;
-    unaff_EBX[(uint)bVar7 * -4 + 2] = auStack_10[(uint)bVar7 * -4];
-    puVar6 = &local_1c;
+  local_1c = *(undefined4 *)(arg_eax + 0xd);
+  auStack_18[(uint)flag_2 * -4] = *(undefined2 *)(arg_eax + 0x11 + (uint)flag_2 * -8);
+  *(int *)(arg_eax + 0xd) = local_14;
+  *(ushort *)(arg_eax + 0x11 + (uint)flag_2 * -8) = auStack_10[(uint)flag_2 * -4];
+  uval = move_process_map_subtile_0b28e8();
+  *(undefined2 *)(arg_eax + 0x11) = uval;
+  anger_fn_010d93();
+  val = ariadne_fn_0129db();
+  if (val != 0) {
+    *(int *)arg_ebx = local_14;
+    arg_ebx[(uint)flag_2 * -4 + 2] = auStack_10[(uint)flag_2 * -4];
+    word_ptr = &local_1c;
 LAB_00012e1e:
-    *(undefined4 *)(in_EAX + 0xd) = *puVar6;
-    *(undefined2 *)(in_EAX + 0x11 + (uint)bVar7 * -8) =
-         *(undefined2 *)(puVar6 + (uint)bVar7 * -2 + 1);
+    *(undefined4 *)(arg_eax + 0xd) = *word_ptr;
+    *(undefined2 *)(arg_eax + 0x11 + (uint)flag_2 * -8) =
+         *(undefined2 *)(word_ptr + (uint)flag_2 * -2 + 1);
     return 1;
   }
-  puVar6 = &local_1c;
+  word_ptr = &local_1c;
 LAB_00012ed3:
-  *(undefined4 *)(in_EAX + 0xd) = *puVar6;
-  *(undefined2 *)(in_EAX + 0x11 + (uint)bVar7 * -8) = *(undefined2 *)(puVar6 + (uint)bVar7 * -2 + 1)
+  *(undefined4 *)(arg_eax + 0xd) = *word_ptr;
+  *(undefined2 *)(arg_eax + 0x11 + (uint)flag_2 * -8) = *(undefined2 *)(word_ptr + (uint)flag_2 * -2 + 1)
   ;
   return 0;
 }
 
 /******************************************************************************
- * Function : sub_012edf (Ghidra: FUN_00012edf)
- * Prototype: undefined4 sub_012edf(void);
+ * Function : ariadne_fn_012edf (Original VA: 0x12edf, Ghidra: FUN_00012edf)
+ * Prototype: undefined4 ariadne_fn_012edf(void);
  * Address  : 0x12edf (Size: 272 bytes)
  * Module   : ariadne.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x123ba
- * Callees  : 3 -> 0x10c1a, 0x12a2e, 0xb28e8
+ * Purpose  : Module ariadne.cpp procedure @ 0x012edf
+ * Callers  : 1 -> ariadne_fn_0123ba
+ * Callees  : 3 -> anger_fn_010c1a, ariadne_fn_012a2e, move_process_map_subtile_0b28e8
  ******************************************************************************/
-undefined4 FUN_00012edf(void)
+undefined4 ariadne_fn_012edf(void)
 
 {
-  ushort *puVar1;
-  ushort uVar2;
-  int in_EAX;
-  int iVar3;
-  ushort uVar4;
-  int unaff_EBX;
-  byte bVar5;
+  ushort *word_ptr;
+  ushort uval;
+  int arg_eax;
+  int val;
+  ushort uval_2;
+  int arg_ebx;
+  byte flag;
   short local_2c;
   short sStack_2a;
   ushort local_28 [4];
@@ -1016,44 +1010,44 @@ undefined4 FUN_00012edf(void)
   short local_1a;
   undefined2 local_18;
   
-  bVar5 = 0;
-  puVar1 = (ushort *)(in_EAX + 0xd);
-  iVar3 = FUN_00010c1a();
-  local_2c = (short)*(undefined4 *)puVar1;
-  sStack_2a = (short)((uint)*(undefined4 *)puVar1 >> 0x10);
-  local_28[(uint)bVar5 * -4] = *(ushort *)(in_EAX + 0x11 + (uint)bVar5 * -8);
-  uVar4 = local_2c + (short)((uint)(unaff_EBX * (&DAT_001927e0)[iVar3]) >> 0x10);
-  uVar2 = sStack_2a + (short)((uint)-(unaff_EBX * (int)(&PTR_LAB_00192fe0)[iVar3] >> 8) >> 8);
-  local_28[0] = FUN_000b28e8();
-  local_1a = (short)unaff_EBX;
-  if (*puVar1 < uVar4) {
-    local_28[2] = *puVar1 + local_1a;
+  flag = 0;
+  word_ptr = (ushort *)(arg_eax + 0xd);
+  val = anger_fn_010c1a();
+  local_2c = (short)*(undefined4 *)word_ptr;
+  sStack_2a = (short)((uint)*(undefined4 *)word_ptr >> 0x10);
+  local_28[(uint)flag * -4] = *(ushort *)(arg_eax + 0x11 + (uint)flag * -8);
+  uval_2 = local_2c + (short)((uint)(arg_ebx * (&g_slab_attr_table)[val]) >> 0x10);
+  uval = sStack_2a + (short)((uint)-(arg_ebx * (int)(&PTR_LAB_00192fe0)[val] >> 8) >> 8);
+  local_28[0] = move_process_map_subtile_0b28e8();
+  local_1a = (short)arg_ebx;
+  if (*word_ptr < uval_2) {
+    local_28[2] = *word_ptr + local_1a;
   }
-  else if (uVar4 < *puVar1) {
-    local_28[2] = *puVar1 - local_1a;
-  }
-  else {
-    local_28[2] = *puVar1;
-  }
-  local_28[3] = *(undefined2 *)(in_EAX + 0xf);
-  local_20 = FUN_000b28e8();
-  if (*(ushort *)(in_EAX + 0xf) < uVar2) {
-    local_1a = *(short *)(in_EAX + 0xf) + local_1a;
-  }
-  else if (uVar2 < *(ushort *)(in_EAX + 0xf)) {
-    local_1a = *(short *)(in_EAX + 0xf) - local_1a;
+  else if (uval_2 < *word_ptr) {
+    local_28[2] = *word_ptr - local_1a;
   }
   else {
-    local_1a = *(short *)(in_EAX + 0xf);
+    local_28[2] = *word_ptr;
   }
-  local_1c = *puVar1;
-  local_18 = FUN_000b28e8();
-  iVar3 = FUN_00012a2e();
-  if (iVar3 == 0) {
-    iVar3 = FUN_00012a2e();
-    if (iVar3 == 0) {
-      iVar3 = FUN_00012a2e();
-      if (iVar3 == 0) {
+  local_28[3] = *(undefined2 *)(arg_eax + 0xf);
+  local_20 = move_process_map_subtile_0b28e8();
+  if (*(ushort *)(arg_eax + 0xf) < uval) {
+    local_1a = *(short *)(arg_eax + 0xf) + local_1a;
+  }
+  else if (uval < *(ushort *)(arg_eax + 0xf)) {
+    local_1a = *(short *)(arg_eax + 0xf) - local_1a;
+  }
+  else {
+    local_1a = *(short *)(arg_eax + 0xf);
+  }
+  local_1c = *word_ptr;
+  local_18 = move_process_map_subtile_0b28e8();
+  val = ariadne_fn_012a2e();
+  if (val == 0) {
+    val = ariadne_fn_012a2e();
+    if (val == 0) {
+      val = ariadne_fn_012a2e();
+      if (val == 0) {
         return 1;
       }
     }
@@ -1062,210 +1056,210 @@ undefined4 FUN_00012edf(void)
 }
 
 /******************************************************************************
- * Function : sub_012fef (Ghidra: FUN_00012fef)
- * Prototype: undefined4 sub_012fef(void);
+ * Function : ariadne_fn_012fef (Original VA: 0x12fef, Ghidra: FUN_00012fef)
+ * Prototype: undefined4 ariadne_fn_012fef(void);
  * Address  : 0x12fef (Size: 112 bytes)
  * Module   : ariadne.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x123ba
+ * Purpose  : Module ariadne.cpp procedure @ 0x012fef
+ * Callers  : 1 -> ariadne_fn_0123ba
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_00012fef(void)
+undefined4 ariadne_fn_012fef(void)
 
 {
-  int in_EAX;
-  int in_EDX;
-  bool bVar1;
-  bool bVar2;
+  int arg_eax;
+  int arg_edx;
+  bool flag;
+  bool flag_2;
   
-  if (*(short *)(in_EAX + 0xd) == *(short *)(in_EDX + 0x18)) {
-    if ((*(ushort *)(in_EAX + 0xf) <= *(ushort *)(in_EDX + 0x1a)) &&
-       (*(ushort *)(in_EDX + 0x1a) <= *(ushort *)(in_EDX + 0x14))) {
+  if (*(short *)(arg_eax + 0xd) == *(short *)(arg_edx + 0x18)) {
+    if ((*(ushort *)(arg_eax + 0xf) <= *(ushort *)(arg_edx + 0x1a)) &&
+       (*(ushort *)(arg_edx + 0x1a) <= *(ushort *)(arg_edx + 0x14))) {
       return 1;
     }
-    if (*(ushort *)(in_EAX + 0xf) < *(ushort *)(in_EDX + 0x1a)) {
+    if (*(ushort *)(arg_eax + 0xf) < *(ushort *)(arg_edx + 0x1a)) {
       return 0;
     }
-    bVar1 = *(ushort *)(in_EDX + 0x14) < *(ushort *)(in_EDX + 0x1a);
-    bVar2 = *(ushort *)(in_EDX + 0x14) == *(ushort *)(in_EDX + 0x1a);
+    flag = *(ushort *)(arg_edx + 0x14) < *(ushort *)(arg_edx + 0x1a);
+    flag_2 = *(ushort *)(arg_edx + 0x14) == *(ushort *)(arg_edx + 0x1a);
   }
   else {
-    if (*(short *)(in_EAX + 0xf) != *(short *)(in_EDX + 0x1a)) {
+    if (*(short *)(arg_eax + 0xf) != *(short *)(arg_edx + 0x1a)) {
       return 0;
     }
-    if ((*(ushort *)(in_EAX + 0xd) <= *(ushort *)(in_EDX + 0x18)) &&
-       (*(ushort *)(in_EDX + 0x18) <= *(ushort *)(in_EDX + 0x12))) {
+    if ((*(ushort *)(arg_eax + 0xd) <= *(ushort *)(arg_edx + 0x18)) &&
+       (*(ushort *)(arg_edx + 0x18) <= *(ushort *)(arg_edx + 0x12))) {
       return 1;
     }
-    if (*(ushort *)(in_EAX + 0xd) < *(ushort *)(in_EDX + 0x18)) {
+    if (*(ushort *)(arg_eax + 0xd) < *(ushort *)(arg_edx + 0x18)) {
       return 0;
     }
-    bVar1 = *(ushort *)(in_EDX + 0x12) < *(ushort *)(in_EDX + 0x18);
-    bVar2 = *(ushort *)(in_EDX + 0x12) == *(ushort *)(in_EDX + 0x18);
+    flag = *(ushort *)(arg_edx + 0x12) < *(ushort *)(arg_edx + 0x18);
+    flag_2 = *(ushort *)(arg_edx + 0x12) == *(ushort *)(arg_edx + 0x18);
   }
-  if (bVar1 || bVar2) {
+  if (flag || flag_2) {
     return 1;
   }
   return 0;
 }
 
 /******************************************************************************
- * Function : sub_01305f (Ghidra: FUN_0001305f)
- * Prototype: void sub_01305f(void);
+ * Function : ariadne_fn_01305f (Original VA: 0x1305f, Ghidra: FUN_0001305f)
+ * Prototype: void ariadne_fn_01305f(void);
  * Address  : 0x1305f (Size: 68 bytes)
  * Module   : ariadne.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x11e00
+ * Purpose  : Module ariadne.cpp procedure @ 0x01305f
+ * Callers  : 1 -> ariadne_update_creature_control_011e00
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_0001305f(void)
+void ariadne_fn_01305f(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  undefined2 *in_EDX;
-  undefined1 uVar2;
-  undefined2 *puVar3;
+  int arg_eax;
+  int loop_i;
+  undefined2 *arg_edx;
+  undefined1 uval;
+  undefined2 *word_ptr;
   
-  if (*(int *)(in_EAX + 0x10) < 10) {
-    uVar2 = (undefined1)*(undefined4 *)(in_EAX + 0x10);
+  if (*(int *)(arg_eax + 0x10) < 10) {
+    uval = (undefined1)*(undefined4 *)(arg_eax + 0x10);
   }
   else {
-    uVar2 = 10;
+    uval = 10;
   }
-  *(undefined1 *)(in_EDX + 0x14) = uVar2;
-  *(undefined1 *)((int)in_EDX + 0x29) = *(undefined1 *)(in_EAX + 0x10);
-  puVar3 = in_EDX;
-  for (iVar1 = 0; iVar1 < (int)(uint)*(byte *)(in_EDX + 0x14); iVar1 = iVar1 + 1) {
-    *puVar3 = *(undefined2 *)(in_EAX + 0x14);
-    puVar3[1] = *(undefined2 *)(in_EAX + 0x18);
-    in_EAX = in_EAX + 8;
-    puVar3 = puVar3 + 2;
+  *(undefined1 *)(arg_edx + 0x14) = uval;
+  *(undefined1 *)((int)arg_edx + 0x29) = *(undefined1 *)(arg_eax + 0x10);
+  word_ptr = arg_edx;
+  for (loop_i = 0; loop_i < (int)(uint)*(byte *)(arg_edx + 0x14); loop_i = loop_i + 1) {
+    *word_ptr = *(undefined2 *)(arg_eax + 0x14);
+    word_ptr[1] = *(undefined2 *)(arg_eax + 0x18);
+    arg_eax = arg_eax + 8;
+    word_ptr = word_ptr + 2;
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0130a3 (Ghidra: FUN_000130a3)
- * Prototype: undefined4 sub_0130a3(void);
+ * Function : ariadne_fn_0130a3 (Original VA: 0x130a3, Ghidra: FUN_000130a3)
+ * Prototype: undefined4 ariadne_fn_0130a3(void);
  * Address  : 0x130a3 (Size: 3 bytes)
  * Module   : ariadne.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x12002
+ * Purpose  : Module ariadne.cpp procedure @ 0x0130a3
+ * Callers  : 1 -> ariadne_update_creature_control_012002
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_000130a3(void)
+undefined4 ariadne_fn_0130a3(void)
 
 {
-  int in_EAX;
-  int in_EDX;
+  int arg_eax;
+  int arg_edx;
   
-  if ((*(short *)(in_EAX + 0xd) == *(short *)(in_EDX + 0xc)) &&
-     (*(short *)(in_EAX + 0xf) == *(short *)(in_EDX + 0xe))) {
+  if ((*(short *)(arg_eax + 0xd) == *(short *)(arg_edx + 0xc)) &&
+     (*(short *)(arg_eax + 0xf) == *(short *)(arg_edx + 0xe))) {
     return 1;
   }
   return 0;
 }
 
 /******************************************************************************
- * Function : sub_0130a6 (Ghidra: FUN_000130a6)
- * Prototype: undefined4 sub_0130a6(void);
+ * Function : ariadne_fn_0130a6 (Original VA: 0x130a6, Ghidra: FUN_000130a6)
+ * Prototype: undefined4 ariadne_fn_0130a6(void);
  * Address  : 0x130a6 (Size: 31 bytes)
  * Module   : ariadne.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x11e00
+ * Purpose  : Module ariadne.cpp procedure @ 0x0130a6
+ * Callers  : 1 -> ariadne_update_creature_control_011e00
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_000130a6(void)
+undefined4 ariadne_fn_0130a6(void)
 
 {
-  int in_EAX;
-  short *in_EDX;
+  int arg_eax;
+  short *arg_edx;
   
-  if ((*(short *)(in_EAX + 0xd) == *in_EDX) && (*(short *)(in_EAX + 0xf) == in_EDX[1])) {
+  if ((*(short *)(arg_eax + 0xd) == *arg_edx) && (*(short *)(arg_eax + 0xf) == arg_edx[1])) {
     return 1;
   }
   return 0;
 }
 
 /******************************************************************************
- * Function : sub_013169 (Ghidra: FUN_00013169)
- * Prototype: undefined4 sub_013169(undefined1 *param_1);
+ * Function : ariadne_fn_013169 (Original VA: 0x13169, Ghidra: FUN_00013169)
+ * Prototype: undefined4 ariadne_fn_013169(undefined1 *param_1);
  * Address  : 0x13169 (Size: 496 bytes)
  * Module   : ariadne.cpp [callgraph_affinity_to_preceding_unit]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x1277d
- * Callees  : 3 -> 0x12a67, 0x1342a, 0xe69fc
+ * Purpose  : Module ariadne.cpp procedure @ 0x013169
+ * Callers  : 1 -> ariadne_speed_01277d
+ * Callees  : 3 -> ariadne_fn_012a67, barracks_fn_01342a, bflib_system_io_fn_0e69fc
  ******************************************************************************/
-undefined4 FUN_00013169(undefined1 *param_1)
+undefined4 ariadne_fn_013169(undefined1 *param_1)
 
 {
-  ushort uVar1;
-  ushort uVar2;
-  ushort uVar3;
-  ushort uVar4;
-  ushort uVar5;
-  ushort uVar6;
-  bool bVar7;
-  bool bVar8;
-  undefined1 uVar9;
-  int in_EAX;
-  uint uVar10;
-  uint uVar11;
-  uint uVar12;
-  int iVar13;
+  ushort uval;
+  ushort uval_2;
+  ushort uval_3;
+  ushort uval_4;
+  ushort uval_5;
+  ushort uval_6;
+  bool flag;
+  bool flag_2;
+  undefined1 uval_7;
+  int arg_eax;
+  uint uval_8;
+  uint uval_9;
+  uint uval_10;
+  int val;
   undefined2 *extraout_ECX;
-  int in_EDX;
-  uint uVar14;
-  ushort *unaff_EBX;
-  undefined8 uVar15;
+  int arg_edx;
+  uint uval_11;
+  ushort *arg_ebx;
+  undefined8 uval_12;
   
-  bVar7 = (uint)*(ushort *)(in_EAX + 0xf) == (uint)unaff_EBX[1] ||
-          (int)((uint)*(ushort *)(in_EAX + 0xf) - (uint)unaff_EBX[1]) < 0;
-  bVar8 = (uint)*(ushort *)(in_EAX + 0xd) == (uint)*unaff_EBX ||
-          (int)((uint)*(ushort *)(in_EAX + 0xd) - (uint)*unaff_EBX) < 0;
-  uVar1 = *(ushort *)(in_EDX + 0xe);
-  uVar2 = *(ushort *)(in_EAX + 0xf);
-  uVar3 = *(ushort *)(in_EAX + 0xd);
-  uVar4 = *(ushort *)(in_EDX + 0xc);
-  FUN_000e69fc(*(undefined2 *)(in_EAX + 0xd));
-  uVar15 = FUN_000e69fc(*(undefined2 *)(in_EDX + 0xe),*(undefined2 *)(in_EAX + 0xf));
-  uVar10 = *(ushort *)(&DAT_0019073b + (uint)*(ushort *)(in_EAX + 0x56) * 2) / 2;
-  uVar5 = *(ushort *)(in_EAX + 0xd);
-  uVar6 = *(ushort *)(in_EAX + 0xf);
-  uVar14 = (uint)*(ushort *)(in_EDX + 0x29 + (uint)*(byte *)(in_EDX + 0x28) * 4);
-  uVar11 = (uint)*(ushort *)(in_EDX + 0x2b + (uint)*(byte *)(in_EDX + 0x28) * 4);
-  uVar12 = FUN_00012a67();
-  if ((uVar12 & 1) == 0) {
-    if ((uVar12 & 2) == 0) {
-      if ((uVar12 & 4) == 0) {
+  flag = (uint)*(ushort *)(arg_eax + 0xf) == (uint)arg_ebx[1] ||
+          (int)((uint)*(ushort *)(arg_eax + 0xf) - (uint)arg_ebx[1]) < 0;
+  flag_2 = (uint)*(ushort *)(arg_eax + 0xd) == (uint)*arg_ebx ||
+          (int)((uint)*(ushort *)(arg_eax + 0xd) - (uint)*arg_ebx) < 0;
+  uval = *(ushort *)(arg_edx + 0xe);
+  uval_2 = *(ushort *)(arg_eax + 0xf);
+  uval_3 = *(ushort *)(arg_eax + 0xd);
+  uval_4 = *(ushort *)(arg_edx + 0xc);
+  bflib_system_io_fn_0e69fc(*(undefined2 *)(arg_eax + 0xd));
+  uval_12 = bflib_system_io_fn_0e69fc(*(undefined2 *)(arg_edx + 0xe),*(undefined2 *)(arg_eax + 0xf));
+  uval_8 = *(ushort *)(&g_data_0019073b + (uint)*(ushort *)(arg_eax + 0x56) * 2) / 2;
+  uval_5 = *(ushort *)(arg_eax + 0xd);
+  uval_6 = *(ushort *)(arg_eax + 0xf);
+  uval_11 = (uint)*(ushort *)(arg_edx + 0x29 + (uint)*(byte *)(arg_edx + 0x28) * 4);
+  uval_9 = (uint)*(ushort *)(arg_edx + 0x2b + (uint)*(byte *)(arg_edx + 0x28) * 4);
+  uval_10 = ariadne_fn_012a67();
+  if ((uval_10 & 1) == 0) {
+    if ((uval_10 & 2) == 0) {
+      if ((uval_10 & 4) == 0) {
         return 0;
       }
-      iVar13 = (uint)bVar8 * 6 + (uint)bVar7 * 0xc +
-               (uint)((int)((ulonglong)uVar15 >> 0x20) < (int)uVar15) * 3;
-      *extraout_ECX = *(undefined2 *)(&DAT_0018e91b + iVar13);
-      uVar9 = (&DAT_0018e91d)[iVar13];
+      val = (uint)flag_2 * 6 + (uint)flag * 0xc +
+               (uint)((int)((ulonglong)uval_12 >> 0x20) < (int)uval_12) * 3;
+      *extraout_ECX = *(undefined2 *)(&g_data_0018e91b + val);
+      uval_7 = (&g_data_0018e91d)[val];
     }
     else {
-      if (((int)(uVar5 - uVar10) <= (int)uVar14) && (uVar14 <= uVar5 + uVar10)) goto LAB_0001328d;
-      iVar13 = (uint)((uint)uVar3 == (uint)uVar4 || (int)((uint)uVar3 - (uint)uVar4) < 0) * 3 +
-               (uint)bVar7 * 6;
-      *extraout_ECX = *(undefined2 *)(&DAT_0018e90f + iVar13);
-      uVar9 = (&DAT_0018e911)[iVar13];
+      if (((int)(uval_5 - uval_8) <= (int)uval_11) && (uval_11 <= uval_5 + uval_8)) goto LAB_0001328d;
+      val = (uint)((uint)uval_3 == (uint)uval_4 || (int)((uint)uval_3 - (uint)uval_4) < 0) * 3 +
+               (uint)flag * 6;
+      *extraout_ECX = *(undefined2 *)(&g_data_0018e90f + val);
+      uval_7 = (&g_data_0018e911)[val];
     }
   }
   else {
-    if (((int)(uVar6 - uVar10) <= (int)uVar11) && (uVar11 <= uVar6 + uVar10)) {
+    if (((int)(uval_6 - uval_8) <= (int)uval_9) && (uval_9 <= uval_6 + uval_8)) {
 LAB_0001328d:
-      FUN_0001342a(param_1);
+      barracks_fn_01342a(param_1);
       return 1;
     }
-    iVar13 = (uint)((uint)uVar2 == (uint)uVar1 || (int)((uint)uVar2 - (uint)uVar1) < 0) * 3 +
-             (uint)bVar8 * 6;
-    *extraout_ECX = *(undefined2 *)(&DAT_0018e903 + iVar13);
-    uVar9 = (&DAT_0018e905)[iVar13];
+    val = (uint)((uint)uval_2 == (uint)uval || (int)((uint)uval_2 - (uint)uval) < 0) * 3 +
+             (uint)flag_2 * 6;
+    *extraout_ECX = *(undefined2 *)(&g_data_0018e903 + val);
+    uval_7 = (&g_data_0018e905)[val];
   }
-  *param_1 = uVar9;
+  *param_1 = uval_7;
   return 1;
 }
 

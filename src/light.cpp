@@ -1,7 +1,7 @@
 /**
- * Dungeon Keeper (KEEPER.EXE) - Reconstructed Source Module: light.cpp
+ * Dungeon Keeper (KEEPER.EXE) - Reconstructed & Semantically Named Module: light.cpp
  * Binary Subject: /home/merlin/Dungeon Keeper/re/KEEPER.elf
- * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 (x86:LE:32:default)
+ * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 + DK Semantic Analyzer
  * Functions in this translation unit: 54
  */
 
@@ -11,104 +11,104 @@
 #include "../include/dk_functions.h"
 
 /******************************************************************************
- * Function : sub_0ac094 (Ghidra: FUN_000ac094)
- * Prototype: undefined8 sub_0ac094(void);
+ * Function : light_update_creature_control_0ac094 (Original VA: 0xac094, Ghidra: FUN_000ac094)
+ * Prototype: undefined8 light_update_creature_control_0ac094(void);
  * Address  : 0xac094 (Size: 264 bytes)
  * Module   : light.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
  * Callers  : 0 -> 
- * Callees  : 5 -> 0x239ee, 0x64ae7, 0xb3c90, 0xc9b2c, 0xcc968
+ * Callees  : 5 -> dungeon_attempt_get_random_position_0239ee, person_update_creature_control_064ae7, move_fn_0b3c90, room_process_dungeon_room_0c9b2c, room_number_slabs_room_zero_0cc968
  ******************************************************************************/
-undefined8 FUN_000ac094(void)
+undefined8 light_update_creature_control_0ac094(void)
 
 {
-  int iVar1;
-  char cVar2;
-  int in_EAX;
-  undefined4 in_EDX;
-  undefined1 *puVar3;
+  int room_off;
+  char ch;
+  int thing;
+  undefined4 arg_edx;
+  undefined1 *room_ptr;
   
-  if (((*(byte *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 0xab) & 1) == 0) &&
-     (((uint)*(ushort *)(in_EAX + 0x1b) + DAT_002e8bee & 0xf) == 0)) {
-    iVar1 = (uint)(byte)(&DAT_002d33c8)
-                        [((&DAT_0019033b)[*(byte *)(in_EAX + 0xe)] +
-                         (&DAT_0019033b)[*(byte *)(in_EAX + 0x10)] * 0x55) * 6] * 0x45;
-    puVar3 = &DAT_002ddd1b + iVar1;
-    if ((puVar3 != (undefined1 *)0x0) &&
-       ((*(short *)(&DAT_002ddd25 + iVar1) != 0xd ||
-        ((&DAT_002ddd1e)[iVar1] != *(char *)(in_EAX + 6))))) {
-      puVar3 = (undefined1 *)0x0;
+  if (((*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 0xab) & 1) == 0) && /* thing->ccontrol_idx */
+     (((uint)*(ushort *)(thing + 0x1b) + g_game_turn & 0xf) == 0)) { /* thing->index_or_angle */
+    room_off = (uint)(byte)(&g_bss_002d33c8)
+                        [((&g_subtile_to_slab_lut)[*(byte *)(thing + 0xe)] +
+                         (&g_subtile_to_slab_lut)[*(byte *)(thing + 0x10)] * 0x55) * 6] * 0x45;
+    room_ptr = &g_rooms + room_off;
+    if ((room_ptr != (undefined1 *)0x0) &&
+       ((*(short *)(&g_room_slabs_count + room_off) != 0xd ||
+        ((&g_bss_002ddd1e)[room_off] != *(char *)(thing + 6))))) { /* thing->owner */
+      room_ptr = (undefined1 *)0x0;
     }
-    if (puVar3 == (undefined1 *)0x0) {
-      puVar3 = (undefined1 *)FUN_000c9b2c();
+    if (room_ptr == (undefined1 *)0x0) {
+      room_ptr = (undefined1 *)room_process_dungeon_room_0c9b2c();
     }
-    if (puVar3 == (undefined1 *)0x0) {
-      cVar2 = FUN_000239ee();
+    if (room_ptr == (undefined1 *)0x0) {
+      ch = dungeon_attempt_get_random_position_0239ee();
     }
     else {
-      cVar2 = FUN_000cc968();
+      ch = room_number_slabs_room_zero_0cc968();
     }
-    if (cVar2 != '\0') {
-      FUN_000b3c90();
-      FUN_00064ae7();
+    if (ch != '\0') {
+      move_fn_0b3c90();
+      person_update_creature_control_064ae7();
     }
   }
-  return CONCAT44(in_EDX,1);
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : sub_0ac19c (Ghidra: FUN_000ac19c)
- * Prototype: undefined8 sub_0ac19c(void);
+ * Function : light_update_creature_control_0ac19c (Original VA: 0xac19c, Ghidra: FUN_000ac19c)
+ * Prototype: undefined8 light_update_creature_control_0ac19c(void);
  * Address  : 0xac19c (Size: 125 bytes)
  * Module   : light.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
  * Callers  : 0 -> 
- * Callees  : 2 -> 0x64ae7, 0xb4ac4
+ * Callees  : 2 -> person_update_creature_control_064ae7, move_fn_0b4ac4
  ******************************************************************************/
-undefined8 FUN_000ac19c(void)
+undefined8 light_update_creature_control_0ac19c(void)
 
 {
-  char cVar1;
-  int in_EAX;
-  undefined4 *puVar2;
+  char ch;
+  int thing;
+  undefined4 *word_ptr;
   undefined4 uStack_14;
   
-  puVar2 = (undefined4 *)&stack0xfffffff0;
-  if ((*(byte *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 0xab) & 1) == 0) {
+  word_ptr = (undefined4 *)&stack0xfffffff0;
+  if ((*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 0xab) & 1) == 0) { /* thing->ccontrol_idx */
     uStack_14 = 0;
-    cVar1 = FUN_000b4ac4();
-    if ((cVar1 == '\x01') || (puVar2 = &uStack_14, cVar1 == -1)) {
-      FUN_00064ae7();
-      puVar2 = &uStack_14;
+    ch = move_fn_0b4ac4();
+    if ((ch == '\x01') || (word_ptr = &uStack_14, ch == -1)) {
+      person_update_creature_control_064ae7();
+      word_ptr = &uStack_14;
     }
   }
-  return CONCAT44(*(undefined4 *)((int)puVar2 + 4),1);
+  return CONCAT44(*(undefined4 *)((int)word_ptr + 4),1);
 }
 
 /******************************************************************************
- * Function : sub_0ac370 (Ghidra: FUN_000ac370)
- * Prototype: void sub_0ac370(void);
+ * Function : light_fn_0ac370 (Original VA: 0xac370, Ghidra: FUN_000ac370)
+ * Prototype: void light_fn_0ac370(void);
  * Address  : 0xac370 (Size: 697 bytes)
  * Module   : light.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x31599, 0x322e9
+ * Purpose  : Module light.cpp procedure @ 0x0ac370
+ * Callers  : 2 -> frontmap_fn_031599, frontmap_number_players_0322e9
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_000ac370(void)
+void light_fn_0ac370(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  int iVar2;
-  int in_EDX;
-  int iVar3;
-  int iVar4;
-  undefined1 *puVar5;
-  int unaff_EBX;
-  int iVar6;
-  undefined1 *puVar7;
-  int iVar8;
-  int iVar9;
+  int arg_eax;
+  int val;
+  int val_2;
+  int arg_edx;
+  int val_3;
+  int val_4;
+  undefined1 *word_ptr;
+  int arg_ebx;
+  int val_5;
+  undefined1 *word_ptr_2;
+  int val_6;
+  int val_7;
   int local_34;
   int local_30;
   int local_2c;
@@ -118,934 +118,866 @@ void FUN_000ac370(void)
   int local_1c;
   uint local_18;
   
-  iVar1 = 0x100 - unaff_EBX;
-  iVar2 = in_EAX + DAT_00335168 + in_EDX * 0x500;
-  iVar3 = (in_EAX - DAT_00335182) + 1;
+  val = 0x100 - arg_ebx;
+  val_2 = arg_eax + g_frontnet_bss_00335168 + arg_edx * 0x500;
+  val_3 = (arg_eax - g_frontnet_bss_00335182) + 1;
   local_2c = 0;
-  puVar7 = (undefined1 *)
-           (DAT_003d9818 + (in_EAX - DAT_00335182) + DAT_003d9834 * (in_EDX - DAT_00335186));
-  local_30 = (in_EDX - DAT_00335186) + 1;
-  iVar4 = DAT_003d9834 - iVar3;
-  puVar5 = puVar7;
+  word_ptr_2 = (undefined1 *)
+           (g_display_bss_003d9818 + (arg_eax - g_frontnet_bss_00335182) + g_screen_pitch * (arg_edx - g_frontnet_bss_00335186));
+  local_30 = (arg_edx - g_frontnet_bss_00335186) + 1;
+  val_4 = g_screen_pitch - val_3;
+  word_ptr = word_ptr_2;
   while (local_30 = local_30 + -1, -1 < local_30) {
-    iVar8 = 0;
-    iVar6 = iVar3;
-    while (iVar6 = iVar6 + -1, -1 < iVar6) {
-      iVar9 = iVar8 >> 8;
-      iVar8 = iVar8 + iVar1;
-      *puVar5 = *(undefined1 *)((iVar2 + (local_2c >> 8) * -0x500) - iVar9);
-      puVar5 = puVar5 + -1;
+    val_6 = 0;
+    val_5 = val_3;
+    while (val_5 = val_5 + -1, -1 < val_5) {
+      val_7 = val_6 >> 8;
+      val_6 = val_6 + val;
+      *word_ptr = *(undefined1 *)((val_2 + (local_2c >> 8) * -0x500) - val_7);
+      word_ptr = word_ptr + -1;
     }
-    local_2c = local_2c + iVar1;
-    puVar5 = puVar5 + -iVar4;
+    local_2c = local_2c + val;
+    word_ptr = word_ptr + -val_4;
   }
-  iVar3 = (DAT_003d982c - (in_EAX - DAT_00335182)) + -1;
+  val_3 = (g_screen_width - (arg_eax - g_frontnet_bss_00335182)) + -1;
   local_20 = 0;
-  iVar4 = DAT_003d9834 + iVar3;
-  local_24 = (in_EDX - DAT_00335186) + 1;
-  puVar5 = puVar7;
+  val_4 = g_screen_pitch + val_3;
+  local_24 = (arg_edx - g_frontnet_bss_00335186) + 1;
+  word_ptr = word_ptr_2;
   while (local_24 = local_24 - 1, local_24 < 0x80000000) {
-    iVar8 = 0;
-    iVar6 = iVar3;
-    while (iVar6 = iVar6 + -1, -1 < iVar6) {
-      iVar9 = iVar8 >> 8;
-      iVar8 = iVar8 + iVar1;
-      *puVar5 = *(undefined1 *)(iVar9 + iVar2 + (local_20 >> 8) * -0x500);
-      puVar5 = puVar5 + 1;
+    val_6 = 0;
+    val_5 = val_3;
+    while (val_5 = val_5 + -1, -1 < val_5) {
+      val_7 = val_6 >> 8;
+      val_6 = val_6 + val;
+      *word_ptr = *(undefined1 *)(val_7 + val_2 + (local_20 >> 8) * -0x500);
+      word_ptr = word_ptr + 1;
     }
-    local_20 = local_20 + iVar1;
-    puVar5 = puVar5 + -iVar4;
+    local_20 = local_20 + val;
+    word_ptr = word_ptr + -val_4;
   }
-  puVar7 = puVar7 + DAT_003d9834;
-  iVar3 = (in_EAX - DAT_00335182) + 1;
+  word_ptr_2 = word_ptr_2 + g_screen_pitch;
+  val_3 = (arg_eax - g_frontnet_bss_00335182) + 1;
   local_34 = 0;
-  local_1c = (DAT_003d9830 - (in_EDX - DAT_00335186)) + -1;
-  iVar4 = DAT_003d9834 + iVar3;
-  puVar5 = puVar7;
+  local_1c = (g_screen_height - (arg_edx - g_frontnet_bss_00335186)) + -1;
+  val_4 = g_screen_pitch + val_3;
+  word_ptr = word_ptr_2;
   while (local_1c = local_1c + -1, -1 < local_1c) {
-    iVar8 = 0;
-    iVar6 = iVar3;
-    while (iVar6 = iVar6 + -1, -1 < iVar6) {
-      iVar9 = iVar8 >> 8;
-      iVar8 = iVar8 + iVar1;
-      *puVar5 = *(undefined1 *)(((local_34 >> 8) * 0x500 + iVar2) - iVar9);
-      puVar5 = puVar5 + -1;
+    val_6 = 0;
+    val_5 = val_3;
+    while (val_5 = val_5 + -1, -1 < val_5) {
+      val_7 = val_6 >> 8;
+      val_6 = val_6 + val;
+      *word_ptr = *(undefined1 *)(((local_34 >> 8) * 0x500 + val_2) - val_7);
+      word_ptr = word_ptr + -1;
     }
-    local_34 = local_34 + iVar1;
-    puVar5 = puVar5 + iVar4;
+    local_34 = local_34 + val;
+    word_ptr = word_ptr + val_4;
   }
-  iVar3 = (DAT_003d982c - (in_EAX - DAT_00335182)) + -1;
+  val_3 = (g_screen_width - (arg_eax - g_frontnet_bss_00335182)) + -1;
   local_28 = 0;
-  local_18 = (DAT_003d9830 - (in_EDX - DAT_00335186)) - 1;
-  iVar4 = DAT_003d9834 - iVar3;
+  local_18 = (g_screen_height - (arg_edx - g_frontnet_bss_00335186)) - 1;
+  val_4 = g_screen_pitch - val_3;
   while (local_18 = local_18 - 1, local_18 < 0x80000000) {
-    iVar8 = 0;
-    iVar6 = iVar3;
-    while (iVar6 = iVar6 + -1, -1 < iVar6) {
-      iVar9 = iVar8 >> 8;
-      iVar8 = iVar8 + iVar1;
-      *puVar7 = *(undefined1 *)(iVar9 + (local_28 >> 8) * 0x500 + iVar2);
-      puVar7 = puVar7 + 1;
+    val_6 = 0;
+    val_5 = val_3;
+    while (val_5 = val_5 + -1, -1 < val_5) {
+      val_7 = val_6 >> 8;
+      val_6 = val_6 + val;
+      *word_ptr_2 = *(undefined1 *)(val_7 + (local_28 >> 8) * 0x500 + val_2);
+      word_ptr_2 = word_ptr_2 + 1;
     }
-    local_28 = local_28 + iVar1;
-    puVar7 = puVar7 + iVar4;
+    local_28 = local_28 + val;
+    word_ptr_2 = word_ptr_2 + val_4;
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0ac630 (Ghidra: FUN_000ac630)
- * Prototype: void sub_0ac630(void);
+ * Function : light_fn_0ac630 (Original VA: 0xac630, Ghidra: FUN_000ac630)
+ * Prototype: void light_fn_0ac630(void);
  * Address  : 0xac630 (Size: 97 bytes)
  * Module   : light.cpp [callgraph_affinity_to_following_unit]
- * Naming   : Address-based identifier
- * Callers  : 6 -> 0x29b54, 0x40d25, 0x40db9, 0x6a553, 0x72810, 0xb20e0
- * Callees  : 2 -> 0xacce4, 0xb10c0
+ * Purpose  : Module light.cpp procedure @ 0x0ac630
+ * Callers  : 6 -> file_fn_029b54, inits_roll_action_random_040d25, inits_update_player_view_state_040db9, setup_load_core_game_data, structs_fn_072810, light_fn_0b20e0
+ * Callees  : 2 -> light_attempt_delete_light_0acce4, light_fn_0b10c0
  ******************************************************************************/
-void FUN_000ac630(void)
+void light_fn_0ac630(void)
 
 {
-  byte bVar1;
-  int iVar2;
-  int iVar3;
-  byte bVar4;
-  byte *pbVar5;
+  byte flag;
+  int val;
+  int val_2;
+  byte flag_2;
+  byte *loop_i;
   byte *extraout_EDX;
   
-  for (pbVar5 = &DAT_001bd5ed; pbVar5 < &DAT_001c1dcd; pbVar5 = pbVar5 + 0x2e) {
-    if ((*pbVar5 & 1) != 0) {
-      FUN_000acce4();
-      pbVar5 = extraout_EDX;
+  for (loop_i = &g_bss_001bd5ed; loop_i < &g_bss_001c1dcd; loop_i = loop_i + 0x2e) {
+    if ((*loop_i & 1) != 0) {
+      light_attempt_delete_light_0acce4();
+      loop_i = extraout_EDX;
     }
   }
-  if (DAT_001e31fa == '\0') {
-    FUN_000b10c0();
-    bVar4 = 0x1f;
-    iVar2 = 0;
+  if (g_bss_001e31fa == '\0') {
+    light_fn_0b10c0();
+    flag_2 = 0x1f;
+    val = 0;
     do {
-      iVar3 = iVar2 + 4;
-      bVar1 = bVar4 & 0x1f;
-      bVar4 = bVar4 - 1;
-      *(int *)((int)&DAT_00388e3c + iVar2) = 1 << bVar1;
-      iVar2 = iVar3;
-    } while (iVar3 != 0x80);
-    DAT_001e31fa = '\x01';
+      val_2 = val + 4;
+      flag = flag_2 & 0x1f;
+      flag_2 = flag_2 - 1;
+      *(int *)((int)&g_bss_00388e3c + val) = 1 << flag;
+      val = val_2;
+    } while (val_2 != 0x80);
+    g_bss_001e31fa = '\x01';
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0ac694 (Ghidra: FUN_000ac694)
- * Prototype: void sub_0ac694(void);
+ * Function : light_fn_0ac694 (Original VA: 0xac694, Ghidra: FUN_000ac694)
+ * Prototype: void light_fn_0ac694(void);
  * Address  : 0xac694 (Size: 851 bytes)
  * Module   : light.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0xde6a8
- * Callees  : 1 -> 0xadbc0
+ * Purpose  : Module light.cpp procedure @ 0x0ac694
+ * Callers  : 1 -> update_go_first_person_without_0de6a8
+ * Callees  : 1 -> light_maintain_gui_button_state_0adbc0
  ******************************************************************************/
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void FUN_000ac694(void)
+void light_fn_0ac694(void)
 
 {
-  int iVar1;
-  int in_EAX;
-  uint in_ECX;
-  uint uVar2;
-  ushort uVar3;
-  uint in_EDX;
-  undefined4 *puVar4;
-  int unaff_EBX;
-  byte *pbVar5;
-  int iVar6;
-  undefined4 *puVar7;
-  uint uVar8;
-  undefined4 *puVar9;
-  undefined4 *puVar10;
-  byte bVar11;
+  int val;
+  int arg_eax;
+  uint arg_ecx;
+  uint loop_i;
+  ushort uval;
+  uint arg_edx;
+  undefined4 *word_ptr;
+  int arg_ebx;
+  byte *byte_ptr;
+  int val_2;
+  undefined4 *word_ptr_2;
+  uint loop_i_2;
+  undefined4 *word_ptr_3;
+  undefined4 *word_ptr_4;
+  byte flag;
   
-  bVar11 = 0;
-  _DAT_00388e28 = 0;
-  _DAT_00388e2c = 0;
-  DAT_00388e30 = 0;
-  DAT_00388e34 = 0;
-  iVar6 = (unaff_EBX - in_EAX) / 2 + 1;
-  iVar1 = (int)(in_ECX - in_EDX) / 2 + 1;
-  if ((DAT_001e31f9 != '\0') &&
-     (pbVar5 = &DAT_001bd5ed + DAT_002e6f0e * 0x2e, &DAT_001bd5ed < pbVar5)) {
+  flag = 0;
+  g_bss_00388e28 = 0;
+  g_bss_00388e2c = 0;
+  g_bss_00388e30 = 0;
+  g_bss_00388e34 = 0;
+  val_2 = (arg_ebx - arg_eax) / 2 + 1;
+  val = (int)(arg_ecx - arg_edx) / 2 + 1;
+  if ((g_bss_001e31f9 != '\0') &&
+     (byte_ptr = &g_bss_001bd5ed + g_bss_002e6f0e * 0x2e, &g_bss_001bd5ed < byte_ptr)) {
     do {
-      if (((*pbVar5 & 8) != 0) || ((*pbVar5 & 0x80) != 0)) {
-        DAT_00388e34 = DAT_00388e34 + 1;
-        uVar8 = (in_EAX + iVar6) - (uint)pbVar5[0x29];
-        uVar2 = (int)uVar8 >> 0x1f;
-        if (((int)((uVar8 ^ uVar2) - uVar2) < (int)((uint)pbVar5[5] + iVar6)) &&
-           (uVar8 = (iVar1 + in_EDX) - (uint)pbVar5[0x2b], uVar2 = (int)uVar8 >> 0x1f,
-           (int)((uVar8 ^ uVar2) - uVar2) < (int)((uint)pbVar5[5] + iVar1))) {
-          DAT_00388e30 = DAT_00388e30 + 1;
-          FUN_000adbc0();
-          *pbVar5 = *pbVar5 & 0x77;
+      if (((*byte_ptr & 8) != 0) || ((*byte_ptr & 0x80) != 0)) {
+        g_bss_00388e34 = g_bss_00388e34 + 1;
+        loop_i_2 = (arg_eax + val_2) - (uint)byte_ptr[0x29];
+        loop_i = (int)loop_i_2 >> 0x1f;
+        if (((int)((loop_i_2 ^ loop_i) - loop_i) < (int)((uint)byte_ptr[5] + val_2)) &&
+           (loop_i_2 = (val + arg_edx) - (uint)byte_ptr[0x2b], loop_i = (int)loop_i_2 >> 0x1f,
+           (int)((loop_i_2 ^ loop_i) - loop_i) < (int)((uint)byte_ptr[5] + val))) {
+          g_bss_00388e30 = g_bss_00388e30 + 1;
+          light_maintain_gui_button_state_0adbc0();
+          *byte_ptr = *byte_ptr & 0x77;
         }
       }
-      pbVar5 = &DAT_001bd5ed + (uint)*(ushort *)(pbVar5 + 0x26) * 0x2e;
-    } while (&DAT_001bd5ed < pbVar5);
+      byte_ptr = &g_bss_001bd5ed + (uint)*(ushort *)(byte_ptr + 0x26) * 0x2e;
+    } while (&g_bss_001bd5ed < byte_ptr);
   }
-  iVar6 = in_EDX * 0x100 + in_EAX;
-  puVar4 = (undefined4 *)(&DAT_001e3203 + iVar6);
-  puVar7 = (undefined4 *)(&DAT_001c31f5 + iVar6 * 2);
-  for (uVar8 = in_EDX; uVar8 <= in_ECX; uVar8 = uVar8 + 1) {
-    puVar9 = puVar7;
-    puVar10 = puVar4;
-    for (uVar2 = (unaff_EBX - in_EAX & 0x7fffffffU) >> 1; uVar2 != 0; uVar2 = uVar2 - 1) {
-      *puVar10 = *puVar9;
-      puVar9 = puVar9 + (uint)bVar11 * -2 + 1;
-      puVar10 = puVar10 + (uint)bVar11 * -2 + 1;
+  val_2 = arg_edx * 0x100 + arg_eax;
+  word_ptr = (undefined4 *)(&g_bss_001e3203 + val_2);
+  word_ptr_2 = (undefined4 *)(&g_bss_001c31f5 + val_2 * 2);
+  for (loop_i_2 = arg_edx; loop_i_2 <= arg_ecx; loop_i_2 = loop_i_2 + 1) {
+    word_ptr_3 = word_ptr_2;
+    word_ptr_4 = word_ptr;
+    for (loop_i = (arg_ebx - arg_eax & 0x7fffffffU) >> 1; loop_i != 0; loop_i = loop_i - 1) {
+      *word_ptr_4 = *word_ptr_3;
+      word_ptr_3 = word_ptr_3 + (uint)flag * -2 + 1;
+      word_ptr_4 = word_ptr_4 + (uint)flag * -2 + 1;
     }
-    for (uVar2 = (unaff_EBX - in_EAX) * 2 & 3; uVar2 != 0; uVar2 = uVar2 - 1) {
-      *(undefined1 *)puVar10 = *(undefined1 *)puVar9;
-      puVar9 = (undefined4 *)((int)puVar9 + (uint)bVar11 * -2 + 1);
-      puVar10 = (undefined4 *)((int)puVar10 + (uint)bVar11 * -2 + 1);
+    for (loop_i = (arg_ebx - arg_eax) * 2 & 3; loop_i != 0; loop_i = loop_i - 1) {
+      *(undefined1 *)word_ptr_4 = *(undefined1 *)word_ptr_3;
+      word_ptr_3 = (undefined4 *)((int)word_ptr_3 + (uint)flag * -2 + 1);
+      word_ptr_4 = (undefined4 *)((int)word_ptr_4 + (uint)flag * -2 + 1);
     }
-    puVar4 = puVar4 + 0x80;
-    puVar7 = puVar7 + 0x80;
+    word_ptr = word_ptr + 0x80;
+    word_ptr_2 = word_ptr_2 + 0x80;
   }
-  if (DAT_001e31f9 != '\0') {
-    iVar6 = (unaff_EBX - in_EAX) / 2 + 1;
-    iVar1 = (int)(in_ECX - in_EDX) / 2 + 1;
-    pbVar5 = &DAT_001bd5ed + DAT_002e6f16 * 0x2e;
-    if (&DAT_001bd5ed < pbVar5) {
+  if (g_bss_001e31f9 != '\0') {
+    val_2 = (arg_ebx - arg_eax) / 2 + 1;
+    val = (int)(arg_ecx - arg_edx) / 2 + 1;
+    byte_ptr = &g_bss_001bd5ed + g_bss_002e6f16 * 0x2e;
+    if (&g_bss_001bd5ed < byte_ptr) {
       do {
-        uVar8 = (in_EAX + iVar6) - (uint)pbVar5[0x29];
-        uVar2 = (int)uVar8 >> 0x1f;
-        if (((int)((uVar8 ^ uVar2) - uVar2) < (int)(iVar6 + (uint)pbVar5[5])) &&
-           (uVar8 = (iVar1 + in_EDX) - (uint)pbVar5[0x2b], uVar2 = (int)uVar8 >> 0x1f,
-           (int)((uVar8 ^ uVar2) - uVar2) < (int)((uint)pbVar5[5] + iVar1))) {
-          _DAT_00388e28 = _DAT_00388e28 + 1;
-          if ((*pbVar5 & 8) == 0) {
-            _DAT_00388e2c = _DAT_00388e2c + 1;
+        loop_i_2 = (arg_eax + val_2) - (uint)byte_ptr[0x29];
+        loop_i = (int)loop_i_2 >> 0x1f;
+        if (((int)((loop_i_2 ^ loop_i) - loop_i) < (int)(val_2 + (uint)byte_ptr[5])) &&
+           (loop_i_2 = (val + arg_edx) - (uint)byte_ptr[0x2b], loop_i = (int)loop_i_2 >> 0x1f,
+           (int)((loop_i_2 ^ loop_i) - loop_i) < (int)((uint)byte_ptr[5] + val))) {
+          g_bss_00388e28 = g_bss_00388e28 + 1;
+          if ((*byte_ptr & 8) == 0) {
+            g_bss_00388e2c = g_bss_00388e2c + 1;
           }
-          if ((*pbVar5 & 0x10) != 0) {
-            if (pbVar5[6] == 1) {
-              uVar3 = *(ushort *)(pbVar5 + 0x20);
-              if ((uint)*(ushort *)(pbVar5 + 0x16) + (uint)*(ushort *)(pbVar5 + 0x1e) < (uint)uVar3)
+          if ((*byte_ptr & 0x10) != 0) {
+            if (byte_ptr[6] == 1) {
+              uval = *(ushort *)(byte_ptr + 0x20);
+              if ((uint)*(ushort *)(byte_ptr + 0x16) + (uint)*(ushort *)(byte_ptr + 0x1e) < (uint)uval)
               {
-                *(short *)(pbVar5 + 0x16) = *(short *)(pbVar5 + 0x16) + *(short *)(pbVar5 + 0x1e);
+                *(short *)(byte_ptr + 0x16) = *(short *)(byte_ptr + 0x16) + *(short *)(byte_ptr + 0x1e);
               }
               else {
-                pbVar5[6] = 2;
+                byte_ptr[6] = 2;
 LAB_000ac964:
-                *(ushort *)(pbVar5 + 0x16) = uVar3;
+                *(ushort *)(byte_ptr + 0x16) = uval;
               }
             }
             else {
-              uVar3 = *(ushort *)(pbVar5 + 0x22);
-              if ((int)((uint)*(ushort *)(pbVar5 + 0x16) - (uint)*(ushort *)(pbVar5 + 0x1e)) <=
-                  (int)(uint)uVar3) {
-                pbVar5[6] = 1;
+              uval = *(ushort *)(byte_ptr + 0x22);
+              if ((int)((uint)*(ushort *)(byte_ptr + 0x16) - (uint)*(ushort *)(byte_ptr + 0x1e)) <=
+                  (int)(uint)uval) {
+                byte_ptr[6] = 1;
                 goto LAB_000ac964;
               }
-              *(short *)(pbVar5 + 0x16) = *(short *)(pbVar5 + 0x16) - *(short *)(pbVar5 + 0x1e);
+              *(short *)(byte_ptr + 0x16) = *(short *)(byte_ptr + 0x16) - *(short *)(byte_ptr + 0x1e);
             }
-            *pbVar5 = *pbVar5 | 8;
+            *byte_ptr = *byte_ptr | 8;
           }
-          if ((*pbVar5 & 0x20) != 0) {
-            if (pbVar5[3] == 1) {
-              bVar11 = pbVar5[7];
-              if ((uint)pbVar5[4] + (uint)pbVar5[2] < (uint)bVar11) {
-                pbVar5[2] = pbVar5[2] + pbVar5[4];
+          if ((*byte_ptr & 0x20) != 0) {
+            if (byte_ptr[3] == 1) {
+              flag = byte_ptr[7];
+              if ((uint)byte_ptr[4] + (uint)byte_ptr[2] < (uint)flag) {
+                byte_ptr[2] = byte_ptr[2] + byte_ptr[4];
               }
               else {
-                pbVar5[3] = 2;
+                byte_ptr[3] = 2;
 LAB_000ac9be:
-                pbVar5[2] = bVar11;
+                byte_ptr[2] = flag;
               }
             }
             else {
-              bVar11 = pbVar5[8];
-              if ((int)((uint)pbVar5[2] - (uint)pbVar5[4]) <= (int)(uint)bVar11) {
-                pbVar5[3] = 1;
+              flag = byte_ptr[8];
+              if ((int)((uint)byte_ptr[2] - (uint)byte_ptr[4]) <= (int)(uint)flag) {
+                byte_ptr[3] = 1;
                 goto LAB_000ac9be;
               }
-              pbVar5[2] = pbVar5[2] - pbVar5[4];
+              byte_ptr[2] = byte_ptr[2] - byte_ptr[4];
             }
-            *pbVar5 = *pbVar5 | 8;
+            *byte_ptr = *byte_ptr | 8;
           }
-          if (*(short *)(pbVar5 + 0x1c) != 0) {
-            *(short *)(pbVar5 + 0x18) = *(short *)(pbVar5 + 0x18) + *(short *)(pbVar5 + 0x1c);
-            *pbVar5 = *pbVar5 | 8;
+          if (*(short *)(byte_ptr + 0x1c) != 0) {
+            *(short *)(byte_ptr + 0x18) = *(short *)(byte_ptr + 0x18) + *(short *)(byte_ptr + 0x1c);
+            *byte_ptr = *byte_ptr | 8;
           }
-          FUN_000adbc0();
+          light_maintain_gui_button_state_0adbc0();
         }
-        pbVar5 = &DAT_001bd5ed + (uint)*(ushort *)(pbVar5 + 0x26) * 0x2e;
-      } while (&DAT_001bd5ed < pbVar5);
+        byte_ptr = &g_bss_001bd5ed + (uint)*(ushort *)(byte_ptr + 0x26) * 0x2e;
+      } while (&g_bss_001bd5ed < byte_ptr);
     }
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0ac9e8 (Ghidra: FUN_000ac9e8)
- * Prototype: void sub_0ac9e8(void);
+ * Function : light_fn_0ac9e8 (Original VA: 0xac9e8, Ghidra: FUN_000ac9e8)
+ * Prototype: void light_fn_0ac9e8(void);
  * Address  : 0xac9e8 (Size: 36 bytes)
  * Module   : light.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module light.cpp procedure @ 0x0ac9e8
  * Callers  : 0 -> 
- * Callees  : 1 -> 0xb087c
+ * Callees  : 1 -> light_fn_0b087c
  ******************************************************************************/
-void FUN_000ac9e8(void)
+void light_fn_0ac9e8(void)
 
 {
-  int in_EAX;
+  int arg_eax;
   
-  if (in_EAX != DAT_001e31f5) {
-    DAT_001e31f5 = in_EAX;
-    FUN_000b087c();
+  if (arg_eax != g_bss_001e31f5) {
+    g_bss_001e31f5 = arg_eax;
+    light_fn_0b087c();
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0aca0c (Ghidra: FUN_000aca0c)
- * Prototype: void sub_0aca0c(void);
+ * Function : light_fn_0aca0c (Original VA: 0xaca0c, Ghidra: FUN_000aca0c)
+ * Prototype: void light_fn_0aca0c(void);
  * Address  : 0xaca0c (Size: 89 bytes)
  * Module   : light.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x404f7
- * Callees  : 2 -> 0xb087c, 0xb0980
+ * Purpose  : Module light.cpp procedure @ 0x0aca0c
+ * Callers  : 1 -> inits_could_create_ambient_sound_0404f7
+ * Callees  : 2 -> light_fn_0b087c, light_process_map_subtile_0b0980
  ******************************************************************************/
-void FUN_000aca0c(void)
+void light_fn_0aca0c(void)
 
 {
-  char in_AL;
+  char arg_al;
   
-  if (in_AL == '\0') {
-    DAT_001e31f5 = 0x20;
+  if (arg_al == '\0') {
+    g_bss_001e31f5 = 0x20;
   }
   else {
-    DAT_001e31f5 = 10;
+    g_bss_001e31f5 = 10;
   }
-  DAT_001e31f9 = in_AL != '\0';
-  FUN_000b0980();
-  FUN_000b087c();
+  g_bss_001e31f9 = arg_al != '\0';
+  light_process_map_subtile_0b0980();
+  light_fn_0b087c();
   return;
 }
 
 /******************************************************************************
- * Function : sub_0aca68 (Ghidra: FUN_000aca68)
- * Prototype: void sub_0aca68(void);
+ * Function : light_fn_0aca68 (Original VA: 0xaca68, Ghidra: FUN_000aca68)
+ * Prototype: void light_fn_0aca68(void);
  * Address  : 0xaca68 (Size: 142 bytes)
  * Module   : light.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x14a68
- * Callees  : 1 -> 0xb087c
+ * Purpose  : Module light.cpp procedure @ 0x0aca68
+ * Callers  : 1 -> build_fn_014a68
+ * Callees  : 1 -> light_fn_0b087c
  ******************************************************************************/
-void FUN_000aca68(void)
+void light_fn_0aca68(void)
 
 {
-  int in_EAX;
-  uint uVar1;
-  int in_ECX;
-  int in_EDX;
-  byte *pbVar2;
-  int unaff_EBX;
+  int arg_eax;
+  uint uval;
+  int arg_ecx;
+  int arg_edx;
+  byte *loop_i;
+  int arg_ebx;
   
-  for (pbVar2 = &DAT_001bd61b; pbVar2 < &DAT_001c1dcd; pbVar2 = pbVar2 + 0x2e) {
-    if (((*pbVar2 & 1) != 0) && ((*pbVar2 & 4) != 0)) {
-      uVar1 = (uint)pbVar2[5];
-      if ((in_EAX <= (int)(pbVar2[0x29] + uVar1)) &&
-         (((int)(pbVar2[0x29] - uVar1) <= unaff_EBX && (in_EDX <= (int)(pbVar2[0x2b] + uVar1))))) {
-        if ((int)(pbVar2[0x2b] - uVar1) <= in_ECX) {
-          *pbVar2 = *pbVar2 | 8;
+  for (loop_i = &g_bss_001bd61b; loop_i < &g_bss_001c1dcd; loop_i = loop_i + 0x2e) {
+    if (((*loop_i & 1) != 0) && ((*loop_i & 4) != 0)) {
+      uval = (uint)loop_i[5];
+      if ((arg_eax <= (int)(loop_i[0x29] + uval)) &&
+         (((int)(loop_i[0x29] - uval) <= arg_ebx && (arg_edx <= (int)(loop_i[0x2b] + uval))))) {
+        if ((int)(loop_i[0x2b] - uval) <= arg_ecx) {
+          *loop_i = *loop_i | 8;
         }
       }
     }
   }
-  FUN_000b087c();
+  light_fn_0b087c();
   return;
 }
 
 /******************************************************************************
- * Function : dk_light_already_list_0acaf8 (Ghidra: FUN_000acaf8)
- * Prototype: longlong dk_light_already_list_0acaf8(void);
+ * Function : light_already_list_0acaf8 (Original VA: 0xacaf8, Ghidra: FUN_000acaf8)
+ * Prototype: longlong light_already_list_0acaf8(void);
  * Address  : 0xacaf8 (Size: 490 bytes)
  * Module   : light.cpp [direct_file_string_xref]
- * OrigLine : light.cpp:2725 ("Light is already in list"); light.cpp:237 ("Cannot allocate cache for dynamic light"); light.cpp:2725 ("Light is already in list")
- * Naming   : String 'Light is already in list'
- * Callers  : 13 -> 0x24998, 0x29b54, 0x40e94, 0x43f07, 0x442ca, 0x444a9, 0x447fb, 0x69268, 0x694d4, 0x6972c ...
- * Callees  : 2 -> 0xddaf0, 0xe6a10
- * Strings  :
- *   - 0x16a49d: "light.cpp"
- *   - 0x16a4cf: "light.cpp"
- *   - 0x16a484: "Light is already in list"
- *   - 0x16a4a7: "Cannot allocate cache for dynamic light"
+ * OrigLine : light.cpp lines 237, 2725
+ * Purpose  : String 'Light is already in list'
+ * Callers  : 13 -> effect_allocate_light_effect_024998, file_fn_029b54, inits_fn_040e94, inits_allocate_light_object_043f07, inits_allocate_dynamic_light_shot_0442ca, inits_allocate_dynamic_light_shot_0444a9, inits_allocate_dynamic_light_trap_0447fb, scrsupp_allocate_light_new_hero_069268 ...
+ * Callees  : 2 -> LbErrorLog, LbScreenWaitVbi
  ******************************************************************************/
 /* WARNING: Removing unreachable block (ram,0x000acb12) */
 /* WARNING: Removing unreachable block (ram,0x000acb57) */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-longlong FUN_000acaf8(void)
+longlong light_already_list_0acaf8(void)
 
 {
-  char cVar1;
-  undefined2 *in_EAX;
-  uint uVar2;
+  char ch;
+  undefined2 *arg_eax;
+  uint uval;
   byte *extraout_ECX;
   byte *extraout_ECX_00;
-  uint in_EDX;
-  byte *pbVar3;
-  byte *pbVar4;
-  short sVar5;
-  byte bVar6;
+  uint arg_edx;
+  byte *byte_ptr;
+  byte *byte_ptr_2;
+  short short_val;
+  byte flag;
   
-  bVar6 = 0;
-  pbVar3 = &DAT_001bd61b;
-  sVar5 = 1;
+  flag = 0;
+  byte_ptr = &g_bss_001bd61b;
+  short_val = 1;
   do {
-    if ((*pbVar3 & 1) == 0) {
-      *(short *)(pbVar3 + 0xe) = sVar5;
-      *pbVar3 = *pbVar3 | 1;
+    if ((*byte_ptr & 1) == 0) {
+      *(short *)(byte_ptr + 0xe) = short_val;
+      *byte_ptr = *byte_ptr | 1;
       goto LAB_000acb36;
     }
-    pbVar3 = pbVar3 + 0x2e;
-    sVar5 = sVar5 + 1;
-  } while (pbVar3 < &DAT_001c1dcd);
-  pbVar3 = (byte *)0x0;
+    byte_ptr = byte_ptr + 0x2e;
+    short_val = short_val + 1;
+  } while (byte_ptr < &g_bss_001c1dcd);
+  byte_ptr = (byte *)0x0;
 LAB_000acb36:
-  if (pbVar3 == (byte *)0x0) {
+  if (byte_ptr == (byte *)0x0) {
 LAB_000acc0e:
-    return (ulonglong)in_EDX << 0x20;
+    return (ulonglong)arg_edx << 0x20;
   }
-  if (*(char *)((int)in_EAX + 0x11) == '\0') {
-    DAT_00388e24 = DAT_00388e24 + 1;
-    if ((pbVar3[1] & 1) == 0) {
-      DAT_002e6f0a = DAT_002e6f0a + 1;
-      pbVar3[1] = pbVar3[1] | 1;
-      *(undefined2 *)(pbVar3 + 0x26) = (undefined2)DAT_002e6f0e;
-      DAT_002e6f0e._0_2_ = *(undefined2 *)(pbVar3 + 0xe);
-      DAT_002e6f0e._2_2_ = 0;
+  if (*(char *)((int)arg_eax + 0x11) == '\0') {
+    g_bss_00388e24 = g_bss_00388e24 + 1;
+    if ((byte_ptr[1] & 1) == 0) {
+      g_bss_002e6f0a = g_bss_002e6f0a + 1;
+      byte_ptr[1] = byte_ptr[1] | 1;
+      *(undefined2 *)(byte_ptr + 0x26) = (undefined2)g_bss_002e6f0e;
+      g_bss_002e6f0e._0_2_ = *(undefined2 *)(byte_ptr + 0xe);
+      g_bss_002e6f0e._2_2_ = 0;
     }
     else {
-      FUN_000ddaf0(); /* LbErrorLog("light.cpp", line 2725, "Light is already in list") */
-      pbVar3 = extraout_ECX_00;
+      LbErrorLog(); /* LbErrorLog("light.cpp", line 2725, "Light is already in list") */
+      byte_ptr = extraout_ECX_00;
     }
-    _DAT_00388e38 = 1;
+    g_bss_00388e38 = 1;
   }
   else {
-    pbVar4 = &DAT_001c1e4e;
+    byte_ptr_2 = &g_bss_001c1e4e;
     do {
-      if ((*pbVar4 & 1) == 0) {
-        *pbVar4 = *pbVar4 | 1;
+      if ((*byte_ptr_2 & 1) == 0) {
+        *byte_ptr_2 = *byte_ptr_2 | 1;
         goto LAB_000acb7a;
       }
-      pbVar4 = pbVar4 + 0x81;
-    } while (pbVar4 < &DAT_001c31f5);
-    pbVar4 = (byte *)0x0;
+      byte_ptr_2 = byte_ptr_2 + 0x81;
+    } while (byte_ptr_2 < &g_bss_001c31f5);
+    byte_ptr_2 = (byte *)0x0;
 LAB_000acb7a:
-    if (pbVar4 == (byte *)0x0) {
-      FUN_000ddaf0(); /* LbErrorLog("light.cpp", line 237, "Cannot allocate cache for dynamic light") */
-      FUN_000e6a10();
+    if (byte_ptr_2 == (byte *)0x0) {
+      LbErrorLog(); /* LbErrorLog("light.cpp", line 237, "Cannot allocate cache for dynamic light") */
+      LbScreenWaitVbi();
       goto LAB_000acc0e;
     }
-    DAT_00388e20 = DAT_00388e20 + 1;
-    *(short *)(pbVar3 + 0x10) = (short)((int)(pbVar4 + -0x1c1dcd) / 0x81);
-    if ((pbVar3[1] & 1) == 0) {
-      DAT_002e6f12 = DAT_002e6f12 + 1;
-      pbVar3[1] = pbVar3[1] | 1;
-      *(undefined2 *)(pbVar3 + 0x26) = (undefined2)DAT_002e6f16;
-      DAT_002e6f16._0_2_ = *(undefined2 *)(pbVar3 + 0xe);
-      DAT_002e6f16._2_2_ = 0;
+    g_bss_00388e20 = g_bss_00388e20 + 1;
+    *(short *)(byte_ptr + 0x10) = (short)((int)(byte_ptr_2 + -0x1c1dcd) / 0x81);
+    if ((byte_ptr[1] & 1) == 0) {
+      g_bss_002e6f12 = g_bss_002e6f12 + 1;
+      byte_ptr[1] = byte_ptr[1] | 1;
+      *(undefined2 *)(byte_ptr + 0x26) = (undefined2)g_bss_002e6f16;
+      g_bss_002e6f16._0_2_ = *(undefined2 *)(byte_ptr + 0xe);
+      g_bss_002e6f16._2_2_ = 0;
     }
     else {
-      FUN_000ddaf0(); /* LbErrorLog("light.cpp", line 2725, "Light is already in list") */
-      pbVar3 = extraout_ECX;
+      LbErrorLog(); /* LbErrorLog("light.cpp", line 2725, "Light is already in list") */
+      byte_ptr = extraout_ECX;
     }
   }
-  *pbVar3 = *pbVar3 | 10;
-  *(undefined4 *)(pbVar3 + 0x28) = *(undefined4 *)(in_EAX + 5);
-  *(undefined2 *)(pbVar3 + (uint)bVar6 * -8 + 0x2c) = in_EAX[(uint)bVar6 * -4 + 7];
-  *(undefined2 *)(pbVar3 + 0x16) = *in_EAX;
-  pbVar3[2] = *(byte *)(in_EAX + 1);
-  bVar6 = pbVar3[1];
-  cVar1 = *(char *)((int)in_EAX + 3);
-  pbVar3[1] = bVar6 & 1;
-  pbVar3[1] = bVar6 & 1 | cVar1 * '\x02';
-  uVar2 = (CONCAT11(*pbVar3,*(undefined1 *)((int)in_EAX + 0x11)) & 0xff01) & 0xfffffbff;
-  bVar6 = (byte)(uVar2 >> 8);
-  *pbVar3 = bVar6;
-  *pbVar3 = bVar6 | (char)uVar2 << 2;
-  *(undefined2 *)(pbVar3 + 0x1a) = in_EAX[4];
-  *(undefined2 *)(pbVar3 + 0x18) = in_EAX[2];
-  *(uint *)(pbVar3 + 0x12) = (uint)(ushort)in_EAX[9];
-  return CONCAT44(in_EDX,(uint)*(ushort *)(pbVar3 + 0xe));
+  *byte_ptr = *byte_ptr | 10;
+  *(undefined4 *)(byte_ptr + 0x28) = *(undefined4 *)(arg_eax + 5);
+  *(undefined2 *)(byte_ptr + (uint)flag * -8 + 0x2c) = arg_eax[(uint)flag * -4 + 7];
+  *(undefined2 *)(byte_ptr + 0x16) = *arg_eax;
+  byte_ptr[2] = *(byte *)(arg_eax + 1);
+  flag = byte_ptr[1];
+  ch = *(char *)((int)arg_eax + 3);
+  byte_ptr[1] = flag & 1;
+  byte_ptr[1] = flag & 1 | ch * '\x02';
+  uval = (CONCAT11(*byte_ptr,*(undefined1 *)((int)arg_eax + 0x11)) & 0xff01) & 0xfffffbff;
+  flag = (byte)(uval >> 8);
+  *byte_ptr = flag;
+  *byte_ptr = flag | (char)uval << 2;
+  *(undefined2 *)(byte_ptr + 0x1a) = arg_eax[4];
+  *(undefined2 *)(byte_ptr + 0x18) = arg_eax[2];
+  *(uint *)(byte_ptr + 0x12) = (uint)(ushort)arg_eax[9];
+  return CONCAT44(arg_edx,(uint)*(ushort *)(byte_ptr + 0xe));
 }
 
 /******************************************************************************
- * Function : dk_attempt_delete_light_0acce4 (Ghidra: FUN_000acce4)
- * Prototype: void dk_attempt_delete_light_0acce4(void);
+ * Function : light_attempt_delete_light_0acce4 (Original VA: 0xacce4, Ghidra: FUN_000acce4)
+ * Prototype: void light_attempt_delete_light_0acce4(void);
  * Address  : 0xacce4 (Size: 277 bytes)
  * Module   : light.cpp [direct_file_string_xref]
- * OrigLine : light.cpp:307 ("Attempt to delete light 0")
- * Naming   : String 'Attempt to delete light 0'
- * Callers  : 8 -> 0x63a25, 0x65b07, 0x72af4, 0x7436a, 0x80fbc, 0xac630, 0xd6664, 0xd7dac
- * Callees  : 4 -> 0xb087c, 0xb0f94, 0xddaf0, 0xe6a10
- * Strings  :
- *   - 0x16a4f3: "light.cpp"
- *   - 0x16a4d9: "Attempt to delete light 0"
+ * OrigLine : light.cpp lines 307
+ * Purpose  : String 'Attempt to delete light 0'
+ * Callers  : 8 -> person_update_creature_control_063a25, pom_update_creature_control_065b07, structs_update_creature_control_072af4, torture_update_creature_and_thing_07436a, creature_update_creature_control_080fbc, light_fn_0ac630, routes_fn_0d6664, slab_illegal_special_case_0d7dac
+ * Callees  : 4 -> light_fn_0b087c, light_prev_when_removing_light_0b0f94, LbErrorLog, LbScreenWaitVbi
  ******************************************************************************/
-void FUN_000acce4(void)
+void light_attempt_delete_light_0acce4(void)
 
 {
-  int in_EAX;
+  int arg_eax;
   
-  if (in_EAX == 0) {
-    FUN_000ddaf0(); /* LbErrorLog("light.cpp", line 307, "Attempt to delete light 0") */
+  if (arg_eax == 0) {
+    LbErrorLog(); /* LbErrorLog("light.cpp", line 307, "Attempt to delete light 0") */
   }
-  else if (((&DAT_001bd5ed)[in_EAX * 0x2e] & 1) != 0) {
-    if (*(short *)(&DAT_001bd5fd + in_EAX * 0x2e) != 0) {
-      FUN_000e6a10();
+  else if (((&g_bss_001bd5ed)[arg_eax * 0x2e] & 1) != 0) {
+    if (*(short *)(&g_bss_001bd5fd + arg_eax * 0x2e) != 0) {
+      LbScreenWaitVbi();
     }
-    if (((&DAT_001bd5ed)[in_EAX * 0x2e] & 4) == 0) {
-      DAT_00388e24 = DAT_00388e24 + -1;
-      FUN_000b087c();
+    if (((&g_bss_001bd5ed)[arg_eax * 0x2e] & 4) == 0) {
+      g_bss_00388e24 = g_bss_00388e24 + -1;
+      light_fn_0b087c();
     }
     else {
-      DAT_00388e20 = DAT_00388e20 + -1;
+      g_bss_00388e20 = g_bss_00388e20 + -1;
     }
-    FUN_000b0f94();
-    FUN_000e6a10();
+    light_prev_when_removing_light_0b0f94();
+    LbScreenWaitVbi();
     return;
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0acdfc (Ghidra: FUN_000acdfc)
- * Prototype: void sub_0acdfc(void);
+ * Function : light_fn_0acdfc (Original VA: 0xacdfc, Ghidra: FUN_000acdfc)
+ * Prototype: void light_fn_0acdfc(void);
  * Address  : 0xacdfc (Size: 210 bytes)
  * Module   : light.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x5f438, 0xe0880
- * Callees  : 1 -> 0xb087c
+ * Purpose  : Module light.cpp procedure @ 0x0acdfc
+ * Callers  : 2 -> packet_update_player_zoom_box, update_fn_0e0880
+ * Callees  : 1 -> light_fn_0b087c
  ******************************************************************************/
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void FUN_000acdfc(void)
+void light_fn_0acdfc(void)
 
 {
-  int iVar1;
-  int in_EAX;
-  short *in_EDX;
-  byte *pbVar2;
-  byte bVar3;
+  int val;
+  int arg_eax;
+  short *arg_edx;
+  byte *byte_ptr;
+  byte flag;
   
-  bVar3 = 0;
-  iVar1 = in_EAX * 0x2e;
-  pbVar2 = &DAT_001bd5ed + iVar1;
-  if (((*in_EDX != *(short *)(&DAT_001bd615 + iVar1)) ||
-      (*(short *)(&DAT_001bd617 + iVar1) != in_EDX[1])) ||
-     (*(short *)(&DAT_001bd619 + iVar1) != in_EDX[2])) {
-    if ((*pbVar2 & 4) == 0) {
-      _DAT_00388e38 = 1;
-      FUN_000b087c();
+  flag = 0;
+  val = arg_eax * 0x2e;
+  byte_ptr = &g_bss_001bd5ed + val;
+  if (((*arg_edx != *(short *)(&g_bss_001bd615 + val)) ||
+      (*(short *)(&g_bss_001bd617 + val) != arg_edx[1])) ||
+     (*(short *)(&g_bss_001bd619 + val) != arg_edx[2])) {
+    if ((*byte_ptr & 4) == 0) {
+      g_bss_00388e38 = 1;
+      light_fn_0b087c();
     }
-    *(undefined4 *)(&DAT_001bd615 + iVar1) = *(undefined4 *)in_EDX;
-    *(short *)(&DAT_001bd619 + (uint)bVar3 * -8 + iVar1) = in_EDX[(uint)bVar3 * -4 + 2];
-    *pbVar2 = *pbVar2 | 8;
+    *(undefined4 *)(&g_bss_001bd615 + val) = *(undefined4 *)arg_edx;
+    *(short *)(&g_bss_001bd619 + (uint)flag * -8 + val) = arg_edx[(uint)flag * -4 + 2];
+    *byte_ptr = *byte_ptr | 8;
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0aced0 (Ghidra: FUN_000aced0)
- * Prototype: undefined8 sub_0aced0(void);
+ * Function : light_fn_0aced0 (Original VA: 0xaced0, Ghidra: FUN_000aced0)
+ * Prototype: undefined8 light_fn_0aced0(void);
  * Address  : 0xaced0 (Size: 29 bytes)
  * Module   : light.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0xe0880
+ * Purpose  : Module light.cpp procedure @ 0x0aced0
+ * Callers  : 1 -> update_fn_0e0880
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined8 FUN_000aced0(void)
+undefined8 light_fn_0aced0(void)
 
 {
-  int in_EAX;
-  undefined4 in_EDX;
+  int arg_eax;
+  undefined4 arg_edx;
   
-  return CONCAT44(in_EDX,(uint)((&DAT_001bd5ed)[in_EAX * 0x2e] & 1));
+  return CONCAT44(arg_edx,(uint)((&g_bss_001bd5ed)[arg_eax * 0x2e] & 1));
 }
 
 /******************************************************************************
- * Function : sub_0acef0 (Ghidra: FUN_000acef0)
- * Prototype: undefined8 sub_0acef0(void);
+ * Function : light_fn_0acef0 (Original VA: 0xacef0, Ghidra: FUN_000acef0)
+ * Prototype: undefined8 light_fn_0acef0(void);
  * Address  : 0xacef0 (Size: 25 bytes)
  * Module   : light.cpp [direct_file_string_xref]
- * OrigLine : light.cpp:421 ("Attempt to set anglexy of light 0")
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x2a6c5
+ * OrigLine : light.cpp lines 421
+ * Purpose  : Module light.cpp procedure @ 0x0acef0
+ * Callers  : 1 -> file_process_thing_entity_02a6c5
  * Callees  : 0 -> 
- * Strings  :
- *   - 0x16a533: "light.cpp"
- *   - 0x16a55f: "light.cpp"
  ******************************************************************************/
-undefined8 FUN_000acef0(void)
+undefined8 light_fn_0acef0(void)
 
 {
-  int in_EAX;
-  undefined4 in_EDX;
+  int arg_eax;
+  undefined4 arg_edx;
   
-  return CONCAT44(in_EDX,&DAT_001bd615 + in_EAX * 0x2e);
+  return CONCAT44(arg_edx,&g_bss_001bd615 + arg_eax * 0x2e);
 }
 
 /******************************************************************************
- * Function : dk_attempt_get_anglexy_unallocated_0acf7c (Ghidra: FUN_000acf7c)
- * Prototype: longlong dk_attempt_get_anglexy_unallocated_0acf7c(void);
+ * Function : light_attempt_get_anglexy_unallocated_0acf7c (Original VA: 0xacf7c, Ghidra: FUN_000acf7c)
+ * Prototype: longlong light_attempt_get_anglexy_unallocated_0acf7c(void);
  * Address  : 0xacf7c (Size: 84 bytes)
  * Module   : light.cpp [direct_file_string_xref]
- * OrigLine : light.cpp:445 ("Attempt to get anglexy of light 0"); light.cpp:476 ("Attempt to set anglexy anim step of light 0"); light.cpp:500 ("Attempt to get anglexy anim step of light 0"); light.cpp:588 ("Attempt to set width of light 0")
- * Naming   : String 'Attempt to get anglexy of unallocated light structure'
- * Callers  : 1 -> 0x2a6c5
- * Callees  : 1 -> 0xddaf0
- * Strings  :
- *   - 0x16a59f: "light.cpp"
- *   - 0x16a5cb: "light.cpp"
- *   - 0x16a615: "light.cpp"
- *   - 0x16a64b: "light.cpp"
- *   - 0x16a695: "light.cpp"
- *   - 0x16a6cb: "light.cpp"
- *   - 0x16a711: "light.cpp"
- *   - 0x16a73b: "light.cpp"
- *   - 0x16a569: "Attempt to get anglexy of unallocated light structure"
- *   - 0x16a5a9: "Attempt to get anglexy of light 0"
+ * OrigLine : light.cpp lines 445, 476, 500, 588
+ * Purpose  : String 'Attempt to get anglexy of unallocated light structure'
+ * Callers  : 1 -> file_process_thing_entity_02a6c5
+ * Callees  : 1 -> LbErrorLog
  ******************************************************************************/
-longlong FUN_000acf7c(void)
+longlong light_attempt_get_anglexy_unallocated_0acf7c(void)
 
 {
-  int in_EAX;
-  uint in_EDX;
+  int arg_eax;
+  uint arg_edx;
   
-  if ((in_EAX != 0) && (((&DAT_001bd5ed)[in_EAX * 0x2e] & 1) != 0)) {
-    return CONCAT44(in_EDX,(uint)*(ushort *)(&DAT_001bd605 + in_EAX * 0x2e));
+  if ((arg_eax != 0) && (((&g_bss_001bd5ed)[arg_eax * 0x2e] & 1) != 0)) {
+    return CONCAT44(arg_edx,(uint)*(ushort *)(&g_bss_001bd605 + arg_eax * 0x2e));
   }
-  FUN_000ddaf0(); /* LbErrorLog("light.cpp", line 445, "Attempt to get anglexy of light 0") */
-  return (ulonglong)in_EDX << 0x20;
+  LbErrorLog(); /* LbErrorLog("light.cpp", line 445, "Attempt to get anglexy of light 0") */
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : dk_attempt_get_width_unallocated_0ad0f4 (Ghidra: FUN_000ad0f4)
- * Prototype: longlong dk_attempt_get_width_unallocated_0ad0f4(void);
+ * Function : light_attempt_get_width_unallocated_0ad0f4 (Original VA: 0xad0f4, Ghidra: FUN_000ad0f4)
+ * Prototype: longlong light_attempt_get_width_unallocated_0ad0f4(void);
  * Address  : 0xad0f4 (Size: 84 bytes)
  * Module   : light.cpp [direct_file_string_xref]
- * OrigLine : light.cpp:612 ("Attempt to get width of light 0")
- * Naming   : String 'Attempt to get width of unallocated light structure'
- * Callers  : 1 -> 0x2a6c5
- * Callees  : 1 -> 0xddaf0
- * Strings  :
- *   - 0x16a779: "light.cpp"
- *   - 0x16a7a3: "light.cpp"
- *   - 0x16a745: "Attempt to get width of unallocated light structure"
- *   - 0x16a783: "Attempt to get width of light 0"
+ * OrigLine : light.cpp lines 612
+ * Purpose  : String 'Attempt to get width of unallocated light structure'
+ * Callers  : 1 -> file_process_thing_entity_02a6c5
+ * Callees  : 1 -> LbErrorLog
  ******************************************************************************/
-longlong FUN_000ad0f4(void)
+longlong light_attempt_get_width_unallocated_0ad0f4(void)
 
 {
-  int in_EAX;
-  uint in_EDX;
+  int arg_eax;
+  uint arg_edx;
   
-  if ((in_EAX != 0) && (((&DAT_001bd5ed)[in_EAX * 0x2e] & 1) != 0)) {
-    return CONCAT44(in_EDX,(uint)*(ushort *)(&DAT_001bd607 + in_EAX * 0x2e));
+  if ((arg_eax != 0) && (((&g_bss_001bd5ed)[arg_eax * 0x2e] & 1) != 0)) {
+    return CONCAT44(arg_edx,(uint)*(ushort *)(&g_bss_001bd607 + arg_eax * 0x2e));
   }
-  FUN_000ddaf0(); /* LbErrorLog("light.cpp", line 612, "Attempt to get width of light 0") */
-  return (ulonglong)in_EDX << 0x20;
+  LbErrorLog(); /* LbErrorLog("light.cpp", line 612, "Attempt to get width of light 0") */
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : dk_attempt_set_intensity_unallocated_0ad148 (Ghidra: FUN_000ad148)
- * Prototype: void dk_attempt_set_intensity_unallocated_0ad148(void);
+ * Function : light_attempt_set_intensity_unallocated_0ad148 (Original VA: 0xad148, Ghidra: FUN_000ad148)
+ * Prototype: void light_attempt_set_intensity_unallocated_0ad148(void);
  * Address  : 0xad148 (Size: 242 bytes)
  * Module   : light.cpp [direct_file_string_xref]
- * OrigLine : light.cpp:655 ("Attempt to set intensity of light 0")
- * Naming   : String 'Attempt to set intensity of unallocated light structure'
- * Callers  : 3 -> 0x24ab9, 0xc3c3c, 0xc55c8
- * Callees  : 2 -> 0xb087c, 0xddaf0
- * Strings  :
- *   - 0x16a7e5: "light.cpp"
- *   - 0x16a813: "light.cpp"
- *   - 0x16a7ad: "Attempt to set intensity of unallocated light structure"
- *   - 0x16a7ef: "Attempt to set intensity of light 0"
+ * OrigLine : light.cpp lines 655
+ * Purpose  : String 'Attempt to set intensity of unallocated light structure'
+ * Callers  : 3 -> effect_process_thing_entity_024ab9, object_update_creature_and_thing_0c3c3c, object_fn_0c55c8
+ * Callees  : 2 -> light_fn_0b087c, LbErrorLog
  ******************************************************************************/
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void FUN_000ad148(void)
+void light_attempt_set_intensity_unallocated_0ad148(void)
 
 {
-  int iVar1;
-  int in_EAX;
-  uint in_EDX;
-  byte *pbVar2;
+  int val;
+  int arg_eax;
+  uint arg_edx;
+  byte *byte_ptr;
   undefined1 local_14;
   
-  local_14 = (undefined1)in_EDX;
-  if (in_EAX != 0) {
-    iVar1 = in_EAX * 0x2e;
-    pbVar2 = &DAT_001bd5ed + iVar1;
-    if ((*pbVar2 & 1) != 0) {
-      if ((byte)(&DAT_001bd5ef)[iVar1] == in_EDX) {
+  local_14 = (undefined1)arg_edx;
+  if (arg_eax != 0) {
+    val = arg_eax * 0x2e;
+    byte_ptr = &g_bss_001bd5ed + val;
+    if ((*byte_ptr & 1) != 0) {
+      if ((byte)(&g_bss_001bd5ef)[val] == arg_edx) {
         return;
       }
-      if ((*pbVar2 & 4) == 0) {
-        FUN_000b087c();
-        _DAT_00388e38 = 1;
+      if ((*byte_ptr & 4) == 0) {
+        light_fn_0b087c();
+        g_bss_00388e38 = 1;
       }
-      (&DAT_001bd5ef)[iVar1] = local_14;
-      if ((ushort)(byte)(&DAT_001bd5ef)[iVar1] <= *(ushort *)(&DAT_001bd611 + iVar1)) {
+      (&g_bss_001bd5ef)[val] = local_14;
+      if ((ushort)(byte)(&g_bss_001bd5ef)[val] <= *(ushort *)(&g_bss_001bd611 + val)) {
         return;
       }
-      *pbVar2 = *pbVar2 | 8;
+      *byte_ptr = *byte_ptr | 8;
       return;
     }
   }
-  FUN_000ddaf0(); /* LbErrorLog("light.cpp", line 655, "Attempt to set intensity of light 0") */
+  LbErrorLog(); /* LbErrorLog("light.cpp", line 655, "Attempt to set intensity of light 0") */
   return;
 }
 
 /******************************************************************************
- * Function : dk_attempt_get_intensity_unallocated_0ad23c (Ghidra: FUN_000ad23c)
- * Prototype: longlong dk_attempt_get_intensity_unallocated_0ad23c(void);
+ * Function : light_attempt_get_intensity_unallocated_0ad23c (Original VA: 0xad23c, Ghidra: FUN_000ad23c)
+ * Prototype: longlong light_attempt_get_intensity_unallocated_0ad23c(void);
  * Address  : 0xad23c (Size: 83 bytes)
  * Module   : light.cpp [direct_file_string_xref]
- * OrigLine : light.cpp:679 ("Attempt to get intensity of light 0")
- * Naming   : String 'Attempt to get intensity of unallocated light structure'
- * Callers  : 4 -> 0x24ab9, 0x2a6c5, 0xc3c3c, 0xc55c8
- * Callees  : 1 -> 0xddaf0
- * Strings  :
- *   - 0x16a855: "light.cpp"
- *   - 0x16a883: "light.cpp"
- *   - 0x16a81d: "Attempt to get intensity of unallocated light structure"
- *   - 0x16a85f: "Attempt to get intensity of light 0"
+ * OrigLine : light.cpp lines 679
+ * Purpose  : String 'Attempt to get intensity of unallocated light structure'
+ * Callers  : 4 -> effect_process_thing_entity_024ab9, file_process_thing_entity_02a6c5, object_update_creature_and_thing_0c3c3c, object_fn_0c55c8
+ * Callees  : 1 -> LbErrorLog
  ******************************************************************************/
-longlong FUN_000ad23c(void)
+longlong light_attempt_get_intensity_unallocated_0ad23c(void)
 
 {
-  int in_EAX;
-  uint in_EDX;
+  int arg_eax;
+  uint arg_edx;
   
-  if ((in_EAX != 0) && (((&DAT_001bd5ed)[in_EAX * 0x2e] & 1) != 0)) {
-    return CONCAT44(in_EDX,(uint)(byte)(&DAT_001bd5ef)[in_EAX * 0x2e]);
+  if ((arg_eax != 0) && (((&g_bss_001bd5ed)[arg_eax * 0x2e] & 1) != 0)) {
+    return CONCAT44(arg_edx,(uint)(byte)(&g_bss_001bd5ef)[arg_eax * 0x2e]);
   }
-  FUN_000ddaf0(); /* LbErrorLog("light.cpp", line 679, "Attempt to get intensity of light 0") */
-  return (ulonglong)in_EDX << 0x20;
+  LbErrorLog(); /* LbErrorLog("light.cpp", line 679, "Attempt to get intensity of light 0") */
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : dk_attempt_set_size_unallocated_0ad290 (Ghidra: FUN_000ad290)
- * Prototype: void dk_attempt_set_size_unallocated_0ad290(void);
+ * Function : light_attempt_set_size_unallocated_0ad290 (Original VA: 0xad290, Ghidra: FUN_000ad290)
+ * Prototype: void light_attempt_set_size_unallocated_0ad290(void);
  * Address  : 0xad290 (Size: 235 bytes)
  * Module   : light.cpp [direct_file_string_xref]
- * OrigLine : light.cpp:723 ("Attempt to set size of light 0")
- * Naming   : String 'Attempt to set size of unallocated light structure'
+ * OrigLine : light.cpp lines 723
+ * Purpose  : String 'Attempt to set size of unallocated light structure'
  * Callers  : 0 -> 
- * Callees  : 2 -> 0xb087c, 0xddaf0
- * Strings  :
- *   - 0x16a8c0: "light.cpp"
- *   - 0x16a8e9: "light.cpp"
- *   - 0x16a88d: "Attempt to set size of unallocated light structure"
- *   - 0x16a8ca: "Attempt to set size of light 0"
+ * Callees  : 2 -> light_fn_0b087c, LbErrorLog
  ******************************************************************************/
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void FUN_000ad290(void)
+void light_attempt_set_size_unallocated_0ad290(void)
 
 {
-  int iVar1;
-  int in_EAX;
-  uint in_EDX;
-  byte *pbVar2;
+  int val;
+  int arg_eax;
+  uint arg_edx;
+  byte *byte_ptr;
   
-  if (in_EAX != 0) {
-    iVar1 = in_EAX * 0x2e;
-    pbVar2 = &DAT_001bd5ed + iVar1;
-    if ((*pbVar2 & 1) != 0) {
-      if (*(ushort *)(&DAT_001bd603 + iVar1) == in_EDX) {
+  if (arg_eax != 0) {
+    val = arg_eax * 0x2e;
+    byte_ptr = &g_bss_001bd5ed + val;
+    if ((*byte_ptr & 1) != 0) {
+      if (*(ushort *)(&g_bss_001bd603 + val) == arg_edx) {
         return;
       }
-      if ((*pbVar2 & 4) == 0) {
-        FUN_000b087c();
-        _DAT_00388e38 = 1;
+      if ((*byte_ptr & 4) == 0) {
+        light_fn_0b087c();
+        g_bss_00388e38 = 1;
       }
-      *(short *)(&DAT_001bd603 + iVar1) = (short)in_EDX;
-      if ((in_EDX & 0xffff) <= (uint)(byte)(&DAT_001bd5f6)[iVar1]) {
+      *(short *)(&g_bss_001bd603 + val) = (short)arg_edx;
+      if ((arg_edx & 0xffff) <= (uint)(byte)(&g_bss_001bd5f6)[val]) {
         return;
       }
-      *pbVar2 = *pbVar2 | 8;
+      *byte_ptr = *byte_ptr | 8;
       return;
     }
   }
-  FUN_000ddaf0(); /* LbErrorLog("light.cpp", line 723, "Attempt to set size of light 0") */
+  LbErrorLog(); /* LbErrorLog("light.cpp", line 723, "Attempt to set size of light 0") */
   return;
 }
 
 /******************************************************************************
- * Function : dk_attempt_get_size_unallocated_0ad37c (Ghidra: FUN_000ad37c)
- * Prototype: longlong dk_attempt_get_size_unallocated_0ad37c(void);
+ * Function : light_attempt_get_size_unallocated_0ad37c (Original VA: 0xad37c, Ghidra: FUN_000ad37c)
+ * Prototype: longlong light_attempt_get_size_unallocated_0ad37c(void);
  * Address  : 0xad37c (Size: 84 bytes)
  * Module   : light.cpp [direct_file_string_xref]
- * OrigLine : light.cpp:747 ("Attempt to get size of light 0"); light.cpp:778 ("Attempt to animate size of light 0")
- * Naming   : String 'Attempt to get size of unallocated light structure'
- * Callers  : 1 -> 0x2a6c5
- * Callees  : 1 -> 0xddaf0
- * Strings  :
- *   - 0x16a926: "light.cpp"
- *   - 0x16a94f: "light.cpp"
- *   - 0x16a990: "light.cpp"
- *   - 0x16a9bd: "light.cpp"
- *   - 0x16a8f3: "Attempt to get size of unallocated light structure"
- *   - 0x16a930: "Attempt to get size of light 0"
+ * OrigLine : light.cpp lines 747, 778
+ * Purpose  : String 'Attempt to get size of unallocated light structure'
+ * Callers  : 1 -> file_process_thing_entity_02a6c5
+ * Callees  : 1 -> LbErrorLog
  ******************************************************************************/
-longlong FUN_000ad37c(void)
+longlong light_attempt_get_size_unallocated_0ad37c(void)
 
 {
-  int in_EAX;
-  uint in_EDX;
+  int arg_eax;
+  uint arg_edx;
   
-  if ((in_EAX != 0) && (((&DAT_001bd5ed)[in_EAX * 0x2e] & 1) != 0)) {
-    return CONCAT44(in_EDX,(uint)*(ushort *)(&DAT_001bd603 + in_EAX * 0x2e));
+  if ((arg_eax != 0) && (((&g_bss_001bd5ed)[arg_eax * 0x2e] & 1) != 0)) {
+    return CONCAT44(arg_edx,(uint)*(ushort *)(&g_bss_001bd603 + arg_eax * 0x2e));
   }
-  FUN_000ddaf0(); /* LbErrorLog("light.cpp", line 747, "Attempt to get size of light 0") */
-  return (ulonglong)in_EDX << 0x20;
+  LbErrorLog(); /* LbErrorLog("light.cpp", line 747, "Attempt to get size of light 0") */
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : dk_attempt_stop_animating_size_0ad438 (Ghidra: FUN_000ad438)
- * Prototype: void dk_attempt_stop_animating_size_0ad438(void);
+ * Function : light_attempt_stop_animating_size_0ad438 (Original VA: 0xad438, Ghidra: FUN_000ad438)
+ * Prototype: void light_attempt_stop_animating_size_0ad438(void);
  * Address  : 0xad438 (Size: 82 bytes)
  * Module   : light.cpp [direct_file_string_xref]
- * OrigLine : light.cpp:802 ("Attempt to stop animating size of light 0"); light.cpp:830 ("Attempt to animate intensity of light 0")
- * Naming   : String 'Attempt to stop animating size of unallocated light structur'
+ * OrigLine : light.cpp lines 802, 830
+ * Purpose  : String 'Attempt to stop animating size of unallocated light structur'
  * Callers  : 0 -> 
- * Callees  : 1 -> 0xddaf0
- * Strings  :
- *   - 0x16aa05: "light.cpp"
- *   - 0x16aa39: "light.cpp"
- *   - 0x16aa7f: "light.cpp"
- *   - 0x16aab1: "light.cpp"
- *   - 0x16a9c7: "Attempt to stop animating size of unallocated light structure"
- *   - 0x16aa0f: "Attempt to stop animating size of light 0"
+ * Callees  : 1 -> LbErrorLog
  ******************************************************************************/
-void FUN_000ad438(void)
+void light_attempt_stop_animating_size_0ad438(void)
 
 {
-  byte bVar1;
-  int in_EAX;
+  byte flag;
+  int arg_eax;
   
-  if (in_EAX != 0) {
-    bVar1 = (&DAT_001bd5ed)[in_EAX * 0x2e];
-    if ((bVar1 & 1) != 0) {
-      (&DAT_001bd5ed)[in_EAX * 0x2e] = bVar1 & 0xef;
+  if (arg_eax != 0) {
+    flag = (&g_bss_001bd5ed)[arg_eax * 0x2e];
+    if ((flag & 1) != 0) {
+      (&g_bss_001bd5ed)[arg_eax * 0x2e] = flag & 0xef;
       return;
     }
   }
-  FUN_000ddaf0(); /* LbErrorLog("light.cpp", line 802, "Attempt to stop animating size of light 0") */
+  LbErrorLog(); /* LbErrorLog("light.cpp", line 802, "Attempt to stop animating size of light 0") */
   return;
 }
 
 /******************************************************************************
- * Function : dk_attempt_stop_animating_intensity_0ad4f8 (Ghidra: FUN_000ad4f8)
- * Prototype: void dk_attempt_stop_animating_intensity_0ad4f8(void);
+ * Function : light_attempt_stop_animating_intensity_0ad4f8 (Original VA: 0xad4f8, Ghidra: FUN_000ad4f8)
+ * Prototype: void light_attempt_stop_animating_intensity_0ad4f8(void);
  * Address  : 0xad4f8 (Size: 82 bytes)
  * Module   : light.cpp [direct_file_string_xref]
- * OrigLine : light.cpp:854 ("Attempt to stop animating intensity of light 0")
- * Naming   : String 'Attempt to stop animating intensity of unallocated light str'
+ * OrigLine : light.cpp lines 854
+ * Purpose  : String 'Attempt to stop animating intensity of unallocated light str'
  * Callers  : 0 -> 
- * Callees  : 1 -> 0xddaf0
- * Strings  :
- *   - 0x16aafe: "light.cpp"
- *   - 0x16ab37: "light.cpp"
- *   - 0x16aabb: "Attempt to stop animating intensity of unallocated light structure"
- *   - 0x16ab08: "Attempt to stop animating intensity of light 0"
+ * Callees  : 1 -> LbErrorLog
  ******************************************************************************/
-void FUN_000ad4f8(void)
+void light_attempt_stop_animating_intensity_0ad4f8(void)
 
 {
-  byte bVar1;
-  int in_EAX;
+  byte flag;
+  int arg_eax;
   
-  if (in_EAX != 0) {
-    bVar1 = (&DAT_001bd5ed)[in_EAX * 0x2e];
-    if ((bVar1 & 1) != 0) {
-      (&DAT_001bd5ed)[in_EAX * 0x2e] = bVar1 & 0xdf;
+  if (arg_eax != 0) {
+    flag = (&g_bss_001bd5ed)[arg_eax * 0x2e];
+    if ((flag & 1) != 0) {
+      (&g_bss_001bd5ed)[arg_eax * 0x2e] = flag & 0xdf;
       return;
     }
   }
-  FUN_000ddaf0(); /* LbErrorLog("light.cpp", line 854, "Attempt to stop animating intensity of light 0") */
+  LbErrorLog(); /* LbErrorLog("light.cpp", line 854, "Attempt to stop animating intensity of light 0") */
   return;
 }
 
 /******************************************************************************
- * Function : dk_light_already_list_0ad54c (Ghidra: FUN_000ad54c)
- * Prototype: void dk_light_already_list_0ad54c(void);
+ * Function : light_already_list_0ad54c (Original VA: 0xad54c, Ghidra: FUN_000ad54c)
+ * Prototype: void light_already_list_0ad54c(void);
  * Address  : 0xad54c (Size: 285 bytes)
  * Module   : light.cpp [direct_file_string_xref]
- * OrigLine : light.cpp:2725 ("Light is already in list"); light.cpp:2725 ("Light is already in list"); light.cpp:887 ("Attempt to turn on unallocated light structure"); light.cpp:892 ("Attempt to turn on light 0")
- * Naming   : String 'Light is already in list'
- * Callers  : 6 -> 0x4b5ca, 0x4b6ae, 0x4bd35, 0x5f438, 0x85f80, 0xc39a8
- * Callees  : 1 -> 0xddaf0
- * Strings  :
- *   - 0x16a49d: "light.cpp"
- *   - 0x16ab70: "light.cpp"
- *   - 0x16ab95: "light.cpp"
- *   - 0x16a484: "Light is already in list"
- *   - 0x16ab41: "Attempt to turn on unallocated light structure"
- *   - 0x16ab7a: "Attempt to turn on light 0"
+ * OrigLine : light.cpp lines 887, 892, 2725
+ * Purpose  : String 'Light is already in list'
+ * Callers  : 6 -> instance_update_player_view_state_04b5ca, instance_update_player_view_state_04b6ae, instance_update_player_view_state_04bd35, packet_update_player_zoom_box, creature_update_player_view_state_085f80, object_dragging_anything_0c39a8
+ * Callees  : 1 -> LbErrorLog
  ******************************************************************************/
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void FUN_000ad54c(void)
+void light_already_list_0ad54c(void)
 
 {
-  byte bVar1;
-  int iVar2;
-  int in_EAX;
-  byte *pbVar3;
+  byte flag;
+  int val;
+  int arg_eax;
+  byte *byte_ptr;
   byte *extraout_ECX;
   byte *extraout_ECX_00;
   
-  if (in_EAX == 0) {
-    FUN_000ddaf0(); /* LbErrorLog("light.cpp", line 2725, "Light is already in list") */
+  if (arg_eax == 0) {
+    LbErrorLog(); /* LbErrorLog("light.cpp", line 2725, "Light is already in list") */
   }
   else {
-    iVar2 = in_EAX * 0x2e;
-    pbVar3 = &DAT_001bd5ed + iVar2;
-    bVar1 = *pbVar3;
-    if ((bVar1 & 1) == 0) {
-      FUN_000ddaf0(); /* LbErrorLog("light.cpp", line 2725, "Light is already in list") */
+    val = arg_eax * 0x2e;
+    byte_ptr = &g_bss_001bd5ed + val;
+    flag = *byte_ptr;
+    if ((flag & 1) == 0) {
+      LbErrorLog(); /* LbErrorLog("light.cpp", line 2725, "Light is already in list") */
       return;
     }
-    if ((bVar1 & 2) == 0) {
-      *pbVar3 = bVar1 | 2;
-      if ((bVar1 & 4) == 0) {
-        if (((&DAT_001bd5ee)[iVar2] & 1) == 0) {
-          DAT_002e6f0a = DAT_002e6f0a + 1;
-          (&DAT_001bd5ee)[iVar2] = (&DAT_001bd5ee)[iVar2] | 1;
-          *(undefined2 *)(&DAT_001bd613 + iVar2) = (undefined2)DAT_002e6f0e;
-          DAT_002e6f0e = (uint)(ushort)(&DAT_001bd5fb)[in_EAX * 0x17];
+    if ((flag & 2) == 0) {
+      *byte_ptr = flag | 2;
+      if ((flag & 4) == 0) {
+        if (((&g_bss_001bd5ee)[val] & 1) == 0) {
+          g_bss_002e6f0a = g_bss_002e6f0a + 1;
+          (&g_bss_001bd5ee)[val] = (&g_bss_001bd5ee)[val] | 1;
+          *(undefined2 *)(&g_bss_001bd613 + val) = (undefined2)g_bss_002e6f0e;
+          g_bss_002e6f0e = (uint)(ushort)(&g_bss_001bd5fb)[arg_eax * 0x17];
         }
         else {
-          FUN_000ddaf0(); /* LbErrorLog("light.cpp", line 887, "Attempt to turn on unallocated light structure") */
-          pbVar3 = extraout_ECX;
+          LbErrorLog(); /* LbErrorLog("light.cpp", line 887, "Attempt to turn on unallocated light structure") */
+          byte_ptr = extraout_ECX;
         }
-        _DAT_00388e38 = 1;
+        g_bss_00388e38 = 1;
       }
       else {
-        if (((&DAT_001bd5ee)[iVar2] & 1) == 0) {
-          DAT_002e6f12 = DAT_002e6f12 + 1;
-          (&DAT_001bd5ee)[iVar2] = (&DAT_001bd5ee)[iVar2] | 1;
-          *(undefined2 *)(&DAT_001bd613 + iVar2) = (undefined2)DAT_002e6f16;
-          DAT_002e6f16 = (uint)(ushort)(&DAT_001bd5fb)[in_EAX * 0x17];
-          *pbVar3 = *pbVar3 | 8;
+        if (((&g_bss_001bd5ee)[val] & 1) == 0) {
+          g_bss_002e6f12 = g_bss_002e6f12 + 1;
+          (&g_bss_001bd5ee)[val] = (&g_bss_001bd5ee)[val] | 1;
+          *(undefined2 *)(&g_bss_001bd613 + val) = (undefined2)g_bss_002e6f16;
+          g_bss_002e6f16 = (uint)(ushort)(&g_bss_001bd5fb)[arg_eax * 0x17];
+          *byte_ptr = *byte_ptr | 8;
           return;
         }
-        FUN_000ddaf0(); /* LbErrorLog("light.cpp", line 892, "Attempt to turn on light 0") */
-        pbVar3 = extraout_ECX_00;
+        LbErrorLog(); /* LbErrorLog("light.cpp", line 892, "Attempt to turn on light 0") */
+        byte_ptr = extraout_ECX_00;
       }
-      *pbVar3 = *pbVar3 | 8;
+      *byte_ptr = *byte_ptr | 8;
       return;
     }
   }
@@ -1053,46 +985,41 @@ void FUN_000ad54c(void)
 }
 
 /******************************************************************************
- * Function : dk_attempt_turn_off_unallocated_0ad66c (Ghidra: FUN_000ad66c)
- * Prototype: void dk_attempt_turn_off_unallocated_0ad66c(void);
+ * Function : light_attempt_turn_off_unallocated_0ad66c (Original VA: 0xad66c, Ghidra: FUN_000ad66c)
+ * Prototype: void light_attempt_turn_off_unallocated_0ad66c(void);
  * Address  : 0xad66c (Size: 265 bytes)
  * Module   : light.cpp [direct_file_string_xref]
- * OrigLine : light.cpp:929 ("Attempt to turn off unallocated light structure"); light.cpp:934 ("Attempt to turn off light 0")
- * Naming   : String 'Attempt to turn off unallocated light structure'
- * Callers  : 4 -> 0x4b9ee, 0x4bd9b, 0x5f438, 0xc3960
- * Callees  : 3 -> 0xb087c, 0xb0f94, 0xddaf0
- * Strings  :
- *   - 0x16abcf: "light.cpp"
- *   - 0x16abf5: "light.cpp"
- *   - 0x16ab9f: "Attempt to turn off unallocated light structure"
- *   - 0x16abd9: "Attempt to turn off light 0"
+ * OrigLine : light.cpp lines 929, 934
+ * Purpose  : String 'Attempt to turn off unallocated light structure'
+ * Callers  : 4 -> instance_update_creature_and_thing_04b9ee, instance_update_player_view_state_04bd9b, packet_update_player_zoom_box, object_update_creature_control_0c3960
+ * Callees  : 3 -> light_fn_0b087c, light_prev_when_removing_light_0b0f94, LbErrorLog
  ******************************************************************************/
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void FUN_000ad66c(void)
+void light_attempt_turn_off_unallocated_0ad66c(void)
 
 {
-  byte bVar1;
-  int in_EAX;
+  byte flag;
+  int arg_eax;
   
-  if (in_EAX == 0) {
-    FUN_000ddaf0(); /* LbErrorLog("light.cpp", line 929, "Attempt to turn off unallocated light structure") */
+  if (arg_eax == 0) {
+    LbErrorLog(); /* LbErrorLog("light.cpp", line 929, "Attempt to turn off unallocated light structure") */
   }
   else {
-    bVar1 = (&DAT_001bd5ed)[in_EAX * 0x2e];
-    if ((bVar1 & 1) == 0) {
-      FUN_000ddaf0(); /* LbErrorLog("light.cpp", line 934, "Attempt to turn off light 0") */
+    flag = (&g_bss_001bd5ed)[arg_eax * 0x2e];
+    if ((flag & 1) == 0) {
+      LbErrorLog(); /* LbErrorLog("light.cpp", line 934, "Attempt to turn off light 0") */
       return;
     }
-    if ((bVar1 & 2) != 0) {
-      (&DAT_001bd5ed)[in_EAX * 0x2e] = bVar1 & 0xfd;
-      if ((bVar1 & 4) == 0) {
-        FUN_000b087c();
-        FUN_000b0f94();
-        _DAT_00388e38 = 1;
+    if ((flag & 2) != 0) {
+      (&g_bss_001bd5ed)[arg_eax * 0x2e] = flag & 0xfd;
+      if ((flag & 4) == 0) {
+        light_fn_0b087c();
+        light_prev_when_removing_light_0b0f94();
+        g_bss_00388e38 = 1;
         return;
       }
-      FUN_000b0f94();
+      light_prev_when_removing_light_0b0f94();
       return;
     }
   }
@@ -1100,112 +1027,100 @@ void FUN_000ad66c(void)
 }
 
 /******************************************************************************
- * Function : dk_attempt_set_size_unallocated_0ad834 (Ghidra: FUN_000ad834)
- * Prototype: void dk_attempt_set_size_unallocated_0ad834(void);
+ * Function : light_attempt_set_size_unallocated_0ad834 (Original VA: 0xad834, Ghidra: FUN_000ad834)
+ * Prototype: void light_attempt_set_size_unallocated_0ad834(void);
  * Address  : 0xad834 (Size: 82 bytes)
  * Module   : light.cpp [direct_file_string_xref]
- * OrigLine : light.cpp:1019 ("Attempt to set size of light 0")
- * Naming   : String 'Attempt to set size of unallocated light structure'
- * Callers  : 6 -> 0x40e94, 0x69268, 0x694d4, 0x6972c, 0x80a94, 0x80c84
- * Callees  : 1 -> 0xddaf0
- * Strings  :
- *   - 0x16ac32: "light.cpp"
- *   - 0x16ac5b: "light.cpp"
- *   - 0x16abff: "Attempt to set size of unallocated light structure"
- *   - 0x16ac3c: "Attempt to set size of light 0"
+ * OrigLine : light.cpp lines 1019
+ * Purpose  : String 'Attempt to set size of unallocated light structure'
+ * Callers  : 6 -> inits_fn_040e94, scrsupp_allocate_light_new_hero_069268, scrsupp_script_could_find_hero_0694d4, scrsupp_allocate_light_new_hero_06972c, creature_allocate_light_new_hero_080a94, creature_allocate_light_new_hero_080c84
+ * Callees  : 1 -> LbErrorLog
  ******************************************************************************/
-void FUN_000ad834(void)
+void light_attempt_set_size_unallocated_0ad834(void)
 
 {
-  byte bVar1;
-  int in_EAX;
+  byte flag;
+  int arg_eax;
   
-  if (in_EAX != 0) {
-    bVar1 = (&DAT_001bd5ed)[in_EAX * 0x2e];
-    if ((bVar1 & 1) != 0) {
-      (&DAT_001bd5ed)[in_EAX * 0x2e] = bVar1 | 0x40;
+  if (arg_eax != 0) {
+    flag = (&g_bss_001bd5ed)[arg_eax * 0x2e];
+    if ((flag & 1) != 0) {
+      (&g_bss_001bd5ed)[arg_eax * 0x2e] = flag | 0x40;
       return;
     }
   }
-  FUN_000ddaf0(); /* LbErrorLog("light.cpp", line 1019, "Attempt to set size of light 0") */
+  LbErrorLog(); /* LbErrorLog("light.cpp", line 1019, "Attempt to set size of light 0") */
   return;
 }
 
 /******************************************************************************
- * Function : dk_attempt_set_minimum_light_0ad888 (Ghidra: FUN_000ad888)
- * Prototype: void dk_attempt_set_minimum_light_0ad888(void);
+ * Function : light_attempt_set_minimum_light_0ad888 (Original VA: 0xad888, Ghidra: FUN_000ad888)
+ * Prototype: void light_attempt_set_minimum_light_0ad888(void);
  * Address  : 0xad888 (Size: 113 bytes)
  * Module   : light.cpp [direct_file_string_xref]
- * OrigLine : light.cpp:1055 ("Attempt to set minimum light size for light 0")
- * Naming   : String 'Attempt to set_minimum light size to cache on non dynamic li'
- * Callers  : 1 -> 0x43f07
- * Callees  : 1 -> 0xddaf0
- * Strings  :
- *   - 0x16aca5: "light.cpp"
- *   - 0x16acf1: "light.cpp"
- *   - 0x16ad29: "light.cpp"
- *   - 0x16ac65: "Attempt to set_minimum light size to cache on non dynamic light"
- *   - 0x16acaf: "Attempt to set minimum light size for unallocated light structure"
- *   - 0x16acfb: "Attempt to set minimum light size for light 0"
+ * OrigLine : light.cpp lines 1055
+ * Purpose  : String 'Attempt to set_minimum light size to cache on non dynamic li'
+ * Callers  : 1 -> inits_allocate_light_object_043f07
+ * Callees  : 1 -> LbErrorLog
  ******************************************************************************/
-void FUN_000ad888(void)
+void light_attempt_set_minimum_light_0ad888(void)
 
 {
-  byte bVar1;
-  int iVar2;
-  int in_EAX;
-  undefined1 in_DL;
-  undefined2 unaff_BX;
+  byte flag;
+  int val;
+  int arg_eax;
+  undefined1 arg_dl;
+  undefined2 arg_bx;
   
-  if (in_EAX != 0) {
-    iVar2 = in_EAX * 0x2e;
-    bVar1 = (&DAT_001bd5ed)[iVar2];
-    if ((bVar1 & 1) != 0) {
-      if ((bVar1 & 2) == 0) {
+  if (arg_eax != 0) {
+    val = arg_eax * 0x2e;
+    flag = (&g_bss_001bd5ed)[val];
+    if ((flag & 1) != 0) {
+      if ((flag & 2) == 0) {
         return;
       }
-      (&DAT_001bd5ed)[iVar2] = bVar1 & 0xfd;
-      if ((bVar1 & 4) != 0) {
-        (&DAT_001bd5f6)[iVar2] = in_DL;
-        *(undefined2 *)(&DAT_001bd611 + iVar2) = unaff_BX;
+      (&g_bss_001bd5ed)[val] = flag & 0xfd;
+      if ((flag & 4) != 0) {
+        (&g_bss_001bd5f6)[val] = arg_dl;
+        *(undefined2 *)(&g_bss_001bd611 + val) = arg_bx;
         return;
       }
     }
   }
-  FUN_000ddaf0(); /* LbErrorLog("light.cpp", line 1055, "Attempt to set minimum light size for light 0") */
+  LbErrorLog(); /* LbErrorLog("light.cpp", line 1055, "Attempt to set minimum light size for light 0") */
   return;
 }
 
 /******************************************************************************
- * Function : sub_0adbc0 (Ghidra: FUN_000adbc0)
- * Prototype: void sub_0adbc0(void);
+ * Function : light_maintain_gui_button_state_0adbc0 (Original VA: 0xadbc0, Ghidra: FUN_000adbc0)
+ * Prototype: void light_maintain_gui_button_state_0adbc0(void);
  * Address  : 0xadbc0 (Size: 10532 bytes)
  * Module   : light.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0xac694, 0xb06fc
- * Callees  : 2 -> 0xe66ec, 0xe6a10
+ * Purpose  : Updates GUI button enabled bit (0x08)
+ * Callers  : 2 -> light_fn_0ac694, light_fn_0b06fc
+ * Callees  : 2 -> bflib_system_io_fn_0e66ec, LbScreenWaitVbi
  ******************************************************************************/
-void FUN_000adbc0(void)
+void light_maintain_gui_button_state_0adbc0(void)
 
 {
-  byte bVar1;
-  ushort uVar2;
-  longlong lVar3;
-  bool bVar4;
-  undefined *puVar5;
-  ushort uVar6;
-  ushort uVar7;
-  byte *in_EAX;
-  uint uVar8;
-  uint uVar9;
-  int iVar10;
-  int iVar11;
-  int iVar12;
-  uint uVar13;
-  int iVar14;
-  int iVar15;
-  int iVar16;
-  uint uVar17;
+  byte flag;
+  ushort uval;
+  longlong val;
+  bool flag_2;
+  undefined *word_ptr;
+  ushort uval_2;
+  ushort uval_3;
+  byte *gui_btn;
+  uint uval_4;
+  uint uval_5;
+  int val_2;
+  int val_3;
+  int val_4;
+  uint uval_6;
+  int val_5;
+  int val_6;
+  int val_7;
+  uint uval_7;
   int extraout_ECX;
   int extraout_ECX_00;
   int extraout_ECX_01;
@@ -1233,15 +1148,15 @@ void FUN_000adbc0(void)
   int extraout_ECX_23;
   int extraout_ECX_24;
   int extraout_ECX_25;
-  int iVar18;
-  uint uVar19;
-  uint uVar20;
+  int val_8;
+  uint uval_8;
+  uint uval_9;
   uint unaff_EBP;
-  int *piVar21;
-  uint *puVar22;
-  uint uVar23;
-  ushort *puVar24;
-  int iVar25;
+  int *int_ptr;
+  uint *word_ptr_2;
+  uint uval_10;
+  ushort *word_ptr_3;
+  int val_9;
   int *local_1bc;
   byte local_1ac;
   byte local_1a8;
@@ -1333,165 +1248,165 @@ void FUN_000adbc0(void)
   int local_20;
   int local_1c;
   
-  if ((in_EAX[1] & 0xfe) == 0) {
-    uVar7 = *(ushort *)(in_EAX + 0x16);
-    uVar17 = (uint)in_EAX[2] << 8;
-    uVar23 = uVar17;
+  if ((gui_btn[1] & 0xfe) == 0) {
+    uval_3 = *(ushort *)(gui_btn + 0x16);
+    uval_7 = (uint)gui_btn[2] << 8;
+    uval_10 = uval_7;
   }
   else {
-    uVar7 = *(ushort *)(in_EAX + 0x16);
-    uVar17 = DAT_001e31fb * 0x24a1 + 0x24df;
-    DAT_001e31fb = uVar17 >> 0xd | uVar17 * 0x80000;
-    uVar17 = (uint)in_EAX[2] * 0x100 + 0x101;
-    uVar23 = (uint)in_EAX[2] * 0x100 + -0x100 + DAT_001e31fb % 0x201;
+    uval_3 = *(ushort *)(gui_btn + 0x16);
+    uval_7 = g_bss_001e31fb * 0x24a1 + 0x24df;
+    g_bss_001e31fb = uval_7 >> 0xd | uval_7 * 0x80000;
+    uval_7 = (uint)gui_btn[2] * 0x100 + 0x101;
+    uval_10 = (uint)gui_btn[2] * 0x100 + -0x100 + g_bss_001e31fb % 0x201;
   }
-  uVar20 = (uint)uVar7;
-  uVar13 = uVar20;
-  if ((*in_EAX & 4) != 0) {
-    if (uVar20 < (uint)in_EAX[9] * 0x100) {
-      uVar13 = (uint)in_EAX[9] * 0x100;
+  uval_9 = (uint)uval_3;
+  uval_6 = uval_9;
+  if ((*gui_btn & 4) != 0) {
+    if (uval_9 < (uint)gui_btn[9] * 0x100) {
+      uval_6 = (uint)gui_btn[9] * 0x100;
     }
-    if (uVar17 < (uint)*(ushort *)(in_EAX + 0x24) * 0x100) {
-      uVar17 = (uint)*(ushort *)(in_EAX + 0x24) * 0x100;
+    if (uval_7 < (uint)*(ushort *)(gui_btn + 0x24) * 0x100) {
+      uval_7 = (uint)*(ushort *)(gui_btn + 0x24) * 0x100;
     }
   }
-  if ((int)uVar17 < DAT_001e31f5 * 0x100) {
-    uVar17 = 0;
+  if ((int)uval_7 < g_bss_001e31f5 * 0x100) {
+    uval_7 = 0;
   }
   else {
-    uVar17 = (int)(uVar17 + DAT_001e31f5 * -0x100) / (int)(uVar17 / (uint)((int)uVar13 >> 8)) + 1;
-    if (0x1f < (int)uVar17) {
-      uVar17 = 0x1f;
+    uval_7 = (int)(uval_7 + g_bss_001e31f5 * -0x100) / (int)(uval_7 / (uint)((int)uval_6 >> 8)) + 1;
+    if (0x1f < (int)uval_7) {
+      uval_7 = 0x1f;
     }
   }
-  in_EAX[5] = (byte)uVar17;
-  if (uVar20 == 0) {
+  gui_btn[5] = (byte)uval_7;
+  if (uval_9 == 0) {
     return;
   }
-  if ((int)uVar23 < 1) {
+  if ((int)uval_10 < 1) {
     return;
   }
-  bVar1 = *in_EAX;
-  if ((bVar1 & 4) != 0) {
-    if ((bVar1 & 0x40) == 0) {
-      if ((bVar1 & 8) == 0) {
-        iVar18 = (uint)*(ushort *)(in_EAX + 0x28) + uVar17 * -0x100;
-        if (iVar18 < 1) {
-          iVar18 = 0;
+  flag = *gui_btn;
+  if ((flag & 4) != 0) {
+    if ((flag & 0x40) == 0) {
+      if ((flag & 8) == 0) {
+        val_8 = (uint)*(ushort *)(gui_btn + 0x28) + uval_7 * -0x100;
+        if (val_8 < 1) {
+          val_8 = 0;
         }
-        iVar11 = (uint)*(ushort *)(in_EAX + 0x2a) + uVar17 * -0x100;
-        if (iVar11 < 1) {
-          iVar11 = 0;
+        val_3 = (uint)*(ushort *)(gui_btn + 0x2a) + uval_7 * -0x100;
+        if (val_3 < 1) {
+          val_3 = 0;
         }
-        iVar10 = (uint)*(ushort *)(in_EAX + 0x28) + uVar17 * 0x100;
-        if (0xfffe < iVar10) {
-          iVar10 = 0xffff;
+        val_2 = (uint)*(ushort *)(gui_btn + 0x28) + uval_7 * 0x100;
+        if (0xfffe < val_2) {
+          val_2 = 0xffff;
         }
-        iVar12 = (uint)*(ushort *)(in_EAX + 0x2a) + uVar17 * 0x100;
-        if (0xfffe < iVar12) {
-          iVar12 = 0xffff;
+        val_4 = (uint)*(ushort *)(gui_btn + 0x2a) + uval_7 * 0x100;
+        if (0xfffe < val_4) {
+          val_4 = 0xffff;
         }
-        iVar14 = (int)((iVar18 + (iVar18 >> 0x1f) * -0x100) - (uint)((iVar18 >> 0x1f) << 7 < 0)) >>
+        val_5 = (int)((val_8 + (val_8 >> 0x1f) * -0x100) - (uint)((val_8 >> 0x1f) << 7 < 0)) >>
                  8;
-        puVar24 = &DAT_001e3203 +
-                  ((int)((iVar11 + (iVar11 >> 0x1f) * -0x100) - (uint)((iVar11 >> 0x1f) << 7 < 0))
-                  >> 8) * 0x100 + iVar14;
-        uVar17 = *(uint *)(&DAT_001c1dce + (uint)*(ushort *)(in_EAX + 0x10) * 0x81);
-        puVar5 = &DAT_001c1dcd + (uint)*(ushort *)(in_EAX + 0x10) * 0x81;
-        for (; iVar11 <= iVar12; iVar11 = iVar11 + 0x100) {
-          puVar22 = &DAT_00388e3c;
-          iVar15 = iVar18 - iVar10;
-          iVar25 = iVar18;
-          while (iVar25 == iVar10 || SBORROW4(iVar25,iVar10) != iVar15 < 0) {
-            if ((*puVar22 & uVar17) != 0) {
-              uVar13 = (int)((uint)*(ushort *)(in_EAX + 0x28) - iVar25) >> 0x1f;
-              iVar15 = ((uint)*(ushort *)(in_EAX + 0x28) - iVar25 ^ uVar13) - uVar13;
-              uVar13 = (int)((uint)*(ushort *)(in_EAX + 0x2a) - iVar11) >> 0x1f;
-              iVar16 = ((uint)*(ushort *)(in_EAX + 0x2a) - iVar11 ^ uVar13) - uVar13;
-              if (iVar16 < iVar15) {
-                iVar15 = *(int *)(&DAT_0017a4d0 + ((iVar16 * 0x100) / iVar15) * 8) * iVar15 >> 0xd;
+        word_ptr_3 = &g_bss_001e3203 +
+                  ((int)((val_3 + (val_3 >> 0x1f) * -0x100) - (uint)((val_3 >> 0x1f) << 7 < 0))
+                  >> 8) * 0x100 + val_5;
+        uval_7 = *(uint *)(&g_bss_001c1dce + (uint)*(ushort *)(gui_btn + 0x10) * 0x81);
+        word_ptr = &g_bss_001c1dcd + (uint)*(ushort *)(gui_btn + 0x10) * 0x81;
+        for (; val_3 <= val_4; val_3 = val_3 + 0x100) {
+          word_ptr_2 = &g_bss_00388e3c;
+          val_6 = val_8 - val_2;
+          val_9 = val_8;
+          while (val_9 == val_2 || SBORROW4(val_9,val_2) != val_6 < 0) {
+            if ((*word_ptr_2 & uval_7) != 0) {
+              uval_6 = (int)((uint)*(ushort *)(gui_btn + 0x28) - val_9) >> 0x1f;
+              val_6 = ((uint)*(ushort *)(gui_btn + 0x28) - val_9 ^ uval_6) - uval_6;
+              uval_6 = (int)((uint)*(ushort *)(gui_btn + 0x2a) - val_3) >> 0x1f;
+              val_7 = ((uint)*(ushort *)(gui_btn + 0x2a) - val_3 ^ uval_6) - uval_6;
+              if (val_7 < val_6) {
+                val_6 = *(int *)(&g_data_0017a4d0 + ((val_7 * 0x100) / val_6) * 8) * val_6 >> 0xd;
               }
-              else if (iVar16 == 0) {
-                iVar15 = 0;
+              else if (val_7 == 0) {
+                val_6 = 0;
               }
               else {
-                iVar15 = *(int *)(&DAT_0017a4d0 + ((iVar15 * 0x100) / iVar16) * 8) * iVar16 >> 0xd;
+                val_6 = *(int *)(&g_data_0017a4d0 + ((val_6 * 0x100) / val_7) * 8) * val_7 >> 0xd;
               }
-              lVar3 = (longlong)(int)((uVar20 - iVar15) * uVar23) / (longlong)(int)uVar20;
-              if ((int)(uint)*puVar24 < (int)lVar3) {
-                *puVar24 = (ushort)lVar3;
+              val = (longlong)(int)((uval_9 - val_6) * uval_10) / (longlong)(int)uval_9;
+              if ((int)(uint)*word_ptr_3 < (int)val) {
+                *word_ptr_3 = (ushort)val;
               }
             }
-            iVar25 = iVar25 + 0x100;
-            puVar24 = puVar24 + 1;
-            puVar22 = puVar22 + 1;
-            iVar15 = iVar25 - iVar10;
+            val_9 = val_9 + 0x100;
+            word_ptr_3 = word_ptr_3 + 1;
+            word_ptr_2 = word_ptr_2 + 1;
+            val_6 = val_9 - val_2;
           }
-          uVar17 = *(uint *)(puVar5 + 5);
-          puVar24 = puVar24 + (0xff - (((int)((iVar10 + (iVar10 >> 0x1f) * -0x100) -
-                                             (uint)((iVar10 >> 0x1f) << 7 < 0)) >> 8) - iVar14));
-          puVar5 = puVar5 + 4;
+          uval_7 = *(uint *)(word_ptr + 5);
+          word_ptr_3 = word_ptr_3 + (0xff - (((int)((val_2 + (val_2 >> 0x1f) * -0x100) -
+                                             (uint)((val_2 >> 0x1f) << 7 < 0)) >> 8) - val_5));
+          word_ptr = word_ptr + 4;
         }
         return;
       }
-      local_124 = (uint)*(ushort *)(in_EAX + 0x28);
-      local_120 = (uint)*(ushort *)(in_EAX + 0x2a);
-      local_11c = (uint)(*(ushort *)(in_EAX + 0x28) >> 8);
-      uVar17 = (uint)(*(ushort *)(in_EAX + 0x2a) >> 8);
-      iVar18 = *(int *)(in_EAX + 0x2a) >> 0x1f;
-      local_110 = (int)(((*(int *)(in_EAX + 0x2a) >> 0x10) + iVar18 * -0x100) -
-                       (uint)(iVar18 << 7 < 0)) >> 8;
-      local_f4 = &DAT_001c1dcd + (uint)*(ushort *)(in_EAX + 0x10) * 0x81;
-      local_134 = uVar20;
-      local_114 = uVar17;
-      FUN_000e6a10();
-      FUN_000e6a10();
-      iVar18 = local_11c + uVar17 * 0x100;
+      local_124 = (uint)*(ushort *)(gui_btn + 0x28);
+      local_120 = (uint)*(ushort *)(gui_btn + 0x2a);
+      local_11c = (uint)(*(ushort *)(gui_btn + 0x28) >> 8);
+      uval_7 = (uint)(*(ushort *)(gui_btn + 0x2a) >> 8);
+      val_8 = *(int *)(gui_btn + 0x2a) >> 0x1f;
+      local_110 = (int)(((*(int *)(gui_btn + 0x2a) >> 0x10) + val_8 * -0x100) -
+                       (uint)(val_8 << 7 < 0)) >> 8;
+      local_f4 = &g_bss_001c1dcd + (uint)*(ushort *)(gui_btn + 0x10) * 0x81;
+      local_134 = uval_9;
+      local_114 = uval_7;
+      LbScreenWaitVbi();
+      LbScreenWaitVbi();
+      val_8 = local_11c + uval_7 * 0x100;
       if (local_110 <
-          (int)(uint)(*(byte *)((int)&DAT_0019e973 +
-                               (*(uint *)((int)&DAT_00279203 + iVar18 * 5 + 1) & 0x7ff) * 0x18 + 2)
+          (int)(uint)(*(byte *)((int)&g_bss_0019e973 +
+                               (*(uint *)((int)&g_map_subtiles + val_8 * 5 + 1) & 0x7ff) * 0x18 + 2)
                      >> 4)) {
 LAB_000af5d6:
-        *in_EAX = *in_EAX & 0xf7;
+        *gui_btn = *gui_btn & 0xf7;
         return;
       }
       *(uint *)(local_f4 + extraout_ECX_08 * 4 + 1) =
            *(uint *)(local_f4 + extraout_ECX_08 * 4 + 1) |
            1 << (0x1fU - (char)extraout_ECX_08 & 0x1f);
-      uVar13 = local_124 + local_11c * -0x100;
-      uVar20 = local_120 + uVar17 * -0x100;
-      uVar17 = (int)uVar13 >> 0x1f;
-      iVar10 = (uVar13 ^ uVar17) - uVar17;
-      uVar17 = (int)uVar20 >> 0x1f;
-      iVar11 = (uVar20 ^ uVar17) - uVar17;
-      if (iVar11 < iVar10) {
-        iVar10 = *(int *)(&DAT_0017a4d0 + ((iVar11 * 0x100) / iVar10) * 8) * iVar10;
+      uval_6 = local_124 + local_11c * -0x100;
+      uval_9 = local_120 + uval_7 * -0x100;
+      uval_7 = (int)uval_6 >> 0x1f;
+      val_2 = (uval_6 ^ uval_7) - uval_7;
+      uval_7 = (int)uval_9 >> 0x1f;
+      val_3 = (uval_9 ^ uval_7) - uval_7;
+      if (val_3 < val_2) {
+        val_2 = *(int *)(&g_data_0017a4d0 + ((val_3 * 0x100) / val_2) * 8) * val_2;
       }
       else {
-        iVar12 = 0;
-        if (iVar11 == 0) goto LAB_000ae9bc;
-        iVar10 = *(int *)(&DAT_0017a4d0 + ((iVar10 * 0x100) / iVar11) * 8) * iVar11;
+        val_4 = 0;
+        if (val_3 == 0) goto LAB_000ae9bc;
+        val_2 = *(int *)(&g_data_0017a4d0 + ((val_2 * 0x100) / val_3) * 8) * val_3;
       }
-      iVar12 = iVar10 >> 0xd;
+      val_4 = val_2 >> 0xd;
 LAB_000ae9bc:
-      iVar11 = (int)((local_134 - iVar12) * uVar23) / (int)local_134;
-      if ((int)(uint)(ushort)(&DAT_001e3203)[iVar18] < iVar11) {
-        (&DAT_001e3203)[iVar18] = (ushort)iVar11;
+      val_3 = (int)((local_134 - val_4) * uval_10) / (int)local_134;
+      if ((int)(uint)(ushort)(&g_bss_001e3203)[val_8] < val_3) {
+        (&g_bss_001e3203)[val_8] = (ushort)val_3;
       }
       local_160 = local_124 >> 8;
       local_64 = local_120 >> 8;
-      piVar21 = &DAT_001baded;
-      local_130 = uVar23;
+      int_ptr = &g_bss_001baded;
+      local_130 = uval_10;
       local_12c = extraout_ECX_08;
       do {
-        if ((&DAT_001baded + DAT_001e31ff * 2 <= piVar21) ||
-           (local_12c < *(byte *)((int)piVar21 + 1))) goto LAB_000af5d6;
-        local_10c = local_11c + (int)*(char *)((int)piVar21 + 2);
-        local_108 = local_114 + (*piVar21 >> 0x18);
+        if ((&g_bss_001baded + g_bss_001e31ff * 2 <= int_ptr) ||
+           (local_12c < *(byte *)((int)int_ptr + 1))) goto LAB_000af5d6;
+        local_10c = local_11c + (int)*(char *)((int)int_ptr + 2);
+        local_108 = local_114 + (*int_ptr >> 0x18);
         if ((0xff < local_10c) || (0xff < local_108)) goto LAB_000af4ea;
         local_1c = local_10c * 0x100;
         local_138 = local_108 * 0x100;
-        uVar7 = FUN_000e66ec();
+        uval_3 = bflib_system_io_fn_0e66ec();
         if ((byte)local_10c < (byte)local_11c) {
           if ((byte)local_108 < (byte)local_114) {
             local_fc = 4;
@@ -1511,62 +1426,62 @@ LAB_000ae9bc:
         local_30 = local_10c * 0x100 + -1;
         local_14c = local_60 * 4;
         local_28 = local_30 - local_124;
-        if ((&DAT_001bcded)[(uint)uVar7 % 0x800] != '\0') {
+        if ((&g_bss_001bcded)[(uint)uval_3 % 0x800] != '\0') {
           local_f0 = &local_104;
           local_ec = &local_100;
           if (local_10c == local_160) {
             if (local_108 < local_64) {
-              uVar7 = FUN_000e66ec();
-              local_e8 = (uint)uVar7 % 0x800;
-              uVar7 = FUN_000e66ec();
-              local_e4 = (uint)uVar7 % 0x800;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_e8 = (uint)uval_3 % 0x800;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_e4 = (uint)uval_3 % 0x800;
             }
             else {
-              uVar7 = FUN_000e66ec();
-              local_e8 = (uint)uVar7 % 0x800;
-              uVar7 = FUN_000e66ec();
-              local_e4 = (int)(uint)uVar7 % extraout_ECX_09 & 0xffff;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_e8 = (uint)uval_3 % 0x800;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_e4 = (int)(uint)uval_3 % extraout_ECX_09 & 0xffff;
             }
           }
           else if (local_64 == local_108) {
             if (local_10c < local_160) {
-              uVar7 = FUN_000e66ec();
-              local_e8 = (uint)uVar7 % 0x800;
-              uVar7 = FUN_000e66ec();
-              local_e4 = (int)(uint)uVar7 % extraout_ECX_10 & 0xffff;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_e8 = (uint)uval_3 % 0x800;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_e4 = (int)(uint)uval_3 % extraout_ECX_10 & 0xffff;
             }
             else {
-              uVar7 = FUN_000e66ec();
-              local_e8 = (uint)uVar7 % 0x800;
-              uVar7 = FUN_000e66ec();
-              local_e4 = (uint)uVar7 % 0x800;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_e8 = (uint)uval_3 % 0x800;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_e4 = (uint)uval_3 % 0x800;
             }
           }
           else {
             switch(local_60) {
             case 0:
-              uVar7 = FUN_000e66ec();
-              local_e8 = (uint)uVar7 % 0x800;
-              uVar7 = FUN_000e66ec();
-              local_e4 = (uint)uVar7 % 0x800;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_e8 = (uint)uval_3 % 0x800;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_e4 = (uint)uval_3 % 0x800;
               break;
             case 1:
-              uVar7 = FUN_000e66ec();
-              local_e8 = (uint)uVar7 % 0x800;
-              uVar7 = FUN_000e66ec();
-              local_e4 = (uint)uVar7 % 0x800;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_e8 = (uint)uval_3 % 0x800;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_e4 = (uint)uval_3 % 0x800;
               break;
             case 2:
-              uVar7 = FUN_000e66ec();
-              local_e8 = (uint)uVar7 % 0x800;
-              uVar7 = FUN_000e66ec();
-              local_e4 = (int)(uint)uVar7 % extraout_ECX_11 & 0xffff;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_e8 = (uint)uval_3 % 0x800;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_e4 = (int)(uint)uval_3 % extraout_ECX_11 & 0xffff;
               break;
             case 3:
-              uVar7 = FUN_000e66ec();
-              local_e8 = (uint)uVar7 % 0x800;
-              uVar7 = FUN_000e66ec();
-              local_e4 = (int)(uint)uVar7 % extraout_ECX_12 & 0xffff;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_e8 = (uint)uval_3 % 0x800;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_e4 = (int)(uint)uval_3 % extraout_ECX_12 & 0xffff;
             }
           }
           if (((int)((local_e8 + ((int)local_e8 >> 0x1f) * -0x200) -
@@ -1579,85 +1494,85 @@ LAB_000ae9bc:
           }
           *local_f0 = local_e8;
           *local_ec = local_e4;
-          if ((((&DAT_001bcded)[local_104] == '\0') || ((&DAT_001bcded)[local_100] == '\0')) &&
+          if ((((&g_bss_001bcded)[local_104] == '\0') || ((&g_bss_001bcded)[local_100] == '\0')) &&
              (local_110 <
-              (int)(uint)(*(byte *)((int)&DAT_0019e973 +
-                                   (*(uint *)((int)&DAT_00279203 +
+              (int)(uint)(*(byte *)((int)&g_bss_0019e973 +
+                                   (*(uint *)((int)&g_map_subtiles +
                                              (local_108 * 0x100 + local_10c) * 5 + 1) & 0x7ff) *
                                    0x18 + 2) >> 4))) {
             if ((int)local_100 < (int)local_104) {
-              FUN_000e6a10();
-              FUN_000e6a10();
+              LbScreenWaitVbi();
+              LbScreenWaitVbi();
             }
             else {
-              FUN_000e6a10();
+              LbScreenWaitVbi();
             }
           }
           goto LAB_000af4ea;
         }
         local_e0 = (local_10c + local_48) * 5;
-        local_128 = (int)&DAT_00279203 + local_e0;
-        local_40 = &DAT_001e3203 + local_10c + local_48;
+        local_128 = (int)&g_map_subtiles + local_e0;
+        local_40 = &g_bss_001e3203 + local_10c + local_48;
         local_f8 = (uint)(local_110 <
-                         (int)(uint)(*(byte *)((int)&DAT_0019e973 +
-                                              (*(uint *)((int)&DAT_00279203 + local_e0 + 1) & 0x7ff)
+                         (int)(uint)(*(byte *)((int)&g_bss_0019e973 +
+                                              (*(uint *)((int)&g_map_subtiles + local_e0 + 1) & 0x7ff)
                                               * 0x18 + 2) >> 4));
         if (local_f8 != 0) {
           local_178 = &local_104;
           local_dc = &local_100;
           if (local_10c == local_160) {
             if (local_108 < local_64) {
-              uVar7 = FUN_000e66ec();
-              local_d8 = (uint)uVar7 % 0x800;
-              uVar7 = FUN_000e66ec();
-              local_d4 = (uint)uVar7 % 0x800;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_d8 = (uint)uval_3 % 0x800;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_d4 = (uint)uval_3 % 0x800;
             }
             else {
-              uVar7 = FUN_000e66ec();
-              local_d8 = (uint)uVar7 % 0x800;
-              uVar7 = FUN_000e66ec();
-              local_d4 = (int)(uint)uVar7 % extraout_ECX_13 & 0xffff;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_d8 = (uint)uval_3 % 0x800;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_d4 = (int)(uint)uval_3 % extraout_ECX_13 & 0xffff;
             }
           }
           else if (local_64 == local_108) {
             if (local_10c < local_160) {
-              uVar7 = FUN_000e66ec();
-              local_d8 = (uint)uVar7 % 0x800;
-              uVar7 = FUN_000e66ec();
-              local_d4 = (int)(uint)uVar7 % extraout_ECX_14 & 0xffff;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_d8 = (uint)uval_3 % 0x800;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_d4 = (int)(uint)uval_3 % extraout_ECX_14 & 0xffff;
             }
             else {
-              uVar7 = FUN_000e66ec();
-              local_d8 = (uint)uVar7 % 0x800;
-              uVar7 = FUN_000e66ec();
-              local_d4 = (uint)uVar7 % 0x800;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_d8 = (uint)uval_3 % 0x800;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_d4 = (uint)uval_3 % 0x800;
             }
           }
           else {
             switch(local_60) {
             case 0:
-              uVar7 = FUN_000e66ec();
-              local_d8 = (uint)uVar7 % 0x800;
-              uVar7 = FUN_000e66ec();
-              local_d4 = (uint)uVar7 % 0x800;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_d8 = (uint)uval_3 % 0x800;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_d4 = (uint)uval_3 % 0x800;
               break;
             case 1:
-              uVar7 = FUN_000e66ec();
-              local_d8 = (uint)uVar7 % 0x800;
-              uVar7 = FUN_000e66ec();
-              local_d4 = (uint)uVar7 % 0x800;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_d8 = (uint)uval_3 % 0x800;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_d4 = (uint)uval_3 % 0x800;
               break;
             case 2:
-              uVar7 = FUN_000e66ec();
-              local_d8 = (uint)uVar7 % 0x800;
-              uVar7 = FUN_000e66ec();
-              local_d4 = (int)(uint)uVar7 % extraout_ECX_15 & 0xffff;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_d8 = (uint)uval_3 % 0x800;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_d4 = (int)(uint)uval_3 % extraout_ECX_15 & 0xffff;
               break;
             case 3:
-              uVar7 = FUN_000e66ec();
-              local_d8 = (uint)uVar7 % 0x800;
-              uVar7 = FUN_000e66ec();
-              local_d4 = (int)(uint)uVar7 % extraout_ECX_16 & 0xffff;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_d8 = (uint)uval_3 % 0x800;
+              uval_3 = bflib_system_io_fn_0e66ec();
+              local_d4 = (int)(uint)uval_3 % extraout_ECX_16 & 0xffff;
             }
           }
           if (((int)((local_d8 + ((int)local_d8 >> 0x1f) * -0x200) -
@@ -1671,117 +1586,117 @@ LAB_000ae9bc:
           *local_178 = local_d8;
           *local_dc = local_d4;
           if ((int)local_100 < (int)local_104) {
-            FUN_000e6a10();
+            LbScreenWaitVbi();
           }
-          FUN_000e6a10();
+          LbScreenWaitVbi();
         }
         if (local_f8 == 0) goto LAB_000af3f4;
         switch(local_fc) {
         case 1:
-          if ((int)(uint)(*(byte *)((int)&DAT_0019e973 +
-                                   (*(uint *)((int)&DAT_00279203 +
+          if ((int)(uint)(*(byte *)((int)&g_bss_0019e973 +
+                                   (*(uint *)((int)&g_map_subtiles +
                                              (local_108 * 0x100 + (local_10c - 1)) * 5 + 1) & 0x7ff)
                                    * 0x18 + 2) >> 4) <= local_110) goto switchD_000af3df_caseD_2;
-          bVar4 = false;
+          flag_2 = false;
           break;
         case 3:
           if (local_110 <
-              (int)(uint)(*(byte *)((int)&DAT_0019e973 +
-                                   (*(uint *)((int)&DAT_00279203 +
+              (int)(uint)(*(byte *)((int)&g_bss_0019e973 +
+                                   (*(uint *)((int)&g_map_subtiles +
                                              ((local_108 - 1) * 0x100 + local_10c) * 5 + 1) & 0x7ff)
                                    * 0x18 + 2) >> 4)) goto switchD_000af3df_caseD_4;
         default:
 switchD_000af3df_caseD_2:
-          bVar4 = true;
+          flag_2 = true;
           break;
         case 4:
 switchD_000af3df_caseD_4:
-          bVar4 = false;
+          flag_2 = false;
         }
-        if (bVar4) {
+        if (flag_2) {
 LAB_000af3f4:
-          uVar17 = (int)(local_124 - local_1c) >> 0x1f;
-          iVar18 = (local_124 - local_1c ^ uVar17) - uVar17;
-          uVar17 = (int)(local_120 - local_138) >> 0x1f;
-          iVar11 = (local_120 - local_138 ^ uVar17) - uVar17;
-          if (iVar11 < iVar18) {
-            iVar18 = *(int *)(&DAT_0017a4d0 + ((iVar11 * 0x100) / iVar18) * 8) * iVar18 >> 0xd;
+          uval_7 = (int)(local_124 - local_1c) >> 0x1f;
+          val_8 = (local_124 - local_1c ^ uval_7) - uval_7;
+          uval_7 = (int)(local_120 - local_138) >> 0x1f;
+          val_3 = (local_120 - local_138 ^ uval_7) - uval_7;
+          if (val_3 < val_8) {
+            val_8 = *(int *)(&g_data_0017a4d0 + ((val_3 * 0x100) / val_8) * 8) * val_8 >> 0xd;
           }
-          else if (iVar11 == 0) {
-            iVar18 = 0;
+          else if (val_3 == 0) {
+            val_8 = 0;
           }
           else {
-            iVar18 = *(int *)(&DAT_0017a4d0 + ((iVar18 * 0x100) / iVar11) * 8) * iVar11 >> 0xd;
+            val_8 = *(int *)(&g_data_0017a4d0 + ((val_8 * 0x100) / val_3) * 8) * val_3 >> 0xd;
           }
-          lVar3 = (longlong)(int)((local_134 - iVar18) * local_130) / (longlong)(int)local_134;
-          iVar18 = (int)lVar3;
-          if (iVar18 <= DAT_001e31f5) goto LAB_000af5d6;
-          iVar11 = local_12c + (*piVar21 >> 0x18);
-          *(uint *)(local_f4 + iVar11 * 4 + 1) =
-               *(uint *)(local_f4 + iVar11 * 4 + 1) |
-               1 << (0x1fU - ((char)local_12c + *(char *)((int)piVar21 + 2)) & 0x1f);
-          if ((int)(uint)*local_40 < iVar18) {
-            *local_40 = (ushort)lVar3;
+          val = (longlong)(int)((local_134 - val_8) * local_130) / (longlong)(int)local_134;
+          val_8 = (int)val;
+          if (val_8 <= g_bss_001e31f5) goto LAB_000af5d6;
+          val_3 = local_12c + (*int_ptr >> 0x18);
+          *(uint *)(local_f4 + val_3 * 4 + 1) =
+               *(uint *)(local_f4 + val_3 * 4 + 1) |
+               1 << (0x1fU - ((char)local_12c + *(char *)((int)int_ptr + 2)) & 0x1f);
+          if ((int)(uint)*local_40 < val_8) {
+            *local_40 = (ushort)val;
           }
         }
 LAB_000af4ea:
-        piVar21 = piVar21 + 2;
+        int_ptr = int_ptr + 2;
       } while( true );
     }
-    uVar7 = *(ushort *)(in_EAX + 0x28);
-    uVar13 = (uint)uVar7;
-    uVar2 = *(ushort *)(in_EAX + 0x2a);
-    uVar8 = (uint)(uVar7 >> 8);
-    iVar18 = *(int *)(in_EAX + 0x2a) >> 0x1f;
-    iVar18 = (int)(((*(int *)(in_EAX + 0x2a) >> 0x10) + iVar18 * -0x100) - (uint)(iVar18 << 7 < 0))
+    uval_3 = *(ushort *)(gui_btn + 0x28);
+    uval_6 = (uint)uval_3;
+    uval = *(ushort *)(gui_btn + 0x2a);
+    uval_4 = (uint)(uval_3 >> 8);
+    val_8 = *(int *)(gui_btn + 0x2a) >> 0x1f;
+    val_8 = (int)(((*(int *)(gui_btn + 0x2a) >> 0x10) + val_8 * -0x100) - (uint)(val_8 << 7 < 0))
              >> 8;
-    FUN_000e6a10();
-    if (iVar18 < (int)(uint)(*(byte *)((int)&DAT_0019e973 +
-                                      (*(uint *)((int)&DAT_00279203 + (uVar8 + extraout_ECX) * 5 + 1
+    LbScreenWaitVbi();
+    if (val_8 < (int)(uint)(*(byte *)((int)&g_bss_0019e973 +
+                                      (*(uint *)((int)&g_map_subtiles + (uval_4 + extraout_ECX) * 5 + 1
                                                 ) & 0x7ff) * 0x18 + 2) >> 4)) {
       return;
     }
-    uVar9 = uVar13 + uVar8 * -0x100;
-    uVar19 = (int)uVar9 >> 0x1f;
-    iVar10 = (uVar9 ^ uVar19) - uVar19;
-    uVar19 = (uint)uVar2 - extraout_ECX;
-    uVar9 = (int)uVar19 >> 0x1f;
-    iVar11 = (uVar19 ^ uVar9) - uVar9;
-    if (iVar11 < iVar10) {
-      iVar10 = *(int *)(&DAT_0017a4d0 + ((iVar11 * 0x100) / iVar10) * 8) * iVar10;
+    uval_5 = uval_6 + uval_4 * -0x100;
+    uval_8 = (int)uval_5 >> 0x1f;
+    val_2 = (uval_5 ^ uval_8) - uval_8;
+    uval_8 = (uint)uval - extraout_ECX;
+    uval_5 = (int)uval_8 >> 0x1f;
+    val_3 = (uval_8 ^ uval_5) - uval_5;
+    if (val_3 < val_2) {
+      val_2 = *(int *)(&g_data_0017a4d0 + ((val_3 * 0x100) / val_2) * 8) * val_2;
     }
     else {
-      iVar12 = 0;
-      if (iVar11 == 0) goto LAB_000addf2;
-      iVar10 = *(int *)(&DAT_0017a4d0 + ((iVar10 * 0x100) / iVar11) * 8) * iVar11;
+      val_4 = 0;
+      if (val_3 == 0) goto LAB_000addf2;
+      val_2 = *(int *)(&g_data_0017a4d0 + ((val_2 * 0x100) / val_3) * 8) * val_3;
     }
-    iVar12 = iVar10 >> 0xd;
+    val_4 = val_2 >> 0xd;
 LAB_000addf2:
-    iVar11 = (int)((uVar20 - iVar12) * uVar23) / (int)uVar20;
-    if ((int)(uint)(ushort)(&DAT_001e3203)[uVar8 + extraout_ECX] < iVar11) {
-      (&DAT_001e3203)[uVar8 + extraout_ECX] = (ushort)iVar11;
+    val_3 = (int)((uval_9 - val_4) * uval_10) / (int)uval_9;
+    if ((int)(uint)(ushort)(&g_bss_001e3203)[uval_4 + extraout_ECX] < val_3) {
+      (&g_bss_001e3203)[uval_4 + extraout_ECX] = (ushort)val_3;
     }
-    local_38 = (uint)(uVar7 >> 8);
-    local_15c = (uint)(uVar2 >> 8);
-    local_1bc = &DAT_001baded;
+    local_38 = (uint)(uval_3 >> 8);
+    local_15c = (uint)(uval >> 8);
+    local_1bc = &g_bss_001baded;
     do {
-      if (&DAT_001baded + DAT_001e31ff * 2 <= local_1bc) {
+      if (&g_bss_001baded + g_bss_001e31ff * 2 <= local_1bc) {
         return;
       }
-      if (uVar17 < *(byte *)((int)local_1bc + 1)) {
+      if (uval_7 < *(byte *)((int)local_1bc + 1)) {
         return;
       }
-      uVar9 = uVar8 + (int)*(char *)((int)local_1bc + 2);
-      uVar19 = (uint)(uVar2 >> 8) + (*local_1bc >> 0x18);
-      if ((uVar9 < 0x100) && (uVar19 < 0x100)) {
-        local_20 = uVar9 * 0x100;
-        local_140 = uVar19 * 0x100;
-        uVar6 = FUN_000e66ec();
-        local_190 = (uint)uVar6 % 0x800;
-        local_1ac = (byte)(uVar7 >> 8);
-        local_1a0 = (byte)uVar9;
-        local_19c = (byte)uVar19;
-        local_1a8 = (byte)(uVar2 >> 8);
+      uval_5 = uval_4 + (int)*(char *)((int)local_1bc + 2);
+      uval_8 = (uint)(uval >> 8) + (*local_1bc >> 0x18);
+      if ((uval_5 < 0x100) && (uval_8 < 0x100)) {
+        local_20 = uval_5 * 0x100;
+        local_140 = uval_8 * 0x100;
+        uval_2 = bflib_system_io_fn_0e66ec();
+        local_190 = (uint)uval_2 % 0x800;
+        local_1ac = (byte)(uval_3 >> 8);
+        local_1a0 = (byte)uval_5;
+        local_19c = (byte)uval_8;
+        local_1a8 = (byte)(uval >> 8);
         if (local_1a0 < local_1ac) {
           if (local_19c < local_1a8) {
             local_18c = 4;
@@ -1796,66 +1711,66 @@ LAB_000addf2:
         else {
           local_18c = 2;
         }
-        local_44 = uVar19 * 0x100;
+        local_44 = uval_8 * 0x100;
         local_154 = local_18c + -1;
         local_2c = local_154 * 4;
-        local_144 = (uVar9 * 0x100 + -1) - uVar13;
-        if ((&DAT_001bcded)[local_190] != '\0') {
+        local_144 = (uval_5 * 0x100 + -1) - uval_6;
+        if ((&g_bss_001bcded)[local_190] != '\0') {
           local_184 = &local_198;
           local_180 = &local_194;
-          if (uVar9 == local_38) {
-            if (uVar19 < local_15c) {
-              uVar6 = FUN_000e66ec();
-              local_17c = (uint)uVar6 % 0x800;
-              uVar6 = FUN_000e66ec();
-              unaff_EBP = (uint)uVar6 % 0x800;
+          if (uval_5 == local_38) {
+            if (uval_8 < local_15c) {
+              uval_2 = bflib_system_io_fn_0e66ec();
+              local_17c = (uint)uval_2 % 0x800;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              unaff_EBP = (uint)uval_2 % 0x800;
             }
             else {
-              uVar6 = FUN_000e66ec();
-              local_17c = (uint)uVar6 % 0x800;
-              uVar6 = FUN_000e66ec();
-              unaff_EBP = (int)(uint)uVar6 % extraout_ECX_00 & 0xffff;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              local_17c = (uint)uval_2 % 0x800;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              unaff_EBP = (int)(uint)uval_2 % extraout_ECX_00 & 0xffff;
             }
           }
-          else if (local_15c == uVar19) {
-            if (uVar9 < local_38) {
-              uVar6 = FUN_000e66ec();
-              local_17c = (uint)uVar6 % 0x800;
-              uVar6 = FUN_000e66ec();
-              unaff_EBP = (int)(uint)uVar6 % extraout_ECX_01 & 0xffff;
+          else if (local_15c == uval_8) {
+            if (uval_5 < local_38) {
+              uval_2 = bflib_system_io_fn_0e66ec();
+              local_17c = (uint)uval_2 % 0x800;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              unaff_EBP = (int)(uint)uval_2 % extraout_ECX_01 & 0xffff;
             }
             else {
-              uVar6 = FUN_000e66ec();
-              local_17c = (uint)uVar6 % 0x800;
-              uVar6 = FUN_000e66ec();
-              unaff_EBP = (uint)uVar6 % 0x800;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              local_17c = (uint)uval_2 % 0x800;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              unaff_EBP = (uint)uval_2 % 0x800;
             }
           }
           else {
             switch(local_154) {
             case 0:
-              uVar6 = FUN_000e66ec();
-              local_17c = (uint)uVar6 % 0x800;
-              uVar6 = FUN_000e66ec();
-              unaff_EBP = (uint)uVar6 % 0x800;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              local_17c = (uint)uval_2 % 0x800;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              unaff_EBP = (uint)uval_2 % 0x800;
               break;
             case 1:
-              uVar6 = FUN_000e66ec();
-              local_17c = (uint)uVar6 % 0x800;
-              uVar6 = FUN_000e66ec();
-              unaff_EBP = (uint)uVar6 % 0x800;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              local_17c = (uint)uval_2 % 0x800;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              unaff_EBP = (uint)uval_2 % 0x800;
               break;
             case 2:
-              uVar6 = FUN_000e66ec();
-              local_17c = (uint)uVar6 % 0x800;
-              uVar6 = FUN_000e66ec();
-              unaff_EBP = (int)(uint)uVar6 % extraout_ECX_02 & 0xffff;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              local_17c = (uint)uval_2 % 0x800;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              unaff_EBP = (int)(uint)uval_2 % extraout_ECX_02 & 0xffff;
               break;
             case 3:
-              uVar6 = FUN_000e66ec();
-              local_17c = (uint)uVar6 % 0x800;
-              uVar6 = FUN_000e66ec();
-              unaff_EBP = (int)(uint)uVar6 % extraout_ECX_03 & 0xffff;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              local_17c = (uint)uval_2 % 0x800;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              unaff_EBP = (int)(uint)uval_2 % extraout_ECX_03 & 0xffff;
             }
           }
           if (((int)((local_17c + ((int)local_17c >> 0x1f) * -0x200) -
@@ -1868,83 +1783,83 @@ LAB_000addf2:
           }
           *local_184 = local_17c;
           *local_180 = unaff_EBP;
-          if ((((&DAT_001bcded)[local_198] == '\0') || ((&DAT_001bcded)[local_194] == '\0')) &&
-             (iVar18 < (int)(uint)(*(byte *)((int)&DAT_0019e973 +
-                                            (*(uint *)((int)&DAT_00279203 +
-                                                      (uVar19 * 0x100 + uVar9) * 5 + 1) & 0x7ff) *
+          if ((((&g_bss_001bcded)[local_198] == '\0') || ((&g_bss_001bcded)[local_194] == '\0')) &&
+             (val_8 < (int)(uint)(*(byte *)((int)&g_bss_0019e973 +
+                                            (*(uint *)((int)&g_map_subtiles +
+                                                      (uval_8 * 0x100 + uval_5) * 5 + 1) & 0x7ff) *
                                             0x18 + 2) >> 4))) {
             if ((int)local_194 < (int)local_198) {
-              FUN_000e6a10();
-              FUN_000e6a10();
+              LbScreenWaitVbi();
+              LbScreenWaitVbi();
             }
             else {
-              FUN_000e6a10();
+              LbScreenWaitVbi();
             }
           }
           goto LAB_000ae746;
         }
-        local_e0 = (uVar9 + local_44) * 5;
-        local_13c = &DAT_001e3203 + uVar9 + local_44;
-        local_188 = (uint)(iVar18 < (int)(uint)(*(byte *)((int)&DAT_0019e973 +
-                                                         (*(uint *)((int)&DAT_00279203 +
+        local_e0 = (uval_5 + local_44) * 5;
+        local_13c = &g_bss_001e3203 + uval_5 + local_44;
+        local_188 = (uint)(val_8 < (int)(uint)(*(byte *)((int)&g_bss_0019e973 +
+                                                         (*(uint *)((int)&g_map_subtiles +
                                                                    local_e0 + 1) & 0x7ff) * 0x18 + 2
                                                          ) >> 4));
         if (local_188 != 0) {
           local_174 = &local_198;
           local_170 = &local_194;
-          if (uVar9 == local_38) {
-            if (uVar19 < local_15c) {
-              uVar6 = FUN_000e66ec();
-              local_16c = (uint)uVar6 % 0x800;
-              uVar6 = FUN_000e66ec();
-              local_168 = (uint)uVar6 % 0x800;
+          if (uval_5 == local_38) {
+            if (uval_8 < local_15c) {
+              uval_2 = bflib_system_io_fn_0e66ec();
+              local_16c = (uint)uval_2 % 0x800;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              local_168 = (uint)uval_2 % 0x800;
             }
             else {
-              uVar6 = FUN_000e66ec();
-              local_16c = (uint)uVar6 % 0x800;
-              uVar6 = FUN_000e66ec();
-              local_168 = (int)(uint)uVar6 % extraout_ECX_04 & 0xffff;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              local_16c = (uint)uval_2 % 0x800;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              local_168 = (int)(uint)uval_2 % extraout_ECX_04 & 0xffff;
             }
           }
-          else if (local_15c == uVar19) {
-            if (uVar9 < local_38) {
-              uVar6 = FUN_000e66ec();
-              local_16c = (uint)uVar6 % 0x800;
-              uVar6 = FUN_000e66ec();
-              local_168 = (int)(uint)uVar6 % extraout_ECX_05 & 0xffff;
+          else if (local_15c == uval_8) {
+            if (uval_5 < local_38) {
+              uval_2 = bflib_system_io_fn_0e66ec();
+              local_16c = (uint)uval_2 % 0x800;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              local_168 = (int)(uint)uval_2 % extraout_ECX_05 & 0xffff;
             }
             else {
-              uVar6 = FUN_000e66ec();
-              local_16c = (uint)uVar6 % 0x800;
-              uVar6 = FUN_000e66ec();
-              local_168 = (uint)uVar6 % 0x800;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              local_16c = (uint)uval_2 % 0x800;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              local_168 = (uint)uval_2 % 0x800;
             }
           }
           else {
             switch(local_154) {
             case 0:
-              uVar6 = FUN_000e66ec();
-              local_16c = (uint)uVar6 % 0x800;
-              uVar6 = FUN_000e66ec();
-              local_168 = (uint)uVar6 % 0x800;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              local_16c = (uint)uval_2 % 0x800;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              local_168 = (uint)uval_2 % 0x800;
               break;
             case 1:
-              uVar6 = FUN_000e66ec();
-              local_16c = (uint)uVar6 % 0x800;
-              uVar6 = FUN_000e66ec();
-              local_168 = (uint)uVar6 % 0x800;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              local_16c = (uint)uval_2 % 0x800;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              local_168 = (uint)uval_2 % 0x800;
               break;
             case 2:
-              uVar6 = FUN_000e66ec();
-              local_16c = (uint)uVar6 % 0x800;
-              uVar6 = FUN_000e66ec();
-              local_168 = (int)(uint)uVar6 % extraout_ECX_06 & 0xffff;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              local_16c = (uint)uval_2 % 0x800;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              local_168 = (int)(uint)uval_2 % extraout_ECX_06 & 0xffff;
               break;
             case 3:
-              uVar6 = FUN_000e66ec();
-              local_16c = (uint)uVar6 % 0x800;
-              uVar6 = FUN_000e66ec();
-              local_168 = (int)(uint)uVar6 % extraout_ECX_07 & 0xffff;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              local_16c = (uint)uval_2 % 0x800;
+              uval_2 = bflib_system_io_fn_0e66ec();
+              local_168 = (int)(uint)uval_2 % extraout_ECX_07 & 0xffff;
             }
           }
           if (((int)((local_16c + ((int)local_16c >> 0x1f) * -0x200) -
@@ -1958,55 +1873,55 @@ LAB_000addf2:
           *local_174 = local_16c;
           *local_170 = local_168;
           if ((int)local_194 < (int)local_198) {
-            FUN_000e6a10();
+            LbScreenWaitVbi();
           }
-          FUN_000e6a10();
+          LbScreenWaitVbi();
         }
         if (local_188 == 0) goto LAB_000ae6a3;
         switch(local_18c) {
         case 1:
-          if ((int)(uint)(*(byte *)((int)&DAT_0019e973 +
-                                   (*(uint *)((int)&DAT_00279203 +
-                                             (uVar19 * 0x100 + (uVar9 - 1)) * 5 + 1) & 0x7ff) * 0x18
-                                   + 2) >> 4) <= iVar18) goto switchD_000ae68e_caseD_2;
-          bVar4 = false;
+          if ((int)(uint)(*(byte *)((int)&g_bss_0019e973 +
+                                   (*(uint *)((int)&g_map_subtiles +
+                                             (uval_8 * 0x100 + (uval_5 - 1)) * 5 + 1) & 0x7ff) * 0x18
+                                   + 2) >> 4) <= val_8) goto switchD_000ae68e_caseD_2;
+          flag_2 = false;
           break;
         case 3:
-          if (iVar18 < (int)(uint)(*(byte *)((int)&DAT_0019e973 +
-                                            (*(uint *)((int)&DAT_00279203 +
-                                                      ((uVar19 - 1) * 0x100 + uVar9) * 5 + 1) &
+          if (val_8 < (int)(uint)(*(byte *)((int)&g_bss_0019e973 +
+                                            (*(uint *)((int)&g_map_subtiles +
+                                                      ((uval_8 - 1) * 0x100 + uval_5) * 5 + 1) &
                                             0x7ff) * 0x18 + 2) >> 4)) goto switchD_000ae68e_caseD_4;
         default:
 switchD_000ae68e_caseD_2:
-          bVar4 = true;
+          flag_2 = true;
           break;
         case 4:
 switchD_000ae68e_caseD_4:
-          bVar4 = false;
+          flag_2 = false;
         }
-        if (bVar4) {
+        if (flag_2) {
 LAB_000ae6a3:
-          uVar9 = (int)(uVar13 - local_20) >> 0x1f;
-          iVar11 = (uVar13 - local_20 ^ uVar9) - uVar9;
-          uVar19 = (uint)uVar2 - local_140;
-          uVar9 = (int)uVar19 >> 0x1f;
-          iVar10 = (uVar19 ^ uVar9) - uVar9;
-          if (iVar10 < iVar11) {
-            iVar11 = *(int *)(&DAT_0017a4d0 + ((iVar10 * 0x100) / iVar11) * 8) * iVar11 >> 0xd;
+          uval_5 = (int)(uval_6 - local_20) >> 0x1f;
+          val_3 = (uval_6 - local_20 ^ uval_5) - uval_5;
+          uval_8 = (uint)uval - local_140;
+          uval_5 = (int)uval_8 >> 0x1f;
+          val_2 = (uval_8 ^ uval_5) - uval_5;
+          if (val_2 < val_3) {
+            val_3 = *(int *)(&g_data_0017a4d0 + ((val_2 * 0x100) / val_3) * 8) * val_3 >> 0xd;
           }
-          else if (iVar10 == 0) {
-            iVar11 = 0;
+          else if (val_2 == 0) {
+            val_3 = 0;
           }
           else {
-            iVar11 = *(int *)(&DAT_0017a4d0 + ((iVar11 * 0x100) / iVar10) * 8) * iVar10 >> 0xd;
+            val_3 = *(int *)(&g_data_0017a4d0 + ((val_3 * 0x100) / val_2) * 8) * val_2 >> 0xd;
           }
-          lVar3 = (longlong)(int)((uVar20 - iVar11) * uVar23) / (longlong)(int)uVar20;
-          iVar11 = (int)lVar3;
-          if (iVar11 <= DAT_001e31f5) {
+          val = (longlong)(int)((uval_9 - val_3) * uval_10) / (longlong)(int)uval_9;
+          val_3 = (int)val;
+          if (val_3 <= g_bss_001e31f5) {
             return;
           }
-          if ((int)(uint)*local_13c < iVar11) {
-            *local_13c = (ushort)lVar3;
+          if ((int)(uint)*local_13c < val_3) {
+            *local_13c = (ushort)val;
           }
         }
       }
@@ -2014,57 +1929,57 @@ LAB_000ae746:
       local_1bc = local_1bc + 2;
     } while( true );
   }
-  local_9c = (uint)*(ushort *)(in_EAX + 0x28);
-  local_98 = (uint)*(ushort *)(in_EAX + 0x2a);
-  local_94 = (uint)(*(ushort *)(in_EAX + 0x28) >> 8);
-  local_90 = (uint)(*(ushort *)(in_EAX + 0x2a) >> 8);
-  iVar18 = *(int *)(in_EAX + 0x2a) >> 0x1f;
-  local_8c = (int)(((*(int *)(in_EAX + 0x2a) >> 0x10) + iVar18 * -0x100) - (uint)(iVar18 << 7 < 0))
+  local_9c = (uint)*(ushort *)(gui_btn + 0x28);
+  local_98 = (uint)*(ushort *)(gui_btn + 0x2a);
+  local_94 = (uint)(*(ushort *)(gui_btn + 0x28) >> 8);
+  local_90 = (uint)(*(ushort *)(gui_btn + 0x2a) >> 8);
+  val_8 = *(int *)(gui_btn + 0x2a) >> 0x1f;
+  local_8c = (int)(((*(int *)(gui_btn + 0x2a) >> 0x10) + val_8 * -0x100) - (uint)(val_8 << 7 < 0))
              >> 8;
-  FUN_000e6a10();
+  LbScreenWaitVbi();
   if (local_8c <
-      (int)(uint)(*(byte *)((int)&DAT_0019e973 +
-                           (*(uint *)((int)&DAT_00279203 + (local_94 + local_90 * 0x100) * 5 + 1) &
+      (int)(uint)(*(byte *)((int)&g_bss_0019e973 +
+                           (*(uint *)((int)&g_map_subtiles + (local_94 + local_90 * 0x100) * 5 + 1) &
                            0x7ff) * 0x18 + 2) >> 4)) {
     return;
   }
-  uVar17 = local_98 + local_90 * -0x100;
-  uVar13 = local_9c + local_94 * -0x100;
-  uVar8 = (int)uVar13 >> 0x1f;
-  iVar11 = (uVar13 ^ uVar8) - uVar8;
-  uVar13 = (int)uVar17 >> 0x1f;
-  iVar18 = (uVar17 ^ uVar13) - uVar13;
-  if (iVar18 < iVar11) {
-    iVar11 = *(int *)(&DAT_0017a4d0 + ((iVar18 * 0x100) / iVar11) * 8) * iVar11;
+  uval_7 = local_98 + local_90 * -0x100;
+  uval_6 = local_9c + local_94 * -0x100;
+  uval_4 = (int)uval_6 >> 0x1f;
+  val_3 = (uval_6 ^ uval_4) - uval_4;
+  uval_6 = (int)uval_7 >> 0x1f;
+  val_8 = (uval_7 ^ uval_6) - uval_6;
+  if (val_8 < val_3) {
+    val_3 = *(int *)(&g_data_0017a4d0 + ((val_8 * 0x100) / val_3) * 8) * val_3;
   }
   else {
-    iVar10 = 0;
-    if (iVar18 == 0) goto LAB_000af99a;
-    iVar11 = *(int *)(&DAT_0017a4d0 + ((iVar11 * 0x100) / iVar18) * 8) * iVar18;
+    val_2 = 0;
+    if (val_8 == 0) goto LAB_000af99a;
+    val_3 = *(int *)(&g_data_0017a4d0 + ((val_3 * 0x100) / val_8) * 8) * val_8;
   }
-  iVar10 = iVar11 >> 0xd;
+  val_2 = val_3 >> 0xd;
 LAB_000af99a:
-  iVar18 = (int)((uVar20 - iVar10) * uVar23) / (int)uVar20;
-  if ((int)(uint)*(ushort *)(&DAT_001c31f5 + (local_90 * 0x100 + local_94) * 2) < iVar18) {
-    *(ushort *)(&DAT_001c31f5 + (local_90 * 0x100 + local_94) * 2) = (ushort)iVar18;
+  val_8 = (int)((uval_9 - val_2) * uval_10) / (int)uval_9;
+  if ((int)(uint)*(ushort *)(&g_bss_001c31f5 + (local_90 * 0x100 + local_94) * 2) < val_8) {
+    *(ushort *)(&g_bss_001c31f5 + (local_90 * 0x100 + local_94) * 2) = (ushort)val_8;
   }
   local_164 = local_9c >> 8;
   local_3c = local_98 >> 8;
-  piVar21 = &DAT_001baded;
-  local_a8 = uVar20;
-  local_a4 = uVar23;
+  int_ptr = &g_bss_001baded;
+  local_a8 = uval_9;
+  local_a4 = uval_10;
   local_a0 = extraout_ECX_17;
   do {
-    if (&DAT_001baded + DAT_001e31ff * 2 <= piVar21) {
+    if (&g_bss_001baded + g_bss_001e31ff * 2 <= int_ptr) {
       return;
     }
-    if (local_a0 < *(byte *)((int)piVar21 + 1)) {
+    if (local_a0 < *(byte *)((int)int_ptr + 1)) {
       return;
     }
-    local_88 = local_94 + (int)*(char *)((int)piVar21 + 2);
-    local_84 = local_90 + (*piVar21 >> 0x18);
+    local_88 = local_94 + (int)*(char *)((int)int_ptr + 2);
+    local_84 = local_90 + (*int_ptr >> 0x18);
     if ((local_88 < 0x100) && (local_84 < 0x100)) {
-      uVar7 = FUN_000e66ec();
+      uval_3 = bflib_system_io_fn_0e66ec();
       if ((byte)local_88 < (byte)local_94) {
         if ((byte)local_84 < (byte)local_90) {
           local_78 = 4;
@@ -2084,62 +1999,62 @@ LAB_000af99a:
       local_34 = local_4c + 0x100;
       local_150 = local_158 * 4;
       local_148 = (local_88 * 0x100 + -1) - local_9c;
-      if ((&DAT_001bcded)[(uint)uVar7 % 0x800] != '\0') {
+      if ((&g_bss_001bcded)[(uint)uval_3 % 0x800] != '\0') {
         local_70 = &local_80;
         local_6c = &local_7c;
         if (local_88 == local_164) {
           if (local_84 < local_3c) {
-            uVar7 = FUN_000e66ec();
-            local_68 = (uint)uVar7 % 0x800;
-            uVar7 = FUN_000e66ec();
-            local_118 = (uint)uVar7 % 0x800;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_68 = (uint)uval_3 % 0x800;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_118 = (uint)uval_3 % 0x800;
           }
           else {
-            uVar7 = FUN_000e66ec();
-            local_68 = (uint)uVar7 % 0x800;
-            uVar7 = FUN_000e66ec();
-            local_118 = (int)(uint)uVar7 % extraout_ECX_18 & 0xffff;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_68 = (uint)uval_3 % 0x800;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_118 = (int)(uint)uval_3 % extraout_ECX_18 & 0xffff;
           }
         }
         else if (local_3c == local_84) {
           if (local_88 < local_164) {
-            uVar7 = FUN_000e66ec();
-            local_68 = (uint)uVar7 % 0x800;
-            uVar7 = FUN_000e66ec();
-            local_118 = (int)(uint)uVar7 % extraout_ECX_19 & 0xffff;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_68 = (uint)uval_3 % 0x800;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_118 = (int)(uint)uval_3 % extraout_ECX_19 & 0xffff;
           }
           else {
-            uVar7 = FUN_000e66ec();
-            local_68 = (uint)uVar7 % 0x800;
-            uVar7 = FUN_000e66ec();
-            local_118 = (uint)uVar7 % 0x800;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_68 = (uint)uval_3 % 0x800;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_118 = (uint)uval_3 % 0x800;
           }
         }
         else {
           switch(local_158) {
           case 0:
-            uVar7 = FUN_000e66ec();
-            local_68 = (uint)uVar7 % 0x800;
-            uVar7 = FUN_000e66ec();
-            local_118 = (uint)uVar7 % 0x800;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_68 = (uint)uval_3 % 0x800;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_118 = (uint)uval_3 % 0x800;
             break;
           case 1:
-            uVar7 = FUN_000e66ec();
-            local_68 = (uint)uVar7 % 0x800;
-            uVar7 = FUN_000e66ec();
-            local_118 = (uint)uVar7 % 0x800;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_68 = (uint)uval_3 % 0x800;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_118 = (uint)uval_3 % 0x800;
             break;
           case 2:
-            uVar7 = FUN_000e66ec();
-            local_68 = (uint)uVar7 % 0x800;
-            uVar7 = FUN_000e66ec();
-            local_118 = (int)(uint)uVar7 % extraout_ECX_20 & 0xffff;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_68 = (uint)uval_3 % 0x800;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_118 = (int)(uint)uval_3 % extraout_ECX_20 & 0xffff;
             break;
           case 3:
-            uVar7 = FUN_000e66ec();
-            local_68 = (uint)uVar7 % 0x800;
-            uVar7 = FUN_000e66ec();
-            local_118 = (int)(uint)uVar7 % extraout_ECX_21 & 0xffff;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_68 = (uint)uval_3 % 0x800;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_118 = (int)(uint)uval_3 % extraout_ECX_21 & 0xffff;
           }
         }
         if (((int)((local_68 + ((int)local_68 >> 0x1f) * -0x200) -
@@ -2152,25 +2067,25 @@ LAB_000af99a:
         }
         *local_70 = local_68;
         *local_6c = local_118;
-        if ((((&DAT_001bcded)[local_80] == '\0') || ((&DAT_001bcded)[local_7c] == '\0')) &&
+        if ((((&g_bss_001bcded)[local_80] == '\0') || ((&g_bss_001bcded)[local_7c] == '\0')) &&
            (local_8c <
-            (int)(uint)(*(byte *)((int)&DAT_0019e973 +
-                                 (*(uint *)((int)&DAT_00279203 +
+            (int)(uint)(*(byte *)((int)&g_bss_0019e973 +
+                                 (*(uint *)((int)&g_map_subtiles +
                                            (local_84 * 0x100 + local_88) * 5 + 1) & 0x7ff) * 0x18 +
                                  2) >> 4))) {
           if ((int)local_7c < (int)local_80) {
-            FUN_000e6a10();
-            FUN_000e6a10();
+            LbScreenWaitVbi();
+            LbScreenWaitVbi();
           }
           else {
-            FUN_000e6a10();
+            LbScreenWaitVbi();
           }
         }
         goto LAB_000b0414;
       }
       local_74 = (uint)(local_8c <
-                       (int)(uint)(*(byte *)((int)&DAT_0019e973 +
-                                            (*(uint *)((int)&DAT_00279203 +
+                       (int)(uint)(*(byte *)((int)&g_bss_0019e973 +
+                                            (*(uint *)((int)&g_map_subtiles +
                                                       (local_88 + local_4c) * 5 + 1) & 0x7ff) * 0x18
                                             + 2) >> 4));
       if (local_74 != 0) {
@@ -2178,57 +2093,57 @@ LAB_000af99a:
         local_58 = &local_7c;
         if (local_88 == local_164) {
           if (local_84 < local_3c) {
-            uVar7 = FUN_000e66ec();
-            local_54 = (uint)uVar7 % 0x800;
-            uVar7 = FUN_000e66ec();
-            local_50 = (uint)uVar7 % 0x800;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_54 = (uint)uval_3 % 0x800;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_50 = (uint)uval_3 % 0x800;
           }
           else {
-            uVar7 = FUN_000e66ec();
-            local_54 = (uint)uVar7 % 0x800;
-            uVar7 = FUN_000e66ec();
-            local_50 = (int)(uint)uVar7 % extraout_ECX_22 & 0xffff;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_54 = (uint)uval_3 % 0x800;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_50 = (int)(uint)uval_3 % extraout_ECX_22 & 0xffff;
           }
         }
         else if (local_3c == local_84) {
           if (local_88 < local_164) {
-            uVar7 = FUN_000e66ec();
-            local_54 = (uint)uVar7 % 0x800;
-            uVar7 = FUN_000e66ec();
-            local_50 = (int)(uint)uVar7 % extraout_ECX_23 & 0xffff;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_54 = (uint)uval_3 % 0x800;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_50 = (int)(uint)uval_3 % extraout_ECX_23 & 0xffff;
           }
           else {
-            uVar7 = FUN_000e66ec();
-            local_54 = (uint)uVar7 % 0x800;
-            uVar7 = FUN_000e66ec();
-            local_50 = (uint)uVar7 % 0x800;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_54 = (uint)uval_3 % 0x800;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_50 = (uint)uval_3 % 0x800;
           }
         }
         else {
           switch(local_158) {
           case 0:
-            uVar7 = FUN_000e66ec();
-            local_54 = (uint)uVar7 % 0x800;
-            uVar7 = FUN_000e66ec();
-            local_50 = (uint)uVar7 % 0x800;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_54 = (uint)uval_3 % 0x800;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_50 = (uint)uval_3 % 0x800;
             break;
           case 1:
-            uVar7 = FUN_000e66ec();
-            local_54 = (uint)uVar7 % 0x800;
-            uVar7 = FUN_000e66ec();
-            local_50 = (uint)uVar7 % 0x800;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_54 = (uint)uval_3 % 0x800;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_50 = (uint)uval_3 % 0x800;
             break;
           case 2:
-            uVar7 = FUN_000e66ec();
-            local_54 = (uint)uVar7 % 0x800;
-            uVar7 = FUN_000e66ec();
-            local_50 = (int)(uint)uVar7 % extraout_ECX_24 & 0xffff;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_54 = (uint)uval_3 % 0x800;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_50 = (int)(uint)uval_3 % extraout_ECX_24 & 0xffff;
             break;
           case 3:
-            uVar7 = FUN_000e66ec();
-            local_54 = (uint)uVar7 % 0x800;
-            uVar7 = FUN_000e66ec();
-            local_50 = (int)(uint)uVar7 % extraout_ECX_25 & 0xffff;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_54 = (uint)uval_3 % 0x800;
+            uval_3 = bflib_system_io_fn_0e66ec();
+            local_50 = (int)(uint)uval_3 % extraout_ECX_25 & 0xffff;
           }
         }
         if (((int)((local_54 + ((int)local_54 >> 0x1f) * -0x200) -
@@ -2242,154 +2157,154 @@ LAB_000af99a:
         *local_5c = local_54;
         *local_58 = local_50;
         if ((int)local_7c < (int)local_80) {
-          FUN_000e6a10();
+          LbScreenWaitVbi();
         }
-        FUN_000e6a10();
+        LbScreenWaitVbi();
       }
       if (local_74 == 0) goto LAB_000b03b9;
       switch(local_78) {
       case 1:
-        if ((int)(uint)(*(byte *)((int)&DAT_0019e973 +
-                                 (*(uint *)((int)&DAT_00279203 +
+        if ((int)(uint)(*(byte *)((int)&g_bss_0019e973 +
+                                 (*(uint *)((int)&g_map_subtiles +
                                            (local_84 * 0x100 + (local_88 - 1)) * 5 + 1) & 0x7ff) *
                                  0x18 + 2) >> 4) <= local_8c) goto switchD_000b03a8_caseD_2;
-        bVar4 = false;
+        flag_2 = false;
         break;
       case 3:
         if (local_8c <
-            (int)(uint)(*(byte *)((int)&DAT_0019e973 +
-                                 (*(uint *)((int)&DAT_00279203 +
+            (int)(uint)(*(byte *)((int)&g_bss_0019e973 +
+                                 (*(uint *)((int)&g_map_subtiles +
                                            ((local_84 - 1) * 0x100 + local_88) * 5 + 1) & 0x7ff) *
                                  0x18 + 2) >> 4)) goto switchD_000b03a8_caseD_4;
       default:
 switchD_000b03a8_caseD_2:
-        bVar4 = true;
+        flag_2 = true;
         break;
       case 4:
 switchD_000b03a8_caseD_4:
-        bVar4 = false;
+        flag_2 = false;
       }
-      if (bVar4) {
+      if (flag_2) {
 LAB_000b03b9:
-        iVar18 = (int)((local_a8 - piVar21[1]) * local_a4) / (int)local_a8;
-        if (iVar18 <= DAT_001e31f5) {
+        val_8 = (int)((local_a8 - int_ptr[1]) * local_a4) / (int)local_a8;
+        if (val_8 <= g_bss_001e31f5) {
           return;
         }
-        if ((int)(uint)*(ushort *)(&DAT_001c31f5 + (local_84 * 0x100 + local_88) * 2) < iVar18) {
-          *(ushort *)(&DAT_001c31f5 + (local_84 * 0x100 + local_88) * 2) = (ushort)iVar18;
+        if ((int)(uint)*(ushort *)(&g_bss_001c31f5 + (local_84 * 0x100 + local_88) * 2) < val_8) {
+          *(ushort *)(&g_bss_001c31f5 + (local_84 * 0x100 + local_88) * 2) = (ushort)val_8;
         }
       }
     }
 LAB_000b0414:
-    piVar21 = piVar21 + 2;
+    int_ptr = int_ptr + 2;
   } while( true );
 }
 
 /******************************************************************************
- * Function : sub_0b04e4 (Ghidra: FUN_000b04e4)
- * Prototype: void sub_0b04e4(void);
+ * Function : light_fn_0b04e4 (Original VA: 0xb04e4, Ghidra: FUN_000b04e4)
+ * Prototype: void light_fn_0b04e4(void);
  * Address  : 0xb04e4 (Size: 536 bytes)
  * Module   : light.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Module light.cpp procedure @ 0x0b04e4
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_000b04e4(void)
+void light_fn_0b04e4(void)
 
 {
-  longlong lVar1;
-  int in_EAX;
-  int iVar2;
-  int iVar3;
-  uint uVar4;
-  int iVar5;
-  int iVar6;
-  int in_ECX;
-  int iVar7;
-  int in_EDX;
-  int iVar8;
-  uint uVar9;
-  int unaff_EBX;
-  uint uVar10;
-  uint *puVar11;
-  ushort *puVar12;
-  int iVar13;
-  bool bVar14;
-  bool bVar15;
-  bool bVar16;
+  longlong val;
+  int arg_eax;
+  int val_2;
+  int val_3;
+  uint uval;
+  int val_4;
+  int val_5;
+  int arg_ecx;
+  int val_6;
+  int arg_edx;
+  int val_7;
+  uint uval_2;
+  int arg_ebx;
+  uint uval_3;
+  uint *word_ptr;
+  ushort *word_ptr_2;
+  int val_8;
+  bool flag;
+  bool flag_2;
+  bool flag_3;
   undefined *local_28;
   uint local_20;
   int local_18;
   
-  iVar5 = (uint)*(ushort *)(in_EAX + 0x10) * 0x81;
-  iVar8 = (uint)*(ushort *)(in_EAX + 0x28) + in_ECX * -0x100;
-  if (iVar8 < 1) {
-    iVar8 = 0;
+  val_4 = (uint)*(ushort *)(arg_eax + 0x10) * 0x81;
+  val_7 = (uint)*(ushort *)(arg_eax + 0x28) + arg_ecx * -0x100;
+  if (val_7 < 1) {
+    val_7 = 0;
   }
-  local_18 = (uint)*(ushort *)(in_EAX + 0x2a) + in_ECX * -0x100;
+  local_18 = (uint)*(ushort *)(arg_eax + 0x2a) + arg_ecx * -0x100;
   if (local_18 < 1) {
     local_18 = 0;
   }
-  iVar2 = (uint)*(ushort *)(in_EAX + 0x28) + in_ECX * 0x100;
-  if (0xfffe < iVar2) {
-    iVar2 = 0xffff;
+  val_2 = (uint)*(ushort *)(arg_eax + 0x28) + arg_ecx * 0x100;
+  if (0xfffe < val_2) {
+    val_2 = 0xffff;
   }
-  iVar7 = in_ECX * 0x100 + (uint)*(ushort *)(in_EAX + 0x2a);
-  if (0xfffe < iVar7) {
-    iVar7 = 0xffff;
+  val_6 = arg_ecx * 0x100 + (uint)*(ushort *)(arg_eax + 0x2a);
+  if (0xfffe < val_6) {
+    val_6 = 0xffff;
   }
-  iVar3 = (int)((iVar8 + (iVar8 >> 0x1f) * -0x100) - (uint)((iVar8 >> 0x1f) << 7 < 0)) >> 8;
-  puVar12 = &DAT_001e3203 +
+  val_3 = (int)((val_7 + (val_7 >> 0x1f) * -0x100) - (uint)((val_7 >> 0x1f) << 7 < 0)) >> 8;
+  word_ptr_2 = &g_bss_001e3203 +
             ((int)((local_18 + (local_18 >> 0x1f) * -0x100) - (uint)((local_18 >> 0x1f) << 7 < 0))
-            >> 8) * 0x100 + iVar3;
-  local_20 = *(uint *)(&DAT_001c1dce + iVar5);
-  if (local_18 <= iVar7) {
-    puVar11 = &DAT_00388e3c;
-    bVar16 = SBORROW4(iVar8,iVar2);
-    bVar15 = iVar8 - iVar2 < 0;
-    bVar14 = iVar8 == iVar2;
-    iVar13 = iVar8;
-    local_28 = &DAT_001c1dcd + iVar5;
+            >> 8) * 0x100 + val_3;
+  local_20 = *(uint *)(&g_bss_001c1dce + val_4);
+  if (local_18 <= val_6) {
+    word_ptr = &g_bss_00388e3c;
+    flag_3 = SBORROW4(val_7,val_2);
+    flag_2 = val_7 - val_2 < 0;
+    flag = val_7 == val_2;
+    val_8 = val_7;
+    local_28 = &g_bss_001c1dcd + val_4;
     while( true ) {
-      while (bVar14 || bVar16 != bVar15) {
-        if ((*puVar11 & local_20) != 0) {
-          uVar10 = (uint)*(ushort *)(in_EAX + 0x2a) - local_18;
-          uVar4 = (uint)*(ushort *)(in_EAX + 0x28) - iVar13;
-          uVar9 = (int)uVar4 >> 0x1f;
-          iVar5 = (uVar4 ^ uVar9) - uVar9;
-          uVar4 = (int)uVar10 >> 0x1f;
-          iVar6 = (uVar10 ^ uVar4) - uVar4;
-          if (iVar6 < iVar5) {
-            iVar5 = *(int *)(&DAT_0017a4d0 + ((iVar6 * 0x100) / iVar5) * 8) * iVar5 >> 0xd;
+      while (flag || flag_3 != flag_2) {
+        if ((*word_ptr & local_20) != 0) {
+          uval_3 = (uint)*(ushort *)(arg_eax + 0x2a) - local_18;
+          uval = (uint)*(ushort *)(arg_eax + 0x28) - val_8;
+          uval_2 = (int)uval >> 0x1f;
+          val_4 = (uval ^ uval_2) - uval_2;
+          uval = (int)uval_3 >> 0x1f;
+          val_5 = (uval_3 ^ uval) - uval;
+          if (val_5 < val_4) {
+            val_4 = *(int *)(&g_data_0017a4d0 + ((val_5 * 0x100) / val_4) * 8) * val_4 >> 0xd;
           }
-          else if (iVar6 == 0) {
-            iVar5 = 0;
+          else if (val_5 == 0) {
+            val_4 = 0;
           }
           else {
-            iVar5 = *(int *)(&DAT_0017a4d0 + ((iVar5 * 0x100) / iVar6) * 8) * iVar6 >> 0xd;
+            val_4 = *(int *)(&g_data_0017a4d0 + ((val_4 * 0x100) / val_5) * 8) * val_5 >> 0xd;
           }
-          lVar1 = (longlong)((in_EDX - iVar5) * unaff_EBX) / (longlong)in_EDX;
-          if ((int)(uint)*puVar12 < (int)lVar1) {
-            *puVar12 = (ushort)lVar1;
+          val = (longlong)((arg_edx - val_4) * arg_ebx) / (longlong)arg_edx;
+          if ((int)(uint)*word_ptr_2 < (int)val) {
+            *word_ptr_2 = (ushort)val;
           }
         }
-        iVar13 = iVar13 + 0x100;
-        puVar12 = puVar12 + 1;
-        puVar11 = puVar11 + 1;
-        bVar16 = SBORROW4(iVar13,iVar2);
-        bVar15 = iVar13 - iVar2 < 0;
-        bVar14 = iVar13 == iVar2;
+        val_8 = val_8 + 0x100;
+        word_ptr_2 = word_ptr_2 + 1;
+        word_ptr = word_ptr + 1;
+        flag_3 = SBORROW4(val_8,val_2);
+        flag_2 = val_8 - val_2 < 0;
+        flag = val_8 == val_2;
       }
       local_18 = local_18 + 0x100;
       local_20 = *(uint *)(local_28 + 5);
-      puVar12 = puVar12 + (0xff - (((int)((iVar2 + (iVar2 >> 0x1f) * -0x100) -
-                                         (uint)((iVar2 >> 0x1f) << 7 < 0)) >> 8) - iVar3));
-      if (iVar7 < local_18) break;
-      puVar11 = &DAT_00388e3c;
-      bVar16 = SBORROW4(iVar8,iVar2);
-      bVar15 = iVar8 - iVar2 < 0;
-      bVar14 = iVar8 == iVar2;
-      iVar13 = iVar8;
+      word_ptr_2 = word_ptr_2 + (0xff - (((int)((val_2 + (val_2 >> 0x1f) * -0x100) -
+                                         (uint)((val_2 >> 0x1f) << 7 < 0)) >> 8) - val_3));
+      if (val_6 < local_18) break;
+      word_ptr = &g_bss_00388e3c;
+      flag_3 = SBORROW4(val_7,val_2);
+      flag_2 = val_7 - val_2 < 0;
+      flag = val_7 == val_2;
+      val_8 = val_7;
       local_28 = local_28 + 4;
     }
   }
@@ -2397,343 +2312,341 @@ void FUN_000b04e4(void)
 }
 
 /******************************************************************************
- * Function : sub_0b06fc (Ghidra: FUN_000b06fc)
- * Prototype: void sub_0b06fc(void);
+ * Function : light_fn_0b06fc (Original VA: 0xb06fc, Ghidra: FUN_000b06fc)
+ * Prototype: void light_fn_0b06fc(void);
  * Address  : 0xb06fc (Size: 381 bytes)
  * Module   : light.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Module light.cpp procedure @ 0x0b06fc
  * Callers  : 0 -> 
- * Callees  : 1 -> 0xadbc0
+ * Callees  : 1 -> light_maintain_gui_button_state_0adbc0
  ******************************************************************************/
-void FUN_000b06fc(void)
+void light_fn_0b06fc(void)
 
 {
-  int iVar1;
-  int in_EAX;
-  int iVar2;
-  uint in_ECX;
-  uint uVar3;
-  uint in_EDX;
-  uint uVar4;
-  undefined4 *puVar5;
-  int unaff_EBX;
-  byte *pbVar6;
-  undefined4 *puVar7;
-  undefined4 *puVar8;
-  undefined4 *puVar9;
-  byte bVar10;
+  int val;
+  int arg_eax;
+  int val_2;
+  uint arg_ecx;
+  uint loop_i;
+  uint arg_edx;
+  uint uval;
+  undefined4 *word_ptr;
+  int arg_ebx;
+  byte *byte_ptr;
+  undefined4 *word_ptr_2;
+  undefined4 *word_ptr_3;
+  undefined4 *word_ptr_4;
+  byte flag;
   
-  bVar10 = 0;
-  iVar2 = (unaff_EBX - in_EAX) / 2 + 1;
-  iVar1 = (int)(in_ECX - in_EDX) / 2 + 1;
-  if ((DAT_001e31f9 != '\0') &&
-     (pbVar6 = &DAT_001bd5ed + DAT_002e6f0e * 0x2e, &DAT_001bd5ed < pbVar6)) {
+  flag = 0;
+  val_2 = (arg_ebx - arg_eax) / 2 + 1;
+  val = (int)(arg_ecx - arg_edx) / 2 + 1;
+  if ((g_bss_001e31f9 != '\0') &&
+     (byte_ptr = &g_bss_001bd5ed + g_bss_002e6f0e * 0x2e, &g_bss_001bd5ed < byte_ptr)) {
     do {
-      if (((*pbVar6 & 8) != 0) || ((*pbVar6 & 0x80) != 0)) {
-        DAT_00388e34 = DAT_00388e34 + 1;
-        uVar3 = (in_EAX + iVar2) - (uint)pbVar6[0x29];
-        uVar4 = (int)uVar3 >> 0x1f;
-        if (((int)((uVar3 ^ uVar4) - uVar4) < (int)((uint)pbVar6[5] + iVar2)) &&
-           (uVar3 = (in_EDX + iVar1) - (uint)pbVar6[0x2b], uVar4 = (int)uVar3 >> 0x1f,
-           (int)((uVar3 ^ uVar4) - uVar4) < (int)(iVar1 + (uint)pbVar6[5]))) {
-          DAT_00388e30 = DAT_00388e30 + 1;
-          FUN_000adbc0();
-          *pbVar6 = *pbVar6 & 0x77;
+      if (((*byte_ptr & 8) != 0) || ((*byte_ptr & 0x80) != 0)) {
+        g_bss_00388e34 = g_bss_00388e34 + 1;
+        loop_i = (arg_eax + val_2) - (uint)byte_ptr[0x29];
+        uval = (int)loop_i >> 0x1f;
+        if (((int)((loop_i ^ uval) - uval) < (int)((uint)byte_ptr[5] + val_2)) &&
+           (loop_i = (arg_edx + val) - (uint)byte_ptr[0x2b], uval = (int)loop_i >> 0x1f,
+           (int)((loop_i ^ uval) - uval) < (int)(val + (uint)byte_ptr[5]))) {
+          g_bss_00388e30 = g_bss_00388e30 + 1;
+          light_maintain_gui_button_state_0adbc0();
+          *byte_ptr = *byte_ptr & 0x77;
         }
       }
-      pbVar6 = &DAT_001bd5ed + (uint)*(ushort *)(pbVar6 + 0x26) * 0x2e;
-    } while (&DAT_001bd5ed < pbVar6);
+      byte_ptr = &g_bss_001bd5ed + (uint)*(ushort *)(byte_ptr + 0x26) * 0x2e;
+    } while (&g_bss_001bd5ed < byte_ptr);
   }
-  iVar2 = in_EDX * 0x100 + in_EAX;
-  puVar7 = (undefined4 *)(&DAT_001e3203 + iVar2);
-  puVar5 = (undefined4 *)(&DAT_001c31f5 + iVar2 * 2);
-  for (; in_EDX <= in_ECX; in_EDX = in_EDX + 1) {
-    puVar8 = puVar5;
-    puVar9 = puVar7;
-    for (uVar3 = (unaff_EBX - in_EAX & 0x7fffffffU) >> 1; uVar3 != 0; uVar3 = uVar3 - 1) {
-      *puVar9 = *puVar8;
-      puVar8 = puVar8 + (uint)bVar10 * -2 + 1;
-      puVar9 = puVar9 + (uint)bVar10 * -2 + 1;
+  val_2 = arg_edx * 0x100 + arg_eax;
+  word_ptr_2 = (undefined4 *)(&g_bss_001e3203 + val_2);
+  word_ptr = (undefined4 *)(&g_bss_001c31f5 + val_2 * 2);
+  for (; arg_edx <= arg_ecx; arg_edx = arg_edx + 1) {
+    word_ptr_3 = word_ptr;
+    word_ptr_4 = word_ptr_2;
+    for (loop_i = (arg_ebx - arg_eax & 0x7fffffffU) >> 1; loop_i != 0; loop_i = loop_i - 1) {
+      *word_ptr_4 = *word_ptr_3;
+      word_ptr_3 = word_ptr_3 + (uint)flag * -2 + 1;
+      word_ptr_4 = word_ptr_4 + (uint)flag * -2 + 1;
     }
-    for (uVar3 = (unaff_EBX - in_EAX) * 2 & 3; uVar3 != 0; uVar3 = uVar3 - 1) {
-      *(undefined1 *)puVar9 = *(undefined1 *)puVar8;
-      puVar8 = (undefined4 *)((int)puVar8 + (uint)bVar10 * -2 + 1);
-      puVar9 = (undefined4 *)((int)puVar9 + (uint)bVar10 * -2 + 1);
+    for (loop_i = (arg_ebx - arg_eax) * 2 & 3; loop_i != 0; loop_i = loop_i - 1) {
+      *(undefined1 *)word_ptr_4 = *(undefined1 *)word_ptr_3;
+      word_ptr_3 = (undefined4 *)((int)word_ptr_3 + (uint)flag * -2 + 1);
+      word_ptr_4 = (undefined4 *)((int)word_ptr_4 + (uint)flag * -2 + 1);
     }
-    puVar7 = puVar7 + 0x80;
-    puVar5 = puVar5 + 0x80;
+    word_ptr_2 = word_ptr_2 + 0x80;
+    word_ptr = word_ptr + 0x80;
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0b087c (Ghidra: FUN_000b087c)
- * Prototype: void sub_0b087c(void);
+ * Function : light_fn_0b087c (Original VA: 0xb087c, Ghidra: FUN_000b087c)
+ * Prototype: void light_fn_0b087c(void);
  * Address  : 0xb087c (Size: 158 bytes)
  * Module   : light.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 8 -> 0xac9e8, 0xaca0c, 0xaca68, 0xacce4, 0xacdfc, 0xad148, 0xad290, 0xad66c
- * Callees  : 1 -> 0xb0980
+ * Purpose  : Module light.cpp procedure @ 0x0b087c
+ * Callers  : 8 -> light_fn_0ac9e8, light_fn_0aca0c, light_fn_0aca68, light_attempt_delete_light_0acce4, light_fn_0acdfc, light_attempt_set_intensity_unallocated_0ad148, light_attempt_set_size_unallocated_0ad290, light_attempt_turn_off_unallocated_0ad66c
+ * Callees  : 1 -> light_process_map_subtile_0b0980
  ******************************************************************************/
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void FUN_000b087c(void)
+void light_fn_0b087c(void)
 
 {
-  byte bVar1;
-  int in_EAX;
-  uint uVar2;
-  int in_ECX;
-  int in_EDX;
-  byte *pbVar3;
-  int unaff_EBX;
-  int iVar4;
+  byte flag;
+  int arg_eax;
+  uint uval;
+  int arg_ecx;
+  int arg_edx;
+  byte *loop_i;
+  int arg_ebx;
+  int val;
   
-  iVar4 = 0;
-  for (pbVar3 = &DAT_001bd61b; pbVar3 < &DAT_001c1dcd; pbVar3 = pbVar3 + 0x2e) {
-    if (((*pbVar3 & 1) != 0) && ((*pbVar3 & 4) == 0)) {
-      uVar2 = (uint)pbVar3[5];
-      if ((in_EAX <= (int)(pbVar3[0x29] + uVar2)) &&
-         ((((int)(pbVar3[0x29] - uVar2) <= unaff_EBX && (in_EDX <= (int)(pbVar3[0x2b] + uVar2))) &&
-          ((int)(pbVar3[0x2b] - uVar2) <= in_ECX)))) {
-        bVar1 = *pbVar3;
-        _DAT_00388e38 = 1;
-        *pbVar3 = bVar1 | 8;
-        iVar4 = iVar4 + 1;
-        *pbVar3 = bVar1 & 0x7f | 8;
+  val = 0;
+  for (loop_i = &g_bss_001bd61b; loop_i < &g_bss_001c1dcd; loop_i = loop_i + 0x2e) {
+    if (((*loop_i & 1) != 0) && ((*loop_i & 4) == 0)) {
+      uval = (uint)loop_i[5];
+      if ((arg_eax <= (int)(loop_i[0x29] + uval)) &&
+         ((((int)(loop_i[0x29] - uval) <= arg_ebx && (arg_edx <= (int)(loop_i[0x2b] + uval))) &&
+          ((int)(loop_i[0x2b] - uval) <= arg_ecx)))) {
+        flag = *loop_i;
+        g_bss_00388e38 = 1;
+        *loop_i = flag | 8;
+        val = val + 1;
+        *loop_i = flag & 0x7f | 8;
       }
     }
   }
-  if (iVar4 != 0) {
-    FUN_000b0980();
+  if (val != 0) {
+    light_process_map_subtile_0b0980();
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0b0980 (Ghidra: FUN_000b0980)
- * Prototype: void sub_0b0980(void);
+ * Function : light_process_map_subtile_0b0980 (Original VA: 0xb0980, Ghidra: FUN_000b0980)
+ * Prototype: void light_process_map_subtile_0b0980(void);
  * Address  : 0xb0980 (Size: 308 bytes)
  * Module   : light.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0xaca0c, 0xb087c
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 2 -> light_fn_0aca0c, light_fn_0b087c
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_000b0980(void)
+void light_process_map_subtile_0b0980(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  int in_ECX;
-  int iVar2;
-  int in_EDX;
-  int iVar3;
-  int unaff_EBX;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
-  int iVar8;
-  int iVar9;
+  int arg_eax;
+  int val;
+  int arg_ecx;
+  int val_2;
+  int arg_edx;
+  int val_3;
+  int arg_ebx;
+  int val_4;
+  int val_5;
+  int val_6;
+  int val_7;
+  int val_8;
+  int val_9;
   
-  iVar1 = in_EDX - in_ECX;
-  while (in_EDX == in_ECX || SBORROW4(in_EDX,in_ECX) != iVar1 < 0) {
-    if (in_EAX <= unaff_EBX) {
-      iVar5 = in_EAX * 5 + in_EDX * 0x500;
-      iVar1 = in_EAX + -1;
-      iVar3 = in_EDX + -1;
-      iVar4 = in_EAX * 2 + in_EDX * 0x200;
-      iVar2 = in_EAX;
+  val = arg_edx - arg_ecx;
+  while (arg_edx == arg_ecx || SBORROW4(arg_edx,arg_ecx) != val < 0) {
+    if (arg_eax <= arg_ebx) {
+      val_5 = arg_eax * 5 + arg_edx * 0x500;
+      val = arg_eax + -1;
+      val_3 = arg_edx + -1;
+      val_4 = arg_eax * 2 + arg_edx * 0x200;
+      val_2 = arg_eax;
       do {
-        iVar6 = iVar3;
-        if (iVar3 < 1) {
-          iVar6 = 0;
+        val_6 = val_3;
+        if (val_3 < 1) {
+          val_6 = 0;
         }
-        iVar7 = iVar1;
-        if (iVar1 < 1) {
-          iVar7 = 0;
+        val_7 = val;
+        if (val < 1) {
+          val_7 = 0;
         }
-        iVar8 = iVar3;
-        if (iVar3 < 1) {
-          iVar8 = 0;
+        val_8 = val_3;
+        if (val_3 < 1) {
+          val_8 = 0;
         }
-        iVar9 = iVar1;
-        if (iVar1 < 1) {
-          iVar9 = 0;
+        val_9 = val;
+        if (val < 1) {
+          val_9 = 0;
         }
-        if (((((*(uint *)((int)&DAT_00279203 + iVar5 + 1) & 0x7ff) == 0) ||
-             ((*(uint *)((int)&DAT_00279203 + (iVar6 * 0x100 + iVar2) * 5 + 1) & 0x7ff) == 0)) ||
-            ((*(uint *)((int)&DAT_00279203 + (iVar7 + in_EDX * 0x100) * 5 + 1) & 0x7ff) == 0)) ||
-           ((*(uint *)((int)&DAT_00279203 + (iVar9 + iVar8 * 0x100) * 5 + 1) & 0x7ff) == 0)) {
-          *(undefined2 *)(&DAT_001c31f5 + iVar4) = 0;
+        if (((((*(uint *)((int)&g_map_subtiles + val_5 + 1) & 0x7ff) == 0) ||
+             ((*(uint *)((int)&g_map_subtiles + (val_6 * 0x100 + val_2) * 5 + 1) & 0x7ff) == 0)) ||
+            ((*(uint *)((int)&g_map_subtiles + (val_7 + arg_edx * 0x100) * 5 + 1) & 0x7ff) == 0)) ||
+           ((*(uint *)((int)&g_map_subtiles + (val_9 + val_8 * 0x100) * 5 + 1) & 0x7ff) == 0)) {
+          *(undefined2 *)(&g_bss_001c31f5 + val_4) = 0;
         }
         else {
-          *(short *)(&DAT_001c31f5 + iVar4) = (short)DAT_001e31f5 << 8;
+          *(short *)(&g_bss_001c31f5 + val_4) = (short)g_bss_001e31f5 << 8;
         }
-        iVar5 = iVar5 + 5;
-        iVar1 = iVar1 + 1;
-        iVar2 = iVar2 + 1;
-        iVar4 = iVar4 + 2;
-      } while (iVar2 <= unaff_EBX);
+        val_5 = val_5 + 5;
+        val = val + 1;
+        val_2 = val_2 + 1;
+        val_4 = val_4 + 2;
+      } while (val_2 <= arg_ebx);
     }
-    in_EDX = in_EDX + 1;
-    iVar1 = in_EDX - in_ECX;
+    arg_edx = arg_edx + 1;
+    val = arg_edx - arg_ecx;
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0b0ab4 (Ghidra: FUN_000b0ab4)
- * Prototype: void sub_0b0ab4(void);
+ * Function : light_fn_0b0ab4 (Original VA: 0xb0ab4, Ghidra: FUN_000b0ab4)
+ * Prototype: void light_fn_0b0ab4(void);
  * Address  : 0xb0ab4 (Size: 108 bytes)
  * Module   : light.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Module light.cpp procedure @ 0x0b0ab4
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_000b0ab4(void)
+void light_fn_0b0ab4(void)
 
 {
-  byte *in_EAX;
+  byte *thing;
   
-  if (in_EAX[6] == 1) {
-    if ((uint)*(ushort *)(in_EAX + 0x1e) + (uint)*(ushort *)(in_EAX + 0x16) <
-        (uint)*(ushort *)(in_EAX + 0x20)) {
-      *(short *)(in_EAX + 0x16) = *(short *)(in_EAX + 0x16) + *(short *)(in_EAX + 0x1e);
+  if (thing[6] == 1) {
+    if ((uint)*(ushort *)(thing + 0x1e) + (uint)*(ushort *)(thing + 0x16) <
+        (uint)*(ushort *)(thing + 0x20)) { /* thing->model */
+      *(short *)(thing + 0x16) = *(short *)(thing + 0x16) + *(short *)(thing + 0x1e);
     }
     else {
-      in_EAX[6] = 2;
-      *(ushort *)(in_EAX + 0x16) = *(ushort *)(in_EAX + 0x20);
+      thing[6] = 2;
+      *(ushort *)(thing + 0x16) = *(ushort *)(thing + 0x20); /* thing->model */
     }
   }
   else {
-    if ((int)(uint)*(ushort *)(in_EAX + 0x22) <
-        (int)((uint)*(ushort *)(in_EAX + 0x16) - (uint)*(ushort *)(in_EAX + 0x1e))) {
-      *(short *)(in_EAX + 0x16) = *(short *)(in_EAX + 0x16) - *(short *)(in_EAX + 0x1e);
-      *in_EAX = *in_EAX | 8;
+    if ((int)(uint)*(ushort *)(thing + 0x22) <
+        (int)((uint)*(ushort *)(thing + 0x16) - (uint)*(ushort *)(thing + 0x1e))) {
+      *(short *)(thing + 0x16) = *(short *)(thing + 0x16) - *(short *)(thing + 0x1e);
+      *thing = *thing | 8;
       return;
     }
-    in_EAX[6] = 1;
-    *(ushort *)(in_EAX + 0x16) = *(ushort *)(in_EAX + 0x22);
+    thing[6] = 1;
+    *(ushort *)(thing + 0x16) = *(ushort *)(thing + 0x22);
   }
-  *in_EAX = *in_EAX | 8;
+  *thing = *thing | 8;
   return;
 }
 
 /******************************************************************************
- * Function : sub_0b0b20 (Ghidra: FUN_000b0b20)
- * Prototype: void sub_0b0b20(void);
+ * Function : light_fn_0b0b20 (Original VA: 0xb0b20, Ghidra: FUN_000b0b20)
+ * Prototype: void light_fn_0b0b20(void);
  * Address  : 0xb0b20 (Size: 26 bytes)
  * Module   : light.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Module light.cpp procedure @ 0x0b0b20
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_000b0b20(void)
+void light_fn_0b0b20(void)
 
 {
-  byte *in_EAX;
+  byte *arg_eax;
   
-  *(short *)(in_EAX + 0x18) = *(short *)(in_EAX + 0x18) + *(short *)(in_EAX + 0x1c);
-  *in_EAX = *in_EAX | 8;
+  *(short *)(arg_eax + 0x18) = *(short *)(arg_eax + 0x18) + *(short *)(arg_eax + 0x1c);
+  *arg_eax = *arg_eax | 8;
   return;
 }
 
 /******************************************************************************
- * Function : sub_0b0b9c (Ghidra: FUN_000b0b9c)
- * Prototype: longlong sub_0b0b9c(void);
+ * Function : light_fn_0b0b9c (Original VA: 0xb0b9c, Ghidra: FUN_000b0b9c)
+ * Prototype: longlong light_fn_0b0b9c(void);
  * Address  : 0xb0b9c (Size: 58 bytes)
  * Module   : light.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Module light.cpp procedure @ 0x0b0b9c
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
 /* WARNING: Removing unreachable block (ram,0x000b0bab) */
 
-longlong FUN_000b0b9c(void)
+longlong light_fn_0b0b9c(void)
 
 {
-  uint in_EDX;
-  byte *pbVar1;
+  uint arg_edx;
+  byte *byte_ptr;
   
-  pbVar1 = &DAT_001c1e4e;
+  byte_ptr = &g_bss_001c1e4e;
   do {
-    if ((*pbVar1 & 1) == 0) {
-      *pbVar1 = *pbVar1 | 1;
-      return CONCAT44(in_EDX,pbVar1);
+    if ((*byte_ptr & 1) == 0) {
+      *byte_ptr = *byte_ptr | 1;
+      return CONCAT44(arg_edx,byte_ptr);
     }
-    pbVar1 = pbVar1 + 0x81;
-  } while (pbVar1 < &DAT_001c31f5);
-  return (ulonglong)in_EDX << 0x20;
+    byte_ptr = byte_ptr + 0x81;
+  } while (byte_ptr < &g_bss_001c31f5);
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : sub_0b0c44 (Ghidra: FUN_000b0c44)
- * Prototype: undefined8 sub_0b0c44(void);
+ * Function : light_fn_0b0c44 (Original VA: 0xb0c44, Ghidra: FUN_000b0c44)
+ * Prototype: undefined8 light_fn_0b0c44(void);
  * Address  : 0xb0c44 (Size: 198 bytes)
  * Module   : light.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0xdb5c4, 0xdbb84
+ * Purpose  : Module light.cpp procedure @ 0x0b0c44
+ * Callers  : 2 -> get_thing_anim_sprite_id_checked, update_thing_anim_sprite_frame
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined8 FUN_000b0c44(void)
+undefined8 light_fn_0b0c44(void)
 
 {
-  int in_EAX;
-  uint uVar1;
-  undefined4 in_EDX;
-  uint uVar2;
-  int iVar3;
-  uint uVar4;
-  int iVar5;
+  int arg_eax;
+  uint uval;
+  undefined4 arg_edx;
+  uint uval_2;
+  int val;
+  uint uval_3;
+  int val_2;
   
-  uVar2 = (uint)*(byte *)(in_EAX + 0xe);
-  uVar4 = uVar2 + 1;
-  if (0xfe < uVar4) {
-    uVar4 = 0xff;
+  uval_2 = (uint)*(byte *)(arg_eax + 0xe);
+  uval_3 = uval_2 + 1;
+  if (0xfe < uval_3) {
+    uval_3 = 0xff;
   }
-  uVar1 = *(byte *)(in_EAX + 0x10) + 1;
-  if (0xfe < uVar1) {
-    uVar1 = 0xff;
+  uval = *(byte *)(arg_eax + 0x10) + 1;
+  if (0xfe < uval) {
+    uval = 0xff;
   }
-  iVar5 = (uint)*(byte *)(in_EAX + 0x10) * 0x100;
-  iVar3 = (uint)(ushort)(&DAT_001e3203)[uVar2 + iVar5] +
-          ((int)(((uint)(ushort)(&DAT_001e3203)[uVar2 + uVar1 * 0x100] -
-                 (uint)(ushort)(&DAT_001e3203)[uVar2 + iVar5]) * (uint)*(byte *)(in_EAX + 0xf)) >> 8
+  val_2 = (uint)*(byte *)(arg_eax + 0x10) * 0x100;
+  val = (uint)(ushort)(&g_bss_001e3203)[uval_2 + val_2] +
+          ((int)(((uint)(ushort)(&g_bss_001e3203)[uval_2 + uval * 0x100] -
+                 (uint)(ushort)(&g_bss_001e3203)[uval_2 + val_2]) * (uint)*(byte *)(arg_eax + 0xf)) >> 8
           );
-  iVar3 = ((int)((uint)*(byte *)(in_EAX + 0xd) *
-                ((((int)((uint)*(byte *)(in_EAX + 0xf) *
-                        ((uint)(ushort)(&DAT_001e3203)[uVar1 * 0x100 + uVar4] -
-                        (uint)(ushort)(&DAT_001e3203)[iVar5 + uVar4])) >> 8) +
-                 (uint)(ushort)(&DAT_001e3203)[iVar5 + uVar4]) - iVar3)) >> 8) + iVar3;
-  if ((iVar3 < 0x2000) && (iVar3 = iVar3 + 0x800, 0x2000 < iVar3)) {
-    iVar3 = 0x2000;
+  val = ((int)((uint)*(byte *)(arg_eax + 0xd) *
+                ((((int)((uint)*(byte *)(arg_eax + 0xf) *
+                        ((uint)(ushort)(&g_bss_001e3203)[uval * 0x100 + uval_3] -
+                        (uint)(ushort)(&g_bss_001e3203)[val_2 + uval_3])) >> 8) +
+                 (uint)(ushort)(&g_bss_001e3203)[val_2 + uval_3]) - val)) >> 8) + val;
+  if ((val < 0x2000) && (val = val + 0x800, 0x2000 < val)) {
+    val = 0x2000;
   }
-  return CONCAT44(in_EDX,iVar3);
+  return CONCAT44(arg_edx,val);
 }
 
 /******************************************************************************
- * Function : sub_0b0d0c (Ghidra: FUN_000b0d0c)
- * Prototype: int sub_0b0d0c(void);
+ * Function : light_fn_0b0d0c (Original VA: 0xb0d0c, Ghidra: FUN_000b0d0c)
+ * Prototype: int light_fn_0b0d0c(void);
  * Address  : 0xb0d0c (Size: 586 bytes)
  * Module   : light.cpp [direct_file_string_xref]
- * OrigLine : light.cpp:2725 ("Light is already in list")
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0xdb1a4
- * Callees  : 1 -> 0xdc440
- * Strings  :
- *   - 0x16a49d: "light.cpp"
+ * OrigLine : light.cpp lines 2725
+ * Purpose  : Module light.cpp procedure @ 0x0b0d0c
+ * Callers  : 1 -> ssprite_decode_and_blit_rle_frame
+ * Callees  : 1 -> update_fn_0dc440
  ******************************************************************************/
-int FUN_000b0d0c(void)
+int light_fn_0b0d0c(void)
 
 {
-  ushort *puVar1;
-  short *in_EAX;
-  int iVar2;
-  undefined4 *puVar3;
-  int iVar4;
-  undefined4 *in_EDX;
-  byte bVar5;
+  ushort *word_ptr;
+  short *arg_eax;
+  int loop_i;
+  undefined4 *word_ptr_2;
+  int val;
+  undefined4 *arg_edx;
+  byte flag;
   int aiStack_40 [6];
   int local_28;
   int local_24;
@@ -2741,84 +2654,84 @@ int FUN_000b0d0c(void)
   byte *local_1c;
   byte *local_18;
   
-  bVar5 = 0;
+  flag = 0;
   local_24 = 0;
-  if (DAT_002ee8d2 != 0) {
-    iVar4 = 0;
-    local_20 = in_EDX;
-    for (iVar2 = 0; iVar2 < (int)(uint)DAT_002ee8d2; iVar2 = iVar2 + 1) {
-      *(undefined4 *)((int)aiStack_40 + iVar4 + 4) = 0x7fffffff;
-      iVar4 = iVar4 + 4;
+  if (g_bss_002ee8d2 != 0) {
+    val = 0;
+    local_20 = arg_edx;
+    for (loop_i = 0; loop_i < (int)(uint)g_bss_002ee8d2; loop_i = loop_i + 1) {
+      *(undefined4 *)((int)aiStack_40 + val + 4) = 0x7fffffff;
+      val = val + 4;
     }
-    local_18 = &DAT_001bd5ed + DAT_002e6f0e * 0x2e;
-    if (&DAT_001bd5ed < &DAT_001bd5ed + DAT_002e6f0e * 0x2e) {
+    local_18 = &g_bss_001bd5ed + g_bss_002e6f0e * 0x2e;
+    if (&g_bss_001bd5ed < &g_bss_001bd5ed + g_bss_002e6f0e * 0x2e) {
       do {
         if ((*local_18 & 1) != 0) {
           aiStack_40[0] = 0xb0db0;
-          local_28 = FUN_000dc440();
-          if ((((local_28 < 0xa00) && (local_28 < aiStack_40[DAT_002ee8d2])) &&
-              (*in_EAX != *(short *)(local_18 + 0x28))) &&
-             (in_EAX[1] != *(short *)(local_18 + 0x2a))) {
-            if ((1 < DAT_002ee8d2) && (iVar4 = DAT_002ee8d2 - 1, 0 < iVar4)) {
-              iVar2 = iVar4 * 4;
-              puVar3 = (undefined4 *)(iVar4 * 6 + -6 + (int)local_20);
+          local_28 = update_fn_0dc440();
+          if ((((local_28 < 0xa00) && (local_28 < aiStack_40[g_bss_002ee8d2])) &&
+              (*arg_eax != *(short *)(local_18 + 0x28))) &&
+             (arg_eax[1] != *(short *)(local_18 + 0x2a))) {
+            if ((1 < g_bss_002ee8d2) && (val = g_bss_002ee8d2 - 1, 0 < val)) {
+              loop_i = val * 4;
+              word_ptr_2 = (undefined4 *)(val * 6 + -6 + (int)local_20);
               do {
-                *(undefined4 *)((int)aiStack_40 + iVar2 + 4) =
-                     *(undefined4 *)((int)aiStack_40 + iVar2);
-                iVar2 = iVar2 + -4;
-                *(undefined4 *)((int)puVar3 + 6) = *puVar3;
-                *(undefined2 *)((int)puVar3 + (uint)bVar5 * -8 + 10) =
-                     *(undefined2 *)(puVar3 + (uint)bVar5 * -2 + 1);
-                puVar3 = (undefined4 *)((int)puVar3 + -6);
-              } while (0 < iVar2);
+                *(undefined4 *)((int)aiStack_40 + loop_i + 4) =
+                     *(undefined4 *)((int)aiStack_40 + loop_i);
+                loop_i = loop_i + -4;
+                *(undefined4 *)((int)word_ptr_2 + 6) = *word_ptr_2;
+                *(undefined2 *)((int)word_ptr_2 + (uint)flag * -8 + 10) =
+                     *(undefined2 *)(word_ptr_2 + (uint)flag * -2 + 1);
+                word_ptr_2 = (undefined4 *)((int)word_ptr_2 + -6);
+              } while (0 < loop_i);
             }
             aiStack_40[1] = local_28;
             *local_20 = *(undefined4 *)(local_18 + 0x28);
-            *(undefined2 *)(local_20 + (uint)bVar5 * -2 + 1) =
-                 *(undefined2 *)(local_18 + (uint)bVar5 * -8 + 0x2c);
+            *(undefined2 *)(local_20 + (uint)flag * -2 + 1) =
+                 *(undefined2 *)(local_18 + (uint)flag * -8 + 0x2c);
           }
         }
-        puVar1 = (ushort *)(local_18 + 0x26);
-        local_18 = &DAT_001bd5ed + (uint)*puVar1 * 0x2e;
-      } while (&DAT_001bd5ed < &DAT_001bd5ed + (uint)*puVar1 * 0x2e);
+        word_ptr = (ushort *)(local_18 + 0x26);
+        local_18 = &g_bss_001bd5ed + (uint)*word_ptr * 0x2e;
+      } while (&g_bss_001bd5ed < &g_bss_001bd5ed + (uint)*word_ptr * 0x2e);
     }
-    local_1c = &DAT_001bd5ed + DAT_002e6f16 * 0x2e;
-    if (&DAT_001bd5ed < &DAT_001bd5ed + DAT_002e6f16 * 0x2e) {
+    local_1c = &g_bss_001bd5ed + g_bss_002e6f16 * 0x2e;
+    if (&g_bss_001bd5ed < &g_bss_001bd5ed + g_bss_002e6f16 * 0x2e) {
       do {
         if ((*local_1c & 1) != 0) {
           aiStack_40[0] = 0xb0e9b;
-          aiStack_40[5] = FUN_000dc440();
-          if (((aiStack_40[5] < 0xa00) && (aiStack_40[5] < aiStack_40[DAT_002ee8d2])) &&
-             ((*in_EAX != *(short *)(local_1c + 0x28) && (in_EAX[1] != *(short *)(local_1c + 0x2a)))
+          aiStack_40[5] = update_fn_0dc440();
+          if (((aiStack_40[5] < 0xa00) && (aiStack_40[5] < aiStack_40[g_bss_002ee8d2])) &&
+             ((*arg_eax != *(short *)(local_1c + 0x28) && (arg_eax[1] != *(short *)(local_1c + 0x2a)))
              )) {
-            if ((1 < DAT_002ee8d2) && (iVar4 = DAT_002ee8d2 - 1, 0 < iVar4)) {
-              iVar2 = iVar4 * 4;
-              puVar3 = (undefined4 *)(iVar4 * 6 + -6 + (int)local_20);
+            if ((1 < g_bss_002ee8d2) && (val = g_bss_002ee8d2 - 1, 0 < val)) {
+              loop_i = val * 4;
+              word_ptr_2 = (undefined4 *)(val * 6 + -6 + (int)local_20);
               do {
-                *(undefined4 *)((int)aiStack_40 + iVar2 + 4) =
-                     *(undefined4 *)((int)aiStack_40 + iVar2);
-                iVar2 = iVar2 + -4;
-                *(undefined4 *)((int)puVar3 + 6) = *puVar3;
-                *(undefined2 *)((int)puVar3 + (uint)bVar5 * -8 + 10) =
-                     *(undefined2 *)(puVar3 + (uint)bVar5 * -2 + 1);
-                puVar3 = (undefined4 *)((int)puVar3 + -6);
-              } while (0 < iVar2);
+                *(undefined4 *)((int)aiStack_40 + loop_i + 4) =
+                     *(undefined4 *)((int)aiStack_40 + loop_i);
+                loop_i = loop_i + -4;
+                *(undefined4 *)((int)word_ptr_2 + 6) = *word_ptr_2;
+                *(undefined2 *)((int)word_ptr_2 + (uint)flag * -8 + 10) =
+                     *(undefined2 *)(word_ptr_2 + (uint)flag * -2 + 1);
+                word_ptr_2 = (undefined4 *)((int)word_ptr_2 + -6);
+              } while (0 < loop_i);
             }
             aiStack_40[1] = aiStack_40[5];
             *local_20 = *(undefined4 *)(local_1c + 0x28);
-            *(undefined2 *)(local_20 + (uint)bVar5 * -2 + 1) =
-                 *(undefined2 *)(local_1c + (uint)bVar5 * -8 + 0x2c);
+            *(undefined2 *)(local_20 + (uint)flag * -2 + 1) =
+                 *(undefined2 *)(local_1c + (uint)flag * -8 + 0x2c);
           }
         }
-        puVar1 = (ushort *)(local_1c + 0x26);
-        local_1c = &DAT_001bd5ed + (uint)*puVar1 * 0x2e;
-      } while (&DAT_001bd5ed < &DAT_001bd5ed + (uint)*puVar1 * 0x2e);
+        word_ptr = (ushort *)(local_1c + 0x26);
+        local_1c = &g_bss_001bd5ed + (uint)*word_ptr * 0x2e;
+      } while (&g_bss_001bd5ed < &g_bss_001bd5ed + (uint)*word_ptr * 0x2e);
     }
-    iVar4 = 0;
-    for (iVar2 = 0;
-        (iVar4 < (int)(uint)DAT_002ee8d2 && (*(int *)((int)aiStack_40 + iVar2 + 4) != 0x7fffffff));
-        iVar2 = iVar2 + 4) {
-      iVar4 = iVar4 + 1;
+    val = 0;
+    for (loop_i = 0;
+        (val < (int)(uint)g_bss_002ee8d2 && (*(int *)((int)aiStack_40 + loop_i + 4) != 0x7fffffff));
+        loop_i = loop_i + 4) {
+      val = val + 1;
       local_24 = local_24 + 1;
     }
   }
@@ -2826,99 +2739,92 @@ int FUN_000b0d0c(void)
 }
 
 /******************************************************************************
- * Function : dk_prev_when_removing_light_0b0f94 (Ghidra: FUN_000b0f94)
- * Prototype: void dk_prev_when_removing_light_0b0f94(void);
+ * Function : light_prev_when_removing_light_0b0f94 (Original VA: 0xb0f94, Ghidra: FUN_000b0f94)
+ * Prototype: void light_prev_when_removing_light_0b0f94(void);
  * Address  : 0xb0f94 (Size: 298 bytes)
  * Module   : light.cpp [direct_file_string_xref]
- * OrigLine : light.cpp:2764; light.cpp:2773; light.cpp:2778 ("List has < 0 structures")
- * Naming   : String 'No prev when removing light from list'
- * Callers  : 2 -> 0xacce4, 0xad66c
- * Callees  : 2 -> 0xddaf0, 0xe7714
- * Strings  :
- *   - 0x16ad59: "light.cpp"
- *   - 0x16ad83: "light.cpp"
- *   - 0x16ada5: "light.cpp"
- *   - 0x16ad33: "No prev when removing light from list"
- *   - 0x16ad63: "Could not find light %d in list"
- *   - 0x16ad8d: "List has < 0 structures"
+ * OrigLine : light.cpp lines 2764, 2773, 2778
+ * Purpose  : String 'No prev when removing light from list'
+ * Callers  : 2 -> light_attempt_delete_light_0acce4, light_attempt_turn_off_unallocated_0ad66c
+ * Callees  : 2 -> LbErrorLog, dk_sprintf
  ******************************************************************************/
-void FUN_000b0f94(void)
+void light_prev_when_removing_light_0b0f94(void)
 
 {
-  ushort *puVar1;
-  bool bVar2;
-  undefined1 *in_EAX;
-  undefined1 *puVar3;
+  ushort *word_ptr;
+  bool flag;
+  undefined1 *arg_eax;
+  undefined1 *word_ptr_2;
   undefined1 *extraout_ECX;
-  int *in_EDX;
-  undefined1 *puVar4;
+  int *arg_edx;
+  undefined1 *word_ptr_3;
   
-  bVar2 = false;
-  if ((in_EAX[1] & 1) != 0) {
-    if ((uint)*(ushort *)(in_EAX + 0xe) == in_EDX[1]) {
-      bVar2 = true;
-      in_EDX[1] = CONCAT22((short)((uint)in_EDX[1] >> 0x10),*(undefined2 *)(in_EAX + 0x26));
-      *in_EDX = *in_EDX + -1;
-      *(undefined2 *)(in_EAX + 0x26) = 0;
-      in_EAX[1] = in_EAX[1] & 0xfe;
+  flag = false;
+  if ((arg_eax[1] & 1) != 0) {
+    if ((uint)*(ushort *)(arg_eax + 0xe) == arg_edx[1]) {
+      flag = true;
+      arg_edx[1] = CONCAT22((short)((uint)arg_edx[1] >> 0x10),*(undefined2 *)(arg_eax + 0x26));
+      *arg_edx = *arg_edx + -1;
+      *(undefined2 *)(arg_eax + 0x26) = 0;
+      arg_eax[1] = arg_eax[1] & 0xfe;
     }
     else {
-      puVar3 = (undefined1 *)0x0;
-      puVar4 = &DAT_001bd5ed + in_EDX[1] * 0x2e;
-      if (&DAT_001bd5ed + in_EDX[1] * 0x2e != &DAT_001bd5ed) {
+      word_ptr_2 = (undefined1 *)0x0;
+      word_ptr_3 = &g_bss_001bd5ed + arg_edx[1] * 0x2e;
+      if (&g_bss_001bd5ed + arg_edx[1] * 0x2e != &g_bss_001bd5ed) {
         do {
-          if (puVar4 == in_EAX) {
-            bVar2 = true;
-            if (puVar3 == (undefined1 *)0x0) {
-              FUN_000e7714(&DAT_0019cbac,s_No_prev_when_removing_light_from_0016ad33);
-              FUN_000ddaf0(); /* LbErrorLog("light.cpp", line 2764, g_log_buf) */
-              in_EAX = extraout_ECX;
+          if (word_ptr_3 == arg_eax) {
+            flag = true;
+            if (word_ptr_2 == (undefined1 *)0x0) {
+              dk_sprintf(&g_log_sprintf_buf,s_No_prev_when_removing_light_from_0016ad33);
+              LbErrorLog(); /* LbErrorLog("light.cpp", line 2764, g_log_buf) */
+              arg_eax = extraout_ECX;
             }
             else {
-              *(undefined2 *)(puVar3 + 0x26) = *(undefined2 *)(in_EAX + 0x26);
-              in_EAX[1] = in_EAX[1] & 0xfe;
-              *in_EDX = *in_EDX + -1;
-              *(undefined2 *)(in_EAX + 0x26) = 0;
+              *(undefined2 *)(word_ptr_2 + 0x26) = *(undefined2 *)(arg_eax + 0x26);
+              arg_eax[1] = arg_eax[1] & 0xfe;
+              *arg_edx = *arg_edx + -1;
+              *(undefined2 *)(arg_eax + 0x26) = 0;
             }
           }
-          puVar1 = (ushort *)(puVar4 + 0x26);
-          puVar3 = puVar4;
-          puVar4 = &DAT_001bd5ed + (uint)*puVar1 * 0x2e;
-        } while (&DAT_001bd5ed + (uint)*puVar1 * 0x2e != &DAT_001bd5ed);
+          word_ptr = (ushort *)(word_ptr_3 + 0x26);
+          word_ptr_2 = word_ptr_3;
+          word_ptr_3 = &g_bss_001bd5ed + (uint)*word_ptr * 0x2e;
+        } while (&g_bss_001bd5ed + (uint)*word_ptr * 0x2e != &g_bss_001bd5ed);
       }
     }
-    if (!bVar2) {
-      FUN_000e7714(&DAT_0019cbac,s_Could_not_find_light__d_in_list_0016ad63,
-                   *(undefined2 *)(in_EAX + 0xe));
-      FUN_000ddaf0(); /* LbErrorLog("light.cpp", line 2773, g_log_buf) */
+    if (!flag) {
+      dk_sprintf(&g_log_sprintf_buf,s_Could_not_find_light__d_in_list_0016ad63,
+                   *(undefined2 *)(arg_eax + 0xe));
+      LbErrorLog(); /* LbErrorLog("light.cpp", line 2773, g_log_buf) */
     }
-    if (*in_EDX < 0) {
-      FUN_000ddaf0(); /* LbErrorLog("light.cpp", line 2778, "List has < 0 structures") */
+    if (*arg_edx < 0) {
+      LbErrorLog(); /* LbErrorLog("light.cpp", line 2778, "List has < 0 structures") */
     }
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0b10c0 (Ghidra: FUN_000b10c0)
- * Prototype: void sub_0b10c0(void);
+ * Function : light_fn_0b10c0 (Original VA: 0xb10c0, Ghidra: FUN_000b10c0)
+ * Prototype: void light_fn_0b10c0(void);
  * Address  : 0xb10c0 (Size: 689 bytes)
  * Module   : light.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0xac630
- * Callees  : 1 -> 0xb182c
+ * Purpose  : Module light.cpp procedure @ 0x0b10c0
+ * Callers  : 1 -> light_fn_0ac630
+ * Callees  : 1 -> light_fn_0b182c
  ******************************************************************************/
-void FUN_000b10c0(void)
+void light_fn_0b10c0(void)
 
 {
-  int iVar1;
-  int iVar2;
-  uint uVar3;
-  uint uVar4;
-  undefined1 *puVar5;
-  undefined4 *puVar6;
-  int iVar7;
-  byte bVar8;
+  int val;
+  int val_2;
+  uint uval;
+  uint uval_2;
+  undefined1 *word_ptr;
+  undefined4 *word_ptr_2;
+  int val_3;
+  byte flag;
   int aiStack_60 [5];
   undefined1 auStack_4c [8];
   undefined4 local_44;
@@ -2929,213 +2835,213 @@ void FUN_000b10c0(void)
   uint local_20;
   char local_1c [4];
   
-  bVar8 = 0;
-  puVar6 = (undefined4 *)auStack_4c;
-  iVar7 = 0;
+  flag = 0;
+  word_ptr_2 = (undefined4 *)auStack_4c;
+  val_3 = 0;
   local_20 = 1;
   local_44 = 0x100;
   local_34[4] = 0x100;
   local_40 = 0;
   do {
     do {
-      iVar2 = *(int *)((int)&PTR_LAB_00192fe0 + *(int *)((int)puVar6 + 0xc));
-      *(int *)((int)puVar6 + 0x14) =
-           *(int *)((int)puVar6 + 0x28) * *(int *)((int)&DAT_001927e0 + *(int *)((int)puVar6 + 0xc))
+      val_2 = *(int *)((int)&PTR_LAB_00192fe0 + *(int *)((int)word_ptr_2 + 0xc));
+      *(int *)((int)word_ptr_2 + 0x14) =
+           *(int *)((int)word_ptr_2 + 0x28) * *(int *)((int)&g_slab_attr_table + *(int *)((int)word_ptr_2 + 0xc))
            >> 0x10;
-      *(int *)((int)puVar6 + 0x18) = -(*(int *)((int)puVar6 + 0x28) * iVar2 >> 8) >> 8;
-      iVar2 = *(int *)((int)puVar6 + 0x14) >> 0x1f;
-      *(int *)((int)puVar6 + 0x14) =
-           (int)((*(int *)((int)puVar6 + 0x14) + iVar2 * -0x100) - (uint)(iVar2 << 7 < 0)) >> 8;
-      iVar2 = *(int *)((int)puVar6 + 0x18) >> 0x1f;
-      iVar2 = (int)((*(int *)((int)puVar6 + 0x18) + iVar2 * -0x100) - (uint)(iVar2 << 7 < 0)) >> 8;
-      *(int *)((int)puVar6 + 0x18) = iVar2;
-      uVar4 = iVar2 << 8;
-      uVar3 = (*(int *)((int)puVar6 + 0x14) << 8) >> 0x1f;
-      iVar2 = (*(int *)((int)puVar6 + 0x14) << 8 ^ uVar3) - uVar3;
-      uVar3 = (int)uVar4 >> 0x1f;
-      iVar1 = (uVar4 ^ uVar3) - uVar3;
-      if (iVar1 < iVar2) {
-        iVar2 = *(int *)(&DAT_0017a4d0 + ((iVar1 * 0x100) / iVar2) * 8) * iVar2 >> 0xd;
+      *(int *)((int)word_ptr_2 + 0x18) = -(*(int *)((int)word_ptr_2 + 0x28) * val_2 >> 8) >> 8;
+      val_2 = *(int *)((int)word_ptr_2 + 0x14) >> 0x1f;
+      *(int *)((int)word_ptr_2 + 0x14) =
+           (int)((*(int *)((int)word_ptr_2 + 0x14) + val_2 * -0x100) - (uint)(val_2 << 7 < 0)) >> 8;
+      val_2 = *(int *)((int)word_ptr_2 + 0x18) >> 0x1f;
+      val_2 = (int)((*(int *)((int)word_ptr_2 + 0x18) + val_2 * -0x100) - (uint)(val_2 << 7 < 0)) >> 8;
+      *(int *)((int)word_ptr_2 + 0x18) = val_2;
+      uval_2 = val_2 << 8;
+      uval = (*(int *)((int)word_ptr_2 + 0x14) << 8) >> 0x1f;
+      val_2 = (*(int *)((int)word_ptr_2 + 0x14) << 8 ^ uval) - uval;
+      uval = (int)uval_2 >> 0x1f;
+      val = (uval_2 ^ uval) - uval;
+      if (val < val_2) {
+        val_2 = *(int *)(&g_data_0017a4d0 + ((val * 0x100) / val_2) * 8) * val_2 >> 0xd;
       }
-      else if (iVar1 == 0) {
-        iVar2 = 0;
+      else if (val == 0) {
+        val_2 = 0;
       }
       else {
-        iVar2 = *(int *)(&DAT_0017a4d0 + ((iVar2 * 0x100) / iVar1) * 8) * iVar1 >> 0xd;
+        val_2 = *(int *)(&g_data_0017a4d0 + ((val_2 * 0x100) / val) * 8) * val >> 0xd;
       }
-      *(int *)((int)puVar6 + 0x10) = iVar2;
-      puVar5 = (undefined1 *)puVar6;
-      if ((*(int *)((int)puVar6 + 0x14) != 0) || (*(int *)((int)puVar6 + 0x18) != 0)) {
+      *(int *)((int)word_ptr_2 + 0x10) = val_2;
+      word_ptr = (undefined1 *)word_ptr_2;
+      if ((*(int *)((int)word_ptr_2 + 0x14) != 0) || (*(int *)((int)word_ptr_2 + 0x18) != 0)) {
         do {
-          iVar1 = 0;
-          puVar5[0x30] = 0;
-          iVar2 = 0;
+          val = 0;
+          word_ptr[0x30] = 0;
+          val_2 = 0;
           do {
-            if (*(char *)((int)&DAT_001baded + iVar2) == '\0') break;
-            if ((*(int *)((int)&DAT_001bade9 + iVar2 + 3) >> 0x18 == *(int *)(puVar5 + 0x14)) &&
-               (*(int *)((int)&DAT_001baded + iVar2) >> 0x18 == *(int *)(puVar5 + 0x18))) {
-              *(int *)(puVar5 + 0x24) = iVar1;
-              puVar5[0x30] = 1;
+            if (*(char *)((int)&g_bss_001baded + val_2) == '\0') break;
+            if ((*(int *)((int)&g_bss_001bade9 + val_2 + 3) >> 0x18 == *(int *)(word_ptr + 0x14)) &&
+               (*(int *)((int)&g_bss_001baded + val_2) >> 0x18 == *(int *)(word_ptr + 0x18))) {
+              *(int *)(word_ptr + 0x24) = val;
+              word_ptr[0x30] = 1;
               break;
             }
-            iVar2 = iVar2 + 8;
-            iVar1 = iVar1 + 1;
-          } while (iVar2 < 0x2000);
-          if (puVar5[0x30] == '\0') {
-            *(undefined1 *)((int)&DAT_001baded + iVar7 * 8 + 2) = puVar5[0x14];
-            *(undefined1 *)((int)&DAT_001baded + iVar7 * 8 + 3) = puVar5[0x18];
-            *(undefined1 *)((int)&DAT_001baded + iVar7 * 8 + 1) = puVar5[0x2c];
-            (&DAT_001badf1)[iVar7 * 2] = *(undefined4 *)(puVar5 + 0x10);
-            *(undefined1 **)(puVar5 + -4) = puVar5 + 0x20;
-            *(undefined1 **)(puVar5 + -8) = puVar5 + 0x1c;
-            *(int *)(puVar5 + -0xc) = *(int *)(puVar5 + 0x18) + 1;
-            iVar2 = *(int *)(puVar5 + 0x14);
-            *(undefined1 *)(&DAT_001baded + iVar7 * 2) = 1;
-            puVar6 = (undefined4 *)(puVar5 + -0x10);
-            *(int *)(puVar5 + -0x10) = iVar2 + 1;
-            iVar7 = iVar7 + 1;
-            *(undefined4 *)(puVar5 + -0x14) = 0xb12f9;
-            FUN_000b182c();
+            val_2 = val_2 + 8;
+            val = val + 1;
+          } while (val_2 < 0x2000);
+          if (word_ptr[0x30] == '\0') {
+            *(undefined1 *)((int)&g_bss_001baded + val_3 * 8 + 2) = word_ptr[0x14];
+            *(undefined1 *)((int)&g_bss_001baded + val_3 * 8 + 3) = word_ptr[0x18];
+            *(undefined1 *)((int)&g_bss_001baded + val_3 * 8 + 1) = word_ptr[0x2c];
+            (&g_bss_001badf1)[val_3 * 2] = *(undefined4 *)(word_ptr + 0x10);
+            *(undefined1 **)(word_ptr + -4) = word_ptr + 0x20;
+            *(undefined1 **)(word_ptr + -8) = word_ptr + 0x1c;
+            *(int *)(word_ptr + -0xc) = *(int *)(word_ptr + 0x18) + 1;
+            val_2 = *(int *)(word_ptr + 0x14);
+            *(undefined1 *)(&g_bss_001baded + val_3 * 2) = 1;
+            word_ptr_2 = (undefined4 *)(word_ptr + -0x10);
+            *(int *)(word_ptr + -0x10) = val_2 + 1;
+            val_3 = val_3 + 1;
+            *(undefined4 *)(word_ptr + -0x14) = 0xb12f9;
+            light_fn_0b182c();
           }
           else {
-            puVar6 = (undefined4 *)puVar5;
-            if ((uint)*(byte *)((int)&DAT_001baded + *(int *)(puVar5 + 0x24) * 8 + 1) ==
-                *(uint *)(puVar5 + 0x2c)) break;
-            iVar2 = *(int *)(puVar5 + 0x24) * 8;
-            if (*(int *)(puVar5 + 0x24) < 0x3ff) {
+            word_ptr_2 = (undefined4 *)word_ptr;
+            if ((uint)*(byte *)((int)&g_bss_001baded + *(int *)(word_ptr + 0x24) * 8 + 1) ==
+                *(uint *)(word_ptr + 0x2c)) break;
+            val_2 = *(int *)(word_ptr + 0x24) * 8;
+            if (*(int *)(word_ptr + 0x24) < 0x3ff) {
               do {
-                if (*(char *)((int)&DAT_001baded + iVar2) == '\0') break;
-                iVar1 = iVar2 + 8;
-                *(undefined4 *)((int)&DAT_001baded + iVar2) =
-                     *(undefined4 *)((int)&DAT_001badf5 + iVar2);
-                *(undefined4 *)((int)&DAT_001badf1 + (uint)bVar8 * -8 + iVar2) =
-                     *(undefined4 *)((int)&DAT_001badf9 + (uint)bVar8 * -8 + iVar2);
-                iVar2 = iVar1;
-              } while (iVar1 < 0x1ff8);
+                if (*(char *)((int)&g_bss_001baded + val_2) == '\0') break;
+                val = val_2 + 8;
+                *(undefined4 *)((int)&g_bss_001baded + val_2) =
+                     *(undefined4 *)((int)&g_bss_001badf5 + val_2);
+                *(undefined4 *)((int)&g_bss_001badf1 + (uint)flag * -8 + val_2) =
+                     *(undefined4 *)((int)&g_bss_001badf9 + (uint)flag * -8 + val_2);
+                val_2 = val;
+              } while (val < 0x1ff8);
             }
-            iVar7 = iVar7 + -1;
+            val_3 = val_3 + -1;
           }
-          puVar5 = (undefined1 *)puVar6;
-        } while (*(char *)((int)puVar6 + 0x30) != '\0');
+          word_ptr = (undefined1 *)word_ptr_2;
+        } while (*(char *)((int)word_ptr_2 + 0x30) != '\0');
       }
-      iVar2 = puVar6[3];
-      puVar6[3] = iVar2 + 4;
-    } while (iVar2 + 4 != 0x2000);
-    iVar2 = puVar6[0xb];
-    puVar6[2] = puVar6[2] + 0x100;
-    puVar6[0xb] = iVar2 + 1;
-    if (0xf < iVar2 + 1) {
-      uVar3 = 0x100;
-      DAT_001e31ff = iVar7;
+      val_2 = word_ptr_2[3];
+      word_ptr_2[3] = val_2 + 4;
+    } while (val_2 + 4 != 0x2000);
+    val_2 = word_ptr_2[0xb];
+    word_ptr_2[2] = word_ptr_2[2] + 0x100;
+    word_ptr_2[0xb] = val_2 + 1;
+    if (0xf < val_2 + 1) {
+      uval = 0x100;
+      g_bss_001e31ff = val_3;
       do {
-        uVar3 = uVar3 & 0xffffff00;
-        iVar7 = 0;
+        uval = uval & 0xffffff00;
+        val_3 = 0;
         do {
-          if ((*(char *)((int)&DAT_001baded + iVar7) == '\0') ||
-             (*(char *)((int)&DAT_001badf5 + iVar7) == '\0')) break;
-          if (*(int *)((int)&DAT_001badf9 + iVar7) < *(int *)((int)&DAT_001badf1 + iVar7)) {
-            *puVar6 = *(undefined4 *)((int)&DAT_001baded + iVar7);
-            puVar6[(uint)bVar8 * -2 + 1] =
-                 *(undefined4 *)((int)&DAT_001badf1 + (uint)bVar8 * -8 + iVar7);
-            *(undefined4 *)((int)&DAT_001baded + iVar7) =
-                 *(undefined4 *)((int)&DAT_001badf5 + iVar7);
-            *(undefined4 *)((int)&DAT_001badf1 + (uint)bVar8 * -8 + iVar7) =
-                 *(undefined4 *)((int)&DAT_001badf9 + (uint)bVar8 * -8 + iVar7);
-            uVar3 = CONCAT31((int3)(uVar3 >> 8),(char)(uVar3 >> 8));
-            *(undefined4 *)((int)&DAT_001badf5 + iVar7) = *puVar6;
-            *(undefined4 *)((int)&DAT_001badf9 + (uint)bVar8 * -8 + iVar7) =
-                 puVar6[(uint)bVar8 * -2 + 1];
+          if ((*(char *)((int)&g_bss_001baded + val_3) == '\0') ||
+             (*(char *)((int)&g_bss_001badf5 + val_3) == '\0')) break;
+          if (*(int *)((int)&g_bss_001badf9 + val_3) < *(int *)((int)&g_bss_001badf1 + val_3)) {
+            *word_ptr_2 = *(undefined4 *)((int)&g_bss_001baded + val_3);
+            word_ptr_2[(uint)flag * -2 + 1] =
+                 *(undefined4 *)((int)&g_bss_001badf1 + (uint)flag * -8 + val_3);
+            *(undefined4 *)((int)&g_bss_001baded + val_3) =
+                 *(undefined4 *)((int)&g_bss_001badf5 + val_3);
+            *(undefined4 *)((int)&g_bss_001badf1 + (uint)flag * -8 + val_3) =
+                 *(undefined4 *)((int)&g_bss_001badf9 + (uint)flag * -8 + val_3);
+            uval = CONCAT31((int3)(uval >> 8),(char)(uval >> 8));
+            *(undefined4 *)((int)&g_bss_001badf5 + val_3) = *word_ptr_2;
+            *(undefined4 *)((int)&g_bss_001badf9 + (uint)flag * -8 + val_3) =
+                 word_ptr_2[(uint)flag * -2 + 1];
           }
-          iVar7 = iVar7 + 8;
-        } while (iVar7 < 0x1ff8);
-        if ((char)uVar3 == '\0') {
+          val_3 = val_3 + 8;
+        } while (val_3 < 0x1ff8);
+        if ((char)uval == '\0') {
           return;
         }
       } while( true );
     }
-    puVar6[10] = puVar6[2];
-    puVar6[3] = 0;
+    word_ptr_2[10] = word_ptr_2[2];
+    word_ptr_2[3] = 0;
   } while( true );
 }
 
 /******************************************************************************
- * Function : sub_0b1398 (Ghidra: FUN_000b1398)
- * Prototype: void sub_0b1398(void);
+ * Function : light_fn_0b1398 (Original VA: 0xb1398, Ghidra: FUN_000b1398)
+ * Prototype: void light_fn_0b1398(void);
  * Address  : 0xb1398 (Size: 40 bytes)
  * Module   : light.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module light.cpp procedure @ 0x0b1398
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_000b1398(void)
+void light_fn_0b1398(void)
 
 {
-  byte bVar1;
-  int iVar2;
-  int iVar3;
-  byte bVar4;
+  byte flag;
+  int val;
+  int val_2;
+  byte flag_2;
   
-  bVar4 = 0x1f;
-  iVar2 = 0;
+  flag_2 = 0x1f;
+  val = 0;
   do {
-    iVar3 = iVar2 + 4;
-    bVar1 = bVar4 & 0x1f;
-    bVar4 = bVar4 - 1;
-    *(int *)((int)&DAT_00388e3c + iVar2) = 1 << bVar1;
-    iVar2 = iVar3;
-  } while (iVar3 != 0x80);
+    val_2 = val + 4;
+    flag = flag_2 & 0x1f;
+    flag_2 = flag_2 - 1;
+    *(int *)((int)&g_bss_00388e3c + val) = 1 << flag;
+    val = val_2;
+  } while (val_2 != 0x80);
   return;
 }
 
 /******************************************************************************
- * Function : sub_0b13c0 (Ghidra: FUN_000b13c0)
- * Prototype: undefined4 sub_0b13c0(int param_1,int param_2);
+ * Function : light_fn_0b13c0 (Original VA: 0xb13c0, Ghidra: FUN_000b13c0)
+ * Prototype: undefined4 light_fn_0b13c0(int param_1,int param_2);
  * Address  : 0xb13c0 (Size: 183 bytes)
  * Module   : light.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0xb14a0, 0xb182c
+ * Purpose  : Module light.cpp procedure @ 0x0b13c0
+ * Callers  : 2 -> light_fn_0b14a0, light_fn_0b182c
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_000b13c0(int param_1,int param_2)
+undefined4 light_fn_0b13c0(int param_1,int param_2)
 
 {
-  int in_EAX;
-  int in_ECX;
-  int in_EDX;
-  int unaff_EBX;
+  int arg_eax;
+  int arg_ecx;
+  int arg_edx;
+  int arg_ebx;
   
-  if ((in_EAX < unaff_EBX) || (param_1 < in_EAX)) {
-    if (in_EAX < unaff_EBX) {
-      if ((in_ECX <= in_EDX) && (in_EDX <= param_2)) {
+  if ((arg_eax < arg_ebx) || (param_1 < arg_eax)) {
+    if (arg_eax < arg_ebx) {
+      if ((arg_ecx <= arg_edx) && (arg_edx <= param_2)) {
         return 3;
       }
-      if (param_2 < in_EDX) {
+      if (param_2 < arg_edx) {
         return 2;
       }
-      if (in_EDX < in_ECX) {
+      if (arg_edx < arg_ecx) {
         return 4;
       }
     }
-    else if (param_1 < in_EAX) {
-      if ((in_ECX <= in_EDX) && (in_EDX <= param_2)) {
+    else if (param_1 < arg_eax) {
+      if ((arg_ecx <= arg_edx) && (arg_edx <= param_2)) {
         return 7;
       }
-      if (param_2 < in_EDX) {
+      if (param_2 < arg_edx) {
         return 8;
       }
-      if (in_EDX < in_ECX) {
+      if (arg_edx < arg_ecx) {
         return 6;
       }
     }
   }
   else {
-    if ((in_ECX <= in_EDX) && (in_EDX <= param_2)) {
+    if ((arg_ecx <= arg_edx) && (arg_edx <= param_2)) {
       return 0xffffffff;
     }
-    if (param_2 < in_EDX) {
+    if (param_2 < arg_edx) {
       return 1;
     }
-    if (in_EDX < in_ECX) {
+    if (arg_edx < arg_ecx) {
       return 5;
     }
   }
@@ -3143,70 +3049,70 @@ undefined4 FUN_000b13c0(int param_1,int param_2)
 }
 
 /******************************************************************************
- * Function : sub_0b14a0 (Ghidra: FUN_000b14a0)
- * Prototype: void sub_0b14a0(uint *param_1,uint *param_2);
+ * Function : light_fn_0b14a0 (Original VA: 0xb14a0, Ghidra: FUN_000b14a0)
+ * Prototype: void light_fn_0b14a0(uint *param_1,uint *param_2);
  * Address  : 0xb14a0 (Size: 866 bytes)
  * Module   : light.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module light.cpp procedure @ 0x0b14a0
  * Callers  : 0 -> 
- * Callees  : 2 -> 0xb13c0, 0xe66ec
+ * Callees  : 2 -> light_fn_0b13c0, bflib_system_io_fn_0e66ec
  ******************************************************************************/
-void FUN_000b14a0(uint *param_1,uint *param_2)
+void light_fn_0b14a0(uint *param_1,uint *param_2)
 
 {
-  ushort uVar1;
-  undefined4 uVar2;
-  uint in_ECX;
+  ushort uval;
+  undefined4 uval_2;
+  uint arg_ecx;
   uint unaff_EBP;
   uint local_18;
   
-  uVar2 = FUN_000b13c0(param_1,param_2);
-  local_18 = in_ECX;
-  switch(uVar2) {
+  uval_2 = light_fn_0b13c0(param_1,param_2);
+  local_18 = arg_ecx;
+  switch(uval_2) {
   case 1:
-    uVar1 = FUN_000e66ec();
-    local_18 = (uint)uVar1 % 0x800;
-    uVar1 = FUN_000e66ec();
-    unaff_EBP = (uint)uVar1 % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    local_18 = (uint)uval % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    unaff_EBP = (uint)uval % 0x800;
     break;
   case 2:
-    uVar1 = FUN_000e66ec();
-    local_18 = (uint)uVar1 % 0x800;
-    uVar1 = FUN_000e66ec();
-    unaff_EBP = (uint)uVar1 % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    local_18 = (uint)uval % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    unaff_EBP = (uint)uval % 0x800;
     break;
   case 3:
-    uVar1 = FUN_000e66ec();
-    local_18 = (uint)uVar1 % 0x800;
-    uVar1 = FUN_000e66ec();
-    unaff_EBP = (uint)uVar1 % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    local_18 = (uint)uval % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    unaff_EBP = (uint)uval % 0x800;
     break;
   case 4:
-    FUN_000e66ec();
-    FUN_000e66ec();
+    bflib_system_io_fn_0e66ec();
+    bflib_system_io_fn_0e66ec();
   case 5:
-    uVar1 = FUN_000e66ec();
-    local_18 = (uint)uVar1 % 0x800;
-    uVar1 = FUN_000e66ec();
-    unaff_EBP = (uint)uVar1 % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    local_18 = (uint)uval % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    unaff_EBP = (uint)uval % 0x800;
     break;
   case 6:
-    uVar1 = FUN_000e66ec();
-    local_18 = (uint)uVar1 % 0x800;
-    uVar1 = FUN_000e66ec();
-    unaff_EBP = (uint)uVar1 % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    local_18 = (uint)uval % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    unaff_EBP = (uint)uval % 0x800;
     break;
   case 7:
-    uVar1 = FUN_000e66ec();
-    local_18 = (uint)uVar1 % 0x800;
-    uVar1 = FUN_000e66ec();
-    unaff_EBP = (uint)uVar1 % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    local_18 = (uint)uval % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    unaff_EBP = (uint)uval % 0x800;
     break;
   case 8:
-    uVar1 = FUN_000e66ec();
-    local_18 = (uint)uVar1 % 0x800;
-    uVar1 = FUN_000e66ec();
-    unaff_EBP = (uint)uVar1 % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    local_18 = (uint)uval % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    unaff_EBP = (uint)uval % 0x800;
     break;
   case 0xffffffff:
     unaff_EBP = 0;
@@ -3226,70 +3132,70 @@ void FUN_000b14a0(uint *param_1,uint *param_2)
 }
 
 /******************************************************************************
- * Function : sub_0b182c (Ghidra: FUN_000b182c)
- * Prototype: void sub_0b182c(uint *param_1,uint *param_2);
+ * Function : light_fn_0b182c (Original VA: 0xb182c, Ghidra: FUN_000b182c)
+ * Prototype: void light_fn_0b182c(uint *param_1,uint *param_2);
  * Address  : 0xb182c (Size: 866 bytes)
  * Module   : light.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0xb10c0
- * Callees  : 2 -> 0xb13c0, 0xe66ec
+ * Purpose  : Module light.cpp procedure @ 0x0b182c
+ * Callers  : 1 -> light_fn_0b10c0
+ * Callees  : 2 -> light_fn_0b13c0, bflib_system_io_fn_0e66ec
  ******************************************************************************/
-void FUN_000b182c(uint *param_1,uint *param_2)
+void light_fn_0b182c(uint *param_1,uint *param_2)
 
 {
-  ushort uVar1;
-  undefined4 uVar2;
-  uint in_ECX;
+  ushort uval;
+  undefined4 uval_2;
+  uint arg_ecx;
   uint unaff_EBP;
   uint local_18;
   
-  uVar2 = FUN_000b13c0(param_1,param_2);
-  local_18 = in_ECX;
-  switch(uVar2) {
+  uval_2 = light_fn_0b13c0(param_1,param_2);
+  local_18 = arg_ecx;
+  switch(uval_2) {
   case 1:
-    uVar1 = FUN_000e66ec();
-    local_18 = (uint)uVar1 % 0x800;
-    uVar1 = FUN_000e66ec();
-    unaff_EBP = (uint)uVar1 % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    local_18 = (uint)uval % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    unaff_EBP = (uint)uval % 0x800;
     break;
   case 2:
-    uVar1 = FUN_000e66ec();
-    local_18 = (uint)uVar1 % 0x800;
-    uVar1 = FUN_000e66ec();
-    unaff_EBP = (uint)uVar1 % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    local_18 = (uint)uval % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    unaff_EBP = (uint)uval % 0x800;
     break;
   case 3:
-    uVar1 = FUN_000e66ec();
-    local_18 = (uint)uVar1 % 0x800;
-    uVar1 = FUN_000e66ec();
-    unaff_EBP = (uint)uVar1 % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    local_18 = (uint)uval % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    unaff_EBP = (uint)uval % 0x800;
     break;
   case 4:
-    FUN_000e66ec();
-    FUN_000e66ec();
+    bflib_system_io_fn_0e66ec();
+    bflib_system_io_fn_0e66ec();
   case 5:
-    uVar1 = FUN_000e66ec();
-    local_18 = (uint)uVar1 % 0x800;
-    uVar1 = FUN_000e66ec();
-    unaff_EBP = (uint)uVar1 % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    local_18 = (uint)uval % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    unaff_EBP = (uint)uval % 0x800;
     break;
   case 6:
-    uVar1 = FUN_000e66ec();
-    local_18 = (uint)uVar1 % 0x800;
-    uVar1 = FUN_000e66ec();
-    unaff_EBP = (uint)uVar1 % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    local_18 = (uint)uval % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    unaff_EBP = (uint)uval % 0x800;
     break;
   case 7:
-    uVar1 = FUN_000e66ec();
-    local_18 = (uint)uVar1 % 0x800;
-    uVar1 = FUN_000e66ec();
-    unaff_EBP = (uint)uVar1 % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    local_18 = (uint)uval % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    unaff_EBP = (uint)uval % 0x800;
     break;
   case 8:
-    uVar1 = FUN_000e66ec();
-    local_18 = (uint)uVar1 % 0x800;
-    uVar1 = FUN_000e66ec();
-    unaff_EBP = (uint)uVar1 % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    local_18 = (uint)uval % 0x800;
+    uval = bflib_system_io_fn_0e66ec();
+    unaff_EBP = (uint)uval % 0x800;
     break;
   case 0xffffffff:
     unaff_EBP = 0;
@@ -3309,510 +3215,510 @@ void FUN_000b182c(uint *param_1,uint *param_2)
 }
 
 /******************************************************************************
- * Function : sub_0b1b90 (Ghidra: FUN_000b1b90)
- * Prototype: bool sub_0b1b90(void);
+ * Function : light_fn_0b1b90 (Original VA: 0xb1b90, Ghidra: FUN_000b1b90)
+ * Prototype: bool light_fn_0b1b90(void);
  * Address  : 0xb1b90 (Size: 52 bytes)
  * Module   : light.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module light.cpp procedure @ 0x0b1b90
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-bool FUN_000b1b90(void)
+bool light_fn_0b1b90(void)
 
 {
-  int in_EAX;
-  int in_EDX;
+  int arg_eax;
+  int arg_edx;
   
-  return in_EDX < (int)(uint)(*(byte *)((int)&DAT_0019e973 +
-                                       (*(uint *)(in_EAX + 1) & 0x7ff) * 0x18 + 2) >> 4);
+  return arg_edx < (int)(uint)(*(byte *)((int)&g_bss_0019e973 +
+                                       (*(uint *)(arg_eax + 1) & 0x7ff) * 0x18 + 2) >> 4);
 }
 
 /******************************************************************************
- * Function : sub_0b1c20 (Ghidra: FUN_000b1c20)
- * Prototype: int sub_0b1c20(void);
+ * Function : light_fn_0b1c20 (Original VA: 0xb1c20, Ghidra: FUN_000b1c20)
+ * Prototype: int light_fn_0b1c20(void);
  * Address  : 0xb1c20 (Size: 17 bytes)
  * Module   : light.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module light.cpp procedure @ 0x0b1c20
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-int FUN_000b1c20(void)
+int light_fn_0b1c20(void)
 
 {
-  int in_EAX;
-  int in_EDX;
-  int unaff_EBX;
+  int arg_eax;
+  int arg_edx;
+  int arg_ebx;
   
-  return ((in_EDX - unaff_EBX) * in_EAX) / in_EDX;
+  return ((arg_edx - arg_ebx) * arg_eax) / arg_edx;
 }
 
 /******************************************************************************
- * Function : sub_0b1c40 (Ghidra: FUN_000b1c40)
- * Prototype: void sub_0b1c40(void);
+ * Function : light_fn_0b1c40 (Original VA: 0xb1c40, Ghidra: FUN_000b1c40)
+ * Prototype: void light_fn_0b1c40(void);
  * Address  : 0xb1c40 (Size: 42 bytes)
  * Module   : light.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module light.cpp procedure @ 0x0b1c40
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_000b1c40(void)
+void light_fn_0b1c40(void)
 
 {
-  uint *puVar1;
-  int in_EAX;
-  int iVar2;
-  char in_CL;
-  char in_DL;
-  uint uVar3;
-  int unaff_EBX;
+  uint *word_ptr;
+  int arg_eax;
+  int val;
+  char arg_cl;
+  char arg_dl;
+  uint uval;
+  int arg_ebx;
   
-  iVar2 = in_EAX + unaff_EBX * 4;
-  uVar3 = 1 << (0x1fU - in_DL & 0x1f);
-  if (in_CL != '\0') {
-    puVar1 = (uint *)(iVar2 + 1);
-    *puVar1 = *puVar1 | uVar3;
+  val = arg_eax + arg_ebx * 4;
+  uval = 1 << (0x1fU - arg_dl & 0x1f);
+  if (arg_cl != '\0') {
+    word_ptr = (uint *)(val + 1);
+    *word_ptr = *word_ptr | uval;
     return;
   }
-  puVar1 = (uint *)(iVar2 + 1);
-  *puVar1 = *puVar1 & ~uVar3;
+  word_ptr = (uint *)(val + 1);
+  *word_ptr = *word_ptr & ~uval;
   return;
 }
 
 /******************************************************************************
- * Function : sub_0b1f60 (Ghidra: FUN_000b1f60)
- * Prototype: void sub_0b1f60(void);
+ * Function : light_fn_0b1f60 (Original VA: 0xb1f60, Ghidra: FUN_000b1f60)
+ * Prototype: void light_fn_0b1f60(void);
  * Address  : 0xb1f60 (Size: 69 bytes)
  * Module   : light.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module light.cpp procedure @ 0x0b1f60
  * Callers  : 0 -> 
- * Callees  : 1 -> 0xe6a10
+ * Callees  : 1 -> LbScreenWaitVbi
  ******************************************************************************/
-void FUN_000b1f60(void)
+void light_fn_0b1f60(void)
 
 {
-  int in_EAX;
-  int in_EDX;
+  int arg_eax;
+  int arg_edx;
   
-  if (in_EDX < in_EAX) {
-    FUN_000e6a10();
+  if (arg_edx < arg_eax) {
+    LbScreenWaitVbi();
   }
-  FUN_000e6a10();
+  LbScreenWaitVbi();
   return;
 }
 
 /******************************************************************************
- * Function : sub_0b20e0 (Ghidra: FUN_000b20e0)
- * Prototype: void sub_0b20e0(void);
+ * Function : light_fn_0b20e0 (Original VA: 0xb20e0, Ghidra: FUN_000b20e0)
+ * Prototype: void light_fn_0b20e0(void);
  * Address  : 0xb20e0 (Size: 119 bytes)
  * Module   : light.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x298b5
- * Callees  : 4 -> 0x15318, 0x72810, 0xac630, 0xb2158
+ * Purpose  : Module light.cpp procedure @ 0x0b20e0
+ * Callers  : 1 -> evil_process_map_subtile_0298b5
+ * Callees  : 4 -> column_fn_015318, structs_fn_072810, light_fn_0ac630, light_update_slab_subtile_columns_0b2158
  ******************************************************************************/
-void FUN_000b20e0(void)
+void light_fn_0b20e0(void)
 
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
+  int val;
+  int val_2;
+  int val_3;
   int extraout_ECX;
   int extraout_EDX;
-  int iVar4;
-  int iVar5;
+  int val_4;
+  int val_5;
   
   do {
-    FUN_000b2158();
+    light_update_slab_subtile_columns_0b2158();
   } while (extraout_EDX < 0x10000);
-  iVar3 = 0x10;
-  iVar5 = 0;
+  val_3 = 0x10;
+  val_5 = 0;
   do {
-    iVar4 = iVar5 * 0x18;
-    iVar1 = iVar4 - iVar3;
-    iVar2 = iVar4;
-    while (iVar1 != 0) {
-      *(undefined2 *)((int)&DAT_0019e97b + iVar2) = 0;
-      iVar1 = (iVar2 + 2) - iVar3;
-      iVar2 = iVar2 + 2;
+    val_4 = val_5 * 0x18;
+    val = val_4 - val_3;
+    val_2 = val_4;
+    while (val != 0) {
+      *(undefined2 *)((int)&g_bss_0019e97b + val_2) = 0;
+      val = (val_2 + 2) - val_3;
+      val_2 = val_2 + 2;
     }
-    *(undefined1 *)((int)&DAT_0019e977 + iVar4 + 3) = 0;
-    iVar5 = iVar5 + 1;
-    *(undefined2 *)((int)&DAT_0019e977 + iVar4 + 1) = 1;
-    FUN_00015318();
-    iVar3 = extraout_ECX;
-  } while (iVar5 < 0x7ff);
-  FUN_000ac630();
-  FUN_00072810();
+    *(undefined1 *)((int)&g_bss_0019e977 + val_4 + 3) = 0;
+    val_5 = val_5 + 1;
+    *(undefined2 *)((int)&g_bss_0019e977 + val_4 + 1) = 1;
+    column_fn_015318();
+    val_3 = extraout_ECX;
+  } while (val_5 < 0x7ff);
+  light_fn_0ac630();
+  structs_fn_072810();
   return;
 }
 
 /******************************************************************************
- * Function : sub_0b2158 (Ghidra: FUN_000b2158)
- * Prototype: undefined8 sub_0b2158(void);
+ * Function : light_update_slab_subtile_columns_0b2158 (Original VA: 0xb2158, Ghidra: FUN_000b2158)
+ * Prototype: undefined8 light_update_slab_subtile_columns_0b2158(void);
  * Address  : 0xb2158 (Size: 151 bytes)
  * Module   : light.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0xb20e0
+ * Purpose  : Updates 3x3 subtile map entries for slab coordinates
+ * Callers  : 1 -> light_fn_0b20e0
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined8 FUN_000b2158(void)
+undefined8 light_update_slab_subtile_columns_0b2158(void)
 
 {
-  uint *puVar1;
-  int in_EAX;
-  int iVar2;
-  undefined4 in_EDX;
+  uint *word_ptr;
+  int arg_eax;
+  int val;
+  undefined4 arg_edx;
   
-  (&DAT_001e3203)[in_EAX] = 0x2000;
-  puVar1 = (uint *)((int)&DAT_00279203 + in_EAX * 5 + 1);
-  *puVar1 = *puVar1 & 0xf000000;
-  *(undefined1 *)((int)&DAT_00279203 + in_EAX * 5) = 0;
-  iVar2 = in_EAX / 0x100;
-  if ((in_EAX % 0x100 < 0xff) &&
-     (iVar2 = (int)((in_EAX + (in_EAX >> 0x1f) * -0x100) - (uint)((in_EAX >> 0x1f) << 7 < 0)) >> 8,
-     iVar2 < 0xff)) {
-    iVar2 = (&DAT_0019033b)[in_EAX % 0x100] + (&DAT_0019033b)[iVar2] * 0x55;
-    (&DAT_002d33c8)[iVar2 * 6] = 0;
-    (&DAT_002d33c9)[iVar2 * 6] = 0;
+  (&g_bss_001e3203)[arg_eax] = 0x2000;
+  word_ptr = (uint *)((int)&g_map_subtiles + arg_eax * 5 + 1);
+  *word_ptr = *word_ptr & 0xf000000;
+  *(undefined1 *)((int)&g_map_subtiles + arg_eax * 5) = 0;
+  val = arg_eax / 0x100;
+  if ((arg_eax % 0x100 < 0xff) &&
+     (val = (int)((arg_eax + (arg_eax >> 0x1f) * -0x100) - (uint)((arg_eax >> 0x1f) << 7 < 0)) >> 8,
+     val < 0xff)) {
+    val = (&g_subtile_to_slab_lut)[arg_eax % 0x100] + (&g_subtile_to_slab_lut)[val] * 0x55;
+    (&g_bss_002d33c8)[val * 6] = 0;
+    (&g_bss_002d33c9)[val * 6] = 0;
   }
-  return CONCAT44(in_EDX,iVar2);
+  return CONCAT44(arg_edx,val);
 }
 
 /******************************************************************************
- * Function : sub_0b21f0 (Ghidra: FUN_000b21f0)
- * Prototype: void sub_0b21f0(void);
+ * Function : light_fn_0b21f0 (Original VA: 0xb21f0, Ghidra: FUN_000b21f0)
+ * Prototype: void light_fn_0b21f0(void);
  * Address  : 0xb21f0 (Size: 89 bytes)
  * Module   : light.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x29bfe, 0x2cb2b
- * Callees  : 1 -> 0x15318
+ * Purpose  : Module light.cpp procedure @ 0x0b21f0
+ * Callers  : 2 -> file_fn_029bfe, file_process_map_subtile_02cb2b
+ * Callees  : 1 -> column_fn_015318
  ******************************************************************************/
-void FUN_000b21f0(void)
+void light_fn_0b21f0(void)
 
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
+  int val;
+  int val_2;
+  int val_3;
   int extraout_ECX;
-  int iVar4;
-  int iVar5;
+  int val_4;
+  int val_5;
   
-  iVar3 = 0x10;
-  iVar5 = 0;
+  val_3 = 0x10;
+  val_5 = 0;
   do {
-    iVar4 = iVar5 * 0x18;
-    iVar1 = iVar4 - iVar3;
-    iVar2 = iVar4;
-    while (iVar1 != 0) {
-      *(undefined2 *)((int)&DAT_0019e97b + iVar2) = 0;
-      iVar1 = (iVar2 + 2) - iVar3;
-      iVar2 = iVar2 + 2;
+    val_4 = val_5 * 0x18;
+    val = val_4 - val_3;
+    val_2 = val_4;
+    while (val != 0) {
+      *(undefined2 *)((int)&g_bss_0019e97b + val_2) = 0;
+      val = (val_2 + 2) - val_3;
+      val_2 = val_2 + 2;
     }
-    *(undefined1 *)((int)&DAT_0019e977 + iVar4 + 3) = 0;
-    iVar5 = iVar5 + 1;
-    *(undefined2 *)((int)&DAT_0019e977 + iVar4 + 1) = 1;
-    FUN_00015318();
-    iVar3 = extraout_ECX;
-  } while (iVar5 < 0x7ff);
+    *(undefined1 *)((int)&g_bss_0019e977 + val_4 + 3) = 0;
+    val_5 = val_5 + 1;
+    *(undefined2 *)((int)&g_bss_0019e977 + val_4 + 1) = 1;
+    column_fn_015318();
+    val_3 = extraout_ECX;
+  } while (val_5 < 0x7ff);
   return;
 }
 
 /******************************************************************************
- * Function : sub_0b224c (Ghidra: FUN_000b224c)
- * Prototype: void sub_0b224c(void);
+ * Function : light_fn_0b224c (Original VA: 0xb224c, Ghidra: FUN_000b224c)
+ * Prototype: void light_fn_0b224c(void);
  * Address  : 0xb224c (Size: 52 bytes)
  * Module   : light.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x29800
+ * Purpose  : Module light.cpp procedure @ 0x0b224c
+ * Callers  : 1 -> evil_fn_029800
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_000b224c(void)
+void light_fn_0b224c(void)
 
 {
-  int iVar1;
-  int iVar3;
-  int iVar4;
-  int iVar2;
+  int val;
+  int val_3;
+  int val_4;
+  int val_2;
   
-  iVar3 = 0xc;
-  iVar4 = 0;
+  val_3 = 0xc;
+  val_4 = 0;
   do {
-    iVar2 = iVar4 * 0x12;
+    val_2 = val_4 * 0x12;
     do {
-      iVar1 = iVar2 + 2;
-      *(undefined2 *)((int)&DAT_001aa973 + iVar2) = 0;
-      iVar2 = iVar1;
-    } while (iVar1 != iVar3);
-    iVar4 = iVar4 + 1;
-    iVar3 = iVar3 + 0x12;
-  } while (iVar4 < 0x200);
+      val = val_2 + 2;
+      *(undefined2 *)((int)&g_bss_001aa973 + val_2) = 0;
+      val_2 = val;
+    } while (val != val_3);
+    val_4 = val_4 + 1;
+    val_3 = val_3 + 0x12;
+  } while (val_4 < 0x200);
   return;
 }
 
 /******************************************************************************
- * Function : sub_0b2280 (Ghidra: FUN_000b2280)
- * Prototype: void sub_0b2280(void);
+ * Function : light_fn_0b2280 (Original VA: 0xb2280, Ghidra: FUN_000b2280)
+ * Prototype: void light_fn_0b2280(void);
  * Address  : 0xb2280 (Size: 95 bytes)
  * Module   : light.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x2a25c, 0x401ec
- * Callees  : 1 -> 0xe6a10
+ * Purpose  : Module light.cpp procedure @ 0x0b2280
+ * Callers  : 2 -> file_fn_02a25c, inits_fn_0401ec
+ * Callees  : 1 -> LbScreenWaitVbi
  ******************************************************************************/
-void FUN_000b2280(void)
+void light_fn_0b2280(void)
 
 {
-  int iVar1;
+  int val;
   uint extraout_ECX;
-  uint uVar2;
-  short sVar3;
-  int iVar4;
+  uint uval;
+  short short_val;
+  int val_2;
   
-  iVar4 = 2;
-  FUN_000e6a10();
-  uVar2 = extraout_ECX;
+  val_2 = 2;
+  LbScreenWaitVbi();
+  uval = extraout_ECX;
   do {
-    sVar3 = 1;
-    iVar1 = 0x12;
+    short_val = 1;
+    val = 0x12;
     do {
-      if (*(ushort *)((int)&DAT_001aa97b + iVar1) == uVar2) {
-        *(short *)(&DAT_002e8c11 + iVar4) = sVar3;
+      if (*(ushort *)((int)&g_bss_001aa97b + val) == uval) {
+        *(short *)(&g_bss_002e8c11 + val_2) = short_val;
         break;
       }
-      iVar1 = iVar1 + 0x12;
-      sVar3 = sVar3 + 1;
-    } while (iVar1 < 0x2400);
-    uVar2 = uVar2 + 1;
-    iVar4 = iVar4 + 2;
-    if (0x24f < (int)uVar2) {
+      val = val + 0x12;
+      short_val = short_val + 1;
+    } while (val < 0x2400);
+    uval = uval + 1;
+    val_2 = val_2 + 2;
+    if (0x24f < (int)uval) {
       return;
     }
   } while( true );
 }
 
 /******************************************************************************
- * Function : sub_0b2398 (Ghidra: FUN_000b2398)
- * Prototype: uint sub_0b2398(void);
+ * Function : light_process_map_subtile_0b2398 (Original VA: 0xb2398, Ghidra: FUN_000b2398)
+ * Prototype: uint light_process_map_subtile_0b2398(void);
  * Address  : 0xb2398 (Size: 82 bytes)
  * Module   : light.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 15 -> 0x28bae, 0x63dd3, 0x6ca16, 0x6d4df, 0x73607, 0x739b9, 0xb45b4, 0xb5264, 0xc6be0, 0xcdcd0 ...
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 15 -> evil_could_find_position_028bae, person_update_creature_control_063dd3, shot_process_thing_entity_06ca16, shot_roll_action_random_06d4df, temple_update_creature_control_073607, temple_update_slab_subtile_columns_0739b9, move_fn_0b45b4, move_process_slabmap_tile_0b5264 ...
  * Callees  : 0 -> 
  ******************************************************************************/
-uint FUN_000b2398(void)
+uint light_process_map_subtile_0b2398(void)
 
 {
-  byte bVar1;
-  int in_EAX;
-  int iVar2;
-  int in_EDX;
+  byte flag;
+  int arg_eax;
+  int val;
+  int arg_edx;
   
-  iVar2 = (*(uint *)((int)&DAT_00279203 + (in_EDX * 0x100 + in_EAX) * 5 + 1) & 0x7ff) * 0x18;
-  bVar1 = *(byte *)((int)&DAT_0019e973 + iVar2 + 2);
-  if ((bVar1 & 0xf0) != 0) {
-    return *(int *)((int)&DAT_0019e977 + (uint)(bVar1 >> 4) * 2 + iVar2) >> 0x10;
+  val = (*(uint *)((int)&g_map_subtiles + (arg_edx * 0x100 + arg_eax) * 5 + 1) & 0x7ff) * 0x18;
+  flag = *(byte *)((int)&g_bss_0019e973 + val + 2);
+  if ((flag & 0xf0) != 0) {
+    return *(int *)((int)&g_bss_0019e977 + (uint)(flag >> 4) * 2 + val) >> 0x10;
   }
-  return (uint)*(ushort *)(&DAT_002e8c11 + (*(int *)((int)&DAT_0019e973 + iVar2 + 3) >> 0x10) * 2);
+  return (uint)*(ushort *)(&g_bss_002e8c11 + (*(int *)((int)&g_bss_0019e973 + val + 3) >> 0x10) * 2);
 }
 
 /******************************************************************************
- * Function : sub_0b23ec (Ghidra: FUN_000b23ec)
- * Prototype: undefined8 sub_0b23ec(void);
+ * Function : light_process_map_subtile_0b23ec (Original VA: 0xb23ec, Ghidra: FUN_000b23ec)
+ * Prototype: undefined8 light_process_map_subtile_0b23ec(void);
  * Address  : 0xb23ec (Size: 80 bytes)
  * Module   : light.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0xe0b1c, 0xe45c0
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 2 -> update_state_return_type_human_0e0b1c, update_update_slab_subtile_columns_0e45c0
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined8 FUN_000b23ec(void)
+undefined8 light_process_map_subtile_0b23ec(void)
 
 {
-  byte bVar1;
-  int in_EAX;
-  int iVar2;
-  undefined4 in_EDX;
+  byte flag;
+  int arg_eax;
+  int val;
+  undefined4 arg_edx;
   
-  iVar2 = (*(uint *)((int)&DAT_00279203 + in_EAX * 5 + 1) & 0x7ff) * 0x18;
-  bVar1 = *(byte *)((int)&DAT_0019e973 + iVar2 + 2);
-  if ((bVar1 & 0xf0) != 0) {
-    return CONCAT44(in_EDX,*(int *)((int)&DAT_0019e977 + (uint)(bVar1 >> 4) * 2 + iVar2) >> 0x10);
+  val = (*(uint *)((int)&g_map_subtiles + arg_eax * 5 + 1) & 0x7ff) * 0x18;
+  flag = *(byte *)((int)&g_bss_0019e973 + val + 2);
+  if ((flag & 0xf0) != 0) {
+    return CONCAT44(arg_edx,*(int *)((int)&g_bss_0019e977 + (uint)(flag >> 4) * 2 + val) >> 0x10);
   }
-  return CONCAT44(in_EDX,(uint)*(ushort *)
-                                (&DAT_002e8c11 +
-                                (*(int *)((int)&DAT_0019e973 + iVar2 + 3) >> 0x10) * 2));
+  return CONCAT44(arg_edx,(uint)*(ushort *)
+                                (&g_bss_002e8c11 +
+                                (*(int *)((int)&g_bss_0019e973 + val + 3) >> 0x10) * 2));
 }
 
 /******************************************************************************
- * Function : sub_0b2440 (Ghidra: FUN_000b2440)
- * Prototype: undefined8 sub_0b2440(void);
+ * Function : light_process_map_subtile_0b2440 (Original VA: 0xb2440, Ghidra: FUN_000b2440)
+ * Prototype: undefined8 light_process_map_subtile_0b2440(void);
  * Address  : 0xb2440 (Size: 39 bytes)
  * Module   : light.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0x640f7, 0x68788, 0xdf760
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 3 -> person_update_creature_control_0640f7, script_update_creature_and_thing_068788, update_update_slab_subtile_columns_0df760
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined8 FUN_000b2440(void)
+undefined8 light_process_map_subtile_0b2440(void)
 
 {
-  int in_EAX;
-  undefined4 in_EDX;
+  int arg_eax;
+  undefined4 arg_edx;
   
-  return CONCAT44(in_EDX,((*(uint *)((int)&DAT_00279203 +
-                                    ((uint)*(byte *)(in_EAX + 3) * 0x100 +
-                                    (uint)*(byte *)(in_EAX + 1)) * 5 + 1) & 0xfffffff) >> 0x18) << 8
+  return CONCAT44(arg_edx,((*(uint *)((int)&g_map_subtiles +
+                                    ((uint)*(byte *)(arg_eax + 3) * 0x100 +
+                                    (uint)*(byte *)(arg_eax + 1)) * 5 + 1) & 0xfffffff) >> 0x18) << 8
                  );
 }
 
 /******************************************************************************
- * Function : sub_0b250c (Ghidra: FUN_000b250c)
- * Prototype: int sub_0b250c(void);
+ * Function : light_process_map_subtile_0b250c (Original VA: 0xb250c, Ghidra: FUN_000b250c)
+ * Prototype: int light_process_map_subtile_0b250c(void);
  * Address  : 0xb250c (Size: 986 bytes)
  * Module   : light.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x2606f
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 1 -> effect_process_thing_entity_02606f
  * Callees  : 0 -> 
  ******************************************************************************/
-int FUN_000b250c(void)
+int light_process_map_subtile_0b250c(void)
 
 {
-  byte bVar1;
-  ushort uVar2;
-  uint uVar3;
-  uint uVar4;
-  int in_EAX;
-  uint uVar5;
-  int iVar6;
-  uint uVar7;
-  ushort *in_EDX;
-  uint uVar8;
-  uint uVar9;
-  uint uVar10;
-  int iVar11;
-  uint uVar12;
+  byte flag;
+  ushort uval;
+  uint uval_2;
+  uint uval_3;
+  int thing;
+  uint uval_4;
+  int val;
+  uint uval_5;
+  ushort *arg_edx;
+  uint uval_6;
+  uint uval_7;
+  uint loop_i;
+  int val_2;
+  uint uval_8;
   uint local_5c;
   uint local_58;
   
-  if (*(char *)(in_EAX + 0x1f) == '\x05') {
-    uVar2 = *(ushort *)(&DAT_0019073b + (uint)*(ushort *)(in_EAX + 0x56) * 2);
+  if (*(char *)(thing + 0x1f) == '\x05') { /* thing->class_id */
+    uval = *(ushort *)(&g_data_0019073b + (uint)*(ushort *)(thing + 0x56) * 2);
   }
   else {
-    uVar2 = *(ushort *)(in_EAX + 0x56);
+    uval = *(ushort *)(thing + 0x56);
   }
-  uVar5 = uVar2 / 2;
-  uVar8 = *in_EDX - uVar5;
-  if ((int)uVar8 < 0) {
-    uVar8 = 0;
+  uval_4 = uval / 2;
+  uval_6 = *arg_edx - uval_4;
+  if ((int)uval_6 < 0) {
+    uval_6 = 0;
   }
-  uVar9 = in_EDX[1] - uVar5;
-  if ((int)uVar9 < 0) {
-    uVar9 = 0;
+  uval_7 = arg_edx[1] - uval_4;
+  if ((int)uval_7 < 0) {
+    uval_7 = 0;
   }
-  uVar12 = *in_EDX + uVar5;
-  if (0xffff < uVar12) {
-    uVar12 = 0xffff;
+  uval_8 = *arg_edx + uval_4;
+  if (0xffff < uval_8) {
+    uval_8 = 0xffff;
   }
-  uVar5 = uVar5 + in_EDX[1];
-  if (0xffff < uVar5) {
-    uVar5 = 0xffff;
+  uval_4 = uval_4 + arg_edx[1];
+  if (0xffff < uval_4) {
+    uval_4 = 0xffff;
   }
   local_5c = 0;
   local_58 = 0xf;
-  uVar3 = local_58;
-  for (uVar10 = uVar9; uVar4 = uVar8, uVar10 < uVar5; uVar10 = uVar10 + 0x100) {
-    for (; uVar4 < uVar12; uVar4 = uVar4 + 0x100) {
-      iVar6 = ((uVar10 >> 8 & 0xff) * 0x100 + (uVar4 >> 8 & 0xff)) * 5;
-      iVar11 = (*(uint *)((int)&DAT_00279203 + iVar6 + 1) & 0x7ff) * 0x18;
-      uVar7 = (uint)(*(byte *)((int)&DAT_0019e973 + iVar11 + 2) >> 4);
-      if (uVar7 <= local_5c) {
-        uVar7 = local_5c;
+  uval_2 = local_58;
+  for (loop_i = uval_7; uval_3 = uval_6, loop_i < uval_4; loop_i = loop_i + 0x100) {
+    for (; uval_3 < uval_8; uval_3 = uval_3 + 0x100) {
+      val = ((loop_i >> 8 & 0xff) * 0x100 + (uval_3 >> 8 & 0xff)) * 5;
+      val_2 = (*(uint *)((int)&g_map_subtiles + val + 1) & 0x7ff) * 0x18;
+      uval_5 = (uint)(*(byte *)((int)&g_bss_0019e973 + val_2 + 2) >> 4);
+      if (uval_5 <= local_5c) {
+        uval_5 = local_5c;
       }
-      bVar1 = *(byte *)((int)&DAT_0019e973 + iVar11 + 2);
-      if ((bVar1 & 0xe) == 0) {
-        local_58 = (*(uint *)((int)&DAT_00279203 + iVar6 + 1) & 0xfffffff) >> 0x18;
-        if (uVar3 <= local_58) {
-          local_58 = uVar3;
+      flag = *(byte *)((int)&g_bss_0019e973 + val_2 + 2);
+      if ((flag & 0xe) == 0) {
+        local_58 = (*(uint *)((int)&g_map_subtiles + val + 1) & 0xfffffff) >> 0x18;
+        if (uval_2 <= local_58) {
+          local_58 = uval_2;
         }
       }
       else {
-        local_58 = 8 - ((bVar1 & 0xf) >> 1);
-        if (uVar3 < local_58) {
-          local_58 = uVar3;
+        local_58 = 8 - ((flag & 0xf) >> 1);
+        if (uval_2 < local_58) {
+          local_58 = uval_2;
         }
       }
-      local_5c = uVar7;
-      uVar3 = local_58;
+      local_5c = uval_5;
+      uval_2 = local_58;
     }
   }
-  for (; uVar9 < uVar5; uVar9 = uVar9 + 0x100) {
-    iVar6 = ((uVar9 >> 8 & 0xff) * 0x100 + (uVar12 >> 8 & 0xff)) * 5;
-    iVar11 = (*(uint *)((int)&DAT_00279203 + iVar6 + 1) & 0x7ff) * 0x18;
-    uVar10 = (uint)(*(byte *)((int)&DAT_0019e973 + iVar11 + 2) >> 4);
-    if (uVar10 <= local_5c) {
-      uVar10 = local_5c;
+  for (; uval_7 < uval_4; uval_7 = uval_7 + 0x100) {
+    val = ((uval_7 >> 8 & 0xff) * 0x100 + (uval_8 >> 8 & 0xff)) * 5;
+    val_2 = (*(uint *)((int)&g_map_subtiles + val + 1) & 0x7ff) * 0x18;
+    loop_i = (uint)(*(byte *)((int)&g_bss_0019e973 + val_2 + 2) >> 4);
+    if (loop_i <= local_5c) {
+      loop_i = local_5c;
     }
-    bVar1 = *(byte *)((int)&DAT_0019e973 + iVar11 + 2);
-    if ((bVar1 & 0xe) == 0) {
-      local_58 = (*(uint *)((int)&DAT_00279203 + iVar6 + 1) & 0xfffffff) >> 0x18;
-      if (uVar3 <= local_58) {
-        local_58 = uVar3;
+    flag = *(byte *)((int)&g_bss_0019e973 + val_2 + 2);
+    if ((flag & 0xe) == 0) {
+      local_58 = (*(uint *)((int)&g_map_subtiles + val + 1) & 0xfffffff) >> 0x18;
+      if (uval_2 <= local_58) {
+        local_58 = uval_2;
       }
     }
     else {
-      local_58 = 8 - ((bVar1 & 0xf) >> 1);
-      if (uVar3 < local_58) {
-        local_58 = uVar3;
+      local_58 = 8 - ((flag & 0xf) >> 1);
+      if (uval_2 < local_58) {
+        local_58 = uval_2;
       }
     }
-    local_5c = uVar10;
-    uVar3 = local_58;
+    local_5c = loop_i;
+    uval_2 = local_58;
   }
-  for (; uVar8 < uVar12; uVar8 = uVar8 + 0x100) {
-    iVar6 = ((uVar8 >> 8 & 0xff) + (uVar5 >> 8 & 0xff) * 0x100) * 5;
-    iVar11 = (*(uint *)((int)&DAT_00279203 + iVar6 + 1) & 0x7ff) * 0x18;
-    uVar9 = (uint)(*(byte *)((int)&DAT_0019e973 + iVar11 + 2) >> 4);
-    if (uVar9 <= local_5c) {
-      uVar9 = local_5c;
+  for (; uval_6 < uval_8; uval_6 = uval_6 + 0x100) {
+    val = ((uval_6 >> 8 & 0xff) + (uval_4 >> 8 & 0xff) * 0x100) * 5;
+    val_2 = (*(uint *)((int)&g_map_subtiles + val + 1) & 0x7ff) * 0x18;
+    uval_7 = (uint)(*(byte *)((int)&g_bss_0019e973 + val_2 + 2) >> 4);
+    if (uval_7 <= local_5c) {
+      uval_7 = local_5c;
     }
-    bVar1 = *(byte *)((int)&DAT_0019e973 + iVar11 + 2);
-    if ((bVar1 & 0xe) == 0) {
-      local_58 = (*(uint *)((int)&DAT_00279203 + iVar6 + 1) & 0xfffffff) >> 0x18;
-      if (uVar3 <= local_58) {
-        local_58 = uVar3;
+    flag = *(byte *)((int)&g_bss_0019e973 + val_2 + 2);
+    if ((flag & 0xe) == 0) {
+      local_58 = (*(uint *)((int)&g_map_subtiles + val + 1) & 0xfffffff) >> 0x18;
+      if (uval_2 <= local_58) {
+        local_58 = uval_2;
       }
     }
     else {
-      local_58 = 8 - ((bVar1 & 0xf) >> 1);
-      if (uVar3 < local_58) {
-        local_58 = uVar3;
+      local_58 = 8 - ((flag & 0xf) >> 1);
+      if (uval_2 < local_58) {
+        local_58 = uval_2;
       }
     }
-    local_5c = uVar9;
-    uVar3 = local_58;
+    local_5c = uval_7;
+    uval_2 = local_58;
   }
-  iVar6 = ((uVar12 >> 8 & 0xff) + (uVar5 >> 8 & 0xff) * 0x100) * 5;
-  iVar11 = (*(uint *)((int)&DAT_00279203 + iVar6 + 1) & 0x7ff) * 0x18;
-  uVar8 = (uint)(*(byte *)((int)&DAT_0019e973 + iVar11 + 2) >> 4);
-  if (uVar8 <= local_5c) {
-    uVar8 = local_5c;
+  val = ((uval_8 >> 8 & 0xff) + (uval_4 >> 8 & 0xff) * 0x100) * 5;
+  val_2 = (*(uint *)((int)&g_map_subtiles + val + 1) & 0x7ff) * 0x18;
+  uval_6 = (uint)(*(byte *)((int)&g_bss_0019e973 + val_2 + 2) >> 4);
+  if (uval_6 <= local_5c) {
+    uval_6 = local_5c;
   }
-  bVar1 = *(byte *)((int)&DAT_0019e973 + iVar11 + 2);
-  if ((bVar1 & 0xe) == 0) {
-    uVar5 = (*(uint *)((int)&DAT_00279203 + iVar6 + 1) & 0xfffffff) >> 0x18;
-    if (uVar3 <= uVar5) {
-      uVar5 = uVar3;
+  flag = *(byte *)((int)&g_bss_0019e973 + val_2 + 2);
+  if ((flag & 0xe) == 0) {
+    uval_4 = (*(uint *)((int)&g_map_subtiles + val + 1) & 0xfffffff) >> 0x18;
+    if (uval_2 <= uval_4) {
+      uval_4 = uval_2;
     }
   }
   else {
-    uVar5 = 8 - ((bVar1 & 0xf) >> 1);
-    if (uVar3 < uVar5) {
-      uVar5 = uVar3;
+    uval_4 = 8 - ((flag & 0xf) >> 1);
+    if (uval_2 < uval_4) {
+      uval_4 = uval_2;
     }
   }
-  if (((uint)(*(int *)(in_EDX + 1) >> 0x10) < uVar8 << 8) ||
-     (uVar5 * 0x100 - (uint)*(ushort *)(in_EAX + 0x58) <= uVar8 << 8)) {
-    iVar6 = *(int *)(in_EDX + 1) >> 0x10;
+  if (((uint)(*(int *)(arg_edx + 1) >> 0x10) < uval_6 << 8) ||
+     (uval_4 * 0x100 - (uint)*(ushort *)(thing + 0x58) <= uval_6 << 8)) {
+    val = *(int *)(arg_edx + 1) >> 0x10;
   }
   else {
-    iVar6 = (uVar5 * 0x100 + -1) - (uint)*(ushort *)(in_EAX + 0x58);
+    val = (uval_4 * 0x100 + -1) - (uint)*(ushort *)(thing + 0x58);
   }
-  return iVar6;
+  return val;
 }
 

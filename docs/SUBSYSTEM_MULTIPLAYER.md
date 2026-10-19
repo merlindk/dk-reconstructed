@@ -11,259 +11,259 @@ This document details all reverse-engineered functions, strings, and protocols g
 
 | Module | Address | Inferred Name | Callers | Callees | Naming Evidence |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `frontnet.cpp` | `0x32f12` | `sub_032f12` | `1` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x32f5c` | `sub_032f5c` | `2` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x32f6a` | `sub_032f6a` | `1` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x32f9b` | `dk_levelnamefile_add_blank_line_032f9b` | `2` | `2` | String 'LevelNameFile, Add a blank line at the end' |
-| `frontnet.cpp` | `0x3308c` | `sub_03308c` | `4` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x330ae` | `sub_0330ae` | `1` | `1` | Address-based identifier |
-| `frontnet.cpp` | `0x330e0` | `sub_0330e0` | `0` | `1` | Address-based identifier |
-| `frontnet.cpp` | `0x33156` | `sub_033156` | `5` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x3315b` | `sub_03315b` | `2` | `5` | Address-based identifier |
-| `frontnet.cpp` | `0x33223` | `sub_033223` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x3325d` | `sub_03325d` | `3` | `1` | Address-based identifier |
-| `frontnet.cpp` | `0x33350` | `sub_033350` | `0` | `1` | Address-based identifier |
-| `frontnet.cpp` | `0x33563` | `dk_button_type_033563` | `0` | `2` | String 'Unknown button type' |
-| `frontnet.cpp` | `0x3378f` | `sub_03378f` | `2` | `3` | Address-based identifier |
-| `frontnet.cpp` | `0x33828` | `sub_033828` | `2` | `3` | Address-based identifier |
-| `frontnet.cpp` | `0x338fd` | `sub_0338fd` | `0` | `1` | Address-based identifier |
-| `frontnet.cpp` | `0x33917` | `sub_033917` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x33928` | `sub_033928` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x33939` | `sub_033939` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x3394a` | `sub_03394a` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x3395b` | `sub_03395b` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x3396c` | `sub_03396c` | `0` | `1` | Address-based identifier |
-| `frontnet.cpp` | `0x339df` | `sub_0339df` | `0` | `1` | Address-based identifier |
-| `frontnet.cpp` | `0x33a44` | `sub_033a44` | `0` | `1` | Address-based identifier |
-| `frontnet.cpp` | `0x33ac7` | `sub_033ac7` | `0` | `1` | Address-based identifier |
-| `frontnet.cpp` | `0x33b5c` | `sub_033b5c` | `0` | `1` | Address-based identifier |
-| `frontnet.cpp` | `0x33bcc` | `dk_LbNetwork_Stop_033bcc` | `0` | `3` | References 'LbNetwork_Stop() failed' |
-| `frontnet.cpp` | `0x33bfb` | `dk_LbNetwork_Stop_033bfb` | `0` | `4` | References 'LbNetwork_Stop() failed' |
-| `frontnet.cpp` | `0x33c3a` | `sub_033c3a` | `0` | `2` | Address-based identifier |
-| `frontnet.cpp` | `0x33c7d` | `sub_033c7d` | `0` | `1` | Address-based identifier |
-| `frontnet.cpp` | `0x33d87` | `sub_033d87` | `0` | `1` | Address-based identifier |
-| `frontnet.cpp` | `0x33ead` | `dk_LbNetwork_EnumerateServices_033ead` | `1` | `6` | References 'LbNetwork_EnumerateServices() failed' |
-| `frontnet.cpp` | `0x33f26` | `sub_033f26` | `1` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x33f57` | `sub_033f57` | `0` | `2` | Address-based identifier |
-| `frontnet.cpp` | `0x33fdf` | `sub_033fdf` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x33ff7` | `sub_033ff7` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x34004` | `sub_034004` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x34022` | `sub_034022` | `0` | `1` | Address-based identifier |
-| `frontnet.cpp` | `0x34070` | `sub_034070` | `1` | `1` | Address-based identifier |
-| `frontnet.cpp` | `0x34077` | `sub_034077` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x34087` | `sub_034087` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x3409c` | `sub_03409c` | `1` | `3` | Address-based identifier |
-| `frontnet.cpp` | `0x34105` | `sub_034105` | `1` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x34186` | `sub_034186` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x34196` | `sub_034196` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x341ab` | `sub_0341ab` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x341bb` | `sub_0341bb` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x341d0` | `sub_0341d0` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x341dd` | `sub_0341dd` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x341f0` | `sub_0341f0` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x34208` | `sub_034208` | `0` | `1` | Address-based identifier |
-| `frontnet.cpp` | `0x34241` | `sub_034241` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x3424e` | `sub_03424e` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x34261` | `sub_034261` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x34279` | `sub_034279` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x34298` | `sub_034298` | `0` | `2` | Address-based identifier |
-| `frontnet.cpp` | `0x3431e` | `sub_03431e` | `0` | `2` | Address-based identifier |
-| `frontnet.cpp` | `0x343a4` | `sub_0343a4` | `0` | `1` | Address-based identifier |
-| `frontnet.cpp` | `0x343d7` | `sub_0343d7` | `0` | `1` | Address-based identifier |
-| `frontnet.cpp` | `0x3440a` | `sub_03440a` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x3442b` | `dk_isdn_supported_serial_03442b` | `0` | `4` | String 'ISDN not supported by Serial' |
-| `frontnet.cpp` | `0x344c8` | `sub_0344c8` | `1` | `3` | Address-based identifier |
-| `frontnet.cpp` | `0x3457c` | `sub_03457c` | `1` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x345fd` | `sub_0345fd` | `0` | `3` | Address-based identifier |
-| `frontnet.cpp` | `0x3468f` | `sub_03468f` | `1` | `1` | Address-based identifier |
-| `frontnet.cpp` | `0x346de` | `dk_LbNetwork_EnumerateSessions_0346de` | `1` | `4` | References 'LbNetwork_EnumerateSessions() failed' |
-| `frontnet.cpp` | `0x3488f` | `sub_03488f` | `0` | `2` | Address-based identifier |
-| `frontnet.cpp` | `0x34918` | `sub_034918` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x34941` | `sub_034941` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x34959` | `sub_034959` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x34966` | `sub_034966` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x34979` | `sub_034979` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x34989` | `sub_034989` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x3499e` | `sub_03499e` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x349d9` | `sub_0349d9` | `0` | `6` | Address-based identifier |
-| `frontnet.cpp` | `0x34a8a` | `sub_034a8a` | `0` | `7` | Address-based identifier |
-| `frontnet.cpp` | `0x34bb6` | `sub_034bb6` | `0` | `2` | Address-based identifier |
-| `frontnet.cpp` | `0x34bdc` | `sub_034bdc` | `0` | `1` | Address-based identifier |
-| `frontnet.cpp` | `0x34bff` | `sub_034bff` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x34c0f` | `sub_034c0f` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x34c1f` | `sub_034c1f` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x34c2f` | `sub_034c2f` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x34c3f` | `sub_034c3f` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x34c4f` | `sub_034c4f` | `0` | `3` | Address-based identifier |
-| `frontnet.cpp` | `0x34d86` | `sub_034d86` | `0` | `3` | Address-based identifier |
-| `frontnet.cpp` | `0x34ea2` | `sub_034ea2` | `0` | `1` | Address-based identifier |
-| `frontnet.cpp` | `0x34ed8` | `sub_034ed8` | `1` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x34f38` | `dk_LbNetwork_EnumeratePlayers_034f38` | `1` | `5` | References 'LbNetwork_EnumeratePlayers() failed' |
-| `frontnet.cpp` | `0x35037` | `sub_035037` | `1` | `1` | Address-based identifier |
-| `frontnet.cpp` | `0x350a0` | `sub_0350a0` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x350ad` | `sub_0350ad` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x350bd` | `sub_0350bd` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x350d2` | `sub_0350d2` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x350df` | `sub_0350df` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x350f2` | `sub_0350f2` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x35102` | `sub_035102` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x35117` | `sub_035117` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x35124` | `sub_035124` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x35137` | `sub_035137` | `0` | `3` | Address-based identifier |
-| `frontnet.cpp` | `0x351d7` | `sub_0351d7` | `0` | `3` | Address-based identifier |
-| `frontnet.cpp` | `0x35304` | `sub_035304` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x35338` | `sub_035338` | `0` | `1` | Address-based identifier |
-| `frontnet.cpp` | `0x3536a` | `sub_03536a` | `0` | `2` | Address-based identifier |
-| `frontnet.cpp` | `0x3540e` | `sub_03540e` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x35446` | `dk_sessions_enumeration_035446` | `0` | `2` | String 'Too many sessions in enumeration' |
-| `frontnet.cpp` | `0x354fb` | `dk_players_enumeration_0354fb` | `0` | `2` | String 'Too many players in enumeration' |
-| `frontnet.cpp` | `0x35546` | `dk_unrecognised_network_service_035546` | `0` | `3` | String 'Unrecognised Network Service' |
-| `frontnet.cpp` | `0x3562b` | `sub_03562b` | `0` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x35666` | `sub_035666` | `1` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x356d1` | `sub_0356d1` | `1` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x35758` | `dk_LbNetwork_Exchange_035758` | `1` | `14` | References 'LbNetwork_Exchange failed' |
-| `frontnet.cpp` | `0x35ac5` | `sub_035ac5` | `1` | `2` | Address-based identifier |
-| `frontnet.cpp` | `0x35b51` | `dk_save_config_net_035b51` | `3` | `6` | String 'SAVE\CONFIG.NET' |
-| `frontnet.cpp` | `0x35bbf` | `dk_save_config_net_035bbf` | `2` | `5` | String 'SAVE\CONFIG.NET' |
-| `frontnet.cpp` | `0x35c1e` | `sub_035c1e` | `0` | `4` | Address-based identifier |
-| `frontnet.cpp` | `0x35c5a` | `sub_035c5a` | `0` | `2` | Address-based identifier |
-| `frontnet.cpp` | `0x35c86` | `sub_035c86` | `1` | `1` | Address-based identifier |
-| `frontnet.cpp` | `0x35cc1` | `sub_035cc1` | `1` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x35ce2` | `sub_035ce2` | `1` | `0` | Address-based identifier |
-| `frontnet.cpp` | `0x35d29` | `dk_LbNetwork_Stop_035d29` | `1` | `10` | References 'LbNetwork_Stop() failed' |
-| `frontnet.cpp` | `0x35e19` | `sub_035e19` | `1` | `3` | Address-based identifier |
-| `frontnet.cpp` | `0x35e3c` | `sub_035e3c` | `3` | `9` | Address-based identifier |
-| `frontnet.cpp` | `0x36008` | `sub_036008` | `1` | `1` | Address-based identifier |
-| `frontnet.cpp` | `0x36018` | `sub_036018` | `0` | `3` | Address-based identifier |
-| `frontnet.cpp` | `0x360e8` | `sub_0360e8` | `0` | `3` | Address-based identifier |
-| `frontnet.cpp` | `0x36188` | `sub_036188` | `1` | `2` | Address-based identifier |
-| `frontnet.cpp` | `0x36223` | `sub_036223` | `0` | `2` | Address-based identifier |
-| `frontnet.cpp` | `0x36278` | `sub_036278` | `2` | `2` | Address-based identifier |
-| `frontnet.cpp` | `0x362e1` | `sub_0362e1` | `0` | `0` | Address-based identifier |
-| `packet.cpp` | `0x5d32c` | `sub_05d32c` | `2` | `2` | Address-based identifier |
-| `packet.cpp` | `0x5d34c` | `sub_05d34c` | `2` | `0` | Address-based identifier |
-| `packet.cpp` | `0x5d35c` | `dk_LbNetwork_Exchange_05d35c` | `2` | `15` | References 'LbNetwork_Exchange failed' |
-| `packet.cpp` | `0x5d7b5` | `dk_my_player_host_05d7b5` | `1` | `12` | String 'MY_PLAYER=%d  Host=%d' |
-| `packet.cpp` | `0x5da11` | `dk_initialising_level_05da11` | `1` | `7` | String 'Initialising level' |
-| `packet.cpp` | `0x5dc27` | `dk_LbNetwork_Exchange_05dc27` | `1` | `10` | References 'LbNetwork_Exchange failed' |
-| `packet.cpp` | `0x5dde9` | `sub_05dde9` | `6` | `0` | Address-based identifier |
-| `packet.cpp` | `0x5ddee` | `sub_05ddee` | `43` | `0` | Address-based identifier |
-| `packet.cpp` | `0x5de00` | `sub_05de00` | `2` | `0` | Address-based identifier |
-| `packet.cpp` | `0x5de7c` | `sub_05de7c` | `1` | `8` | Address-based identifier |
-| `packet.cpp` | `0x5df2f` | `sub_05df2f` | `0` | `0` | Address-based identifier |
-| `packet.cpp` | `0x5e01e` | `sub_05e01e` | `1` | `0` | Address-based identifier |
-| `packet.cpp` | `0x5eb8d` | `sub_05eb8d` | `1` | `5` | Address-based identifier |
-| `packet.cpp` | `0x5ec71` | `sub_05ec71` | `1` | `4` | Address-based identifier |
-| `packet.cpp` | `0x5f001` | `sub_05f001` | `1` | `1` | Address-based identifier |
-| `packet.cpp` | `0x5f049` | `sub_05f049` | `1` | `6` | Address-based identifier |
-| `packet.cpp` | `0x5f163` | `sub_05f163` | `1` | `9` | Address-based identifier |
-| `packet.cpp` | `0x5f3ad` | `sub_05f3ad` | `1` | `2` | Address-based identifier |
-| `packet.cpp` | `0x5f438` | `sub_05f438` | `2` | `4` | Address-based identifier |
-| `packet.cpp` | `0x5f4d9` | `sub_05f4d9` | `1` | `2` | Address-based identifier |
-| `packet.cpp` | `0x5f577` | `sub_05f577` | `1` | `0` | Address-based identifier |
-| `packet.cpp` | `0x5f5db` | `sub_05f5db` | `1` | `0` | Address-based identifier |
-| `packet.cpp` | `0x5f6c5` | `dk_room_here_delete_05f6c5` | `1` | `77` | String 'No room here to delete' |
-| `packet.cpp` | `0x61751` | `sub_061751` | `1` | `0` | Address-based identifier |
-| `packet.cpp` | `0x617c9` | `dk_open_keeper_packet_file_0617c9` | `1` | `6` | String 'Cannot open keeper packet file for save' |
-| `packet.cpp` | `0x61883` | `sub_061883` | `1` | `5` | Address-based identifier |
-| `packet.cpp` | `0x618f5` | `dk_open_keeper_packet_file_0618f5` | `2` | `5` | String 'Cannot open keeper packet file for load' |
-| `packet.cpp` | `0x619be` | `dk_packet_saving_seek_offset_0619be` | `1` | `6` | String 'Packet Saving Seek Offset is wrong' |
-| `packet.cpp` | `0x61bde` | `sub_061bde` | `3` | `5` | Address-based identifier |
-| `packet.cpp` | `0x61ca3` | `sub_061ca3` | `11` | `2` | Address-based identifier |
-| `packet.cpp` | `0x61d43` | `sub_061d43` | `2` | `7` | Address-based identifier |
-| `packet.cpp` | `0x61e86` | `sub_061e86` | `1` | `1` | Address-based identifier |
-| `packet.cpp` | `0x61f1b` | `sub_061f1b` | `1` | `0` | Address-based identifier |
-| `packet.cpp` | `0x61f77` | `sub_061f77` | `0` | `4` | Address-based identifier |
-| `packet.cpp` | `0x620e6` | `sub_0620e6` | `0` | `4` | Address-based identifier |
-| `packet.cpp` | `0x62238` | `sub_062238` | `1` | `0` | Address-based identifier |
-| `packet.cpp` | `0x622f1` | `sub_0622f1` | `1` | `0` | Address-based identifier |
-| `packet.cpp` | `0x623aa` | `sub_0623aa` | `2` | `6` | Address-based identifier |
-| `bflib/bflib_network.cpp` | `0xed04c` | `dk_bullfrog_net_library_version_0ed04c` | `0` | `1` | String 'BULLFROG NET LIBRARY VERSION %f FOR %s LAST BUILT __DATE__' |
-| `bflib/bflib_network.cpp` | `0xed0e8` | `sub_0ed0e8` | `1` | `0` | Address-based identifier |
-| `bflib/bflib_network.cpp` | `0xed4e0` | `dk_LbNetwork_Init_0ed4e0` | `3` | `8` | References 'WARNING network: LbNetwork_Init() failure on compositeBuffer allo' |
-| `bflib/bflib_network.cpp` | `0xed84c` | `dk_LbNetwork_Create_0ed84c` | `1` | `1` | References 'ERROR::LbNetwork_Create ServiceProvider ptr is NULL' |
-| `bflib/bflib_network.cpp` | `0xeda20` | `dk_LbNetwork_Join_0eda20` | `1` | `5` | References 'ERROR::LbNetwork_Join ServiceProvider ptr is NULL' |
-| `bflib/bflib_network.cpp` | `0xedc70` | `dk_LbNetwork_Stop_0edc70` | `9` | `3` | References 'INSIDE LbNetwork_Stop' |
-| `bflib/bflib_network.cpp` | `0xedd8c` | `dk_LbNetwork_EnumerateSessions_0edd8c` | `1` | `1` | References 'ERROR::LbNetwork_EnumerateSessions ServiceProvider ptr is NULL' |
-| `bflib/bflib_network.cpp` | `0xeddf0` | `dk_LbNetwork_EnumeratePlayers_0eddf0` | `2` | `1` | References 'ERROR::LbNetwork_EnumeratePlayers ServiceProvider ptr is NULL' |
-| `bflib/bflib_network.cpp` | `0xee3c0` | `dk_LbNetwork_CompleteExchange_0ee3c0` | `0` | `10` | References 'WARNING network: LbNetwork_CompleteExchange() failure on HostData' |
-| `bflib/bflib_network.cpp` | `0xee694` | `dk_LbNetwork_StartExchange_0ee694` | `5` | `12` | References 'ERROR::LbNetwork_StartExchange ServiceProvider ptr is NULL' |
-| `bflib/bflib_network.cpp` | `0xeeb20` | `dk_LbNetwork_ChangeExchangeBuffer_0eeb20` | `1` | `3` | References 'WARNING network: LbNetwork_ChangeExchangeBuffer() failure on buff' |
-| `bflib/bflib_network.cpp` | `0xeebe0` | `dk_GetCurrentPlayers_0eebe0` | `0` | `1` | References 'WARNING network: GetCurrentPlayers() localPlayerIndex not updated' |
-| `bflib/bflib_network.cpp` | `0xeedc0` | `dk_HostDataCollection_0eedc0` | `2` | `7` | References 'WARNING network: HostDataCollection() deletePlayerBuffer is too s' |
-| `bflib/bflib_network.cpp` | `0xef060` | `dk_LbNetwork_CompleteExchange_0ef060` | `2` | `3` | References 'WARNING network: LbNetwork_CompleteExchange() failure on SP::Send' |
-| `bflib/bflib_network.cpp` | `0xef14c` | `dk_UserDataMsgCallback_0ef14c` | `0` | `1` | References 'WARNING network: UserDataMsgCallback() host got data from itself' |
-| `bflib/bflib_network.cpp` | `0xef4a8` | `dk_DeleteMsgCallback_0ef4a8` | `0` | `1` | References 'WARNING network: DeleteMsgCallback() NULL localPlayerInfoPtr' |
-| `bflib/bflib_network.cpp` | `0xef520` | `dk_GetCurrentPlayers_0ef520` | `0` | `1` | References 'WARNING network: GetCurrentPlayers() localPlayerIndex not updated' |
-| `bflib/bflib_network.cpp` | `0xef7a8` | `dk_RequestExchangeDataMsgCallback_0ef7a8` | `0` | `3` | References 'WARNING network: RequestExchangeDataMsgCallback() NULL data point' |
-| `bflib/bflib_network.cpp` | `0xef864` | `dk_RequestCompositeExchangeDataMsgCallback_0ef864` | `0` | `2` | References 'WARNING network: RequestCompositeExchangeDataMsgCallback() failur' |
-| `bflib/bflib_network.cpp` | `0xef8e8` | `dk_GenericIPXInit_0ef8e8` | `0` | `5` | References 'WARNING network: GenericIPXInit() failure on ServiceProvider::Ini' |
-| `bflib/bflib_network.cpp` | `0xefab0` | `dk_SendSystemUserMessage_0efab0` | `0` | `3` | References 'WARNING network: SendSystemUserMessage() systemUserBuffer is too ' |
-| `bflib/bflib_network.cpp` | `0xf3b50` | `dk_LbNetwork_Send_0f3b50` | `1` | `6` | References 'INSIDE LbNetwork_Send' |
-| `bflib/bflib_network.cpp` | `0xf3ed8` | `dk_LbNetwork_Receive_0f3ed8` | `1` | `6` | References 'INSIDE LbNetwork_Receive' |
-| `bflib/bflib_network.cpp` | `0xff0ec` | `dk_LbNETWORK_0ff0ec` | `3` | `1` | References 'LbNETWORK : Destructing ServiceProvider' |
-| `bflib/bflib_network.cpp` | `0xff10c` | `dk_LbNETWORK_0ff10c` | `2` | `1` | References 'LbNETWORK : Initialising ServiceProvider' |
-| `bflib/bflib_network.cpp` | `0xff18c` | `dk_LbNETWORK_0ff18c` | `3` | `1` | References 'LbNETWORK : Releasing ServiceProvider' |
-| `bflib/bflib_network.cpp` | `0xff1d4` | `dk_AddPlayer_0ff1d4` | `10` | `1` | References 'WARNING network: ServiceProvider::AddPlayer() player table is ful' |
-| `bflib/bflib_network.cpp` | `0xff550` | `dk_EncodeMessageStub_0ff550` | `6` | `1` | References 'WARNING network: ServiceProvider::EncodeMessageStub() NULL ptr' |
-| `bflib/bflib_network.cpp` | `0xff630` | `dk_EncodeMessageStub_0ff630` | `9` | `1` | References 'WARNING network: ServiceProvider::EncodeMessageStub() NULL ptr' |
-| `bflib/bflib_network.cpp` | `0xff6a0` | `dk_EncodeMessageStub_0ff6a0` | `3` | `1` | References 'WARNING network: ServiceProvider::EncodeMessageStub() NULL ptr' |
-| `bflib/bflib_network.cpp` | `0xff6f0` | `dk_EncodeMessageStub_0ff6f0` | `2` | `1` | References 'WARNING network: ServiceProvider::EncodeMessageStub() NULL ptr' |
-| `bflib/bflib_network.cpp` | `0xff894` | `dk_EncodeMessageStub_0ff894` | `10` | `1` | References 'WARNING network: ServiceProvider::EncodeMessageStub() NULL ptr' |
-| `bflib/bflib_network.cpp` | `0xff8c0` | `dk_DecodeMessageStub_0ff8c0` | `11` | `1` | References 'WARNING network: ServiceProvider::DecodeMessageStub() NULL ptr' |
-| `bflib/bflib_network.cpp` | `0xff904` | `dk_warning_network_niladdmsgcallback_hit_0ff904` | `0` | `1` | String 'WARNING network: NilAddMsgCallback(%d, %s) hit' |
-| `bflib/bflib_network.cpp` | `0xff920` | `dk_warning_network_nildeletemsgcallback_hit_0ff920` | `0` | `1` | String 'WARNING network: NilDeleteMsgCallback(%d) hit' |
-| `bflib/bflib_network.cpp` | `0xff938` | `dk_warning_network_nilhostmsgcallback_hit_0ff938` | `0` | `1` | String 'WARNING network: NilHostMsgCallback(%d) hit' |
-| `bflib/bflib_network.cpp` | `0xff950` | `dk_NilUserSysMsgCallback_0ff950` | `0` | `1` | References 'WARNING network: NilUserSysMsgCallback() hit' |
-| `bflib/bflib_network.cpp` | `0xff960` | `dk_warning_network_niluserdatamsgcallbac_hit_0ff960` | `0` | `1` | String 'WARNING network: NilUserDataMsgCallback(%d, %d %d) hit' |
-| `bflib/bflib_network.cpp` | `0xff984` | `dk_warning_network_nilrequestexchangedat_amsgcallback_0ff984` | `0` | `1` | String 'WARNING network: NilRequestExchangeDataMsgCallback(%d %d) hi' |
-| `bflib/bflib_network.cpp` | `0xff9a0` | `dk_warning_network_nilrequestcompositeex_changedatamsgcallback_0ff9a0` | `0` | `1` | String 'WARNING network: NilRequestCompositeExchangeDataMsgCallback(' |
-| `bflib/bflib_network.cpp` | `0xff9bc` | `dk_warning_network_nilunidirectionalmsgc_allback_0ff9bc` | `0` | `1` | String 'WARNING network: NilUnidirectionalMsgCallback(%d, %d) hit' |
-| `bflib/bflib_network.cpp` | `0xff9dc` | `dk_warning_network_nilsystemusermsgcallb_ack_0ff9dc` | `0` | `1` | String 'WARNING network: NilSystemUserMsgCallback(%d %d) hit' |
-| `bflib/bflib_network.cpp` | `0xffb54` | `dk_Receive_0ffb54` | `12` | `5` | References 'WARNING network: ServiceProvider::Receive() not initialised' |
-| `bflib/bflib_network.cpp` | `0x1002dc` | `dk_Send_1002dc` | `15` | `4` | References 'WARNING network: ServiceProvider::Send() not initialised' |
-| `bflib/bflib_network.cpp` | `0x100718` | `dk_DecodeMessageStub_100718` | `1` | `1` | References 'WARNING network: ServiceProvider::DecodeMessageStub() NULL ptr' |
-| `bflib/bflib_network.cpp` | `0x100828` | `dk_EnumeratePlayersForSessionRunning_100828` | `1` | `2` | References 'WARNING network: ServiceProvider::EnumeratePlayersForSessionRunni' |
-| `bflib/bflib_network.cpp` | `0x1008d0` | `dk_GenericSerialInit_1008d0` | `1` | `4` | References 'WARNING network: GenericSerialInit() failure on ServiceProvider::' |
-| `bflib/bflib_network.cpp` | `0x100a28` | `dk_StartTwoPlayerExchange_100a28` | `1` | `5` | References 'WARNING network: StartTwoPlayerExchange() failure on SP::Send()' |
-| `bflib/bflib_network.cpp` | `0x100bb8` | `dk_CompleteTwoPlayerExchange_100bb8` | `1` | `7` | References 'WARNING network: CompleteTwoPlayerExchange() failure on SP::Send(' |
-| `bflib/bflib_network.cpp` | `0x100e14` | `dk_TwoPlayerCallback_100e14` | `0` | `6` | References 'WARNING network: TwoPlayerCallback() Unexpected sequence number: ' |
-| `bflib/bflib_network.cpp` | `0x101074` | `dk_TwoPlayerReqExDataMsgCallback_101074` | `0` | `4` | References 'WARNING network: TwoPlayerReqExDataMsgCallback() could not find r' |
-| `bflib/bflib_network.cpp` | `0x101158` | `dk_GenericModemInit_101158` | `1` | `4` | References 'WARNING network: GenericModemInit() failure on ServiceProvider::I' |
-| `bflib/bflib_network.cpp` | `0x101360` | `dk_allocated_fine_handler_size_101360` | `1` | `8` | String 'ALLOCATED FINE HANDLER SIZE = %d' |
-| `bflib/bflib_network.cpp` | `0x102108` | `dk_network_node_102108` | `1` | `4` | String 'NETWORK %x%x%x%x
+| `frontnet.cpp` | `0x32f12` | `frontnet_fn_032f12` | `1` | `0` | Module frontnet.cpp procedure @ 0x032f12 |
+| `frontnet.cpp` | `0x32f5c` | `frontnet_fn_032f5c` | `2` | `0` | Module frontnet.cpp procedure @ 0x032f5c |
+| `frontnet.cpp` | `0x32f6a` | `frontnet_fn_032f6a` | `1` | `0` | Module frontnet.cpp procedure @ 0x032f6a |
+| `frontnet.cpp` | `0x32f9b` | `frontnet_levelnamefile_add_blank_line_032f9b` | `2` | `2` | String 'LevelNameFile, Add a blank line at the end' |
+| `frontnet.cpp` | `0x3308c` | `frontnet_fn_03308c` | `4` | `0` | Module frontnet.cpp procedure @ 0x03308c |
+| `frontnet.cpp` | `0x330ae` | `frontnet_fn_0330ae` | `1` | `1` | Module frontnet.cpp procedure @ 0x0330ae |
+| `frontnet.cpp` | `0x330e0` | `frontnet_fn_0330e0` | `0` | `1` | Module frontnet.cpp procedure @ 0x0330e0 |
+| `frontnet.cpp` | `0x33156` | `frontnet_fn_033156` | `5` | `0` | Module frontnet.cpp procedure @ 0x033156 |
+| `frontnet.cpp` | `0x3315b` | `frontnet_fn_03315b` | `2` | `5` | Module frontnet.cpp procedure @ 0x03315b |
+| `frontnet.cpp` | `0x33223` | `frontnet_fn_033223` | `0` | `0` | Module frontnet.cpp procedure @ 0x033223 |
+| `frontnet.cpp` | `0x3325d` | `frontnet_fn_03325d` | `3` | `1` | Module frontnet.cpp procedure @ 0x03325d |
+| `frontnet.cpp` | `0x33350` | `frontnet_fn_033350` | `0` | `1` | Module frontnet.cpp procedure @ 0x033350 |
+| `frontnet.cpp` | `0x33563` | `frontnet_button_type_033563` | `0` | `2` | String 'Unknown button type' |
+| `frontnet.cpp` | `0x3378f` | `frontnet_draw_text_overlay_03378f` | `2` | `3` | Configures font/flags and draws text on screen |
+| `frontnet.cpp` | `0x33828` | `frontnet_draw_text_overlay_033828` | `2` | `3` | Configures font/flags and draws text on screen |
+| `frontnet.cpp` | `0x338fd` | `frontnet_fn_0338fd` | `0` | `1` | Module frontnet.cpp procedure @ 0x0338fd |
+| `frontnet.cpp` | `0x33917` | `frontnet_fn_033917` | `0` | `0` | Module frontnet.cpp procedure @ 0x033917 |
+| `frontnet.cpp` | `0x33928` | `frontnet_fn_033928` | `0` | `0` | Module frontnet.cpp procedure @ 0x033928 |
+| `frontnet.cpp` | `0x33939` | `frontnet_fn_033939` | `0` | `0` | Module frontnet.cpp procedure @ 0x033939 |
+| `frontnet.cpp` | `0x3394a` | `frontnet_fn_03394a` | `0` | `0` | Module frontnet.cpp procedure @ 0x03394a |
+| `frontnet.cpp` | `0x3395b` | `frontnet_fn_03395b` | `0` | `0` | Module frontnet.cpp procedure @ 0x03395b |
+| `frontnet.cpp` | `0x3396c` | `frontnet_fn_03396c` | `0` | `1` | Module frontnet.cpp procedure @ 0x03396c |
+| `frontnet.cpp` | `0x339df` | `frontnet_fn_0339df` | `0` | `1` | Module frontnet.cpp procedure @ 0x0339df |
+| `frontnet.cpp` | `0x33a44` | `frontnet_fn_033a44` | `0` | `1` | Module frontnet.cpp procedure @ 0x033a44 |
+| `frontnet.cpp` | `0x33ac7` | `frontnet_fn_033ac7` | `0` | `1` | Module frontnet.cpp procedure @ 0x033ac7 |
+| `frontnet.cpp` | `0x33b5c` | `frontnet_fn_033b5c` | `0` | `1` | Module frontnet.cpp procedure @ 0x033b5c |
+| `frontnet.cpp` | `0x33bcc` | `frontnet_LbNetwork_Stop_033bcc` | `0` | `3` | References 'LbNetwork_Stop() failed' |
+| `frontnet.cpp` | `0x33bfb` | `frontnet_LbNetwork_Stop_033bfb` | `0` | `4` | References 'LbNetwork_Stop() failed' |
+| `frontnet.cpp` | `0x33c3a` | `frontnet_fn_033c3a` | `0` | `2` | Module frontnet.cpp procedure @ 0x033c3a |
+| `frontnet.cpp` | `0x33c7d` | `frontnet_fn_033c7d` | `0` | `1` | Module frontnet.cpp procedure @ 0x033c7d |
+| `frontnet.cpp` | `0x33d87` | `frontnet_fn_033d87` | `0` | `1` | Module frontnet.cpp procedure @ 0x033d87 |
+| `frontnet.cpp` | `0x33ead` | `frontnet_LbNetwork_EnumerateServices_033ead` | `1` | `6` | References 'LbNetwork_EnumerateServices() failed' |
+| `frontnet.cpp` | `0x33f26` | `frontnet_fn_033f26` | `1` | `0` | Module frontnet.cpp procedure @ 0x033f26 |
+| `frontnet.cpp` | `0x33f57` | `frontnet_draw_gui_button_label_033f57` | `0` | `2` | Sets active font and draws GUI button text label |
+| `frontnet.cpp` | `0x33fdf` | `frontnet_maintain_service_scroll_btn_033fdf` | `0` | `0` | Updates GUI button enabled flag from service scroll offset |
+| `frontnet.cpp` | `0x33ff7` | `frontnet_maintain_service_scroll_btn_033ff7` | `0` | `0` | Updates GUI button enabled flag from service scroll offset |
+| `frontnet.cpp` | `0x34004` | `frontnet_maintain_service_scroll_btn_034004` | `0` | `0` | Updates GUI button enabled flag from service scroll offset |
+| `frontnet.cpp` | `0x34022` | `frontnet_fn_034022` | `0` | `1` | Module frontnet.cpp procedure @ 0x034022 |
+| `frontnet.cpp` | `0x34070` | `frontnet_fn_034070` | `1` | `1` | Module frontnet.cpp procedure @ 0x034070 |
+| `frontnet.cpp` | `0x34077` | `frontnet_scroll_service_list_up_034077` | `0` | `0` | Decrements network service list scroll offset |
+| `frontnet.cpp` | `0x34087` | `frontnet_scroll_service_list_down_034087` | `0` | `0` | Increments network service list scroll offset |
+| `frontnet.cpp` | `0x3409c` | `frontnet_fn_03409c` | `1` | `3` | Module frontnet.cpp procedure @ 0x03409c |
+| `frontnet.cpp` | `0x34105` | `frontnet_fn_034105` | `1` | `0` | Module frontnet.cpp procedure @ 0x034105 |
+| `frontnet.cpp` | `0x34186` | `frontnet_scroll_com_port_up_034186` | `0` | `0` | Decrements COM port scroll offset |
+| `frontnet.cpp` | `0x34196` | `frontnet_scroll_com_port_down_034196` | `0` | `0` | Increments COM port scroll offset |
+| `frontnet.cpp` | `0x341ab` | `frontnet_fn_0341ab` | `0` | `0` | Module frontnet.cpp procedure @ 0x0341ab |
+| `frontnet.cpp` | `0x341bb` | `frontnet_fn_0341bb` | `0` | `0` | Module frontnet.cpp procedure @ 0x0341bb |
+| `frontnet.cpp` | `0x341d0` | `frontnet_maintain_gui_button_state_0341d0` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `frontnet.cpp` | `0x341dd` | `frontnet_maintain_gui_button_state_0341dd` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `frontnet.cpp` | `0x341f0` | `frontnet_maintain_gui_button_state_0341f0` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `frontnet.cpp` | `0x34208` | `frontnet_fn_034208` | `0` | `1` | Module frontnet.cpp procedure @ 0x034208 |
+| `frontnet.cpp` | `0x34241` | `frontnet_maintain_gui_button_state_034241` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `frontnet.cpp` | `0x3424e` | `frontnet_maintain_gui_button_state_03424e` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `frontnet.cpp` | `0x34261` | `frontnet_maintain_gui_button_state_034261` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `frontnet.cpp` | `0x34279` | `frontnet_fn_034279` | `0` | `0` | Module frontnet.cpp procedure @ 0x034279 |
+| `frontnet.cpp` | `0x34298` | `frontnet_draw_gui_button_label_034298` | `0` | `2` | Sets active font and draws GUI button text label |
+| `frontnet.cpp` | `0x3431e` | `frontnet_draw_gui_button_label_03431e` | `0` | `2` | Sets active font and draws GUI button text label |
+| `frontnet.cpp` | `0x343a4` | `frontnet_fn_0343a4` | `0` | `1` | Module frontnet.cpp procedure @ 0x0343a4 |
+| `frontnet.cpp` | `0x343d7` | `frontnet_fn_0343d7` | `0` | `1` | Module frontnet.cpp procedure @ 0x0343d7 |
+| `frontnet.cpp` | `0x3440a` | `frontnet_maintain_gui_button_state_03440a` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `frontnet.cpp` | `0x3442b` | `frontnet_isdn_supported_serial_03442b` | `0` | `4` | String 'ISDN not supported by Serial' |
+| `frontnet.cpp` | `0x344c8` | `frontnet_fn_0344c8` | `1` | `3` | Module frontnet.cpp procedure @ 0x0344c8 |
+| `frontnet.cpp` | `0x3457c` | `frontnet_fn_03457c` | `1` | `0` | Module frontnet.cpp procedure @ 0x03457c |
+| `frontnet.cpp` | `0x345fd` | `frontnet_fn_0345fd` | `0` | `3` | Module frontnet.cpp procedure @ 0x0345fd |
+| `frontnet.cpp` | `0x3468f` | `frontnet_fn_03468f` | `1` | `1` | Module frontnet.cpp procedure @ 0x03468f |
+| `frontnet.cpp` | `0x346de` | `frontnet_LbNetwork_EnumerateSessions_0346de` | `1` | `4` | References 'LbNetwork_EnumerateSessions() failed' |
+| `frontnet.cpp` | `0x3488f` | `frontnet_draw_gui_button_label_03488f` | `0` | `2` | Sets active font and draws GUI button text label |
+| `frontnet.cpp` | `0x34918` | `frontnet_fn_034918` | `0` | `0` | Module frontnet.cpp procedure @ 0x034918 |
+| `frontnet.cpp` | `0x34941` | `frontnet_maintain_session_scroll_btn_034941` | `0` | `0` | Updates GUI button enabled flag from session scroll offset |
+| `frontnet.cpp` | `0x34959` | `frontnet_maintain_session_scroll_btn_034959` | `0` | `0` | Updates GUI button enabled flag from session scroll offset |
+| `frontnet.cpp` | `0x34966` | `frontnet_maintain_session_scroll_btn_034966` | `0` | `0` | Updates GUI button enabled flag from session scroll offset |
+| `frontnet.cpp` | `0x34979` | `frontnet_scroll_session_list_up_034979` | `0` | `0` | Decrements network session list scroll offset |
+| `frontnet.cpp` | `0x34989` | `frontnet_scroll_session_list_down_034989` | `0` | `0` | Increments network session list scroll offset |
+| `frontnet.cpp` | `0x3499e` | `frontnet_maintain_gui_button_state_03499e` | `0` | `0` | Updates GUI button enabled bit (0x08) |
+| `frontnet.cpp` | `0x349d9` | `frontnet_fn_0349d9` | `0` | `6` | Module frontnet.cpp procedure @ 0x0349d9 |
+| `frontnet.cpp` | `0x34a8a` | `frontnet_fn_034a8a` | `0` | `7` | Module frontnet.cpp procedure @ 0x034a8a |
+| `frontnet.cpp` | `0x34bb6` | `frontnet_copy_state_struct_034bb6` | `0` | `2` | Copies fixed-size state structure via LbMemoryCopy |
+| `frontnet.cpp` | `0x34bdc` | `frontnet_fn_034bdc` | `0` | `1` | Module frontnet.cpp procedure @ 0x034bdc |
+| `frontnet.cpp` | `0x34bff` | `frontnet_copy_state_struct_034bff` | `0` | `0` | Copies fixed-size state structure via LbMemoryCopy |
+| `frontnet.cpp` | `0x34c0f` | `frontnet_copy_state_struct_034c0f` | `0` | `0` | Copies fixed-size state structure via LbMemoryCopy |
+| `frontnet.cpp` | `0x34c1f` | `frontnet_copy_state_struct_034c1f` | `0` | `0` | Copies fixed-size state structure via LbMemoryCopy |
+| `frontnet.cpp` | `0x34c2f` | `frontnet_copy_state_struct_034c2f` | `0` | `0` | Copies fixed-size state structure via LbMemoryCopy |
+| `frontnet.cpp` | `0x34c3f` | `frontnet_copy_state_struct_034c3f` | `0` | `0` | Copies fixed-size state structure via LbMemoryCopy |
+| `frontnet.cpp` | `0x34c4f` | `frontnet_draw_gui_button_label_034c4f` | `0` | `3` | Sets active font and draws GUI button text label |
+| `frontnet.cpp` | `0x34d86` | `frontnet_draw_gui_button_label_034d86` | `0` | `3` | Sets active font and draws GUI button text label |
+| `frontnet.cpp` | `0x34ea2` | `frontnet_fn_034ea2` | `0` | `1` | Module frontnet.cpp procedure @ 0x034ea2 |
+| `frontnet.cpp` | `0x34ed8` | `frontnet_fn_034ed8` | `1` | `0` | Module frontnet.cpp procedure @ 0x034ed8 |
+| `frontnet.cpp` | `0x34f38` | `frontnet_LbNetwork_EnumeratePlayers_034f38` | `1` | `5` | References 'LbNetwork_EnumeratePlayers() failed' |
+| `frontnet.cpp` | `0x35037` | `frontnet_fn_035037` | `1` | `1` | Module frontnet.cpp procedure @ 0x035037 |
+| `frontnet.cpp` | `0x350a0` | `frontnet_maintain_player_list_btn_0350a0` | `0` | `0` | Updates GUI button enabled flag from lobby player count/scroll |
+| `frontnet.cpp` | `0x350ad` | `frontnet_scroll_player_list_up_0350ad` | `0` | `0` | Decrements lobby player list scroll offset |
+| `frontnet.cpp` | `0x350bd` | `frontnet_scroll_player_list_down_0350bd` | `0` | `0` | Increments lobby player list scroll offset |
+| `frontnet.cpp` | `0x350d2` | `frontnet_maintain_player_list_btn_0350d2` | `0` | `0` | Updates GUI button enabled flag from lobby player count/scroll |
+| `frontnet.cpp` | `0x350df` | `frontnet_maintain_player_list_btn_0350df` | `0` | `0` | Updates GUI button enabled flag from lobby player count/scroll |
+| `frontnet.cpp` | `0x350f2` | `frontnet_scroll_chat_list_up_0350f2` | `0` | `0` | Decrements lobby chat scroll offset |
+| `frontnet.cpp` | `0x35102` | `frontnet_scroll_chat_list_down_035102` | `0` | `0` | Increments lobby chat scroll offset |
+| `frontnet.cpp` | `0x35117` | `frontnet_maintain_chat_scroll_btn_035117` | `0` | `0` | Updates GUI button enabled flag from lobby chat scroll |
+| `frontnet.cpp` | `0x35124` | `frontnet_maintain_chat_scroll_btn_035124` | `0` | `0` | Updates GUI button enabled flag from lobby chat scroll |
+| `frontnet.cpp` | `0x35137` | `frontnet_update_player_view_state_035137` | `0` | `3` | Accesses per-player PlayerInfo state (stride 0x4ef) |
+| `frontnet.cpp` | `0x351d7` | `frontnet_draw_gui_button_label_0351d7` | `0` | `3` | Sets active font and draws GUI button text label |
+| `frontnet.cpp` | `0x35304` | `frontnet_maintain_player_list_btn_035304` | `0` | `0` | Updates GUI button enabled flag from lobby player count/scroll |
+| `frontnet.cpp` | `0x35338` | `frontnet_update_player_view_state_035338` | `0` | `1` | Accesses per-player PlayerInfo state (stride 0x4ef) |
+| `frontnet.cpp` | `0x3536a` | `frontnet_draw_gui_button_label_03536a` | `0` | `2` | Sets active font and draws GUI button text label |
+| `frontnet.cpp` | `0x3540e` | `frontnet_fn_03540e` | `0` | `0` | Module frontnet.cpp procedure @ 0x03540e |
+| `frontnet.cpp` | `0x35446` | `frontnet_sessions_enumeration_035446` | `0` | `2` | String 'Too many sessions in enumeration' |
+| `frontnet.cpp` | `0x354fb` | `frontnet_players_enumeration_0354fb` | `0` | `2` | String 'Too many players in enumeration' |
+| `frontnet.cpp` | `0x35546` | `frontnet_unrecognised_network_service_035546` | `0` | `3` | String 'Unrecognised Network Service' |
+| `frontnet.cpp` | `0x3562b` | `frontnet_fn_03562b` | `0` | `0` | Module frontnet.cpp procedure @ 0x03562b |
+| `frontnet.cpp` | `0x35666` | `frontnet_fn_035666` | `1` | `0` | Module frontnet.cpp procedure @ 0x035666 |
+| `frontnet.cpp` | `0x356d1` | `frontnet_fn_0356d1` | `1` | `0` | Module frontnet.cpp procedure @ 0x0356d1 |
+| `frontnet.cpp` | `0x35758` | `frontnet_LbNetwork_Exchange_035758` | `1` | `14` | References 'LbNetwork_Exchange failed' |
+| `frontnet.cpp` | `0x35ac5` | `frontnet_fn_035ac5` | `1` | `2` | Module frontnet.cpp procedure @ 0x035ac5 |
+| `frontnet.cpp` | `0x35b51` | `frontnet_save_config_net_035b51` | `3` | `6` | String 'SAVE\CONFIG.NET' |
+| `frontnet.cpp` | `0x35bbf` | `frontnet_save_config_net_035bbf` | `2` | `5` | String 'SAVE\CONFIG.NET' |
+| `frontnet.cpp` | `0x35c1e` | `frontnet_fn_035c1e` | `0` | `4` | Module frontnet.cpp procedure @ 0x035c1e |
+| `frontnet.cpp` | `0x35c5a` | `frontnet_fn_035c5a` | `0` | `2` | Module frontnet.cpp procedure @ 0x035c5a |
+| `frontnet.cpp` | `0x35c86` | `frontnet_fn_035c86` | `1` | `1` | Module frontnet.cpp procedure @ 0x035c86 |
+| `frontnet.cpp` | `0x35cc1` | `frontnet_fn_035cc1` | `1` | `0` | Module frontnet.cpp procedure @ 0x035cc1 |
+| `frontnet.cpp` | `0x35ce2` | `frontnet_fn_035ce2` | `1` | `0` | Module frontnet.cpp procedure @ 0x035ce2 |
+| `frontnet.cpp` | `0x35d29` | `frontnet_LbNetwork_Stop_035d29` | `1` | `10` | References 'LbNetwork_Stop() failed' |
+| `frontnet.cpp` | `0x35e19` | `frontnet_fn_035e19` | `1` | `3` | Module frontnet.cpp procedure @ 0x035e19 |
+| `frontnet.cpp` | `0x35e3c` | `frontnet_update_player_dungeon_035e3c` | `3` | `9` | Accesses per-player Dungeon state (stride 0x1508) |
+| `frontnet.cpp` | `0x36008` | `frontnet_fn_036008` | `1` | `1` | Module frontnet.cpp procedure @ 0x036008 |
+| `frontnet.cpp` | `0x36018` | `frontnet_draw_text_overlay_036018` | `0` | `3` | Configures font/flags and draws text on screen |
+| `frontnet.cpp` | `0x360e8` | `frontnet_draw_text_overlay_0360e8` | `0` | `3` | Configures font/flags and draws text on screen |
+| `frontnet.cpp` | `0x36188` | `frontnet_draw_text_overlay_036188` | `1` | `2` | Configures font/flags and draws text on screen |
+| `frontnet.cpp` | `0x36223` | `frontnet_fn_036223` | `0` | `2` | Module frontnet.cpp procedure @ 0x036223 |
+| `frontnet.cpp` | `0x36278` | `frontnet_draw_text_overlay_036278` | `2` | `2` | Configures font/flags and draws text on screen |
+| `frontnet.cpp` | `0x362e1` | `frontnet_fn_0362e1` | `0` | `0` | Module frontnet.cpp procedure @ 0x0362e1 |
+| `packet.cpp` | `0x5d32c` | `packet_check_all_room_ traps_sync` | `2` | `2` | Validate room and trap state before turn packet processing |
+| `packet.cpp` | `0x5d34c` | `packet_validate_active_Catalogue_entries` | `2` | `0` | Scan 86 catalogue slots for valid string pointers |
+| `packet.cpp` | `0x5d35c` | `packet_resync_network_game_state` | `2` | `15` | Chunked full-game-state network resynchronization via LbNetwork_Exchange |
+| `packet.cpp` | `0x5d7b5` | `packet_build_local_player_turn_packet` | `1` | `12` | Capture local player cursor, hand, and mode into turn Packet |
+| `packet.cpp` | `0x5da11` | `packet_init_level_replay_or_resync` | `1` | `7` | Re-initialize level state and reload packet stream on resync/replay |
+| `packet.cpp` | `0x5dc27` | `packet_exchange_all_players_packets` | `1` | `10` | Exchange per-turn Packet structs across peers via LbNetwork_Exchange |
+| `packet.cpp` | `0x5dde9` | `set_packet_control_flag` | `6` | `0` | OR control bitflag into pkt->control_flags (+0x0e) |
+| `packet.cpp` | `0x5ddee` | `set_packet_action` | `43` | `0` | Populate pkt->action (+0x05), actn_par1 (+0x06), and actn_par2 (+0x08) |
+| `packet.cpp` | `0x5de00` | `packet_find_next_active_player` | `2` | `0` | Find next active non-spectator player index in g_players |
+| `packet.cpp` | `0x5de7c` | `process_players_packet_control_flags` | `1` | `8` | Apply incoming Packet.player_flags and control_flags to PlayerInfo |
+| `packet.cpp` | `0x5df2f` | `packet_vio_table_data_block` | `0` | `0` | Embedded data/thunk block in packet.cpp |
+| `packet.cpp` | `0x5e01e` | `process_all_players_turn_packets` | `1` | `0` | Main per-turn dispatcher executing Packet actions for all active players |
+| `packet.cpp` | `0x5eb8d` | `process_players_dungeon_control_packet` | `1` | `5` | Execute dungeon-view Packet action for a player |
+| `packet.cpp` | `0x5ec71` | `process_players_creature_control_packet` | `1` | `4` | Execute first-person creature possession Packet movement & instance actions |
+| `packet.cpp` | `0x5f001` | `process_players_spectator_packet` | `1` | `1` | Handle spectator view packet toggle |
+| `packet.cpp` | `0x5f049` | `process_players_map_view_packet` | `1` | `6` | Handle parchment map view zoom/exit packet actions |
+| `packet.cpp` | `0x5f163` | `process_players_global_packet_action` | `1` | `9` | Execute global hotkeys, pause, message, and view-mode Packet actions |
+| `packet.cpp` | `0x5f3ad` | `process_players_creature_passenger_packet` | `1` | `2` | Update camera position and actions while riding a possessed creature |
+| `packet.cpp` | `0x5f438` | `packet_update_player_zoom_box` | `2` | `4` | Update player camera zoom/bounding box from packet control flags |
+| `packet.cpp` | `0x5f4d9` | `packet_check_thing_interaction_valid` | `1` | `2` | Verify whether player can interact with target Thing in packet |
+| `packet.cpp` | `0x5f577` | `packet_can_player_afford_room_or_trap` | `1` | `0` | Check if player gold covers cost of room/trap kind |
+| `packet.cpp` | `0x5f5db` | `packet_is_subtile_revealed_for_player` | `1` | `0` | Check if map subtile (x, y) is revealed for player bitmask |
+| `packet.cpp` | `0x5f6c5` | `process_players_dungeon_command_packet` | `1` | `77` | Master switch executing dungeon build, dig, slap, pickup, drop, and spell Packet commands |
+| `packet.cpp` | `0x61751` | `clear_packet_for_player` | `1` | `0` | Zero out a player's 17-byte Packet slot for the upcoming turn |
+| `packet.cpp` | `0x617c9` | `open_new_packet_file_for_save` | `1` | `6` | Create and write header for new .PKT replay recording file |
+| `packet.cpp` | `0x61883` | `write_turn_packets_to_file` | `1` | `5` | Compute Thing checksum (compute_things_checksum) and write turn Packets to .PKT file |
+| `packet.cpp` | `0x618f5` | `open_packet_file_for_load` | `2` | `5` | Open existing .PKT replay file and validate header |
+| `packet.cpp` | `0x619be` | `load_turn_packets_from_file` | `1` | `6` | Seek and read per-turn Packet structures from open .PKT replay file |
+| `packet.cpp` | `0x61bde` | `packet_possess_thing_direct` | `3` | `5` | Directly attach player camera to possessed Thing |
+| `packet.cpp` | `0x61ca3` | `packet_handle_double_click_action` | `11` | `2` | Process double-click packet action within turn threshold |
+| `packet.cpp` | `0x61d43` | `packet_activate_dungeon_special_or_spell` | `2` | `7` | Trigger dungeon special box or spell from packet command |
+| `packet.cpp` | `0x61e86` | `packet_tag_slab_for_digging` | `1` | `1` | Tag or untag a 3x3 subtile slab area for imp digging |
+| `packet.cpp` | `0x61f1b` | `packet_has_selectable_things_at_subtile` | `1` | `0` | Check if subtile contains Things selectable by player hand |
+| `packet.cpp` | `0x61f77` | `packet_update_pause_mode_state` | `0` | `4` | Synchronize pause state across singleplayer/multiplayer packet flags |
+| `packet.cpp` | `0x620e6` | `packet_compute_full_dungeon_checksum` | `0` | `4` | Compute deterministic checksum over Dungeon and SlabMap state |
+| `packet.cpp` | `0x62238` | `packet_backup_catalogue_settings` | `1` | `0` | Save current level/campaign catalogue settings before packet replay |
+| `packet.cpp` | `0x622f1` | `packet_restore_catalogue_settings` | `1` | `0` | Restore level/campaign catalogue settings after packet replay |
+| `packet.cpp` | `0x623aa` | `packet_draw_debug_cursor_overlay` | `2` | `6` | Lock screen and draw multiplayer/packet cursor overlay |
+| `bflib/bflib_network.cpp` | `0xed04c` | `lbnet_bullfrog_net_library_version_0ed04c` | `0` | `1` | String 'BULLFROG NET LIBRARY VERSION %f FOR %s LAST BUILT __DATE__' |
+| `bflib/bflib_network.cpp` | `0xed0e8` | `lbnet_fn_0ed0e8` | `1` | `0` | Module bflib/bflib_network.cpp procedure @ 0x0ed0e8 |
+| `bflib/bflib_network.cpp` | `0xed4e0` | `LbNetwork_Init_0ed4e0` | `3` | `8` | References 'WARNING network: LbNetwork_Init() failure on compositeBuffer allo' |
+| `bflib/bflib_network.cpp` | `0xed84c` | `LbNetwork_Create_0ed84c` | `1` | `1` | References 'ERROR::LbNetwork_Create ServiceProvider ptr is NULL' |
+| `bflib/bflib_network.cpp` | `0xeda20` | `LbNetwork_Join_0eda20` | `1` | `5` | References 'ERROR::LbNetwork_Join ServiceProvider ptr is NULL' |
+| `bflib/bflib_network.cpp` | `0xedc70` | `LbNetwork_Stop_0edc70` | `9` | `3` | References 'INSIDE LbNetwork_Stop' |
+| `bflib/bflib_network.cpp` | `0xedd8c` | `LbNetwork_EnumerateSessions_0edd8c` | `1` | `1` | References 'ERROR::LbNetwork_EnumerateSessions ServiceProvider ptr is NULL' |
+| `bflib/bflib_network.cpp` | `0xeddf0` | `LbNetwork_EnumeratePlayers_0eddf0` | `2` | `1` | References 'ERROR::LbNetwork_EnumeratePlayers ServiceProvider ptr is NULL' |
+| `bflib/bflib_network.cpp` | `0xee3c0` | `LbNetwork_CompleteExchange_0ee3c0` | `0` | `10` | References 'WARNING network: LbNetwork_CompleteExchange() failure on HostData' |
+| `bflib/bflib_network.cpp` | `0xee694` | `LbNetwork_StartExchange_0ee694` | `5` | `12` | References 'ERROR::LbNetwork_StartExchange ServiceProvider ptr is NULL' |
+| `bflib/bflib_network.cpp` | `0xeeb20` | `LbNetwork_ChangeExchangeBuffer_0eeb20` | `1` | `3` | References 'WARNING network: LbNetwork_ChangeExchangeBuffer() failure on buff' |
+| `bflib/bflib_network.cpp` | `0xeebe0` | `lbnet_GetCurrentPlayers_0eebe0` | `0` | `1` | References 'WARNING network: GetCurrentPlayers() localPlayerIndex not updated' |
+| `bflib/bflib_network.cpp` | `0xeedc0` | `lbnet_HostDataCollection_0eedc0` | `2` | `7` | References 'WARNING network: HostDataCollection() deletePlayerBuffer is too s' |
+| `bflib/bflib_network.cpp` | `0xef060` | `LbNetwork_CompleteExchange_0ef060` | `2` | `3` | References 'WARNING network: LbNetwork_CompleteExchange() failure on SP::Send' |
+| `bflib/bflib_network.cpp` | `0xef14c` | `lbnet_UserDataMsgCallback_0ef14c` | `0` | `1` | References 'WARNING network: UserDataMsgCallback() host got data from itself' |
+| `bflib/bflib_network.cpp` | `0xef4a8` | `lbnet_DeleteMsgCallback_0ef4a8` | `0` | `1` | References 'WARNING network: DeleteMsgCallback() NULL localPlayerInfoPtr' |
+| `bflib/bflib_network.cpp` | `0xef520` | `lbnet_GetCurrentPlayers_0ef520` | `0` | `1` | References 'WARNING network: GetCurrentPlayers() localPlayerIndex not updated' |
+| `bflib/bflib_network.cpp` | `0xef7a8` | `lbnet_RequestExchangeDataMsgCallback_0ef7a8` | `0` | `3` | References 'WARNING network: RequestExchangeDataMsgCallback() NULL data point' |
+| `bflib/bflib_network.cpp` | `0xef864` | `lbnet_RequestCompositeExchangeDataMsgCallback_0ef864` | `0` | `2` | References 'WARNING network: RequestCompositeExchangeDataMsgCallback() failur' |
+| `bflib/bflib_network.cpp` | `0xef8e8` | `lbnet_GenericIPXInit_0ef8e8` | `0` | `5` | References 'WARNING network: GenericIPXInit() failure on ServiceProvider::Ini' |
+| `bflib/bflib_network.cpp` | `0xefab0` | `lbnet_SendSystemUserMessage_0efab0` | `0` | `3` | References 'WARNING network: SendSystemUserMessage() systemUserBuffer is too ' |
+| `bflib/bflib_network.cpp` | `0xf3b50` | `LbNetwork_Send_0f3b50` | `1` | `6` | References 'INSIDE LbNetwork_Send' |
+| `bflib/bflib_network.cpp` | `0xf3ed8` | `LbNetwork_Receive_0f3ed8` | `1` | `6` | References 'INSIDE LbNetwork_Receive' |
+| `bflib/bflib_network.cpp` | `0xff0ec` | `LbNETWORK_0ff0ec` | `3` | `1` | References 'LbNETWORK : Destructing ServiceProvider' |
+| `bflib/bflib_network.cpp` | `0xff10c` | `LbNETWORK_0ff10c` | `2` | `1` | References 'LbNETWORK : Initialising ServiceProvider' |
+| `bflib/bflib_network.cpp` | `0xff18c` | `LbNETWORK_0ff18c` | `3` | `1` | References 'LbNETWORK : Releasing ServiceProvider' |
+| `bflib/bflib_network.cpp` | `0xff1d4` | `lbnet_AddPlayer_0ff1d4` | `10` | `1` | References 'WARNING network: ServiceProvider::AddPlayer() player table is ful' |
+| `bflib/bflib_network.cpp` | `0xff550` | `lbnet_EncodeMessageStub_0ff550` | `6` | `1` | References 'WARNING network: ServiceProvider::EncodeMessageStub() NULL ptr' |
+| `bflib/bflib_network.cpp` | `0xff630` | `lbnet_EncodeMessageStub_0ff630` | `9` | `1` | References 'WARNING network: ServiceProvider::EncodeMessageStub() NULL ptr' |
+| `bflib/bflib_network.cpp` | `0xff6a0` | `lbnet_EncodeMessageStub_0ff6a0` | `3` | `1` | References 'WARNING network: ServiceProvider::EncodeMessageStub() NULL ptr' |
+| `bflib/bflib_network.cpp` | `0xff6f0` | `lbnet_EncodeMessageStub_0ff6f0` | `2` | `1` | References 'WARNING network: ServiceProvider::EncodeMessageStub() NULL ptr' |
+| `bflib/bflib_network.cpp` | `0xff894` | `lbnet_EncodeMessageStub_0ff894` | `10` | `1` | References 'WARNING network: ServiceProvider::EncodeMessageStub() NULL ptr' |
+| `bflib/bflib_network.cpp` | `0xff8c0` | `lbnet_DecodeMessageStub_0ff8c0` | `11` | `1` | References 'WARNING network: ServiceProvider::DecodeMessageStub() NULL ptr' |
+| `bflib/bflib_network.cpp` | `0xff904` | `lbnet_warning_network_niladdmsgcallback_hit_0ff904` | `0` | `1` | String 'WARNING network: NilAddMsgCallback(%d, %s) hit' |
+| `bflib/bflib_network.cpp` | `0xff920` | `lbnet_warning_network_nildeletemsgcallback_hit_0ff920` | `0` | `1` | String 'WARNING network: NilDeleteMsgCallback(%d) hit' |
+| `bflib/bflib_network.cpp` | `0xff938` | `lbnet_warning_network_nilhostmsgcallback_hit_0ff938` | `0` | `1` | String 'WARNING network: NilHostMsgCallback(%d) hit' |
+| `bflib/bflib_network.cpp` | `0xff950` | `lbnet_NilUserSysMsgCallback_0ff950` | `0` | `1` | References 'WARNING network: NilUserSysMsgCallback() hit' |
+| `bflib/bflib_network.cpp` | `0xff960` | `lbnet_warning_network_niluserdatamsgcallbac_hit_0ff960` | `0` | `1` | String 'WARNING network: NilUserDataMsgCallback(%d, %d %d) hit' |
+| `bflib/bflib_network.cpp` | `0xff984` | `lbnet_warning_network_nilrequestexchangedat_amsgcallback_0ff984` | `0` | `1` | String 'WARNING network: NilRequestExchangeDataMsgCallback(%d %d) hi' |
+| `bflib/bflib_network.cpp` | `0xff9a0` | `lbnet_warning_network_nilrequestcompositeex_changedatamsgcallback_0ff9a0` | `0` | `1` | String 'WARNING network: NilRequestCompositeExchangeDataMsgCallback(' |
+| `bflib/bflib_network.cpp` | `0xff9bc` | `lbnet_warning_network_nilunidirectionalmsgc_allback_0ff9bc` | `0` | `1` | String 'WARNING network: NilUnidirectionalMsgCallback(%d, %d) hit' |
+| `bflib/bflib_network.cpp` | `0xff9dc` | `lbnet_warning_network_nilsystemusermsgcallb_ack_0ff9dc` | `0` | `1` | String 'WARNING network: NilSystemUserMsgCallback(%d %d) hit' |
+| `bflib/bflib_network.cpp` | `0xffb54` | `lbnet_Receive_0ffb54` | `12` | `5` | References 'WARNING network: ServiceProvider::Receive() not initialised' |
+| `bflib/bflib_network.cpp` | `0x1002dc` | `lbnet_Send_1002dc` | `15` | `4` | References 'WARNING network: ServiceProvider::Send() not initialised' |
+| `bflib/bflib_network.cpp` | `0x100718` | `lbnet_DecodeMessageStub_100718` | `1` | `1` | References 'WARNING network: ServiceProvider::DecodeMessageStub() NULL ptr' |
+| `bflib/bflib_network.cpp` | `0x100828` | `lbnet_EnumeratePlayersForSessionRunning_100828` | `1` | `2` | References 'WARNING network: ServiceProvider::EnumeratePlayersForSessionRunni' |
+| `bflib/bflib_network.cpp` | `0x1008d0` | `lbnet_GenericSerialInit_1008d0` | `1` | `4` | References 'WARNING network: GenericSerialInit() failure on ServiceProvider::' |
+| `bflib/bflib_network.cpp` | `0x100a28` | `lbnet_StartTwoPlayerExchange_100a28` | `1` | `5` | References 'WARNING network: StartTwoPlayerExchange() failure on SP::Send()' |
+| `bflib/bflib_network.cpp` | `0x100bb8` | `lbnet_CompleteTwoPlayerExchange_100bb8` | `1` | `7` | References 'WARNING network: CompleteTwoPlayerExchange() failure on SP::Send(' |
+| `bflib/bflib_network.cpp` | `0x100e14` | `lbnet_TwoPlayerCallback_100e14` | `0` | `6` | References 'WARNING network: TwoPlayerCallback() Unexpected sequence number: ' |
+| `bflib/bflib_network.cpp` | `0x101074` | `lbnet_TwoPlayerReqExDataMsgCallback_101074` | `0` | `4` | References 'WARNING network: TwoPlayerReqExDataMsgCallback() could not find r' |
+| `bflib/bflib_network.cpp` | `0x101158` | `lbnet_GenericModemInit_101158` | `1` | `4` | References 'WARNING network: GenericModemInit() failure on ServiceProvider::I' |
+| `bflib/bflib_network.cpp` | `0x101360` | `lbnet_allocated_fine_handler_size_101360` | `1` | `8` | String 'ALLOCATED FINE HANDLER SIZE = %d' |
+| `bflib/bflib_network.cpp` | `0x102108` | `lbnet_network_node_102108` | `1` | `4` | String 'NETWORK %x%x%x%x
 NODE %02x%02x%02x%02x%02x%02x' |
-| `bflib/bflib_network.cpp` | `0x1031e8` | `dk_Init_1031e8` | `2` | `4` | References 'WARNING network: IPXServiceProvider::Init() failure on Initialise' |
-| `bflib/bflib_network.cpp` | `0x1032d8` | `dk_LbNETWORK_1032d8` | `1` | `11` | References 'LbNETWORK : Initialising IPXServiceProvider' |
-| `bflib/bflib_network.cpp` | `0x103464` | `dk_LbNETWORK_103464` | `0` | `7` | References 'LbNETWORK : Releasing IPXServiceProvider' |
-| `bflib/bflib_network.cpp` | `0x103528` | `dk_Start_103528` | `0` | `9` | References 'WARNING network: IPXServiceProvider::Start() not initialised' |
-| `bflib/bflib_network.cpp` | `0x10646c` | `dk_Start_10646c` | `2` | `12` | References 'WARNING network: IPXServiceProvider::Start() failure on AddPlayer' |
-| `bflib/bflib_network.cpp` | `0x106da4` | `dk_Start_106da4` | `1` | `8` | References 'WARNING network: IPXServiceProvider::Start() failure on AddPlayer' |
-| `bflib/bflib_network.cpp` | `0x10962c` | `dk_resending_packet_10962c` | `1` | `7` | String 'RESENDING PACKET' |
-| `bflib/bflib_network.cpp` | `0x11e254` | `dk_LbNETWORK_11e254` | `1` | `7` | References 'LbNETWORK : Releasing SerialSP' |
-| `bflib/bflib_network.cpp` | `0x11e314` | `dk_LbNETWORK_11e314` | `1` | `7` | References 'LbNETWORK : Initialising SerialSP' |
-| `bflib/bflib_network.cpp` | `0x11e484` | `dk_Start_11e484` | `1` | `4` | References 'WARNING network: SerialSP::Start() not initialised' |
-| `bflib/bflib_network.cpp` | `0x11e554` | `dk_Start_11e554` | `1` | `7` | References 'WARNING network: SerialSP::Start() not initialised' |
-| `bflib/bflib_network.cpp` | `0x11e6a8` | `dk_SendMessage_11e6a8` | `1` | `5` | References 'WARNING network: SerialSP::SendMessage() invalid sendMode()' |
-| `bflib/bflib_network.cpp` | `0x11e9e8` | `dk_Enumerate_11e9e8` | `0` | `3` | References 'WARNING network: SerialSP::Enumerate() not initialised' |
-| `bflib/bflib_network.cpp` | `0x11ea38` | `dk_Enumerate_11ea38` | `0` | `3` | References 'WARNING network: SerialSP::Enumerate() not initialised' |
-| `bflib/bflib_network.cpp` | `0x11eaf8` | `dk_Stop_11eaf8` | `1` | `5` | References 'WARNING network: SerialSP::Stop() not initialised' |
-| `bflib/bflib_network.cpp` | `0x11eb84` | `dk_ReadMessage_11eb84` | `0` | `2` | References 'WARNING network: SerialSP::ReadMessage() invalid m_localPlayerId' |
-| `bflib/bflib_network.cpp` | `0x11ebd0` | `dk_PeekMessage_11ebd0` | `0` | `2` | References 'WARNING network: SerialSP::PeekMessage() invalid m_localPlayerId' |
-| `bflib/bflib_network.cpp` | `0x11ec1c` | `dk_SendAck_11ec1c` | `1` | `2` | References 'WARNING network: SerialSP::SendAck() failure on CommHandler::Writ' |
-| `bflib/bflib_network.cpp` | `0x11ece0` | `dk_PrivateReceive_11ece0` | `2` | `4` | References 'WARNING network: SerialSP::PrivateReceive() invalid mode value' |
-| `bflib/bflib_network.cpp` | `0x11ee0c` | `dk_warning_network_serialsp_privatereceive_11ee0c` | `1` | `6` | String 'WARNING network: SerialSP::PrivateReceive addPlayerBuffer to' |
-| `bflib/bflib_network.cpp` | `0x11f4d8` | `dk_LbNETWORK_11f4d8` | `0` | `2` | References 'LbNETWORK : Releasing ModemSP' |
-| `bflib/bflib_network.cpp` | `0x11f53c` | `dk_MODEM_11f53c` | `0` | `9` | Log prefix 'MODEM: USER ABORTS MODEM INIT FUNCTION' |
-| `bflib/bflib_network.cpp` | `0x11f818` | `dk_MODEM_11f818` | `0` | `10` | Log prefix 'MODEM: IS BUSY OR ENGAGED' |
-| `bflib/bflib_network.cpp` | `0x11fb98` | `dk_calling_hangupmodem_11fb98` | `0` | `3` | String 'CALLING HANGUPMODEM' |
-| `bflib/bflib_network.cpp` | `0x124d1c` | `sub_124d1c` | `2` | `1` | Address-based identifier |
-| `bflib/bflib_network.cpp` | `0x125630` | `dk_serialhandler_size_port_irq_125630` | `1` | `5` | String 'SERIALHANDLER size %d Port %x IRQ %x INT VECT %x' |
-| `bflib/bflib_network.cpp` | `0x1262a4` | `dk_commhandler_readserialdev_null_parameter_1262a4` | `1` | `1` | String 'CommHandler::ReadSerialDev NULL parameter passed' |
+| `bflib/bflib_network.cpp` | `0x1031e8` | `lbnet_Init_1031e8` | `2` | `4` | References 'WARNING network: IPXServiceProvider::Init() failure on Initialise' |
+| `bflib/bflib_network.cpp` | `0x1032d8` | `LbNETWORK_1032d8` | `1` | `11` | References 'LbNETWORK : Initialising IPXServiceProvider' |
+| `bflib/bflib_network.cpp` | `0x103464` | `LbNETWORK_103464` | `0` | `7` | References 'LbNETWORK : Releasing IPXServiceProvider' |
+| `bflib/bflib_network.cpp` | `0x103528` | `lbnet_Start_103528` | `0` | `9` | References 'WARNING network: IPXServiceProvider::Start() not initialised' |
+| `bflib/bflib_network.cpp` | `0x10646c` | `lbnet_Start_10646c` | `2` | `12` | References 'WARNING network: IPXServiceProvider::Start() failure on AddPlayer' |
+| `bflib/bflib_network.cpp` | `0x106da4` | `lbnet_Start_106da4` | `1` | `8` | References 'WARNING network: IPXServiceProvider::Start() failure on AddPlayer' |
+| `bflib/bflib_network.cpp` | `0x10962c` | `lbnet_resending_packet_10962c` | `1` | `7` | String 'RESENDING PACKET' |
+| `bflib/bflib_network.cpp` | `0x11e254` | `LbNETWORK_11e254` | `1` | `7` | References 'LbNETWORK : Releasing SerialSP' |
+| `bflib/bflib_network.cpp` | `0x11e314` | `LbNETWORK_11e314` | `1` | `7` | References 'LbNETWORK : Initialising SerialSP' |
+| `bflib/bflib_network.cpp` | `0x11e484` | `lbnet_Start_11e484` | `1` | `4` | References 'WARNING network: SerialSP::Start() not initialised' |
+| `bflib/bflib_network.cpp` | `0x11e554` | `lbnet_Start_11e554` | `1` | `7` | References 'WARNING network: SerialSP::Start() not initialised' |
+| `bflib/bflib_network.cpp` | `0x11e6a8` | `lbnet_SendMessage_11e6a8` | `1` | `5` | References 'WARNING network: SerialSP::SendMessage() invalid sendMode()' |
+| `bflib/bflib_network.cpp` | `0x11e9e8` | `lbnet_Enumerate_11e9e8` | `0` | `3` | References 'WARNING network: SerialSP::Enumerate() not initialised' |
+| `bflib/bflib_network.cpp` | `0x11ea38` | `lbnet_Enumerate_11ea38` | `0` | `3` | References 'WARNING network: SerialSP::Enumerate() not initialised' |
+| `bflib/bflib_network.cpp` | `0x11eaf8` | `lbnet_Stop_11eaf8` | `1` | `5` | References 'WARNING network: SerialSP::Stop() not initialised' |
+| `bflib/bflib_network.cpp` | `0x11eb84` | `lbnet_ReadMessage_11eb84` | `0` | `2` | References 'WARNING network: SerialSP::ReadMessage() invalid m_localPlayerId' |
+| `bflib/bflib_network.cpp` | `0x11ebd0` | `lbnet_PeekMessage_11ebd0` | `0` | `2` | References 'WARNING network: SerialSP::PeekMessage() invalid m_localPlayerId' |
+| `bflib/bflib_network.cpp` | `0x11ec1c` | `lbnet_SendAck_11ec1c` | `1` | `2` | References 'WARNING network: SerialSP::SendAck() failure on CommHandler::Writ' |
+| `bflib/bflib_network.cpp` | `0x11ece0` | `lbnet_PrivateReceive_11ece0` | `2` | `4` | References 'WARNING network: SerialSP::PrivateReceive() invalid mode value' |
+| `bflib/bflib_network.cpp` | `0x11ee0c` | `lbnet_warning_network_serialsp_privatereceive_11ee0c` | `1` | `6` | String 'WARNING network: SerialSP::PrivateReceive addPlayerBuffer to' |
+| `bflib/bflib_network.cpp` | `0x11f4d8` | `LbNETWORK_11f4d8` | `0` | `2` | References 'LbNETWORK : Releasing ModemSP' |
+| `bflib/bflib_network.cpp` | `0x11f53c` | `lbnet_MODEM_11f53c` | `0` | `9` | Log prefix 'MODEM: USER ABORTS MODEM INIT FUNCTION' |
+| `bflib/bflib_network.cpp` | `0x11f818` | `lbnet_MODEM_11f818` | `0` | `10` | Log prefix 'MODEM: IS BUSY OR ENGAGED' |
+| `bflib/bflib_network.cpp` | `0x11fb98` | `lbnet_calling_hangupmodem_11fb98` | `0` | `3` | String 'CALLING HANGUPMODEM' |
+| `bflib/bflib_network.cpp` | `0x124d1c` | `lbnet_fn_124d1c` | `2` | `1` | Module bflib/bflib_network.cpp procedure @ 0x124d1c |
+| `bflib/bflib_network.cpp` | `0x125630` | `lbnet_serialhandler_size_port_irq_125630` | `1` | `5` | String 'SERIALHANDLER size %d Port %x IRQ %x INT VECT %x' |
+| `bflib/bflib_network.cpp` | `0x1262a4` | `lbnet_commhandler_readserialdev_null_parameter_1262a4` | `1` | `1` | String 'CommHandler::ReadSerialDev NULL parameter passed' |
 
 ## 3. Decompiled Key Networking & Packet Functions
 
-### `dk_levelnamefile_add_blank_line_032f9b` (`0x32f9b` in `frontnet.cpp`)
+### `frontnet_levelnamefile_add_blank_line_032f9b` (`0x32f9b` in `frontnet.cpp`)
 - **Evidence**: String 'LevelNameFile, Add a blank line at the end'
 ```c
 void FUN_00032f9b(void)
@@ -314,8 +314,8 @@ void FUN_00032f9b(void)
 }
 ```
 
-### `sub_03325d` (`0x3325d` in `frontnet.cpp`)
-- **Evidence**: Address-based identifier
+### `frontnet_fn_03325d` (`0x3325d` in `frontnet.cpp`)
+- **Evidence**: Module frontnet.cpp procedure @ 0x03325d
 ```c
 void FUN_0003325d(void)
 
@@ -344,7 +344,7 @@ void FUN_0003325d(void)
 }
 ```
 
-### `dk_button_type_033563` (`0x33563` in `frontnet.cpp`)
+### `frontnet_button_type_033563` (`0x33563` in `frontnet.cpp`)
 - **Evidence**: String 'Unknown button type'
 ```c
 void FUN_00033563(void)
@@ -398,7 +398,7 @@ LAB_0003359d:
 }
 ```
 
-### `dk_LbNetwork_Stop_033bcc` (`0x33bcc` in `frontnet.cpp`)
+### `frontnet_LbNetwork_Stop_033bcc` (`0x33bcc` in `frontnet.cpp`)
 - **Evidence**: References 'LbNetwork_Stop() failed'
 ```c
 void FUN_00033bcc(void)
@@ -416,7 +416,7 @@ void FUN_00033bcc(void)
 }
 ```
 
-### `dk_LbNetwork_Stop_033bfb` (`0x33bfb` in `frontnet.cpp`)
+### `frontnet_LbNetwork_Stop_033bfb` (`0x33bfb` in `frontnet.cpp`)
 - **Evidence**: References 'LbNetwork_Stop() failed'
 ```c
 void FUN_00033bfb(void)
@@ -435,7 +435,7 @@ void FUN_00033bfb(void)
 }
 ```
 
-### `dk_LbNetwork_EnumerateServices_033ead` (`0x33ead` in `frontnet.cpp`)
+### `frontnet_LbNetwork_EnumerateServices_033ead` (`0x33ead` in `frontnet.cpp`)
 - **Evidence**: References 'LbNetwork_EnumerateServices() failed'
 ```c
 void FUN_00033ead(void)
@@ -459,7 +459,7 @@ void FUN_00033ead(void)
 }
 ```
 
-### `dk_isdn_supported_serial_03442b` (`0x3442b` in `frontnet.cpp`)
+### `frontnet_isdn_supported_serial_03442b` (`0x3442b` in `frontnet.cpp`)
 - **Evidence**: String 'ISDN not supported by Serial'
 ```c
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
@@ -487,7 +487,7 @@ void FUN_0003442b(void)
 }
 ```
 
-### `dk_LbNetwork_EnumerateSessions_0346de` (`0x346de` in `frontnet.cpp`)
+### `frontnet_LbNetwork_EnumerateSessions_0346de` (`0x346de` in `frontnet.cpp`)
 - **Evidence**: References 'LbNetwork_EnumerateSessions() failed'
 ```c
 void FUN_000346de(void)
@@ -555,7 +555,7 @@ LAB_000347b0:
 }
 ```
 
-### `dk_LbNetwork_EnumeratePlayers_034f38` (`0x34f38` in `frontnet.cpp`)
+### `frontnet_LbNetwork_EnumeratePlayers_034f38` (`0x34f38` in `frontnet.cpp`)
 - **Evidence**: References 'LbNetwork_EnumeratePlayers() failed'
 ```c
 void FUN_00034f38(void)
@@ -610,7 +610,7 @@ void FUN_00034f38(void)
 }
 ```
 
-### `dk_sessions_enumeration_035446` (`0x35446` in `frontnet.cpp`)
+### `frontnet_sessions_enumeration_035446` (`0x35446` in `frontnet.cpp`)
 - **Evidence**: String 'Too many sessions in enumeration'
 ```c
 void FUN_00035446(undefined4 param_1)
@@ -636,7 +636,7 @@ void FUN_00035446(undefined4 param_1)
 }
 ```
 
-### `dk_players_enumeration_0354fb` (`0x354fb` in `frontnet.cpp`)
+### `frontnet_players_enumeration_0354fb` (`0x354fb` in `frontnet.cpp`)
 - **Evidence**: String 'Too many players in enumeration'
 ```c
 void FUN_000354fb(void)
@@ -652,7 +652,7 @@ void FUN_000354fb(void)
 }
 ```
 
-### `dk_unrecognised_network_service_035546` (`0x35546` in `frontnet.cpp`)
+### `frontnet_unrecognised_network_service_035546` (`0x35546` in `frontnet.cpp`)
 - **Evidence**: String 'Unrecognised Network Service'
 ```c
 void FUN_00035546(void)
@@ -686,7 +686,7 @@ LAB_00035595:
 }
 ```
 
-### `dk_LbNetwork_Exchange_035758` (`0x35758` in `frontnet.cpp`)
+### `frontnet_LbNetwork_Exchange_035758` (`0x35758` in `frontnet.cpp`)
 - **Evidence**: References 'LbNetwork_Exchange failed'
 ```c
 void FUN_00035758(void)
@@ -848,7 +848,7 @@ LAB_0003587e:
 }
 ```
 
-### `dk_LbNetwork_Stop_035d29` (`0x35d29` in `frontnet.cpp`)
+### `frontnet_LbNetwork_Stop_035d29` (`0x35d29` in `frontnet.cpp`)
 - **Evidence**: References 'LbNetwork_Stop() failed'
 ```c
 void FUN_00035d29(void)
@@ -896,8 +896,69 @@ void FUN_00035d29(void)
 }
 ```
 
-### `dk_LbNetwork_Exchange_05d35c` (`0x5d35c` in `packet.cpp`)
-- **Evidence**: References 'LbNetwork_Exchange failed'
+### `packet_check_all_room_ traps_sync` (`0x5d32c` in `packet.cpp`)
+- **Evidence**: Validate room and trap state before turn packet processing
+```c
+void FUN_0005d32c(void)
+
+{
+  int iVar1;
+  int iVar2;
+  uint uVar3;
+  
+  FUN_0005cd55();
+  iVar2 = FUN_00053c6b();
+  if (iVar2 != -1) {
+    for (uVar3 = 0; uVar3 < 0x56; uVar3 = (uint)(byte)((char)uVar3 + 1)) {
+      iVar1 = uVar3 * 0x39;
+      if (((*(char **)((int)&DAT_0034bc09 + iVar1) != (char *)0x0) &&
+          (uVar3 = (uint)CONCAT11((&DAT_0034bbd9)[iVar1],(char)uVar3),
+          (&DAT_0034bbd9)[iVar1] == (&DAT_0034baea)[iVar2 * 0x20])) &&
+         ((&DAT_0034bbdc)[iVar1] == '\x03')) {
+        if (**(char **)((int)&DAT_0034bc09 + iVar1) == '\0') {
+          (&DAT_0034bbd7)[iVar1] = 0;
+        }
+        else {
+          (&DAT_0034bbd7)[iVar1] = 1;
+        }
+      }
+    }
+    return;
+  }
+  return;
+}
+```
+
+### `packet_validate_active_Catalogue_entries` (`0x5d34c` in `packet.cpp`)
+- **Evidence**: Scan 86 catalogue slots for valid string pointers
+```c
+void FUN_0005d34c(void)
+
+{
+  int iVar1;
+  int in_EAX;
+  uint uVar2;
+  
+  for (uVar2 = 0; uVar2 < 0x56; uVar2 = (uint)(byte)((char)uVar2 + 1)) {
+    iVar1 = uVar2 * 0x39;
+    if (((*(char **)((int)&DAT_0034bc09 + iVar1) != (char *)0x0) &&
+        (uVar2 = (uint)CONCAT11((&DAT_0034bbd9)[iVar1],(char)uVar2),
+        (&DAT_0034bbd9)[iVar1] == *(char *)(in_EAX + 0x14))) && ((&DAT_0034bbdc)[iVar1] == '\x03'))
+    {
+      if (**(char **)((int)&DAT_0034bc09 + iVar1) == '\0') {
+        (&DAT_0034bbd7)[iVar1] = 0;
+      }
+      else {
+        (&DAT_0034bbd7)[iVar1] = 1;
+      }
+    }
+  }
+  return;
+}
+```
+
+### `packet_resync_network_game_state` (`0x5d35c` in `packet.cpp`)
+- **Evidence**: Chunked full-game-state network resynchronization via LbNetwork_Exchange
 ```c
 void FUN_0005d35c(void)
 
@@ -1097,8 +1158,8 @@ void FUN_0005d35c(void)
 }
 ```
 
-### `dk_my_player_host_05d7b5` (`0x5d7b5` in `packet.cpp`)
-- **Evidence**: String 'MY_PLAYER=%d  Host=%d'
+### `packet_build_local_player_turn_packet` (`0x5d7b5` in `packet.cpp`)
+- **Evidence**: Capture local player cursor, hand, and mode into turn Packet
 ```c
 void FUN_0005d7b5(void)
 
@@ -1211,8 +1272,84 @@ void FUN_0005d7b5(void)
 }
 ```
 
-### `dk_LbNetwork_Exchange_05dc27` (`0x5dc27` in `packet.cpp`)
-- **Evidence**: References 'LbNetwork_Exchange failed'
+### `packet_init_level_replay_or_resync` (`0x5da11` in `packet.cpp`)
+- **Evidence**: Re-initialize level state and reload packet stream on resync/replay
+```c
+void FUN_0005da11(void)
+
+{
+  uint uVar1;
+  uint uVar2;
+  int iVar3;
+  int local_14;
+  
+  FUN_000e6a10();
+  FUN_000618f5();
+  DAT_002e78e9 = DAT_002e6fd1;
+  DAT_003d9885 = DAT_0019a29f;
+  DAT_002e8bf2 = 0;
+  FUN_000e7714(&DAT_0019cbac,s_Initialising_level_00166320,DAT_002e6fd1);
+  FUN_000e7714(&DAT_0019cbac,s_Packet_Loading_Active__File_cont_00166333,DAT_002e6fdc);
+  if (DAT_002e6fe5 != '\0') {
+    FUN_000e7714(&DAT_0019cbac,s_Packet_Checksum_Active_00166362);
+  }
+  FUN_000e7714(&DAT_0019cbac,s_Fast_Forward_through__d_game_tur_00166379,DAT_002e6fe0);
+  if (DAT_002e6fee != -1) {
+    FUN_000e7714(&DAT_0019cbac,s_Packet_Quit_at__d_0016639c,DAT_002e6fee);
+  }
+  if ((DAT_002e6f2d != '\0') && (DAT_002e6fe6 != DAT_002e6fea)) {
+    FUN_000e7714(&DAT_0019cbac,s_Logging_things__game_turns__d__>_001663ae,DAT_002e6fe6,DAT_002e6fea
+                );
+  }
+  uVar1 = 1 << (DAT_002e6ff2 & 0x1f);
+  DAT_002ebaf6 = 2;
+  if (((DAT_002e6fd9 & uVar1) == 0) || ((DAT_002e6fda & uVar1) != 0)) {
+    DAT_002f10ce._3_1_ = 0;
+  }
+  else {
+    DAT_002f10ce._3_1_ = DAT_002e6ff2;
+  }
+  FUN_000404f7();
+  DAT_002eb541 = '\0';
+  local_14 = 0;
+  iVar3 = 0;
+  do {
+    uVar2 = (uint)DAT_002e6fd9;
+    uVar1 = 1 << ((byte)local_14 & 0x1f);
+    (&DAT_0019d0c8)[iVar3] = (&DAT_0019d0c8)[iVar3] & 0xfe;
+    (&DAT_0019d0c8)[iVar3] =
+         (&DAT_0019d0c8)[iVar3] | (byte)((int)(uVar2 & uVar1) >> ((byte)local_14 & 0x1f)) & 1;
+    if (((&DAT_0019d0c8)[iVar3] & 1) != 0) {
+      (&DAT_0019d0f3)[iVar3] = (byte)local_14;
+      uVar2 = (uint)DAT_002e6fda;
+      (&DAT_0019d0c8)[iVar3] = (&DAT_0019d0c8)[iVar3] & 0xbf;
+      (&DAT_0019d0c8)[iVar3] =
+           (&DAT_0019d0c8)[iVar3] |
+           ((byte)((int)(uVar1 & uVar2) >> ((byte)local_14 & 0x1f)) & 1) << 6;
+      if (((&DAT_0019d0c8)[iVar3] & 0x40) == 0) {
+        DAT_002eb541 = DAT_002eb541 + '\x01';
+        (&DAT_0019d0f4)[iVar3] = 1;
+        DAT_002ebaf6 = 5;
+        FUN_000402e5();
+      }
+    }
+    local_14 = local_14 + 1;
+    iVar3 = iVar3 + 0x4ef;
+  } while (local_14 < 5);
+  if (DAT_002eb541 == '\x01') {
+    DAT_002ebaf6 = 2;
+  }
+  if (DAT_002e6fdc < DAT_002e6fe0) {
+    DAT_002e6fe0 = DAT_002e6fdc;
+  }
+  FUN_00040832();
+  FUN_00040992();
+  return;
+}
+```
+
+### `packet_exchange_all_players_packets` (`0x5dc27` in `packet.cpp`)
+- **Evidence**: Exchange per-turn Packet structs across peers via LbNetwork_Exchange
 ```c
 void FUN_0005dc27(void)
 
@@ -1299,8 +1436,796 @@ void FUN_0005dc27(void)
 }
 ```
 
-### `dk_room_here_delete_05f6c5` (`0x5f6c5` in `packet.cpp`)
-- **Evidence**: String 'No room here to delete'
+### `set_packet_control_flag` (`0x5dde9` in `packet.cpp`)
+- **Evidence**: OR control bitflag into pkt->control_flags (+0x0e)
+```c
+void FUN_0005dde9(void)
+
+{
+  int in_EAX;
+  ushort in_DX;
+  
+  *(ushort *)(in_EAX + 0xe) = *(ushort *)(in_EAX + 0xe) | in_DX;
+  return;
+}
+```
+
+### `set_packet_action` (`0x5ddee` in `packet.cpp`)
+- **Evidence**: Populate pkt->action (+0x05), actn_par1 (+0x06), and actn_par2 (+0x08)
+```c
+void FUN_0005ddee(void)
+
+{
+  int in_EAX;
+  undefined2 in_CX;
+  undefined1 in_DL;
+  undefined2 unaff_BX;
+  
+  *(undefined1 *)(in_EAX + 5) = in_DL;
+  *(undefined2 *)(in_EAX + 6) = unaff_BX;
+  *(undefined2 *)(in_EAX + 8) = in_CX;
+  return;
+}
+```
+
+### `packet_find_next_active_player` (`0x5de00` in `packet.cpp`)
+- **Evidence**: Find next active non-spectator player index in g_players
+```c
+undefined8 FUN_0005de00(void)
+
+{
+  int iVar1;
+  uint uVar2;
+  undefined4 in_EDX;
+  undefined1 uVar3;
+  
+  uVar2 = 0xffffffff;
+  uVar3 = 0;
+  iVar1 = 0;
+  do {
+    if ((((&DAT_0019d0c8)[iVar1] & 1) != 0) && (((&DAT_0019d0c8)[iVar1] & 0x40) == 0)) {
+      if (uVar2 == 0xffffffff) {
+        uVar2 = (uint)(byte)(&DAT_002e90bc)[(uint)(byte)(&DAT_0019d0d3)[iVar1] * 0x11];
+      }
+      else if (uVar2 != (byte)(&DAT_002e90bc)[(uint)(byte)(&DAT_0019d0d3)[iVar1] * 0x11]) {
+        uVar3 = 1;
+      }
+    }
+    iVar1 = iVar1 + 0x4ef;
+  } while (iVar1 != 0x18ab);
+  return CONCAT44(in_EDX,CONCAT31(0x18,uVar3));
+}
+```
+
+### `process_players_packet_control_flags` (`0x5de7c` in `packet.cpp`)
+- **Evidence**: Apply incoming Packet.player_flags and control_flags to PlayerInfo
+```c
+undefined8 FUN_0005de7c(void)
+
+{
+  byte bVar1;
+  int in_EAX;
+  int iVar2;
+  int iVar3;
+  undefined4 uVar4;
+  uint uVar5;
+  undefined4 in_EDX;
+  undefined4 extraout_EDX;
+  
+  iVar2 = in_EAX * 0x4ef;
+  iVar3 = (uint)(byte)(&DAT_0019d0d3)[iVar2] * 0x11;
+  (&DAT_0019d0cc)[iVar2] = ((&DAT_002e90c8)[iVar3] & 0x3f) >> 5;
+  (&DAT_0019d0cd)[iVar2] = ((&DAT_002e90c8)[iVar3] & 0x7f) >> 6;
+  if ((((&DAT_0019d0c8)[iVar2] & 4) != 0) && ((&DAT_002e90bd)[iVar3] == 'y')) {
+    uVar4 = FUN_0005f4d9();
+    return CONCAT44(in_EDX,uVar4);
+  }
+  uVar5 = FUN_0005e01e();
+  if ((char)uVar5 == '\0') {
+    bVar1 = (&DAT_0019d51a)[iVar2] - 1;
+    uVar5 = CONCAT31((int3)(uVar5 >> 8),bVar1);
+    if (bVar1 < 6) {
+      uVar5 = (uint)bVar1;
+      switch(uVar5) {
+      case 0:
+        FUN_0005f163();
+        uVar4 = FUN_0005eb8d();
+        return CONCAT44(in_EDX,uVar4);
+      case 1:
+        FUN_0005ec71();
+        uVar4 = FUN_0005f049();
+        return CONCAT44(in_EDX,uVar4);
+      case 2:
+        uVar4 = FUN_0005f001();
+        return CONCAT44(in_EDX,uVar4);
+      case 3:
+        FUN_0005f3ad();
+        return CONCAT44(in_EDX,extraout_EDX);
+      }
+    }
+  }
+  return CONCAT44(in_EDX,uVar5);
+}
+```
+
+### `packet_vio_table_data_block` (`0x5df2f` in `packet.cpp`)
+- **Evidence**: Embedded data/thunk block in packet.cpp
+```c
+/* WARNING: Control flow encountered bad instruction data */
+/* WARNING: Instruction at (ram,0x0005df8a) overlaps instruction at (ram,0x0005df85)
+    */
+/* WARNING: Removing unreachable block (ram,0x0005df79) */
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void FUN_0005df2f(void)
+
+{
+  ushort *puVar1;
+  int *piVar2;
+  byte bVar3;
+  undefined1 uVar5;
+  undefined4 uVar6;
+  byte bVar7;
+  byte bVar9;
+  uint uVar10;
+  byte *pbVar11;
+  char in_AL;
+  uint uVar12;
+  int iVar13;
+  char *pcVar14;
+  char *in_ECX;
+  byte *pbVar15;
+  byte bVar16;
+  char extraout_DL;
+  undefined2 uVar17;
+  int in_EDX;
+  byte bVar18;
+  char cVar20;
+  char *unaff_EBX;
+  undefined3 uVar21;
+  int unaff_EBP;
+  undefined1 *unaff_ESI;
+  byte *pbVar22;
+  undefined4 *unaff_EDI;
+  bool in_CF;
+  byte in_AF;
+  bool in_ZF;
+  bool in_SF;
+  byte bVar4;
+  byte bVar8;
+  char *pcVar19;
+  
+  if (((!in_SF) && (!in_CF && !in_ZF)) && (!in_ZF)) {
+    if (in_CF) {
+                    /* WARNING: Bad instruction - Truncating control flow here */
+      halt_baddata();
+    }
+    pbVar22 = unaff_ESI + 1;
+    uVar17 = (undefined2)in_EDX;
+    out(*unaff_ESI,uVar17);
+    uVar6 = in(uVar17);
+    *unaff_EDI = uVar6;
+    uVar5 = in(uVar17);
+    *(undefined1 *)(unaff_EDI + 1) = uVar5;
+    puVar1 = (ushort *)(in_EDX + 0x61);
+    *puVar1 = *puVar1 + (ushort)(0 < (short)-(*puVar1 & 3)) * -(*puVar1 & 3);
+    pbVar11 = _DAT_00000070;
+    uVar6 = _DAT_00000068;
+    _DAT_00000068 = 0x6c;
+    _DAT_00000064 = uVar6;
+    _DAT_00000060 = _DAT_0000006c;
+    _DAT_0000005c = _DAT_00000070;
+    _DAT_00000058 = _DAT_00000074;
+    bVar9 = 9 < ((byte)_DAT_00000074 & 0xf) | in_AF;
+    uVar12 = CONCAT31((int3)((uint)_DAT_00000074 >> 8),(byte)_DAT_00000074 + bVar9 * '\x06') &
+             0xffffff0f;
+    uVar10 = (uint)_DAT_00000074 >> 8;
+    bVar7 = *_DAT_00000070;
+    bVar18 = (byte)uVar6;
+    bVar8 = *_DAT_00000070;
+    uVar21 = (undefined3)((uint)uVar6 >> 8);
+    pcVar19 = (char *)CONCAT31(uVar21,bVar18 - bVar8);
+    bVar3 = *pbVar22;
+    bVar16 = (byte)_DAT_0000006c;
+    bVar4 = *pbVar22;
+    _DAT_0000006c = unaff_EBP;
+    _DAT_00000070 = pbVar22;
+    _DAT_00000074 = (undefined4 *)((int)unaff_EDI + 5);
+    *pbVar22 = (bVar4 - bVar16) - (bVar18 < bVar7);
+    iVar13 = (CONCAT22((short)(uVar12 >> 0x10),CONCAT11((char)uVar10 + bVar9,(char)uVar12)) &
+             0x1b1c1d24) + 0x50d0e14 +
+             (uint)(bVar3 < bVar16 || (byte)(bVar4 - bVar16) < (bVar18 < bVar7));
+    pcVar14 = (char *)CONCAT31((int3)((uint)iVar13 >> 8),(char)iVar13 + '\x03');
+    piVar2 = (int *)(unaff_ESI + 0x6c0005ec);
+    *piVar2 = (int)(pcVar14 + *piVar2);
+    pbVar15 = pbVar11 + -1;
+    cVar20 = (char)((uint)uVar6 >> 8);
+    if (pbVar15 == (byte *)0x0 || *piVar2 == 0) {
+      *pcVar14 = *pcVar14 + bVar16;
+      pbVar15 = pbVar11 + -2;
+      if (pbVar15 == (byte *)0x0 || *pcVar14 != '\0') {
+        pcVar14[-0x1d] = pcVar14[-0x1d] + (char)pbVar15;
+        pcVar14 = pcVar14 + 0x5e1be00;
+        pcVar19 = (char *)CONCAT31(uVar21,(bVar18 - bVar8) + cVar20);
+      }
+      else {
+        pbVar22 = (byte *)0xfb0005e1;
+      }
+    }
+    else {
+      pcVar14 = pcVar14 + -1;
+      if (pbVar15 != (byte *)0x0) {
+        unaff_ESI[-0x4fffa1e] = unaff_ESI[-0x4fffa1e] + cVar20;
+      }
+    }
+    pbVar15 = pbVar15 + -1;
+    cVar20 = (char)pcVar19;
+    if (pbVar15 == (byte *)0x0) {
+      *pcVar19 = *pcVar19 + (char)pcVar14;
+    }
+    else if (pbVar15 == (byte *)0x0) {
+      *_DAT_00000058 = *(undefined4 *)pbVar22;
+      pcVar19 = &DAT_0000005c;
+    }
+    else {
+      pcVar19[0x2f0005e3] = pcVar19[0x2f0005e3] + (char)pbVar15;
+      pcVar19 = &DAT_0000005c;
+    }
+    *(char *)(unaff_EBP + -0x5afffa1b) = *(char *)(unaff_EBP + -0x5afffa1b) + cVar20;
+    pcVar19[-0xffffffff00000004] = -0x70;
+    pcVar19[-0xffffffff00000003] = -0x21;
+    pcVar19[-0xffffffff00000002] = '\x05';
+    pcVar19[-0xffffffff00000001] = '\0';
+    func_0xe5dbdf95();
+    DAT_280005e9 = DAT_280005e9 + extraout_DL;
+                    /* WARNING: Bad instruction - Truncating control flow here */
+    halt_baddata();
+  }
+  *in_ECX = *in_ECX + in_AL;
+  iVar13 = in(5);
+  *(char *)((int)unaff_EDI + -0x1d) = *(char *)((int)unaff_EDI + -0x1d) + (char)in_ECX;
+  *unaff_EBX = *unaff_EBX + (char)in_EDX;
+  out(5,(char)(iVar13 + 0x5e96900));
+  *(char *)(iVar13 + 0x29e96ee6) = *(char *)(iVar13 + 0x29e96ee6) + (char)unaff_EBX;
+  out(5,iVar13 + 0x5e96900);
+  cRamec0005ea = cRamec0005ea + (char)in_ECX;
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
+}
+```
+
+### `process_all_players_turn_packets` (`0x5e01e` in `packet.cpp`)
+- **Evidence**: Main per-turn dispatcher executing Packet actions for all active players
+```c
+void FUN_0005e01e(void)
+
+{
+  code cVar1;
+  int in_EAX;
+  int iVar2;
+  code *pcVar3;
+  
+  iVar2 = 0x30;
+  pcVar3 = FUN_0005df2f;
+  do {
+    if (iVar2 == 0) break;
+    iVar2 = iVar2 + -1;
+    cVar1 = *pcVar3;
+    pcVar3 = pcVar3 + 1;
+  } while ((code)(&DAT_002e90bd)[(uint)(byte)(&DAT_0019d0d3)[in_EAX * 0x4ef] * 0x11] != cVar1);
+                    /* WARNING: Could not recover jumptable at 0x0005e064. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(iVar2 * 4 + 0x5df5e))();
+  return;
+}
+```
+
+### `process_players_dungeon_control_packet` (`0x5eb8d` in `packet.cpp`)
+- **Evidence**: Execute dungeon-view Packet action for a player
+```c
+void FUN_0005eb8d(void)
+
+{
+  byte bVar1;
+  int in_EAX;
+  
+  bVar1 = (&DAT_002e90bd)[(uint)(byte)(&DAT_0019d0d3)[in_EAX * 0x4ef] * 0x11];
+  if (bVar1 < 0x5f) {
+    if (0x28 < bVar1) {
+      if (bVar1 < 0x2a) {
+        FUN_0004efd4();
+        return;
+      }
+      if (bVar1 == 0x5d) {
+        FUN_000708fa();
+        return;
+      }
+    }
+    return;
+  }
+  if (bVar1 < 0x60) {
+    FUN_00070a3c();
+    return;
+  }
+  if (0x60 < bVar1) {
+    if (bVar1 != 0x6b) {
+      return;
+    }
+    FUN_00021527();
+    return;
+  }
+  FUN_00070ac6();
+  return;
+}
+```
+
+### `process_players_creature_control_packet` (`0x5ec71` in `packet.cpp`)
+- **Evidence**: Execute first-person creature possession Packet movement & instance actions
+```c
+void FUN_0005ec71(void)
+
+{
+  int iVar1;
+  short sVar2;
+  short sVar3;
+  int in_EAX;
+  int iVar4;
+  int iVar5;
+  int iVar6;
+  undefined2 uVar7;
+  uint uVar8;
+  int *piVar9;
+  undefined4 uStack_2c;
+  int local_28 [2];
+  undefined1 *local_20;
+  undefined *local_1c;
+  
+  iVar4 = in_EAX * 0x4ef;
+  local_20 = &DAT_0019d0c8 + iVar4;
+  iVar5 = (uint)(byte)(&DAT_0019d0d3)[iVar4] * 0x11;
+  iVar4 = (&DAT_001ae9fc)[*(ushort *)((int)&DAT_0019d0f7 + iVar4)];
+  local_28[1] = 1;
+  local_1c = &DAT_002e90b8 + iVar5;
+  if ((((*(char *)(iVar4 + 0x1f) == '\x05') &&
+       (iVar1 = (&DAT_001b0a00)[*(ushort *)(iVar4 + 100)], -1 < *(short *)(iVar4 + 0x5e))) &&
+      (*(char *)(iVar1 + 0xab) == '\0')) && (*(char *)(iVar4 + 7) != 'C')) {
+    uVar8 = (uint)*(ushort *)(iVar1 + 0xc4);
+    if (0x100 < uVar8) {
+      uVar8 = 0x100;
+    }
+    uVar7 = (undefined2)uVar8;
+    sVar3 = (short)((int)uVar8 >> 2);
+    if ((*(byte *)((int)&DAT_002e90c6 + iVar5) & 4) != 0) {
+      sVar2 = *(short *)(iVar1 + 200) + sVar3;
+      *(short *)(iVar1 + 200) = sVar2;
+      if ((int)uVar8 < (int)sVar2) {
+        *(undefined2 *)(iVar1 + 200) = uVar7;
+      }
+      *(byte *)(iVar1 + 1) = *(byte *)(iVar1 + 1) | 0x40;
+      local_28[0] = (int)uVar8 >> 2;
+    }
+    if ((*(byte *)((int)&DAT_002e90c6 + iVar5) & 8) != 0) {
+      sVar2 = *(short *)(iVar1 + 200) - sVar3;
+      *(short *)(iVar1 + 200) = sVar2;
+      if ((int)sVar2 < (int)-uVar8) {
+        *(undefined2 *)(iVar1 + 200) = uVar7;
+        *(short *)(iVar1 + 200) = -*(short *)(iVar1 + 200);
+      }
+      *(byte *)(iVar1 + 1) = *(byte *)(iVar1 + 1) | 0x40;
+    }
+    if ((*(byte *)((int)&DAT_002e90c6 + iVar5) & 0x10) != 0) {
+      sVar2 = *(short *)(iVar1 + 0xca) + sVar3;
+      *(short *)(iVar1 + 0xca) = sVar2;
+      if ((int)sVar2 < (int)-uVar8) {
+        *(undefined2 *)(iVar1 + 0xca) = uVar7;
+        *(short *)(iVar1 + 0xca) = -*(short *)(iVar1 + 0xca);
+      }
+      else if ((int)uVar8 < (int)sVar2) {
+        *(undefined2 *)(iVar1 + 0xca) = uVar7;
+      }
+      *(byte *)(iVar1 + 1) = *(byte *)(iVar1 + 1) | 0x80;
+    }
+    if ((*(byte *)((int)&DAT_002e90c6 + iVar5) & 0x20) != 0) {
+      sVar3 = *(short *)(iVar1 + 0xca) - sVar3;
+      *(short *)(iVar1 + 0xca) = sVar3;
+      if ((int)sVar3 < (int)-uVar8) {
+        *(undefined2 *)(iVar1 + 0xca) = uVar7;
+        *(short *)(iVar1 + 0xca) = -*(short *)(iVar1 + 0xca);
+      }
+      else if ((int)uVar8 < (int)sVar3) {
+        *(undefined2 *)(iVar1 + 0xca) = uVar7;
+      }
+      *(byte *)(iVar1 + 1) = *(byte *)(iVar1 + 1) | 0x80;
+    }
+    piVar9 = local_28;
+    if (((*(byte *)((int)&DAT_002e90c6 + iVar5 + 1) & 0x10) != 0) &&
+       (piVar9 = local_28, *(char *)(iVar1 + 0xd2) == '\0')) {
+      uStack_2c = 0x5ee42;
+      iVar5 = FUN_00049e95();
+      piVar9 = local_28;
+      if (iVar5 != 0) {
+        uStack_2c = 0x5ee54;
+        iVar5 = FUN_00049ea9();
+        piVar9 = local_28;
+        if (iVar5 != 0) {
+          piVar9 = &uStack_2c;
+          uStack_2c = 0;
+          FUN_000e3e78();
+          FUN_00049bfc();
+        }
+      }
+    }
+    if ((((local_1c[0xf] & 4) != 0) &&
+        ((&DAT_0018ee05)[(uint)*(byte *)(iVar1 + 0x1e8) * 0x2a] != '\0')) &&
+       ((*(char *)(iVar1 + 0xd2) == '\0' || (*(char *)(iVar1 + 0xd2) == *(char *)(iVar1 + 0x1e8)))))
+    {
+      *(undefined4 *)((int)piVar9 + -4) = 0;
+      *(undefined4 *)((int)piVar9 + -8) = 0x5eedb;
+      FUN_000e3e78();
+      *(undefined4 *)((int)piVar9 + -8) = 0x5eeeb;
+      FUN_00049bfc();
+    }
+    uVar8 = (uint)*(ushort *)(local_1c + 0xc);
+    if (uVar8 < 5) {
+      uVar8 = 5;
+    }
+    if (0xfa < uVar8) {
+      uVar8 = 0xfa;
+    }
+    iVar5 = (int)(*(ushort *)(local_1c + 10) - 0x7f) / (int)(uint)(byte)local_20[0x14];
+    if (iVar5 != 0) {
+      if (iVar5 < -0x20) {
+        iVar5 = -0x20;
+      }
+      else if (0x20 < iVar5) {
+        iVar5 = 0x20;
+      }
+      iVar6 = iVar5 * 0x38 >> 0x1f;
+      *(short *)(iVar1 + 0x6c) =
+           *(short *)(iVar1 + 0x6c) +
+           (short)((int)((iVar5 * 0x38 + iVar6 * -0x20) - (uint)(iVar6 << 4 < 0)) >> 5) *
+           (short)local_28[1];
+    }
+    iVar5 = (uint)*(byte *)(iVar4 + 0x1a) * 0xe6;
+    if ((int)*(short *)(iVar1 + 0x6c) < (int)-(uint)*(ushort *)(&DAT_002e9160 + iVar5)) {
+      *(undefined2 *)(iVar1 + 0x6c) = *(undefined2 *)(&DAT_002e9160 + iVar5);
+      *(short *)(iVar1 + 0x6c) = -*(short *)(iVar1 + 0x6c);
+    }
+    else if ((int)(uint)*(ushort *)(&DAT_002e9160 + iVar5) < (int)*(short *)(iVar1 + 0x6c)) {
+      *(undefined2 *)(iVar1 + 0x6c) = *(undefined2 *)(&DAT_002e9160 + iVar5);
+    }
+    *(ushort *)(iVar4 + 0x52) = *(short *)(iVar4 + 0x52) + *(short *)(iVar1 + 0x6c) & 0x7ff;
+    *(ushort *)(iVar4 + 0x54) = (ushort)((int)((uVar8 - 0x7f) * 0xe3) / 0x7f) & 0x7ff;
+    *(short *)(iVar1 + 0xcc) =
+         (short)((*(short *)(iVar1 + 0x6c) * 0xaa) /
+                (int)(uint)*(ushort *)(&DAT_002e9160 + (uint)*(byte *)(iVar4 + 0x1a) * 0xe6));
+    if (*(short *)(iVar1 + 0x6c) != 0) {
+      iVar4 = *(short *)(iVar1 + 0x6c) * 4;
+      iVar5 = iVar4 >> 0x1f;
+      *(short *)(iVar1 + 0x6c) = (short)((int)((iVar4 + iVar5 * -8) - (uint)(iVar5 << 2 < 0)) >> 3);
+    }
+  }
+  return;
+}
+```
+
+### `process_players_spectator_packet` (`0x5f001` in `packet.cpp`)
+- **Evidence**: Handle spectator view packet toggle
+```c
+void FUN_0005f001(void)
+
+{
+  int in_EAX;
+  
+  if ((&DAT_002e90bd)[(uint)(byte)(&DAT_0019d0d3)[in_EAX * 0x4ef] * 0x11] != ' ') {
+    return;
+  }
+  *(undefined2 *)(&DAT_0019d506 + in_EAX * 0x4ef) =
+       *(undefined2 *)(&DAT_002e90be + (uint)(byte)(&DAT_0019d0d3)[in_EAX * 0x4ef] * 0x11);
+  FUN_00049eff();
+  return;
+}
+```
+
+### `process_players_map_view_packet` (`0x5f049` in `packet.cpp`)
+- **Evidence**: Handle parchment map view zoom/exit packet actions
+```c
+void FUN_0005f049(void)
+
+{
+  byte bVar1;
+  int in_EAX;
+  int iVar2;
+  int iVar3;
+  
+  iVar2 = in_EAX * 0x4ef;
+  iVar3 = (uint)(byte)(&DAT_0019d0d3)[iVar2] * 0x11;
+  bVar1 = (&DAT_002e90bd)[iVar3];
+  if (0x20 < bVar1) {
+    if (bVar1 < 0x22) {
+      *(undefined2 *)(&DAT_0019d506 + iVar2) = *(undefined2 *)(&DAT_002e90be + iVar3);
+      FUN_00049eff();
+    }
+    else if (bVar1 == 0x27) {
+      if ((&DAT_0018edeb)[*(short *)(&DAT_002e90be + iVar3) * 0x2a] == '\0') {
+        *(undefined1 *)
+         ((&DAT_001b0a00)
+          [*(ushort *)((&DAT_001ae9fc)[*(ushort *)((int)&DAT_0019d0f7 + iVar2)] + 100)] + 0x1e8) =
+             (&DAT_002e90be)[iVar3];
+      }
+      else if (((*(char *)((&DAT_001b0a00)
+                           [*(ushort *)
+                             ((&DAT_001ae9fc)[*(ushort *)((int)&DAT_0019d0f7 + iVar2)] + 100)] +
+                          0xd2) == '\0') && (iVar3 = FUN_00049e95(), iVar3 != 0)) &&
+              (iVar3 = FUN_00049ea9(), iVar3 != 0)) {
+        FUN_000e3e78(0);
+        FUN_00049bfc();
+        if (&DAT_0019d0c8 + DAT_002f10ce._3_1_ * 0x4ef == &DAT_0019d0c8 + iVar2) {
+          FUN_0005345d();
+        }
+      }
+    }
+  }
+  return;
+}
+```
+
+### `process_players_global_packet_action` (`0x5f163` in `packet.cpp`)
+- **Evidence**: Execute global hotkeys, pause, message, and view-mode Packet actions
+```c
+void FUN_0005f163(void)
+
+{
+  byte bVar1;
+  int iVar2;
+  int in_EAX;
+  int iVar3;
+  undefined1 *puVar4;
+  undefined1 *extraout_ECX;
+  undefined1 *extraout_ECX_00;
+  undefined1 *extraout_ECX_01;
+  undefined1 *extraout_ECX_02;
+  undefined1 *extraout_ECX_03;
+  undefined1 *extraout_ECX_04;
+  undefined1 *extraout_ECX_05;
+  undefined1 *extraout_ECX_06;
+  
+  puVar4 = &DAT_0019d0c8 + in_EAX * 0x4ef;
+  iVar3 = (uint)(byte)(&DAT_0019d0d3)[in_EAX * 0x4ef] * 0x11;
+  if ((*(byte *)((int)&DAT_002e90c6 + iVar3) & 4) != 0) {
+    FUN_00077ad0();
+    puVar4 = extraout_ECX;
+  }
+  if ((*(byte *)((int)&DAT_002e90c6 + iVar3) & 8) != 0) {
+    FUN_00077ad0();
+    puVar4 = extraout_ECX_00;
+  }
+  if ((*(byte *)((int)&DAT_002e90c6 + iVar3) & 0x10) != 0) {
+    FUN_00077b0f();
+    puVar4 = extraout_ECX_01;
+  }
+  if ((*(byte *)((int)&DAT_002e90c6 + iVar3) & 0x20) != 0) {
+    FUN_00077b0f();
+    puVar4 = extraout_ECX_02;
+  }
+  if ((*(byte *)((int)&DAT_002e90c6 + iVar3) & 2) != 0) {
+    iVar2 = *(int *)(puVar4 + 0x38);
+    bVar1 = *(byte *)(iVar2 + 6);
+    if (1 < bVar1) {
+      if (bVar1 < 3) {
+        FUN_00077b4e();
+        puVar4 = extraout_ECX_03;
+      }
+      else if (bVar1 == 5) {
+        *(uint *)(iVar2 + 7) = *(int *)(iVar2 + 7) + 0x200U & 0x7ff;
+      }
+    }
+  }
+  if ((*(byte *)((int)&DAT_002e90c6 + iVar3) & 1) != 0) {
+    iVar2 = *(int *)(puVar4 + 0x38);
+    bVar1 = *(byte *)(iVar2 + 6);
+    if (1 < bVar1) {
+      if (bVar1 < 3) {
+        FUN_00077b4e();
+        puVar4 = extraout_ECX_04;
+      }
+      else if (bVar1 == 5) {
+        *(uint *)(iVar2 + 7) = *(int *)(iVar2 + 7) + 0x600U & 0x7ff;
+      }
+    }
+  }
+  if ((*(byte *)((int)&DAT_002e90c6 + iVar3) & 0x40) != 0) {
+    if (*(char *)(*(int *)(puVar4 + 0x38) + 6) == '\x02') {
+      FUN_00077f16();
+      FUN_000780a3();
+      FUN_000780c2();
+      puVar4 = extraout_ECX_05;
+    }
+    else {
+      FUN_00077f16();
+      puVar4 = extraout_ECX_06;
+    }
+  }
+  if ((*(byte *)((int)&DAT_002e90c6 + iVar3) & 0x80) != 0) {
+    if (*(char *)(*(int *)(puVar4 + 0x38) + 6) == '\x02') {
+      FUN_00077fdc();
+      FUN_000780a3();
+      FUN_000780c2();
+    }
+    else {
+      FUN_00077fdc();
+    }
+  }
+  FUN_0005f6c5();
+  FUN_0005f438();
+  return;
+}
+```
+
+### `process_players_creature_passenger_packet` (`0x5f3ad` in `packet.cpp`)
+- **Evidence**: Update camera position and actions while riding a possessed creature
+```c
+void FUN_0005f3ad(void)
+
+{
+  int iVar1;
+  int in_EAX;
+  int iVar2;
+  int extraout_ECX;
+  int iVar3;
+  
+  iVar2 = in_EAX * 0x4ef;
+  iVar1 = (*(ushort *)(&DAT_002e90c2 + (uint)(byte)(&DAT_0019d0d3)[iVar2] * 0x11) - 0x96) * 3;
+  iVar3 = iVar1 >> 0x1f;
+  FUN_00061751();
+  *(short *)(&DAT_0019d158 + iVar2) =
+       ((short)((int)((iVar1 + iVar3 * -4) - (uint)(iVar3 << 1 < 0)) >> 2) + 1) * 0x100 + 0x80;
+  *(short *)(&DAT_0019d15a + iVar2) = (short)(extraout_ECX << 8) + 0x80;
+  FUN_0005f438();
+  return;
+}
+```
+
+### `packet_update_player_zoom_box` (`0x5f438` in `packet.cpp`)
+- **Evidence**: Update player camera zoom/bounding box from packet control flags
+```c
+void FUN_0005f438(void)
+
+{
+  undefined4 uVar1;
+  int in_EAX;
+  undefined1 *extraout_EDX;
+  byte bVar2;
+  undefined2 local_18 [2];
+  
+  bVar2 = 0;
+  if (*(short *)(in_EAX + 0x460) != 0) {
+    if ((*(byte *)((int)&DAT_002e90c6 +
+                  (uint)(byte)(&DAT_0019d0d3)[(uint)*(byte *)(in_EAX + 0x2b) * 0x4ef] * 0x11 + 1) &
+        0x80) == 0) {
+      FUN_000ad66c();
+    }
+    else {
+      uVar1 = *(undefined4 *)
+               (&DAT_002e90c2 +
+               (uint)(byte)(&DAT_0019d0d3)[(uint)*(byte *)(in_EAX + 0x2b) * 0x4ef] * 0x11);
+      local_18[0] = FUN_000b3788();
+      if (extraout_EDX == &DAT_0019d0c8 + DAT_002f10ce._3_1_ * 0x4ef) {
+        DAT_002e90b2 = uVar1;
+        (&DAT_002e90b6)[(uint)bVar2 * -4] = local_18[(uint)bVar2 * -4];
+      }
+      FUN_000ad54c();
+      FUN_000acdfc();
+    }
+  }
+  return;
+}
+```
+
+### `packet_check_thing_interaction_valid` (`0x5f4d9` in `packet.cpp`)
+- **Evidence**: Verify whether player can interact with target Thing in packet
+```c
+void FUN_0005f4d9(void)
+
+{
+  undefined1 uVar1;
+  int in_EAX;
+  int iVar2;
+  int extraout_ECX;
+  char cVar3;
+  ulonglong uVar4;
+  
+  if (-1 < *(short *)(&DAT_002e90be +
+                     (uint)(byte)(&DAT_0019d0d3)[(uint)*(byte *)(in_EAX + 0x2b) * 0x4ef] * 0x11)) {
+    uVar4 = FUN_000efdb4();
+    iVar2 = (int)uVar4;
+    if (extraout_ECX == 0xe) {
+      if (iVar2 != 0) {
+        *(undefined1 *)(in_EAX + 0x462 + iVar2) = 0;
+        return;
+      }
+    }
+    else {
+      cVar3 = (char)(uVar4 >> 0x20);
+      if ((((uVar4 & 0x8000000000) == 0) &&
+          (((('`' < cVar3 && (cVar3 < '{')) || (('@' < cVar3 && (cVar3 < '[')))) ||
+           ((('/' < cVar3 && (cVar3 < ':')) || (cVar3 == ' ')))))) && (iVar2 < 0x3e)) {
+        uVar1 = FUN_000f43c7();
+        *(undefined1 *)(iVar2 + 0x464 + in_EAX) = 0;
+        *(undefined1 *)(iVar2 + 0x463 + in_EAX) = uVar1;
+      }
+    }
+  }
+  return;
+}
+```
+
+### `packet_can_player_afford_room_or_trap` (`0x5f577` in `packet.cpp`)
+- **Evidence**: Check if player gold covers cost of room/trap kind
+```c
+uint FUN_0005f577(void)
+
+{
+  char cVar1;
+  int in_EAX;
+  uint uVar2;
+  byte in_DL;
+  int unaff_EBX;
+  int iVar3;
+  
+  uVar2 = in_EAX + 1U >> 2;
+  if (7 < uVar2) {
+    uVar2 = 8;
+  }
+  if (*(int *)(&DAT_002eae11 + uVar2 * 4 + (uint)in_DL * 0x4c) <= unaff_EBX) {
+    return in_EAX + 1U;
+  }
+  uVar2 = in_EAX + 1U >> 2;
+  if (7 < uVar2) {
+    uVar2 = 8;
+  }
+  while( true ) {
+    cVar1 = (char)uVar2;
+    iVar3 = cVar1 * 4;
+    if (*(int *)(&DAT_002eae11 + iVar3 + (uint)in_DL * 0x4c) <= unaff_EBX) break;
+    uVar2 = (uint)(byte)(cVar1 - 1);
+  }
+  if (cVar1 < 0) {
+    return 0;
+  }
+  return iVar3 + 1;
+}
+```
+
+### `packet_is_subtile_revealed_for_player` (`0x5f5db` in `packet.cpp`)
+- **Evidence**: Check if map subtile (x, y) is revealed for player bitmask
+```c
+uint FUN_0005f5db(void)
+
+{
+  int in_EAX;
+  int iVar1;
+  uint uVar2;
+  int in_EDX;
+  uint unaff_EBX;
+  
+  if ((*(uint *)((int)&DAT_00279203 + (in_EDX * 0x100 + in_EAX) * 5 + 1) >> 0x1c &
+      1 << ((byte)unaff_EBX & 0x1f)) != 0) {
+    iVar1 = ((&DAT_0019033b)[in_EAX] + (&DAT_0019033b)[in_EDX] * 0x55) * 6;
+    uVar2 = (uint)(byte)(&DAT_002d33c5)[iVar1];
+    if (((0x29 < uVar2) && (uVar2 < 0x30)) && (((&DAT_002d33ca)[iVar1] & 7) == unaff_EBX)) {
+      return (&DAT_002d33ca)[iVar1] & 7 ^ unaff_EBX;
+    }
+    if ((*(uint *)(&DAT_001921c6 + uVar2 * 0x16) & 0x29) == 0) {
+      return 0;
+    }
+  }
+  return 1;
+}
+```
+
+### `process_players_dungeon_command_packet` (`0x5f6c5` in `packet.cpp`)
+- **Evidence**: Master switch executing dungeon build, dig, slap, pickup, drop, and spell Packet commands
 ```c
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
@@ -2413,8 +3338,38 @@ switchD_0005f95d_caseD_5:
 }
 ```
 
-### `dk_open_keeper_packet_file_0617c9` (`0x617c9` in `packet.cpp`)
-- **Evidence**: String 'Cannot open keeper packet file for save'
+### `clear_packet_for_player` (`0x61751` in `packet.cpp`)
+- **Evidence**: Zero out a player's 17-byte Packet slot for the upcoming turn
+```c
+void FUN_00061751(void)
+
+{
+  int in_EAX;
+  int iVar1;
+  int iVar2;
+  
+  iVar1 = (uint)(byte)(&DAT_0019d0d3)[in_EAX * 0x4ef] * 0x11;
+  iVar2 = in_EAX * 4;
+  *(undefined4 *)(&DAT_0034d208 + iVar2) = 0;
+  if ((*(byte *)((int)&DAT_002e90c6 + iVar1 + 1) & 0x40) == 0) {
+    if ((*(byte *)((int)&DAT_002e90c6 + iVar1 + 1) & 0x10) != 0) {
+      if (*(int *)(&DAT_0034d1f4 + iVar2) < 5) {
+        *(undefined4 *)(&DAT_0034d208 + iVar2) = 1;
+      }
+      *(undefined4 *)(&DAT_0034d1f4 + in_EAX * 4) = 0;
+    }
+    if ((((*(byte *)((int)&DAT_002e90c6 + iVar1 + 1) & 4) == 0) &&
+        ((*(byte *)((int)&DAT_002e90c6 + iVar1 + 1) & 1) == 0)) &&
+       (*(int *)(&DAT_0034d1f4 + in_EAX * 4) < 0x7fffffff)) {
+      *(int *)(&DAT_0034d1f4 + in_EAX * 4) = *(int *)(&DAT_0034d1f4 + in_EAX * 4) + 1;
+    }
+  }
+  return;
+}
+```
+
+### `open_new_packet_file_for_save` (`0x617c9` in `packet.cpp`)
+- **Evidence**: Create and write header for new .PKT replay recording file
 ```c
 void FUN_000617c9(void)
 
@@ -2437,8 +3392,28 @@ void FUN_000617c9(void)
 }
 ```
 
-### `dk_open_keeper_packet_file_0618f5` (`0x618f5` in `packet.cpp`)
-- **Evidence**: String 'Cannot open keeper packet file for load'
+### `write_turn_packets_to_file` (`0x61883` in `packet.cpp`)
+- **Evidence**: Compute Thing checksum (compute_things_checksum) and write turn Packets to .PKT file
+```c
+void FUN_00061883(void)
+
+{
+  if (DAT_002e6fc4 != '\0') {
+    if (DAT_002e6fe5 != '\0') {
+      FUN_000ddafc();
+    }
+    FUN_000e8a34();
+    FUN_000e8c83();
+    FUN_000e8c83();
+    FUN_000e8a8c();
+    FUN_000f43d5();
+  }
+  return;
+}
+```
+
+### `open_packet_file_for_load` (`0x618f5` in `packet.cpp`)
+- **Evidence**: Open existing .PKT replay file and validate header
 ```c
 void FUN_000618f5(void)
 
@@ -2468,8 +3443,8 @@ void FUN_000618f5(void)
 }
 ```
 
-### `dk_packet_saving_seek_offset_0619be` (`0x619be` in `packet.cpp`)
-- **Evidence**: String 'Packet Saving Seek Offset is wrong'
+### `load_turn_packets_from_file` (`0x619be` in `packet.cpp`)
+- **Evidence**: Seek and read per-turn Packet structures from open .PKT replay file
 ```c
 void FUN_000619be(void)
 
@@ -2542,7 +3517,396 @@ void FUN_000619be(void)
 }
 ```
 
-### `dk_LbNetwork_Init_0ed4e0` (`0xed4e0` in `bflib/bflib_network.cpp`)
+### `packet_possess_thing_direct` (`0x61bde` in `packet.cpp`)
+- **Evidence**: Directly attach player camera to possessed Thing
+```c
+void FUN_00061bde(void)
+
+{
+  byte in_AL;
+  uint uVar1;
+  int iVar2;
+  
+  FUN_000e6a10();
+  uVar1 = FUN_00043f07();
+  if (DAT_001ae9fc < uVar1) {
+    iVar2 = (uint)in_AL * 0x4ef;
+    *(undefined2 *)(&DAT_0019d502 + iVar2) = *(undefined2 *)(uVar1 + 0x1b);
+    *(undefined4 *)(&DAT_0019d0d4 + iVar2) = 0;
+    if ((DAT_001ae9fc < (&DAT_001ae9fc)[*(ushort *)(&DAT_002e05bc + (uint)in_AL * 0x1508)]) &&
+       (*(char *)((&DAT_001ae9fc)[*(ushort *)(&DAT_002e05bc + (uint)in_AL * 0x1508)] + 0x1f) ==
+        '\x01')) {
+      FUN_000c57a4();
+    }
+    FUN_00061ca3();
+    FUN_00081eac();
+  }
+  return;
+}
+```
+
+### `packet_handle_double_click_action` (`0x61ca3` in `packet.cpp`)
+- **Evidence**: Process double-click packet action within turn threshold
+```c
+void FUN_00061ca3(void)
+
+{
+  int in_EAX;
+  int in_EDX;
+  int iVar1;
+  undefined4 uVar2;
+  
+  iVar1 = in_EAX * 0x4ef;
+  if ((DAT_002e8bee <= *(uint *)(&DAT_0019d0d8 + iVar1)) && ((in_EDX == 0x312 || (in_EDX == 0x313)))
+     ) {
+    *(undefined4 *)(&DAT_0019d0d8 + iVar1) = 0;
+  }
+  if ((*(uint *)(&DAT_0019d0d8 + iVar1) < DAT_002e8bee) &&
+     (in_EDX != *(int *)(&DAT_0019d0d4 + iVar1))) {
+    *(int *)(&DAT_0019d0d4 + iVar1) = in_EDX;
+    if ((in_EDX == 0x30e) || (in_EDX == 0x30d)) {
+      uVar2 = 0;
+    }
+    else {
+      uVar2 = 1;
+    }
+    FUN_0008ccec(uVar2,0,2);
+    FUN_0004fbd8();
+  }
+  return;
+}
+```
+
+### `packet_activate_dungeon_special_or_spell` (`0x61d43` in `packet.cpp`)
+- **Evidence**: Trigger dungeon special box or spell from packet command
+```c
+undefined4 FUN_00061d43(char param_1)
+
+{
+  int iVar1;
+  int in_ECX;
+  uint unaff_EBX;
+  int iVar2;
+  
+  iVar2 = unaff_EBX * 0x1508;
+  if ((&DAT_002e15a6)[in_ECX + iVar2] != '\0') {
+    if (param_1 != '\0') {
+      FUN_00022e62();
+      FUN_000449a4(0);
+      FUN_000da6fc();
+      iVar1 = FUN_00077a5b();
+      if (iVar1 != 0) {
+        FUN_0007795d();
+        *(int *)(&DAT_002e1808 + iVar2) = *(int *)(&DAT_002e1808 + iVar2) + 1;
+      }
+      iVar1 = (int)DAT_002f10ce._3_1_;
+      *(undefined4 *)(&DAT_002e142d + iVar2) = 0xc0;
+      if ((byte)(&DAT_0019d0f3)[iVar1 * 0x4ef] == unaff_EBX) {
+        FUN_0006e9ab();
+      }
+      FUN_00061e86();
+      return 1;
+    }
+    if ((byte)(&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef] == unaff_EBX) {
+      FUN_0006e9ab();
+    }
+  }
+  return 0;
+}
+```
+
+### `packet_tag_slab_for_digging` (`0x61e86` in `packet.cpp`)
+- **Evidence**: Tag or untag a 3x3 subtile slab area for imp digging
+```c
+void FUN_00061e86(void)
+
+{
+  char *pcVar1;
+  uint uVar2;
+  int in_EAX;
+  uint uVar3;
+  int iVar4;
+  int extraout_ECX;
+  int in_EDX;
+  int iVar5;
+  int iVar6;
+  
+  for (iVar4 = in_EDX * 0xf00 + in_EAX * 0xf; iVar4 < in_EAX * 0xf + (in_EDX * 3 + 3) * 0x500;
+      iVar4 = iVar4 + 0x500) {
+    iVar5 = (int)&DAT_00279203 + iVar4;
+    for (iVar6 = in_EAX * 3; iVar6 < in_EAX * 3 + 3; iVar6 = iVar6 + 1) {
+      uVar3 = (&DAT_001ae9fc)[(*(uint *)(iVar5 + 1) & 0x3fffff) >> 0xb];
+      while (DAT_001ae9fc < uVar3) {
+        uVar2 = (&DAT_001ae9fc)[*(ushort *)(uVar3 + 2)];
+        pcVar1 = (char *)(uVar3 + 0x1f);
+        uVar3 = uVar2;
+        if (*pcVar1 == '\x04') {
+          FUN_00072af4();
+          iVar4 = extraout_ECX;
+        }
+      }
+      iVar5 = iVar5 + 5;
+    }
+  }
+  return;
+}
+```
+
+### `packet_has_selectable_things_at_subtile` (`0x61f1b` in `packet.cpp`)
+- **Evidence**: Check if subtile contains Things selectable by player hand
+```c
+bool FUN_00061f1b(void)
+
+{
+  int in_EAX;
+  int iVar1;
+  int *in_EDX;
+  int iVar2;
+  int iVar3;
+  
+  if (*(char *)(in_EAX + 0x29) == '\x02') {
+    return false;
+  }
+  iVar2 = 0;
+  iVar3 = 0;
+  iVar1 = 0;
+  do {
+    if (((((&DAT_0019d0c8)[iVar1] & 1) != 0) && ((&DAT_0019d0f4)[iVar1] == '\x01')) &&
+       (iVar2 = iVar2 + 1, (&DAT_0019d0f1)[iVar1] == '\x02')) {
+      iVar3 = iVar3 + 1;
+    }
+    iVar1 = iVar1 + 0x4ef;
+  } while (iVar1 != 0x18ab);
+  *in_EDX = iVar2;
+  return iVar2 == iVar3 + 1;
+}
+```
+
+### `packet_update_pause_mode_state` (`0x61f77` in `packet.cpp`)
+- **Evidence**: Synchronize pause state across singleplayer/multiplayer packet flags
+```c
+/* WARNING: Removing unreachable block (ram,0x0006200e) */
+
+void FUN_00061f77(void)
+
+{
+  byte *in_EAX;
+  int iVar1;
+  int iVar2;
+  byte *pbVar3;
+  int extraout_ECX;
+  int extraout_ECX_00;
+  int extraout_ECX_01;
+  int in_EDX;
+  
+  if ((DAT_0019d0b6 & 1) == 0) {
+    *in_EAX = *in_EAX & 0xfe;
+    pbVar3 = &DAT_0019d0c8 + DAT_002f10ce._3_1_ * 0x4ef;
+  }
+  else {
+    iVar1 = FUN_00061f1b();
+    if (iVar1 != 0) {
+      iVar2 = 0;
+      do {
+        if (((((&DAT_0019d0c8)[iVar2] & 1) != 0) && ((&DAT_0019d0f4)[iVar2] == '\x01')) &&
+           ((&DAT_0019d0f1)[iVar2] == '\0')) {
+          (&DAT_0019d0f1)[iVar2] = 1;
+        }
+        iVar2 = iVar2 + 0x4ef;
+      } while (iVar2 != 0x18ab);
+    }
+    if (((in_EAX == &DAT_0019d0c8 + DAT_002f10ce._3_1_ * 0x4ef) ||
+        (iVar2 = FUN_00032f5c(), iVar2 != 0)) || (iVar1 != 0)) {
+      FUN_000edc70();
+      DAT_0019a2a0 = 1;
+      if (extraout_ECX_00 != 0) {
+        DAT_0019a2a1 = 1;
+      }
+      *in_EAX = *in_EAX & 0xfe;
+      iVar1 = FUN_00032f5c();
+      if (iVar1 == 0) {
+        return;
+      }
+      iVar1 = 0;
+      do {
+        if (((&DAT_0019d0c8)[iVar1] & 1) != 0) {
+          (&DAT_0019d0c8)[iVar1] = (&DAT_0019d0c8)[iVar1] & 0xfe;
+          (&DAT_0019d0ce)[iVar1] = (&DAT_0019d0ce)[iVar1] | 2;
+        }
+        iVar1 = iVar1 + 0x4ef;
+      } while (iVar1 != 0x18ab);
+      return;
+    }
+    if (in_EAX[0x29] == 0) {
+      *in_EAX = *in_EAX | 0x40;
+      FUN_00021527();
+      in_EDX = extraout_ECX_01;
+    }
+    else {
+      *in_EAX = *in_EAX & 0xfe;
+      in_EDX = extraout_ECX;
+    }
+    pbVar3 = &DAT_0019d0c8 + DAT_002f10ce._3_1_ * 0x4ef;
+  }
+  if ((in_EAX == pbVar3) && (DAT_0019a2a0 = 1, in_EDX != 0)) {
+    DAT_0019a2a0 = 1;
+    DAT_0019a2a1 = 1;
+  }
+  return;
+}
+```
+
+### `packet_compute_full_dungeon_checksum` (`0x620e6` in `packet.cpp`)
+- **Evidence**: Compute deterministic checksum over Dungeon and SlabMap state
+```c
+void FUN_000620e6(void)
+
+{
+  char cVar1;
+  bool bVar2;
+  byte bVar3;
+  byte in_AL;
+  int iVar4;
+  char in_DL;
+  
+  bVar3 = DAT_0019d0b8;
+  bVar2 = true;
+  iVar4 = 0;
+  do {
+    if (0x18aa < iVar4) {
+LAB_0006214c:
+      if (bVar2) {
+        DAT_0019d0b8 = DAT_0019d0b8 & 0xfe;
+        if ((in_AL & 1) != 0) {
+          DAT_0019d0b8 = bVar3 & 0x7e | in_AL & 1;
+          DAT_0019d0b8 = DAT_0019d0b8 | in_DL << 7;
+        }
+        if (DAT_00334019 == 0) {
+          if ((DAT_0019d0b8 & 1) == 0) {
+            FUN_000f32ae();
+            FUN_000ecf70();
+          }
+          else {
+            FUN_000f32ae();
+            FUN_000ecf70();
+          }
+          FUN_000f3264();
+        }
+        if (((DAT_0019d0b8 & 1) != 0) && (((&DAT_0019d0cb)[DAT_002f10ce._3_1_ * 0x4ef] & 8) != 0)) {
+          FUN_000627b5();
+          (&DAT_0019d0cb)[DAT_002f10ce._3_1_ * 0x4ef] =
+               (&DAT_0019d0cb)[DAT_002f10ce._3_1_ * 0x4ef] & 0xf7;
+        }
+      }
+      return;
+    }
+    if ((((((&DAT_0019d0c8)[iVar4] & 1) != 0) && ((&DAT_0019d0f4)[iVar4] == '\x01')) &&
+        (((&DAT_0019d0c8)[iVar4] & 0x40) == 0)) &&
+       (((((cVar1 = (&DAT_0019d578)[iVar4], cVar1 == '\x0e' || (cVar1 == '\x0f')) ||
+          ((cVar1 == '\r' || ((cVar1 == '\x05' || (cVar1 == '\x06')))))) || (cVar1 == '\a')) ||
+        (cVar1 == '\b')))) {
+      bVar2 = false;
+      goto LAB_0006214c;
+    }
+    iVar4 = iVar4 + 0x4ef;
+  } while( true );
+}
+```
+
+### `packet_backup_catalogue_settings` (`0x62238` in `packet.cpp`)
+- **Evidence**: Save current level/campaign catalogue settings before packet replay
+```c
+void FUN_00062238(void)
+
+{
+  DAT_0034d21c = DAT_002ee8a2;
+  DAT_0034d21d = DAT_002ee8a3;
+  DAT_0034d21e = DAT_002ee8a4;
+  DAT_0034d21f = DAT_002ee8a5;
+  DAT_0034d220 = DAT_002ee8a6;
+  DAT_0034d221 = DAT_002ee8a7;
+  DAT_0034d222 = DAT_002ee8a8;
+  DAT_0034d223 = DAT_002ee8a9;
+  DAT_0034d225 = DAT_002ee8ab;
+  DAT_0034d227 = DAT_002ee8ad;
+  DAT_0034d22b = DAT_002ee8b1;
+  DAT_0034d22f = DAT_002ee8b5;
+  DAT_0034d233 = DAT_002ee8b9;
+  DAT_0034d237 = DAT_002ee8bd;
+  DAT_0034d23b = DAT_002ee8c1;
+  DAT_0034d23f = DAT_002ee8c5;
+  DAT_0034d243 = DAT_002ee8c9;
+  DAT_0034d247 = DAT_002ee8cd;
+  return;
+}
+```
+
+### `packet_restore_catalogue_settings` (`0x622f1` in `packet.cpp`)
+- **Evidence**: Restore level/campaign catalogue settings after packet replay
+```c
+void FUN_000622f1(void)
+
+{
+  DAT_002ee8a2 = DAT_0034d21c;
+  DAT_002ee8a3 = DAT_0034d21d;
+  DAT_002ee8a4 = DAT_0034d21e;
+  DAT_002ee8a5 = DAT_0034d21f;
+  DAT_002ee8a6 = DAT_0034d220;
+  DAT_002ee8a7 = DAT_0034d221;
+  DAT_002ee8a8 = DAT_0034d222;
+  DAT_002ee8a9 = DAT_0034d223;
+  DAT_002ee8ab = DAT_0034d225;
+  DAT_002ee8ad = DAT_0034d227;
+  DAT_002ee8b1 = DAT_0034d22b;
+  DAT_002ee8b5 = DAT_0034d22f;
+  DAT_002ee8b9 = DAT_0034d233;
+  DAT_002ee8bd = DAT_0034d237;
+  DAT_002ee8c1 = DAT_0034d23b;
+  DAT_002ee8c5 = DAT_0034d23f;
+  DAT_002ee8c9 = DAT_0034d243;
+  DAT_002ee8cd = DAT_0034d247;
+  return;
+}
+```
+
+### `packet_draw_debug_cursor_overlay` (`0x623aa` in `packet.cpp`)
+- **Evidence**: Lock screen and draw multiplayer/packet cursor overlay
+```c
+void FUN_000623aa(void)
+
+{
+  int iVar1;
+  uint uVar2;
+  uint uVar3;
+  int extraout_ECX;
+  int in_EDX;
+  int unaff_EBX;
+  undefined4 uVar4;
+  undefined4 uVar5;
+  
+  iVar1 = FUN_000e797c();
+  if (iVar1 == 1) {
+    uVar2 = (uint)DAT_0019cba4;
+    uVar3 = (uint)DAT_0019cba2;
+    FUN_000595ab();
+    DAT_003d98b4 = DAT_001991b8;
+    DAT_003d9874 = 0x100;
+    FUN_000e6b20();
+    uVar4 = 100;
+    uVar5 = DAT_00333f2f;
+    FUN_000e6d80();
+    FUN_000f0870(0,(unaff_EBX + (int)((uVar2 - unaff_EBX) + -200) / 2 + 100) - in_EDX,in_EDX * 2,
+                 (in_EDX * 2) / (int)(uint)DAT_0019cba6,
+                 ((int)(uVar3 - 100) / 2 + extraout_ECX + 8) / (int)(uint)DAT_0019cba6,uVar4,uVar5);
+    FUN_000f0870(0x85);
+    FUN_000e797c();
+    FUN_000e79fc();
+  }
+  return;
+}
+```
+
+### `LbNetwork_Init_0ed4e0` (`0xed4e0` in `bflib/bflib_network.cpp`)
 - **Evidence**: References 'WARNING network: LbNetwork_Init() failure on compositeBuffer allo'
 ```c
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
@@ -2784,7 +4148,7 @@ LAB_000ed68b:
 }
 ```
 
-### `dk_LbNetwork_Create_0ed84c` (`0xed84c` in `bflib/bflib_network.cpp`)
+### `LbNetwork_Create_0ed84c` (`0xed84c` in `bflib/bflib_network.cpp`)
 - **Evidence**: References 'ERROR::LbNetwork_Create ServiceProvider ptr is NULL'
 ```c
 undefined1 FUN_000ed84c(void)
@@ -2886,7 +4250,7 @@ undefined1 FUN_000ed84c(void)
 }
 ```
 
-### `dk_LbNetwork_Join_0eda20` (`0xeda20` in `bflib/bflib_network.cpp`)
+### `LbNetwork_Join_0eda20` (`0xeda20` in `bflib/bflib_network.cpp`)
 - **Evidence**: References 'ERROR::LbNetwork_Join ServiceProvider ptr is NULL'
 ```c
 undefined1 FUN_000eda20(void)
@@ -3000,7 +4364,7 @@ undefined1 FUN_000eda20(void)
 }
 ```
 
-### `dk_LbNetwork_Stop_0edc70` (`0xedc70` in `bflib/bflib_network.cpp`)
+### `LbNetwork_Stop_0edc70` (`0xedc70` in `bflib/bflib_network.cpp`)
 - **Evidence**: References 'INSIDE LbNetwork_Stop'
 ```c
 undefined8 FUN_000edc70(void)
@@ -3057,7 +4421,7 @@ undefined8 FUN_000edc70(void)
 }
 ```
 
-### `dk_LbNetwork_EnumerateSessions_0edd8c` (`0xedd8c` in `bflib/bflib_network.cpp`)
+### `LbNetwork_EnumerateSessions_0edd8c` (`0xedd8c` in `bflib/bflib_network.cpp`)
 - **Evidence**: References 'ERROR::LbNetwork_EnumerateSessions ServiceProvider ptr is NULL'
 ```c
 /* WARNING: Removing unreachable block (ram,0x000eddb6) */
@@ -3086,7 +4450,7 @@ undefined1 FUN_000edd8c(void)
 }
 ```
 
-### `dk_LbNetwork_EnumeratePlayers_0eddf0` (`0xeddf0` in `bflib/bflib_network.cpp`)
+### `LbNetwork_EnumeratePlayers_0eddf0` (`0xeddf0` in `bflib/bflib_network.cpp`)
 - **Evidence**: References 'ERROR::LbNetwork_EnumeratePlayers ServiceProvider ptr is NULL'
 ```c
 undefined1 FUN_000eddf0(void)
@@ -3113,7 +4477,7 @@ undefined1 FUN_000eddf0(void)
 }
 ```
 
-### `dk_LbNetwork_CompleteExchange_0ee3c0` (`0xee3c0` in `bflib/bflib_network.cpp`)
+### `LbNetwork_CompleteExchange_0ee3c0` (`0xee3c0` in `bflib/bflib_network.cpp`)
 - **Evidence**: References 'WARNING network: LbNetwork_CompleteExchange() failure on HostData'
 ```c
 undefined8 FUN_000ee3c0(void)
@@ -3252,7 +4616,7 @@ LAB_000ee634:
 }
 ```
 
-### `dk_LbNetwork_StartExchange_0ee694` (`0xee694` in `bflib/bflib_network.cpp`)
+### `LbNetwork_StartExchange_0ee694` (`0xee694` in `bflib/bflib_network.cpp`)
 - **Evidence**: References 'ERROR::LbNetwork_StartExchange ServiceProvider ptr is NULL'
 ```c
 longlong FUN_000ee694(void)
@@ -3481,7 +4845,7 @@ LAB_000eeb10:
 }
 ```
 
-### `dk_LbNetwork_ChangeExchangeBuffer_0eeb20` (`0xeeb20` in `bflib/bflib_network.cpp`)
+### `LbNetwork_ChangeExchangeBuffer_0eeb20` (`0xeeb20` in `bflib/bflib_network.cpp`)
 - **Evidence**: References 'WARNING network: LbNetwork_ChangeExchangeBuffer() failure on buff'
 ```c
 undefined1 FUN_000eeb20(void)
@@ -3546,7 +4910,7 @@ LAB_000eebd8:
 }
 ```
 
-### `dk_LbNetwork_CompleteExchange_0ef060` (`0xef060` in `bflib/bflib_network.cpp`)
+### `LbNetwork_CompleteExchange_0ef060` (`0xef060` in `bflib/bflib_network.cpp`)
 - **Evidence**: References 'WARNING network: LbNetwork_CompleteExchange() failure on SP::Send'
 ```c
 undefined8 FUN_000ef060(void)
@@ -3616,7 +4980,7 @@ undefined8 FUN_000ef060(void)
 }
 ```
 
-### `dk_LbNetwork_Send_0f3b50` (`0xf3b50` in `bflib/bflib_network.cpp`)
+### `LbNetwork_Send_0f3b50` (`0xf3b50` in `bflib/bflib_network.cpp`)
 - **Evidence**: References 'INSIDE LbNetwork_Send'
 ```c
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
@@ -3750,7 +5114,7 @@ LAB_000f3c80:
 }
 ```
 
-### `dk_LbNetwork_Receive_0f3ed8` (`0xf3ed8` in `bflib/bflib_network.cpp`)
+### `LbNetwork_Receive_0f3ed8` (`0xf3ed8` in `bflib/bflib_network.cpp`)
 - **Evidence**: References 'INSIDE LbNetwork_Receive'
 ```c
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
@@ -3982,7 +5346,7 @@ LAB_000f3fc8:
 }
 ```
 
-### `dk_resending_packet_10962c` (`0x10962c` in `bflib/bflib_network.cpp`)
+### `lbnet_resending_packet_10962c` (`0x10962c` in `bflib/bflib_network.cpp`)
 - **Evidence**: String 'RESENDING PACKET'
 ```c
 undefined1 FUN_0010962c(void)

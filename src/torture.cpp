@@ -1,7 +1,7 @@
 /**
- * Dungeon Keeper (KEEPER.EXE) - Reconstructed Source Module: torture.cpp
+ * Dungeon Keeper (KEEPER.EXE) - Reconstructed & Semantically Named Module: torture.cpp
  * Binary Subject: /home/merlin/Dungeon Keeper/re/KEEPER.elf
- * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 (x86:LE:32:default)
+ * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 + DK Semantic Analyzer
  * Functions in this translation unit: 14
  */
 
@@ -11,32 +11,32 @@
 #include "../include/dk_functions.h"
 
 /******************************************************************************
- * Function : sub_074038 (Ghidra: FUN_00074038)
- * Prototype: undefined4 sub_074038(void);
+ * Function : torture_update_slab_subtile_columns_074038 (Original VA: 0x74038, Ghidra: FUN_00074038)
+ * Prototype: undefined4 torture_update_slab_subtile_columns_074038(void);
  * Address  : 0x74038 (Size: 818 bytes)
  * Module   : torture.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x74853
- * Callees  : 4 -> 0x17db0, 0x23de2, 0x51374, 0x82828
+ * Purpose  : Updates 3x3 subtile map entries for slab coordinates
+ * Callers  : 1 -> torture_update_creature_control_074853
+ * Callees  : 4 -> combtool_couldn_get_flee_position_017db0, dungeon_update_slab_subtile_columns_023de2, moodneed_fn_051374, creature_process_map_subtile_082828
  ******************************************************************************/
-undefined4 FUN_00074038(void)
+undefined4 torture_update_slab_subtile_columns_074038(void)
 
 {
-  int *piVar1;
-  byte bVar2;
-  byte bVar3;
-  bool bVar4;
-  int iVar5;
-  int in_EAX;
-  char *pcVar6;
-  int iVar7;
-  byte *pbVar8;
-  int iVar9;
+  int *slab_coord;
+  byte thing_ptr;
+  byte thing_ptr_2;
+  bool flag;
+  int val;
+  int thing;
+  char *str_ptr;
+  int val_2;
+  byte *byte_ptr;
+  int val_3;
   char *extraout_ECX;
-  char *pcVar10;
-  uint in_EDX;
-  int iVar11;
-  uint uVar12;
+  char *str_ptr_2;
+  uint arg_edx;
+  int val_4;
+  uint uval;
   int local_40;
   uint local_34;
   uint local_28;
@@ -44,408 +44,402 @@ undefined4 FUN_00074038(void)
   uint local_18;
   
   local_40 = 0x20;
-  bVar4 = false;
-  if ((&DAT_002e0589)[*(char *)(in_EAX + 6) * 0xa84] == 0) {
-    FUN_00017db0();
-    bVar2 = *(byte *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 0x289);
-    bVar3 = *(byte *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 0x28b);
+  flag = false;
+  if ((&g_dungeons)[*(char *)(thing + 6) * 0xa84] == 0) { /* thing->owner */
+    combtool_couldn_get_flee_position_017db0();
+    thing_ptr = *(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 0x289); /* thing->ccontrol_idx */
+    thing_ptr_2 = *(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 0x28b); /* thing->ccontrol_idx */
   }
   else {
-    bVar2 = *(byte *)((&DAT_001ae9fc)[(ushort)(&DAT_002e0589)[*(char *)(in_EAX + 6) * 0xa84]] + 0xe)
+    thing_ptr = *(byte *)((&g_thing_ptrs)[(ushort)(&g_dungeons)[*(char *)(thing + 6) * 0xa84]] + 0xe) /* thing->owner */
     ;
-    bVar3 = *(byte *)((&DAT_001ae9fc)[(ushort)(&DAT_002e0589)[*(char *)(in_EAX + 6) * 0xa84]] + 0x10
+    thing_ptr_2 = *(byte *)((&g_thing_ptrs)[(ushort)(&g_dungeons)[*(char *)(thing + 6) * 0xa84]] + 0x10 /* thing->owner */
                      );
   }
-  iVar5 = DAT_00199228;
-  iVar9 = 0;
-  pcVar6 = (char *)(DAT_00199228 + 0x1c39);
-  iVar11 = DAT_00199228;
+  val = g_scratch_work_buf;
+  val_3 = 0;
+  str_ptr = (char *)(g_scratch_work_buf + 0x1c39);
+  val_4 = g_scratch_work_buf;
   do {
-    iVar7 = 0;
+    val_2 = 0;
     do {
-      piVar1 = (int *)((int)&DAT_0019033b + iVar7);
-      iVar7 = iVar7 + 0xc;
-      *(bool *)iVar11 =
-           (uint)((&DAT_002d33ca)[(*piVar1 + *(int *)((int)&DAT_0019033b + iVar9) * 0x55) * 6] & 7)
-           != (int)*(char *)(in_EAX + 6);
-      iVar11 = iVar11 + 1;
-    } while (iVar7 != 0x3fc);
-    iVar9 = iVar9 + 0xc;
-  } while (iVar9 != 0x3fc);
-  local_34 = bVar2 / 3;
-  local_18 = bVar3 / 3;
-  local_24 = (byte)in_EDX;
+      slab_coord = (int *)((int)&g_subtile_to_slab_lut + val_2);
+      val_2 = val_2 + 0xc;
+      *(bool *)val_4 =
+           (uint)((&g_slabmap)[(*slab_coord + *(int *)((int)&g_subtile_to_slab_lut + val_3) * 0x55) * 6] & 7)
+           != (int)*(char *)(thing + 6); /* thing->owner */
+      val_4 = val_4 + 1;
+    } while (val_2 != 0x3fc);
+    val_3 = val_3 + 0xc;
+  } while (val_3 != 0x3fc);
+  local_34 = thing_ptr / 3;
+  local_18 = thing_ptr_2 / 3;
+  local_24 = (byte)arg_edx;
   local_28 = 0;
-  pbVar8 = (byte *)(local_18 * 0x55 + local_34 + iVar5);
-  uVar12 = 0;
-  *pbVar8 = *pbVar8 | 2;
-  pcVar10 = pcVar6;
+  byte_ptr = (byte *)(local_18 * 0x55 + local_34 + val);
+  uval = 0;
+  *byte_ptr = *byte_ptr | 2;
+  str_ptr_2 = str_ptr;
   do {
     if ((1 << (local_24 & 0x1f) &
-        *(uint *)((int)&DAT_00279203 + (local_34 * 3 + local_18 * 0x300) * 5 + 1) >> 0x1c) == 0) {
-      FUN_00023de2();
-      bVar4 = true;
-      FUN_00082828();
+        *(uint *)((int)&g_map_subtiles + (local_34 * 3 + local_18 * 0x300) * 5 + 1) >> 0x1c) == 0) {
+      dungeon_update_slab_subtile_columns_023de2();
+      flag = true;
+      creature_process_map_subtile_082828();
       local_40 = local_40 + -1;
-      pcVar10 = extraout_ECX;
+      str_ptr_2 = extraout_ECX;
       if (local_40 == 0) break;
     }
-    iVar11 = local_18 * 0x55 + local_34 + iVar5;
-    if ((((*(byte *)(iVar11 + -1) & 1) == 0) && ((*(byte *)(iVar11 + -1) & 2) == 0)) &&
-       (*(byte *)(iVar11 + -1) = *(byte *)(iVar11 + -1) | 2,
-       (uint)((&DAT_002d33ca)
-              [((&DAT_0019033b)[(local_34 - 1) * 3] + (&DAT_0019033b)[local_18 * 3] * 0x55) * 6] & 7
-             ) == (int)*(char *)(in_EAX + 6))) {
-      iVar11 = uVar12 * 2;
-      pcVar6[iVar11] = (char)local_34 + -1;
-      uVar12 = uVar12 + 1;
-      (pcVar6 + iVar11)[1] = (char)local_18;
+    val_4 = local_18 * 0x55 + local_34 + val;
+    if ((((*(byte *)(val_4 + -1) & 1) == 0) && ((*(byte *)(val_4 + -1) & 2) == 0)) &&
+       (*(byte *)(val_4 + -1) = *(byte *)(val_4 + -1) | 2,
+       (uint)((&g_slabmap)
+              [((&g_subtile_to_slab_lut)[(local_34 - 1) * 3] + (&g_subtile_to_slab_lut)[local_18 * 3] * 0x55) * 6] & 7
+             ) == (int)*(char *)(thing + 6))) { /* thing->owner */
+      val_4 = uval * 2;
+      str_ptr[val_4] = (char)local_34 + -1;
+      uval = uval + 1;
+      (str_ptr + val_4)[1] = (char)local_18;
     }
-    iVar11 = local_18 * 0x55 + local_34 + iVar5;
-    if ((((*(byte *)(iVar11 + 1) & 1) == 0) && ((*(byte *)(iVar11 + 1) & 2) == 0)) &&
-       (*(byte *)(iVar11 + 1) = *(byte *)(iVar11 + 1) | 2,
-       (uint)((&DAT_002d33ca)
-              [((&DAT_0019033b)[local_18 * 3] * 0x55 + (&DAT_0019033b)[(local_34 + 1) * 3]) * 6] & 7
-             ) == (int)*(char *)(in_EAX + 6))) {
-      iVar11 = uVar12 * 2;
-      pcVar6[iVar11] = (char)local_34 + '\x01';
-      uVar12 = uVar12 + 1;
-      (pcVar6 + iVar11)[1] = (char)local_18;
+    val_4 = local_18 * 0x55 + local_34 + val;
+    if ((((*(byte *)(val_4 + 1) & 1) == 0) && ((*(byte *)(val_4 + 1) & 2) == 0)) &&
+       (*(byte *)(val_4 + 1) = *(byte *)(val_4 + 1) | 2,
+       (uint)((&g_slabmap)
+              [((&g_subtile_to_slab_lut)[local_18 * 3] * 0x55 + (&g_subtile_to_slab_lut)[(local_34 + 1) * 3]) * 6] & 7
+             ) == (int)*(char *)(thing + 6))) { /* thing->owner */
+      val_4 = uval * 2;
+      str_ptr[val_4] = (char)local_34 + '\x01';
+      uval = uval + 1;
+      (str_ptr + val_4)[1] = (char)local_18;
     }
-    pbVar8 = (byte *)((local_18 - 1) * 0x55 + local_34 + iVar5);
-    if ((((*pbVar8 & 1) == 0) && ((*pbVar8 & 2) == 0)) &&
-       (*pbVar8 = *pbVar8 | 2,
-       (uint)((&DAT_002d33ca)
-              [((&DAT_0019033b)[local_34 * 3] + (&DAT_0019033b)[(local_18 - 1) * 3] * 0x55) * 6] & 7
-             ) == (int)*(char *)(in_EAX + 6))) {
-      iVar11 = uVar12 * 2;
-      pcVar6[iVar11] = (char)local_34;
-      uVar12 = uVar12 + 1;
-      (pcVar6 + iVar11)[1] = (char)local_18 + -1;
+    byte_ptr = (byte *)((local_18 - 1) * 0x55 + local_34 + val);
+    if ((((*byte_ptr & 1) == 0) && ((*byte_ptr & 2) == 0)) &&
+       (*byte_ptr = *byte_ptr | 2,
+       (uint)((&g_slabmap)
+              [((&g_subtile_to_slab_lut)[local_34 * 3] + (&g_subtile_to_slab_lut)[(local_18 - 1) * 3] * 0x55) * 6] & 7
+             ) == (int)*(char *)(thing + 6))) { /* thing->owner */
+      val_4 = uval * 2;
+      str_ptr[val_4] = (char)local_34;
+      uval = uval + 1;
+      (str_ptr + val_4)[1] = (char)local_18 + -1;
     }
-    pbVar8 = (byte *)((local_18 + 1) * 0x55 + local_34 + iVar5);
-    if ((((*pbVar8 & 1) == 0) && ((*pbVar8 & 2) == 0)) &&
-       (*pbVar8 = *pbVar8 | 2,
-       (uint)((&DAT_002d33ca)
-              [((&DAT_0019033b)[local_34 * 3] + (&DAT_0019033b)[(local_18 + 1) * 3] * 0x55) * 6] & 7
-             ) == (int)*(char *)(in_EAX + 6))) {
-      iVar11 = uVar12 * 2;
-      pcVar6[iVar11] = (char)local_34;
-      uVar12 = uVar12 + 1;
-      (pcVar6 + iVar11)[1] = (char)local_18 + '\x01';
+    byte_ptr = (byte *)((local_18 + 1) * 0x55 + local_34 + val);
+    if ((((*byte_ptr & 1) == 0) && ((*byte_ptr & 2) == 0)) &&
+       (*byte_ptr = *byte_ptr | 2,
+       (uint)((&g_slabmap)
+              [((&g_subtile_to_slab_lut)[local_34 * 3] + (&g_subtile_to_slab_lut)[(local_18 + 1) * 3] * 0x55) * 6] & 7
+             ) == (int)*(char *)(thing + 6))) { /* thing->owner */
+      val_4 = uval * 2;
+      str_ptr[val_4] = (char)local_34;
+      uval = uval + 1;
+      (str_ptr + val_4)[1] = (char)local_18 + '\x01';
     }
-    local_34 = (uint)*pcVar10;
+    local_34 = (uint)*str_ptr_2;
     local_28 = local_28 + 1;
-    local_18 = (uint)pcVar10[1];
-    pcVar10 = pcVar10 + 2;
-  } while (local_28 <= uVar12);
-  if ((bVar4) &&
-     (((byte)(&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef] == in_EDX ||
-      ((int)*(char *)(in_EAX + 6) == (uint)(byte)(&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef])))) {
-    FUN_00051374();
+    local_18 = (uint)str_ptr_2[1];
+    str_ptr_2 = str_ptr_2 + 2;
+  } while (local_28 <= uval);
+  if ((flag) &&
+     (((byte)(&g_player_id_number)[g_my_player_word._3_1_ * 0x4ef] == arg_edx ||
+      ((int)*(char *)(thing + 6) == (uint)(byte)(&g_player_id_number)[g_my_player_word._3_1_ * 0x4ef])))) { /* thing->owner */
+    moodneed_fn_051374();
   }
   return 1;
 }
 
 /******************************************************************************
- * Function : sub_07436a (Ghidra: FUN_0007436a)
- * Prototype: undefined4 sub_07436a(void);
+ * Function : torture_update_creature_and_thing_07436a (Original VA: 0x7436a, Ghidra: FUN_0007436a)
+ * Prototype: undefined4 torture_update_creature_and_thing_07436a(void);
  * Address  : 0x7436a (Size: 213 bytes)
  * Module   : torture.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x74616, 0x74d42
- * Callees  : 3 -> 0x71edd, 0x85890, 0xacce4
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
+ * Callers  : 2 -> torture_update_creature_control_074616, torture_update_creature_control_074d42
+ * Callees  : 3 -> spell_update_creature_control_071edd, creature_update_creature_control_085890, light_attempt_delete_light_0acce4
  ******************************************************************************/
-undefined4 FUN_0007436a(void)
+undefined4 torture_update_creature_and_thing_07436a(void)
 
 {
-  short *psVar1;
-  ushort uVar2;
-  undefined2 uVar3;
-  int in_EAX;
-  uint uVar4;
+  short *dungeon_off;
+  ushort cctrl_ptr;
+  undefined2 uval;
+  int thing;
+  uint thing_ptr;
   int extraout_ECX;
   int extraout_ECX_00;
-  int in_EDX;
-  int iVar5;
+  int arg_edx;
+  int cctrl_ptr_2;
   uint extraout_EDX;
   
-  iVar5 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  if (*(short *)(in_EAX + 0x62) != 0) {
-    FUN_000acce4();
-    iVar5 = extraout_ECX;
+  cctrl_ptr_2 = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  if (*(short *)(thing + 0x62) != 0) {
+    light_attempt_delete_light_0acce4();
+    cctrl_ptr_2 = extraout_ECX;
   }
-  if ((*(byte *)(iVar5 + 0xac) & 2) != 0) {
-    FUN_00071edd();
-    iVar5 = extraout_ECX_00;
+  if ((*(byte *)(cctrl_ptr_2 + 0xac) & 2) != 0) {
+    spell_update_creature_control_071edd();
+    cctrl_ptr_2 = extraout_ECX_00;
   }
-  if ((*(byte *)(iVar5 + 0xac) & 0x20) != 0) {
-    FUN_00071edd();
+  if ((*(byte *)(cctrl_ptr_2 + 0xac) & 0x20) != 0) {
+    spell_update_creature_control_071edd();
   }
-  iVar5 = (int)*(char *)(in_EDX + 3);
-  *(int *)(&DAT_002e17cc + iVar5 * 0x1508) = *(int *)(&DAT_002e17cc + iVar5 * 0x1508) + 1;
-  uVar4 = (uint)*(byte *)(in_EAX + 0x1a);
-  if ((&DAT_002e0589)[iVar5 * 0xa84 + uVar4 + 0xa10] == 0) {
-    psVar1 = &DAT_002e0589 + iVar5 * 0xa84 + uVar4 + 0xa10;
-    *psVar1 = *psVar1 + 1;
-    uVar2 = (&DAT_002e05b6)[iVar5 * 0xa84];
-    while (uVar4 = (&DAT_001ae9fc)[uVar2], DAT_001ae9fc < uVar4) {
-      if (*(char *)(uVar4 + 0x1a) == *(char *)(in_EAX + 0x1a)) {
-        uVar3 = FUN_00085890();
-        *(undefined2 *)((&DAT_001b0a00)[*(ushort *)(extraout_EDX + 100)] + 0xc4) = uVar3;
-        uVar4 = extraout_EDX;
+  cctrl_ptr_2 = (int)*(char *)(arg_edx + 3);
+  *(int *)(&g_bss_002e17cc + cctrl_ptr_2 * 0x1508) = *(int *)(&g_bss_002e17cc + cctrl_ptr_2 * 0x1508) + 1;
+  thing_ptr = (uint)*(byte *)(thing + 0x1a);
+  if ((&g_dungeons)[cctrl_ptr_2 * 0xa84 + thing_ptr + 0xa10] == 0) {
+    dungeon_off = &g_dungeons + cctrl_ptr_2 * 0xa84 + thing_ptr + 0xa10;
+    *dungeon_off = *dungeon_off + 1;
+    cctrl_ptr = (&g_bss_002e05b6)[cctrl_ptr_2 * 0xa84];
+    while (thing_ptr = (&g_thing_ptrs)[cctrl_ptr], g_thing_ptrs < thing_ptr) {
+      if (*(char *)(thing_ptr + 0x1a) == *(char *)(thing + 0x1a)) {
+        uval = creature_update_creature_control_085890();
+        *(undefined2 *)((&g_creature_ctrl_ptrs)[*(ushort *)(extraout_EDX + 100)] + 0xc4) = uval;
+        thing_ptr = extraout_EDX;
       }
-      uVar2 = *(ushort *)((&DAT_001b0a00)[*(ushort *)(uVar4 + 100)] + 0x1f);
+      cctrl_ptr = *(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x1f); /* thing->ccontrol_idx */
     }
   }
   else {
-    psVar1 = &DAT_002e0589 + iVar5 * 0xa84 + uVar4 + 0xa10;
-    *psVar1 = *psVar1 + 1;
+    dungeon_off = &g_dungeons + cctrl_ptr_2 * 0xa84 + thing_ptr + 0xa10;
+    *dungeon_off = *dungeon_off + 1;
   }
   return 1;
 }
 
 /******************************************************************************
- * Function : sub_07443f (Ghidra: FUN_0007443f)
- * Prototype: undefined4 sub_07443f(void);
+ * Function : torture_update_creature_and_thing_07443f (Original VA: 0x7443f, Ghidra: FUN_0007443f)
+ * Prototype: undefined4 torture_update_creature_and_thing_07443f(void);
  * Address  : 0x7443f (Size: 128 bytes)
  * Module   : torture.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x74b82
- * Callees  : 1 -> 0x85890
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
+ * Callers  : 1 -> torture_update_creature_and_thing_074b82
+ * Callees  : 1 -> creature_update_creature_control_085890
  ******************************************************************************/
-undefined4 FUN_0007443f(void)
+undefined4 torture_update_creature_and_thing_07443f(void)
 
 {
-  char cVar1;
-  ushort uVar2;
-  undefined2 uVar3;
-  int in_EAX;
-  int iVar4;
-  int in_EDX;
-  uint uVar5;
+  char ch;
+  ushort cctrl_ptr;
+  undefined2 uval;
+  int arg_eax;
+  int dungeon_off;
+  int arg_edx;
+  uint thing_ptr;
   uint extraout_EDX;
   
-  cVar1 = *(char *)(in_EDX + 3);
-  iVar4 = cVar1 * 0x1508;
-  *(short *)(&DAT_002e19a9 + (uint)*(byte *)(in_EAX + 0x1a) * 2 + iVar4) =
-       *(short *)(&DAT_002e19a9 + (uint)*(byte *)(in_EAX + 0x1a) * 2 + iVar4) + -1;
-  if (*(short *)(&DAT_002e19a9 + (uint)*(byte *)(in_EAX + 0x1a) * 2 + iVar4) == 0) {
-    uVar2 = (&DAT_002e05b6)[cVar1 * 0xa84];
-    while (uVar5 = (&DAT_001ae9fc)[uVar2], DAT_001ae9fc < uVar5) {
-      if (*(char *)(uVar5 + 0x1a) == *(char *)(in_EAX + 0x1a)) {
-        uVar3 = FUN_00085890();
-        *(undefined2 *)((&DAT_001b0a00)[*(ushort *)(extraout_EDX + 100)] + 0xc4) = uVar3;
-        uVar5 = extraout_EDX;
+  ch = *(char *)(arg_edx + 3);
+  dungeon_off = ch * 0x1508;
+  *(short *)(&g_bss_002e19a9 + (uint)*(byte *)(arg_eax + 0x1a) * 2 + dungeon_off) =
+       *(short *)(&g_bss_002e19a9 + (uint)*(byte *)(arg_eax + 0x1a) * 2 + dungeon_off) + -1;
+  if (*(short *)(&g_bss_002e19a9 + (uint)*(byte *)(arg_eax + 0x1a) * 2 + dungeon_off) == 0) {
+    cctrl_ptr = (&g_bss_002e05b6)[ch * 0xa84];
+    while (thing_ptr = (&g_thing_ptrs)[cctrl_ptr], g_thing_ptrs < thing_ptr) {
+      if (*(char *)(thing_ptr + 0x1a) == *(char *)(arg_eax + 0x1a)) {
+        uval = creature_update_creature_control_085890();
+        *(undefined2 *)((&g_creature_ctrl_ptrs)[*(ushort *)(extraout_EDX + 100)] + 0xc4) = uval;
+        thing_ptr = extraout_EDX;
       }
-      uVar2 = *(ushort *)((&DAT_001b0a00)[*(ushort *)(uVar5 + 100)] + 0x1f);
+      cctrl_ptr = *(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x1f); /* thing->ccontrol_idx */
     }
   }
   return 1;
 }
 
 /******************************************************************************
- * Function : sub_0744bf (Ghidra: FUN_000744bf)
- * Prototype: bool sub_0744bf(void);
+ * Function : torture_fn_0744bf (Original VA: 0x744bf, Ghidra: FUN_000744bf)
+ * Prototype: bool torture_fn_0744bf(void);
  * Address  : 0x744bf (Size: 22 bytes)
  * Module   : torture.cpp [callgraph_affinity_to_following_unit]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x746e4
- * Callees  : 1 -> 0xce0e4
+ * Purpose  : Module torture.cpp procedure @ 0x0744bf
+ * Callers  : 1 -> torture_centre_table_torture_0746e4
+ * Callees  : 1 -> room_fn_0ce0e4
  ******************************************************************************/
-bool FUN_000744bf(void)
+bool torture_fn_0744bf(void)
 
 {
-  int iVar1;
+  int val;
   int extraout_ECX;
-  undefined1 unaff_BL;
+  undefined1 arg_bl;
   
-  iVar1 = FUN_000ce0e4();
-  if (iVar1 != 0) {
-    *(undefined1 *)(extraout_ECX + 8) = unaff_BL;
+  val = room_fn_0ce0e4();
+  if (val != 0) {
+    *(undefined1 *)(extraout_ECX + 8) = arg_bl;
   }
-  return iVar1 != 0;
+  return val != 0;
 }
 
 /******************************************************************************
- * Function : dk_move_torture_0744d5 (Ghidra: FUN_000744d5)
- * Prototype: undefined4 dk_move_torture_0744d5(void);
+ * Function : torture_move_torture_0744d5 (Original VA: 0x744d5, Ghidra: FUN_000744d5)
+ * Prototype: undefined4 torture_move_torture_0744d5(void);
  * Address  : 0x744d5 (Size: 321 bytes)
  * Module   : torture.cpp [direct_file_string_xref]
- * OrigLine : torture.cpp:329 ("MOVE FAILED IN TORTURE")
- * Naming   : String 'MOVE FAILED IN TORTURE'
- * Callers  : 1 -> 0x746e4
- * Callees  : 3 -> 0x50d3c, 0xb3be4, 0xddaf0
- * Strings  :
- *   - 0x167a9b: "torture.cpp"
- *   - 0x167a84: "MOVE FAILED IN TORTURE"
+ * OrigLine : torture.cpp lines 329
+ * Purpose  : String 'MOVE FAILED IN TORTURE'
+ * Callers  : 1 -> torture_centre_table_torture_0746e4
+ * Callees  : 3 -> mapwho_process_map_subtile_050d3c, move_fn_0b3be4, LbErrorLog
  ******************************************************************************/
-undefined4 FUN_000744d5(void)
+undefined4 torture_move_torture_0744d5(void)
 
 {
-  int iVar1;
-  short sVar2;
-  int in_EAX;
-  uint uVar3;
-  int iVar4;
+  int cctrl_ptr;
+  short short_val;
+  int thing;
+  uint loop_i;
+  int val;
   int extraout_ECX;
-  int in_EDX;
-  undefined1 unaff_BL;
+  int arg_edx;
+  undefined1 arg_bl;
   int local_1c;
   uint local_18;
   
-  iVar1 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  DAT_002e8bf6 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-  DAT_002e8bf6 = DAT_002e8bf6 >> 0xd | DAT_002e8bf6 * 0x80000;
-  local_18 = DAT_002e8bf6 % (uint)*(ushort *)(in_EDX + 0x3b);
-  for (uVar3 = local_18; 0 < (int)uVar3; uVar3 = uVar3 - 1) {
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  g_action_random_seed = g_action_random_seed * 0x24a1 + 0x24df;
+  g_action_random_seed = g_action_random_seed >> 0xd | g_action_random_seed * 0x80000;
+  local_18 = g_action_random_seed % (uint)*(ushort *)(arg_edx + 0x3b);
+  for (loop_i = local_18; 0 < (int)loop_i; loop_i = loop_i - 1) {
   }
   local_1c = 0;
   while( true ) {
-    if ((int)(uint)*(ushort *)(in_EDX + 0x3b) <= local_1c) {
+    if ((int)(uint)*(ushort *)(arg_edx + 0x3b) <= local_1c) {
       return 0;
     }
-    if (*(ushort *)(in_EDX + 0x3b) == local_18) {
+    if (*(ushort *)(arg_edx + 0x3b) == local_18) {
       local_18 = 0;
     }
-    iVar4 = FUN_00050d3c();
-    if ((iVar4 != 0) && (*(short *)(iVar4 + 0x13) == 0)) break;
+    val = mapwho_process_map_subtile_050d3c();
+    if ((val != 0) && (*(short *)(val + 0x13) == 0)) break;
     local_1c = local_1c + 1;
     local_18 = local_18 + 1;
   }
-  sVar2 = FUN_000b3be4();
-  if (sVar2 < 1) {
-    FUN_000ddaf0(); /* LbErrorLog("torture.cpp", line 329, "MOVE FAILED IN TORTURE") */
+  short_val = move_fn_0b3be4();
+  if (short_val < 1) {
+    LbErrorLog(); /* LbErrorLog("torture.cpp", line 329, "MOVE FAILED IN TORTURE") */
     return 0;
   }
-  *(undefined1 *)(in_EAX + 8) = unaff_BL;
-  *(undefined2 *)(extraout_ECX + 0x13) = *(undefined2 *)(in_EAX + 0x1b);
+  *(undefined1 *)(thing + 8) = arg_bl; /* thing->active_state */
+  *(undefined2 *)(extraout_ECX + 0x13) = *(undefined2 *)(thing + 0x1b); /* thing->index_or_angle */
   *(undefined2 *)(extraout_ECX + 0x15) = *(undefined2 *)(extraout_ECX + 0x46);
-  *(undefined2 *)(iVar1 + 0xa6) = *(undefined2 *)(extraout_ECX + 0x1b);
+  *(undefined2 *)(cctrl_ptr + 0xa6) = *(undefined2 *)(extraout_ECX + 0x1b);
   return 1;
 }
 
 /******************************************************************************
- * Function : sub_074616 (Ghidra: FUN_00074616)
- * Prototype: longlong sub_074616(void);
+ * Function : torture_update_creature_control_074616 (Original VA: 0x74616, Ghidra: FUN_00074616)
+ * Prototype: longlong torture_update_creature_control_074616(void);
  * Address  : 0x74616 (Size: 206 bytes)
  * Module   : torture.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
  * Callers  : 0 -> 
- * Callees  : 6 -> 0x51374, 0x63b6d, 0x64ae7, 0x7436a, 0xcd85c, 0xd0f50
+ * Callees  : 6 -> moodneed_fn_051374, person_fn_063b6d, person_update_creature_control_064ae7, torture_update_creature_and_thing_07436a, room_attempt_add_creature_room_0cd85c, room_update_slab_subtile_columns_0d0f50
  ******************************************************************************/
-longlong FUN_00074616(void)
+longlong torture_update_creature_control_074616(void)
 
 {
-  int iVar1;
-  undefined4 uVar2;
-  char cVar3;
-  int in_EAX;
-  int iVar4;
-  uint in_EDX;
+  int cctrl_ptr;
+  undefined4 uval;
+  char ch;
+  int thing;
+  int val;
+  uint arg_edx;
   
-  iVar1 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  *(undefined2 *)(iVar1 + 0x80) = 0;
-  iVar4 = FUN_000d0f50();
-  if ((iVar4 != 0) && (*(short *)(iVar4 + 10) == 5)) {
-    cVar3 = FUN_000cd85c();
-    if (cVar3 != '\0') {
-      FUN_0007436a();
-      *(undefined2 *)(iVar1 + 0xa6) = 0;
-      *(byte *)(iVar1 + 1) = *(byte *)(iVar1 + 1) | 2;
-      uVar2 = DAT_002e8bee;
-      *(undefined4 *)(iVar1 + 0x82) = DAT_002e8bee;
-      *(undefined4 *)(iVar1 + 0x9a) = uVar2;
-      *(undefined4 *)(iVar1 + 0x9e) = uVar2;
-      *(undefined4 *)(iVar1 + 0xa2) = uVar2;
-      *(undefined1 *)(iVar1 + 0xa8) = 1;
-      FUN_00064ae7();
-      return CONCAT44(in_EDX,1);
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  *(undefined2 *)(cctrl_ptr + 0x80) = 0;
+  val = room_update_slab_subtile_columns_0d0f50();
+  if ((val != 0) && (*(short *)(val + 10) == 5)) {
+    ch = room_attempt_add_creature_room_0cd85c();
+    if (ch != '\0') {
+      torture_update_creature_and_thing_07436a();
+      *(undefined2 *)(cctrl_ptr + 0xa6) = 0;
+      *(byte *)(cctrl_ptr + 1) = *(byte *)(cctrl_ptr + 1) | 2;
+      uval = g_game_turn;
+      *(undefined4 *)(cctrl_ptr + 0x82) = g_game_turn;
+      *(undefined4 *)(cctrl_ptr + 0x9a) = uval;
+      *(undefined4 *)(cctrl_ptr + 0x9e) = uval;
+      *(undefined4 *)(cctrl_ptr + 0xa2) = uval;
+      *(undefined1 *)(cctrl_ptr + 0xa8) = 1;
+      person_update_creature_control_064ae7();
+      return CONCAT44(arg_edx,1);
     }
-    if ((int)*(char *)(iVar4 + 3) == (uint)(byte)(&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef]) {
-      FUN_00051374();
+    if ((int)*(char *)(val + 3) == (uint)(byte)(&g_player_id_number)[g_my_player_word._3_1_ * 0x4ef]) {
+      moodneed_fn_051374();
     }
   }
-  FUN_00063b6d();
-  return (ulonglong)in_EDX << 0x20;
+  person_fn_063b6d();
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : dk_centre_table_torture_0746e4 (Ghidra: FUN_000746e4)
- * Prototype: undefined4 dk_centre_table_torture_0746e4(void);
+ * Function : torture_centre_table_torture_0746e4 (Original VA: 0x746e4, Ghidra: FUN_000746e4)
+ * Prototype: undefined4 torture_centre_table_torture_0746e4(void);
  * Address  : 0x746e4 (Size: 367 bytes)
  * Module   : torture.cpp [direct_file_string_xref]
- * OrigLine : torture.cpp:441 ("NO CENTRE TABLE FOR TORTURE")
- * Naming   : String 'NO CENTRE TABLE FOR TORTURE'
- * Callers  : 2 -> 0x74b25, 0x74dde
- * Callees  : 7 -> 0x10132, 0x49bfc, 0x6edb9, 0x744bf, 0x744d5, 0xb28e8, 0xddaf0
- * Strings  :
- *   - 0x167ac3: "torture.cpp"
- *   - 0x167aa7: "NO CENTRE TABLE FOR TORTURE"
+ * OrigLine : torture.cpp lines 441
+ * Purpose  : String 'NO CENTRE TABLE FOR TORTURE'
+ * Callers  : 2 -> torture_update_creature_control_074b25, torture_update_creature_control_074dde
+ * Callees  : 7 -> anger_fn_010132, instance_negative_instance_049bfc, sound_roll_unsynced_random_06edb9, torture_fn_0744bf, torture_move_torture_0744d5, move_process_map_subtile_0b28e8, LbErrorLog
  ******************************************************************************/
-undefined4 FUN_000746e4(void)
+undefined4 torture_centre_table_torture_0746e4(void)
 
 {
-  byte bVar1;
-  undefined2 uVar2;
-  int in_EAX;
-  int iVar3;
-  int iVar4;
-  uint uVar5;
-  uint *puVar6;
+  byte flag;
+  undefined2 uval;
+  int thing;
+  int cctrl_ptr;
+  int val;
+  uint uval_2;
+  uint *word_ptr;
   uint uStack_10;
   
-  puVar6 = (uint *)&stack0xfffffff4;
-  iVar3 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  bVar1 = *(byte *)(iVar3 + 0xa8);
-  if (bVar1 == 0) {
-    if (100 < (uint)(DAT_002e8bee - *(int *)(iVar3 + 0x9e))) {
-      *(undefined1 *)(iVar3 + 0xa8) = 1;
+  word_ptr = (uint *)&stack0xfffffff4;
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  flag = *(byte *)(cctrl_ptr + 0xa8);
+  if (flag == 0) {
+    if (100 < (uint)(g_game_turn - *(int *)(cctrl_ptr + 0x9e))) {
+      *(undefined1 *)(cctrl_ptr + 0xa8) = 1;
     }
     uStack_10 = 0x74732;
-    iVar3 = FUN_000744bf();
-    if (iVar3 != 0) {
+    cctrl_ptr = torture_fn_0744bf();
+    if (cctrl_ptr != 0) {
       return 1;
     }
   }
-  else if (bVar1 < 2) {
+  else if (flag < 2) {
     uStack_10 = 0x7474c;
-    iVar4 = FUN_000744d5();
-    if (iVar4 != 0) {
-      *(undefined1 *)(iVar3 + 0xa8) = 2;
-      *(int *)(iVar3 + 0x9e) = DAT_002e8bee;
+    val = torture_move_torture_0744d5();
+    if (val != 0) {
+      *(undefined1 *)(cctrl_ptr + 0xa8) = 2;
+      *(int *)(cctrl_ptr + 0x9e) = g_game_turn;
       return 1;
     }
-    *(undefined1 *)(iVar3 + 0xa8) = 0;
-    *(int *)(iVar3 + 0x9e) = DAT_002e8bee;
+    *(undefined1 *)(cctrl_ptr + 0xa8) = 0;
+    *(int *)(cctrl_ptr + 0x9e) = g_game_turn;
   }
-  else if (bVar1 == 2) {
+  else if (flag == 2) {
     uStack_10 = 0x74794;
-    iVar4 = FUN_00010132();
-    if (iVar4 < 0x55) {
-      *(byte *)(in_EAX + 0x25) = *(byte *)(in_EAX + 0x25) & 0xdf;
-      *(byte *)(iVar3 + 0xac) = *(byte *)(iVar3 + 0xac) & 0xef;
+    val = anger_fn_010132();
+    if (val < 0x55) {
+      *(byte *)(thing + 0x25) = *(byte *)(thing + 0x25) & 0xdf;
+      *(byte *)(cctrl_ptr + 0xac) = *(byte *)(cctrl_ptr + 0xac) & 0xef;
       uStack_10 = 0x747b2;
-      uVar2 = FUN_000b28e8();
-      *(undefined2 *)(in_EAX + 0x11) = uVar2;
-      if (*(byte *)(iVar3 + 0xd2) == 0) {
-        puVar6 = &uStack_10;
-        uStack_10 = (uint)*(byte *)(iVar3 + 0xd2);
-        FUN_00049bfc();
+      uval = move_process_map_subtile_0b28e8();
+      *(undefined2 *)(thing + 0x11) = uval;
+      if (*(byte *)(cctrl_ptr + 0xd2) == 0) {
+        word_ptr = &uStack_10;
+        uStack_10 = (uint)*(byte *)(cctrl_ptr + 0xd2);
+        instance_negative_instance_049bfc();
       }
-      if (*(short *)(iVar3 + 0xa6) == 0) {
-        *(undefined4 *)((int)puVar6 + -4) = 0x74807;
-        FUN_000ddaf0(); /* LbErrorLog("torture.cpp", line 441, "NO CENTRE TABLE FOR TORTURE") */
+      if (*(short *)(cctrl_ptr + 0xa6) == 0) {
+        *(undefined4 *)((int)word_ptr + -4) = 0x74807;
+        LbErrorLog(); /* LbErrorLog("torture.cpp", line 441, "NO CENTRE TABLE FOR TORTURE") */
       }
       else {
-        *(byte *)((&DAT_001ae9fc)[*(ushort *)(iVar3 + 0xa6)] + 0x4f) =
-             *(byte *)((&DAT_001ae9fc)[*(ushort *)(iVar3 + 0xa6)] + 0x4f) | 1;
+        *(byte *)((&g_thing_ptrs)[*(ushort *)(cctrl_ptr + 0xa6)] + 0x4f) =
+             *(byte *)((&g_thing_ptrs)[*(ushort *)(cctrl_ptr + 0xa6)] + 0x4f) | 1;
       }
-      uVar5 = DAT_002e8bee - *(int *)(iVar3 + 0xa2);
-      if ((0x20 < uVar5) || (((*(byte *)(iVar3 + 0xac) & 2) != 0 && (0x10 < uVar5)))) {
-        *(undefined4 *)((int)puVar6 + -4) = 0x74838;
-        FUN_0006edb9();
-        *(int *)(iVar3 + 0xa2) = DAT_002e8bee;
+      uval_2 = g_game_turn - *(int *)(cctrl_ptr + 0xa2);
+      if ((0x20 < uval_2) || (((*(byte *)(cctrl_ptr + 0xac) & 2) != 0 && (0x10 < uval_2)))) {
+        *(undefined4 *)((int)word_ptr + -4) = 0x74838;
+        sound_roll_unsynced_random_06edb9();
+        *(int *)(cctrl_ptr + 0xa2) = g_game_turn;
       }
     }
   }
@@ -453,208 +447,205 @@ undefined4 FUN_000746e4(void)
 }
 
 /******************************************************************************
- * Function : sub_074853 (Ghidra: FUN_00074853)
- * Prototype: undefined8 sub_074853(void);
+ * Function : torture_update_creature_control_074853 (Original VA: 0x74853, Ghidra: FUN_00074853)
+ * Prototype: undefined8 torture_update_creature_control_074853(void);
  * Address  : 0x74853 (Size: 722 bytes)
  * Module   : torture.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x74b25
- * Callees  : 9 -> 0x10434, 0x10ad6, 0x51374, 0x63a25, 0x63b6d, 0x6709c, 0x74038, 0x74c0d, 0x81c44
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
+ * Callers  : 1 -> torture_update_creature_control_074b25
+ * Callees  : 9 -> anger_fn_010434, anger_fn_010ad6, moodneed_fn_051374, person_update_creature_control_063a25, person_fn_063b6d, scavenge_fn_06709c, torture_update_slab_subtile_columns_074038, torture_couldn_create_ghost_torture_074c0d ...
  ******************************************************************************/
-undefined8 FUN_00074853(void)
+undefined8 torture_update_creature_control_074853(void)
 
 {
-  int iVar1;
-  int in_EAX;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  undefined4 uVar5;
-  uint uVar6;
-  undefined4 in_EDX;
-  int iVar7;
+  int cctrl_ptr;
+  int thing;
+  int val;
+  int room_off;
+  int val_2;
+  undefined4 uval;
+  uint uval_2;
+  undefined4 arg_edx;
+  int val_3;
   
-  iVar2 = (uint)*(byte *)(in_EAX + 0x1a) * 0xe6;
-  iVar1 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  iVar3 = (uint)*(ushort *)(iVar1 + 0x7e) * 0x45;
-  iVar4 = FUN_0006709c();
-  if (iVar4 == 0) {
-    FUN_00063b6d();
-    uVar5 = 1;
+  val = (uint)*(byte *)(thing + 0x1a) * 0xe6;
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  room_off = (uint)*(ushort *)(cctrl_ptr + 0x7e) * 0x45;
+  val_2 = scavenge_fn_06709c();
+  if (val_2 == 0) {
+    person_fn_063b6d();
+    uval = 1;
     goto LAB_00074b1e;
   }
-  FUN_00010434();
-  if ((uint)DAT_002ebc4f <= (uint)(DAT_002e8bee - *(int *)(iVar1 + 0x82))) {
-    FUN_00081c44();
-    *(int *)(iVar1 + 0x82) = DAT_002e8bee;
+  anger_fn_010434();
+  if ((uint)g_bss_002ebc4f <= (uint)(g_game_turn - *(int *)(cctrl_ptr + 0x82))) {
+    creature_fn_081c44();
+    *(int *)(cctrl_ptr + 0x82) = g_game_turn;
   }
-  if (*(short *)(in_EAX + 0x5e) < 0) {
-    if (DAT_002ebc51 != 0) {
-      DAT_002e8bf6 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-      DAT_002e8bf6 = DAT_002e8bf6 >> 0xd | DAT_002e8bf6 * 0x80000;
-      if (DAT_002e8bf6 % (uint)DAT_002ebc51 != 0) goto LAB_00074977;
+  if (*(short *)(thing + 0x5e) < 0) {
+    if (g_bss_002ebc51 != 0) {
+      g_action_random_seed = g_action_random_seed * 0x24a1 + 0x24df;
+      g_action_random_seed = g_action_random_seed >> 0xd | g_action_random_seed * 0x80000;
+      if (g_action_random_seed % (uint)g_bss_002ebc51 != 0) goto LAB_00074977;
     }
-    FUN_00074c0d();
-    uVar5 = 0xffffffff;
+    torture_couldn_create_ghost_torture_074c0d();
+    uval = 0xffffffff;
   }
   else {
 LAB_00074977:
-    if ((&DAT_002ddd1e)[iVar3] != *(char *)(in_EAX + 6)) {
-      uVar6 = (DAT_002e8bee - *(int *)(iVar1 + 0x9a)) * (uint)*(ushort *)(&DAT_002ddd5a + iVar3) >>
+    if ((&g_bss_002ddd1e)[room_off] != *(char *)(thing + 6)) { /* thing->owner */
+      uval_2 = (g_game_turn - *(int *)(cctrl_ptr + 0x9a)) * (uint)*(ushort *)(&g_bss_002ddd5a + room_off) >>
               8;
-      if ((*(byte *)(iVar1 + 0xac) & 2) != 0) {
-        uVar6 = (uVar6 << 2) / 3;
+      if ((*(byte *)(cctrl_ptr + 0xac) & 2) != 0) {
+        uval_2 = (uval_2 << 2) / 3;
       }
-      if (*(short *)(iVar1 + 0x21) != 0) {
-        uVar6 = (int)(uVar6 * 5) >> 2;
+      if (*(short *)(cctrl_ptr + 0x21) != 0) {
+        uval_2 = (int)(uval_2 * 5) >> 2;
       }
-      if (((int)*(short *)(&DAT_002e91b1 + iVar2) <= (int)uVar6) && (*(short *)(iVar1 + 0xa6) != 0))
+      if (((int)*(short *)(&g_bss_002e91b1 + val) <= (int)uval_2) && (*(short *)(cctrl_ptr + 0xa6) != 0))
       {
-        iVar4 = (DAT_002e8bee - *(int *)(iVar1 + 0x9a)) - (int)*(short *)(&DAT_002e91b1 + iVar2);
-        iVar7 = iVar4 >> 0x1f;
-        DAT_002e8bf6 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-        DAT_002e8bf6 = DAT_002e8bf6 >> 0xd | DAT_002e8bf6 * 0x80000;
-        if (DAT_002e8bf6 % 100 < ((int)((iVar4 + iVar7 * -0x40) - (uint)(iVar7 << 5 < 0)) >> 6) + 1U
+        val_2 = (g_game_turn - *(int *)(cctrl_ptr + 0x9a)) - (int)*(short *)(&g_bss_002e91b1 + val);
+        val_3 = val_2 >> 0x1f;
+        g_action_random_seed = g_action_random_seed * 0x24a1 + 0x24df;
+        g_action_random_seed = g_action_random_seed >> 0xd | g_action_random_seed * 0x80000;
+        if (g_action_random_seed % 100 < ((int)((val_2 + val_3 * -0x40) - (uint)(val_3 << 5 < 0)) >> 6) + 1U
            ) {
-          DAT_002e8bf6 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-          DAT_002e8bf6 = DAT_002e8bf6 >> 0xd | DAT_002e8bf6 * 0x80000;
-          if (DAT_002e8bf6 % 3 == 0) {
-            if (((int)(char)(&DAT_002ddd1e)[iVar3] ==
-                 (uint)(byte)(&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef]) ||
-               ((int)*(char *)(in_EAX + 6) ==
-                (uint)(byte)(&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef])) {
-              FUN_00051374();
+          g_action_random_seed = g_action_random_seed * 0x24a1 + 0x24df;
+          g_action_random_seed = g_action_random_seed >> 0xd | g_action_random_seed * 0x80000;
+          if (g_action_random_seed % 3 == 0) {
+            if (((int)(char)(&g_bss_002ddd1e)[room_off] ==
+                 (uint)(byte)(&g_player_id_number)[g_my_player_word._3_1_ * 0x4ef]) ||
+               ((int)*(char *)(thing + 6) == /* thing->owner */
+                (uint)(byte)(&g_player_id_number)[g_my_player_word._3_1_ * 0x4ef])) {
+              moodneed_fn_051374();
             }
-            FUN_00063a25();
-            FUN_00010ad6();
-            uVar5 = 1;
-            *(int *)(&DAT_002e17d4 + (char)(&DAT_002ddd1e)[iVar3] * 0x1508) =
-                 *(int *)(&DAT_002e17d4 + (char)(&DAT_002ddd1e)[iVar3] * 0x1508) + 1;
+            person_update_creature_control_063a25();
+            anger_fn_010ad6();
+            uval = 1;
+            *(int *)(&g_bss_002e17d4 + (char)(&g_bss_002ddd1e)[room_off] * 0x1508) =
+                 *(int *)(&g_bss_002e17d4 + (char)(&g_bss_002ddd1e)[room_off] * 0x1508) + 1;
             goto LAB_00074b1e;
           }
-          *(int *)(iVar1 + 0x9a) = DAT_002e8bee - (int)*(short *)(&DAT_002e91b1 + iVar2) / 2;
-          FUN_00074038();
+          *(int *)(cctrl_ptr + 0x9a) = g_game_turn - (int)*(short *)(&g_bss_002e91b1 + val) / 2;
+          torture_update_slab_subtile_columns_074038();
         }
       }
     }
-    uVar5 = 0;
+    uval = 0;
   }
 LAB_00074b1e:
-  return CONCAT44(in_EDX,uVar5);
+  return CONCAT44(arg_edx,uval);
 }
 
 /******************************************************************************
- * Function : sub_074b25 (Ghidra: FUN_00074b25)
- * Prototype: longlong sub_074b25(void);
+ * Function : torture_update_creature_control_074b25 (Original VA: 0x74b25, Ghidra: FUN_00074b25)
+ * Prototype: longlong torture_update_creature_control_074b25(void);
  * Address  : 0x74b25 (Size: 93 bytes)
  * Module   : torture.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
  * Callers  : 0 -> 
- * Callees  : 4 -> 0x63b6d, 0x746e4, 0x74853, 0xd0f50
+ * Callees  : 4 -> person_fn_063b6d, torture_centre_table_torture_0746e4, torture_update_creature_control_074853, room_update_slab_subtile_columns_0d0f50
  ******************************************************************************/
-longlong FUN_00074b25(void)
+longlong torture_update_creature_control_074b25(void)
 
 {
-  int iVar1;
+  int val;
   int extraout_ECX;
-  uint in_EDX;
+  uint arg_edx;
   
-  iVar1 = FUN_000d0f50();
-  if (((iVar1 != 0) && (*(short *)(iVar1 + 10) == 5)) &&
-     (*(short *)(iVar1 + 1) == *(short *)((&DAT_001b0a00)[*(ushort *)(extraout_ECX + 100)] + 0x7e)))
+  val = room_update_slab_subtile_columns_0d0f50();
+  if (((val != 0) && (*(short *)(val + 10) == 5)) &&
+     (*(short *)(val + 1) == *(short *)((&g_creature_ctrl_ptrs)[*(ushort *)(extraout_ECX + 100)] + 0x7e)))
   {
-    iVar1 = FUN_00074853();
-    if (iVar1 == 0) {
-      FUN_000746e4();
+    val = torture_update_creature_control_074853();
+    if (val == 0) {
+      torture_centre_table_torture_0746e4();
     }
-    return CONCAT44(in_EDX,iVar1);
+    return CONCAT44(arg_edx,val);
   }
-  FUN_00063b6d();
-  return (ulonglong)in_EDX << 0x20;
+  person_fn_063b6d();
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : sub_074b82 (Ghidra: FUN_00074b82)
- * Prototype: undefined8 sub_074b82(void);
+ * Function : torture_update_creature_and_thing_074b82 (Original VA: 0x74b82, Ghidra: FUN_00074b82)
+ * Prototype: undefined8 torture_update_creature_and_thing_074b82(void);
  * Address  : 0x74b82 (Size: 139 bytes)
  * Module   : torture.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
  * Callers  : 0 -> 
- * Callees  : 2 -> 0x64e59, 0x7443f
+ * Callees  : 2 -> person_fn_064e59, torture_update_creature_and_thing_07443f
  ******************************************************************************/
-undefined8 FUN_00074b82(void)
+undefined8 torture_update_creature_and_thing_074b82(void)
 
 {
-  int iVar1;
-  int in_EAX;
-  undefined4 in_EDX;
+  int cctrl_ptr;
+  int thing;
+  undefined4 arg_edx;
   
-  iVar1 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  if (*(short *)(iVar1 + 0xa6) != 0) {
-    *(undefined2 *)((&DAT_001ae9fc)[*(ushort *)(iVar1 + 0xa6)] + 0x13) = 0;
-    *(byte *)((&DAT_001ae9fc)[*(ushort *)(iVar1 + 0xa6)] + 0x4f) =
-         *(byte *)((&DAT_001ae9fc)[*(ushort *)(iVar1 + 0xa6)] + 0x4f) & 0xfe;
-    *(undefined2 *)(iVar1 + 0xa6) = 0;
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  if (*(short *)(cctrl_ptr + 0xa6) != 0) {
+    *(undefined2 *)((&g_thing_ptrs)[*(ushort *)(cctrl_ptr + 0xa6)] + 0x13) = 0;
+    *(byte *)((&g_thing_ptrs)[*(ushort *)(cctrl_ptr + 0xa6)] + 0x4f) =
+         *(byte *)((&g_thing_ptrs)[*(ushort *)(cctrl_ptr + 0xa6)] + 0x4f) & 0xfe;
+    *(undefined2 *)(cctrl_ptr + 0xa6) = 0;
   }
-  if ((&DAT_002e9188)[(uint)*(byte *)(in_EAX + 0x1a) * 0xe6] != '\0') {
-    *(byte *)(in_EAX + 0x25) = *(byte *)(in_EAX + 0x25) | 0x20;
+  if ((&g_bss_002e9188)[(uint)*(byte *)(thing + 0x1a) * 0xe6] != '\0') {
+    *(byte *)(thing + 0x25) = *(byte *)(thing + 0x25) | 0x20;
   }
-  *(byte *)(iVar1 + 1) = *(byte *)(iVar1 + 1) & 0xfd;
-  FUN_0007443f();
-  FUN_00064e59();
-  return CONCAT44(in_EDX,1);
+  *(byte *)(cctrl_ptr + 1) = *(byte *)(cctrl_ptr + 1) & 0xfd;
+  torture_update_creature_and_thing_07443f();
+  person_fn_064e59();
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : dk_couldn_create_ghost_torture_074c0d (Ghidra: FUN_00074c0d)
- * Prototype: void dk_couldn_create_ghost_torture_074c0d(void);
+ * Function : torture_couldn_create_ghost_torture_074c0d (Original VA: 0x74c0d, Ghidra: FUN_00074c0d)
+ * Prototype: void torture_couldn_create_ghost_torture_074c0d(void);
  * Address  : 0x74c0d (Size: 262 bytes)
  * Module   : torture.cpp [direct_file_string_xref]
- * OrigLine : torture.cpp:633 ("COULDN'T CREATE GHOST IN TORTURE ROOM")
- * Naming   : String 'COULDN'T CREATE GHOST IN TORTURE ROOM'
- * Callers  : 1 -> 0x74853
- * Callees  : 7 -> 0x263c9, 0x43bb3, 0x51374, 0x63b6d, 0x8240c, 0x8608c, 0xddaf0
- * Strings  :
- *   - 0x167af5: "torture.cpp"
- *   - 0x167acf: "COULDN'T CREATE GHOST IN TORTURE ROOM"
+ * OrigLine : torture.cpp lines 633
+ * Purpose  : String 'COULDN'T CREATE GHOST IN TORTURE ROOM'
+ * Callers  : 1 -> torture_update_creature_control_074853
+ * Callees  : 7 -> effect_fn_0263c9, inits_told_you_so_create_043bb3, moodneed_fn_051374, person_fn_063b6d, creature_update_creature_control_08240c, creature_how_hero_have_tend_08608c, LbErrorLog
  ******************************************************************************/
-void FUN_00074c0d(void)
+void torture_couldn_create_ghost_torture_074c0d(void)
 
 {
-  char cVar1;
-  int in_EAX;
-  int iVar2;
-  uint uVar3;
-  int in_EDX;
+  char ch;
+  int arg_eax;
+  int val;
+  uint uval;
+  int arg_edx;
   
-  iVar2 = FUN_00043bb3();
-  if (iVar2 == 0) {
-    FUN_000ddaf0(); /* LbErrorLog("torture.cpp", line 633, "COULDN'T CREATE GHOST IN TORTURE ROOM") */
+  val = inits_told_you_so_create_043bb3();
+  if (val == 0) {
+    LbErrorLog(); /* LbErrorLog("torture.cpp", line 633, "COULDN'T CREATE GHOST IN TORTURE ROOM") */
   }
   else {
-    FUN_0008240c();
-    if (DAT_002ee9b9 == 3) {
-      uVar3 = (uint)*(byte *)(in_EDX + 0x1a);
-      if (((&DAT_002e91e7)[uVar3 * 0xe6] == '\0') || ((uVar3 != 0 && (uVar3 < 0xe)))) {
-        cVar1 = '\0';
+    creature_update_creature_control_08240c();
+    if (g_bss_002ee9b9 == 3) {
+      uval = (uint)*(byte *)(arg_edx + 0x1a);
+      if (((&g_bss_002e91e7)[uval * 0xe6] == '\0') || ((uval != 0 && (uval < 0xe)))) {
+        ch = '\0';
       }
       else {
-        cVar1 = '\x01';
+        ch = '\x01';
       }
     }
     else {
-      cVar1 = (&DAT_002e91e7)[(uint)*(byte *)(in_EDX + 0x1a) * 0xe6];
+      ch = (&g_bss_002e91e7)[(uint)*(byte *)(arg_edx + 0x1a) * 0xe6];
     }
-    if (cVar1 != '\0') {
-      FUN_000263c9();
+    if (ch != '\0') {
+      effect_fn_0263c9();
     }
-    FUN_00063b6d();
-    FUN_0008608c(1,0);
-    iVar2 = (int)DAT_002f10ce._3_1_;
-    *(int *)(&DAT_002e1828 + *(char *)(in_EAX + 3) * 0x1508) =
-         *(int *)(&DAT_002e1828 + *(char *)(in_EAX + 3) * 0x1508) + 1;
-    if ((int)*(char *)(in_EAX + 3) == (uint)(byte)(&DAT_0019d0f3)[iVar2 * 0x4ef]) {
-      FUN_00051374();
+    person_fn_063b6d();
+    creature_how_hero_have_tend_08608c(1,0);
+    val = (int)g_my_player_word._3_1_;
+    *(int *)(&g_bss_002e1828 + *(char *)(arg_eax + 3) * 0x1508) =
+         *(int *)(&g_bss_002e1828 + *(char *)(arg_eax + 3) * 0x1508) + 1;
+    if ((int)*(char *)(arg_eax + 3) == (uint)(byte)(&g_player_id_number)[val * 0x4ef]) {
+      moodneed_fn_051374();
       return;
     }
   }
@@ -662,100 +653,100 @@ void FUN_00074c0d(void)
 }
 
 /******************************************************************************
- * Function : sub_074d13 (Ghidra: FUN_00074d13)
- * Prototype: longlong sub_074d13(void);
+ * Function : torture_fn_074d13 (Original VA: 0x74d13, Ghidra: FUN_00074d13)
+ * Prototype: longlong torture_fn_074d13(void);
  * Address  : 0x74d13 (Size: 47 bytes)
  * Module   : torture.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x74dde
- * Callees  : 1 -> 0x10434
+ * Purpose  : Module torture.cpp procedure @ 0x074d13
+ * Callers  : 1 -> torture_update_creature_control_074dde
+ * Callees  : 1 -> anger_fn_010434
  ******************************************************************************/
-longlong FUN_00074d13(void)
+longlong torture_fn_074d13(void)
 
 {
-  uint in_EDX;
+  uint arg_edx;
   
-  FUN_00010434();
-  return (ulonglong)in_EDX << 0x20;
+  anger_fn_010434();
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : sub_074d42 (Ghidra: FUN_00074d42)
- * Prototype: longlong sub_074d42(void);
+ * Function : torture_update_creature_control_074d42 (Original VA: 0x74d42, Ghidra: FUN_00074d42)
+ * Prototype: longlong torture_update_creature_control_074d42(void);
  * Address  : 0x74d42 (Size: 156 bytes)
  * Module   : torture.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
  * Callers  : 0 -> 
- * Callees  : 5 -> 0x63b6d, 0x64ae7, 0x7436a, 0xcd85c, 0xd0f50
+ * Callees  : 5 -> person_fn_063b6d, person_update_creature_control_064ae7, torture_update_creature_and_thing_07436a, room_attempt_add_creature_room_0cd85c, room_update_slab_subtile_columns_0d0f50
  ******************************************************************************/
-longlong FUN_00074d42(void)
+longlong torture_update_creature_control_074d42(void)
 
 {
-  int iVar1;
-  undefined4 uVar2;
-  char cVar3;
-  int in_EAX;
-  int iVar4;
-  uint in_EDX;
+  int cctrl_ptr;
+  undefined4 uval;
+  char ch;
+  int thing;
+  int val;
+  uint arg_edx;
   
-  iVar1 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  *(undefined2 *)(iVar1 + 0x80) = 0;
-  iVar4 = FUN_000d0f50();
-  if ((iVar4 != 0) && (*(short *)(iVar4 + 10) == 5)) {
-    cVar3 = FUN_000cd85c();
-    if (cVar3 != '\0') {
-      FUN_0007436a();
-      uVar2 = DAT_002e8bee;
-      *(undefined2 *)(iVar1 + 0xa6) = 0;
-      *(undefined1 *)(iVar1 + 0xa8) = 1;
-      *(undefined4 *)(iVar1 + 0x82) = uVar2;
-      *(undefined4 *)(iVar1 + 0x9a) = uVar2;
-      *(undefined4 *)(iVar1 + 0x9e) = uVar2;
-      *(undefined4 *)(iVar1 + 0xa2) = uVar2;
-      *(undefined4 *)(iVar1 + 0x82) = uVar2;
-      FUN_00064ae7();
-      return CONCAT44(in_EDX,1);
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  *(undefined2 *)(cctrl_ptr + 0x80) = 0;
+  val = room_update_slab_subtile_columns_0d0f50();
+  if ((val != 0) && (*(short *)(val + 10) == 5)) {
+    ch = room_attempt_add_creature_room_0cd85c();
+    if (ch != '\0') {
+      torture_update_creature_and_thing_07436a();
+      uval = g_game_turn;
+      *(undefined2 *)(cctrl_ptr + 0xa6) = 0;
+      *(undefined1 *)(cctrl_ptr + 0xa8) = 1;
+      *(undefined4 *)(cctrl_ptr + 0x82) = uval;
+      *(undefined4 *)(cctrl_ptr + 0x9a) = uval;
+      *(undefined4 *)(cctrl_ptr + 0x9e) = uval;
+      *(undefined4 *)(cctrl_ptr + 0xa2) = uval;
+      *(undefined4 *)(cctrl_ptr + 0x82) = uval;
+      person_update_creature_control_064ae7();
+      return CONCAT44(arg_edx,1);
     }
   }
-  FUN_00063b6d();
-  return (ulonglong)in_EDX << 0x20;
+  person_fn_063b6d();
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : sub_074dde (Ghidra: FUN_00074dde)
- * Prototype: undefined8 sub_074dde(void);
+ * Function : torture_update_creature_control_074dde (Original VA: 0x74dde, Ghidra: FUN_00074dde)
+ * Prototype: undefined8 torture_update_creature_control_074dde(void);
  * Address  : 0x74dde (Size: 144 bytes)
  * Module   : torture.cpp [callgraph_affinity_to_preceding_unit]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
  * Callers  : 0 -> 
- * Callees  : 4 -> 0x63b6d, 0x746e4, 0x74d13, 0xd0f50
+ * Callees  : 4 -> person_fn_063b6d, torture_centre_table_torture_0746e4, torture_fn_074d13, room_update_slab_subtile_columns_0d0f50
  ******************************************************************************/
-undefined8 FUN_00074dde(void)
+undefined8 torture_update_creature_control_074dde(void)
 
 {
-  byte bVar1;
-  int iVar2;
-  int in_EAX;
-  int iVar3;
-  undefined4 uVar4;
+  byte flag;
+  int cctrl_ptr;
+  int thing;
+  int cctrl_ptr_2;
+  undefined4 uval;
   int extraout_ECX;
-  undefined4 in_EDX;
+  undefined4 arg_edx;
   
-  bVar1 = *(byte *)(in_EAX + 0x1a);
-  iVar2 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  iVar3 = FUN_000d0f50();
-  if ((((iVar3 == 0) || (*(short *)(iVar3 + 10) != 5)) ||
-      (*(short *)(iVar3 + 1) != *(short *)((&DAT_001b0a00)[*(ushort *)(extraout_ECX + 100)] + 0x7e))
-      ) || ((uint)(int)*(short *)(&DAT_002e91b1 + (uint)bVar1 * 0xe6) <
-            (uint)(DAT_002e8bee - *(int *)(iVar2 + 0x82)))) {
-    FUN_00063b6d();
-    uVar4 = 0;
+  flag = *(byte *)(thing + 0x1a);
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  cctrl_ptr_2 = room_update_slab_subtile_columns_0d0f50();
+  if ((((cctrl_ptr_2 == 0) || (*(short *)(cctrl_ptr_2 + 10) != 5)) ||
+      (*(short *)(cctrl_ptr_2 + 1) != *(short *)((&g_creature_ctrl_ptrs)[*(ushort *)(extraout_ECX + 100)] + 0x7e))
+      ) || ((uint)(int)*(short *)(&g_bss_002e91b1 + (uint)flag * 0xe6) <
+            (uint)(g_game_turn - *(int *)(cctrl_ptr + 0x82)))) {
+    person_fn_063b6d();
+    uval = 0;
   }
   else {
-    FUN_00074d13();
-    FUN_000746e4();
-    uVar4 = 1;
+    torture_fn_074d13();
+    torture_centre_table_torture_0746e4();
+    uval = 1;
   }
-  return CONCAT44(in_EDX,uVar4);
+  return CONCAT44(arg_edx,uval);
 }
 

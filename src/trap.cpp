@@ -1,7 +1,7 @@
 /**
- * Dungeon Keeper (KEEPER.EXE) - Reconstructed Source Module: trap.cpp
+ * Dungeon Keeper (KEEPER.EXE) - Reconstructed & Semantically Named Module: trap.cpp
  * Binary Subject: /home/merlin/Dungeon Keeper/re/KEEPER.elf
- * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 (x86:LE:32:default)
+ * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 + DK Semantic Analyzer
  * Functions in this translation unit: 14
  */
 
@@ -11,80 +11,77 @@
 #include "../include/dk_functions.h"
 
 /******************************************************************************
- * Function : dk_illegal_trap_trigger_type_075ba4 (Ghidra: FUN_00075ba4)
- * Prototype: void dk_illegal_trap_trigger_type_075ba4(void);
+ * Function : trap_illegal_trap_trigger_type_075ba4 (Original VA: 0x75ba4, Ghidra: FUN_00075ba4)
+ * Prototype: void trap_illegal_trap_trigger_type_075ba4(void);
  * Address  : 0x75ba4 (Size: 140 bytes)
  * Module   : trap.cpp [direct_file_string_xref]
- * OrigLine : trap.cpp:41 ("Illegal trap trigger type")
- * Naming   : String 'Illegal trap trigger type'
- * Callers  : 1 -> 0xe2c58
- * Callees  : 3 -> 0x75c30, 0x761cd, 0xddaf0
- * Strings  :
- *   - 0x167c36: "trap.cpp"
- *   - 0x167c1c: "Illegal trap trigger type"
+ * OrigLine : trap.cpp lines 41
+ * Purpose  : String 'Illegal trap trigger type'
+ * Callers  : 1 -> update_fn_0e2c58
+ * Callees  : 3 -> trap_process_map_subtile_075c30, trap_process_map_subtile_0761cd, LbErrorLog
  ******************************************************************************/
-void FUN_00075ba4(void)
+void trap_illegal_trap_trigger_type_075ba4(void)
 
 {
-  byte bVar1;
-  char cVar2;
-  int in_EAX;
+  byte flag;
+  char ch;
+  int arg_eax;
   int extraout_EDX;
   int extraout_EDX_00;
-  int iVar3;
+  int thing_ptr;
   
-  if (*(char *)(in_EAX + 0x13) != '\0') {
-    bVar1 = (&DAT_0018fd21)[(uint)*(byte *)(in_EAX + 0x1a) * 0x36];
-    if (bVar1 == 0) {
+  if (*(char *)(arg_eax + 0x13) != '\0') {
+    flag = (&g_data_0018fd21)[(uint)*(byte *)(arg_eax + 0x1a) * 0x36];
+    if (flag == 0) {
 LAB_00075be1:
-      FUN_000ddaf0(); /* LbErrorLog("trap.cpp", line 41, "Illegal trap trigger type") */
+      LbErrorLog(); /* LbErrorLog("trap.cpp", line 41, "Illegal trap trigger type") */
       return;
     }
-    if (bVar1 < 2) {
-      cVar2 = FUN_00075c30();
-      iVar3 = extraout_EDX;
+    if (flag < 2) {
+      ch = trap_process_map_subtile_075c30();
+      thing_ptr = extraout_EDX;
     }
     else {
-      if (bVar1 != 2) goto LAB_00075be1;
-      cVar2 = FUN_000761cd();
-      iVar3 = extraout_EDX_00;
+      if (flag != 2) goto LAB_00075be1;
+      ch = trap_process_map_subtile_0761cd();
+      thing_ptr = extraout_EDX_00;
     }
-    if (((cVar2 != '\0') &&
-        (*(int *)(iVar3 + 0x14) =
-              DAT_002e8bee + *(int *)(&DAT_001ae8a0 + (uint)*(byte *)(iVar3 + 0x1a) * 0x14),
-        *(char *)(iVar3 + 0x13) != -1)) &&
-       (*(char *)(iVar3 + 0x13) = *(char *)(iVar3 + 0x13) + -1, *(char *)(iVar3 + 0x13) == '\0')) {
-      *(byte *)(iVar3 + 0x4f) = *(byte *)(iVar3 + 0x4f) & 0xcf;
-      *(byte *)(iVar3 + 0x4f) = *(byte *)(iVar3 + 0x4f) | 0x20;
+    if (((ch != '\0') &&
+        (*(int *)(thing_ptr + 0x14) =
+              g_game_turn + *(int *)(&g_bss_001ae8a0 + (uint)*(byte *)(thing_ptr + 0x1a) * 0x14),
+        *(char *)(thing_ptr + 0x13) != -1)) && /* thing->anim_sprite */
+       (*(char *)(thing_ptr + 0x13) = *(char *)(thing_ptr + 0x13) + -1, *(char *)(thing_ptr + 0x13) == '\0')) { /* thing->anim_sprite */
+      *(byte *)(thing_ptr + 0x4f) = *(byte *)(thing_ptr + 0x4f) & 0xcf; /* thing->render_flags */
+      *(byte *)(thing_ptr + 0x4f) = *(byte *)(thing_ptr + 0x4f) | 0x20; /* thing->render_flags */
     }
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_075c30 (Ghidra: FUN_00075c30)
- * Prototype: undefined8 sub_075c30(void);
+ * Function : trap_process_map_subtile_075c30 (Original VA: 0x75c30, Ghidra: FUN_00075c30)
+ * Prototype: undefined8 trap_process_map_subtile_075c30(void);
  * Address  : 0x75c30 (Size: 1437 bytes)
  * Module   : trap.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x75ba4
- * Callees  : 1 -> 0x76319
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 1 -> trap_illegal_trap_trigger_type_075ba4
+ * Callees  : 1 -> trap_illegal_trap_activation_type_076319
  ******************************************************************************/
-undefined8 FUN_00075c30(void)
+undefined8 trap_process_map_subtile_075c30(void)
 
 {
-  int in_EAX;
-  uint uVar1;
-  int iVar2;
-  uint uVar3;
-  uint uVar4;
-  undefined4 uVar5;
-  uint uVar6;
-  uint uVar7;
-  uint uVar8;
-  undefined4 in_EDX;
-  int iVar9;
-  int iVar10;
+  int arg_eax;
+  uint uval;
+  int loop_i;
+  uint uval_2;
+  uint thing_ptr;
+  undefined4 uval_3;
+  uint uval_4;
+  uint uval_5;
+  uint player_off;
+  undefined4 arg_edx;
+  int loop_i_2;
+  int val;
   int local_b4;
   int local_a8;
   int local_a4;
@@ -102,51 +99,51 @@ undefined8 FUN_00075c30(void)
   int local_34;
   int local_30;
   
-  uVar1 = *(ushort *)(in_EAX + 0x56) / 2;
-  iVar2 = *(ushort *)(in_EAX + 0xd) - uVar1;
-  iVar9 = iVar2 >> 0x1f;
-  iVar2 = (int)((iVar2 + iVar9 * -0x100) - (uint)(iVar9 << 7 < 0)) >> 8;
-  if (iVar2 < 1) {
-    iVar2 = 0;
+  uval = *(ushort *)(arg_eax + 0x56) / 2;
+  loop_i = *(ushort *)(arg_eax + 0xd) - uval;
+  loop_i_2 = loop_i >> 0x1f;
+  loop_i = (int)((loop_i + loop_i_2 * -0x100) - (uint)(loop_i_2 << 7 < 0)) >> 8;
+  if (loop_i < 1) {
+    loop_i = 0;
   }
-  uVar3 = (int)(*(ushort *)(in_EAX + 0xd) + uVar1) >> 8;
-  if (0xfe < uVar3) {
-    uVar3 = 0xff;
+  uval_2 = (int)(*(ushort *)(arg_eax + 0xd) + uval) >> 8;
+  if (0xfe < uval_2) {
+    uval_2 = 0xff;
   }
-  iVar9 = *(ushort *)(in_EAX + 0xf) - uVar1;
-  iVar10 = iVar9 >> 0x1f;
-  local_54 = (int)((iVar9 + iVar10 * -0x100) - (uint)(iVar10 << 7 < 0)) >> 8;
+  loop_i_2 = *(ushort *)(arg_eax + 0xf) - uval;
+  val = loop_i_2 >> 0x1f;
+  local_54 = (int)((loop_i_2 + val * -0x100) - (uint)(val << 7 < 0)) >> 8;
   if (local_54 < 1) {
     local_54 = 0;
   }
-  uVar1 = (int)(*(ushort *)(in_EAX + 0xf) + uVar1) >> 8;
-  if (0xfe < uVar1) {
-    uVar1 = 0xff;
+  uval = (int)(*(ushort *)(arg_eax + 0xf) + uval) >> 8;
+  if (0xfe < uval) {
+    uval = 0xff;
   }
   local_b4 = local_54 + -0x14;
   if (local_b4 < 1) {
     local_b4 = 0;
   }
-  local_34 = iVar2 * 5;
-  for (local_a8 = iVar2; local_a8 <= (int)uVar3; local_a8 = local_a8 + 1) {
+  local_34 = loop_i * 5;
+  for (local_a8 = loop_i; local_a8 <= (int)uval_2; local_a8 = local_a8 + 1) {
     local_48 = local_54;
-    for (iVar9 = local_54 * 0x500 + local_34; local_34 + local_b4 * 0x500 <= iVar9;
-        iVar9 = iVar9 + -0x500) {
-      if ((*(byte *)((int)&DAT_00279203 + iVar9) & 0x10) != 0) {
+    for (loop_i_2 = local_54 * 0x500 + local_34; local_34 + local_b4 * 0x500 <= loop_i_2;
+        loop_i_2 = loop_i_2 + -0x500) {
+      if ((*(byte *)((int)&g_map_subtiles + loop_i_2) & 0x10) != 0) {
         local_b4 = local_48 + 1;
         break;
       }
-      for (uVar4 = (*(uint *)((int)&DAT_00279203 + iVar9 + 1) & 0x3fffff) >> 0xb;
-          uVar4 = (&DAT_001ae9fc)[uVar4], DAT_001ae9fc < uVar4; uVar4 = (uint)*(ushort *)(uVar4 + 2)
+      for (thing_ptr = (*(uint *)((int)&g_map_subtiles + loop_i_2 + 1) & 0x3fffff) >> 0xb;
+          thing_ptr = (&g_thing_ptrs)[thing_ptr], g_thing_ptrs < thing_ptr; thing_ptr = (uint)*(ushort *)(thing_ptr + 2)
           ) {
-        if ((((*(char *)(uVar4 + 0x1f) == '\x05') && (*(char *)(uVar4 + 6) != *(char *)(in_EAX + 6))
-             ) && ((*(byte *)(uVar4 + 1) & 1) == 0)) && (*(char *)(uVar4 + 7) != 'C')) {
-          uVar6 = (uint)*(char *)(uVar4 + 6);
-          uVar7 = (uint)DAT_002eb543;
-          if ((((uVar6 == uVar7) || (uVar8 = (uint)*(char *)(in_EAX + 6), uVar8 == uVar7)) ||
-              ((((uint)(byte)(&DAT_0019d0f2)[uVar6 * 0x4ef] & 1 << (*(byte *)(in_EAX + 6) & 0x1f))
-                == 0 || ((uVar8 == uVar7 || (uVar6 == uVar7)))))) ||
-             (((uint)(byte)(&DAT_0019d0f2)[uVar8 * 0x4ef] & 1 << (*(byte *)(uVar4 + 6) & 0x1f)) == 0
+        if ((((*(char *)(thing_ptr + 0x1f) == '\x05') && (*(char *)(thing_ptr + 6) != *(char *)(arg_eax + 6)) /* thing->owner, thing->class_id */
+             ) && ((*(byte *)(thing_ptr + 1) & 1) == 0)) && (*(char *)(thing_ptr + 7) != 'C')) {
+          uval_4 = (uint)*(char *)(thing_ptr + 6); /* thing->owner */
+          uval_5 = (uint)g_neutral_player_number;
+          if ((((uval_4 == uval_5) || (player_off = (uint)*(char *)(arg_eax + 6), player_off == uval_5)) ||
+              ((((uint)(byte)(&g_player_view_flags)[uval_4 * 0x4ef] & 1 << (*(byte *)(arg_eax + 6) & 0x1f))
+                == 0 || ((player_off == uval_5 || (uval_4 == uval_5)))))) ||
+             (((uint)(byte)(&g_player_view_flags)[player_off * 0x4ef] & 1 << (*(byte *)(thing_ptr + 6) & 0x1f)) == 0 /* thing->owner */
              )) goto LAB_00075de1;
         }
       }
@@ -154,30 +151,30 @@ undefined8 FUN_00075c30(void)
     }
     local_34 = local_34 + 5;
   }
-  local_78 = uVar1 + 0x14;
+  local_78 = uval + 0x14;
   if (0xff < local_78) {
     local_78 = 0x100;
   }
-  local_30 = iVar2 * 5;
-  for (local_58 = iVar2; local_58 <= (int)uVar3; local_58 = local_58 + 1) {
-    local_50 = uVar1;
-    for (iVar9 = uVar1 * 0x500 + local_30; iVar9 < (int)(local_30 + local_78 * 0x500);
-        iVar9 = iVar9 + 0x500) {
-      if ((*(byte *)((int)&DAT_00279203 + iVar9) & 0x10) != 0) {
+  local_30 = loop_i * 5;
+  for (local_58 = loop_i; local_58 <= (int)uval_2; local_58 = local_58 + 1) {
+    local_50 = uval;
+    for (loop_i_2 = uval * 0x500 + local_30; loop_i_2 < (int)(local_30 + local_78 * 0x500);
+        loop_i_2 = loop_i_2 + 0x500) {
+      if ((*(byte *)((int)&g_map_subtiles + loop_i_2) & 0x10) != 0) {
         local_78 = local_50;
         break;
       }
-      for (uVar4 = (*(uint *)((int)&DAT_00279203 + iVar9 + 1) & 0x3fffff) >> 0xb;
-          uVar4 = (&DAT_001ae9fc)[uVar4], DAT_001ae9fc < uVar4; uVar4 = (uint)*(ushort *)(uVar4 + 2)
+      for (thing_ptr = (*(uint *)((int)&g_map_subtiles + loop_i_2 + 1) & 0x3fffff) >> 0xb;
+          thing_ptr = (&g_thing_ptrs)[thing_ptr], g_thing_ptrs < thing_ptr; thing_ptr = (uint)*(ushort *)(thing_ptr + 2)
           ) {
-        if ((((*(char *)(uVar4 + 0x1f) == '\x05') && (*(char *)(uVar4 + 6) != *(char *)(in_EAX + 6))
-             ) && ((*(byte *)(uVar4 + 1) & 1) == 0)) && (*(char *)(uVar4 + 7) != 'C')) {
-          uVar6 = (uint)*(char *)(uVar4 + 6);
-          uVar7 = (uint)DAT_002eb543;
-          if (((uVar6 == uVar7) || (uVar8 = (uint)*(char *)(in_EAX + 6), uVar8 == uVar7)) ||
-             (((((uint)(byte)(&DAT_0019d0f2)[uVar6 * 0x4ef] & 1 << (*(byte *)(in_EAX + 6) & 0x1f))
-                == 0 || ((uVar8 == uVar7 || (uVar6 == uVar7)))) ||
-              (((uint)(byte)(&DAT_0019d0f2)[uVar8 * 0x4ef] & 1 << (*(byte *)(uVar4 + 6) & 0x1f)) ==
+        if ((((*(char *)(thing_ptr + 0x1f) == '\x05') && (*(char *)(thing_ptr + 6) != *(char *)(arg_eax + 6)) /* thing->owner, thing->class_id */
+             ) && ((*(byte *)(thing_ptr + 1) & 1) == 0)) && (*(char *)(thing_ptr + 7) != 'C')) {
+          uval_4 = (uint)*(char *)(thing_ptr + 6); /* thing->owner */
+          uval_5 = (uint)g_neutral_player_number;
+          if (((uval_4 == uval_5) || (player_off = (uint)*(char *)(arg_eax + 6), player_off == uval_5)) ||
+             (((((uint)(byte)(&g_player_view_flags)[uval_4 * 0x4ef] & 1 << (*(byte *)(arg_eax + 6) & 0x1f))
+                == 0 || ((player_off == uval_5 || (uval_4 == uval_5)))) ||
+              (((uint)(byte)(&g_player_view_flags)[player_off * 0x4ef] & 1 << (*(byte *)(thing_ptr + 6) & 0x1f)) == /* thing->owner */
                0)))) goto LAB_00075de1;
         }
       }
@@ -185,29 +182,29 @@ undefined8 FUN_00075c30(void)
     }
     local_30 = local_30 + 5;
   }
-  local_7c = iVar2 + -0x14;
+  local_7c = loop_i + -0x14;
   if (local_7c < 1) {
     local_7c = 0;
   }
   local_a4 = local_54 * 0x500;
-  for (local_4c = local_54; local_4c <= (int)uVar1; local_4c = local_4c + 1) {
-    local_5c = iVar2;
-    for (iVar9 = iVar2 * 5 + local_a4; local_a4 + local_7c * 5 <= iVar9; iVar9 = iVar9 + -5) {
-      if ((*(byte *)((int)&DAT_00279203 + iVar9) & 0x10) != 0) {
+  for (local_4c = local_54; local_4c <= (int)uval; local_4c = local_4c + 1) {
+    local_5c = loop_i;
+    for (loop_i_2 = loop_i * 5 + local_a4; local_a4 + local_7c * 5 <= loop_i_2; loop_i_2 = loop_i_2 + -5) {
+      if ((*(byte *)((int)&g_map_subtiles + loop_i_2) & 0x10) != 0) {
         local_7c = local_5c + 1;
         break;
       }
-      for (uVar4 = (*(uint *)((int)&DAT_00279203 + iVar9 + 1) & 0x3fffff) >> 0xb;
-          uVar4 = (&DAT_001ae9fc)[uVar4], DAT_001ae9fc < uVar4; uVar4 = (uint)*(ushort *)(uVar4 + 2)
+      for (thing_ptr = (*(uint *)((int)&g_map_subtiles + loop_i_2 + 1) & 0x3fffff) >> 0xb;
+          thing_ptr = (&g_thing_ptrs)[thing_ptr], g_thing_ptrs < thing_ptr; thing_ptr = (uint)*(ushort *)(thing_ptr + 2)
           ) {
-        if ((((*(char *)(uVar4 + 0x1f) == '\x05') && (*(char *)(uVar4 + 6) != *(char *)(in_EAX + 6))
-             ) && ((*(byte *)(uVar4 + 1) & 1) == 0)) && (*(char *)(uVar4 + 7) != 'C')) {
-          uVar6 = (uint)*(char *)(uVar4 + 6);
-          uVar7 = (uint)DAT_002eb543;
-          if ((((uVar6 == uVar7) || (uVar8 = (uint)*(char *)(in_EAX + 6), uVar8 == uVar7)) ||
-              ((((uint)(byte)(&DAT_0019d0f2)[uVar6 * 0x4ef] & 1 << (*(byte *)(in_EAX + 6) & 0x1f))
-                == 0 || ((uVar8 == uVar7 || (uVar6 == uVar7)))))) ||
-             (((uint)(byte)(&DAT_0019d0f2)[uVar8 * 0x4ef] & 1 << (*(byte *)(uVar4 + 6) & 0x1f)) == 0
+        if ((((*(char *)(thing_ptr + 0x1f) == '\x05') && (*(char *)(thing_ptr + 6) != *(char *)(arg_eax + 6)) /* thing->owner, thing->class_id */
+             ) && ((*(byte *)(thing_ptr + 1) & 1) == 0)) && (*(char *)(thing_ptr + 7) != 'C')) {
+          uval_4 = (uint)*(char *)(thing_ptr + 6); /* thing->owner */
+          uval_5 = (uint)g_neutral_player_number;
+          if ((((uval_4 == uval_5) || (player_off = (uint)*(char *)(arg_eax + 6), player_off == uval_5)) ||
+              ((((uint)(byte)(&g_player_view_flags)[uval_4 * 0x4ef] & 1 << (*(byte *)(arg_eax + 6) & 0x1f))
+                == 0 || ((player_off == uval_5 || (uval_4 == uval_5)))))) ||
+             (((uint)(byte)(&g_player_view_flags)[player_off * 0x4ef] & 1 << (*(byte *)(thing_ptr + 6) & 0x1f)) == 0 /* thing->owner */
              )) goto LAB_00075de1;
         }
       }
@@ -215,29 +212,29 @@ undefined8 FUN_00075c30(void)
     }
     local_a4 = local_a4 + 0x500;
   }
-  local_74 = uVar3 + 0x14;
+  local_74 = uval_2 + 0x14;
   if (0xff < local_74) {
     local_74 = 0x100;
   }
   local_3c = local_54 * 0x500;
-  for (; local_54 <= (int)uVar1; local_54 = local_54 + 1) {
-    local_60 = uVar3;
-    for (iVar2 = uVar3 * 5 + local_3c; iVar2 < (int)(local_3c + local_74 * 5); iVar2 = iVar2 + 5) {
-      if ((*(byte *)((int)&DAT_00279203 + iVar2) & 0x10) != 0) {
+  for (; local_54 <= (int)uval; local_54 = local_54 + 1) {
+    local_60 = uval_2;
+    for (loop_i = uval_2 * 5 + local_3c; loop_i < (int)(local_3c + local_74 * 5); loop_i = loop_i + 5) {
+      if ((*(byte *)((int)&g_map_subtiles + loop_i) & 0x10) != 0) {
         local_74 = local_60;
         break;
       }
-      for (uVar4 = (*(uint *)((int)&DAT_00279203 + iVar2 + 1) & 0x3fffff) >> 0xb;
-          uVar4 = (&DAT_001ae9fc)[uVar4], DAT_001ae9fc < uVar4; uVar4 = (uint)*(ushort *)(uVar4 + 2)
+      for (thing_ptr = (*(uint *)((int)&g_map_subtiles + loop_i + 1) & 0x3fffff) >> 0xb;
+          thing_ptr = (&g_thing_ptrs)[thing_ptr], g_thing_ptrs < thing_ptr; thing_ptr = (uint)*(ushort *)(thing_ptr + 2)
           ) {
-        if ((((*(char *)(uVar4 + 0x1f) == '\x05') && (*(char *)(uVar4 + 6) != *(char *)(in_EAX + 6))
-             ) && ((*(byte *)(uVar4 + 1) & 1) == 0)) && (*(char *)(uVar4 + 7) != 'C')) {
-          uVar6 = (uint)*(char *)(uVar4 + 6);
-          uVar7 = (uint)DAT_002eb543;
-          if (((uVar7 == uVar6) || (uVar8 = (uint)*(char *)(in_EAX + 6), uVar7 == uVar8)) ||
-             (((((uint)(byte)(&DAT_0019d0f2)[uVar6 * 0x4ef] & 1 << (*(byte *)(in_EAX + 6) & 0x1f))
-                == 0 || ((uVar7 == uVar8 || (uVar7 == uVar6)))) ||
-              (((uint)(byte)(&DAT_0019d0f2)[uVar8 * 0x4ef] & 1 << (*(byte *)(uVar4 + 6) & 0x1f)) ==
+        if ((((*(char *)(thing_ptr + 0x1f) == '\x05') && (*(char *)(thing_ptr + 6) != *(char *)(arg_eax + 6)) /* thing->owner, thing->class_id */
+             ) && ((*(byte *)(thing_ptr + 1) & 1) == 0)) && (*(char *)(thing_ptr + 7) != 'C')) {
+          uval_4 = (uint)*(char *)(thing_ptr + 6); /* thing->owner */
+          uval_5 = (uint)g_neutral_player_number;
+          if (((uval_5 == uval_4) || (player_off = (uint)*(char *)(arg_eax + 6), uval_5 == player_off)) ||
+             (((((uint)(byte)(&g_player_view_flags)[uval_4 * 0x4ef] & 1 << (*(byte *)(arg_eax + 6) & 0x1f))
+                == 0 || ((uval_5 == player_off || (uval_5 == uval_4)))) ||
+              (((uint)(byte)(&g_player_view_flags)[player_off * 0x4ef] & 1 << (*(byte *)(thing_ptr + 6) & 0x1f)) == /* thing->owner */
                0)))) goto LAB_00075de1;
         }
       }
@@ -245,67 +242,67 @@ undefined8 FUN_00075c30(void)
     }
     local_3c = local_3c + 0x500;
   }
-  uVar5 = 0;
+  uval_3 = 0;
 LAB_000761c0:
-  return CONCAT44(in_EDX,uVar5);
+  return CONCAT44(arg_edx,uval_3);
 LAB_00075de1:
-  FUN_00076319();
-  uVar5 = 1;
+  trap_illegal_trap_activation_type_076319();
+  uval_3 = 1;
   goto LAB_000761c0;
 }
 
 /******************************************************************************
- * Function : sub_0761cd (Ghidra: FUN_000761cd)
- * Prototype: undefined8 sub_0761cd(void);
+ * Function : trap_process_map_subtile_0761cd (Original VA: 0x761cd, Ghidra: FUN_000761cd)
+ * Prototype: undefined8 trap_process_map_subtile_0761cd(void);
  * Address  : 0x761cd (Size: 316 bytes)
  * Module   : trap.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x75ba4
- * Callees  : 1 -> 0x76319
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 1 -> trap_illegal_trap_trigger_type_075ba4
+ * Callees  : 1 -> trap_illegal_trap_activation_type_076319
  ******************************************************************************/
-undefined8 FUN_000761cd(void)
+undefined8 trap_process_map_subtile_0761cd(void)
 
 {
-  int in_EAX;
-  uint uVar1;
-  uint uVar2;
-  undefined4 uVar3;
-  uint uVar4;
-  uint uVar5;
-  undefined4 in_EDX;
-  int iVar6;
-  int iVar7;
-  uint uVar8;
+  int arg_eax;
+  uint uval;
+  uint thing_ptr;
+  undefined4 uval_2;
+  uint uval_3;
+  uint player_off;
+  undefined4 arg_edx;
+  int loop_i;
+  int val;
+  uint uval_4;
   int local_20;
   int local_1c;
   
-  uVar1 = *(byte *)(in_EAX + 0xe) / 3;
-  uVar2 = *(byte *)(in_EAX + 0x10) / 3;
-  local_20 = uVar2 * 3;
-  iVar7 = local_20 + 3;
-  local_1c = uVar2 * 0xf00;
+  uval = *(byte *)(arg_eax + 0xe) / 3;
+  thing_ptr = *(byte *)(arg_eax + 0x10) / 3;
+  local_20 = thing_ptr * 3;
+  val = local_20 + 3;
+  local_1c = thing_ptr * 0xf00;
   do {
-    if (iVar7 <= local_20) {
-      uVar3 = 0;
+    if (val <= local_20) {
+      uval_2 = 0;
 LAB_000761c7:
-      return CONCAT44(in_EDX,uVar3);
+      return CONCAT44(arg_edx,uval_2);
     }
-    for (iVar6 = uVar1 * 0xf + local_1c; iVar6 < (int)(local_1c + (uVar1 * 3 + 3) * 5);
-        iVar6 = iVar6 + 5) {
-      for (uVar2 = (*(uint *)((int)&DAT_00279203 + iVar6 + 1) & 0x3fffff) >> 0xb;
-          uVar2 = (&DAT_001ae9fc)[uVar2], DAT_001ae9fc < uVar2; uVar2 = (uint)*(ushort *)(uVar2 + 2)
+    for (loop_i = uval * 0xf + local_1c; loop_i < (int)(local_1c + (uval * 3 + 3) * 5);
+        loop_i = loop_i + 5) {
+      for (thing_ptr = (*(uint *)((int)&g_map_subtiles + loop_i + 1) & 0x3fffff) >> 0xb;
+          thing_ptr = (&g_thing_ptrs)[thing_ptr], g_thing_ptrs < thing_ptr; thing_ptr = (uint)*(ushort *)(thing_ptr + 2)
           ) {
-        if ((((*(char *)(uVar2 + 0x1f) == '\x05') && (*(char *)(uVar2 + 6) != *(char *)(in_EAX + 6))
-             ) && ((*(byte *)(uVar2 + 1) & 1) == 0)) && (*(char *)(uVar2 + 7) != 'C')) {
-          uVar4 = (uint)*(char *)(uVar2 + 6);
-          uVar8 = (uint)DAT_002eb543;
-          if ((((uVar8 == uVar4) || (uVar5 = (uint)*(char *)(in_EAX + 6), uVar8 == uVar5)) ||
-              ((((uint)(byte)(&DAT_0019d0f2)[uVar4 * 0x4ef] & 1 << (*(byte *)(in_EAX + 6) & 0x1f))
-                == 0 || ((uVar8 == uVar5 || (uVar8 == uVar4)))))) ||
-             (((uint)(byte)(&DAT_0019d0f2)[uVar5 * 0x4ef] & 1 << (*(byte *)(uVar2 + 6) & 0x1f)) == 0
+        if ((((*(char *)(thing_ptr + 0x1f) == '\x05') && (*(char *)(thing_ptr + 6) != *(char *)(arg_eax + 6)) /* thing->owner, thing->class_id */
+             ) && ((*(byte *)(thing_ptr + 1) & 1) == 0)) && (*(char *)(thing_ptr + 7) != 'C')) {
+          uval_3 = (uint)*(char *)(thing_ptr + 6); /* thing->owner */
+          uval_4 = (uint)g_neutral_player_number;
+          if ((((uval_4 == uval_3) || (player_off = (uint)*(char *)(arg_eax + 6), uval_4 == player_off)) ||
+              ((((uint)(byte)(&g_player_view_flags)[uval_3 * 0x4ef] & 1 << (*(byte *)(arg_eax + 6) & 0x1f))
+                == 0 || ((uval_4 == player_off || (uval_4 == uval_3)))))) ||
+             (((uint)(byte)(&g_player_view_flags)[player_off * 0x4ef] & 1 << (*(byte *)(thing_ptr + 6) & 0x1f)) == 0 /* thing->owner */
              )) {
-            FUN_00076319();
-            uVar3 = 1;
+            trap_illegal_trap_activation_type_076319();
+            uval_2 = 1;
             goto LAB_000761c7;
           }
         }
@@ -317,87 +314,81 @@ LAB_000761c7:
 }
 
 /******************************************************************************
- * Function : dk_illegal_trap_activation_type_076319 (Ghidra: FUN_00076319)
- * Prototype: void dk_illegal_trap_activation_type_076319(void);
+ * Function : trap_illegal_trap_activation_type_076319 (Original VA: 0x76319, Ghidra: FUN_00076319)
+ * Prototype: void trap_illegal_trap_activation_type_076319(void);
  * Address  : 0x76319 (Size: 187 bytes)
  * Module   : trap.cpp [direct_file_string_xref]
- * OrigLine : trap.cpp:251 ("Illegal trap activation type")
- * Naming   : String 'Illegal trap activation type'
- * Callers  : 2 -> 0x75c30, 0x761cd
- * Callees  : 7 -> 0x27390, 0x6e538, 0x763d4, 0x76643, 0x7668c, 0x766fa, 0xddaf0
- * Strings  :
- *   - 0x167c5c: "trap.cpp"
- *   - 0x167c3f: "Illegal trap activation type"
+ * OrigLine : trap.cpp lines 251
+ * Purpose  : String 'Illegal trap activation type'
+ * Callers  : 2 -> trap_process_map_subtile_075c30, trap_process_map_subtile_0761cd
+ * Callees  : 7 -> event_illegal_event_number_created_027390, sound_fn_06e538, trap_activation_shot_0763d4, trap_activation_effect_076643, trap_activation_shot_07668c, trap_fn_0766fa, LbErrorLog
  ******************************************************************************/
-void FUN_00076319(void)
+void trap_illegal_trap_activation_type_076319(void)
 
 {
-  int in_EAX;
-  undefined **ppuVar1;
+  int arg_eax;
+  undefined **val;
   undefined4 uStack_1c;
   undefined *local_18;
   
-  ppuVar1 = &local_18;
-  *(undefined1 *)(in_EAX + 0x18) = 1;
-  local_18 = &DAT_0018fd09 + (uint)*(byte *)(in_EAX + 0x1a) * 0x36;
-  if (*(char *)(in_EAX + 0x1a) == '\x02') {
-    ppuVar1 = (undefined **)&uStack_1c;
+  val = &local_18;
+  *(undefined1 *)(arg_eax + 0x18) = 1;
+  local_18 = &g_data_0018fd09 + (uint)*(byte *)(arg_eax + 0x1a) * 0x36;
+  if (*(char *)(arg_eax + 0x1a) == '\x02') {
+    val = (undefined **)&uStack_1c;
     uStack_1c = 0;
-    FUN_00027390();
+    event_illegal_event_number_created_027390();
   }
-  *(undefined4 *)((int)ppuVar1 + -4) = 0x100;
-  *(undefined4 *)((int)ppuVar1 + -8) = 2;
-  *(undefined4 *)((int)ppuVar1 + -0xc) = 0;
-  *(undefined4 *)((int)ppuVar1 + -0x10) = 3;
-  *(undefined4 *)((int)ppuVar1 + -0x14) = 0x76377;
-  FUN_0006e538();
+  *(undefined4 *)((int)val + -4) = 0x100;
+  *(undefined4 *)((int)val + -8) = 2;
+  *(undefined4 *)((int)val + -0xc) = 0;
+  *(undefined4 *)((int)val + -0x10) = 3;
+  *(undefined4 *)((int)val + -0x14) = 0x76377;
+  sound_fn_06e538();
   switch(local_18[0x19]) {
   case 1:
-    *(undefined4 *)((int)ppuVar1 + -0x14) = 0x76397;
-    FUN_000763d4();
+    *(undefined4 *)((int)val + -0x14) = 0x76397;
+    trap_activation_shot_0763d4();
     break;
   case 2:
-    *(undefined4 *)((int)ppuVar1 + -0x14) = 0x763a2;
-    FUN_00076643();
+    *(undefined4 *)((int)val + -0x14) = 0x763a2;
+    trap_activation_effect_076643();
     break;
   case 3:
-    *(undefined4 *)((int)ppuVar1 + -0x14) = 0x763ad;
-    FUN_0007668c();
+    *(undefined4 *)((int)val + -0x14) = 0x763ad;
+    trap_activation_shot_07668c();
     break;
   case 4:
-    *(undefined4 *)((int)ppuVar1 + -0x14) = 0x763b8;
-    FUN_000766fa();
+    *(undefined4 *)((int)val + -0x14) = 0x763b8;
+    trap_fn_0766fa();
     break;
   default:
-    *(undefined4 *)((int)ppuVar1 + -0x14) = 0x763ce;
-    FUN_000ddaf0(); /* LbErrorLog("trap.cpp", line 251, "Illegal trap activation type") */
+    *(undefined4 *)((int)val + -0x14) = 0x763ce;
+    LbErrorLog(); /* LbErrorLog("trap.cpp", line 251, "Illegal trap activation type") */
   }
   return;
 }
 
 /******************************************************************************
- * Function : dk_trap_activation_shot_0763d4 (Ghidra: FUN_000763d4)
- * Prototype: void dk_trap_activation_shot_0763d4(void);
+ * Function : trap_activation_shot_0763d4 (Original VA: 0x763d4, Ghidra: FUN_000763d4)
+ * Prototype: void trap_activation_shot_0763d4(void);
  * Address  : 0x763d4 (Size: 405 bytes)
  * Module   : trap.cpp [direct_file_string_xref]
- * Naming   : String 'Trap activation of shot 0'
- * Callers  : 1 -> 0x76319
- * Callees  : 4 -> 0x10d08, 0x442ca, 0x6e538, 0xe69fc
- * Strings  :
- *   - 0x167c7f: "trap.cpp"
- *   - 0x167c65: "Trap activation of shot 0"
+ * Purpose  : String 'Trap activation of shot 0'
+ * Callers  : 1 -> trap_illegal_trap_activation_type_076319
+ * Callees  : 4 -> anger_fn_010d08, inits_allocate_dynamic_light_shot_0442ca, sound_fn_06e538, bflib_system_io_fn_0e69fc
  ******************************************************************************/
-void FUN_000763d4(void)
+void trap_activation_shot_0763d4(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  int iVar2;
+  int arg_eax;
+  int val;
+  int val_2;
   int extraout_ECX;
   int extraout_ECX_00;
-  int iVar3;
-  short *psVar4;
-  undefined8 uVar5;
+  int thing_ptr;
+  short *val_3;
+  undefined8 uval;
   undefined4 uStack_3c;
   undefined4 uStack_38;
   undefined4 uStack_34;
@@ -410,65 +401,65 @@ void FUN_000763d4(void)
   uint local_1c;
   uint local_18;
   
-  psVar4 = &local_2c;
-  iVar1 = (uint)*(byte *)(in_EAX + 0x1a) * 0x36;
-  local_24 = &DAT_0018fd09 + iVar1;
-  if ((&DAT_0018fd23)[iVar1] == '\0') {
+  val_3 = &local_2c;
+  val = (uint)*(byte *)(arg_eax + 0x1a) * 0x36;
+  local_24 = &g_data_0018fd09 + val;
+  if ((&g_data_0018fd23)[val] == '\0') {
     uStack_30 = 0x763ce;
-    FUN_000ddaf0();
+    LbErrorLog();
   }
   else {
-    local_20 = &DAT_00188c94 + (uint)(byte)(&DAT_0018fd23)[iVar1] * 0x65;
+    local_20 = &g_data_00188c94 + (uint)(byte)(&g_data_0018fd23)[val] * 0x65;
     uStack_30 = 0x76418;
-    iVar1 = FUN_000442ca();
-    if (iVar1 != 0) {
-      local_1c = (uint)*(ushort *)(in_EAX + 0xd);
+    val = inits_allocate_dynamic_light_shot_0442ca();
+    if (val != 0) {
+      local_1c = (uint)*(ushort *)(arg_eax + 0xd);
       uStack_30 = 0x76437;
-      iVar2 = FUN_000e69fc();
-      local_1c = (uint)*(ushort *)(in_EAX + 0xf);
+      val_2 = bflib_system_io_fn_0e69fc();
+      local_1c = (uint)*(ushort *)(arg_eax + 0xf);
       local_18 = (uint)*(ushort *)(extraout_ECX + 0xf);
       uStack_30 = 0x76452;
-      uVar5 = FUN_000e69fc();
-      iVar3 = (int)((ulonglong)uVar5 >> 0x20);
-      if ((int)uVar5 < iVar2) {
-        if (*(ushort *)(extraout_ECX_00 + 0xd) < *(ushort *)(in_EAX + 0xd)) {
-          *(undefined2 *)(iVar3 + 0x52) = 0x600;
+      uval = bflib_system_io_fn_0e69fc();
+      thing_ptr = (int)((ulonglong)uval >> 0x20);
+      if ((int)uval < val_2) {
+        if (*(ushort *)(extraout_ECX_00 + 0xd) < *(ushort *)(arg_eax + 0xd)) {
+          *(undefined2 *)(thing_ptr + 0x52) = 0x600; /* thing->health */
         }
         else {
-          *(undefined2 *)(iVar3 + 0x52) = 0x200;
+          *(undefined2 *)(thing_ptr + 0x52) = 0x200; /* thing->health */
         }
       }
-      else if (*(ushort *)(extraout_ECX_00 + 0xf) < *(ushort *)(in_EAX + 0xf)) {
-        *(undefined2 *)(iVar3 + 0x52) = 0;
+      else if (*(ushort *)(extraout_ECX_00 + 0xf) < *(ushort *)(arg_eax + 0xf)) {
+        *(undefined2 *)(thing_ptr + 0x52) = 0; /* thing->health */
       }
       else {
-        *(undefined2 *)(iVar3 + 0x52) = 0x400;
+        *(undefined2 *)(thing_ptr + 0x52) = 0x400; /* thing->health */
       }
-      *(undefined2 *)(iVar1 + 0x54) = 0;
+      *(undefined2 *)(val + 0x54) = 0;
       uStack_30 = 0x764a3;
-      FUN_00010d08();
-      *(short *)(iVar1 + 0x32) = *(short *)(iVar1 + 0x32) + local_2c;
-      *(short *)(iVar1 + 0x34) = *(short *)(iVar1 + 0x34) + sStack_2a;
-      *(short *)(iVar1 + 0x36) = *(short *)(iVar1 + 0x36) + local_28;
-      *(byte *)(iVar1 + 1) = *(byte *)(iVar1 + 1) | 4;
-      *(undefined *)(iVar1 + 0x16) = local_24[0x1b];
+      anger_fn_010d08();
+      *(short *)(val + 0x32) = *(short *)(val + 0x32) + local_2c;
+      *(short *)(val + 0x34) = *(short *)(val + 0x34) + sStack_2a;
+      *(short *)(val + 0x36) = *(short *)(val + 0x36) + local_28;
+      *(byte *)(val + 1) = *(byte *)(val + 1) | 4;
+      *(undefined *)(val + 0x16) = local_24[0x1b];
       if (*(short *)(local_20 + 0x1b) != 0) {
         uStack_30 = 0x100;
         uStack_34 = 6;
         uStack_38 = 0;
-        DAT_002e8bfa = DAT_002e8bfa * 0x24a1 + 0x24df;
-        psVar4 = (short *)&uStack_3c;
+        g_unsynced_random_seed = g_unsynced_random_seed * 0x24a1 + 0x24df;
+        val_3 = (short *)&uStack_3c;
         uStack_3c = 3;
-        DAT_002e8bfa = DAT_002e8bfa >> 0xd | DAT_002e8bfa * 0x80000;
-        FUN_0006e538();
+        g_unsynced_random_seed = g_unsynced_random_seed >> 0xd | g_unsynced_random_seed * 0x80000;
+        sound_fn_06e538();
       }
       if (*(short *)(local_20 + 0x1e) != 0) {
-        *(undefined4 *)((int)psVar4 + -4) = 0x100;
-        *(undefined4 *)((int)psVar4 + -8) = 2;
-        *(undefined4 *)((int)psVar4 + -0xc) = 0;
-        *(undefined4 *)((int)psVar4 + -0x10) = 3;
-        *(undefined4 *)((int)psVar4 + -0x14) = 0x76550;
-        FUN_0006e538();
+        *(undefined4 *)((int)val_3 + -4) = 0x100;
+        *(undefined4 *)((int)val_3 + -8) = 2;
+        *(undefined4 *)((int)val_3 + -0xc) = 0;
+        *(undefined4 *)((int)val_3 + -0x10) = 3;
+        *(undefined4 *)((int)val_3 + -0x14) = 0x76550;
+        sound_fn_06e538();
       }
     }
   }
@@ -476,49 +467,46 @@ void FUN_000763d4(void)
 }
 
 /******************************************************************************
- * Function : dk_trap_activation_shot_076569 (Ghidra: FUN_00076569)
- * Prototype: void dk_trap_activation_shot_076569(void);
+ * Function : trap_activation_shot_076569 (Original VA: 0x76569, Ghidra: FUN_00076569)
+ * Prototype: void trap_activation_shot_076569(void);
  * Address  : 0x76569 (Size: 218 bytes)
  * Module   : trap.cpp [direct_file_string_xref]
- * Naming   : String 'Trap activation of shot 0'
- * Callers  : 1 -> 0x4af38
- * Callees  : 2 -> 0x10d08, 0x442ca
- * Strings  :
- *   - 0x167ca2: "trap.cpp"
- *   - 0x167c88: "Trap activation of shot 0"
+ * Purpose  : String 'Trap activation of shot 0'
+ * Callers  : 1 -> instance_update_creature_and_thing_04af38
+ * Callees  : 2 -> anger_fn_010d08, inits_allocate_dynamic_light_shot_0442ca
  ******************************************************************************/
-void FUN_00076569(void)
+void trap_activation_shot_076569(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  int iVar2;
+  int arg_eax;
+  int val;
+  int thing_ptr;
   undefined2 extraout_CX;
   short local_20;
   short sStack_1e;
   short local_1c;
   
-  iVar1 = (uint)*(byte *)(in_EAX + 0x1a) * 0x36;
-  if ((&DAT_0018fd23)[iVar1] == '\0') {
-    FUN_000ddaf0();
+  val = (uint)*(byte *)(arg_eax + 0x1a) * 0x36;
+  if ((&g_data_0018fd23)[val] == '\0') {
+    LbErrorLog();
   }
   else {
-    iVar2 = FUN_000442ca();
-    if (iVar2 != 0) {
-      *(undefined2 *)(iVar2 + 0x54) = 0;
-      *(undefined2 *)(iVar2 + 0x52) = extraout_CX;
-      FUN_00010d08();
-      *(short *)(iVar2 + 0x32) = *(short *)(iVar2 + 0x32) + local_20;
-      *(short *)(iVar2 + 0x34) = *(short *)(iVar2 + 0x34) + sStack_1e;
-      *(short *)(iVar2 + 0x36) = *(short *)(iVar2 + 0x36) + local_1c;
-      *(byte *)(iVar2 + 1) = *(byte *)(iVar2 + 1) | 4;
-      *(undefined *)(iVar2 + 0x16) = (&DAT_0018fd24)[iVar1];
-      *(int *)(in_EAX + 0x14) =
-           DAT_002e8bee + *(int *)(&DAT_001ae8a0 + (uint)*(byte *)(in_EAX + 0x1a) * 0x14);
-      if ((*(char *)(in_EAX + 0x13) != -1) &&
-         (*(char *)(in_EAX + 0x13) = *(char *)(in_EAX + 0x13) + -1, *(char *)(in_EAX + 0x13) == '\0'
+    thing_ptr = inits_allocate_dynamic_light_shot_0442ca();
+    if (thing_ptr != 0) {
+      *(undefined2 *)(thing_ptr + 0x54) = 0;
+      *(undefined2 *)(thing_ptr + 0x52) = extraout_CX; /* thing->health */
+      anger_fn_010d08();
+      *(short *)(thing_ptr + 0x32) = *(short *)(thing_ptr + 0x32) + local_20;
+      *(short *)(thing_ptr + 0x34) = *(short *)(thing_ptr + 0x34) + sStack_1e;
+      *(short *)(thing_ptr + 0x36) = *(short *)(thing_ptr + 0x36) + local_1c;
+      *(byte *)(thing_ptr + 1) = *(byte *)(thing_ptr + 1) | 4;
+      *(undefined *)(thing_ptr + 0x16) = (&g_data_0018fd24)[val];
+      *(int *)(arg_eax + 0x14) =
+           g_game_turn + *(int *)(&g_bss_001ae8a0 + (uint)*(byte *)(arg_eax + 0x1a) * 0x14);
+      if ((*(char *)(arg_eax + 0x13) != -1) &&
+         (*(char *)(arg_eax + 0x13) = *(char *)(arg_eax + 0x13) + -1, *(char *)(arg_eax + 0x13) == '\0'
          )) {
-        *(undefined2 *)(in_EAX + 0x5e) = 0xffff;
+        *(undefined2 *)(arg_eax + 0x5e) = 0xffff;
       }
     }
   }
@@ -526,32 +514,29 @@ void FUN_00076569(void)
 }
 
 /******************************************************************************
- * Function : dk_trap_activation_effect_076643 (Ghidra: FUN_00076643)
- * Prototype: void dk_trap_activation_effect_076643(void);
+ * Function : trap_activation_effect_076643 (Original VA: 0x76643, Ghidra: FUN_00076643)
+ * Prototype: void trap_activation_effect_076643(void);
  * Address  : 0x76643 (Size: 73 bytes)
  * Module   : trap.cpp [direct_file_string_xref]
- * OrigLine : trap.cpp:372 ("Trap activation of effect 0")
- * Naming   : String 'Trap activation of effect 0'
- * Callers  : 1 -> 0x76319
- * Callees  : 2 -> 0x24998, 0xddaf0
- * Strings  :
- *   - 0x167cc7: "trap.cpp"
- *   - 0x167cab: "Trap activation of effect 0"
+ * OrigLine : trap.cpp lines 372
+ * Purpose  : String 'Trap activation of effect 0'
+ * Callers  : 1 -> trap_illegal_trap_activation_type_076319
+ * Callees  : 2 -> effect_allocate_light_effect_024998, LbErrorLog
  ******************************************************************************/
-void FUN_00076643(void)
+void trap_activation_effect_076643(void)
 
 {
-  int in_EAX;
-  int iVar1;
+  int arg_eax;
+  int val;
   int extraout_ECX;
   
-  if ((&DAT_0018fd23)[(uint)*(byte *)(in_EAX + 0x1a) * 0x36] == '\0') {
-    FUN_000ddaf0(); /* LbErrorLog("trap.cpp", line 372, "Trap activation of effect 0") */
+  if ((&g_data_0018fd23)[(uint)*(byte *)(arg_eax + 0x1a) * 0x36] == '\0') {
+    LbErrorLog(); /* LbErrorLog("trap.cpp", line 372, "Trap activation of effect 0") */
   }
   else {
-    iVar1 = FUN_00024998();
-    if (iVar1 != 0) {
-      *(undefined1 *)(iVar1 + 0x16) = *(undefined1 *)(extraout_ECX + 0x1b);
+    val = effect_allocate_light_effect_024998();
+    if (val != 0) {
+      *(undefined1 *)(val + 0x16) = *(undefined1 *)(extraout_ECX + 0x1b);
       return;
     }
   }
@@ -559,41 +544,38 @@ void FUN_00076643(void)
 }
 
 /******************************************************************************
- * Function : dk_trap_activation_shot_07668c (Ghidra: FUN_0007668c)
- * Prototype: void dk_trap_activation_shot_07668c(void);
+ * Function : trap_activation_shot_07668c (Original VA: 0x7668c, Ghidra: FUN_0007668c)
+ * Prototype: void trap_activation_shot_07668c(void);
  * Address  : 0x7668c (Size: 110 bytes)
  * Module   : trap.cpp [direct_file_string_xref]
- * OrigLine : trap.cpp:402 ("Trap activation of shot 0")
- * Naming   : String 'Trap activation of shot 0'
- * Callers  : 1 -> 0x76319
- * Callees  : 2 -> 0x442ca, 0xddaf0
- * Strings  :
- *   - 0x167cea: "trap.cpp"
- *   - 0x167cd0: "Trap activation of shot 0"
+ * OrigLine : trap.cpp lines 402
+ * Purpose  : String 'Trap activation of shot 0'
+ * Callers  : 1 -> trap_illegal_trap_activation_type_076319
+ * Callees  : 2 -> inits_allocate_dynamic_light_shot_0442ca, LbErrorLog
  ******************************************************************************/
-void FUN_0007668c(void)
+void trap_activation_shot_07668c(void)
 
 {
-  undefined1 uVar1;
-  short sVar2;
-  int in_EAX;
-  int iVar3;
+  undefined1 uval;
+  short short_val;
+  int arg_eax;
+  int val;
   int extraout_ECX;
   
-  if ((&DAT_0018fd23)[(uint)*(byte *)(in_EAX + 0x1a) * 0x36] == '\0') {
-    FUN_000ddaf0(); /* LbErrorLog("trap.cpp", line 402, "Trap activation of shot 0") */
+  if ((&g_data_0018fd23)[(uint)*(byte *)(arg_eax + 0x1a) * 0x36] == '\0') {
+    LbErrorLog(); /* LbErrorLog("trap.cpp", line 402, "Trap activation of shot 0") */
   }
   else {
-    iVar3 = FUN_000442ca();
-    if (iVar3 != 0) {
-      uVar1 = *(undefined1 *)(extraout_ECX + 0x1b);
-      *(undefined2 *)(iVar3 + 0x1d) = 0;
-      *(undefined1 *)(iVar3 + 0x16) = uVar1;
-      *(short *)(iVar3 + 0x32) = *(short *)(iVar3 + 0x32) + *(short *)(extraout_ECX + 0x30);
-      *(short *)(iVar3 + 0x34) = *(short *)(iVar3 + 0x34) + *(short *)(extraout_ECX + 0x32);
-      sVar2 = *(short *)(extraout_ECX + 0x34);
-      *(byte *)(iVar3 + 1) = *(byte *)(iVar3 + 1) | 4;
-      *(short *)(iVar3 + 0x36) = *(short *)(iVar3 + 0x36) + sVar2;
+    val = inits_allocate_dynamic_light_shot_0442ca();
+    if (val != 0) {
+      uval = *(undefined1 *)(extraout_ECX + 0x1b);
+      *(undefined2 *)(val + 0x1d) = 0;
+      *(undefined1 *)(val + 0x16) = uval;
+      *(short *)(val + 0x32) = *(short *)(val + 0x32) + *(short *)(extraout_ECX + 0x30);
+      *(short *)(val + 0x34) = *(short *)(val + 0x34) + *(short *)(extraout_ECX + 0x32);
+      short_val = *(short *)(extraout_ECX + 0x34);
+      *(byte *)(val + 1) = *(byte *)(val + 1) | 4;
+      *(short *)(val + 0x36) = *(short *)(val + 0x36) + short_val;
       return;
     }
   }
@@ -601,177 +583,177 @@ void FUN_0007668c(void)
 }
 
 /******************************************************************************
- * Function : sub_0766fa (Ghidra: FUN_000766fa)
- * Prototype: void sub_0766fa(void);
+ * Function : trap_fn_0766fa (Original VA: 0x766fa, Ghidra: FUN_000766fa)
+ * Prototype: void trap_fn_0766fa(void);
  * Address  : 0x766fa (Size: 89 bytes)
  * Module   : trap.cpp [callgraph_affinity_to_preceding_unit]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x76319
- * Callees  : 2 -> 0xd7688, 0xda6fc
+ * Purpose  : Module trap.cpp procedure @ 0x0766fa
+ * Callers  : 1 -> trap_illegal_trap_activation_type_076319
+ * Callees  : 2 -> slab_attempt_place_animating_slab_0d7688, slab_process_slabmap_tile_0da6fc
  ******************************************************************************/
-void FUN_000766fa(void)
+void trap_fn_0766fa(void)
 
 {
-  int in_EAX;
+  int arg_eax;
   
-  FUN_000d7688(0,*(undefined1 *)(in_EAX + 0xe),*(undefined1 *)(in_EAX + 0x10));
-  FUN_000da6fc();
+  slab_attempt_place_animating_slab_0d7688(0,*(undefined1 *)(arg_eax + 0xe),*(undefined1 *)(arg_eax + 0x10));
+  slab_process_slabmap_tile_0da6fc();
   return;
 }
 
 /******************************************************************************
- * Function : sub_076753 (Ghidra: FUN_00076753)
- * Prototype: uint sub_076753(void);
+ * Function : trap_process_map_subtile_076753 (Original VA: 0x76753, Ghidra: FUN_00076753)
+ * Prototype: uint trap_process_map_subtile_076753(void);
  * Address  : 0x76753 (Size: 54 bytes)
  * Module   : trap.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 4 -> 0x4a40c, 0x4a6a2, 0x5f6c5, 0xc4b0c
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 4 -> instance_update_player_dungeon_04a40c, instance_process_dungeon_room_04a6a2, process_players_dungeon_command_packet, object_process_slabmap_tile_0c4b0c
  * Callees  : 0 -> 
  ******************************************************************************/
-uint FUN_00076753(void)
+uint trap_process_map_subtile_076753(void)
 
 {
-  int in_EAX;
-  uint uVar1;
-  int in_EDX;
+  int arg_eax;
+  uint thing_ptr;
+  int arg_edx;
   
-  uVar1 = (*(uint *)((int)&DAT_00279203 + (in_EAX + in_EDX * 0x100) * 5 + 1) & 0x3fffff) >> 0xb;
+  thing_ptr = (*(uint *)((int)&g_map_subtiles + (arg_eax + arg_edx * 0x100) * 5 + 1) & 0x3fffff) >> 0xb;
   while( true ) {
-    uVar1 = (&DAT_001ae9fc)[uVar1];
-    if (uVar1 <= DAT_001ae9fc) {
+    thing_ptr = (&g_thing_ptrs)[thing_ptr];
+    if (thing_ptr <= g_thing_ptrs) {
       return 0;
     }
-    if (*(char *)(uVar1 + 0x1f) == '\b') break;
-    uVar1 = (uint)*(ushort *)(uVar1 + 2);
+    if (*(char *)(thing_ptr + 0x1f) == '\b') break; /* thing->class_id */
+    thing_ptr = (uint)*(ushort *)(thing_ptr + 2);
   }
-  return uVar1;
+  return thing_ptr;
 }
 
 /******************************************************************************
- * Function : sub_076789 (Ghidra: FUN_00076789)
- * Prototype: uint sub_076789(void);
+ * Function : trap_process_map_subtile_076789 (Original VA: 0x76789, Ghidra: FUN_00076789)
+ * Prototype: uint trap_process_map_subtile_076789(void);
  * Address  : 0x76789 (Size: 104 bytes)
  * Module   : trap.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 6 -> 0x5bf63, 0x5f6c5, 0x8f518, 0x8f75c, 0x8f924, 0x8fb10
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 6 -> newgui_update_player_view_state_05bf63, process_players_dungeon_command_packet, draw_update_slab_subtile_columns_08f518, draw_update_slab_subtile_columns_08f75c, draw_update_slab_subtile_columns_08f924, draw_update_slab_subtile_columns_08fb10
  * Callees  : 0 -> 
  ******************************************************************************/
-uint FUN_00076789(void)
+uint trap_process_map_subtile_076789(void)
 
 {
-  int in_EAX;
-  uint uVar1;
-  int in_EDX;
-  int iVar2;
+  int arg_eax;
+  uint thing_ptr;
+  int arg_edx;
+  int val;
   
-  iVar2 = 0;
+  val = 0;
   do {
-    if (0x11 < iVar2) {
+    if (0x11 < val) {
       return 0;
     }
-    uVar1 = (*(uint *)((int)&DAT_00279203 +
-                      ((int)*(char *)((int)&DAT_0018b647 + iVar2 + 3) + in_EAX * 3 + 1 +
-                      ((int)(char)(&DAT_0018b64b)[iVar2] + in_EDX * 3 + 1) * 0x100) * 5 + 1) &
+    thing_ptr = (*(uint *)((int)&g_map_subtiles +
+                      ((int)*(char *)((int)&g_data_0018b647 + val + 3) + arg_eax * 3 + 1 +
+                      ((int)(char)(&g_data_0018b64b)[val] + arg_edx * 3 + 1) * 0x100) * 5 + 1) &
             0x3fffff) >> 0xb;
     while( true ) {
-      uVar1 = (&DAT_001ae9fc)[uVar1];
-      if (uVar1 <= DAT_001ae9fc) break;
-      if (*(char *)(uVar1 + 0x1f) == '\b') {
-        return uVar1;
+      thing_ptr = (&g_thing_ptrs)[thing_ptr];
+      if (thing_ptr <= g_thing_ptrs) break;
+      if (*(char *)(thing_ptr + 0x1f) == '\b') { /* thing->class_id */
+        return thing_ptr;
       }
-      uVar1 = (uint)*(ushort *)(uVar1 + 2);
+      thing_ptr = (uint)*(ushort *)(thing_ptr + 2);
     }
-    iVar2 = iVar2 + 2;
+    val = val + 2;
   } while( true );
 }
 
 /******************************************************************************
- * Function : sub_0767f1 (Ghidra: FUN_000767f1)
- * Prototype: undefined8 sub_0767f1(void);
+ * Function : trap_fn_0767f1 (Original VA: 0x767f1, Ghidra: FUN_000767f1)
+ * Prototype: undefined8 trap_fn_0767f1(void);
  * Address  : 0x767f1 (Size: 15 bytes)
  * Module   : trap.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 4 -> 0x4a40c, 0x4a6a2, 0x5f6c5, 0xc4b0c
- * Callees  : 1 -> 0x72af4
+ * Purpose  : Module trap.cpp procedure @ 0x0767f1
+ * Callers  : 4 -> instance_update_player_dungeon_04a40c, instance_process_dungeon_room_04a6a2, process_players_dungeon_command_packet, object_process_slabmap_tile_0c4b0c
+ * Callees  : 1 -> structs_update_creature_control_072af4
  ******************************************************************************/
-undefined8 FUN_000767f1(void)
+undefined8 trap_fn_0767f1(void)
 
 {
-  undefined4 in_EDX;
+  undefined4 arg_edx;
   
-  FUN_00072af4();
-  return CONCAT44(in_EDX,1);
+  structs_update_creature_control_072af4();
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : sub_076800 (Ghidra: FUN_00076800)
- * Prototype: void sub_076800(void);
+ * Function : trap_process_thing_entity_076800 (Original VA: 0x76800, Ghidra: FUN_00076800)
+ * Prototype: void trap_process_thing_entity_076800(void);
  * Address  : 0x76800 (Size: 198 bytes)
  * Module   : trap.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x5ac80
- * Callees  : 1 -> 0x5ddee
+ * Purpose  : Looks up Thing* in g_thing_ptrs[2048] and updates state
+ * Callers  : 1 -> newgui_fn_05ac80
+ * Callees  : 1 -> set_packet_action
  ******************************************************************************/
-void FUN_00076800(void)
+void trap_process_thing_entity_076800(void)
 
 {
-  uint in_EAX;
-  int iVar1;
-  uint uVar2;
-  char in_DL;
+  uint arg_eax;
+  int thing_ptr;
+  uint uval;
+  char arg_dl;
   
-  if (*(short *)(&DAT_003776e4 + in_EAX * 2) != 0) {
-    iVar1 = (&DAT_001ae9fc)[*(ushort *)(&DAT_003776e4 + in_EAX * 2)];
+  if (*(short *)(&g_bss_003776e4 + arg_eax * 2) != 0) {
+    thing_ptr = (&g_thing_ptrs)[*(ushort *)(&g_bss_003776e4 + arg_eax * 2)];
     do {
-      iVar1 = (&DAT_001ae9fc)[*(ushort *)(iVar1 + 0x67)];
-      if (iVar1 == DAT_001ae9fc) break;
-    } while ((in_DL != *(char *)(iVar1 + 6)) || (*(byte *)(iVar1 + 0x1a) != in_EAX));
-    *(undefined2 *)(&DAT_003776e4 + in_EAX * 2) = *(undefined2 *)(iVar1 + 0x1b);
+      thing_ptr = (&g_thing_ptrs)[*(ushort *)(thing_ptr + 0x67)];
+      if (thing_ptr == g_thing_ptrs) break;
+    } while ((arg_dl != *(char *)(thing_ptr + 6)) || (*(byte *)(thing_ptr + 0x1a) != arg_eax)); /* thing->owner */
+    *(undefined2 *)(&g_bss_003776e4 + arg_eax * 2) = *(undefined2 *)(thing_ptr + 0x1b); /* thing->index_or_angle */
   }
-  uVar2 = DAT_002e6eee;
-  if (*(short *)(&DAT_003776e4 + in_EAX * 2) == 0) {
-    while (iVar1 = (&DAT_001ae9fc)[uVar2], iVar1 != DAT_001ae9fc) {
-      if ((in_DL == *(char *)(iVar1 + 6)) && (*(byte *)(iVar1 + 0x1a) == in_EAX)) {
-        *(undefined2 *)(&DAT_003776e4 + in_EAX * 2) = *(undefined2 *)(iVar1 + 0x1b);
+  uval = g_bss_002e6eee;
+  if (*(short *)(&g_bss_003776e4 + arg_eax * 2) == 0) {
+    while (thing_ptr = (&g_thing_ptrs)[uval], thing_ptr != g_thing_ptrs) {
+      if ((arg_dl == *(char *)(thing_ptr + 6)) && (*(byte *)(thing_ptr + 0x1a) == arg_eax)) { /* thing->owner */
+        *(undefined2 *)(&g_bss_003776e4 + arg_eax * 2) = *(undefined2 *)(thing_ptr + 0x1b); /* thing->index_or_angle */
         break;
       }
-      uVar2 = (uint)*(ushort *)(iVar1 + 0x67);
+      uval = (uint)*(ushort *)(thing_ptr + 0x67);
     }
   }
-  if (*(short *)(&DAT_003776e4 + in_EAX * 2) != 0) {
-    FUN_0005ddee(0,0);
+  if (*(short *)(&g_bss_003776e4 + arg_eax * 2) != 0) {
+    set_packet_action(0,0);
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0768c6 (Ghidra: FUN_000768c6)
- * Prototype: int sub_0768c6(void);
+ * Function : trap_process_thing_entity_0768c6 (Original VA: 0x768c6, Ghidra: FUN_000768c6)
+ * Prototype: int trap_process_thing_entity_0768c6(void);
  * Address  : 0x768c6 (Size: 53 bytes)
  * Module   : trap.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x55e33
+ * Purpose  : Looks up Thing* in g_thing_ptrs[2048] and updates state
+ * Callers  : 1 -> newgui_update_player_dungeon_055e33
  * Callees  : 0 -> 
  ******************************************************************************/
-int FUN_000768c6(void)
+int trap_process_thing_entity_0768c6(void)
 
 {
-  int iVar1;
-  uint in_EAX;
-  uint uVar2;
-  uint3 uVar3;
-  char in_DL;
+  int thing_ptr;
+  uint arg_eax;
+  uint uval;
+  uint3 uval_2;
+  char arg_dl;
   
-  uVar2 = DAT_002e6eee;
+  uval = g_bss_002e6eee;
   while( true ) {
-    iVar1 = (&DAT_001ae9fc)[uVar2];
-    uVar3 = (uint3)((uint)iVar1 >> 8);
-    if (iVar1 == DAT_001ae9fc) {
-      return (uint)uVar3 << 8;
+    thing_ptr = (&g_thing_ptrs)[uval];
+    uval_2 = (uint3)((uint)thing_ptr >> 8);
+    if (thing_ptr == g_thing_ptrs) {
+      return (uint)uval_2 << 8;
     }
-    if ((in_DL == *(char *)(iVar1 + 6)) && (*(byte *)(iVar1 + 0x1a) == in_EAX)) break;
-    uVar2 = (uint)*(ushort *)(iVar1 + 0x67);
+    if ((arg_dl == *(char *)(thing_ptr + 6)) && (*(byte *)(thing_ptr + 0x1a) == arg_eax)) break; /* thing->owner */
+    uval = (uint)*(ushort *)(thing_ptr + 0x67);
   }
-  return CONCAT31(uVar3,1);
+  return CONCAT31(uval_2,1);
 }
 

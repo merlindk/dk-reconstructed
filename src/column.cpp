@@ -1,7 +1,7 @@
 /**
- * Dungeon Keeper (KEEPER.EXE) - Reconstructed Source Module: column.cpp
+ * Dungeon Keeper (KEEPER.EXE) - Reconstructed & Semantically Named Module: column.cpp
  * Binary Subject: /home/merlin/Dungeon Keeper/re/KEEPER.elf
- * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 (x86:LE:32:default)
+ * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 + DK Semantic Analyzer
  * Functions in this translation unit: 13
  */
 
@@ -11,500 +11,488 @@
 #include "../include/dk_functions.h"
 
 /******************************************************************************
- * Function : sub_015318 (Ghidra: FUN_00015318)
- * Prototype: void sub_015318(void);
+ * Function : column_fn_015318 (Original VA: 0x15318, Ghidra: FUN_00015318)
+ * Prototype: void column_fn_015318(void);
  * Address  : 0x15318 (Size: 50 bytes)
  * Module   : column.cpp [callgraph_affinity_to_following_unit]
- * Naming   : Address-based identifier
- * Callers  : 8 -> 0x15386, 0x15603, 0x156de, 0x158a6, 0x2cdc8, 0x40f98, 0xb20e0, 0xb21f0
+ * Purpose  : Module column.cpp procedure @ 0x015318
+ * Callers  : 8 -> column_could_create_column_none_015386, column_process_map_subtile_015603, column_process_map_subtile_0156de, combat_fn_0158a6, file_e14r432q_system_should_able_02cdc8, inits_fn_040f98, light_fn_0b20e0, light_fn_0b21f0
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_00015318(void)
+void column_fn_015318(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  short *psVar2;
-  ushort uVar3;
+  int arg_eax;
+  int val;
+  short *val_2;
+  ushort uval;
   
-  uVar3 = 1;
-  iVar1 = 8;
-  psVar2 = (short *)(in_EAX + 8);
-  *(undefined2 *)(in_EAX + 3) = 0;
+  uval = 1;
+  val = 8;
+  val_2 = (short *)(arg_eax + 8);
+  *(undefined2 *)(arg_eax + 3) = 0;
   do {
-    if (*psVar2 != 0) {
-      *(ushort *)(in_EAX + 3) = *(ushort *)(in_EAX + 3) | uVar3;
+    if (*val_2 != 0) {
+      *(ushort *)(arg_eax + 3) = *(ushort *)(arg_eax + 3) | uval;
     }
-    psVar2 = psVar2 + 1;
-    uVar3 = uVar3 * 2;
-    iVar1 = iVar1 + -1;
-  } while (iVar1 != 0);
+    val_2 = val_2 + 1;
+    uval = uval * 2;
+    val = val + -1;
+  } while (val != 0);
   return;
 }
 
 /******************************************************************************
- * Function : sub_01534a (Ghidra: FUN_0001534a)
- * Prototype: longlong sub_01534a(void);
+ * Function : column_fn_01534a (Original VA: 0x1534a, Ghidra: FUN_0001534a)
+ * Prototype: longlong column_fn_01534a(void);
  * Address  : 0x1534a (Size: 60 bytes)
  * Module   : column.cpp [callgraph_affinity_to_following_unit]
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0x15479, 0x2cdc8, 0x40f98
- * Callees  : 1 -> 0x1581c
+ * Purpose  : Module column.cpp procedure @ 0x01534a
+ * Callers  : 3 -> column_allocate_column_015479, file_e14r432q_system_should_able_02cdc8, inits_fn_040f98
+ * Callees  : 1 -> column_fn_01581c
  ******************************************************************************/
-longlong FUN_0001534a(void)
+longlong column_fn_01534a(void)
 
 {
-  int iVar1;
-  uint in_EDX;
-  int iVar2;
+  int val;
+  uint arg_edx;
+  int val_2;
   
-  iVar2 = 1;
+  val_2 = 1;
   while( true ) {
-    if (0x7ff < iVar2) {
-      return (ulonglong)in_EDX << 0x20;
+    if (0x7ff < val_2) {
+      return (ulonglong)arg_edx << 0x20;
     }
-    iVar1 = FUN_0001581c();
-    if (iVar1 != 0) break;
-    iVar2 = iVar2 + 1;
+    val = column_fn_01581c();
+    if (val != 0) break;
+    val_2 = val_2 + 1;
   }
-  return CONCAT44(in_EDX,iVar2);
+  return CONCAT44(arg_edx,val_2);
 }
 
 /******************************************************************************
- * Function : dk_could_create_column_none_015386 (Ghidra: FUN_00015386)
- * Prototype: undefined8 dk_could_create_column_none_015386(void);
+ * Function : column_could_create_column_none_015386 (Original VA: 0x15386, Ghidra: FUN_00015386)
+ * Prototype: undefined8 column_could_create_column_none_015386(void);
  * Address  : 0x15386 (Size: 208 bytes)
  * Module   : column.cpp [direct_file_string_xref]
- * OrigLine : column.cpp:95 ("Could not create column: None free")
- * Naming   : String 'Could not create column: None free'
- * Callers  : 3 -> 0x15479, 0x2cdc8, 0x40f98
- * Callees  : 3 -> 0x15318, 0x157ac, 0xddaf0
- * Strings  :
- *   - 0x160407: "column.cpp"
- *   - 0x1603e4: "Could not create column: None free"
+ * OrigLine : column.cpp lines 95
+ * Purpose  : String 'Could not create column: None free'
+ * Callers  : 3 -> column_allocate_column_015479, file_e14r432q_system_should_able_02cdc8, inits_fn_040f98
+ * Callees  : 3 -> column_fn_015318, column_fn_0157ac, LbErrorLog
  ******************************************************************************/
-undefined8 FUN_00015386(void)
+undefined8 column_could_create_column_none_015386(void)
 
 {
-  byte bVar1;
-  char cVar2;
-  undefined4 *in_EAX;
-  uint uVar3;
-  undefined4 uVar4;
-  int iVar5;
+  byte flag;
+  char ch;
+  undefined4 *arg_eax;
+  uint uval;
+  undefined4 uval_2;
+  int loop_i;
   undefined4 extraout_ECX;
-  undefined4 in_EDX;
-  short *psVar6;
+  undefined4 arg_edx;
+  short *val;
   int extraout_EDX;
   
-  iVar5 = 1;
-  psVar6 = (short *)&DAT_0019e98b;
+  loop_i = 1;
+  val = (short *)&g_bss_0019e98b;
   do {
-    if (0x7ff < iVar5) {
-      FUN_000ddaf0(); /* LbErrorLog("column.cpp", line 95, "Could not create column: None free") */
-      uVar4 = 0;
+    if (0x7ff < loop_i) {
+      LbErrorLog(); /* LbErrorLog("column.cpp", line 95, "Could not create column: None free") */
+      uval_2 = 0;
 LAB_0001544f:
-      return CONCAT44(in_EDX,uVar4);
+      return CONCAT44(arg_edx,uval_2);
     }
-    if ((*psVar6 == 0) && ((*(byte *)(psVar6 + 1) & 1) == 0)) {
-      *(undefined4 *)psVar6 = *in_EAX;
-      *(undefined4 *)(psVar6 + 2) = in_EAX[1];
-      *(undefined4 *)(psVar6 + 4) = in_EAX[2];
-      *(undefined4 *)(psVar6 + 6) = in_EAX[3];
-      *(undefined4 *)(psVar6 + 8) = in_EAX[4];
-      *(undefined4 *)(psVar6 + 10) = in_EAX[5];
-      FUN_00015318();
-      cVar2 = FUN_000157ac();
+    if ((*val == 0) && ((*(byte *)(val + 1) & 1) == 0)) {
+      *(undefined4 *)val = *arg_eax;
+      *(undefined4 *)(val + 2) = arg_eax[1];
+      *(undefined4 *)(val + 4) = arg_eax[2];
+      *(undefined4 *)(val + 6) = arg_eax[3];
+      *(undefined4 *)(val + 8) = arg_eax[4];
+      *(undefined4 *)(val + 10) = arg_eax[5];
+      column_fn_015318();
+      ch = column_fn_0157ac();
       *(byte *)(extraout_EDX + 2) = *(byte *)(extraout_EDX + 2) & 0xf;
-      *(byte *)(extraout_EDX + 2) = *(byte *)(extraout_EDX + 2) | cVar2 << 4;
-      uVar3 = (uint)(*(byte *)(extraout_EDX + 2) >> 4);
-      for (iVar5 = uVar3 * 2 + extraout_EDX; ((int)uVar3 < 8 && (*(short *)(iVar5 + 8) == 0));
-          iVar5 = iVar5 + 2) {
-        uVar3 = uVar3 + 1;
+      *(byte *)(extraout_EDX + 2) = *(byte *)(extraout_EDX + 2) | ch << 4;
+      uval = (uint)(*(byte *)(extraout_EDX + 2) >> 4);
+      for (loop_i = uval * 2 + extraout_EDX; ((int)uval < 8 && (*(short *)(loop_i + 8) == 0));
+          loop_i = loop_i + 2) {
+        uval = uval + 1;
       }
-      uVar4 = extraout_ECX;
-      if ((int)uVar3 < 8) {
-        iVar5 = extraout_EDX + 0xe;
-        bVar1 = 0;
+      uval_2 = extraout_ECX;
+      if ((int)uval < 8) {
+        loop_i = extraout_EDX + 0xe;
+        flag = 0;
         do {
-          if (*(short *)(iVar5 + 8) != 0) {
+          if (*(short *)(loop_i + 8) != 0) {
             *(byte *)(extraout_EDX + 2) = *(byte *)(extraout_EDX + 2) & 0xf1;
-            *(byte *)(extraout_EDX + 2) = *(byte *)(extraout_EDX + 2) | (bVar1 & 7) * '\x02';
+            *(byte *)(extraout_EDX + 2) = *(byte *)(extraout_EDX + 2) | (flag & 7) * '\x02';
           }
-          iVar5 = iVar5 + -2;
-          bVar1 = bVar1 + 1;
-        } while (iVar5 != extraout_EDX);
+          loop_i = loop_i + -2;
+          flag = flag + 1;
+        } while (loop_i != extraout_EDX);
       }
       else {
         *(byte *)(extraout_EDX + 2) = *(byte *)(extraout_EDX + 2) & 0xf1;
       }
       goto LAB_0001544f;
     }
-    iVar5 = iVar5 + 1;
-    psVar6 = psVar6 + 0xc;
+    loop_i = loop_i + 1;
+    val = val + 0xc;
   } while( true );
 }
 
 /******************************************************************************
- * Function : sub_015456 (Ghidra: FUN_00015456)
- * Prototype: void sub_015456(void);
+ * Function : column_fn_015456 (Original VA: 0x15456, Ghidra: FUN_00015456)
+ * Prototype: void column_fn_015456(void);
  * Address  : 0x15456 (Size: 35 bytes)
  * Module   : column.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x15502
+ * Purpose  : Module column.cpp procedure @ 0x015456
+ * Callers  : 1 -> column_process_map_subtile_015502
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_00015456(void)
+void column_fn_015456(void)
 
 {
-  short in_AX;
-  int iVar1;
+  short arg_ax;
+  int val;
   
-  iVar1 = (int)in_AX;
-  DAT_002e7beb = DAT_002e7beb + -1;
-  (&DAT_0019e973)[iVar1 * 6] = DAT_0019e973;
-  (&DAT_0019e977)[iVar1 * 6] = DAT_0019e977;
-  (&DAT_0019e97b)[iVar1 * 6] = DAT_0019e97b;
-  (&DAT_0019e97f)[iVar1 * 6] = DAT_0019e97f;
-  (&DAT_0019e983)[iVar1 * 6] = DAT_0019e983;
-  (&DAT_0019e987)[iVar1 * 6] = DAT_0019e987;
+  val = (int)arg_ax;
+  g_bss_002e7beb = g_bss_002e7beb + -1;
+  (&g_bss_0019e973)[val * 6] = g_bss_0019e973;
+  (&g_bss_0019e977)[val * 6] = g_bss_0019e977;
+  (&g_bss_0019e97b)[val * 6] = g_bss_0019e97b;
+  (&g_bss_0019e97f)[val * 6] = g_bss_0019e97f;
+  (&g_bss_0019e983)[val * 6] = g_bss_0019e983;
+  (&g_bss_0019e987)[val * 6] = g_bss_0019e987;
   return;
 }
 
 /******************************************************************************
- * Function : dk_allocate_column_015479 (Ghidra: FUN_00015479)
- * Prototype: void dk_allocate_column_015479(void);
+ * Function : column_allocate_column_015479 (Original VA: 0x15479, Ghidra: FUN_00015479)
+ * Prototype: void column_allocate_column_015479(void);
  * Address  : 0x15479 (Size: 137 bytes)
  * Module   : column.cpp [direct_file_string_xref]
- * OrigLine : column.cpp:117 ("Cannot allocate column")
- * Naming   : String 'Cannot allocate column'
- * Callers  : 3 -> 0x15603, 0x156de, 0x4c1e3
- * Callees  : 4 -> 0x1534a, 0x15386, 0x15502, 0xddaf0
- * Strings  :
- *   - 0x160429: "column.cpp"
- *   - 0x160412: "Cannot allocate column"
+ * OrigLine : column.cpp lines 117
+ * Purpose  : String 'Cannot allocate column'
+ * Callers  : 3 -> column_process_map_subtile_015603, column_process_map_subtile_0156de, jtyedit_we_should_only_dealing_04c1e3
+ * Callees  : 4 -> column_fn_01534a, column_could_create_column_none_015386, column_process_map_subtile_015502, LbErrorLog
  ******************************************************************************/
-void FUN_00015479(void)
+void column_allocate_column_015479(void)
 
 {
-  uint *puVar1;
-  int iVar2;
-  uint in_EDX;
-  uint unaff_EBX;
+  uint *word_ptr;
+  int val;
+  uint arg_edx;
+  uint arg_ebx;
   short local_14;
   
-  FUN_00015502();
-  local_14 = FUN_0001534a();
+  column_process_map_subtile_015502();
+  local_14 = column_fn_01534a();
   if (local_14 == 0) {
-    local_14 = FUN_00015386();
+    local_14 = column_could_create_column_none_015386();
     if (local_14 == 0) {
-      FUN_000ddaf0(); /* LbErrorLog("column.cpp", line 117, "Cannot allocate column") */
+      LbErrorLog(); /* LbErrorLog("column.cpp", line 117, "Cannot allocate column") */
     }
   }
-  iVar2 = ((unaff_EBX & 0xffff) * 0x100 + (in_EDX & 0xffff)) * 5;
-  *(undefined1 *)((int)&DAT_00279203 + iVar2 + 1) = 0;
-  *(byte *)((int)&DAT_00279205 + iVar2) = *(byte *)((int)&DAT_00279205 + iVar2) & 0xf8;
-  puVar1 = (uint *)((int)&DAT_00279203 + iVar2 + 1);
-  *puVar1 = *puVar1 | (int)local_14 & 0x7ffU;
-  *(short *)(&DAT_0019e973 + local_14 * 6) = *(short *)(&DAT_0019e973 + local_14 * 6) + 1;
+  val = ((arg_ebx & 0xffff) * 0x100 + (arg_edx & 0xffff)) * 5;
+  *(undefined1 *)((int)&g_map_subtiles + val + 1) = 0;
+  *(byte *)((int)&g_bss_00279205 + val) = *(byte *)((int)&g_bss_00279205 + val) & 0xf8;
+  word_ptr = (uint *)((int)&g_map_subtiles + val + 1);
+  *word_ptr = *word_ptr | (int)local_14 & 0x7ffU;
+  *(short *)(&g_bss_0019e973 + local_14 * 6) = *(short *)(&g_bss_0019e973 + local_14 * 6) + 1;
   return;
 }
 
 /******************************************************************************
- * Function : sub_015502 (Ghidra: FUN_00015502)
- * Prototype: void sub_015502(void);
+ * Function : column_process_map_subtile_015502 (Original VA: 0x15502, Ghidra: FUN_00015502)
+ * Prototype: void column_process_map_subtile_015502(void);
  * Address  : 0x15502 (Size: 95 bytes)
  * Module   : column.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x15479, 0x15861
- * Callees  : 1 -> 0x15456
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 2 -> column_allocate_column_015479, combat_process_map_subtile_015861
+ * Callees  : 1 -> column_fn_015456
  ******************************************************************************/
-void FUN_00015502(void)
+void column_process_map_subtile_015502(void)
 
 {
-  byte *pbVar1;
-  uint in_EAX;
-  short *psVar2;
+  byte *byte_ptr;
+  uint arg_eax;
+  short *val;
   uint extraout_ECX;
-  uint in_EDX;
-  int iVar3;
+  uint arg_edx;
+  int val_2;
   
-  iVar3 = (int)(short)((ushort)*(undefined4 *)
-                                ((int)&DAT_00279203 +
-                                ((in_EDX & 0xffff) * 0x100 + (in_EAX & 0xffff)) * 5 + 1) & 0x7ff);
-  psVar2 = (short *)(&DAT_0019e973 + iVar3 * 6);
-  *psVar2 = *psVar2 + -1;
-  if (((*(byte *)((int)&DAT_0019e973 + iVar3 * 0x18 + 2) & 1) == 0) && (*psVar2 == 0)) {
-    FUN_00015456();
-    in_EDX = extraout_ECX;
+  val_2 = (int)(short)((ushort)*(undefined4 *)
+                                ((int)&g_map_subtiles +
+                                ((arg_edx & 0xffff) * 0x100 + (arg_eax & 0xffff)) * 5 + 1) & 0x7ff);
+  val = (short *)(&g_bss_0019e973 + val_2 * 6);
+  *val = *val + -1;
+  if (((*(byte *)((int)&g_bss_0019e973 + val_2 * 0x18 + 2) & 1) == 0) && (*val == 0)) {
+    column_fn_015456();
+    arg_edx = extraout_ECX;
   }
-  iVar3 = ((in_EAX & 0xffff) + (in_EDX & 0xffff) * 0x100) * 5;
-  *(undefined1 *)((int)&DAT_00279203 + iVar3 + 1) = 0;
-  pbVar1 = (byte *)((int)&DAT_00279205 + iVar3);
-  *pbVar1 = *pbVar1 & 0xf8;
+  val_2 = ((arg_eax & 0xffff) + (arg_edx & 0xffff) * 0x100) * 5;
+  *(undefined1 *)((int)&g_map_subtiles + val_2 + 1) = 0;
+  byte_ptr = (byte *)((int)&g_bss_00279205 + val_2);
+  *byte_ptr = *byte_ptr & 0xf8;
   return;
 }
 
 /******************************************************************************
- * Function : sub_015561 (Ghidra: FUN_00015561)
- * Prototype: void sub_015561(void);
+ * Function : column_fn_015561 (Original VA: 0x15561, Ghidra: FUN_00015561)
+ * Prototype: void column_fn_015561(void);
  * Address  : 0x15561 (Size: 162 bytes)
  * Module   : column.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Module column.cpp procedure @ 0x015561
  * Callers  : 0 -> 
- * Callees  : 1 -> 0x15603
+ * Callees  : 1 -> column_process_map_subtile_015603
  ******************************************************************************/
-void FUN_00015561(void)
+void column_fn_015561(void)
 
 {
-  undefined2 in_DX;
+  undefined2 arg_dx;
   
-  FUN_00015603(in_DX);
+  column_process_map_subtile_015603(arg_dx);
   return;
 }
 
 /******************************************************************************
- * Function : sub_015603 (Ghidra: FUN_00015603)
- * Prototype: void sub_015603(void);
+ * Function : column_process_map_subtile_015603 (Original VA: 0x15603, Ghidra: FUN_00015603)
+ * Prototype: void column_process_map_subtile_015603(void);
  * Address  : 0x15603 (Size: 164 bytes)
  * Module   : column.cpp [direct_file_string_xref]
- * OrigLine : column.cpp:184 ("BBlocks")
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x15561
- * Callees  : 3 -> 0x15318, 0x15479, 0xddaf0
- * Strings  :
- *   - 0x16043c: "column.cpp"
- *   - 0x160434: "BBlocks"
+ * OrigLine : column.cpp lines 184
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 1 -> column_fn_015561
+ * Callees  : 3 -> column_fn_015318, column_allocate_column_015479, LbErrorLog
  ******************************************************************************/
-void FUN_00015603(void)
+void column_process_map_subtile_015603(void)
 
 {
-  int in_EAX;
-  byte in_CL;
+  int arg_eax;
+  byte arg_cl;
   byte extraout_CL;
-  uint in_EDX;
-  uint unaff_EBX;
-  undefined4 *puVar1;
-  undefined4 *puVar2;
-  undefined4 *puVar3;
-  undefined4 *puVar4;
-  byte bVar5;
+  uint arg_edx;
+  uint arg_ebx;
+  undefined4 *word_ptr;
+  undefined4 *word_ptr_2;
+  undefined4 *word_ptr_3;
+  undefined4 *word_ptr_4;
+  byte flag;
   undefined4 auStack_27e8 [2546];
   undefined2 local_1f;
   undefined4 auStack_1c [4];
   
-  bVar5 = 0;
-  if ((*(ushort *)((int)&DAT_00279203 + ((unaff_EBX & 0xffff) * 0x100 + (in_EDX & 0xffff)) * 5 + 1)
+  flag = 0;
+  if ((*(ushort *)((int)&g_map_subtiles + ((arg_ebx & 0xffff) * 0x100 + (arg_edx & 0xffff)) * 5 + 1)
       & 0x7ff) == 0) {
-    FUN_000ddaf0(); /* LbErrorLog("column.cpp", line 184, "BBlocks") */
-    in_CL = extraout_CL;
+    LbErrorLog(); /* LbErrorLog("column.cpp", line 184, "BBlocks") */
+    arg_cl = extraout_CL;
   }
-  puVar1 = &DAT_0019e977 +
-           (*(uint *)((int)&DAT_00279203 +
-                     ((unaff_EBX & 0xffff) * 0x100 + (in_EDX & 0xffff)) * 5 + 1) & 0x7ff) * 6 +
-           (uint)bVar5 * -2;
-  puVar3 = auStack_1c + (uint)bVar5 * -2 + (uint)bVar5 * -2;
-  puVar2 = puVar1 + (uint)bVar5 * -2 + 1;
-  *(undefined4 *)(&stack0xffffffe0 + (uint)bVar5 * -8) = *puVar1;
-  puVar4 = puVar3 + (uint)bVar5 * -2 + 1;
-  puVar1 = puVar2 + (uint)bVar5 * -2 + 1;
-  *puVar3 = *puVar2;
-  *puVar4 = *puVar1;
-  puVar4[(uint)bVar5 * -2 + 1] = puVar1[(uint)bVar5 * -2 + 1];
-  (puVar4 + (uint)bVar5 * -2 + 1)[(uint)bVar5 * -2 + 1] =
-       (puVar1 + (uint)bVar5 * -2 + 1)[(uint)bVar5 * -2 + 1];
-  if (in_CL == 0) {
-    local_1f = *(undefined2 *)((int)&DAT_001aa97b + in_EAX * 0x12);
+  word_ptr = &g_bss_0019e977 +
+           (*(uint *)((int)&g_map_subtiles +
+                     ((arg_ebx & 0xffff) * 0x100 + (arg_edx & 0xffff)) * 5 + 1) & 0x7ff) * 6 +
+           (uint)flag * -2;
+  word_ptr_3 = auStack_1c + (uint)flag * -2 + (uint)flag * -2;
+  word_ptr_2 = word_ptr + (uint)flag * -2 + 1;
+  *(undefined4 *)(&stack0xffffffe0 + (uint)flag * -8) = *word_ptr;
+  word_ptr_4 = word_ptr_3 + (uint)flag * -2 + 1;
+  word_ptr = word_ptr_2 + (uint)flag * -2 + 1;
+  *word_ptr_3 = *word_ptr_2;
+  *word_ptr_4 = *word_ptr;
+  word_ptr_4[(uint)flag * -2 + 1] = word_ptr[(uint)flag * -2 + 1];
+  (word_ptr_4 + (uint)flag * -2 + 1)[(uint)flag * -2 + 1] =
+       (word_ptr + (uint)flag * -2 + 1)[(uint)flag * -2 + 1];
+  if (arg_cl == 0) {
+    local_1f = *(undefined2 *)((int)&g_bss_001aa97b + arg_eax * 0x12);
   }
   else {
-    if (8 < in_CL) {
+    if (8 < arg_cl) {
       return;
     }
-    *(short *)((int)auStack_1c + (uint)(byte)(in_CL - 1) * 2) = (short)in_EAX;
-    FUN_00015318();
+    *(short *)((int)auStack_1c + (uint)(byte)(arg_cl - 1) * 2) = (short)arg_eax;
+    column_fn_015318();
   }
-  FUN_00015479();
+  column_allocate_column_015479();
   return;
 }
 
 /******************************************************************************
- * Function : sub_0156a7 (Ghidra: FUN_000156a7)
- * Prototype: void sub_0156a7(void);
+ * Function : column_fn_0156a7 (Original VA: 0x156a7, Ghidra: FUN_000156a7)
+ * Prototype: void column_fn_0156a7(void);
  * Address  : 0x156a7 (Size: 55 bytes)
  * Module   : column.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Module column.cpp procedure @ 0x0156a7
  * Callers  : 0 -> 
- * Callees  : 1 -> 0x156de
+ * Callees  : 1 -> column_process_map_subtile_0156de
  ******************************************************************************/
-void FUN_000156a7(void)
+void column_fn_0156a7(void)
 
 {
-  FUN_000156de();
+  column_process_map_subtile_0156de();
   return;
 }
 
 /******************************************************************************
- * Function : sub_0156de (Ghidra: FUN_000156de)
- * Prototype: void sub_0156de(void);
+ * Function : column_process_map_subtile_0156de (Original VA: 0x156de, Ghidra: FUN_000156de)
+ * Prototype: void column_process_map_subtile_0156de(void);
  * Address  : 0x156de (Size: 206 bytes)
  * Module   : column.cpp [direct_file_string_xref]
- * OrigLine : column.cpp:245 ("BBlocks")
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x156a7
- * Callees  : 3 -> 0x15318, 0x15479, 0xddaf0
- * Strings  :
- *   - 0x16044f: "column.cpp"
- *   - 0x160447: "BBlocks"
+ * OrigLine : column.cpp lines 245
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 1 -> column_fn_0156a7
+ * Callees  : 3 -> column_fn_015318, column_allocate_column_015479, LbErrorLog
  ******************************************************************************/
-void FUN_000156de(void)
+void column_process_map_subtile_0156de(void)
 
 {
-  undefined4 uVar1;
-  uint in_EAX;
+  undefined4 uval;
+  uint arg_eax;
   uint extraout_ECX;
-  uint in_EDX;
-  byte unaff_BL;
-  undefined4 *puVar2;
-  undefined4 *puVar3;
-  uint uVar4;
-  undefined4 *puVar5;
-  undefined4 *puVar6;
-  byte bVar7;
+  uint arg_edx;
+  byte arg_bl;
+  undefined4 *word_ptr;
+  undefined4 *word_ptr_2;
+  uint uval_2;
+  undefined4 *word_ptr_3;
+  undefined4 *word_ptr_4;
+  byte flag;
   undefined4 auStackY_27ec [2545];
   undefined1 uStack_24;
   undefined2 local_23;
   undefined1 uStack_21;
   undefined4 auStack_20 [4];
   
-  bVar7 = 0;
-  if (unaff_BL == 0) {
-    if ((*(ushort *)((int)&DAT_00279203 + ((in_EDX & 0xffff) * 0x100 + (in_EAX & 0xffff)) * 5 + 1) &
+  flag = 0;
+  if (arg_bl == 0) {
+    if ((*(ushort *)((int)&g_map_subtiles + ((arg_edx & 0xffff) * 0x100 + (arg_eax & 0xffff)) * 5 + 1) &
         0x7ff) == 0) {
-      FUN_000ddaf0(); /* LbErrorLog("column.cpp", line 245, "BBlocks") */
-      in_EDX = extraout_ECX;
+      LbErrorLog(); /* LbErrorLog("column.cpp", line 245, "BBlocks") */
+      arg_edx = extraout_ECX;
     }
-    puVar2 = &DAT_0019e977 +
-             (*(uint *)((int)&DAT_00279203 + ((in_EDX & 0xffff) * 0x100 + (in_EAX & 0xffff)) * 5 + 1
-                       ) & 0x7ff) * 6 + (uint)bVar7 * -2;
-    puVar5 = auStack_20 + (uint)bVar7 * -2 + (uint)bVar7 * -2;
-    puVar3 = puVar2 + (uint)bVar7 * -2 + 1;
-    *(undefined4 *)(&stack0xffffffdc + (uint)bVar7 * -8) = *puVar2;
-    puVar6 = puVar5 + (uint)bVar7 * -2 + 1;
-    puVar2 = puVar3 + (uint)bVar7 * -2 + 1;
-    *puVar5 = *puVar3;
-    *puVar6 = *puVar2;
-    puVar6[(uint)bVar7 * -2 + 1] = puVar2[(uint)bVar7 * -2 + 1];
-    (puVar6 + (uint)bVar7 * -2 + 1)[(uint)bVar7 * -2 + 1] =
-         (puVar2 + (uint)bVar7 * -2 + 1)[(uint)bVar7 * -2 + 1];
+    word_ptr = &g_bss_0019e977 +
+             (*(uint *)((int)&g_map_subtiles + ((arg_edx & 0xffff) * 0x100 + (arg_eax & 0xffff)) * 5 + 1
+                       ) & 0x7ff) * 6 + (uint)flag * -2;
+    word_ptr_3 = auStack_20 + (uint)flag * -2 + (uint)flag * -2;
+    word_ptr_2 = word_ptr + (uint)flag * -2 + 1;
+    *(undefined4 *)(&stack0xffffffdc + (uint)flag * -8) = *word_ptr;
+    word_ptr_4 = word_ptr_3 + (uint)flag * -2 + 1;
+    word_ptr = word_ptr_2 + (uint)flag * -2 + 1;
+    *word_ptr_3 = *word_ptr_2;
+    *word_ptr_4 = *word_ptr;
+    word_ptr_4[(uint)flag * -2 + 1] = word_ptr[(uint)flag * -2 + 1];
+    (word_ptr_4 + (uint)flag * -2 + 1)[(uint)flag * -2 + 1] =
+         (word_ptr + (uint)flag * -2 + 1)[(uint)flag * -2 + 1];
     _uStack_24 = CONCAT21(1,uStack_24);
   }
   else {
-    if (8 < unaff_BL) {
+    if (8 < arg_bl) {
       return;
     }
-    uVar4 = *(uint *)((int)&DAT_00279203 + ((in_EDX & 0xffff) * 0x100 + (in_EAX & 0xffff)) * 5 + 1)
+    uval_2 = *(uint *)((int)&g_map_subtiles + ((arg_edx & 0xffff) * 0x100 + (arg_eax & 0xffff)) * 5 + 1)
             & 0x7ff;
-    uVar1 = (&DAT_0019e973)[uVar4 * 6];
-    _uStack_24 = (&DAT_0019e977)[uVar4 * 6];
-    auStack_20[0] = (&DAT_0019e97b)[uVar4 * 6];
-    auStack_20[1] = (&DAT_0019e97f)[uVar4 * 6];
-    auStack_20[2] = (&DAT_0019e983)[uVar4 * 6];
-    auStack_20[3] = (&DAT_0019e987)[uVar4 * 6];
-    *(undefined2 *)((int)auStack_20 + (uint)(byte)(unaff_BL - 1) * 2) = 0;
-    FUN_00015318(uVar1);
+    uval = (&g_bss_0019e973)[uval_2 * 6];
+    _uStack_24 = (&g_bss_0019e977)[uval_2 * 6];
+    auStack_20[0] = (&g_bss_0019e97b)[uval_2 * 6];
+    auStack_20[1] = (&g_bss_0019e97f)[uval_2 * 6];
+    auStack_20[2] = (&g_bss_0019e983)[uval_2 * 6];
+    auStack_20[3] = (&g_bss_0019e987)[uval_2 * 6];
+    *(undefined2 *)((int)auStack_20 + (uint)(byte)(arg_bl - 1) * 2) = 0;
+    column_fn_015318(uval);
   }
-  FUN_00015479();
+  column_allocate_column_015479();
   return;
 }
 
 /******************************************************************************
- * Function : sub_0157ac (Ghidra: FUN_000157ac)
- * Prototype: longlong sub_0157ac(void);
+ * Function : column_fn_0157ac (Original VA: 0x157ac, Ghidra: FUN_000157ac)
+ * Prototype: longlong column_fn_0157ac(void);
  * Address  : 0x157ac (Size: 56 bytes)
  * Module   : column.cpp [callgraph_affinity_to_preceding_unit]
- * Naming   : Address-based identifier
- * Callers  : 4 -> 0x15386, 0x158a6, 0x29bfe, 0x2cb2b
+ * Purpose  : Module column.cpp procedure @ 0x0157ac
+ * Callers  : 4 -> column_could_create_column_none_015386, combat_fn_0158a6, file_fn_029bfe, file_process_map_subtile_02cb2b
  * Callees  : 0 -> 
  ******************************************************************************/
-longlong FUN_000157ac(void)
+longlong column_fn_0157ac(void)
 
 {
-  int in_EAX;
-  byte bVar1;
-  uint in_EDX;
-  uint uVar2;
+  int arg_eax;
+  byte flag;
+  uint arg_edx;
+  uint uval;
   
-  if (*(short *)(in_EAX + 3) == 0) {
-    return (ulonglong)in_EDX << 0x20;
+  if (*(short *)(arg_eax + 3) == 0) {
+    return (ulonglong)arg_edx << 0x20;
   }
-  bVar1 = 0;
+  flag = 0;
   while( true ) {
-    uVar2 = (uint)bVar1;
-    if (7 < uVar2) {
-      return CONCAT44(in_EDX,8);
+    uval = (uint)flag;
+    if (7 < uval) {
+      return CONCAT44(arg_edx,8);
     }
-    if (*(short *)(in_EAX + 8 + uVar2 * 2) == 0) break;
-    bVar1 = bVar1 + 1;
+    if (*(short *)(arg_eax + 8 + uval * 2) == 0) break;
+    flag = flag + 1;
   }
-  return CONCAT44(in_EDX,uVar2);
+  return CONCAT44(arg_edx,uval);
 }
 
 /******************************************************************************
- * Function : sub_0157e4 (Ghidra: FUN_000157e4)
- * Prototype: longlong sub_0157e4(void);
+ * Function : column_fn_0157e4 (Original VA: 0x157e4, Ghidra: FUN_000157e4)
+ * Prototype: longlong column_fn_0157e4(void);
  * Address  : 0x157e4 (Size: 56 bytes)
  * Module   : column.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x7cd3c
+ * Purpose  : Module column.cpp procedure @ 0x0157e4
+ * Callers  : 1 -> ceiling_process_map_subtile_07cd3c
  * Callees  : 0 -> 
  ******************************************************************************/
 /* WARNING: Removing unreachable block (ram,0x0001580d) */
 
-longlong FUN_000157e4(void)
+longlong column_fn_0157e4(void)
 
 {
-  int in_EAX;
-  byte bVar1;
-  uint in_EDX;
+  int arg_eax;
+  byte flag;
+  uint arg_edx;
   
-  if (*(short *)(in_EAX + 3) != 0) {
-    bVar1 = 7;
-    while (*(short *)(in_EAX + 8 + (uint)bVar1 * 2) == 0) {
-      bVar1 = bVar1 - 1;
+  if (*(short *)(arg_eax + 3) != 0) {
+    flag = 7;
+    while (*(short *)(arg_eax + 8 + (uint)flag * 2) == 0) {
+      flag = flag - 1;
     }
-    return CONCAT44(in_EDX,bVar1 + 1);
+    return CONCAT44(arg_edx,flag + 1);
   }
-  return (ulonglong)in_EDX << 0x20;
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : sub_01581c (Ghidra: FUN_0001581c)
- * Prototype: undefined4 sub_01581c(void);
+ * Function : column_fn_01581c (Original VA: 0x1581c, Ghidra: FUN_0001581c)
+ * Prototype: undefined4 column_fn_01581c(void);
  * Address  : 0x1581c (Size: 69 bytes)
  * Module   : column.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x1534a
+ * Purpose  : Module column.cpp procedure @ 0x01581c
+ * Callers  : 1 -> column_fn_01534a
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_0001581c(void)
+undefined4 column_fn_01581c(void)
 
 {
-  int in_EAX;
-  int in_EDX;
-  int iVar1;
+  int arg_eax;
+  int arg_edx;
+  int val;
   
-  if (((*(short *)(in_EAX + 5) == *(short *)(in_EDX + 5)) &&
-      (*(short *)(in_EAX + 3) == *(short *)(in_EDX + 3))) &&
-     (*(char *)(in_EAX + 7) == *(char *)(in_EDX + 7))) {
-    iVar1 = 0;
+  if (((*(short *)(arg_eax + 5) == *(short *)(arg_edx + 5)) &&
+      (*(short *)(arg_eax + 3) == *(short *)(arg_edx + 3))) &&
+     (*(char *)(arg_eax + 7) == *(char *)(arg_edx + 7))) {
+    val = 0;
     while( true ) {
-      if (7 < iVar1) {
+      if (7 < val) {
         return 1;
       }
-      if (*(short *)(in_EAX + 8) != *(short *)(in_EDX + 8)) break;
-      in_EDX = in_EDX + 2;
-      in_EAX = in_EAX + 2;
-      iVar1 = iVar1 + 1;
+      if (*(short *)(arg_eax + 8) != *(short *)(arg_edx + 8)) break;
+      arg_edx = arg_edx + 2;
+      arg_eax = arg_eax + 2;
+      val = val + 1;
     }
   }
   return 0;

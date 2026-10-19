@@ -1,7 +1,7 @@
 /**
- * Dungeon Keeper (KEEPER.EXE) - Reconstructed Source Module: entrance.cpp
+ * Dungeon Keeper (KEEPER.EXE) - Reconstructed & Semantically Named Module: entrance.cpp
  * Binary Subject: /home/merlin/Dungeon Keeper/re/KEEPER.elf
- * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 (x86:LE:32:default)
+ * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 + DK Semantic Analyzer
  * Functions in this translation unit: 6
  */
 
@@ -11,51 +11,51 @@
 #include "../include/dk_functions.h"
 
 /******************************************************************************
- * Function : sub_02684f (Ghidra: FUN_0002684f)
- * Prototype: void sub_02684f(void);
+ * Function : entrance_update_player_view_state_02684f (Original VA: 0x2684f, Ghidra: FUN_0002684f)
+ * Prototype: void entrance_update_player_view_state_02684f(void);
  * Address  : 0x2684f (Size: 312 bytes)
  * Module   : entrance.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x266af, 0xe1ec4
- * Callees  : 2 -> 0x2683b, 0x627b5
+ * Purpose  : Accesses per-player PlayerInfo state (stride 0x4ef)
+ * Callers  : 2 -> effect_update_creature_and_thing_0266af, update_process_thing_entity_0e1ec4
+ * Callees  : 2 -> effect_fn_02683b, panmap_update_player_view_state_0627b5
  ******************************************************************************/
-void FUN_0002684f(void)
+void entrance_update_player_view_state_02684f(void)
 
 {
-  char cVar1;
-  uint uVar2;
-  int in_EAX;
-  int iVar3;
+  char player_off;
+  uint rand_seed;
+  int arg_eax;
+  int val;
   
-  iVar3 = (int)*(short *)(in_EAX + 0x5e);
-  if (iVar3 == 0) {
+  val = (int)*(short *)(arg_eax + 0x5e);
+  if (val == 0) {
 LAB_00026951:
-    FUN_000627b5();
-    (&DAT_0019d0cb)[DAT_002f10ce._3_1_ * 0x4ef] = (&DAT_0019d0cb)[DAT_002f10ce._3_1_ * 0x4ef] & 0xf7
+    panmap_update_player_view_state_0627b5();
+    (&g_bss_0019d0cb)[g_my_player_word._3_1_ * 0x4ef] = (&g_bss_0019d0cb)[g_my_player_word._3_1_ * 0x4ef] & 0xf7
     ;
   }
   else {
-    if ((iVar3 % 8 != 7) && (iVar3 != 1)) {
-      DAT_002e8bf6 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-      uVar2 = DAT_002e8bf6 >> 0xd;
-      DAT_002e8bf6 = uVar2 | DAT_002e8bf6 * 0x80000;
-      if ((uVar2 & 3) != 0) {
-        if (((&DAT_0019d0cb)[DAT_002f10ce._3_1_ * 0x4ef] & 8) == 0) {
+    if ((val % 8 != 7) && (val != 1)) {
+      g_action_random_seed = g_action_random_seed * 0x24a1 + 0x24df;
+      rand_seed = g_action_random_seed >> 0xd;
+      g_action_random_seed = rand_seed | g_action_random_seed * 0x80000;
+      if ((rand_seed & 3) != 0) {
+        if (((&g_bss_0019d0cb)[g_my_player_word._3_1_ * 0x4ef] & 8) == 0) {
           return;
         }
-        iVar3 = FUN_0002683b();
-        if (iVar3 == 0) {
+        val = effect_fn_02683b();
+        if (val == 0) {
           return;
         }
         goto LAB_00026951;
       }
     }
-    cVar1 = (&DAT_0019d0ff)[DAT_002f10ce._3_1_ * 0x4ef];
-    if ((((cVar1 != '\x06') && (cVar1 != '\a')) && (cVar1 != '\x03')) &&
-       ((((&DAT_0019d0cb)[DAT_002f10ce._3_1_ * 0x4ef] & 8) == 0 &&
-        (iVar3 = FUN_0002683b(), iVar3 != 0)))) {
-      FUN_000627b5();
-      (&DAT_0019d0cb)[DAT_002f10ce._3_1_ * 0x4ef] = (&DAT_0019d0cb)[DAT_002f10ce._3_1_ * 0x4ef] | 8;
+    player_off = (&g_player_view_type)[g_my_player_word._3_1_ * 0x4ef];
+    if ((((player_off != '\x06') && (player_off != '\a')) && (player_off != '\x03')) &&
+       ((((&g_bss_0019d0cb)[g_my_player_word._3_1_ * 0x4ef] & 8) == 0 &&
+        (val = effect_fn_02683b(), val != 0)))) {
+      panmap_update_player_view_state_0627b5();
+      (&g_bss_0019d0cb)[g_my_player_word._3_1_ * 0x4ef] = (&g_bss_0019d0cb)[g_my_player_word._3_1_ * 0x4ef] | 8;
       return;
     }
   }
@@ -63,214 +63,209 @@ LAB_00026951:
 }
 
 /******************************************************************************
- * Function : sub_026ac9 (Ghidra: FUN_00026ac9)
- * Prototype: int sub_026ac9(void);
+ * Function : entrance_fn_026ac9 (Original VA: 0x26ac9, Ghidra: FUN_00026ac9)
+ * Prototype: int entrance_fn_026ac9(void);
  * Address  : 0x26ac9 (Size: 56 bytes)
  * Module   : entrance.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x26987
- * Callees  : 1 -> 0xdc440
+ * Purpose  : Module entrance.cpp procedure @ 0x026ac9
+ * Callers  : 1 -> effect_process_map_subtile_026987
+ * Callees  : 1 -> update_fn_0dc440
  ******************************************************************************/
-int FUN_00026ac9(void)
+int entrance_fn_026ac9(void)
 
 {
-  int iVar1;
+  int val;
   
-  iVar1 = FUN_000dc440();
-  if (iVar1 < 0x280) {
+  val = update_fn_0dc440();
+  if (val < 0x280) {
     return 0x96;
   }
-  return ((0x280 - (iVar1 + -0x280)) * 0x96) / 0x280;
+  return ((0x280 - (val + -0x280)) * 0x96) / 0x280;
 }
 
 /******************************************************************************
- * Function : dk_find_valid_place_entrance_026b04 (Ghidra: FUN_00026b04)
- * Prototype: int dk_find_valid_place_entrance_026b04(void);
+ * Function : entrance_find_valid_place_entrance_026b04 (Original VA: 0x26b04, Ghidra: FUN_00026b04)
+ * Prototype: int entrance_find_valid_place_entrance_026b04(void);
  * Address  : 0x26b04 (Size: 361 bytes)
  * Module   : entrance.cpp [direct_file_string_xref]
- * OrigLine : entrance.cpp:54 ("Cannot find a valid place in entrance to create a creature"); entrance.cpp:60 ("Cannot create a creature for entrance")
- * Naming   : String 'Cannot find a valid place in entrance to create a creature'
- * Callers  : 1 -> 0x37deb
- * Callees  : 8 -> 0x27390, 0x43bb3, 0x63b6d, 0x72af4, 0xb3b10, 0xb3b58, 0xcc968, 0xddaf0
- * Strings  :
- *   - 0x16275b: "entrance.cpp"
- *   - 0x16278e: "entrance.cpp"
- *   - 0x162720: "Cannot find a valid place in entrance to create a creature"
- *   - 0x162768: "Cannot create a creature for entrance"
+ * OrigLine : entrance.cpp lines 54, 60
+ * Purpose  : String 'Cannot find a valid place in entrance to create a creature'
+ * Callers  : 1 -> gen2_could_get_random_entrance_037deb
+ * Callees  : 8 -> event_illegal_event_number_created_027390, inits_told_you_so_create_043bb3, person_fn_063b6d, structs_update_creature_control_072af4, move_fn_0b3b10, move_update_creature_control_0b3b58, room_number_slabs_room_zero_0cc968, LbErrorLog
  ******************************************************************************/
-int FUN_00026b04(void)
+int entrance_find_valid_place_entrance_026b04(void)
 
 {
-  char cVar1;
-  short sVar2;
-  int in_EAX;
-  int iVar3;
-  int iVar4;
-  int in_EDX;
-  uint *puVar5;
+  char ch;
+  short short_val;
+  int gui_btn;
+  int val;
+  int dungeon_off;
+  int arg_edx;
+  uint *word_ptr;
   uint uStack_28;
   undefined1 local_24 [8];
   int local_1c;
   int local_18;
   
   uStack_28 = 0x26b21;
-  local_1c = in_EDX;
-  iVar3 = FUN_00043bb3();
-  local_18 = iVar3;
-  if (iVar3 == 0) {
+  local_1c = arg_edx;
+  val = inits_told_you_so_create_043bb3();
+  local_18 = val;
+  if (val == 0) {
     uStack_28 = 0x26c64;
-    FUN_000ddaf0(); /* LbErrorLog("entrance.cpp", line 54, "Cannot find a valid place in entrance to create a creature") */
+    LbErrorLog(); /* LbErrorLog("entrance.cpp", line 54, "Cannot find a valid place in entrance to create a creature") */
   }
   else {
-    puVar5 = (uint *)local_24;
-    if ((((int)*(char *)(in_EAX + 3) != (uint)DAT_002eb543) &&
-        (iVar4 = *(char *)(in_EAX + 3) * 0x1508 + local_1c, puVar5 = (uint *)local_24,
-        (byte)(&DAT_002e0ea3)[iVar4] < 2)) &&
-       (puVar5 = (uint *)local_24, (&DAT_002e1a12)[iVar4] == '\0')) {
-      uStack_28 = (uint)*(ushort *)(iVar3 + 0x1b);
-      puVar5 = &uStack_28;
-      FUN_00027390();
-      (&DAT_002e1a12)[(uint)*(byte *)(iVar3 + 0x1a) + *(char *)(in_EAX + 3) * 0x1508] = 1;
+    word_ptr = (uint *)local_24;
+    if ((((int)*(char *)(gui_btn + 3) != (uint)g_neutral_player_number) &&
+        (dungeon_off = *(char *)(gui_btn + 3) * 0x1508 + local_1c, word_ptr = (uint *)local_24,
+        (byte)(&g_bss_002e0ea3)[dungeon_off] < 2)) &&
+       (word_ptr = (uint *)local_24, (&g_bss_002e1a12)[dungeon_off] == '\0')) {
+      uStack_28 = (uint)*(ushort *)(val + 0x1b);
+      word_ptr = &uStack_28;
+      event_illegal_event_number_created_027390();
+      (&g_bss_002e1a12)[(uint)*(byte *)(val + 0x1a) + *(char *)(gui_btn + 3) * 0x1508] = 1;
     }
-    *(undefined4 *)((int)puVar5 + -4) = 0x26b99;
-    cVar1 = FUN_000cc968();
-    if (cVar1 == '\0') {
-      *(undefined4 *)((int)puVar5 + -4) = 0x26c44;
-      FUN_000ddaf0(); /* LbErrorLog("entrance.cpp", line 60, "Cannot create a creature for entrance") */
-      *(undefined4 *)((int)puVar5 + -4) = 0x26c4e;
-      FUN_00072af4();
+    *(undefined4 *)((int)word_ptr + -4) = 0x26b99;
+    ch = room_number_slabs_room_zero_0cc968();
+    if (ch == '\0') {
+      *(undefined4 *)((int)word_ptr + -4) = 0x26c44;
+      LbErrorLog(); /* LbErrorLog("entrance.cpp", line 60, "Cannot create a creature for entrance") */
+      *(undefined4 *)((int)word_ptr + -4) = 0x26c4e;
+      structs_update_creature_control_072af4();
     }
     else {
-      *(undefined4 *)((int)puVar5 + -4) = 0x26bac;
-      FUN_000b3b10();
-      *(int *)(&DAT_002e1724 + *(char *)(in_EAX + 3) * 0x1508) =
-           *(int *)(&DAT_002e1724 + *(char *)(in_EAX + 3) * 0x1508) + 1;
-      *(int *)(&DAT_002e1728 + local_1c * 4 + *(char *)(in_EAX + 3) * 0x1508) =
-           *(int *)(&DAT_002e1728 + local_1c * 4 + *(char *)(in_EAX + 3) * 0x1508) + 1;
-      *(int *)(&DAT_002e17a8 + *(char *)(in_EAX + 3) * 0x1508) = local_1c;
-      *(short *)(in_EAX + 0x1b) = *(short *)(in_EAX + 0x1b) + 1;
-      if ((&DAT_002e0589)[*(char *)(in_EAX + 3) * 0xa84] != 0) {
-        *(undefined4 *)((int)puVar5 + -4) = 0x26c18;
-        sVar2 = FUN_000b3b58();
-        if (sVar2 != 0) {
+      *(undefined4 *)((int)word_ptr + -4) = 0x26bac;
+      move_fn_0b3b10();
+      *(int *)(&g_bss_002e1724 + *(char *)(gui_btn + 3) * 0x1508) =
+           *(int *)(&g_bss_002e1724 + *(char *)(gui_btn + 3) * 0x1508) + 1;
+      *(int *)(&g_bss_002e1728 + local_1c * 4 + *(char *)(gui_btn + 3) * 0x1508) =
+           *(int *)(&g_bss_002e1728 + local_1c * 4 + *(char *)(gui_btn + 3) * 0x1508) + 1;
+      *(int *)(&g_bss_002e17a8 + *(char *)(gui_btn + 3) * 0x1508) = local_1c;
+      *(short *)(gui_btn + 0x1b) = *(short *)(gui_btn + 0x1b) + 1; /* gui_btn->id_num */
+      if ((&g_dungeons)[*(char *)(gui_btn + 3) * 0xa84] != 0) {
+        *(undefined4 *)((int)word_ptr + -4) = 0x26c18;
+        short_val = move_update_creature_control_0b3b58();
+        if (short_val != 0) {
           *(undefined1 *)(local_18 + 8) = 0x90;
           return local_18;
         }
       }
-      *(undefined4 *)((int)puVar5 + -4) = 0x26c2e;
-      FUN_00063b6d();
+      *(undefined4 *)((int)word_ptr + -4) = 0x26c2e;
+      person_fn_063b6d();
     }
   }
   return local_18;
 }
 
 /******************************************************************************
- * Function : sub_026c6d (Ghidra: FUN_00026c6d)
- * Prototype: longlong sub_026c6d(void);
+ * Function : entrance_update_player_view_state_026c6d (Original VA: 0x26c6d, Ghidra: FUN_00026c6d)
+ * Prototype: longlong entrance_update_player_view_state_026c6d(void);
  * Address  : 0x26c6d (Size: 117 bytes)
  * Module   : entrance.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses per-player PlayerInfo state (stride 0x4ef)
  * Callers  : 0 -> 
- * Callees  : 4 -> 0x51374, 0x63b6d, 0xc9988, 0xcc4a0
+ * Callees  : 4 -> moodneed_fn_051374, person_fn_063b6d, room_process_dungeon_room_0c9988, room_fn_0cc4a0
  ******************************************************************************/
-longlong FUN_00026c6d(void)
+longlong entrance_update_player_view_state_026c6d(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  uint in_EDX;
+  int arg_eax;
+  int val;
+  uint arg_edx;
   
-  iVar1 = FUN_000c9988();
-  if (iVar1 != 0) {
-    iVar1 = FUN_000cc4a0();
-    if (iVar1 != 0) {
-      if ((int)*(char *)(in_EAX + 6) == (uint)(byte)(&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef]) {
-        FUN_00051374();
+  val = room_process_dungeon_room_0c9988();
+  if (val != 0) {
+    val = room_fn_0cc4a0();
+    if (val != 0) {
+      if ((int)*(char *)(arg_eax + 6) == (uint)(byte)(&g_player_id_number)[g_my_player_word._3_1_ * 0x4ef]) {
+        moodneed_fn_051374();
       }
-      *(undefined1 *)(in_EAX + 8) = 0x33;
-      return CONCAT44(in_EDX,1);
+      *(undefined1 *)(arg_eax + 8) = 0x33;
+      return CONCAT44(arg_edx,1);
     }
   }
-  FUN_00063b6d();
-  return (ulonglong)in_EDX << 0x20;
+  person_fn_063b6d();
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : sub_026ce2 (Ghidra: FUN_00026ce2)
- * Prototype: undefined8 sub_026ce2(void);
+ * Function : entrance_update_creature_and_thing_026ce2 (Original VA: 0x26ce2, Ghidra: FUN_00026ce2)
+ * Prototype: undefined8 entrance_update_creature_and_thing_026ce2(void);
  * Address  : 0x26ce2 (Size: 218 bytes)
  * Module   : entrance.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
  * Callers  : 0 -> 
- * Callees  : 4 -> 0x10434, 0x64ae7, 0x8608c, 0xd0f50
+ * Callees  : 4 -> anger_fn_010434, person_update_creature_control_064ae7, creature_how_hero_have_tend_08608c, room_update_slab_subtile_columns_0d0f50
  ******************************************************************************/
-undefined8 FUN_00026ce2(void)
+undefined8 entrance_update_creature_and_thing_026ce2(void)
 
 {
-  char cVar1;
-  ushort uVar2;
-  int in_EAX;
-  int iVar3;
-  undefined4 uVar4;
-  undefined4 *puVar5;
+  char ch;
+  ushort cctrl_ptr;
+  int arg_eax;
+  int thing_ptr;
+  undefined4 uval;
+  undefined4 *word_ptr;
   undefined4 uStack_1c;
   undefined4 uStack_18;
   
-  puVar5 = (undefined4 *)&stack0xffffffec;
+  word_ptr = (undefined4 *)&stack0xffffffec;
   uStack_18 = 0x26cee;
-  iVar3 = FUN_000d0f50();
-  if (((iVar3 == 0) || (*(short *)(iVar3 + 10) != 1)) ||
-     (cVar1 = *(char *)(in_EAX + 6), cVar1 != *(char *)(iVar3 + 3))) {
+  thing_ptr = room_update_slab_subtile_columns_0d0f50();
+  if (((thing_ptr == 0) || (*(short *)(thing_ptr + 10) != 1)) ||
+     (ch = *(char *)(arg_eax + 6), ch != *(char *)(thing_ptr + 3))) {
     uStack_18 = 0x26db1;
-    FUN_00064ae7();
-    uVar4 = 1;
+    person_update_creature_control_064ae7();
+    uval = 1;
   }
   else {
-    if ((int)cVar1 != (uint)DAT_002eb543) {
-      *(short *)(&DAT_002e0ec8 + cVar1 * 0x1508) = *(short *)(&DAT_002e0ec8 + cVar1 * 0x1508) + 1;
-      uVar2 = (&DAT_002e05b6)[*(char *)(in_EAX + 6) * 0xa84];
-      while (iVar3 = (&DAT_001ae9fc)[uVar2], iVar3 != DAT_001ae9fc) {
-        if (iVar3 != in_EAX) {
+    if ((int)ch != (uint)g_neutral_player_number) {
+      *(short *)(&g_bss_002e0ec8 + ch * 0x1508) = *(short *)(&g_bss_002e0ec8 + ch * 0x1508) + 1;
+      cctrl_ptr = (&g_bss_002e05b6)[*(char *)(arg_eax + 6) * 0xa84];
+      while (thing_ptr = (&g_thing_ptrs)[cctrl_ptr], thing_ptr != g_thing_ptrs) {
+        if (thing_ptr != arg_eax) {
           uStack_18 = 0x26d81;
-          FUN_00010434();
+          anger_fn_010434();
         }
-        uVar2 = *(ushort *)((&DAT_001b0a00)[*(ushort *)(iVar3 + 100)] + 0x1f);
+        cctrl_ptr = *(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x1f); /* thing->ccontrol_idx */
       }
     }
     uStack_18 = 0;
-    puVar5 = &uStack_1c;
+    word_ptr = &uStack_1c;
     uStack_1c = 0;
-    FUN_0008608c();
-    uVar4 = 0xffffffff;
+    creature_how_hero_have_tend_08608c();
+    uval = 0xffffffff;
   }
-  return CONCAT44(*(undefined4 *)((int)puVar5 + 8),uVar4);
+  return CONCAT44(*(undefined4 *)((int)word_ptr + 8),uval);
 }
 
 /******************************************************************************
- * Function : sub_026dbc (Ghidra: FUN_00026dbc)
- * Prototype: undefined8 sub_026dbc(void);
+ * Function : entrance_update_creature_control_026dbc (Original VA: 0x26dbc, Ghidra: FUN_00026dbc)
+ * Prototype: undefined8 entrance_update_creature_control_026dbc(void);
  * Address  : 0x26dbc (Size: 162 bytes)
  * Module   : entrance.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
  * Callers  : 0 -> 
- * Callees  : 4 -> 0x8608c, 0xc9988, 0xcc4a0, 0xd0f50
+ * Callees  : 4 -> creature_how_hero_have_tend_08608c, room_process_dungeon_room_0c9988, room_fn_0cc4a0, room_update_slab_subtile_columns_0d0f50
  ******************************************************************************/
-undefined8 FUN_00026dbc(void)
+undefined8 entrance_update_creature_control_026dbc(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  undefined4 in_EDX;
+  int thing;
+  int val;
+  undefined4 arg_edx;
   
-  iVar1 = FUN_000d0f50();
-  if ((((iVar1 == 0) || (*(short *)(iVar1 + 10) != 1)) && (iVar1 = FUN_000c9988(), iVar1 != 0)) &&
-     (iVar1 = FUN_000cc4a0(), iVar1 != 0)) {
-    *(undefined1 *)(in_EAX + 8) = 0x8b;
-    *(byte *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 1) =
-         *(byte *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 1) | 2;
-    return CONCAT44(in_EDX,1);
+  val = room_update_slab_subtile_columns_0d0f50();
+  if ((((val == 0) || (*(short *)(val + 10) != 1)) && (val = room_process_dungeon_room_0c9988(), val != 0)) &&
+     (val = room_fn_0cc4a0(), val != 0)) {
+    *(undefined1 *)(thing + 8) = 0x8b; /* thing->active_state */
+    *(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 1) = /* thing->ccontrol_idx */
+         *(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 1) | 2; /* thing->ccontrol_idx */
+    return CONCAT44(arg_edx,1);
   }
-  FUN_0008608c(0);
+  creature_how_hero_have_tend_08608c(0);
   return 0xffffffff;
 }
 

@@ -1,7 +1,7 @@
 /**
- * Dungeon Keeper (KEEPER.EXE) - Reconstructed Source Module: imptool.cpp
+ * Dungeon Keeper (KEEPER.EXE) - Reconstructed & Semantically Named Module: imptool.cpp
  * Binary Subject: /home/merlin/Dungeon Keeper/re/KEEPER.elf
- * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 (x86:LE:32:default)
+ * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 + DK Semantic Analyzer
  * Functions in this translation unit: 16
  */
 
@@ -11,319 +11,319 @@
 #include "../include/dk_functions.h"
 
 /******************************************************************************
- * Function : sub_03f7ad (Ghidra: FUN_0003f7ad)
- * Prototype: undefined4 sub_03f7ad(void);
+ * Function : imptool_process_slabmap_tile_03f7ad (Original VA: 0x3f7ad, Ghidra: FUN_0003f7ad)
+ * Prototype: undefined4 imptool_process_slabmap_tile_03f7ad(void);
  * Address  : 0x3f7ad (Size: 95 bytes)
  * Module   : imptool.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0x11606, 0x3f80c, 0x3fed7
+ * Purpose  : Reads/modifies SlabMap[85x85] tile entry
+ * Callers  : 3 -> angtool_fn_011606, imptool_fn_03f80c, imptool_fn_03fed7
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_0003f7ad(void)
+undefined4 imptool_process_slabmap_tile_03f7ad(void)
 
 {
-  uint in_EAX;
-  int in_EDX;
-  uint uVar1;
-  int unaff_EBX;
+  uint arg_eax;
+  int arg_edx;
+  uint uval;
+  int arg_ebx;
   
-  uVar1 = (uint)(byte)(&DAT_002d33c5)[(unaff_EBX * 0x55 + in_EDX) * 6];
-  if ((((((&DAT_002d33ca)[((&DAT_0019033b)[in_EDX * 3] + (&DAT_0019033b)[unaff_EBX * 3] * 0x55) * 6]
-         & 7) == in_EAX) && ((&DAT_001921d2)[uVar1 * 0x16] != '\0')) && (uVar1 != 0xd)) &&
-     (uVar1 != 0xc)) {
+  uval = (uint)(byte)(&g_slabmap_base)[(arg_ebx * 0x55 + arg_edx) * 6];
+  if ((((((&g_slabmap)[((&g_subtile_to_slab_lut)[arg_edx * 3] + (&g_subtile_to_slab_lut)[arg_ebx * 3] * 0x55) * 6]
+         & 7) == arg_eax) && ((&g_data_001921d2)[uval * 0x16] != '\0')) && (uval != 0xd)) &&
+     (uval != 0xc)) {
     return 1;
   }
   return 0;
 }
 
 /******************************************************************************
- * Function : sub_03f80c (Ghidra: FUN_0003f80c)
- * Prototype: undefined4 sub_03f80c(void);
+ * Function : imptool_fn_03f80c (Original VA: 0x3f80c, Ghidra: FUN_0003f80c)
+ * Prototype: undefined4 imptool_fn_03f80c(void);
  * Address  : 0x3f80c (Size: 77 bytes)
  * Module   : imptool.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 10 -> 0x14faa, 0x3aef2, 0x3af4b, 0x3b0a0, 0x3b49d, 0x3b643, 0x3fbe3, 0x66111, 0x70e59, 0x8f518
- * Callees  : 1 -> 0x3f7ad
+ * Purpose  : Module imptool.cpp procedure @ 0x03f80c
+ * Callers  : 10 -> cdtest_process_slabmap_tile_014faa, impset_process_slabmap_tile_03aef2, impset_update_slab_subtile_columns_03af4b, impset_process_map_subtile_03b0a0, heapmgr_update_slab_subtile_columns_03b49d, heapmgr_process_map_subtile_03b643, imptool_process_slabmap_tile_03fbe3, prison_fn_066111 ...
+ * Callees  : 1 -> imptool_process_slabmap_tile_03f7ad
  ******************************************************************************/
-undefined4 FUN_0003f80c(void)
+undefined4 imptool_fn_03f80c(void)
 
 {
-  int iVar1;
+  int val;
   int extraout_ECX;
   
-  iVar1 = 0;
+  val = 0;
   while( true ) {
-    if (7 < iVar1) {
+    if (7 < val) {
       return 0;
     }
-    iVar1 = FUN_0003f7ad();
-    if (iVar1 != 0) break;
-    iVar1 = extraout_ECX + 2;
+    val = imptool_process_slabmap_tile_03f7ad();
+    if (val != 0) break;
+    val = extraout_ECX + 2;
   }
   return 1;
 }
 
 /******************************************************************************
- * Function : sub_03f859 (Ghidra: FUN_0003f859)
- * Prototype: undefined4 sub_03f859(void);
+ * Function : imptool_fn_03f859 (Original VA: 0x3f859, Ghidra: FUN_0003f859)
+ * Prototype: undefined4 imptool_fn_03f859(void);
  * Address  : 0x3f859 (Size: 49 bytes)
  * Module   : imptool.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x3fa16, 0x3fad0
- * Callees  : 1 -> 0xdc440
+ * Purpose  : Module imptool.cpp procedure @ 0x03f859
+ * Callers  : 2 -> imptool_update_creature_and_thing_03fa16, impset_update_creature_and_thing_03fad0
+ * Callees  : 1 -> update_fn_0dc440
  ******************************************************************************/
-undefined4 FUN_0003f859(void)
+undefined4 imptool_fn_03f859(void)
 
 {
-  int iVar1;
-  int iVar2;
+  int val;
+  int val_2;
   
-  iVar1 = FUN_000dc440();
-  iVar2 = FUN_000dc440();
-  if ((iVar2 < iVar1) && (0x600 < iVar1 - iVar2)) {
+  val = update_fn_0dc440();
+  val_2 = update_fn_0dc440();
+  if ((val_2 < val) && (0x600 < val - val_2)) {
     return 0;
   }
   return 1;
 }
 
 /******************************************************************************
- * Function : sub_03f88a (Ghidra: FUN_0003f88a)
- * Prototype: undefined4 sub_03f88a(void);
+ * Function : imptool_process_map_subtile_03f88a (Original VA: 0x3f88a, Ghidra: FUN_0003f88a)
+ * Prototype: undefined4 imptool_process_map_subtile_03f88a(void);
  * Address  : 0x3f88a (Size: 94 bytes)
  * Module   : imptool.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x3eea6, 0x3fcd0
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 2 -> impset_fn_03eea6, impset_process_slabmap_tile_03fcd0
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_0003f88a(void)
+undefined4 imptool_process_map_subtile_03f88a(void)
 
 {
-  byte *pbVar1;
-  byte *in_EAX;
-  uint uVar2;
-  int in_EDX;
-  int unaff_EBX;
+  byte *thing_ptr;
+  byte *arg_eax;
+  uint uval;
+  int arg_edx;
+  int arg_ebx;
   
-  uVar2 = (*(uint *)((int)&DAT_00279203 + (in_EDX + unaff_EBX * 0x100) * 5 + 1) & 0x3fffff) >> 0xb;
+  uval = (*(uint *)((int)&g_map_subtiles + (arg_edx + arg_ebx * 0x100) * 5 + 1) & 0x3fffff) >> 0xb;
   while( true ) {
-    pbVar1 = (&DAT_001ae9fc)[uVar2];
-    if (pbVar1 <= DAT_001ae9fc) {
+    thing_ptr = (&g_thing_ptrs)[uval];
+    if (thing_ptr <= g_thing_ptrs) {
       return 0;
     }
-    if ((((pbVar1[0x1f] == 5) && (pbVar1 != in_EAX)) && ((*pbVar1 & 0x10) == 0)) &&
-       (((pbVar1[1] & 2) == 0 && ((pbVar1[7] == 4 || (pbVar1[7] == 5)))))) break;
-    uVar2 = (uint)*(ushort *)(pbVar1 + 2);
+    if ((((thing_ptr[0x1f] == 5) && (thing_ptr != arg_eax)) && ((*thing_ptr & 0x10) == 0)) &&
+       (((thing_ptr[1] & 2) == 0 && ((thing_ptr[7] == 4 || (thing_ptr[7] == 5)))))) break;
+    uval = (uint)*(ushort *)(thing_ptr + 2);
   }
   return 1;
 }
 
 /******************************************************************************
- * Function : sub_03f8e8 (Ghidra: FUN_0003f8e8)
- * Prototype: undefined4 sub_03f8e8(void);
+ * Function : imptool_update_creature_and_thing_03f8e8 (Original VA: 0x3f8e8, Ghidra: FUN_0003f8e8)
+ * Prototype: undefined4 imptool_update_creature_and_thing_03f8e8(void);
  * Address  : 0x3f8e8 (Size: 163 bytes)
  * Module   : imptool.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0x3c31c, 0x3c458, 0x3c53a
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
+ * Callers  : 3 -> impset_update_creature_and_thing_03c31c, impset_update_creature_and_thing_03c458, impset_update_creature_and_thing_03c53a
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_0003f8e8(void)
+undefined4 imptool_update_creature_and_thing_03f8e8(void)
 
 {
-  ushort uVar1;
-  uint uVar2;
-  int in_EAX;
-  int in_EDX;
-  char cVar3;
+  ushort cctrl_ptr;
+  uint thing_ptr;
+  int arg_eax;
+  int arg_edx;
+  char ch;
   
-  uVar1 = (&DAT_002e05b8)[in_EAX * 0xa84];
+  cctrl_ptr = (&g_bss_002e05b8)[arg_eax * 0xa84];
   do {
-    uVar2 = (&DAT_001ae9fc)[uVar1];
-    if (uVar2 <= DAT_001ae9fc) {
+    thing_ptr = (&g_thing_ptrs)[cctrl_ptr];
+    if (thing_ptr <= g_thing_ptrs) {
       return 0;
     }
-    if (*(short *)((&DAT_001b0a00)[*(ushort *)(uVar2 + 100)] + 0x72) == *(short *)(in_EDX + 0x1b)) {
-      if (*(char *)(uVar2 + 7) == '\x0e') {
-        cVar3 = *(char *)(uVar2 + 8);
+    if (*(short *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x72) == *(short *)(arg_edx + 0x1b)) { /* thing->ccontrol_idx */
+      if (*(char *)(thing_ptr + 7) == '\x0e') {
+        ch = *(char *)(thing_ptr + 8); /* thing->active_state */
       }
       else {
-        cVar3 = *(char *)(uVar2 + 7);
+        ch = *(char *)(thing_ptr + 7);
       }
-      if (cVar3 == '\v') {
+      if (ch == '\v') {
         return 1;
       }
-      if (*(char *)(uVar2 + 7) == 'G') {
-        cVar3 = *(char *)(uVar2 + 8);
+      if (*(char *)(thing_ptr + 7) == 'G') {
+        ch = *(char *)(thing_ptr + 8); /* thing->active_state */
       }
       else {
-        cVar3 = *(char *)(uVar2 + 7);
+        ch = *(char *)(thing_ptr + 7);
       }
-      if (cVar3 == '\f') {
+      if (ch == '\f') {
         return 1;
       }
-      if (*(char *)(uVar2 + 7) == '\x0e') {
-        cVar3 = *(char *)(uVar2 + 8);
+      if (*(char *)(thing_ptr + 7) == '\x0e') {
+        ch = *(char *)(thing_ptr + 8); /* thing->active_state */
       }
       else {
-        cVar3 = *(char *)(uVar2 + 7);
+        ch = *(char *)(thing_ptr + 7);
       }
-      if (cVar3 == '\r') {
+      if (ch == '\r') {
         return 1;
       }
     }
-    uVar1 = *(ushort *)((&DAT_001b0a00)[*(ushort *)(uVar2 + 100)] + 0x1f);
+    cctrl_ptr = *(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x1f); /* thing->ccontrol_idx */
   } while( true );
 }
 
 /******************************************************************************
- * Function : sub_03f98b (Ghidra: FUN_0003f98b)
- * Prototype: longlong sub_03f98b(void);
+ * Function : imptool_update_creature_and_thing_03f98b (Original VA: 0x3f98b, Ghidra: FUN_0003f98b)
+ * Prototype: longlong imptool_update_creature_and_thing_03f98b(void);
  * Address  : 0x3f98b (Size: 139 bytes)
  * Module   : imptool.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0x3b2c0, 0x3b30e, 0x3c3e7
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
+ * Callers  : 3 -> heapmgr_process_thing_entity_03b2c0, impset_process_thing_entity_03b30e, impset_process_thing_entity_03c3e7
  * Callees  : 0 -> 
  ******************************************************************************/
-longlong FUN_0003f98b(void)
+longlong imptool_update_creature_and_thing_03f98b(void)
 
 {
-  ushort uVar1;
-  uint uVar2;
-  int in_EAX;
-  uint in_EDX;
-  char cVar3;
+  ushort cctrl_ptr;
+  uint thing_ptr;
+  int gui_btn;
+  uint arg_edx;
+  char ch;
   
-  uVar1 = (&DAT_002e05b8)[*(char *)(in_EAX + 6) * 0xa84];
+  cctrl_ptr = (&g_bss_002e05b8)[*(char *)(gui_btn + 6) * 0xa84];
   do {
-    uVar2 = (&DAT_001ae9fc)[uVar1];
-    if (uVar2 <= DAT_001ae9fc) {
-      return (ulonglong)in_EDX << 0x20;
+    thing_ptr = (&g_thing_ptrs)[cctrl_ptr];
+    if (thing_ptr <= g_thing_ptrs) {
+      return (ulonglong)arg_edx << 0x20;
     }
-    if (*(short *)((&DAT_001b0a00)[*(ushort *)(uVar2 + 100)] + 0x70) == *(short *)(in_EAX + 0x1b)) {
-      if (*(char *)(uVar2 + 7) == '\x0e') {
-        cVar3 = *(char *)(uVar2 + 8);
+    if (*(short *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x70) == *(short *)(gui_btn + 0x1b)) { /* thing->ccontrol_idx, gui_btn->id_num */
+      if (*(char *)(thing_ptr + 7) == '\x0e') {
+        ch = *(char *)(thing_ptr + 8); /* thing->active_state */
       }
       else {
-        cVar3 = *(char *)(uVar2 + 7);
+        ch = *(char *)(thing_ptr + 7);
       }
-      if (cVar3 == '\v') {
+      if (ch == '\v') {
 LAB_0003fa09:
-        return CONCAT44(in_EDX,1);
+        return CONCAT44(arg_edx,1);
       }
-      if (*(char *)(uVar2 + 7) == 'G') {
-        cVar3 = *(char *)(uVar2 + 8);
+      if (*(char *)(thing_ptr + 7) == 'G') {
+        ch = *(char *)(thing_ptr + 8); /* thing->active_state */
       }
       else {
-        cVar3 = *(char *)(uVar2 + 7);
+        ch = *(char *)(thing_ptr + 7);
       }
-      if (cVar3 == '\f') goto LAB_0003fa09;
+      if (ch == '\f') goto LAB_0003fa09;
     }
-    uVar1 = *(ushort *)((&DAT_001b0a00)[*(ushort *)(uVar2 + 100)] + 0x1f);
+    cctrl_ptr = *(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x1f); /* thing->ccontrol_idx */
   } while( true );
 }
 
 /******************************************************************************
- * Function : sub_03fa16 (Ghidra: FUN_0003fa16)
- * Prototype: undefined4 sub_03fa16(void);
+ * Function : imptool_update_creature_and_thing_03fa16 (Original VA: 0x3fa16, Ghidra: FUN_0003fa16)
+ * Prototype: undefined4 imptool_update_creature_and_thing_03fa16(void);
  * Address  : 0x3fa16 (Size: 186 bytes)
  * Module   : imptool.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x3cd63
- * Callees  : 1 -> 0x3f859
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
+ * Callers  : 1 -> impset_fn_03cd63
+ * Callees  : 1 -> imptool_fn_03f859
  ******************************************************************************/
-undefined4 FUN_0003fa16(void)
+undefined4 imptool_update_creature_and_thing_03fa16(void)
 
 {
-  ushort uVar1;
-  byte bVar2;
-  int in_EAX;
-  int iVar3;
-  byte *pbVar4;
+  ushort cctrl_ptr;
+  byte cctrl_ptr_2;
+  int arg_eax;
+  int val;
+  byte *thing_ptr;
   byte *extraout_ECX;
-  uint in_EDX;
-  undefined2 uVar5;
-  uint unaff_EBX;
+  uint arg_edx;
+  undefined2 uval;
+  uint arg_ebx;
   
-  uVar5 = (undefined2)(in_EDX << 8);
-  uVar1 = (&DAT_002e05b8)[*(char *)(in_EAX + 6) * 0xa84];
+  uval = (undefined2)(arg_edx << 8);
+  cctrl_ptr = (&g_bss_002e05b8)[*(char *)(arg_eax + 6) * 0xa84];
   do {
-    pbVar4 = (&DAT_001ae9fc)[uVar1];
-    if (pbVar4 <= DAT_001ae9fc) {
+    thing_ptr = (&g_thing_ptrs)[cctrl_ptr];
+    if (thing_ptr <= g_thing_ptrs) {
       return 0;
     }
-    if (((*pbVar4 & 0x10) == 0) && ((pbVar4[1] & 2) == 0)) {
-      if (pbVar4[7] == 0xe) {
-        bVar2 = pbVar4[8];
+    if (((*thing_ptr & 0x10) == 0) && ((thing_ptr[1] & 2) == 0)) {
+      if (thing_ptr[7] == 0xe) {
+        cctrl_ptr_2 = thing_ptr[8];
       }
       else {
-        bVar2 = pbVar4[7];
+        cctrl_ptr_2 = thing_ptr[7];
       }
-      if (((bVar2 == 0x49) &&
-          (*(byte *)((&DAT_001b0a00)[*(ushort *)(pbVar4 + 100)] + 0x2e) == in_EDX)) &&
-         (*(byte *)((&DAT_001b0a00)[*(ushort *)(pbVar4 + 100)] + 0x30) == unaff_EBX)) {
-        iVar3 = FUN_0003f859(uVar5);
-        pbVar4 = extraout_ECX;
-        if (iVar3 != 0) {
+      if (((cctrl_ptr_2 == 0x49) &&
+          (*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x2e) == arg_edx)) && /* thing->ccontrol_idx */
+         (*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x30) == arg_ebx)) { /* thing->ccontrol_idx */
+        val = imptool_fn_03f859(uval);
+        thing_ptr = extraout_ECX;
+        if (val != 0) {
           return 1;
         }
       }
     }
-    uVar1 = *(ushort *)((&DAT_001b0a00)[*(ushort *)(pbVar4 + 100)] + 0x1f);
+    cctrl_ptr = *(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x1f); /* thing->ccontrol_idx */
   } while( true );
 }
 
 /******************************************************************************
- * Function : sub_03fb7f (Ghidra: FUN_0003fb7f)
- * Prototype: undefined4 sub_03fb7f(void);
+ * Function : imptool_update_creature_and_thing_03fb7f (Original VA: 0x3fb7f, Ghidra: FUN_0003fb7f)
+ * Prototype: undefined4 imptool_update_creature_and_thing_03fb7f(void);
  * Address  : 0x3fb7f (Size: 100 bytes)
  * Module   : imptool.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_0003fb7f(void)
+undefined4 imptool_update_creature_and_thing_03fb7f(void)
 
 {
-  ushort uVar1;
-  byte *pbVar2;
-  int in_EAX;
-  uint in_EDX;
-  uint unaff_EBX;
+  ushort cctrl_ptr;
+  byte *thing_ptr;
+  int arg_eax;
+  uint arg_edx;
+  uint arg_ebx;
   
-  uVar1 = (&DAT_002e05b8)[in_EAX * 0xa84];
+  cctrl_ptr = (&g_bss_002e05b8)[arg_eax * 0xa84];
   while( true ) {
-    pbVar2 = (&DAT_001ae9fc)[uVar1];
-    if (pbVar2 <= DAT_001ae9fc) {
+    thing_ptr = (&g_thing_ptrs)[cctrl_ptr];
+    if (thing_ptr <= g_thing_ptrs) {
       return 0;
     }
-    if (((((*pbVar2 & 0x10) == 0) && ((pbVar2[1] & 2) == 0)) &&
-        (*(byte *)((&DAT_001b0a00)[*(ushort *)(pbVar2 + 100)] + 0x2e) == in_EDX)) &&
-       (*(byte *)((&DAT_001b0a00)[*(ushort *)(pbVar2 + 100)] + 0x30) == unaff_EBX)) break;
-    uVar1 = *(ushort *)((&DAT_001b0a00)[*(ushort *)(pbVar2 + 100)] + 0x1f);
+    if (((((*thing_ptr & 0x10) == 0) && ((thing_ptr[1] & 2) == 0)) &&
+        (*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x2e) == arg_edx)) && /* thing->ccontrol_idx */
+       (*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x30) == arg_ebx)) break; /* thing->ccontrol_idx */
+    cctrl_ptr = *(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x1f); /* thing->ccontrol_idx */
   }
   return 1;
 }
 
 /******************************************************************************
- * Function : sub_03fbe3 (Ghidra: FUN_0003fbe3)
- * Prototype: undefined4 sub_03fbe3(void);
+ * Function : imptool_process_slabmap_tile_03fbe3 (Original VA: 0x3fbe3, Ghidra: FUN_0003fbe3)
+ * Prototype: undefined4 imptool_process_slabmap_tile_03fbe3(void);
  * Address  : 0x3fbe3 (Size: 86 bytes)
  * Module   : imptool.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Reads/modifies SlabMap[85x85] tile entry
  * Callers  : 0 -> 
- * Callees  : 2 -> 0x3adf1, 0x3f80c
+ * Callees  : 2 -> heapmgr_process_map_subtile_03adf1, imptool_fn_03f80c
  ******************************************************************************/
-undefined4 FUN_0003fbe3(void)
+undefined4 imptool_process_slabmap_tile_03fbe3(void)
 
 {
-  int iVar1;
-  int in_EDX;
-  int unaff_EBX;
+  int val;
+  int arg_edx;
+  int arg_ebx;
   
-  if ((&DAT_002d33c5)[(unaff_EBX * 0x55 + in_EDX) * 6] == '\n') {
-    iVar1 = FUN_0003f80c(unaff_EBX * 3 + 1);
-    if (iVar1 != 0) {
-      iVar1 = FUN_0003adf1();
-      if (iVar1 == 0) {
+  if ((&g_slabmap_base)[(arg_ebx * 0x55 + arg_edx) * 6] == '\n') {
+    val = imptool_fn_03f80c(arg_ebx * 3 + 1);
+    if (val != 0) {
+      val = heapmgr_process_map_subtile_03adf1();
+      if (val == 0) {
         return 1;
       }
     }
@@ -332,28 +332,28 @@ undefined4 FUN_0003fbe3(void)
 }
 
 /******************************************************************************
- * Function : sub_03fc39 (Ghidra: FUN_0003fc39)
- * Prototype: undefined4 sub_03fc39(void);
+ * Function : imptool_process_map_subtile_03fc39 (Original VA: 0x3fc39, Ghidra: FUN_0003fc39)
+ * Prototype: undefined4 imptool_process_map_subtile_03fc39(void);
  * Address  : 0x3fc39 (Size: 79 bytes)
  * Module   : imptool.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x3fcd0
- * Callees  : 1 -> 0xb3afc
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 1 -> impset_process_slabmap_tile_03fcd0
+ * Callees  : 1 -> move_fn_0b3afc
  ******************************************************************************/
-undefined4 FUN_0003fc39(void)
+undefined4 imptool_process_map_subtile_03fc39(void)
 
 {
-  byte in_AL;
-  int iVar1;
-  int in_EDX;
-  int unaff_EBX;
+  byte arg_al;
+  int val;
+  int arg_edx;
+  int arg_ebx;
   
-  iVar1 = (unaff_EBX * 0x100 + in_EDX) * 5;
-  if (((*(byte *)((int)&DAT_00279203 + iVar1) & 0x10) == 0) &&
-     ((*(uint *)((int)&DAT_00279203 + iVar1 + 1) >> 0x1c & (uint)(1 << (in_AL & 0x1f) == 0)) == 0))
+  val = (arg_ebx * 0x100 + arg_edx) * 5;
+  if (((*(byte *)((int)&g_map_subtiles + val) & 0x10) == 0) &&
+     ((*(uint *)((int)&g_map_subtiles + val + 1) >> 0x1c & (uint)(1 << (arg_al & 0x1f) == 0)) == 0))
   {
-    iVar1 = FUN_000b3afc();
-    if (iVar1 == 0) {
+    val = move_fn_0b3afc();
+    if (val == 0) {
       return 1;
     }
   }
@@ -361,67 +361,67 @@ undefined4 FUN_0003fc39(void)
 }
 
 /******************************************************************************
- * Function : sub_03fc88 (Ghidra: FUN_0003fc88)
- * Prototype: undefined4 sub_03fc88(void);
+ * Function : imptool_fn_03fc88 (Original VA: 0x3fc88, Ghidra: FUN_0003fc88)
+ * Prototype: undefined4 imptool_fn_03fc88(void);
  * Address  : 0x3fc88 (Size: 72 bytes)
  * Module   : imptool.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x3c096, 0x3fcd0
- * Callees  : 1 -> 0x3f74f
+ * Purpose  : Module imptool.cpp procedure @ 0x03fc88
+ * Callers  : 2 -> impset_update_slab_subtile_columns_03c096, impset_process_slabmap_tile_03fcd0
+ * Callees  : 1 -> impset_process_slabmap_tile_03f74f
  ******************************************************************************/
-undefined4 FUN_0003fc88(void)
+undefined4 imptool_fn_03fc88(void)
 
 {
-  int iVar1;
+  int val;
   int extraout_ECX;
   
-  iVar1 = 0;
+  val = 0;
   while( true ) {
-    if (7 < iVar1) {
+    if (7 < val) {
       return 0;
     }
-    iVar1 = FUN_0003f74f();
-    if (iVar1 != 0) break;
-    iVar1 = extraout_ECX + 2;
+    val = impset_process_slabmap_tile_03f74f();
+    if (val != 0) break;
+    val = extraout_ECX + 2;
   }
   return 1;
 }
 
 /******************************************************************************
- * Function : sub_03fed7 (Ghidra: FUN_0003fed7)
- * Prototype: undefined4 sub_03fed7(void);
+ * Function : imptool_fn_03fed7 (Original VA: 0x3fed7, Ghidra: FUN_0003fed7)
+ * Prototype: undefined4 imptool_fn_03fed7(void);
  * Address  : 0x3fed7 (Size: 343 bytes)
  * Module   : imptool.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x3cd1f, 0x3de04
- * Callees  : 6 -> 0x3ad98, 0x3f7ad, 0x3fad0, 0x827fc, 0xb28e8, 0xe69fc
+ * Purpose  : Module imptool.cpp procedure @ 0x03fed7
+ * Callers  : 2 -> impset_fn_03cd1f, impset_update_creature_control_03de04
+ * Callees  : 6 -> heapmgr_process_map_subtile_03ad98, imptool_process_slabmap_tile_03f7ad, impset_update_creature_and_thing_03fad0, creature_fn_0827fc, move_process_map_subtile_0b28e8, bflib_system_io_fn_0e69fc
  ******************************************************************************/
-undefined4 FUN_0003fed7(void)
+undefined4 imptool_fn_03fed7(void)
 
 {
-  byte bVar1;
-  short sVar2;
-  undefined2 uVar3;
-  int in_EAX;
-  int iVar4;
-  uint uVar5;
-  undefined4 *in_ECX;
+  byte flag;
+  short short_val;
+  undefined2 uval;
+  int arg_eax;
+  int val;
+  uint uval_2;
+  undefined4 *arg_ecx;
   int extraout_ECX;
   undefined4 extraout_ECX_00;
-  uint in_EDX;
-  uint uVar6;
-  int *unaff_EBX;
-  int iVar7;
-  undefined8 uVar8;
+  uint arg_edx;
+  uint uval_3;
+  int *arg_ebx;
+  int val_2;
+  undefined8 uval_4;
   int local_20;
   int local_14;
   
-  bVar1 = *(byte *)(in_EAX + 0xe);
-  uVar6 = (in_EDX & 0xffff) % 0x100;
-  FUN_000e69fc();
-  uVar8 = FUN_000e69fc();
-  if ((int)uVar8 < (int)((ulonglong)uVar8 >> 0x20)) {
-    if (uVar6 == bVar1 || (int)(uVar6 - bVar1) < 0) {
+  flag = *(byte *)(arg_eax + 0xe);
+  uval_3 = (arg_edx & 0xffff) % 0x100;
+  bflib_system_io_fn_0e69fc();
+  uval_4 = bflib_system_io_fn_0e69fc();
+  if ((int)uval_4 < (int)((ulonglong)uval_4 >> 0x20)) {
+    if (uval_3 == flag || (int)(uval_3 - flag) < 0) {
       local_14 = 1;
     }
     else {
@@ -439,19 +439,19 @@ undefined4 FUN_0003fed7(void)
     if (3 < local_20) {
       return 0;
     }
-    iVar7 = uVar6 + *(char *)((int)&DAT_0018b67b + local_14 * 2 + 3) * 2;
-    iVar4 = FUN_0003f7ad();
-    if (iVar4 != 0) {
-      iVar4 = FUN_0003ad98();
-      if (iVar4 == 0) {
-        iVar4 = FUN_0003fad0();
-        if (iVar4 == 0) {
-          sVar2 = (short)iVar7 * 0x100 + 0x80;
-          uVar3 = FUN_000b28e8(sVar2,0);
-          uVar5 = FUN_000827fc(sVar2,uVar3);
-          if ((uVar5 & 0xff) != 0xffffffff) {
-            *unaff_EBX = iVar7;
-            *in_ECX = extraout_ECX_00;
+    val_2 = uval_3 + *(char *)((int)&g_data_0018b67b + local_14 * 2 + 3) * 2;
+    val = imptool_process_slabmap_tile_03f7ad();
+    if (val != 0) {
+      val = heapmgr_process_map_subtile_03ad98();
+      if (val == 0) {
+        val = impset_update_creature_and_thing_03fad0();
+        if (val == 0) {
+          short_val = (short)val_2 * 0x100 + 0x80;
+          uval = move_process_map_subtile_0b28e8(short_val,0);
+          uval_2 = creature_fn_0827fc(short_val,uval);
+          if ((uval_2 & 0xff) != 0xffffffff) {
+            *arg_ebx = val_2;
+            *arg_ecx = extraout_ECX_00;
             return 1;
           }
         }
@@ -463,149 +463,146 @@ undefined4 FUN_0003fed7(void)
 }
 
 /******************************************************************************
- * Function : sub_04002e (Ghidra: FUN_0004002e)
- * Prototype: uint sub_04002e(void);
+ * Function : imptool_update_player_dungeon_04002e (Original VA: 0x4002e, Ghidra: FUN_0004002e)
+ * Prototype: uint imptool_update_player_dungeon_04002e(void);
  * Address  : 0x4002e (Size: 172 bytes)
  * Module   : imptool.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x14a9f
+ * Purpose  : Accesses per-player Dungeon state (stride 0x1508)
+ * Callers  : 1 -> build_fn_014a9f
  * Callees  : 0 -> 
  ******************************************************************************/
-uint FUN_0004002e(void)
+uint imptool_update_player_dungeon_04002e(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  uint uVar2;
-  undefined2 *puVar3;
-  uint uVar4;
-  undefined1 in_DL;
-  int unaff_EBX;
-  undefined2 *puVar5;
+  int arg_eax;
+  int dungeon_off;
+  uint uval;
+  undefined2 *loop_i;
+  uint uval_2;
+  undefined1 arg_dl;
+  int arg_ebx;
+  undefined2 *dungeon_off_2;
   
-  iVar1 = in_EAX * 0x1508;
-  uVar2 = 0;
-  puVar5 = &DAT_002e0589 + in_EAX * 0xa84;
-  for (puVar3 = puVar5;
-      ((int)uVar2 < (int)(uint)*(ushort *)(&DAT_002e1080 + iVar1) &&
-      (*(char *)((int)puVar3 + 0xb0b) != '\0')); puVar3 = (undefined2 *)((int)puVar3 + 3)) {
-    uVar2 = uVar2 + 1;
+  dungeon_off = arg_eax * 0x1508;
+  uval = 0;
+  dungeon_off_2 = &g_dungeons + arg_eax * 0xa84;
+  for (loop_i = dungeon_off_2;
+      ((int)uval < (int)(uint)*(ushort *)(&g_bss_002e1080 + dungeon_off) &&
+      (*(char *)((int)loop_i + 0xb0b) != '\0')); loop_i = (undefined2 *)((int)loop_i + 3)) {
+    uval = uval + 1;
   }
-  uVar4 = (uint)*(ushort *)(&DAT_002e1080 + iVar1);
-  if (uVar2 == uVar4) {
-    if (299 < uVar4) {
-      return uVar2 ^ uVar4;
+  uval_2 = (uint)*(ushort *)(&g_bss_002e1080 + dungeon_off);
+  if (uval == uval_2) {
+    if (299 < uval_2) {
+      return uval ^ uval_2;
     }
-    *(short *)(&DAT_002e1080 + iVar1) = *(short *)(&DAT_002e1080 + iVar1) + 1;
+    *(short *)(&g_bss_002e1080 + dungeon_off) = *(short *)(&g_bss_002e1080 + dungeon_off) + 1;
   }
-  *(undefined1 *)((int)puVar5 + uVar2 * 3 + 0xb0b) = in_DL;
-  *(short *)((int)puVar5 + uVar2 * 3 + 0xb0c) =
-       *(short *)(&DAT_0019033b + unaff_EBX % 0x100) * 3 + 1 +
-       (*(short *)(&DAT_0019033b +
-                  ((int)((unaff_EBX + (unaff_EBX >> 0x1f) * -0x100) -
-                        (uint)((unaff_EBX >> 0x1f) << 7 < 0)) >> 8)) * 3 + 1) * 0x100;
-  *(int *)(&DAT_002e1418 + iVar1) = *(int *)(&DAT_002e1418 + iVar1) + 1;
+  *(undefined1 *)((int)dungeon_off_2 + uval * 3 + 0xb0b) = arg_dl;
+  *(short *)((int)dungeon_off_2 + uval * 3 + 0xb0c) =
+       *(short *)(&g_subtile_to_slab_lut + arg_ebx % 0x100) * 3 + 1 +
+       (*(short *)(&g_subtile_to_slab_lut +
+                  ((int)((arg_ebx + (arg_ebx >> 0x1f) * -0x100) -
+                        (uint)((arg_ebx >> 0x1f) << 7 < 0)) >> 8)) * 3 + 1) * 0x100;
+  *(int *)(&g_bss_002e1418 + dungeon_off) = *(int *)(&g_bss_002e1418 + dungeon_off) + 1;
   return 1;
 }
 
 /******************************************************************************
- * Function : dk_stack_pos_0400da (Ghidra: FUN_000400da)
- * Prototype: undefined4 dk_stack_pos_0400da(void);
+ * Function : imptool_stack_pos_0400da (Original VA: 0x400da, Ghidra: FUN_000400da)
+ * Prototype: undefined4 imptool_stack_pos_0400da(void);
  * Address  : 0x400da (Size: 134 bytes)
  * Module   : imptool.cpp [direct_file_string_xref]
- * OrigLine : imptool.cpp:496 ("INVALID STACK POS")
- * Naming   : String 'INVALID STACK POS'
- * Callers  : 4 -> 0x1495c, 0x14e9f, 0x4a0d6, 0xda7bc
- * Callees  : 1 -> 0xddaf0
- * Strings  :
- *   - 0x164dee: "imptool.cpp"
- *   - 0x164ddc: "INVALID STACK POS"
+ * OrigLine : imptool.cpp lines 496
+ * Purpose  : String 'INVALID STACK POS'
+ * Callers  : 4 -> build_attempt_tag_area_outside_01495c, cdtest_update_player_view_state_014e9f, instance_update_creature_control_04a0d6, slab_process_slabmap_tile_0da7bc
+ * Callees  : 1 -> LbErrorLog
  ******************************************************************************/
-undefined4 FUN_000400da(void)
+undefined4 imptool_stack_pos_0400da(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  int in_EDX;
-  int iVar2;
-  int iVar3;
+  int arg_eax;
+  int dungeon_off;
+  int arg_edx;
+  int loop_i;
+  int val;
   
-  iVar1 = in_EAX * 0x1508;
-  if ((-1 < in_EDX) && (in_EDX < (int)(uint)*(ushort *)(&DAT_002e1080 + iVar1))) {
-    *(undefined1 *)((int)&DAT_002e0589 + in_EDX * 3 + 0xb0b + iVar1) = 0;
-    *(undefined2 *)((int)&DAT_002e0589 + in_EDX * 3 + 0xb0c + iVar1) = 0;
-    iVar3 = *(ushort *)(&DAT_002e1080 + iVar1) - 1;
-    *(int *)(&DAT_002e1418 + iVar1) = *(int *)(&DAT_002e1418 + iVar1) + -1;
-    if (in_EDX == iVar3) {
-      for (iVar2 = (int)&DAT_002e0589 + iVar3 * 3 + iVar1;
-          (-1 < iVar3 && (*(char *)(iVar2 + 0xb0b) == '\0')); iVar2 = iVar2 + -3) {
-        iVar3 = iVar3 + -1;
+  dungeon_off = arg_eax * 0x1508;
+  if ((-1 < arg_edx) && (arg_edx < (int)(uint)*(ushort *)(&g_bss_002e1080 + dungeon_off))) {
+    *(undefined1 *)((int)&g_dungeons + arg_edx * 3 + 0xb0b + dungeon_off) = 0;
+    *(undefined2 *)((int)&g_dungeons + arg_edx * 3 + 0xb0c + dungeon_off) = 0;
+    val = *(ushort *)(&g_bss_002e1080 + dungeon_off) - 1;
+    *(int *)(&g_bss_002e1418 + dungeon_off) = *(int *)(&g_bss_002e1418 + dungeon_off) + -1;
+    if (arg_edx == val) {
+      for (loop_i = (int)&g_dungeons + val * 3 + dungeon_off;
+          (-1 < val && (*(char *)(loop_i + 0xb0b) == '\0')); loop_i = loop_i + -3) {
+        val = val + -1;
       }
-      *(short *)(&DAT_002e1080 + iVar1) = (short)iVar3 + 1;
+      *(short *)(&g_bss_002e1080 + dungeon_off) = (short)val + 1;
     }
     return 1;
   }
-  FUN_000ddaf0(); /* LbErrorLog("imptool.cpp", line 496, "INVALID STACK POS") */
+  LbErrorLog(); /* LbErrorLog("imptool.cpp", line 496, "INVALID STACK POS") */
   return 0;
 }
 
 /******************************************************************************
- * Function : sub_040160 (Ghidra: FUN_00040160)
- * Prototype: int sub_040160(void);
+ * Function : imptool_update_player_dungeon_040160 (Original VA: 0x40160, Ghidra: FUN_00040160)
+ * Prototype: int imptool_update_player_dungeon_040160(void);
  * Address  : 0x40160 (Size: 74 bytes)
  * Module   : imptool.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 4 -> 0x3b0a0, 0x3d633, 0x3d77d, 0x3e493
+ * Purpose  : Accesses per-player Dungeon state (stride 0x1508)
+ * Callers  : 4 -> impset_process_map_subtile_03b0a0, impset_update_creature_control_03d633, impset_update_creature_control_03d77d, impset_stack_type_03e493
  * Callees  : 0 -> 
  ******************************************************************************/
-int FUN_00040160(void)
+int imptool_update_player_dungeon_040160(void)
 
 {
-  int in_EAX;
-  char *pcVar1;
-  uint in_EDX;
-  int iVar2;
+  int arg_eax;
+  char *dungeon_off;
+  uint arg_edx;
+  int val;
   
-  iVar2 = 0;
-  pcVar1 = &DAT_002e1094 + in_EAX * 0x1508;
+  val = 0;
+  dungeon_off = &g_bss_002e1094 + arg_eax * 0x1508;
   while( true ) {
-    if ((int)(uint)*(ushort *)(&DAT_002e1080 + in_EAX * 0x1508) <= iVar2) {
+    if ((int)(uint)*(ushort *)(&g_bss_002e1080 + arg_eax * 0x1508) <= val) {
       return -1;
     }
-    if ((*(ushort *)(pcVar1 + 1) == in_EDX) && (*pcVar1 != '\x03')) break;
-    pcVar1 = pcVar1 + 3;
-    iVar2 = iVar2 + 1;
+    if ((*(ushort *)(dungeon_off + 1) == arg_edx) && (*dungeon_off != '\x03')) break;
+    dungeon_off = dungeon_off + 3;
+    val = val + 1;
   }
-  return iVar2;
+  return val;
 }
 
 /******************************************************************************
- * Function : sub_0401aa (Ghidra: FUN_000401aa)
- * Prototype: int sub_0401aa(void);
+ * Function : imptool_update_player_dungeon_0401aa (Original VA: 0x401aa, Ghidra: FUN_000401aa)
+ * Prototype: int imptool_update_player_dungeon_0401aa(void);
  * Address  : 0x401aa (Size: 66 bytes)
  * Module   : imptool.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 12 -> 0x14614, 0x1495c, 0x14e9f, 0x198cd, 0x1bc3e, 0x1d8a1, 0x1dbbc, 0x1e5de, 0x1f8d4, 0x1fa89 ...
+ * Purpose  : Accesses per-player Dungeon state (stride 0x1508)
+ * Callers  : 12 -> build_attempt_tag_area_outside_014614, build_attempt_tag_area_outside_01495c, cdtest_update_player_view_state_014e9f, compevnt_process_slabmap_tile_0198cd, comptask_process_map_subtile_01bc3e, comptask_process_slabmap_tile_01d8a1, comptool_fn_01dbbc, comptool_update_slab_subtile_columns_01e5de ...
  * Callees  : 0 -> 
  ******************************************************************************/
-int FUN_000401aa(void)
+int imptool_update_player_dungeon_0401aa(void)
 
 {
-  int in_EAX;
-  undefined *puVar1;
-  uint in_EDX;
-  int iVar2;
+  int arg_eax;
+  undefined *dungeon_off;
+  uint arg_edx;
+  int val;
   
-  iVar2 = 0;
-  puVar1 = &DAT_002e1094 + in_EAX * 0x1508;
+  val = 0;
+  dungeon_off = &g_bss_002e1094 + arg_eax * 0x1508;
   while( true ) {
-    if ((int)(uint)*(ushort *)(&DAT_002e1080 + in_EAX * 0x1508) <= iVar2) {
+    if ((int)(uint)*(ushort *)(&g_bss_002e1080 + arg_eax * 0x1508) <= val) {
       return -1;
     }
-    if (*(ushort *)(puVar1 + 1) == in_EDX) break;
-    puVar1 = puVar1 + 3;
-    iVar2 = iVar2 + 1;
+    if (*(ushort *)(dungeon_off + 1) == arg_edx) break;
+    dungeon_off = dungeon_off + 3;
+    val = val + 1;
   }
-  return iVar2;
+  return val;
 }
 

@@ -1,7 +1,7 @@
 /**
- * Dungeon Keeper (KEEPER.EXE) - Reconstructed Source Module: build.cpp
+ * Dungeon Keeper (KEEPER.EXE) - Reconstructed & Semantically Named Module: build.cpp
  * Binary Subject: /home/merlin/Dungeon Keeper/re/KEEPER.elf
- * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 (x86:LE:32:default)
+ * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 + DK Semantic Analyzer
  * Functions in this translation unit: 10
  */
 
@@ -11,424 +11,418 @@
 #include "../include/dk_functions.h"
 
 /******************************************************************************
- * Function : sub_01458c (Ghidra: FUN_0001458c)
- * Prototype: int sub_01458c(void);
+ * Function : build_update_player_view_state_01458c (Original VA: 0x1458c, Ghidra: FUN_0001458c)
+ * Prototype: int build_update_player_view_state_01458c(void);
  * Address  : 0x1458c (Size: 70 bytes)
  * Module   : build.cpp [callgraph_affinity_to_following_unit]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x48c77, 0x5f6c5
- * Callees  : 2 -> 0x14614, 0x6e9ab
+ * Purpose  : Accesses per-player PlayerInfo state (stride 0x4ef)
+ * Callers  : 2 -> input_game_action_048c77, process_players_dungeon_command_packet
+ * Callees  : 2 -> build_attempt_tag_area_outside_014614, sound_non_emitter_has_been_06e9ab
  ******************************************************************************/
-int FUN_0001458c(void)
+int build_update_player_view_state_01458c(void)
 
 {
-  int iVar1;
+  int val;
   char extraout_CL;
   int extraout_EDX;
   
-  iVar1 = FUN_00014614();
-  if ((iVar1 != 0) && ((int)extraout_CL == (uint)(byte)(&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef]))
+  val = build_attempt_tag_area_outside_014614();
+  if ((val != 0) && ((int)extraout_CL == (uint)(byte)(&g_player_id_number)[g_my_player_word._3_1_ * 0x4ef]))
   {
-    FUN_0006e9ab();
-    iVar1 = extraout_EDX;
+    sound_non_emitter_has_been_06e9ab();
+    val = extraout_EDX;
   }
-  return iVar1;
+  return val;
 }
 
 /******************************************************************************
- * Function : sub_0145d2 (Ghidra: FUN_000145d2)
- * Prototype: void sub_0145d2(void);
+ * Function : build_update_player_view_state_0145d2 (Original VA: 0x145d2, Ghidra: FUN_000145d2)
+ * Prototype: void build_update_player_view_state_0145d2(void);
  * Address  : 0x145d2 (Size: 66 bytes)
  * Module   : build.cpp [callgraph_affinity_to_following_unit]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x5f6c5
- * Callees  : 2 -> 0x1495c, 0x6e9ab
+ * Purpose  : Accesses per-player PlayerInfo state (stride 0x4ef)
+ * Callers  : 1 -> process_players_dungeon_command_packet
+ * Callees  : 2 -> build_attempt_tag_area_outside_01495c, sound_non_emitter_has_been_06e9ab
  ******************************************************************************/
-void FUN_000145d2(void)
+void build_update_player_view_state_0145d2(void)
 
 {
-  int iVar1;
+  int val;
   char extraout_CL;
   
-  iVar1 = FUN_0001495c();
-  if ((iVar1 != 0) && ((int)extraout_CL == (uint)(byte)(&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef]))
+  val = build_attempt_tag_area_outside_01495c();
+  if ((val != 0) && ((int)extraout_CL == (uint)(byte)(&g_player_id_number)[g_my_player_word._3_1_ * 0x4ef]))
   {
-    FUN_0006e9ab();
+    sound_non_emitter_has_been_06e9ab();
   }
   return;
 }
 
 /******************************************************************************
- * Function : dk_attempt_tag_area_outside_014614 (Ghidra: FUN_00014614)
- * Prototype: undefined1 dk_attempt_tag_area_outside_014614(void);
+ * Function : build_attempt_tag_area_outside_014614 (Original VA: 0x14614, Ghidra: FUN_00014614)
+ * Prototype: undefined1 build_attempt_tag_area_outside_014614(void);
  * Address  : 0x14614 (Size: 840 bytes)
  * Module   : build.cpp [direct_file_string_xref]
- * OrigLine : build.cpp:142 ("Attempt to tag area outside of map")
- * Naming   : String 'Attempt to tag area outside of map'
- * Callers  : 1 -> 0x1458c
- * Callees  : 6 -> 0x14a9f, 0x14ad2, 0x14ae8, 0x401aa, 0x63122, 0xddaf0
- * Strings  :
- *   - 0x160367: "build.cpp"
- *   - 0x160344: "Attempt to tag area outside of map"
+ * OrigLine : build.cpp lines 142
+ * Purpose  : String 'Attempt to tag area outside of map'
+ * Callers  : 1 -> build_update_player_view_state_01458c
+ * Callees  : 6 -> build_fn_014a9f, build_fn_014ad2, build_fn_014ae8, imptool_update_player_dungeon_0401aa, panmap_door_flagged_position_063122, LbErrorLog
  ******************************************************************************/
-undefined1 FUN_00014614(void)
+undefined1 build_attempt_tag_area_outside_014614(void)
 
 {
-  int iVar1;
-  byte bVar2;
-  int iVar3;
-  int iVar4;
-  int in_EAX;
-  int iVar5;
-  int iVar6;
-  int iVar7;
+  int val;
+  byte flag;
+  int val_2;
+  int val_3;
+  int arg_eax;
+  int val_4;
+  int val_5;
+  int val_6;
   byte extraout_CH;
-  byte bVar10;
+  byte slab_coord;
   undefined4 extraout_ECX;
   undefined4 extraout_ECX_00;
   undefined4 extraout_ECX_01;
-  byte bVar9;
-  undefined4 uVar8;
-  int in_EDX;
+  byte flag_2;
+  undefined4 uval;
+  int arg_edx;
   int local_4c;
   int local_30;
   int local_2c;
   undefined1 local_18;
   
-  iVar5 = in_EAX / 3;
-  iVar3 = iVar5 * 3;
-  local_4c = (in_EDX / 3) * 3;
-  iVar1 = iVar3 + 1;
-  iVar7 = local_4c + 1;
+  val_4 = arg_eax / 3;
+  val_2 = val_4 * 3;
+  local_4c = (arg_edx / 3) * 3;
+  val = val_2 + 1;
+  val_6 = local_4c + 1;
   local_18 = 0;
-  if ((((iVar3 < 0) || (0xfe < iVar3)) || (local_4c < 0)) || (0xfe < local_4c)) {
-    FUN_000ddaf0(); /* LbErrorLog("build.cpp", line 142, "Attempt to tag area outside of map") */
+  if ((((val_2 < 0) || (0xfe < val_2)) || (local_4c < 0)) || (0xfe < local_4c)) {
+    LbErrorLog(); /* LbErrorLog("build.cpp", line 142, "Attempt to tag area outside of map") */
   }
   else {
-    iVar4 = (iVar1 + iVar7 * 0x100) * 5;
-    bVar9 = *(byte *)((int)&DAT_00279203 + iVar4);
-    bVar10 = (&DAT_002d33ca)[((&DAT_0019033b)[iVar1] + (&DAT_0019033b)[iVar7] * 0x55) * 6];
-    bVar2 = (&DAT_002d33c5)[(iVar1 / 3 + (iVar7 / 3) * 0x55) * 6];
-    iVar6 = FUN_000401aa();
-    if ((((iVar6 == -1) &&
-         (((&DAT_001921d4)[(uint)bVar2 * 0x16] != '\0' ||
-          ((*(uint *)((int)&DAT_00279203 + iVar4 + 1) >> 0x1c & 1 << (extraout_CH & 0x1f)) == 0))))
-        && (((bVar9 & 2) == 0 || ((uint)(bVar10 & 7) != (int)(char)extraout_CH)))) &&
-       ((((bVar9 & 0x20) == 0 || ((uint)(bVar10 & 7) == (int)(char)extraout_CH)) ||
-        ((*(uint *)((int)&DAT_00279203 + (iVar7 * 0x100 + iVar1) * 5 + 1) >> 0x1c &
+    val_3 = (val + val_6 * 0x100) * 5;
+    flag_2 = *(byte *)((int)&g_map_subtiles + val_3);
+    slab_coord = (&g_slabmap)[((&g_subtile_to_slab_lut)[val] + (&g_subtile_to_slab_lut)[val_6] * 0x55) * 6];
+    flag = (&g_slabmap_base)[(val / 3 + (val_6 / 3) * 0x55) * 6];
+    val_5 = imptool_update_player_dungeon_0401aa();
+    if ((((val_5 == -1) &&
+         (((&g_data_001921d4)[(uint)flag * 0x16] != '\0' ||
+          ((*(uint *)((int)&g_map_subtiles + val_3 + 1) >> 0x1c & 1 << (extraout_CH & 0x1f)) == 0))))
+        && (((flag_2 & 2) == 0 || ((uint)(slab_coord & 7) != (int)(char)extraout_CH)))) &&
+       ((((flag_2 & 0x20) == 0 || ((uint)(slab_coord & 7) == (int)(char)extraout_CH)) ||
+        ((*(uint *)((int)&g_map_subtiles + (val_6 * 0x100 + val) * 5 + 1) >> 0x1c &
          1 << (extraout_CH & 0x1f)) == 0)))) {
-      if ((bVar9 & 1) == 0) {
-        if (((bVar9 & 8) == 0) &&
-           (((bVar9 & 0x20) == 0 ||
-            ((uint)((&DAT_002d33ca)[((&DAT_0019033b)[iVar1] + (&DAT_0019033b)[iVar7] * 0x55) * 6] &
+      if ((flag_2 & 1) == 0) {
+        if (((flag_2 & 8) == 0) &&
+           (((flag_2 & 0x20) == 0 ||
+            ((uint)((&g_slabmap)[((&g_subtile_to_slab_lut)[val] + (&g_subtile_to_slab_lut)[val_6] * 0x55) * 6] &
                    7) != (int)(char)extraout_CH)))) {
-          FUN_00014ae8();
-          uVar8 = extraout_ECX_01;
+          build_fn_014ae8();
+          uval = extraout_ECX_01;
         }
         else {
-          FUN_00014a9f();
-          uVar8 = extraout_ECX_00;
+          build_fn_014a9f();
+          uval = extraout_ECX_00;
         }
       }
       else {
-        FUN_00014ad2();
-        uVar8 = extraout_ECX;
+        build_fn_014ad2();
+        uval = extraout_ECX;
       }
       local_18 = 1;
-      if ((int)(char)((uint)uVar8 >> 8) == (uint)(byte)(&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef])
+      if ((int)(char)((uint)uval >> 8) == (uint)(byte)(&g_player_id_number)[g_my_player_word._3_1_ * 0x4ef])
       {
-        iVar1 = local_4c + 3;
-        local_30 = (in_EDX / 3) * 0xc;
-        for (; local_4c < iVar1; local_4c = local_4c + 1) {
-          iVar7 = local_4c * 0x500 + iVar5 * 0xf;
-          for (local_2c = iVar5 * 0xc; local_2c < (iVar3 + 3) * 4; local_2c = local_2c + 4) {
-            bVar9 = *(byte *)((int)&DAT_00279203 + iVar7);
-            if ((bVar9 & 0x84) == 0) {
-              bVar10 = (byte)((uint)uVar8 >> 8);
-              if ((bVar9 & 2) != 0) {
-                if ((uint)((&DAT_002d33ca)
-                           [(*(int *)((int)&DAT_0019033b + local_2c) +
-                            *(int *)((int)&DAT_0019033b + local_30) * 0x55) * 6] & 7) ==
-                    (int)(char)bVar10) goto LAB_00014886;
+        val = local_4c + 3;
+        local_30 = (arg_edx / 3) * 0xc;
+        for (; local_4c < val; local_4c = local_4c + 1) {
+          val_6 = local_4c * 0x500 + val_4 * 0xf;
+          for (local_2c = val_4 * 0xc; local_2c < (val_2 + 3) * 4; local_2c = local_2c + 4) {
+            flag_2 = *(byte *)((int)&g_map_subtiles + val_6);
+            if ((flag_2 & 0x84) == 0) {
+              slab_coord = (byte)((uint)uval >> 8);
+              if ((flag_2 & 2) != 0) {
+                if ((uint)((&g_slabmap)
+                           [(*(int *)((int)&g_subtile_to_slab_lut + local_2c) +
+                            *(int *)((int)&g_subtile_to_slab_lut + local_30) * 0x55) * 6] & 7) ==
+                    (int)(char)slab_coord) goto LAB_00014886;
               }
-              if (((bVar9 & 0x20) != 0) &&
-                 ((uint)((&DAT_002d33ca)
-                         [(*(int *)((int)&DAT_0019033b + local_2c) +
-                          *(int *)((int)&DAT_0019033b + local_30) * 0x55) * 6] & 7) !=
-                  (int)(char)bVar10)) {
-                uVar8 = CONCAT31((int3)((uint)uVar8 >> 8),bVar10);
-                if ((*(uint *)((int)&DAT_00279203 + iVar7 + 1) >> 0x1c & 1 << (bVar10 & 0x1f)) != 0)
+              if (((flag_2 & 0x20) != 0) &&
+                 ((uint)((&g_slabmap)
+                         [(*(int *)((int)&g_subtile_to_slab_lut + local_2c) +
+                          *(int *)((int)&g_subtile_to_slab_lut + local_30) * 0x55) * 6] & 7) !=
+                  (int)(char)slab_coord)) {
+                uval = CONCAT31((int3)((uint)uval >> 8),slab_coord);
+                if ((*(uint *)((int)&g_map_subtiles + val_6 + 1) >> 0x1c & 1 << (slab_coord & 0x1f)) != 0)
                 goto LAB_00014886;
               }
-              if ((bVar9 & 1) == 0) {
-                if ((bVar9 & 0x28) == 0) {
-                  bVar9 = (byte)((uint)uVar8 >> 8);
-                  uVar8 = CONCAT31((int3)((uint)uVar8 >> 8),bVar9);
-                  if ((*(uint *)((int)&DAT_00279203 + iVar7 + 1) >> 0x1c & 1 << (bVar9 & 0x1f)) != 0
+              if ((flag_2 & 1) == 0) {
+                if ((flag_2 & 0x28) == 0) {
+                  flag_2 = (byte)((uint)uval >> 8);
+                  uval = CONCAT31((int3)((uint)uval >> 8),flag_2);
+                  if ((*(uint *)((int)&g_map_subtiles + val_6 + 1) >> 0x1c & 1 << (flag_2 & 0x1f)) != 0
                      ) goto LAB_00014886;
                 }
-                *(byte *)((int)&DAT_00279203 + iVar7) = *(byte *)((int)&DAT_00279203 + iVar7) | 4;
+                *(byte *)((int)&g_map_subtiles + val_6) = *(byte *)((int)&g_map_subtiles + val_6) | 4;
               }
               else {
-                *(byte *)((int)&DAT_00279203 + iVar7) = *(byte *)((int)&DAT_00279203 + iVar7) | 0x80
+                *(byte *)((int)&g_map_subtiles + val_6) = *(byte *)((int)&g_map_subtiles + val_6) | 0x80
                 ;
               }
             }
 LAB_00014886:
-            iVar7 = iVar7 + 5;
+            val_6 = val_6 + 5;
           }
           local_30 = local_30 + 4;
         }
       }
-      FUN_00063122();
+      panmap_door_flagged_position_063122();
     }
   }
   return local_18;
 }
 
 /******************************************************************************
- * Function : dk_attempt_tag_area_outside_01495c (Ghidra: FUN_0001495c)
- * Prototype: int dk_attempt_tag_area_outside_01495c(void);
+ * Function : build_attempt_tag_area_outside_01495c (Original VA: 0x1495c, Ghidra: FUN_0001495c)
+ * Prototype: int build_attempt_tag_area_outside_01495c(void);
  * Address  : 0x1495c (Size: 268 bytes)
  * Module   : build.cpp [direct_file_string_xref]
- * OrigLine : build.cpp:194 ("Attempt to tag area outside of map")
- * Naming   : String 'Attempt to tag area outside of map'
- * Callers  : 4 -> 0x145d2, 0x14afe, 0x14d45, 0x23de2
- * Callees  : 4 -> 0x400da, 0x401aa, 0x63122, 0xddaf0
- * Strings  :
- *   - 0x160394: "build.cpp"
- *   - 0x160371: "Attempt to tag area outside of map"
+ * OrigLine : build.cpp lines 194
+ * Purpose  : String 'Attempt to tag area outside of map'
+ * Callers  : 4 -> build_update_player_view_state_0145d2, build_process_map_subtile_014afe, build_process_map_subtile_014d45, dungeon_update_slab_subtile_columns_023de2
+ * Callees  : 4 -> imptool_stack_pos_0400da, imptool_update_player_dungeon_0401aa, panmap_door_flagged_position_063122, LbErrorLog
  ******************************************************************************/
-int FUN_0001495c(void)
+int build_attempt_tag_area_outside_01495c(void)
 
 {
-  int iVar1;
-  int in_EAX;
-  int iVar2;
-  int iVar3;
+  int val;
+  int arg_eax;
+  int val_2;
+  int loop_i;
   char extraout_CL;
   char extraout_CL_00;
-  char cVar4;
-  int in_EDX;
-  int iVar5;
+  char ch;
+  int arg_edx;
+  int val_3;
   int local_14;
   
-  iVar1 = (in_EAX / 3) * 3;
+  val = (arg_eax / 3) * 3;
   local_14 = 0;
-  iVar5 = (in_EDX / 3) * 3;
-  if ((((iVar1 < 0) || (0xfe < iVar1)) || (iVar5 < 0)) || (0xfe < iVar5)) {
-    FUN_000ddaf0(); /* LbErrorLog("build.cpp", line 194, "Attempt to tag area outside of map") */
+  val_3 = (arg_edx / 3) * 3;
+  if ((((val < 0) || (0xfe < val)) || (val_3 < 0)) || (0xfe < val_3)) {
+    LbErrorLog(); /* LbErrorLog("build.cpp", line 194, "Attempt to tag area outside of map") */
   }
   else {
-    iVar2 = FUN_000401aa();
-    cVar4 = extraout_CL;
-    if (iVar2 != -1) {
-      FUN_000400da();
-      cVar4 = extraout_CL_00;
+    val_2 = imptool_update_player_dungeon_0401aa();
+    ch = extraout_CL;
+    if (val_2 != -1) {
+      imptool_stack_pos_0400da();
+      ch = extraout_CL_00;
     }
-    if ((int)cVar4 == (uint)(byte)(&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef]) {
-      iVar2 = iVar5 + 3;
-      for (; iVar5 < iVar2; iVar5 = iVar5 + 1) {
-        for (iVar3 = (in_EAX / 3) * 0xf + iVar5 * 0x500; iVar3 < iVar5 * 0x500 + (iVar1 + 3) * 5;
-            iVar3 = iVar3 + 5) {
-          if ((*(byte *)((int)&DAT_00279203 + iVar3) & 0x84) != 0) {
+    if ((int)ch == (uint)(byte)(&g_player_id_number)[g_my_player_word._3_1_ * 0x4ef]) {
+      val_2 = val_3 + 3;
+      for (; val_3 < val_2; val_3 = val_3 + 1) {
+        for (loop_i = (arg_eax / 3) * 0xf + val_3 * 0x500; loop_i < val_3 * 0x500 + (val + 3) * 5;
+            loop_i = loop_i + 5) {
+          if ((*(byte *)((int)&g_map_subtiles + loop_i) & 0x84) != 0) {
             local_14 = local_14 + 1;
           }
-          *(byte *)((int)&DAT_00279203 + iVar3) = *(byte *)((int)&DAT_00279203 + iVar3) & 0x7b;
+          *(byte *)((int)&g_map_subtiles + loop_i) = *(byte *)((int)&g_map_subtiles + loop_i) & 0x7b;
         }
       }
     }
-    FUN_00063122();
+    panmap_door_flagged_position_063122();
   }
   return local_14;
 }
 
 /******************************************************************************
- * Function : sub_014a68 (Ghidra: FUN_00014a68)
- * Prototype: void sub_014a68(void);
+ * Function : build_fn_014a68 (Original VA: 0x14a68, Ghidra: FUN_00014a68)
+ * Prototype: void build_fn_014a68(void);
  * Address  : 0x14a68 (Size: 55 bytes)
  * Module   : build.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0xd72f8, 0xd7688
- * Callees  : 3 -> 0x7c590, 0xaca68, 0xd167c
+ * Purpose  : Module build.cpp procedure @ 0x014a68
+ * Callers  : 2 -> slab_update_slab_subtile_columns_0d72f8, slab_attempt_place_animating_slab_0d7688
+ * Callees  : 3 -> ceiling_process_map_subtile_07c590, light_fn_0aca68, routes_fn_0d167c
  ******************************************************************************/
-void FUN_00014a68(void)
+void build_fn_014a68(void)
 
 {
-  FUN_000d167c();
-  FUN_0007c590();
-  FUN_000aca68();
+  routes_fn_0d167c();
+  ceiling_process_map_subtile_07c590();
+  light_fn_0aca68();
   return;
 }
 
 /******************************************************************************
- * Function : sub_014a9f (Ghidra: FUN_00014a9f)
- * Prototype: void sub_014a9f(void);
+ * Function : build_fn_014a9f (Original VA: 0x14a9f, Ghidra: FUN_00014a9f)
+ * Prototype: void build_fn_014a9f(void);
  * Address  : 0x14a9f (Size: 27 bytes)
  * Module   : build.cpp [callgraph_affinity_to_preceding_unit]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x14614
- * Callees  : 1 -> 0x4002e
+ * Purpose  : Module build.cpp procedure @ 0x014a9f
+ * Callers  : 1 -> build_attempt_tag_area_outside_014614
+ * Callees  : 1 -> imptool_update_player_dungeon_04002e
  ******************************************************************************/
-void FUN_00014a9f(void)
+void build_fn_014a9f(void)
 
 {
-  FUN_0004002e();
+  imptool_update_player_dungeon_04002e();
   return;
 }
 
 /******************************************************************************
- * Function : sub_014ad2 (Ghidra: FUN_00014ad2)
- * Prototype: void sub_014ad2(void);
+ * Function : build_fn_014ad2 (Original VA: 0x14ad2, Ghidra: FUN_00014ad2)
+ * Prototype: void build_fn_014ad2(void);
  * Address  : 0x14ad2 (Size: 22 bytes)
  * Module   : build.cpp [callgraph_affinity_to_preceding_unit]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x14614
+ * Purpose  : Module build.cpp procedure @ 0x014ad2
+ * Callers  : 1 -> build_attempt_tag_area_outside_014614
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_00014ad2(void)
+void build_fn_014ad2(void)
 
 {
-  FUN_0004002e();
+  imptool_update_player_dungeon_04002e();
   return;
 }
 
 /******************************************************************************
- * Function : sub_014ae8 (Ghidra: FUN_00014ae8)
- * Prototype: void sub_014ae8(void);
+ * Function : build_fn_014ae8 (Original VA: 0x14ae8, Ghidra: FUN_00014ae8)
+ * Prototype: void build_fn_014ae8(void);
  * Address  : 0x14ae8 (Size: 22 bytes)
  * Module   : build.cpp [callgraph_affinity_to_preceding_unit]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x14614
+ * Purpose  : Module build.cpp procedure @ 0x014ae8
+ * Callers  : 1 -> build_attempt_tag_area_outside_014614
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_00014ae8(void)
+void build_fn_014ae8(void)
 
 {
-  FUN_0004002e();
+  imptool_update_player_dungeon_04002e();
   return;
 }
 
 /******************************************************************************
- * Function : sub_014afe (Ghidra: FUN_00014afe)
- * Prototype: void sub_014afe(void);
+ * Function : build_process_map_subtile_014afe (Original VA: 0x14afe, Ghidra: FUN_00014afe)
+ * Prototype: void build_process_map_subtile_014afe(void);
  * Address  : 0x14afe (Size: 412 bytes)
  * Module   : build.cpp [callgraph_affinity_to_preceding_unit]
- * Naming   : Address-based identifier
- * Callers  : 4 -> 0x4a0d6, 0x4a5d9, 0x4f63e, 0x6c681
- * Callees  : 4 -> 0x1495c, 0x25f6f, 0xd7688, 0xda6fc
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 4 -> instance_update_creature_control_04a0d6, instance_update_creature_control_04a5d9, magic_xxxxoxxxxxxxx_xxxxxxxo_oxxxxoxo_oxoxxoxo_04f63e, shot_update_slab_subtile_columns_06c681
+ * Callees  : 4 -> build_attempt_tag_area_outside_01495c, effect_fn_025f6f, slab_attempt_place_animating_slab_0d7688, slab_process_slabmap_tile_0da6fc
  ******************************************************************************/
-void FUN_00014afe(void)
+void build_process_map_subtile_014afe(void)
 
 {
-  undefined4 uVar1;
-  byte bVar2;
-  int in_EAX;
-  int iVar3;
-  int iVar4;
-  int iVar5;
+  undefined4 uval;
+  byte flag;
+  int arg_eax;
+  int val;
+  int val_2;
+  int val_3;
   int extraout_ECX;
-  int in_EDX;
-  int unaff_EBX;
-  int iVar6;
+  int arg_edx;
+  int arg_ebx;
+  int val_4;
   int local_1c;
   byte local_18;
   
-  iVar3 = (in_EDX * 0x100 + in_EAX) * 5;
-  if ((*(ushort *)((int)&DAT_00279203 + iVar3 + 1) & 0x7ff) == 0) {
-    bVar2 = 0;
+  val = (arg_edx * 0x100 + arg_eax) * 5;
+  if ((*(ushort *)((int)&g_map_subtiles + val + 1) & 0x7ff) == 0) {
+    flag = 0;
   }
   else {
-    bVar2 = *(byte *)((int)&DAT_0019e973 +
-                     (*(uint *)((int)&DAT_00279203 + iVar3 + 1) & 0x7ff) * 0x18 + 2) >> 4;
+    flag = *(byte *)((int)&g_bss_0019e973 +
+                     (*(uint *)((int)&g_map_subtiles + val + 1) & 0x7ff) * 0x18 + 2) >> 4;
   }
-  iVar3 = (in_EAX / 3) * 3;
-  iVar4 = (in_EDX / 3) * 3;
-  if (bVar2 != 0) {
-    iVar5 = iVar4 + 3;
-    for (; iVar6 = iVar3, iVar4 < iVar5; iVar4 = iVar4 + 1) {
-      for (; iVar6 < iVar3 + 3; iVar6 = iVar6 + 1) {
-        FUN_00025f6f();
+  val = (arg_eax / 3) * 3;
+  val_2 = (arg_edx / 3) * 3;
+  if (flag != 0) {
+    val_3 = val_2 + 3;
+    for (; val_4 = val, val_2 < val_3; val_2 = val_2 + 1) {
+      for (; val_4 < val + 3; val_4 = val_4 + 1) {
+        effect_fn_025f6f();
       }
     }
   }
   local_18 = 1;
-  uVar1 = *(undefined4 *)((int)&DAT_00279203 + ((in_EDX / 3) * 0x300 + iVar3) * 5 + 1);
+  uval = *(undefined4 *)((int)&g_map_subtiles + ((arg_edx / 3) * 0x300 + val) * 5 + 1);
   local_1c = 0;
-  iVar3 = 0;
+  val = 0;
   do {
-    if ((((&DAT_0019d0c8)[iVar3] & 1) != 0) && (((byte)((uint)uVar1 >> 0x1c) & local_18) != 0)) {
-      FUN_0001495c();
-      iVar3 = extraout_ECX;
+    if ((((&g_players)[val] & 1) != 0) && (((byte)((uint)uval >> 0x1c) & local_18) != 0)) {
+      build_attempt_tag_area_outside_01495c();
+      val = extraout_ECX;
     }
     local_18 = local_18 << 1;
     local_1c = local_1c + 1;
-    iVar3 = iVar3 + 0x4ef;
+    val = val + 0x4ef;
   } while (local_1c < 4);
-  FUN_000d7688(0);
-  FUN_000da6fc();
-  *(int *)(&DAT_002e17e8 + unaff_EBX * 0x1508) = *(int *)(&DAT_002e17e8 + unaff_EBX * 0x1508) + 1;
+  slab_attempt_place_animating_slab_0d7688(0);
+  slab_process_slabmap_tile_0da6fc();
+  *(int *)(&g_bss_002e17e8 + arg_ebx * 0x1508) = *(int *)(&g_bss_002e17e8 + arg_ebx * 0x1508) + 1;
   return;
 }
 
 /******************************************************************************
- * Function : sub_014d45 (Ghidra: FUN_00014d45)
- * Prototype: void sub_014d45(void);
+ * Function : build_process_map_subtile_014d45 (Original VA: 0x14d45, Ghidra: FUN_00014d45)
+ * Prototype: void build_process_map_subtile_014d45(void);
  * Address  : 0x14d45 (Size: 346 bytes)
  * Module   : build.cpp [callgraph_affinity_to_preceding_unit]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x4a0d6, 0x6c681
- * Callees  : 5 -> 0x1495c, 0x26007, 0x82a04, 0xd7688, 0xda6fc
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 2 -> instance_update_creature_control_04a0d6, shot_update_slab_subtile_columns_06c681
+ * Callees  : 5 -> build_attempt_tag_area_outside_01495c, effect_fn_026007, creature_process_map_subtile_082a04, slab_attempt_place_animating_slab_0d7688, slab_process_slabmap_tile_0da6fc
  ******************************************************************************/
-void FUN_00014d45(void)
+void build_process_map_subtile_014d45(void)
 
 {
-  undefined4 uVar1;
-  byte bVar2;
-  int in_EAX;
-  int iVar3;
-  int iVar4;
-  int iVar5;
+  undefined4 uval;
+  byte flag;
+  int arg_eax;
+  int val;
+  int val_2;
+  int val_3;
   int extraout_ECX;
-  int in_EDX;
-  int iVar6;
+  int arg_edx;
+  int val_4;
   int local_1c;
   byte local_18;
   
-  iVar3 = (in_EDX * 0x100 + in_EAX) * 5;
-  if ((*(ushort *)((int)&DAT_00279203 + iVar3 + 1) & 0x7ff) == 0) {
-    bVar2 = 0;
+  val = (arg_edx * 0x100 + arg_eax) * 5;
+  if ((*(ushort *)((int)&g_map_subtiles + val + 1) & 0x7ff) == 0) {
+    flag = 0;
   }
   else {
-    bVar2 = *(byte *)((int)&DAT_0019e973 +
-                     (*(uint *)((int)&DAT_00279203 + iVar3 + 1) & 0x7ff) * 0x18 + 2) >> 4;
+    flag = *(byte *)((int)&g_bss_0019e973 +
+                     (*(uint *)((int)&g_map_subtiles + val + 1) & 0x7ff) * 0x18 + 2) >> 4;
   }
-  iVar3 = (in_EAX / 3) * 3;
-  iVar4 = (in_EDX / 3) * 3;
-  iVar5 = iVar4 + 3;
-  for (; iVar6 = iVar3, iVar4 < iVar5; iVar4 = iVar4 + 1) {
-    for (; iVar6 < iVar3 + 3; iVar6 = iVar6 + 1) {
-      if (bVar2 != 0) {
-        FUN_00026007();
+  val = (arg_eax / 3) * 3;
+  val_2 = (arg_edx / 3) * 3;
+  val_3 = val_2 + 3;
+  for (; val_4 = val, val_2 < val_3; val_2 = val_2 + 1) {
+    for (; val_4 < val + 3; val_4 = val_4 + 1) {
+      if (flag != 0) {
+        effect_fn_026007();
       }
     }
   }
   local_18 = 1;
-  uVar1 = *(undefined4 *)((int)&DAT_00279203 + ((in_EDX / 3) * 0x300 + iVar3) * 5 + 1);
+  uval = *(undefined4 *)((int)&g_map_subtiles + ((arg_edx / 3) * 0x300 + val) * 5 + 1);
   local_1c = 0;
-  iVar3 = 0;
+  val = 0;
   do {
-    if ((((&DAT_0019d0c8)[iVar3] & 1) != 0) && (((byte)((uint)uVar1 >> 0x1c) & local_18) != 0)) {
-      FUN_0001495c();
-      iVar3 = extraout_ECX;
+    if ((((&g_players)[val] & 1) != 0) && (((byte)((uint)uval >> 0x1c) & local_18) != 0)) {
+      build_attempt_tag_area_outside_01495c();
+      val = extraout_ECX;
     }
     local_18 = local_18 << 1;
     local_1c = local_1c + 1;
-    iVar3 = iVar3 + 0x4ef;
+    val = val + 0x4ef;
   } while (local_1c < 4);
-  FUN_000d7688(0);
-  FUN_000da6fc();
-  FUN_00082a04();
+  slab_attempt_place_animating_slab_0d7688(0);
+  slab_process_slabmap_tile_0da6fc();
+  creature_process_map_subtile_082a04();
   return;
 }
 

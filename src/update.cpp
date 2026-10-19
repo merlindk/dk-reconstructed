@@ -1,7 +1,7 @@
 /**
- * Dungeon Keeper (KEEPER.EXE) - Reconstructed Source Module: update.cpp
+ * Dungeon Keeper (KEEPER.EXE) - Reconstructed & Semantically Named Module: update.cpp
  * Binary Subject: /home/merlin/Dungeon Keeper/re/KEEPER.elf
- * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 (x86:LE:32:default)
+ * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 + DK Semantic Analyzer
  * Functions in this translation unit: 49
  */
 
@@ -11,564 +11,562 @@
 #include "../include/dk_functions.h"
 
 /******************************************************************************
- * Function : sub_0dc440 (Ghidra: FUN_000dc440)
- * Prototype: int sub_0dc440(void);
+ * Function : update_fn_0dc440 (Original VA: 0xdc440, Ghidra: FUN_000dc440)
+ * Prototype: int update_fn_0dc440(void);
  * Address  : 0xdc440 (Size: 96 bytes)
  * Module   : update.cpp [callgraph_affinity_to_following_unit]
- * Naming   : Address-based identifier
- * Callers  : 40 -> 0x138c9, 0x15be4, 0x16498, 0x189d4, 0x22660, 0x25cf7, 0x2649f, 0x2666b, 0x2683b, 0x26ac9 ...
+ * Purpose  : Module update.cpp procedure @ 0x0dc440
+ * Callers  : 40 -> barracks_update_creature_control_0138c9, combat_update_creature_control_015be4, combchk_fn_016498, combtool_fn_0189d4, compturn_process_map_subtile_022660, effect_update_creature_and_thing_025cf7, effect_update_creature_and_thing_02649f, effect_update_player_view_state_02666b ...
  * Callees  : 0 -> 
  ******************************************************************************/
-int FUN_000dc440(void)
+int update_fn_0dc440(void)
 
 {
-  ushort uVar1;
-  ushort uVar2;
-  ushort *in_EAX;
-  ushort *in_EDX;
-  uint uVar3;
-  uint uVar4;
+  ushort uval;
+  ushort uval_2;
+  ushort *arg_eax;
+  ushort *arg_edx;
+  uint uval_3;
+  uint uval_4;
   
-  uVar3 = (int)((uint)*in_EAX - (uint)*in_EDX) >> 0x1f;
-  uVar4 = (int)((uint)in_EAX[1] - (uint)in_EDX[1]) >> 0x1f;
-  if ((int)(((uint)in_EAX[1] - (uint)in_EDX[1] ^ uVar4) - uVar4) <
-      (int)(((uint)*in_EAX - (uint)*in_EDX ^ uVar3) - uVar3)) {
-    uVar1 = *in_EAX;
-    uVar2 = *in_EDX;
+  uval_3 = (int)((uint)*arg_eax - (uint)*arg_edx) >> 0x1f;
+  uval_4 = (int)((uint)arg_eax[1] - (uint)arg_edx[1]) >> 0x1f;
+  if ((int)(((uint)arg_eax[1] - (uint)arg_edx[1] ^ uval_4) - uval_4) <
+      (int)(((uint)*arg_eax - (uint)*arg_edx ^ uval_3) - uval_3)) {
+    uval = *arg_eax;
+    uval_2 = *arg_edx;
   }
   else {
-    uVar1 = in_EAX[1];
-    uVar2 = in_EDX[1];
+    uval = arg_eax[1];
+    uval_2 = arg_edx[1];
   }
-  uVar3 = (int)((uint)uVar1 - (uint)uVar2) >> 0x1f;
-  return ((uint)uVar1 - (uint)uVar2 ^ uVar3) - uVar3;
+  uval_3 = (int)((uint)uval - (uint)uval_2) >> 0x1f;
+  return ((uint)uval - (uint)uval_2 ^ uval_3) - uval_3;
 }
 
 /******************************************************************************
- * Function : sub_0dd20c (Ghidra: FUN_000dd20c)
- * Prototype: uint sub_0dd20c(void);
+ * Function : update_fn_0dd20c (Original VA: 0xdd20c, Ghidra: FUN_000dd20c)
+ * Prototype: uint update_fn_0dd20c(void);
  * Address  : 0xdd20c (Size: 228 bytes)
  * Module   : update.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x65d3e
- * Callees  : 1 -> 0xd0fc0
+ * Purpose  : Module update.cpp procedure @ 0x0dd20c
+ * Callers  : 1 -> prison_update_creature_control_065d3e
+ * Callees  : 1 -> room_update_slab_subtile_columns_0d0fc0
  ******************************************************************************/
-uint FUN_000dd20c(void)
+uint update_fn_0dd20c(void)
 
 {
-  ushort *in_EAX;
-  int iVar1;
-  int iVar2;
-  uint uVar3;
-  uint uVar4;
+  ushort *arg_eax;
+  int val;
+  int val_2;
+  uint uval;
+  uint uval_2;
   short extraout_CX;
-  ushort *in_EDX;
-  uint unaff_EBX;
-  int iVar5;
-  short sVar6;
-  undefined8 uVar7;
+  ushort *arg_edx;
+  uint arg_ebx;
+  int val_3;
+  short short_val;
+  undefined8 uval_3;
   
-  iVar1 = (uint)*in_EDX - (uint)*in_EAX;
-  iVar2 = (uint)in_EDX[1] - (uint)in_EAX[1];
-  if (iVar1 < 0) {
-    iVar1 = -iVar1;
+  val = (uint)*arg_edx - (uint)*arg_eax;
+  val_2 = (uint)arg_edx[1] - (uint)arg_eax[1];
+  if (val < 0) {
+    val = -val;
   }
-  if (iVar2 < 0) {
-    iVar5 = -0x50;
-    iVar2 = -iVar2;
+  if (val_2 < 0) {
+    val_3 = -0x50;
+    val_2 = -val_2;
   }
   else {
-    iVar5 = 0x50;
+    val_3 = 0x50;
   }
-  iVar1 = iVar1 + 1;
-  uVar3 = iVar1 / 0x50;
-  iVar2 = iVar2 + 1;
-  uVar4 = uVar3;
-  if (iVar1 != iVar2) {
-    if (iVar2 < iVar1) {
-      uVar4 = (iVar2 * iVar5) / iVar1;
+  val = val + 1;
+  uval = val / 0x50;
+  val_2 = val_2 + 1;
+  uval_2 = uval;
+  if (val != val_2) {
+    if (val_2 < val) {
+      uval_2 = (val_2 * val_3) / val;
     }
     else {
-      uVar4 = iVar2 / 0x50;
-      uVar3 = uVar4;
+      uval_2 = val_2 / 0x50;
+      uval = uval_2;
     }
   }
-  sVar6 = (short)*(undefined4 *)in_EAX;
-  if (uVar3 != 0) {
+  short_val = (short)*(undefined4 *)arg_eax;
+  if (uval != 0) {
     do {
-      uVar7 = FUN_000d0fc0(sVar6);
-      uVar4 = (uint)uVar7;
-      if (uVar4 != unaff_EBX) {
-        return uVar4 & 0xffffff00;
+      uval_3 = room_update_slab_subtile_columns_0d0fc0(short_val);
+      uval_2 = (uint)uval_3;
+      if (uval_2 != arg_ebx) {
+        return uval_2 & 0xffffff00;
       }
-      sVar6 = sVar6 + extraout_CX;
-    } while ((int)((ulonglong)uVar7 >> 0x20) != 1);
+      short_val = short_val + extraout_CX;
+    } while ((int)((ulonglong)uval_3 >> 0x20) != 1);
   }
-  return CONCAT31((int3)(uVar4 >> 8),1);
+  return CONCAT31((int3)(uval_2 >> 8),1);
 }
 
 /******************************************************************************
- * Function : sub_0dd2f0 (Ghidra: FUN_000dd2f0)
- * Prototype: uint sub_0dd2f0(void);
+ * Function : update_fn_0dd2f0 (Original VA: 0xdd2f0, Ghidra: FUN_000dd2f0)
+ * Prototype: uint update_fn_0dd2f0(void);
  * Address  : 0xdd2f0 (Size: 144 bytes)
  * Module   : update.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 7 -> 0x43bb3, 0x44b13, 0x4ac70, 0x65283, 0x811d8, 0x84904, 0xe2a14
+ * Purpose  : Module update.cpp procedure @ 0x0dd2f0
+ * Callers  : 7 -> inits_told_you_so_create_043bb3, inits_told_you_so_create_044b13, instance_update_creature_and_thing_04ac70, person_update_creature_control_065283, creature_update_creature_and_thing_0811d8, creature_thing_hand_084904, update_process_map_subtile_0e2a14
  * Callees  : 0 -> 
  ******************************************************************************/
-uint FUN_000dd2f0(void)
+uint update_fn_0dd2f0(void)
 
 {
-  int in_EAX;
-  uint uVar1;
-  byte in_DL;
+  int arg_eax;
+  uint uval;
+  byte arg_dl;
   
-  if ((DAT_00191d3c == '\x02') || (DAT_00191d3c == '\x03')) {
-    uVar1 = (uint)*(ushort *)
-                   (&DAT_00187b74 + (uint)in_DL * 2 + (uint)*(byte *)(in_EAX + 0x1a) * 0x2c);
-    if (-1 < *(int *)(&DAT_002f29d1 +
+  if ((g_view_projection_mode == '\x02') || (g_view_projection_mode == '\x03')) {
+    uval = (uint)*(ushort *)
+                   (&g_data_00187b74 + (uint)arg_dl * 2 + (uint)*(byte *)(arg_eax + 0x1a) * 0x2c);
+    if (-1 < *(int *)(&g_bss_002f29d1 +
                      (uint)*(ushort *)
-                            (&DAT_00187b74 + (uint)in_DL * 2 + (uint)*(byte *)(in_EAX + 0x1a) * 0x2c
+                            (&g_data_00187b74 + (uint)arg_dl * 2 + (uint)*(byte *)(arg_eax + 0x1a) * 0x2c
                             ) * 2) >> 0x10) {
-      return *(int *)(&DAT_002f29d1 +
+      return *(int *)(&g_bss_002f29d1 +
                      (uint)*(ushort *)
-                            (&DAT_00187b74 + (uint)in_DL * 2 + (uint)*(byte *)(in_EAX + 0x1a) * 0x2c
+                            (&g_data_00187b74 + (uint)arg_dl * 2 + (uint)*(byte *)(arg_eax + 0x1a) * 0x2c
                             ) * 2) >> 0x10;
     }
   }
   else {
-    uVar1 = *(int *)((int)&DAT_002f2223 +
+    uval = *(int *)((int)&g_bss_002f2223 +
                     (uint)*(ushort *)
-                           (&DAT_00187b74 + (uint)in_DL * 2 + (uint)*(byte *)(in_EAX + 0x1a) * 0x2c)
+                           (&g_data_00187b74 + (uint)arg_dl * 2 + (uint)*(byte *)(arg_eax + 0x1a) * 0x2c)
                     * 2 + 2) >> 0x10;
-    if ((int)uVar1 < 0) {
-      uVar1 = (uint)*(ushort *)
-                     (&DAT_00187b74 + (uint)in_DL * 2 + (uint)*(byte *)(in_EAX + 0x1a) * 0x2c);
+    if ((int)uval < 0) {
+      uval = (uint)*(ushort *)
+                     (&g_data_00187b74 + (uint)arg_dl * 2 + (uint)*(byte *)(arg_eax + 0x1a) * 0x2c);
     }
   }
-  return uVar1;
+  return uval;
 }
 
 /******************************************************************************
- * Function : sub_0dd380 (Ghidra: FUN_000dd380)
- * Prototype: undefined4 sub_0dd380(int *param_1);
+ * Function : update_fn_0dd380 (Original VA: 0xdd380, Ghidra: FUN_000dd380)
+ * Prototype: undefined4 update_fn_0dd380(int *param_1);
  * Address  : 0xdd380 (Size: 146 bytes)
  * Module   : update.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module update.cpp procedure @ 0x0dd380
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_000dd380(int *param_1)
+undefined4 update_fn_0dd380(int *param_1)
 
 {
-  ushort uVar1;
-  ushort *in_EAX;
-  int iVar2;
-  undefined4 uVar3;
-  int *in_ECX;
-  int in_EDX;
-  int unaff_EBX;
+  ushort uval;
+  ushort *arg_eax;
+  int ui_scale;
+  undefined4 uval_2;
+  int *arg_ecx;
+  int arg_edx;
+  int arg_ebx;
   
-  iVar2 = (uint)DAT_0019cba6 * (((*(int *)(in_EAX + 1) >> 0x10) << 5) >> 8);
-  if (iVar2 < 2) {
-    iVar2 = 2;
+  ui_scale = (uint)g_units_per_pixel * (((*(int *)(arg_eax + 1) >> 0x10) << 5) >> 8);
+  if (ui_scale < 2) {
+    ui_scale = 2;
   }
-  else if (0x20 < iVar2) {
-    iVar2 = 0x20;
+  else if (0x20 < ui_scale) {
+    ui_scale = 0x20;
   }
-  uVar1 = in_EAX[1];
-  *in_ECX = ((int)((in_EDX - (uint)*in_EAX) * iVar2) >> 8) + 0xaa;
-  iVar2 = ((int)(iVar2 * (unaff_EBX - (uint)uVar1)) >> 8) + 0xaa;
-  *param_1 = iVar2;
-  if ((((*in_ECX < 0x96) || (0x1e8 < *in_ECX)) || (iVar2 < 0x38)) || (0x18a < iVar2)) {
-    uVar3 = 0;
+  uval = arg_eax[1];
+  *arg_ecx = ((int)((arg_edx - (uint)*arg_eax) * ui_scale) >> 8) + 0xaa;
+  ui_scale = ((int)(ui_scale * (arg_ebx - (uint)uval)) >> 8) + 0xaa;
+  *param_1 = ui_scale;
+  if ((((*arg_ecx < 0x96) || (0x1e8 < *arg_ecx)) || (ui_scale < 0x38)) || (0x18a < ui_scale)) {
+    uval_2 = 0;
   }
   else {
-    uVar3 = 1;
+    uval_2 = 1;
   }
-  return uVar3;
+  return uval_2;
 }
 
 /******************************************************************************
- * Function : sub_0dd414 (Ghidra: FUN_000dd414)
- * Prototype: void sub_0dd414(int param_1,int param_2);
+ * Function : update_fn_0dd414 (Original VA: 0xdd414, Ghidra: FUN_000dd414)
+ * Prototype: void update_fn_0dd414(int param_1,int param_2);
  * Address  : 0xdd414 (Size: 155 bytes)
  * Module   : update.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x6b820
- * Callees  : 1 -> 0x7da18
+ * Purpose  : Module update.cpp procedure @ 0x0dd414
+ * Callers  : 1 -> setup_switch_screen_resolution
+ * Callees  : 1 -> ceiling_process_map_subtile_07da18
  ******************************************************************************/
-void FUN_000dd414(int param_1,int param_2)
+void update_fn_0dd414(int param_1,int param_2)
 
 {
-  int iVar1;
-  char cVar2;
-  undefined4 *in_EAX;
+  int val;
+  char ch;
+  undefined4 *arg_eax;
   short extraout_CX;
-  int in_ECX;
-  undefined4 *in_EDX;
+  int arg_ecx;
+  undefined4 *arg_edx;
   int extraout_EDX;
-  int unaff_EBX;
-  byte bVar3;
+  int arg_ebx;
+  byte flag;
   short local_18;
   short sStack_16;
   short local_14 [2];
   int local_10;
   
-  bVar3 = 0;
-  iVar1 = (&DAT_001927e0)[unaff_EBX];
-  local_10 = param_1 * (&DAT_001927e0)[in_ECX] >> 0x10;
-  local_18 = (short)*in_EAX;
-  sStack_16 = (short)((uint)*in_EAX >> 0x10);
-  local_14[0] = *(short *)(in_EAX + 1);
+  flag = 0;
+  val = (&g_slab_attr_table)[arg_ebx];
+  local_10 = param_1 * (&g_slab_attr_table)[arg_ecx] >> 0x10;
+  local_18 = (short)*arg_eax;
+  sStack_16 = (short)((uint)*arg_eax >> 0x10);
+  local_14[0] = *(short *)(arg_eax + 1);
   if (param_2 != 0) {
     do {
-      cVar2 = FUN_0007da18();
-      if (cVar2 != '\0') break;
-      local_18 = local_18 + (short)((uint)(param_1 * iVar1) >> 0x10);
+      ch = ceiling_process_map_subtile_07da18();
+      if (ch != '\0') break;
+      local_18 = local_18 + (short)((uint)(param_1 * val) >> 0x10);
       sStack_16 = sStack_16 + extraout_CX;
       local_14[0] = local_14[0] + (short)local_10;
     } while (extraout_EDX != 1);
   }
-  *in_EDX = CONCAT22(sStack_16,local_18);
-  *(short *)(in_EDX + (uint)bVar3 * -2 + 1) = local_14[(uint)bVar3 * -4];
+  *arg_edx = CONCAT22(sStack_16,local_18);
+  *(short *)(arg_edx + (uint)flag * -2 + 1) = local_14[(uint)flag * -4];
   return;
 }
 
 /******************************************************************************
- * Function : sub_0dd4b0 (Ghidra: FUN_000dd4b0)
- * Prototype: undefined4 sub_0dd4b0(void);
+ * Function : update_update_player_view_state_0dd4b0 (Original VA: 0xdd4b0, Ghidra: FUN_000dd4b0)
+ * Prototype: undefined4 update_update_player_view_state_0dd4b0(void);
  * Address  : 0xdd4b0 (Size: 80 bytes)
  * Module   : update.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses per-player PlayerInfo state (stride 0x4ef)
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_000dd4b0(void)
+undefined4 update_update_player_view_state_0dd4b0(void)
 
 {
-  int in_EAX;
-  int in_EDX;
-  int iVar1;
+  int arg_eax;
+  int arg_edx;
+  int player_off;
   
-  iVar1 = (DAT_002f10ce >> 0x18) * 0x4ef;
-  if ((((*(short *)(&DAT_0019d518 + iVar1) != 0) &&
-       ((int)(uint)*(ushort *)(&DAT_0019d514 + iVar1) <= in_EAX)) &&
-      (in_EAX < (int)(*(ushort *)(&DAT_0019d514 + iVar1) + 0x74))) &&
-     (((int)(uint)*(ushort *)(&DAT_0019d516 + iVar1) <= in_EDX &&
-      (in_EDX < (int)(*(ushort *)(&DAT_0019d516 + iVar1) + 0x74))))) {
+  player_off = (g_my_player_word >> 0x18) * 0x4ef;
+  if ((((*(short *)(&g_bss_0019d518 + player_off) != 0) &&
+       ((int)(uint)*(ushort *)(&g_bss_0019d514 + player_off) <= arg_eax)) &&
+      (arg_eax < (int)(*(ushort *)(&g_bss_0019d514 + player_off) + 0x74))) &&
+     (((int)(uint)*(ushort *)(&g_bss_0019d516 + player_off) <= arg_edx &&
+      (arg_edx < (int)(*(ushort *)(&g_bss_0019d516 + player_off) + 0x74))))) {
     return 1;
   }
   return 0;
 }
 
 /******************************************************************************
- * Function : sub_0dd500 (Ghidra: FUN_000dd500)
- * Prototype: void sub_0dd500(void);
+ * Function : update_update_player_dungeon_0dd500 (Original VA: 0xdd500, Ghidra: FUN_000dd500)
+ * Prototype: void update_update_player_dungeon_0dd500(void);
  * Address  : 0xdd500 (Size: 292 bytes)
  * Module   : update.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x23519, 0x68ab1
- * Callees  : 3 -> 0x35e3c, 0x51374, 0x85b1c
+ * Purpose  : Accesses per-player Dungeon state (stride 0x1508)
+ * Callers  : 2 -> door_process_thing_entity_023519, script_fn_068ab1
+ * Callees  : 3 -> frontnet_update_player_dungeon_035e3c, moodneed_fn_051374, creature_process_thing_entity_085b1c
  ******************************************************************************/
-void FUN_000dd500(void)
+void update_update_player_dungeon_0dd500(void)
 
 {
-  undefined1 *in_EAX;
-  int iVar1;
-  int iVar2;
+  undefined1 *arg_eax;
+  int dungeon_off;
+  int val;
   
-  if (in_EAX[0x29] == '\0') {
-    if (in_EAX[0x2b] == (&DAT_0019d0f3)[(DAT_002f10ce >> 0x18) * 0x4ef]) {
-      FUN_00035e3c();
+  if (arg_eax[0x29] == '\0') {
+    if (arg_eax[0x2b] == (&g_player_id_number)[(g_my_player_word >> 0x18) * 0x4ef]) {
+      frontnet_update_player_dungeon_035e3c();
     }
-    iVar1 = (uint)(byte)in_EAX[0x2b] * 0x1508;
-    in_EAX[0x29] = 1;
-    iVar2 = (&DAT_002e107a)[(uint)(byte)in_EAX[0x2b] * 0x542];
-    if ((DAT_0019d0b6 & 1) == 0) {
-      iVar2 = iVar2 + (int)((uint)DAT_002e78e9 * 10 * iVar2) / 100;
+    dungeon_off = (uint)(byte)arg_eax[0x2b] * 0x1508;
+    arg_eax[0x29] = 1;
+    val = (&g_bss_002e107a)[(uint)(byte)arg_eax[0x2b] * 0x542];
+    if ((g_game_system_flags & 1) == 0) {
+      val = val + (int)((uint)g_bss_002e78e9 * 10 * val) / 100;
     }
     else {
-      iVar2 = iVar2 * 2;
+      val = val * 2;
     }
-    if ((&DAT_0019d0f1)[(uint)(byte)in_EAX[0x2b] * 0x4ef] == '\x02') {
-      iVar2 = iVar2 / 2;
+    if ((&g_bss_0019d0f1)[(uint)(byte)arg_eax[0x2b] * 0x4ef] == '\x02') {
+      val = val / 2;
     }
-    *(undefined4 *)(&DAT_002e18a0 + iVar1) = 1;
-    *(int *)(&DAT_002e18a4 + iVar1) = iVar2;
-    if ((DAT_0019d0b6 & 1) == 0) {
-      *(int *)(in_EAX + 0x4eb) = DAT_002e8bee + 300;
+    *(undefined4 *)(&g_bss_002e18a0 + dungeon_off) = 1;
+    *(int *)(&g_bss_002e18a4 + dungeon_off) = val;
+    if ((g_game_system_flags & 1) == 0) {
+      *(int *)(arg_eax + 0x4eb) = g_game_turn + 300;
     }
-    if (in_EAX == &DAT_0019d0c8 + (DAT_002f10ce >> 0x18) * 0x4ef) {
-      iVar2 = FUN_00085b1c();
-      if (iVar2 != 0) {
-        (&DAT_0019d0cb)[(DAT_002f10ce >> 0x18) * 0x4ef] =
-             (&DAT_0019d0cb)[(DAT_002f10ce >> 0x18) * 0x4ef] | 0x10;
+    if (arg_eax == &g_players + (g_my_player_word >> 0x18) * 0x4ef) {
+      val = creature_process_thing_entity_085b1c();
+      if (val != 0) {
+        (&g_bss_0019d0cb)[(g_my_player_word >> 0x18) * 0x4ef] =
+             (&g_bss_0019d0cb)[(g_my_player_word >> 0x18) * 0x4ef] | 0x10;
       }
-      FUN_00051374();
+      moodneed_fn_051374();
     }
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0dd624 (Ghidra: FUN_000dd624)
- * Prototype: void sub_0dd624(void);
+ * Function : update_update_player_dungeon_0dd624 (Original VA: 0xdd624, Ghidra: FUN_000dd624)
+ * Prototype: void update_update_player_dungeon_0dd624(void);
  * Address  : 0xdd624 (Size: 164 bytes)
  * Module   : update.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses per-player Dungeon state (stride 0x1508)
  * Callers  : 0 -> 
- * Callees  : 6 -> 0x4823a, 0x4845c, 0x4ed3d, 0x5cc4a, 0x72af4, 0xe6a10
+ * Callees  : 6 -> input_maintain_gui_button_state_04823a, inits_update_player_view_state_04845c, magic_update_creature_and_thing_04ed3d, newgui_fn_05cc4a, structs_update_creature_control_072af4, LbScreenWaitVbi
  ******************************************************************************/
-void FUN_000dd624(void)
+void update_update_player_dungeon_0dd624(void)
 
 {
-  byte bVar1;
-  int iVar2;
-  int in_EAX;
+  byte flag;
+  int val;
+  int arg_eax;
   undefined1 *extraout_ECX;
   undefined1 *extraout_ECX_00;
   undefined1 *extraout_ECX_01;
-  undefined1 *puVar3;
-  int iVar4;
+  undefined1 *word_ptr;
+  int dungeon_off;
   
-  bVar1 = *(byte *)(in_EAX + 0x2b);
-  iVar4 = (uint)bVar1 * 0x1508;
-  FUN_000e6a10();
-  iVar2 = (&DAT_002e0e0d)[(uint)bVar1 * 0x542];
-  (&DAT_002e05ec)[iVar4] = 0;
-  puVar3 = extraout_ECX;
-  if (iVar2 != 0) {
-    FUN_0004ed3d();
-    puVar3 = extraout_ECX_00;
+  flag = *(byte *)(arg_eax + 0x2b);
+  dungeon_off = (uint)flag * 0x1508;
+  LbScreenWaitVbi();
+  val = (&g_bss_002e0e0d)[(uint)flag * 0x542];
+  (&g_bss_002e05ec)[dungeon_off] = 0;
+  word_ptr = extraout_ECX;
+  if (val != 0) {
+    magic_update_creature_and_thing_04ed3d();
+    word_ptr = extraout_ECX_00;
   }
-  if (*(short *)(&DAT_002e0b61 + iVar4) != 0) {
-    FUN_00072af4();
-    *(undefined2 *)(&DAT_002e0b61 + iVar4) = 0;
-    puVar3 = extraout_ECX_01;
+  if (*(short *)(&g_bss_002e0b61 + dungeon_off) != 0) {
+    structs_update_creature_control_072af4();
+    *(undefined2 *)(&g_bss_002e0b61 + dungeon_off) = 0;
+    word_ptr = extraout_ECX_01;
   }
-  if (puVar3 == &DAT_0019d0c8 + (DAT_002f10ce >> 0x18) * 0x4ef) {
-    FUN_0005cc4a();
+  if (word_ptr == &g_players + (g_my_player_word >> 0x18) * 0x4ef) {
+    newgui_fn_05cc4a();
   }
-  FUN_0004823a();
-  FUN_0004845c();
+  input_maintain_gui_button_state_04823a();
+  inits_update_player_view_state_04845c();
   return;
 }
 
 /******************************************************************************
- * Function : sub_0dd6c8 (Ghidra: FUN_000dd6c8)
- * Prototype: void sub_0dd6c8(void);
+ * Function : update_update_player_dungeon_0dd6c8 (Original VA: 0xdd6c8, Ghidra: FUN_000dd6c8)
+ * Prototype: void update_update_player_dungeon_0dd6c8(void);
  * Address  : 0xdd6c8 (Size: 459 bytes)
  * Module   : update.cpp [callgraph_affinity_to_following_unit]
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0x2347d, 0x68ac4, 0xde6a8
- * Callees  : 11 -> 0x21527, 0x35e3c, 0x4823a, 0x4845c, 0x4ed3d, 0x51374, 0x5ae90, 0x5cc4a, 0x70c0c, 0x72af4 ...
+ * Purpose  : Accesses per-player Dungeon state (stride 0x1508)
+ * Callers  : 3 -> door_process_thing_entity_02347d, script_fn_068ac4, update_go_first_person_without_0de6a8
+ * Callees  : 11 -> compturn_update_player_dungeon_021527, frontnet_update_player_dungeon_035e3c, input_maintain_gui_button_state_04823a, inits_update_player_view_state_04845c, magic_update_creature_and_thing_04ed3d, moodneed_fn_051374, newgui_fn_05ae90, newgui_fn_05cc4a ...
  ******************************************************************************/
-void FUN_000dd6c8(void)
+void update_update_player_dungeon_0dd6c8(void)
 
 {
-  byte bVar1;
-  undefined1 *in_EAX;
-  int iVar2;
-  int iVar3;
-  int iVar4;
+  byte flag;
+  undefined1 *arg_eax;
+  int dungeon_off;
+  int val;
+  int val_2;
   undefined1 *extraout_ECX;
   undefined1 *extraout_ECX_00;
   int extraout_ECX_01;
   
-  bVar1 = in_EAX[0x2b];
-  iVar2 = (uint)bVar1 * 0x1508;
-  if (in_EAX[0x29] == '\0') {
-    if (in_EAX[0x2b] == (&DAT_0019d0f3)[(DAT_002f10ce >> 0x18) * 0x4ef]) {
-      FUN_00035e3c();
-      in_EAX = extraout_ECX;
+  flag = arg_eax[0x2b];
+  dungeon_off = (uint)flag * 0x1508;
+  if (arg_eax[0x29] == '\0') {
+    if (arg_eax[0x2b] == (&g_player_id_number)[(g_my_player_word >> 0x18) * 0x4ef]) {
+      frontnet_update_player_dungeon_035e3c();
+      arg_eax = extraout_ECX;
     }
-    in_EAX[0x29] = 2;
-    iVar3 = (&DAT_002e107a)[(uint)bVar1 * 0x542];
-    if ((DAT_0019d0b6 & 1) == 0) {
-      iVar3 = iVar3 + (int)((uint)DAT_002e78e9 * 10 * iVar3) / 100;
+    arg_eax[0x29] = 2;
+    val = (&g_bss_002e107a)[(uint)flag * 0x542];
+    if ((g_game_system_flags & 1) == 0) {
+      val = val + (int)((uint)g_bss_002e78e9 * 10 * val) / 100;
     }
     else {
-      iVar3 = iVar3 * 2;
+      val = val * 2;
     }
-    if ((&DAT_0019d0f1)[(uint)(byte)in_EAX[0x2b] * 0x4ef] == '\x02') {
-      iVar3 = iVar3 / 2;
+    if ((&g_bss_0019d0f1)[(uint)(byte)arg_eax[0x2b] * 0x4ef] == '\x02') {
+      val = val / 2;
     }
-    iVar4 = DAT_002f10ce >> 0x18;
-    *(int *)(&DAT_002e18a4 + iVar2) = iVar3;
-    if (in_EAX == &DAT_0019d0c8 + iVar4 * 0x4ef) {
-      FUN_00051374();
-      FUN_0005ae90();
-      DAT_002ee892 = 0;
-      DAT_002ee893 = 0;
-      in_EAX = extraout_ECX_00;
+    val_2 = g_my_player_word >> 0x18;
+    *(int *)(&g_bss_002e18a4 + dungeon_off) = val;
+    if (arg_eax == &g_players + val_2 * 0x4ef) {
+      moodneed_fn_051374();
+      newgui_fn_05ae90();
+      g_bss_002ee892 = 0;
+      g_bss_002ee893 = 0;
+      arg_eax = extraout_ECX_00;
     }
-    bVar1 = in_EAX[0x2b];
-    iVar4 = (uint)bVar1 * 0x1508;
-    FUN_000e6a10();
-    iVar3 = (&DAT_002e0e0d)[(uint)bVar1 * 0x542];
-    (&DAT_002e05ec)[iVar4] = 0;
-    if (iVar3 != 0) {
-      FUN_0004ed3d();
+    flag = arg_eax[0x2b];
+    val_2 = (uint)flag * 0x1508;
+    LbScreenWaitVbi();
+    val = (&g_bss_002e0e0d)[(uint)flag * 0x542];
+    (&g_bss_002e05ec)[val_2] = 0;
+    if (val != 0) {
+      magic_update_creature_and_thing_04ed3d();
     }
-    if (*(short *)(&DAT_002e0b61 + iVar4) != 0) {
-      FUN_00072af4();
-      *(undefined2 *)(&DAT_002e0b61 + iVar4) = 0;
+    if (*(short *)(&g_bss_002e0b61 + val_2) != 0) {
+      structs_update_creature_control_072af4();
+      *(undefined2 *)(&g_bss_002e0b61 + val_2) = 0;
     }
-    if (in_EAX == &DAT_0019d0c8 + (DAT_002f10ce >> 0x18) * 0x4ef) {
-      FUN_0005cc4a();
+    if (arg_eax == &g_players + (g_my_player_word >> 0x18) * 0x4ef) {
+      newgui_fn_05cc4a();
     }
-    FUN_0004823a();
-    FUN_0004845c();
-    if ((DAT_0019d0b6 & 1) == 0) {
-      *(int *)(extraout_ECX_01 + 0x4eb) = DAT_002e8bee + 300;
+    input_maintain_gui_button_state_04823a();
+    inits_update_player_view_state_04845c();
+    if ((g_game_system_flags & 1) == 0) {
+      *(int *)(extraout_ECX_01 + 0x4eb) = g_game_turn + 300;
     }
-    if ((DAT_0019d0b6 & 1) != 0) {
-      FUN_00070c0c();
+    if ((g_game_system_flags & 1) != 0) {
+      specials_fn_070c0c();
     }
-    if (((&DAT_002e0593)[iVar2] & 1) != 0) {
-      FUN_00021527();
+    if (((&g_bss_002e0593)[dungeon_off] & 1) != 0) {
+      compturn_update_player_dungeon_021527();
     }
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0dd894 (Ghidra: FUN_000dd894)
- * Prototype: void sub_0dd894(void);
+ * Function : update_update_player_view_state_0dd894 (Original VA: 0xdd894, Ghidra: FUN_000dd894)
+ * Prototype: void update_update_player_view_state_0dd894(void);
  * Address  : 0xdd894 (Size: 85 bytes)
  * Module   : update.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses per-player PlayerInfo state (stride 0x4ef)
  * Callers  : 0 -> 
- * Callees  : 2 -> 0x70bf9, 0xedc70
+ * Callees  : 2 -> specials_fn_070bf9, LbNetwork_Stop_0edc70
  ******************************************************************************/
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void FUN_000dd894(void)
+void update_update_player_view_state_0dd894(void)
 
 {
-  undefined1 *in_EAX;
-  int iVar1;
+  undefined1 *arg_eax;
+  int val;
   
-  if (in_EAX == &DAT_0019d0c8 + (DAT_002f10ce >> 0x18) * 0x4ef) {
-    if ((DAT_0019d0b6 & 1) == 0) {
-      iVar1 = FUN_00070bf9();
-      if (iVar1 == 0) {
-        DAT_002e78ea = DAT_002e78ea + 1;
+  if (arg_eax == &g_players + (g_my_player_word >> 0x18) * 0x4ef) {
+    if ((g_game_system_flags & 1) == 0) {
+      val = specials_fn_070bf9();
+      if (val == 0) {
+        g_bss_002e78ea = g_bss_002e78ea + 1;
       }
-      _DAT_0019d0c2 = (uint)DAT_002e78ea;
+      g_bss_0019d0c2 = (uint)g_bss_002e78ea;
     }
     else {
-      FUN_000edc70();
+      LbNetwork_Stop_0edc70();
     }
-    DAT_0019a2a0 = 1;
+    g_bss_0019a2a0 = 1;
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0dd8ec (Ghidra: FUN_000dd8ec)
- * Prototype: void sub_0dd8ec(void);
+ * Function : update_update_player_view_state_0dd8ec (Original VA: 0xdd8ec, Ghidra: FUN_000dd8ec)
+ * Prototype: void update_update_player_view_state_0dd8ec(void);
  * Address  : 0xdd8ec (Size: 49 bytes)
  * Module   : update.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses per-player PlayerInfo state (stride 0x4ef)
  * Callers  : 0 -> 
- * Callees  : 1 -> 0xedc70
+ * Callees  : 1 -> LbNetwork_Stop_0edc70
  ******************************************************************************/
-void FUN_000dd8ec(void)
+void update_update_player_view_state_0dd8ec(void)
 
 {
-  undefined1 *in_EAX;
+  undefined1 *arg_eax;
   
-  if (in_EAX == &DAT_0019d0c8 + (DAT_002f10ce >> 0x18) * 0x4ef) {
-    if ((DAT_0019d0b6 & 1) != 0) {
-      FUN_000edc70();
+  if (arg_eax == &g_players + (g_my_player_word >> 0x18) * 0x4ef) {
+    if ((g_game_system_flags & 1) != 0) {
+      LbNetwork_Stop_0edc70();
     }
-    DAT_0019a2a0 = 1;
+    g_bss_0019a2a0 = 1;
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0dd920 (Ghidra: FUN_000dd920)
- * Prototype: undefined * sub_0dd920(void);
+ * Function : prepare_file_path (Original VA: 0xdd920, Ghidra: FUN_000dd920)
+ * Prototype: undefined * prepare_file_path(void);
  * Address  : 0xdd920 (Size: 26 bytes)
  * Module   : update.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 58 -> 0x29738, 0x29800, 0x298b5, 0x29979, 0x299f8, 0x29ac2, 0x29b54, 0x29bfe, 0x29d32, 0x29d96 ...
- * Callees  : 1 -> 0xe7714
- * Strings  :
- *   - 0x16c950: "%s%s"
+ * Purpose  : Build full file path in g_file_path_buf
+ * Callers  : 58 -> evil_settings_dat_029738, evil_fn_029800, evil_process_map_subtile_0298b5, file_process_map_subtile_029979, file_process_slabmap_tile_0299f8, file_process_map_subtile_029ac2, file_fn_029b54, file_fn_029bfe ...
+ * Callees  : 1 -> dk_sprintf
  ******************************************************************************/
-undefined * FUN_000dd920(void)
+undefined * prepare_file_path(void)
 
 {
-  FUN_000e7714(&DAT_0019cfac,&DAT_0016c950); /* 0x16c950="%s%s" */
-  return &DAT_0019cfac;
+  dk_sprintf(&g_file_path_buf,&g_data_0016c950); /* 0x16c950="%s%s" */
+  return &g_file_path_buf;
 }
 
 /******************************************************************************
- * Function : coord3d_equal (Ghidra: FUN_000dd93c)
+ * Function : coord3d_equal (Original VA: 0xdd93c, Ghidra: FUN_000dd93c)
  * Prototype: bool coord3d_equal(void);
  * Address  : 0xdd93c (Size: 37 bytes)
  * Module   : update.cpp [address_order_boundary_interpolation]
- * Naming   : 6-byte equality comparison between two Coord3d structures
- * Callers  : 3 -> 0xb45b4, 0xb4894, 0xb4994
+ * Purpose  : 6-byte equality comparison between two Coord3d structures
+ * Callers  : 3 -> move_fn_0b45b4, move_fn_0b4894, move_fn_0b4994
  * Callees  : 0 -> 
  ******************************************************************************/
-bool FUN_000dd93c(void)
+bool coord3d_equal(void)
 
 {
-  byte *in_EAX;
-  int iVar1;
-  int iVar2;
-  byte *in_EDX;
-  bool bVar3;
-  bool bVar4;
+  byte *pos_a;
+  int val;
+  int val_2;
+  byte *pos_b;
+  bool flag;
+  bool flag_2;
   
-  iVar2 = 6;
-  bVar3 = false;
-  iVar1 = 0;
-  bVar4 = true;
+  val_2 = 6;
+  flag = false;
+  val = 0;
+  flag_2 = true;
   do {
-    if (iVar2 == 0) break;
-    iVar2 = iVar2 + -1;
-    bVar3 = *in_EAX < *in_EDX;
-    bVar4 = *in_EAX == *in_EDX;
-    in_EAX = in_EAX + 1;
-    in_EDX = in_EDX + 1;
-  } while (bVar4);
-  if (!bVar4) {
-    iVar1 = (1 - (uint)bVar3) - (uint)(bVar3 != 0);
+    if (val_2 == 0) break;
+    val_2 = val_2 + -1;
+    flag = *pos_a < *pos_b;
+    flag_2 = *pos_a == *pos_b;
+    pos_a = pos_a + 1;
+    pos_b = pos_b + 1;
+  } while (flag_2);
+  if (!flag_2) {
+    val = (1 - (uint)flag) - (uint)(flag != 0);
   }
-  return iVar1 == 0;
+  return val == 0;
 }
 
 /******************************************************************************
- * Function : things_collide_at (Ghidra: FUN_000dd964)
+ * Function : things_collide_at (Original VA: 0xdd964, Ghidra: FUN_000dd964)
  * Prototype: undefined4 things_collide_at(void);
  * Address  : 0xdd964 (Size: 217 bytes)
  * Module   : update.cpp [address_order_boundary_interpolation]
- * Naming   : 3D bounding-box collision check between two Coord3d positions for a Thing
- * Callers  : 1 -> 0xb45b4
+ * Purpose  : 3D bounding-box collision check between two Coord3d positions
+ * Callers  : 1 -> move_fn_0b45b4
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_000dd964(void)
+undefined4 things_collide_at(void)
 
 {
-  int in_EAX;
-  uint uVar1;
-  ushort *in_EDX;
-  ushort *unaff_EBX;
+  int arg_eax;
+  uint uval;
+  ushort *pos_b;
+  ushort *arg_ebx;
   
-  uVar1 = *(ushort *)(&DAT_0019073b + (uint)*(ushort *)(in_EAX + 0x56) * 2) / 2;
-  if (((int)(*in_EDX - uVar1) >> 8 == (int)(*unaff_EBX - uVar1) >> 8) &&
-     ((int)(*in_EDX + uVar1) >> 8 == (int)(*unaff_EBX + uVar1) >> 8)) {
-    if (((int)(in_EDX[1] - uVar1) >> 8 == (int)(unaff_EBX[1] - uVar1) >> 8) &&
-       ((int)(in_EDX[1] + uVar1) >> 8 == (int)(uVar1 + unaff_EBX[1]) >> 8)) {
-      if ((*(int *)(in_EDX + 1) >> 0x18 == *(int *)(unaff_EBX + 1) >> 0x18) &&
-         ((int)((*(int *)(in_EDX + 1) >> 0x10) + (uint)*(ushort *)(in_EAX + 0x58)) >> 8 ==
-          (int)((*(int *)(unaff_EBX + 1) >> 0x10) + (uint)*(ushort *)(in_EAX + 0x58)) >> 8)) {
+  uval = *(ushort *)(&g_data_0019073b + (uint)*(ushort *)(arg_eax + 0x56) * 2) / 2;
+  if (((int)(*pos_b - uval) >> 8 == (int)(*arg_ebx - uval) >> 8) &&
+     ((int)(*pos_b + uval) >> 8 == (int)(*arg_ebx + uval) >> 8)) {
+    if (((int)(pos_b[1] - uval) >> 8 == (int)(arg_ebx[1] - uval) >> 8) &&
+       ((int)(pos_b[1] + uval) >> 8 == (int)(uval + arg_ebx[1]) >> 8)) {
+      if ((*(int *)(pos_b + 1) >> 0x18 == *(int *)(arg_ebx + 1) >> 0x18) &&
+         ((int)((*(int *)(pos_b + 1) >> 0x10) + (uint)*(ushort *)(arg_eax + 0x58)) >> 8 ==
+          (int)((*(int *)(arg_ebx + 1) >> 0x10) + (uint)*(ushort *)(arg_eax + 0x58)) >> 8)) {
         return 1;
       }
     }
@@ -577,147 +575,147 @@ undefined4 FUN_000dd964(void)
 }
 
 /******************************************************************************
- * Function : sub_0ddad0 (Ghidra: FUN_000ddad0)
- * Prototype: int sub_0ddad0(void);
+ * Function : update_fn_0ddad0 (Original VA: 0xddad0, Ghidra: FUN_000ddad0)
+ * Prototype: int update_fn_0ddad0(void);
  * Address  : 0xddad0 (Size: 29 bytes)
  * Module   : update.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 4 -> 0x444a9, 0x44b13, 0x44f33, 0x49bfc
- * Callees  : 1 -> 0x4c2eb
+ * Purpose  : Module update.cpp procedure @ 0x0ddad0
+ * Callers  : 4 -> inits_allocate_dynamic_light_shot_0444a9, inits_told_you_so_create_044b13, inits_roll_action_random_044f33, instance_negative_instance_049bfc
+ * Callees  : 1 -> jtyedit_fn_04c2eb
  ******************************************************************************/
-int FUN_000ddad0(void)
+int update_fn_0ddad0(void)
 
 {
-  undefined1 uVar1;
-  int in_EDX;
+  undefined1 uval;
+  int arg_edx;
   undefined4 extraout_EDX;
   
-  uVar1 = FUN_0004c2eb();
-  return (CONCAT31((int3)((uint)extraout_EDX >> 8),uVar1) << 8) / in_EDX;
+  uval = jtyedit_fn_04c2eb();
+  return (CONCAT31((int3)((uint)extraout_EDX >> 8),uval) << 8) / arg_edx;
 }
 
 /******************************************************************************
- * Function : LbErrorLog (Ghidra: FUN_000ddaf0)
+ * Function : LbErrorLog (Original VA: 0xddaf0, Ghidra: FUN_000ddaf0)
  * Prototype: undefined4 LbErrorLog(void);
  * Address  : 0xddaf0 (Size: 8 bytes)
  * Module   : update.cpp [callgraph_affinity_to_following_unit]
- * Naming   : Bullfrog ERRORLOG(__FILE__, __LINE__, msg) stub (676 call sites)
- * Callers  : 439 -> 0x1073a, 0x109ea, 0x119bc, 0x1264b, 0x1277d, 0x13b43, 0x13bae, 0x13d3b, 0x13e1b, 0x14127 ...
+ * Purpose  : Bullfrog ERRORLOG(__FILE__, __LINE__, msg) handler
+ * Callers  : 439 -> anger_hurrah_mental_instability_creature_01073a, anger_removing_annoyed_creature_non_0109ea, angtool_update_creature_control_0119bc, ariadne_manoeuvre_state_01264b, ariadne_speed_01277d, barracks_barrack_party_class_013b43, battle_attempt_create_battle_null_013bae, battle_creature_has_been_removed_013d3b ...
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_000ddaf0(void)
+undefined4 LbErrorLog(void)
 
 {
   return 1;
 }
 
 /******************************************************************************
- * Function : LbWarnLog (Ghidra: FUN_000ddaf8)
+ * Function : LbWarnLog (Original VA: 0xddaf8, Ghidra: FUN_000ddaf8)
  * Prototype: void LbWarnLog(void);
  * Address  : 0xddaf8 (Size: 1 bytes)
  * Module   : update.cpp [address_order_boundary_interpolation]
- * Naming   : Bullfrog WARNLOG/SYNCLOG(__FILE__, __LINE__, msg) stub (8 call sites)
- * Callers  : 7 -> 0x63670, 0x6385d, 0xb4f00, 0xb4fa0, 0xd1ae0, 0xd29ac, 0xd4188
+ * Purpose  : Bullfrog WARNLOG(__FILE__, __LINE__, msg) handler
+ * Callers  : 7 -> person_thing_already_peter_list_063670, person_peter_list_06385d, move_shiiiiiit_place_move_backwards_0b4f00, move_shiiiiiit_place_tunnel_0b4fa0, routes_ve_been_pushing_very_0d1ae0, routes_illegal_block_direction_lookahead_0d29ac, routes_ve_been_pushing_very_0d4188
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_000ddaf8(void)
+void LbWarnLog(void)
 
 {
   return;
 }
 
 /******************************************************************************
- * Function : compute_things_checksum (Ghidra: FUN_000ddafc)
+ * Function : compute_things_checksum (Original VA: 0xddafc, Ghidra: FUN_000ddafc)
  * Prototype: undefined8 compute_things_checksum(void);
  * Address  : 0xddafc (Size: 91 bytes)
  * Module   : update.cpp [address_order_boundary_interpolation]
- * Naming   : Deterministic lockstep checksum across all 2,048 Thing slots (0x001ae9fc)
- * Callers  : 2 -> 0x61883, 0x619be
+ * Purpose  : Deterministic lockstep checksum across all 2,048 Thing slots
+ * Callers  : 2 -> write_turn_packets_to_file, load_turn_packets_from_file
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined8 FUN_000ddafc(void)
+undefined8 compute_things_checksum(void)
 
 {
-  byte *pbVar1;
-  undefined4 in_EDX;
-  int iVar2;
-  int iVar3;
+  byte *thing_ptr;
+  undefined4 arg_edx;
+  int val;
+  int val_2;
   
-  iVar3 = 0;
-  iVar2 = 0;
+  val_2 = 0;
+  val = 0;
   do {
-    pbVar1 = *(byte **)((int)&DAT_001ae9fc + iVar2);
-    if (((*pbVar1 & 1) != 0) && (pbVar1[0x1f] != 0xc)) {
-      iVar3 = iVar3 + (uint)*(ushort *)(pbVar1 + 0x52) +
-                      (*(int *)(pbVar1 + 0xf) >> 0x10) +
-                      (uint)*(ushort *)(pbVar1 + 0xd) + (uint)*(ushort *)(pbVar1 + 0xf) +
-                      (*(int *)(pbVar1 + 3) >> 0x18);
+    thing_ptr = *(byte **)((int)&g_thing_ptrs + val);
+    if (((*thing_ptr & 1) != 0) && (thing_ptr[0x1f] != 0xc)) {
+      val_2 = val_2 + (uint)*(ushort *)(thing_ptr + 0x52) + /* thing->health */
+                      (*(int *)(thing_ptr + 0xf) >> 0x10) + /* thing->mappos.val_y */
+                      (uint)*(ushort *)(thing_ptr + 0xd) + (uint)*(ushort *)(thing_ptr + 0xf) + /* thing->mappos.val_x, thing->mappos.val_y */
+                      (*(int *)(thing_ptr + 3) >> 0x18);
     }
-    iVar2 = iVar2 + 4;
-  } while (iVar2 != 0x2000);
-  return CONCAT44(in_EDX,iVar3);
+    val = val + 4;
+  } while (val != 0x2000);
+  return CONCAT44(arg_edx,val_2);
 }
 
 /******************************************************************************
- * Function : sub_0ddb5c (Ghidra: FUN_000ddb5c)
- * Prototype: undefined4 sub_0ddb5c(void);
+ * Function : update_fn_0ddb5c (Original VA: 0xddb5c, Ghidra: FUN_000ddb5c)
+ * Prototype: undefined4 update_fn_0ddb5c(void);
  * Address  : 0xddb5c (Size: 101 bytes)
  * Module   : update.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0xddbe0
- * Callees  : 3 -> 0x22b3a, 0x7da18, 0xb3afc
+ * Purpose  : Module update.cpp procedure @ 0x0ddb5c
+ * Callers  : 1 -> update_process_map_subtile_0ddbe0
+ * Callees  : 3 -> door_process_map_subtile_022b3a, ceiling_process_map_subtile_07da18, move_fn_0b3afc
  ******************************************************************************/
-undefined4 FUN_000ddb5c(void)
+undefined4 update_fn_0ddb5c(void)
 
 {
-  char cVar1;
-  int iVar2;
+  char ch;
+  int val;
   int extraout_ECX;
   
-  iVar2 = FUN_000b3afc();
-  if (iVar2 != 0) {
+  val = move_fn_0b3afc();
+  if (val != 0) {
     return 2;
   }
-  cVar1 = FUN_0007da18();
-  if ((cVar1 != '\0') &&
-     (((iVar2 = FUN_00022b3a(), iVar2 == 0 || (*(int *)(iVar2 + 3) >> 0x18 != extraout_ECX)) ||
-      (*(char *)(iVar2 + 0x18) != '\0')))) {
+  ch = ceiling_process_map_subtile_07da18();
+  if ((ch != '\0') &&
+     (((val = door_process_map_subtile_022b3a(), val == 0 || (*(int *)(val + 3) >> 0x18 != extraout_ECX)) ||
+      (*(char *)(val + 0x18) != '\0')))) {
     return 1;
   }
   return 0;
 }
 
 /******************************************************************************
- * Function : sub_0ddbe0 (Ghidra: FUN_000ddbe0)
- * Prototype: uint sub_0ddbe0(void);
+ * Function : update_process_map_subtile_0ddbe0 (Original VA: 0xddbe0, Ghidra: FUN_000ddbe0)
+ * Prototype: uint update_process_map_subtile_0ddbe0(void);
  * Address  : 0xddbe0 (Size: 1063 bytes)
  * Module   : update.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x102c0
- * Callees  : 1 -> 0xddb5c
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 1 -> anger_handle_door_thing_0102c0
+ * Callees  : 1 -> update_fn_0ddb5c
  ******************************************************************************/
-uint FUN_000ddbe0(void)
+uint update_process_map_subtile_0ddbe0(void)
 
 {
-  byte bVar1;
-  byte bVar2;
-  short sVar3;
-  short sVar4;
-  short sVar5;
-  char cVar6;
-  undefined1 uVar7;
-  char cVar8;
-  uint *in_EAX;
-  int iVar9;
-  uint uVar10;
-  uint uVar11;
-  ushort *in_EDX;
-  uint uVar12;
-  int iVar13;
-  int iVar14;
-  byte bVar15;
-  undefined4 uVar16;
-  short sVar17;
+  byte flag;
+  byte flag_2;
+  short short_val;
+  short short_val_2;
+  short short_val_3;
+  char ch;
+  undefined1 uval;
+  char ch_2;
+  uint *arg_eax;
+  int loop_i;
+  uint uval_2;
+  uint uval_3;
+  ushort *arg_edx;
+  uint uval_4;
+  int val;
+  int val_2;
+  byte flag_3;
+  undefined4 uval_5;
+  short short_val_4;
   ushort auStack_50 [2];
   uint local_4c;
   ushort auStack_48 [2];
@@ -738,15 +736,15 @@ uint FUN_000ddbe0(void)
   int local_18;
   undefined4 local_14;
   
-  bVar15 = 0;
-  iVar9 = (uint)*in_EDX - (uint)(ushort)*in_EAX;
-  local_30 = (uint)in_EDX[1] - (uint)*(ushort *)((int)in_EAX + 2);
-  iVar13 = (*(int *)(in_EDX + 1) >> 0x10) - (*(int *)((int)in_EAX + 2) >> 0x10);
-  uVar12 = 0;
-  if ((*(char *)((int)in_EAX + 1) != *(char *)((int)in_EDX + 1)) ||
-     (*(char *)((int)in_EDX + 3) != *(char *)((int)in_EAX + 3))) {
-    if (iVar9 < 0) {
-      iVar9 = -iVar9;
+  flag_3 = 0;
+  loop_i = (uint)*arg_edx - (uint)(ushort)*arg_eax;
+  local_30 = (uint)arg_edx[1] - (uint)*(ushort *)((int)arg_eax + 2);
+  val = (*(int *)(arg_edx + 1) >> 0x10) - (*(int *)((int)arg_eax + 2) >> 0x10);
+  uval_4 = 0;
+  if ((*(char *)((int)arg_eax + 1) != *(char *)((int)arg_edx + 1)) ||
+     (*(char *)((int)arg_edx + 3) != *(char *)((int)arg_eax + 3))) {
+    if (loop_i < 0) {
+      loop_i = -loop_i;
       local_28 = -0x100;
     }
     else {
@@ -759,220 +757,220 @@ uint FUN_000ddbe0(void)
     else {
       local_24 = 0x100;
     }
-    if (iVar13 < 0) {
-      iVar13 = -iVar13;
+    if (val < 0) {
+      val = -val;
       local_18 = -0x100;
     }
     else {
       local_18 = 0x100;
     }
-    local_1c = (byte *)((int)in_EAX + 1);
-    local_34 = (byte *)((int)in_EDX + 1);
-    if (iVar9 == local_30) {
-      uVar10 = (uint)*local_34 - (uint)*local_1c;
+    local_1c = (byte *)((int)arg_eax + 1);
+    local_34 = (byte *)((int)arg_edx + 1);
+    if (loop_i == local_30) {
+      uval_2 = (uint)*local_34 - (uint)*local_1c;
     }
     else {
-      if (local_30 < iVar9) {
-        local_24 = (local_30 * local_24) / iVar9;
-        bVar1 = *local_34;
-        bVar2 = *local_1c;
+      if (local_30 < loop_i) {
+        local_24 = (local_30 * local_24) / loop_i;
+        flag = *local_34;
+        flag_2 = *local_1c;
       }
       else {
-        local_28 = (local_28 * iVar9) / local_30;
-        bVar1 = *(byte *)((int)in_EDX + 3);
-        bVar2 = *(byte *)((int)in_EAX + 3);
-        iVar9 = local_30;
+        local_28 = (local_28 * loop_i) / local_30;
+        flag = *(byte *)((int)arg_edx + 3);
+        flag_2 = *(byte *)((int)arg_eax + 3);
+        loop_i = local_30;
       }
-      uVar10 = (uint)bVar1 - (uint)bVar2;
+      uval_2 = (uint)flag - (uint)flag_2;
     }
-    local_18 = (iVar13 * local_18) / iVar9;
-    local_4c = *in_EAX;
-    auStack_48[0] = (ushort)in_EAX[1];
-    uStack_42 = *(ushort *)((int)in_EAX + 2) + (short)local_24;
-    local_40[0] = (ushort)in_EAX[1] + (short)local_18;
-    _local_44 = (ushort)*in_EAX + (short)local_28;
-    for (iVar9 = (uVar10 ^ (int)uVar10 >> 0x1f) - ((int)uVar10 >> 0x1f); iVar9 != 0;
-        iVar9 = iVar9 + -1) {
-      uVar11 = FUN_000ddb5c();
-      sVar5 = local_3a;
-      cVar8 = local_3b;
-      uVar7 = local_3c;
-      uVar10 = local_4c;
-      uVar12 = uVar12 | uVar11;
-      if ((uVar12 & 1) != 0) {
+    local_18 = (val * local_18) / loop_i;
+    local_4c = *arg_eax;
+    auStack_48[0] = (ushort)arg_eax[1];
+    uStack_42 = *(ushort *)((int)arg_eax + 2) + (short)local_24;
+    local_40[0] = (ushort)arg_eax[1] + (short)local_18;
+    _local_44 = (ushort)*arg_eax + (short)local_28;
+    for (loop_i = (uval_2 ^ (int)uval_2 >> 0x1f) - ((int)uval_2 >> 0x1f); loop_i != 0;
+        loop_i = loop_i + -1) {
+      uval_3 = update_fn_0ddb5c();
+      short_val_3 = local_3a;
+      ch_2 = local_3b;
+      uval = local_3c;
+      uval_2 = local_4c;
+      uval_4 = uval_4 | uval_3;
+      if ((uval_4 & 1) != 0) {
         return 0;
       }
       local_14 = 3;
       local_20 = (uStack_42._1_1_ / 3) * 0x300;
-      if ((*(byte *)((int)&DAT_00279203 + ((bStack_43 / 3) * 3 + local_20 + 0x101) * 5) & 0x40) != 0
+      if ((*(byte *)((int)&g_map_subtiles + ((bStack_43 / 3) * 3 + local_20 + 0x101) * 5) & 0x40) != 0
          ) {
         return 0;
       }
-      iVar14 = (uint)bStack_43 - (local_4c >> 8 & 0xff);
-      iVar13 = (uint)uStack_42._1_1_ - (local_4c >> 0x18);
-      sVar4 = uStack_42;
-      if ((iVar14 != 0) && (iVar13 != 0)) {
+      val_2 = (uint)bStack_43 - (local_4c >> 8 & 0xff);
+      val = (uint)uStack_42._1_1_ - (local_4c >> 0x18);
+      short_val_2 = uStack_42;
+      if ((val_2 != 0) && (val != 0)) {
         local_3c = (undefined1)local_4c;
         local_3b = (char)(local_4c >> 8);
         local_3a._0_1_ = (undefined1)(local_4c >> 0x10);
         local_3a._1_1_ = (char)(local_4c >> 0x18);
-        cVar6 = local_3a._1_1_;
-        sVar3 = (short)local_4c;
-        sVar17 = (short)(local_4c >> 0x10);
-        switch(iVar13 * 2 + iVar14) {
+        ch = local_3a._1_1_;
+        short_val = (short)local_4c;
+        short_val_4 = (short)(local_4c >> 0x10);
+        switch(val * 2 + val_2) {
         case 1:
-          auStack_38[(uint)bVar15 * -4] = auStack_48[(uint)bVar15 * -4];
-          auStack_50[(uint)bVar15 * -4] = auStack_48[(uint)bVar15 * -4];
+          auStack_38[(uint)flag_3 * -4] = auStack_48[(uint)flag_3 * -4];
+          auStack_50[(uint)flag_3 * -4] = auStack_48[(uint)flag_3 * -4];
           local_3a._1_1_ = local_3a._1_1_ + '\x01';
-          uVar16 = CONCAT22(sVar17,sVar3 + -0x100);
-          uVar10 = FUN_000ddb5c(uVar16);
-          if (((uVar12 | uVar10) & 1) != 0) {
+          uval_5 = CONCAT22(short_val_4,short_val + -0x100);
+          uval_2 = update_fn_0ddb5c(uval_5);
+          if (((uval_4 | uval_2) & 1) != 0) {
             return 0;
           }
-          uVar11 = FUN_000ddb5c(uVar16);
-          uVar12 = uVar12 | uVar10 | uVar11;
-          uVar7 = local_3c;
-          cVar8 = local_3b;
-          sVar4 = uStack_42;
-          sVar5 = CONCAT11(local_3a._1_1_,(undefined1)local_3a);
-          if ((uVar12 & 1) != 0) {
+          uval_3 = update_fn_0ddb5c(uval_5);
+          uval_4 = uval_4 | uval_2 | uval_3;
+          uval = local_3c;
+          ch_2 = local_3b;
+          short_val_2 = uStack_42;
+          short_val_3 = CONCAT11(local_3a._1_1_,(undefined1)local_3a);
+          if ((uval_4 & 1) != 0) {
             return 0;
           }
           break;
         case 3:
-          auStack_38[(uint)bVar15 * -4] = auStack_48[(uint)bVar15 * -4];
-          auStack_50[(uint)bVar15 * -4] = auStack_48[(uint)bVar15 * -4];
-          uVar16 = CONCAT13(cVar6 + '\x01',(int3)uVar10);
+          auStack_38[(uint)flag_3 * -4] = auStack_48[(uint)flag_3 * -4];
+          auStack_50[(uint)flag_3 * -4] = auStack_48[(uint)flag_3 * -4];
+          uval_5 = CONCAT13(ch + '\x01',(int3)uval_2);
           local_3b = local_3b + '\x01';
-          uVar10 = FUN_000ddb5c(uVar16);
-          if (((uVar12 | uVar10) & 1) != 0) {
+          uval_2 = update_fn_0ddb5c(uval_5);
+          if (((uval_4 | uval_2) & 1) != 0) {
             return 0;
           }
-          uVar11 = FUN_000ddb5c(uVar16);
-          uVar12 = uVar12 | uVar10 | uVar11;
-          uVar7 = local_3c;
-          cVar8 = local_3b;
-          sVar4 = uStack_42;
-          sVar5 = CONCAT11(local_3a._1_1_,(undefined1)local_3a);
-          if ((uVar12 & 1) != 0) {
+          uval_3 = update_fn_0ddb5c(uval_5);
+          uval_4 = uval_4 | uval_2 | uval_3;
+          uval = local_3c;
+          ch_2 = local_3b;
+          short_val_2 = uStack_42;
+          short_val_3 = CONCAT11(local_3a._1_1_,(undefined1)local_3a);
+          if ((uval_4 & 1) != 0) {
             return 0;
           }
           break;
         case -3:
-          auStack_38[(uint)bVar15 * -4] = auStack_48[(uint)bVar15 * -4];
-          auStack_50[(uint)bVar15 * -4] = auStack_48[(uint)bVar15 * -4];
+          auStack_38[(uint)flag_3 * -4] = auStack_48[(uint)flag_3 * -4];
+          auStack_50[(uint)flag_3 * -4] = auStack_48[(uint)flag_3 * -4];
           local_3a = CONCAT11(local_3a._1_1_,(undefined1)local_3a) + -0x100;
-          uVar16 = CONCAT22(sVar17,sVar3 + -0x100);
-          uVar10 = FUN_000ddb5c(uVar16);
-          if (((uVar12 | uVar10) & 1) != 0) {
+          uval_5 = CONCAT22(short_val_4,short_val + -0x100);
+          uval_2 = update_fn_0ddb5c(uval_5);
+          if (((uval_4 | uval_2) & 1) != 0) {
             return 0;
           }
-          uVar11 = FUN_000ddb5c(uVar16);
-          uVar12 = uVar12 | uVar10 | uVar11;
-          uVar7 = local_3c;
-          cVar8 = local_3b;
-          sVar4 = uStack_42;
-          sVar5 = local_3a;
-          if ((uVar12 & 1) != 0) {
+          uval_3 = update_fn_0ddb5c(uval_5);
+          uval_4 = uval_4 | uval_2 | uval_3;
+          uval = local_3c;
+          ch_2 = local_3b;
+          short_val_2 = uStack_42;
+          short_val_3 = local_3a;
+          if ((uval_4 & 1) != 0) {
             return 0;
           }
           break;
         case -1:
-          auStack_38[(uint)bVar15 * -4] = auStack_48[(uint)bVar15 * -4];
-          auStack_50[(uint)bVar15 * -4] = auStack_48[(uint)bVar15 * -4];
-          uVar16 = CONCAT22(sVar17 + -0x100,sVar3);
+          auStack_38[(uint)flag_3 * -4] = auStack_48[(uint)flag_3 * -4];
+          auStack_50[(uint)flag_3 * -4] = auStack_48[(uint)flag_3 * -4];
+          uval_5 = CONCAT22(short_val_4 + -0x100,short_val);
           local_3b = local_3b + '\x01';
-          uVar10 = FUN_000ddb5c(uVar16);
-          if (((uVar12 | uVar10) & 1) != 0) {
+          uval_2 = update_fn_0ddb5c(uval_5);
+          if (((uval_4 | uval_2) & 1) != 0) {
             return 0;
           }
-          uVar11 = FUN_000ddb5c(uVar16);
-          uVar12 = uVar12 | uVar10 | uVar11;
-          uVar7 = local_3c;
-          cVar8 = local_3b;
-          sVar4 = uStack_42;
-          sVar5 = CONCAT11(local_3a._1_1_,(undefined1)local_3a);
-          if ((uVar12 & 1) != 0) {
+          uval_3 = update_fn_0ddb5c(uval_5);
+          uval_4 = uval_4 | uval_2 | uval_3;
+          uval = local_3c;
+          ch_2 = local_3b;
+          short_val_2 = uStack_42;
+          short_val_3 = CONCAT11(local_3a._1_1_,(undefined1)local_3a);
+          if ((uval_4 & 1) != 0) {
             return 0;
           }
         }
       }
-      local_3b = cVar8;
-      local_3c = uVar7;
-      uStack_42._1_1_ = (byte)((ushort)sVar4 >> 8);
-      uStack_42._0_1_ = (undefined1)sVar4;
-      sVar3 = (short)local_28;
+      local_3b = ch_2;
+      local_3c = uval;
+      uStack_42._1_1_ = (byte)((ushort)short_val_2 >> 8);
+      uStack_42._0_1_ = (undefined1)short_val_2;
+      short_val = (short)local_28;
       local_4c = CONCAT13(uStack_42._1_1_,CONCAT12((undefined1)uStack_42,_local_44));
-      uStack_42 = sVar4;
-      local_3a = sVar5;
-      auStack_48[(uint)bVar15 * -4] = local_40[(uint)bVar15 * -4];
+      uStack_42 = short_val_2;
+      local_3a = short_val_3;
+      auStack_48[(uint)flag_3 * -4] = local_40[(uint)flag_3 * -4];
       uStack_42 = uStack_42 + (short)local_24;
       local_40[0] = local_40[0] + (short)local_18;
-      _local_44 = _local_44 + sVar3;
+      _local_44 = _local_44 + short_val;
     }
-    if (uVar12 != 0) {
-      return uVar12;
+    if (uval_4 != 0) {
+      return uval_4;
     }
   }
   return 1;
 }
 
 /******************************************************************************
- * Function : sub_0de008 (Ghidra: FUN_000de008)
- * Prototype: undefined4 sub_0de008(void);
+ * Function : update_fn_0de008 (Original VA: 0xde008, Ghidra: FUN_000de008)
+ * Prototype: undefined4 update_fn_0de008(void);
  * Address  : 0xde008 (Size: 77 bytes)
  * Module   : update.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module update.cpp procedure @ 0x0de008
  * Callers  : 0 -> 
- * Callees  : 3 -> 0x22b3a, 0x7da18, 0xb3afc
+ * Callees  : 3 -> door_process_map_subtile_022b3a, ceiling_process_map_subtile_07da18, move_fn_0b3afc
  ******************************************************************************/
-undefined4 FUN_000de008(void)
+undefined4 update_fn_0de008(void)
 
 {
-  int iVar1;
-  undefined4 uVar2;
+  int val;
+  undefined4 uval;
   int extraout_ECX;
   
-  iVar1 = FUN_00022b3a();
-  if (iVar1 == 0) {
-    iVar1 = FUN_000b3afc();
-    if (iVar1 != 0) {
+  val = door_process_map_subtile_022b3a();
+  if (val == 0) {
+    val = move_fn_0b3afc();
+    if (val != 0) {
       return 2;
     }
-    uVar2 = FUN_0007da18();
-    return uVar2;
+    uval = ceiling_process_map_subtile_07da18();
+    return uval;
   }
-  if (iVar1 == extraout_ECX) {
+  if (val == extraout_ECX) {
     return 0;
   }
   return 1;
 }
 
 /******************************************************************************
- * Function : sub_0de074 (Ghidra: FUN_000de074)
- * Prototype: uint sub_0de074(void);
+ * Function : update_fn_0de074 (Original VA: 0xde074, Ghidra: FUN_000de074)
+ * Prototype: uint update_fn_0de074(void);
  * Address  : 0xde074 (Size: 1541 bytes)
  * Module   : update.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x102c0
- * Callees  : 3 -> 0x22b3a, 0x7da18, 0xb3afc
+ * Purpose  : Module update.cpp procedure @ 0x0de074
+ * Callers  : 1 -> anger_handle_door_thing_0102c0
+ * Callees  : 3 -> door_process_map_subtile_022b3a, ceiling_process_map_subtile_07da18, move_fn_0b3afc
  ******************************************************************************/
 /* WARNING: Removing unreachable block (ram,0x000de662) */
 
-uint FUN_000de074(void)
+uint update_fn_0de074(void)
 
 {
-  short sVar1;
-  short sVar2;
-  undefined1 uVar3;
-  ushort uVar4;
-  char cVar5;
-  char cVar6;
-  short sVar7;
-  ushort *in_EAX;
-  int iVar8;
-  int iVar9;
-  uint uVar10;
+  short short_val;
+  short short_val_2;
+  undefined1 uval;
+  ushort uval_2;
+  char ch;
+  char ch_2;
+  short short_val_3;
+  ushort *arg_eax;
+  int val;
+  int val_2;
+  uint uval_3;
   int extraout_ECX;
   int extraout_ECX_00;
   int extraout_ECX_01;
@@ -982,11 +980,11 @@ uint FUN_000de074(void)
   int extraout_ECX_05;
   int extraout_ECX_06;
   int extraout_ECX_07;
-  ushort *in_EDX;
-  uint uVar11;
-  uint uVar12;
-  uint uVar13;
-  byte bVar14;
+  ushort *arg_edx;
+  uint uval_4;
+  uint uval_5;
+  uint uval_6;
+  byte flag;
   undefined1 local_5c;
   byte bStack_5b;
   undefined2 uStack_5a;
@@ -1010,15 +1008,15 @@ uint FUN_000de074(void)
   int local_18;
   byte *local_14;
   
-  bVar14 = 0;
-  iVar8 = (uint)*in_EDX - (uint)*in_EAX;
-  local_2c = (uint)in_EDX[1] - (uint)in_EAX[1];
-  iVar9 = (*(int *)(in_EDX + 1) >> 0x10) - (*(int *)(in_EAX + 1) >> 0x10);
-  uVar13 = 0;
-  if ((*(char *)((int)in_EAX + 1) != *(char *)((int)in_EDX + 1)) ||
-     (*(char *)((int)in_EAX + 3) != *(char *)((int)in_EDX + 3))) {
-    if (iVar8 < 0) {
-      iVar8 = -iVar8;
+  flag = 0;
+  val = (uint)*arg_edx - (uint)*arg_eax;
+  local_2c = (uint)arg_edx[1] - (uint)arg_eax[1];
+  val_2 = (*(int *)(arg_edx + 1) >> 0x10) - (*(int *)(arg_eax + 1) >> 0x10);
+  uval_6 = 0;
+  if ((*(char *)((int)arg_eax + 1) != *(char *)((int)arg_edx + 1)) ||
+     (*(char *)((int)arg_eax + 3) != *(char *)((int)arg_edx + 3))) {
+    if (val < 0) {
+      val = -val;
       local_28 = -0x100;
     }
     else {
@@ -1031,76 +1029,76 @@ uint FUN_000de074(void)
     else {
       local_18 = 0x100;
     }
-    if (iVar9 < 0) {
-      iVar9 = -iVar9;
+    if (val_2 < 0) {
+      val_2 = -val_2;
       local_34 = -0x100;
     }
     else {
       local_34 = 0x100;
     }
-    iVar9 = iVar9 * local_34;
-    local_24 = (byte *)((int)in_EAX + 1);
-    local_20 = (byte *)((int)in_EDX + 1);
-    if (iVar8 == local_2c) {
-      local_34 = iVar9 / iVar8;
-      uVar10 = (uint)*local_20;
-      uVar11 = (uint)*local_24;
+    val_2 = val_2 * local_34;
+    local_24 = (byte *)((int)arg_eax + 1);
+    local_20 = (byte *)((int)arg_edx + 1);
+    if (val == local_2c) {
+      local_34 = val_2 / val;
+      uval_3 = (uint)*local_20;
+      uval_4 = (uint)*local_24;
     }
-    else if (local_2c < iVar8) {
-      local_18 = (local_2c * local_18) / iVar8;
-      local_34 = iVar9 / iVar8;
-      uVar10 = (uint)*local_20;
-      uVar11 = (uint)*local_24;
+    else if (local_2c < val) {
+      local_18 = (local_2c * local_18) / val;
+      local_34 = val_2 / val;
+      uval_3 = (uint)*local_20;
+      uval_4 = (uint)*local_24;
     }
     else {
-      local_28 = (local_28 * iVar8) / local_2c;
-      local_34 = iVar9 / local_2c;
-      uVar10 = (uint)*(byte *)((int)in_EDX + 3);
-      uVar11 = (uint)*(byte *)((int)in_EAX + 3);
+      local_28 = (local_28 * val) / local_2c;
+      local_34 = val_2 / local_2c;
+      uval_3 = (uint)*(byte *)((int)arg_edx + 3);
+      uval_4 = (uint)*(byte *)((int)arg_eax + 3);
     }
-    uVar12 = (int)(uVar10 - uVar11) >> 0x1f;
-    local_30 = (uVar10 - uVar11 ^ uVar12) - uVar12;
-    local_54 = *(undefined4 *)in_EAX;
-    auStack_50[0] = in_EAX[2];
-    sVar7 = *in_EAX + (short)local_28;
-    uStack_5a = in_EAX[1] + (short)local_18;
-    local_58[0] = in_EAX[2] + (short)local_34;
+    uval_5 = (int)(uval_3 - uval_4) >> 0x1f;
+    local_30 = (uval_3 - uval_4 ^ uval_5) - uval_5;
+    local_54 = *(undefined4 *)arg_eax;
+    auStack_50[0] = arg_eax[2];
+    short_val_3 = *arg_eax + (short)local_28;
+    uStack_5a = arg_eax[1] + (short)local_18;
+    local_58[0] = arg_eax[2] + (short)local_34;
     if (local_30 != 0) {
       local_1c = &local_4b;
       local_3c = &local_4b;
       local_14 = &bStack_5b;
       do {
-        bStack_5b = (byte)((ushort)sVar7 >> 8);
-        local_5c = (undefined1)sVar7;
-        iVar8 = FUN_00022b3a();
-        if (iVar8 == 0) {
-          iVar8 = FUN_000b3afc();
-          if (iVar8 == 0) {
-            cVar5 = FUN_0007da18();
-            sVar1 = uStack_5a;
-            sVar2 = local_4a;
+        bStack_5b = (byte)((ushort)short_val_3 >> 8);
+        local_5c = (undefined1)short_val_3;
+        val = door_process_map_subtile_022b3a();
+        if (val == 0) {
+          val = move_fn_0b3afc();
+          if (val == 0) {
+            ch = ceiling_process_map_subtile_07da18();
+            short_val = uStack_5a;
+            short_val_2 = local_4a;
           }
           else {
-            cVar5 = '\x02';
-            sVar1 = uStack_5a;
-            sVar2 = local_4a;
+            ch = '\x02';
+            short_val = uStack_5a;
+            short_val_2 = local_4a;
           }
         }
         else {
-          sVar1 = uStack_5a;
-          sVar2 = local_4a;
-          if (iVar8 == extraout_ECX) {
-            cVar5 = '\0';
+          short_val = uStack_5a;
+          short_val_2 = local_4a;
+          if (val == extraout_ECX) {
+            ch = '\0';
           }
           else {
-            cVar5 = '\x01';
+            ch = '\x01';
           }
         }
-        uVar4 = auStack_48[2];
-        uVar3 = local_4c;
-        uStack_5a._1_1_ = (byte)((ushort)sVar1 >> 8);
-        uVar13 = uVar13 | (int)cVar5;
-        if ((uVar13 & 1) != 0) {
+        uval_2 = auStack_48[2];
+        uval = local_4c;
+        uStack_5a._1_1_ = (byte)((ushort)short_val >> 8);
+        uval_6 = uval_6 | (int)ch;
+        if ((uval_6 & 1) != 0) {
           return 0;
         }
         if (((uint)bStack_5b - (uint)local_54._1_1_ != 0) &&
@@ -1108,243 +1106,243 @@ uint FUN_000de074(void)
           local_4c = (undefined1)local_54;
           local_4a._0_1_ = (undefined1)((uint)local_54 >> 0x10);
           auStack_48[2] = (ushort)local_54;
-          sVar7 = (short)((uint)local_54 >> 0x10);
+          short_val_3 = (short)((uint)local_54 >> 0x10);
           uStack_42._0_1_ = (undefined1)local_4a;
           local_4a._1_1_ = local_54._3_1_;
           uStack_42._1_1_ = local_54._3_1_;
-          uStack_5a = sVar1;
+          uStack_5a = short_val;
           switch(((uint)uStack_5a._1_1_ - (uint)local_54._3_1_) * 2 +
                  ((uint)bStack_5b - (uint)local_54._1_1_)) {
           case 1:
-            auStack_48[(uint)bVar14 * -4] = auStack_50[(uint)bVar14 * -4];
-            auStack_40[(uint)bVar14 * -4] = auStack_50[(uint)bVar14 * -4];
+            auStack_48[(uint)flag * -4] = auStack_50[(uint)flag * -4];
+            auStack_40[(uint)flag * -4] = auStack_50[(uint)flag * -4];
             auStack_48[2] = auStack_48[2] + -0x100;
             local_4a._1_1_ = local_54._3_1_ + 1;
             local_4b = local_54._1_1_;
-            iVar8 = FUN_00022b3a();
-            if (iVar8 == 0) {
-              iVar8 = FUN_000b3afc();
-              if (iVar8 == 0) {
-                cVar5 = FUN_0007da18();
+            val = door_process_map_subtile_022b3a();
+            if (val == 0) {
+              val = move_fn_0b3afc();
+              if (val == 0) {
+                ch = ceiling_process_map_subtile_07da18();
               }
               else {
-                cVar5 = '\x02';
+                ch = '\x02';
               }
             }
-            else if (iVar8 == extraout_ECX_04) {
-              cVar5 = '\0';
+            else if (val == extraout_ECX_04) {
+              ch = '\0';
             }
             else {
-              cVar5 = '\x01';
+              ch = '\x01';
             }
-            if (((uVar13 | (int)cVar5) & 1) != 0) {
+            if (((uval_6 | (int)ch) & 1) != 0) {
               return 0;
             }
-            iVar8 = FUN_00022b3a();
-            if (iVar8 == 0) {
-              iVar8 = FUN_000b3afc();
-              if (iVar8 == 0) {
-                cVar6 = FUN_0007da18();
-                sVar1 = uStack_5a;
+            val = door_process_map_subtile_022b3a();
+            if (val == 0) {
+              val = move_fn_0b3afc();
+              if (val == 0) {
+                ch_2 = ceiling_process_map_subtile_07da18();
+                short_val = uStack_5a;
               }
               else {
-                cVar6 = '\x02';
-                sVar1 = uStack_5a;
+                ch_2 = '\x02';
+                short_val = uStack_5a;
               }
             }
             else {
-              sVar1 = uStack_5a;
-              if (iVar8 == extraout_ECX_05) {
-                cVar6 = '\0';
+              short_val = uStack_5a;
+              if (val == extraout_ECX_05) {
+                ch_2 = '\0';
               }
               else {
-                cVar6 = '\x01';
+                ch_2 = '\x01';
               }
             }
-            uVar13 = uVar13 | (int)cVar5 | (int)cVar6;
-            uVar3 = local_4c;
-            uVar4 = auStack_48[2];
-            sVar2 = CONCAT11(local_4a._1_1_,(undefined1)local_4a);
-            if ((uVar13 & 1) != 0) {
+            uval_6 = uval_6 | (int)ch | (int)ch_2;
+            uval = local_4c;
+            uval_2 = auStack_48[2];
+            short_val_2 = CONCAT11(local_4a._1_1_,(undefined1)local_4a);
+            if ((uval_6 & 1) != 0) {
               return 0;
             }
             break;
           case 3:
-            auStack_48[(uint)bVar14 * -4] = auStack_50[(uint)bVar14 * -4];
-            auStack_40[(uint)bVar14 * -4] = auStack_50[(uint)bVar14 * -4];
+            auStack_48[(uint)flag * -4] = auStack_50[(uint)flag * -4];
+            auStack_40[(uint)flag * -4] = auStack_50[(uint)flag * -4];
             uStack_42._1_1_ = local_54._3_1_ + 1;
             local_4b = local_54._1_1_ + 1;
-            iVar8 = FUN_00022b3a();
-            if (iVar8 == 0) {
-              iVar8 = FUN_000b3afc();
-              if (iVar8 == 0) {
-                cVar5 = FUN_0007da18();
+            val = door_process_map_subtile_022b3a();
+            if (val == 0) {
+              val = move_fn_0b3afc();
+              if (val == 0) {
+                ch = ceiling_process_map_subtile_07da18();
               }
               else {
-                cVar5 = '\x02';
+                ch = '\x02';
               }
             }
-            else if (iVar8 == extraout_ECX_06) {
-              cVar5 = '\0';
+            else if (val == extraout_ECX_06) {
+              ch = '\0';
             }
             else {
-              cVar5 = '\x01';
+              ch = '\x01';
             }
-            if (((uVar13 | (int)cVar5) & 1) != 0) {
+            if (((uval_6 | (int)ch) & 1) != 0) {
               return 0;
             }
-            iVar8 = FUN_00022b3a();
-            if (iVar8 == 0) {
-              iVar8 = FUN_000b3afc();
-              if (iVar8 == 0) {
-                cVar6 = FUN_0007da18();
-                sVar1 = uStack_5a;
+            val = door_process_map_subtile_022b3a();
+            if (val == 0) {
+              val = move_fn_0b3afc();
+              if (val == 0) {
+                ch_2 = ceiling_process_map_subtile_07da18();
+                short_val = uStack_5a;
               }
               else {
-                cVar6 = '\x02';
-                sVar1 = uStack_5a;
+                ch_2 = '\x02';
+                short_val = uStack_5a;
               }
             }
             else {
-              sVar1 = uStack_5a;
-              if (iVar8 == extraout_ECX_07) {
-                cVar6 = '\0';
+              short_val = uStack_5a;
+              if (val == extraout_ECX_07) {
+                ch_2 = '\0';
               }
               else {
-                cVar6 = '\x01';
+                ch_2 = '\x01';
               }
             }
-            uVar13 = uVar13 | (int)cVar5 | (int)cVar6;
-            uVar3 = local_4c;
-            uVar4 = auStack_48[2];
-            sVar2 = CONCAT11(local_4a._1_1_,(undefined1)local_4a);
-            if ((uVar13 & 1) != 0) {
+            uval_6 = uval_6 | (int)ch | (int)ch_2;
+            uval = local_4c;
+            uval_2 = auStack_48[2];
+            short_val_2 = CONCAT11(local_4a._1_1_,(undefined1)local_4a);
+            if ((uval_6 & 1) != 0) {
               return 0;
             }
             break;
           case 0xfffffffd:
-            auStack_48[(uint)bVar14 * -4] = auStack_50[(uint)bVar14 * -4];
-            auStack_40[(uint)bVar14 * -4] = auStack_50[(uint)bVar14 * -4];
+            auStack_48[(uint)flag * -4] = auStack_50[(uint)flag * -4];
+            auStack_40[(uint)flag * -4] = auStack_50[(uint)flag * -4];
             auStack_48[2] = auStack_48[2] + -0x100;
             local_4b = local_54._1_1_;
-            local_4a = sVar7 + -0x100;
-            iVar8 = FUN_00022b3a();
-            if (iVar8 == 0) {
-              iVar8 = FUN_000b3afc();
-              if (iVar8 == 0) {
-                cVar5 = FUN_0007da18();
+            local_4a = short_val_3 + -0x100;
+            val = door_process_map_subtile_022b3a();
+            if (val == 0) {
+              val = move_fn_0b3afc();
+              if (val == 0) {
+                ch = ceiling_process_map_subtile_07da18();
               }
               else {
-                cVar5 = '\x02';
+                ch = '\x02';
               }
             }
-            else if (iVar8 == extraout_ECX_00) {
-              cVar5 = '\0';
+            else if (val == extraout_ECX_00) {
+              ch = '\0';
             }
             else {
-              cVar5 = '\x01';
+              ch = '\x01';
             }
-            if (((uVar13 | (int)cVar5) & 1) != 0) {
+            if (((uval_6 | (int)ch) & 1) != 0) {
               return 0;
             }
-            iVar8 = FUN_00022b3a();
-            if (iVar8 == 0) {
-              iVar8 = FUN_000b3afc();
-              if (iVar8 == 0) {
-                cVar6 = FUN_0007da18();
-                sVar1 = uStack_5a;
+            val = door_process_map_subtile_022b3a();
+            if (val == 0) {
+              val = move_fn_0b3afc();
+              if (val == 0) {
+                ch_2 = ceiling_process_map_subtile_07da18();
+                short_val = uStack_5a;
               }
               else {
-                cVar6 = '\x02';
-                sVar1 = uStack_5a;
+                ch_2 = '\x02';
+                short_val = uStack_5a;
               }
             }
             else {
-              sVar1 = uStack_5a;
-              if (iVar8 == extraout_ECX_01) {
-                cVar6 = '\0';
+              short_val = uStack_5a;
+              if (val == extraout_ECX_01) {
+                ch_2 = '\0';
               }
               else {
-                cVar6 = '\x01';
+                ch_2 = '\x01';
               }
             }
-            uVar13 = uVar13 | (int)cVar5 | (int)cVar6;
-            uVar3 = local_4c;
-            uVar4 = auStack_48[2];
-            sVar2 = local_4a;
-            if ((uVar13 & 1) != 0) {
+            uval_6 = uval_6 | (int)ch | (int)ch_2;
+            uval = local_4c;
+            uval_2 = auStack_48[2];
+            short_val_2 = local_4a;
+            if ((uval_6 & 1) != 0) {
               return 0;
             }
             break;
           case 0xffffffff:
-            auStack_48[(uint)bVar14 * -4] = auStack_50[(uint)bVar14 * -4];
-            auStack_40[(uint)bVar14 * -4] = auStack_50[(uint)bVar14 * -4];
+            auStack_48[(uint)flag * -4] = auStack_50[(uint)flag * -4];
+            auStack_40[(uint)flag * -4] = auStack_50[(uint)flag * -4];
             local_4b = local_54._1_1_ + 1;
-            uStack_42 = sVar7 + -0x100;
-            iVar8 = FUN_00022b3a();
-            if (iVar8 == 0) {
-              iVar8 = FUN_000b3afc();
-              if (iVar8 == 0) {
-                cVar5 = FUN_0007da18();
+            uStack_42 = short_val_3 + -0x100;
+            val = door_process_map_subtile_022b3a();
+            if (val == 0) {
+              val = move_fn_0b3afc();
+              if (val == 0) {
+                ch = ceiling_process_map_subtile_07da18();
               }
               else {
-                cVar5 = '\x02';
+                ch = '\x02';
               }
             }
-            else if (iVar8 == extraout_ECX_02) {
-              cVar5 = '\0';
+            else if (val == extraout_ECX_02) {
+              ch = '\0';
             }
             else {
-              cVar5 = '\x01';
+              ch = '\x01';
             }
-            if (((uVar13 | (int)cVar5) & 1) != 0) {
+            if (((uval_6 | (int)ch) & 1) != 0) {
               return 0;
             }
-            iVar8 = FUN_00022b3a();
-            if (iVar8 == 0) {
-              iVar8 = FUN_000b3afc();
-              if (iVar8 == 0) {
-                cVar6 = FUN_0007da18();
-                sVar1 = uStack_5a;
+            val = door_process_map_subtile_022b3a();
+            if (val == 0) {
+              val = move_fn_0b3afc();
+              if (val == 0) {
+                ch_2 = ceiling_process_map_subtile_07da18();
+                short_val = uStack_5a;
               }
               else {
-                cVar6 = '\x02';
-                sVar1 = uStack_5a;
+                ch_2 = '\x02';
+                short_val = uStack_5a;
               }
             }
             else {
-              sVar1 = uStack_5a;
-              if (iVar8 == extraout_ECX_03) {
-                cVar6 = '\0';
+              short_val = uStack_5a;
+              if (val == extraout_ECX_03) {
+                ch_2 = '\0';
               }
               else {
-                cVar6 = '\x01';
+                ch_2 = '\x01';
               }
             }
-            uVar13 = uVar13 | (int)cVar5 | (int)cVar6;
-            uVar3 = local_4c;
-            uVar4 = auStack_48[2];
-            sVar2 = CONCAT11(local_4a._1_1_,(undefined1)local_4a);
-            if ((uVar13 & 1) != 0) {
+            uval_6 = uval_6 | (int)ch | (int)ch_2;
+            uval = local_4c;
+            uval_2 = auStack_48[2];
+            short_val_2 = CONCAT11(local_4a._1_1_,(undefined1)local_4a);
+            if ((uval_6 & 1) != 0) {
               return 0;
             }
           }
         }
-        auStack_48[2] = uVar4;
-        local_4c = uVar3;
-        uStack_5a._1_1_ = (byte)((ushort)sVar1 >> 8);
-        uStack_5a._0_1_ = (undefined1)sVar1;
-        sVar7 = CONCAT11(bStack_5b,local_5c) + (short)local_28;
+        auStack_48[2] = uval_2;
+        local_4c = uval;
+        uStack_5a._1_1_ = (byte)((ushort)short_val >> 8);
+        uStack_5a._0_1_ = (undefined1)short_val;
+        short_val_3 = CONCAT11(bStack_5b,local_5c) + (short)local_28;
         local_54 = CONCAT13(uStack_5a._1_1_,
                             CONCAT12((undefined1)uStack_5a,CONCAT11(bStack_5b,local_5c)));
-        local_4a = sVar2;
-        auStack_50[(uint)bVar14 * -4] = local_58[(uint)bVar14 * -4];
-        uStack_5a = sVar1 + (short)local_18;
+        local_4a = short_val_2;
+        auStack_50[(uint)flag * -4] = local_58[(uint)flag * -4];
+        uStack_5a = short_val + (short)local_18;
         local_58[0] = local_58[0] + (short)local_34;
         local_30 = local_30 + -1;
       } while (local_30 != 0);
-      if (uVar13 != 0) {
-        return uVar13;
+      if (uval_6 != 0) {
+        return uval_6;
       }
     }
   }
@@ -1352,34 +1350,31 @@ uint FUN_000de074(void)
 }
 
 /******************************************************************************
- * Function : dk_go_first_person_without_0de6a8 (Ghidra: FUN_000de6a8)
- * Prototype: undefined8 dk_go_first_person_without_0de6a8(void);
+ * Function : update_go_first_person_without_0de6a8 (Original VA: 0xde6a8, Ghidra: FUN_000de6a8)
+ * Prototype: undefined8 update_go_first_person_without_0de6a8(void);
  * Address  : 0xde6a8 (Size: 4090 bytes)
  * Module   : update.cpp [direct_file_string_xref]
- * OrigLine : update.cpp:2207 ("Cannot go first person without controlling creature")
- * Naming   : String 'Cannot go first person without controlling creature'
- * Callers  : 1 -> 0x36ff4
- * Callees  : 42 -> 0x21369, 0x23250, 0x24344, 0x275c1, 0x2764f, 0x27892, 0x49f4e, 0x51374, 0x51417, 0x5ba80 ...
- * Strings  :
- *   - 0x16c98c: "update.cpp"
- *   - 0x16c958: "Cannot go first person without controlling creature"
+ * OrigLine : update.cpp lines 2207
+ * Purpose  : String 'Cannot go first person without controlling creature'
+ * Callers  : 1 -> game_out_sync_gameturn_036ff4
+ * Callees  : 42 -> compturn_update_player_view_state_021369, door_update_creature_and_thing_023250, effect_process_thing_entity_024344, event_fn_0275c1, event_update_player_dungeon_02764f, evil_process_thing_entity_027892, instance_fn_049f4e, moodneed_fn_051374 ...
  ******************************************************************************/
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined8 FUN_000de6a8(void)
+undefined8 update_go_first_person_without_0de6a8(void)
 
 {
-  undefined1 uVar1;
-  int *piVar2;
-  byte *pbVar3;
-  undefined2 *puVar4;
-  ulonglong uVar5;
-  char cVar6;
-  ushort uVar7;
-  short sVar8;
-  uint uVar9;
-  int iVar10;
-  undefined4 uVar11;
+  undefined1 uval;
+  int *player_off;
+  byte *thing_ptr;
+  undefined2 *word_ptr;
+  ulonglong rand_seed;
+  char ch;
+  ushort loop_i;
+  short short_val;
+  uint uval_2;
+  int val;
+  undefined4 uval_3;
   undefined4 extraout_ECX;
   byte *extraout_ECX_00;
   byte *extraout_ECX_01;
@@ -1391,592 +1386,592 @@ undefined8 FUN_000de6a8(void)
   int extraout_ECX_07;
   ushort extraout_DX;
   ushort extraout_DX_00;
-  int iVar12;
+  int thing_ptr_2;
   int extraout_EDX;
   int extraout_EDX_00;
   int extraout_EDX_01;
   undefined4 extraout_EDX_02;
   undefined4 extraout_EDX_03;
-  int iVar13;
-  byte *pbVar14;
-  undefined1 *puVar15;
-  int *piVar16;
-  int iVar17;
-  byte bVar18;
+  int cctrl_ptr;
+  byte *thing_ptr_3;
+  undefined1 *word_ptr_2;
+  int *int_ptr;
+  int val_2;
+  byte flag;
   uint auStack_1024 [1012];
   undefined1 auStack_54 [8];
   uint auStack_4c [12];
   uint local_1c;
   
-  bVar18 = 0;
-  piVar16 = (int *)auStack_54;
-  puVar15 = auStack_54;
-  if ((DAT_0019d0b8 & 1) == 0) {
-    switch((&DAT_0019d0ff)[(DAT_002f10ce >> 0x18) * 0x4ef]) {
+  flag = 0;
+  int_ptr = (int *)auStack_54;
+  word_ptr_2 = auStack_54;
+  if ((g_game_operation_flags & 1) == 0) {
+    switch((&g_player_view_type)[(g_my_player_word >> 0x18) * 0x4ef]) {
     case 1:
     case 2:
     case 5:
-      DAT_002e8c09 = 0x1e;
-      DAT_002e8c05 = 0x1e;
+      g_bss_002e8c09 = 0x1e;
+      g_bss_002e8c05 = 0x1e;
     }
-    FUN_000ac694();
+    light_fn_0ac694();
   }
-  uVar9 = FUN_0005dc27();
-  if (DAT_0019a2a0 == '\0') {
-    uVar9 = 1;
-    puVar15 = auStack_54;
-    if (DAT_002ebaf6 != '\x01') {
-      if ((DAT_0019d0b8 & 1) == 0) {
-        if (((&DAT_0019d0cb)[(DAT_002f10ce >> 0x18) * 0x4ef] & 8) != 0) {
-          FUN_000627b5();
-          (&DAT_0019d0cb)[(DAT_002f10ce >> 0x18) * 0x4ef] =
-               (&DAT_0019d0cb)[(DAT_002f10ce >> 0x18) * 0x4ef] & 0xf7;
+  uval_2 = packet_exchange_all_players_packets();
+  if (g_bss_0019a2a0 == '\0') {
+    uval_2 = 1;
+    word_ptr_2 = auStack_54;
+    if (g_game_type != '\x01') {
+      if ((g_game_operation_flags & 1) == 0) {
+        if (((&g_bss_0019d0cb)[(g_my_player_word >> 0x18) * 0x4ef] & 8) != 0) {
+          panmap_update_player_view_state_0627b5();
+          (&g_bss_0019d0cb)[(g_my_player_word >> 0x18) * 0x4ef] =
+               (&g_bss_0019d0cb)[(g_my_player_word >> 0x18) * 0x4ef] & 0xf7;
         }
-        for (local_1c = 0; (local_1c & 0xffff) <= (uint)DAT_002eb542; local_1c = local_1c + 1) {
-          FUN_000e6a10();
-          FUN_000e6a10();
-          FUN_000e6a10();
+        for (local_1c = 0; (local_1c & 0xffff) <= (uint)g_bss_002eb542; local_1c = local_1c + 1) {
+          LbScreenWaitVbi();
+          LbScreenWaitVbi();
+          LbScreenWaitVbi();
         }
-        DAT_002ed3dd = 1;
-        for (uVar7 = 1; uVar7 < 0x20; uVar7 = uVar7 + 1) {
-          if (*(int *)(&DAT_002ed35d + (uint)uVar7 * 4) != 0) {
-            DAT_002ed3dd = 0;
+        g_bss_002ed3dd = 1;
+        for (loop_i = 1; loop_i < 0x20; loop_i = loop_i + 1) {
+          if (*(int *)(&g_bss_002ed35d + (uint)loop_i * 4) != 0) {
+            g_bss_002ed3dd = 0;
           }
         }
-        if ((DAT_002e8bee & 1) != 0) {
-          DAT_003d97ac = (DAT_003d97ac + 1) % 8;
-          iVar12 = DAT_003d97ac * 2;
-          iVar13 = 0;
+        if ((g_game_turn & 1) != 0) {
+          g_bss_003d97ac = (g_bss_003d97ac + 1) % 8;
+          thing_ptr_2 = g_bss_003d97ac * 2;
+          cctrl_ptr = 0;
           do {
-            piVar16 = (int *)(&DAT_002e78e9 + iVar12);
-            iVar10 = iVar13 + 4;
-            iVar12 = iVar12 + 0x10;
-            *(undefined4 *)((int)&DAT_002f2163 + iVar13) = (&DAT_002f18e3)[*piVar16 >> 0x10];
-            iVar13 = iVar10;
-          } while (iVar10 != 0xc0);
+            int_ptr = (int *)(&g_bss_002e78e9 + thing_ptr_2);
+            val = cctrl_ptr + 4;
+            thing_ptr_2 = thing_ptr_2 + 0x10;
+            *(undefined4 *)((int)&g_bss_002f2163 + cctrl_ptr) = (&g_bss_002f18e3)[*int_ptr >> 0x10];
+            cctrl_ptr = val;
+          } while (val != 0xc0);
         }
-        FUN_000df760();
-        FUN_000c7be4();
-        FUN_00023250();
-        uVar11 = 1;
-        iVar13 = 0;
-        iVar12 = 0;
+        update_update_slab_subtile_columns_0df760();
+        room_process_dungeon_room_0c7be4();
+        door_update_creature_and_thing_023250();
+        uval_3 = 1;
+        cctrl_ptr = 0;
+        thing_ptr_2 = 0;
         do {
-          if ((((&DAT_0019d0c8)[iVar12] & (byte)uVar11) != 0) && ((&DAT_0019d0f4)[iVar12] == '\x01')
+          if ((((&g_players)[thing_ptr_2] & (byte)uval_3) != 0) && ((&g_bss_0019d0f4)[thing_ptr_2] == '\x01')
              ) {
-            FUN_00066b28();
-            uVar11 = extraout_ECX;
-            iVar12 = extraout_EDX;
+            research_illegal_research_type_process_066b28();
+            uval_3 = extraout_ECX;
+            thing_ptr_2 = extraout_EDX;
           }
-          iVar13 = iVar13 + 1;
-          iVar12 = iVar12 + 0x4ef;
-        } while (iVar13 < 5);
-        iVar13 = 0;
-        iVar12 = 0;
+          cctrl_ptr = cctrl_ptr + 1;
+          thing_ptr_2 = thing_ptr_2 + 0x4ef;
+        } while (cctrl_ptr < 5);
+        cctrl_ptr = 0;
+        thing_ptr_2 = 0;
         do {
-          if ((((&DAT_0019d0c8)[iVar12] & 1) != 0) && ((&DAT_0019d0f4)[iVar12] == '\x01')) {
-            FUN_00076b29();
-            iVar12 = extraout_EDX_00;
+          if ((((&g_players)[thing_ptr_2] & 1) != 0) && ((&g_bss_0019d0f4)[thing_ptr_2] == '\x01')) {
+            workshop_door_choice_076b29();
+            thing_ptr_2 = extraout_EDX_00;
           }
-          iVar13 = iVar13 + 1;
-          iVar12 = iVar12 + 0x4ef;
-        } while (iVar13 < 5);
-        FUN_0002764f();
-        FUN_00027892();
-        FUN_0006809c();
-        if ((DAT_0019d0b9 & 4) != 0) {
-          FUN_00021369();
+          cctrl_ptr = cctrl_ptr + 1;
+          thing_ptr_2 = thing_ptr_2 + 0x4ef;
+        } while (cctrl_ptr < 5);
+        event_update_player_dungeon_02764f();
+        evil_process_thing_entity_027892();
+        script_update_player_view_state_06809c();
+        if ((g_bss_0019d0b9 & 4) != 0) {
+          compturn_update_player_view_state_021369();
         }
-        pbVar14 = &DAT_0019d0c8;
-        iVar12 = 0;
+        thing_ptr_3 = &g_players;
+        thing_ptr_2 = 0;
         do {
-          if ((*pbVar14 & 1) != 0) {
-            FUN_00049f4e();
-            iVar12 = extraout_EDX_01;
+          if ((*thing_ptr_3 & 1) != 0) {
+            instance_fn_049f4e();
+            thing_ptr_2 = extraout_EDX_01;
           }
-          iVar12 = iVar12 + 1;
-          pbVar14 = pbVar14 + 0x4ef;
-        } while (iVar12 < 5);
-        pbVar14 = &DAT_0019d0c8;
-        iVar12 = 0;
+          thing_ptr_2 = thing_ptr_2 + 1;
+          thing_ptr_3 = thing_ptr_3 + 0x4ef;
+        } while (thing_ptr_2 < 5);
+        thing_ptr_3 = &g_players;
+        thing_ptr_2 = 0;
         do {
-          if ((((*pbVar14 & 1) != 0) && ((*pbVar14 & 0x40) == 0)) && (pbVar14[0x453] == 0xf)) {
-            **(undefined2 **)(pbVar14 + 0x38) =
-                 *(undefined2 *)((int)(&DAT_001ae9fc)[*(ushort *)(pbVar14 + 0x2f)] + 0xd);
-            *(undefined2 *)(*(int *)(pbVar14 + 0x38) + 2) =
-                 *(undefined2 *)((int)(&DAT_001ae9fc)[*(ushort *)(pbVar14 + 0x2f)] + 0xf);
+          if ((((*thing_ptr_3 & 1) != 0) && ((*thing_ptr_3 & 0x40) == 0)) && (thing_ptr_3[0x453] == 0xf)) {
+            **(undefined2 **)(thing_ptr_3 + 0x38) =
+                 *(undefined2 *)((int)(&g_thing_ptrs)[*(ushort *)(thing_ptr_3 + 0x2f)] + 0xd);
+            *(undefined2 *)(*(int *)(thing_ptr_3 + 0x38) + 2) =
+                 *(undefined2 *)((int)(&g_thing_ptrs)[*(ushort *)(thing_ptr_3 + 0x2f)] + 0xf);
           }
-          iVar12 = iVar12 + 1;
-          pbVar14 = pbVar14 + 0x4ef;
-        } while (iVar12 < 5);
-        iVar12 = 0;
+          thing_ptr_2 = thing_ptr_2 + 1;
+          thing_ptr_3 = thing_ptr_3 + 0x4ef;
+        } while (thing_ptr_2 < 5);
+        thing_ptr_2 = 0;
         do {
-          iVar12 = iVar12 + 1;
-        } while (iVar12 < 5);
-        pbVar14 = &DAT_0019d0c8;
+          thing_ptr_2 = thing_ptr_2 + 1;
+        } while (thing_ptr_2 < 5);
+        thing_ptr_3 = &g_players;
         do {
-          if (((*pbVar14 & 1) != 0) && (pbVar14[0x2c] == 1)) {
-            FUN_000e612c();
-            FUN_000e612c();
-            FUN_00024344();
-            if (((DAT_0019d0b6 & 1) != 0) &&
+          if (((*thing_ptr_3 & 1) != 0) && (thing_ptr_3[0x2c] == 1)) {
+            bflib_system_io_fn_0e612c();
+            bflib_system_io_fn_0e612c();
+            effect_process_thing_entity_024344();
+            if (((g_game_system_flags & 1) != 0) &&
                ((*(int *)(extraout_ECX_00 + 0x4eb) == 0 && (extraout_ECX_00[0x29] != 0)))) {
-              *(uint *)(extraout_ECX_00 + 0x4eb) = DAT_002e8bee + 1;
+              *(uint *)(extraout_ECX_00 + 0x4eb) = g_game_turn + 1;
             }
-            pbVar14 = extraout_ECX_00;
-            if (*(uint *)(extraout_ECX_00 + 0x4eb) == DAT_002e8bee) {
-              iVar12 = CONCAT31((uint3)(*(uint *)(extraout_ECX_00 + 0x4eb) >> 8) ^
-                                (uint3)(DAT_002e8bee >> 8),extraout_ECX_00[0x29]);
-              if (iVar12 == 1) {
-                if (extraout_ECX_00 == &DAT_0019d0c8 + (DAT_002f10ce >> 0x18) * 0x4ef) {
-                  FUN_0005bcc1();
+            thing_ptr_3 = extraout_ECX_00;
+            if (*(uint *)(extraout_ECX_00 + 0x4eb) == g_game_turn) {
+              thing_ptr_2 = CONCAT31((uint3)(*(uint *)(extraout_ECX_00 + 0x4eb) >> 8) ^
+                                (uint3)(g_game_turn >> 8),extraout_ECX_00[0x29]);
+              if (thing_ptr_2 == 1) {
+                if (extraout_ECX_00 == &g_players + (g_my_player_word >> 0x18) * 0x4ef) {
+                  newgui_copy_state_struct_05bcc1();
                 }
-                FUN_0005ba80();
-                pbVar14 = extraout_ECX_01;
+                newgui_update_player_dungeon_05ba80();
+                thing_ptr_3 = extraout_ECX_01;
               }
-              else if (iVar12 == 2) {
-                if (extraout_ECX_00 == &DAT_0019d0c8 + (DAT_002f10ce >> 0x18) * 0x4ef) {
-                  FUN_0005bcc1();
+              else if (thing_ptr_2 == 2) {
+                if (extraout_ECX_00 == &g_players + (g_my_player_word >> 0x18) * 0x4ef) {
+                  newgui_copy_state_struct_05bcc1();
                 }
-                FUN_0005ba80();
-                pbVar14 = extraout_ECX_02;
+                newgui_update_player_dungeon_05ba80();
+                thing_ptr_3 = extraout_ECX_02;
               }
             }
           }
-          pbVar14 = pbVar14 + 0x4ef;
-        } while (pbVar14 <= &DAT_0019e484);
-        FUN_00069a90();
-        piVar16 = (int *)auStack_54;
-        if ((&DAT_0019d0ff)[(DAT_002f10ce >> 0x18) * 0x4ef] == '\x01') {
-          auStack_4c[4] = DAT_001927d4;
-          auStack_4c[(uint)bVar18 * -2 + 5] = (&DAT_001927d8)[(uint)bVar18 * -2];
-          auStack_4c[(uint)bVar18 * -2 + (uint)bVar18 * -2 + 6] =
-               (&DAT_001927dc)[(uint)bVar18 * -2 + (uint)bVar18 * -2];
-          piVar16 = (int *)auStack_54;
-          if (DAT_003d97b0 != 0) {
-            FUN_000e6a10();
-            pbVar14 = (&DAT_001ae9fc)[DAT_002e6ec6];
-            if (DAT_001ae9fc < pbVar14) {
+          thing_ptr_3 = thing_ptr_3 + 0x4ef;
+        } while (thing_ptr_3 <= &g_bss_0019e484);
+        setup_init_color_tables();
+        int_ptr = (int *)auStack_54;
+        if ((&g_player_view_type)[(g_my_player_word >> 0x18) * 0x4ef] == '\x01') {
+          auStack_4c[4] = g_data_001927d4;
+          auStack_4c[(uint)flag * -2 + 5] = (&g_data_001927d8)[(uint)flag * -2];
+          auStack_4c[(uint)flag * -2 + (uint)flag * -2 + 6] =
+               (&g_data_001927dc)[(uint)flag * -2 + (uint)flag * -2];
+          int_ptr = (int *)auStack_54;
+          if (g_bss_003d97b0 != 0) {
+            LbScreenWaitVbi();
+            thing_ptr_3 = (&g_thing_ptrs)[g_bss_002e6ec6];
+            if (g_thing_ptrs < thing_ptr_3) {
               do {
-                if (((&DAT_0018b916)[(uint)pbVar14[0x1a] * 0x16] != '\0') &&
-                   (iVar12 = FUN_000dc440(), pbVar14 = extraout_ECX_03, iVar12 < (int)auStack_4c[4])
+                if (((&g_data_0018b916)[(uint)thing_ptr_3[0x1a] * 0x16] != '\0') &&
+                   (thing_ptr_2 = update_fn_0dc440(), thing_ptr_3 = extraout_ECX_03, thing_ptr_2 < (int)auStack_4c[4])
                    ) {
-                  iVar13 = 8;
+                  cctrl_ptr = 8;
                   do {
-                    *(undefined4 *)((int)auStack_4c + iVar13 + 4) =
-                         *(undefined4 *)((int)auStack_4c + iVar13);
-                    *(undefined4 *)((int)auStack_4c + iVar13 + 0x10) =
-                         *(undefined4 *)((int)auStack_4c + iVar13 + 0xc);
-                    iVar13 = iVar13 + -4;
-                  } while (iVar13 != 0);
+                    *(undefined4 *)((int)auStack_4c + cctrl_ptr + 4) =
+                         *(undefined4 *)((int)auStack_4c + cctrl_ptr);
+                    *(undefined4 *)((int)auStack_4c + cctrl_ptr + 0x10) =
+                         *(undefined4 *)((int)auStack_4c + cctrl_ptr + 0xc);
+                    cctrl_ptr = cctrl_ptr + -4;
+                  } while (cctrl_ptr != 0);
                   auStack_4c[1] = (uint)*(ushort *)(extraout_ECX_03 + 0x1b);
-                  auStack_4c[4] = iVar12;
+                  auStack_4c[4] = thing_ptr_2;
                 }
-                pbVar14 = (&DAT_001ae9fc)[*(ushort *)(pbVar14 + 0x67)];
-              } while (DAT_001ae9fc < pbVar14);
+                thing_ptr_3 = (&g_thing_ptrs)[*(ushort *)(thing_ptr_3 + 0x67)];
+              } while (g_thing_ptrs < thing_ptr_3);
             }
-            iVar12 = 0;
-            puVar15 = auStack_54;
+            thing_ptr_2 = 0;
+            word_ptr_2 = auStack_54;
             do {
-              piVar16 = (int *)puVar15;
-              if (*(int *)(puVar15 + iVar12 + 0xc) == 0) break;
-              if (*(char *)((int)(&DAT_001ae9fc)[*(int *)(puVar15 + iVar12 + 0xc)] + 0x66) == '\0')
+              int_ptr = (int *)word_ptr_2;
+              if (*(int *)(word_ptr_2 + thing_ptr_2 + 0xc) == 0) break;
+              if (*(char *)((int)(&g_thing_ptrs)[*(int *)(word_ptr_2 + thing_ptr_2 + 0xc)] + 0x66) == '\0')
               {
 LAB_000dec53:
-                *(undefined4 *)(puVar15 + -4) = 0x100;
-                *(undefined4 *)(puVar15 + -8) = 2;
-                *(undefined4 *)(puVar15 + -0xc) = 1;
-                piVar16 = (int *)(puVar15 + -0x10);
-                *(undefined4 *)(puVar15 + -0x10) = 3;
-                *(undefined4 *)(puVar15 + -0x14) = 0xdec71;
-                FUN_0006e538();
+                *(undefined4 *)(word_ptr_2 + -4) = 0x100;
+                *(undefined4 *)(word_ptr_2 + -8) = 2;
+                *(undefined4 *)(word_ptr_2 + -0xc) = 1;
+                int_ptr = (int *)(word_ptr_2 + -0x10);
+                *(undefined4 *)(word_ptr_2 + -0x10) = 3;
+                *(undefined4 *)(word_ptr_2 + -0x14) = 0xdec71;
+                sound_fn_06e538();
               }
               else {
-                *(undefined4 *)(puVar15 + -4) = 0xdec4f;
-                iVar13 = FUN_0006f865();
-                if (iVar13 == 0) goto LAB_000dec53;
+                *(undefined4 *)(word_ptr_2 + -4) = 0xdec4f;
+                cctrl_ptr = sound_fn_06f865();
+                if (cctrl_ptr == 0) goto LAB_000dec53;
               }
-              iVar12 = iVar12 + 4;
-              puVar15 = (undefined1 *)piVar16;
-            } while (iVar12 < 0xc);
+              thing_ptr_2 = thing_ptr_2 + 4;
+              word_ptr_2 = (undefined1 *)int_ptr;
+            } while (thing_ptr_2 < 0xc);
           }
-          DAT_003d97b0 = (byte)((DAT_003d97b0 + 1) % 4);
+          g_bss_003d97b0 = (byte)((g_bss_003d97b0 + 1) % 4);
         }
-        *piVar16 = DAT_001927c8;
-        piVar16[(uint)bVar18 * -2 + 1] = (&DAT_001927cc)[(uint)bVar18 * -2];
-        (piVar16 + (uint)bVar18 * -2 + 1)[(uint)bVar18 * -2 + 1] =
-             (&DAT_001927d0)[(uint)bVar18 * -2 + (uint)bVar18 * -2];
-        piVar2 = *(int **)((int)&DAT_0019d100 + (DAT_002f10ce >> 0x18) * 0x4ef);
-        piVar16[9] = *piVar2;
-        *(short *)(piVar16 + (uint)bVar18 * -2 + 10) = (short)piVar2[(uint)bVar18 * -2 + 1];
-        if (DAT_003d97b4 == 0) {
-          piVar16[-1] = 0xdecda;
-          FUN_000e6a10();
-          pbVar14 = (&DAT_001ae9fc)[DAT_002e6eb6];
-          if (pbVar14 != DAT_001ae9fc) {
+        *int_ptr = g_data_001927c8;
+        int_ptr[(uint)flag * -2 + 1] = (&g_data_001927cc)[(uint)flag * -2];
+        (int_ptr + (uint)flag * -2 + 1)[(uint)flag * -2 + 1] =
+             (&g_data_001927d0)[(uint)flag * -2 + (uint)flag * -2];
+        player_off = *(int **)((int)&g_player_active_camera + (g_my_player_word >> 0x18) * 0x4ef);
+        int_ptr[9] = *player_off;
+        *(short *)(int_ptr + (uint)flag * -2 + 10) = (short)player_off[(uint)flag * -2 + 1];
+        if (g_bss_003d97b4 == 0) {
+          int_ptr[-1] = 0xdecda;
+          LbScreenWaitVbi();
+          thing_ptr_3 = (&g_thing_ptrs)[g_bss_002e6eb6];
+          if (thing_ptr_3 != g_thing_ptrs) {
             do {
-              bVar18 = pbVar14[1];
-              pbVar3 = (&DAT_001ae9fc)[*(ushort *)(pbVar14 + 0x67)];
-              pbVar14[1] = bVar18 & 0xdf;
-              if ((((*pbVar14 & 0x10) == 0) && ((bVar18 & 2) == 0)) &&
-                 (*(int *)(&DAT_001880f4 + (uint)pbVar14[0x1a] * 0x58) != 0)) {
-                iVar12 = (&DAT_001b0a00)[*(ushort *)(pbVar14 + 100)];
-                piVar16[-1] = 0xded4d;
-                iVar13 = FUN_000dc440();
-                if ((iVar13 < *piVar16) &&
-                   (((*(short *)(iVar12 + 9) != 0 &&
+              flag = thing_ptr_3[1];
+              thing_ptr = (&g_thing_ptrs)[*(ushort *)(thing_ptr_3 + 0x67)];
+              thing_ptr_3[1] = flag & 0xdf;
+              if ((((*thing_ptr_3 & 0x10) == 0) && ((flag & 2) == 0)) &&
+                 (*(int *)(&g_data_001880f4 + (uint)thing_ptr_3[0x1a] * 0x58) != 0)) {
+                thing_ptr_2 = (&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr_3 + 100)]; /* thing->ccontrol_idx */
+                int_ptr[-1] = 0xded4d;
+                cctrl_ptr = update_fn_0dc440();
+                if ((cctrl_ptr < *int_ptr) &&
+                   (((*(short *)(thing_ptr_2 + 9) != 0 &&
                      (*(int *)(extraout_ECX_04 + 0xf) >> 0x10 <=
                       (int)(uint)*(ushort *)(extraout_ECX_04 + 0x60))) ||
                     ((*(byte *)(extraout_ECX_04 + 0x25) & 0x20) != 0)))) {
-                  iVar12 = 8;
+                  thing_ptr_2 = 8;
                   do {
-                    *(undefined4 *)((int)&DAT_003d97b8 + iVar12) =
-                         *(undefined4 *)((int)&DAT_003d97b4 + iVar12);
-                    *(undefined4 *)((int)piVar16 + iVar12) =
-                         *(undefined4 *)((int)piVar16 + iVar12 + -4);
-                    iVar12 = iVar12 + -4;
-                  } while (iVar12 != 0);
-                  DAT_003d97b8 = (uint)*(ushort *)(extraout_ECX_04 + 0x1b);
-                  *piVar16 = iVar13;
+                    *(undefined4 *)((int)&g_bss_003d97b8 + thing_ptr_2) =
+                         *(undefined4 *)((int)&g_bss_003d97b4 + thing_ptr_2);
+                    *(undefined4 *)((int)int_ptr + thing_ptr_2) =
+                         *(undefined4 *)((int)int_ptr + thing_ptr_2 + -4);
+                    thing_ptr_2 = thing_ptr_2 + -4;
+                  } while (thing_ptr_2 != 0);
+                  g_bss_003d97b8 = (uint)*(ushort *)(extraout_ECX_04 + 0x1b);
+                  *int_ptr = cctrl_ptr;
                 }
               }
-              pbVar14 = pbVar3;
-            } while (pbVar3 != DAT_001ae9fc);
+              thing_ptr_3 = thing_ptr;
+            } while (thing_ptr != g_thing_ptrs);
           }
         }
-        iVar12 = 0;
+        thing_ptr_2 = 0;
         do {
-          if (*(int *)((int)&DAT_003d97b8 + iVar12) == 0) break;
-          if (*(char *)((int)(&DAT_001ae9fc)[*(int *)((int)&DAT_003d97b8 + iVar12)] + 0x1f) ==
+          if (*(int *)((int)&g_bss_003d97b8 + thing_ptr_2) == 0) break;
+          if (*(char *)((int)(&g_thing_ptrs)[*(int *)((int)&g_bss_003d97b8 + thing_ptr_2)] + 0x1f) ==
               '\x05') {
-            pbVar14 = (byte *)((int)(&DAT_001ae9fc)[*(int *)((int)&DAT_003d97b8 + iVar12)] + 1);
-            *pbVar14 = *pbVar14 | 0x20;
-            piVar16[-1] = 0xdedcf;
-            FUN_0006e61e();
+            thing_ptr_3 = (byte *)((int)(&g_thing_ptrs)[*(int *)((int)&g_bss_003d97b8 + thing_ptr_2)] + 1);
+            *thing_ptr_3 = *thing_ptr_3 | 0x20;
+            int_ptr[-1] = 0xdedcf;
+            sound_update_creature_control_06e61e();
           }
-          iVar12 = iVar12 + 4;
-        } while (iVar12 < 0xc);
-        if ((DAT_003d97b4 == 0) &&
-           (pbVar14 = (&DAT_001ae9fc)[DAT_002e6eb6], pbVar14 != DAT_001ae9fc)) {
+          thing_ptr_2 = thing_ptr_2 + 4;
+        } while (thing_ptr_2 < 0xc);
+        if ((g_bss_003d97b4 == 0) &&
+           (thing_ptr_3 = (&g_thing_ptrs)[g_bss_002e6eb6], thing_ptr_3 != g_thing_ptrs)) {
           do {
-            pbVar3 = (&DAT_001ae9fc)[*(ushort *)(pbVar14 + 0x67)];
-            if ((pbVar14[0x1a] == 0x13) && (-1 < (char)(pbVar14[1] << 2))) {
-              piVar16[-1] = 0xdee37;
-              iVar12 = FUN_0006f865();
-              if (iVar12 != 0) {
-                piVar16[-1] = 0xdee49;
-                FUN_0006f72b();
+            thing_ptr = (&g_thing_ptrs)[*(ushort *)(thing_ptr_3 + 0x67)];
+            if ((thing_ptr_3[0x1a] == 0x13) && (-1 < (char)(thing_ptr_3[1] << 2))) {
+              int_ptr[-1] = 0xdee37;
+              thing_ptr_2 = sound_fn_06f865();
+              if (thing_ptr_2 != 0) {
+                int_ptr[-1] = 0xdee49;
+                sound3d_fn_06f72b();
               }
             }
-            pbVar14 = pbVar3;
-          } while (pbVar3 != DAT_001ae9fc);
+            thing_ptr_3 = thing_ptr;
+          } while (thing_ptr != g_thing_ptrs);
         }
-        DAT_003d97b4 = (DAT_003d97b4 + 1) % 4;
-        piVar16[-1] = 0xdee85;
-        FUN_00062578();
-        if (DAT_002ed402 != 0) {
-          if ((DAT_002e8bee < (uint)(DAT_002ed402 + DAT_002ee894)) &&
-             ((((&DAT_0019d0f1)[(ram0x002ed407 >> 0x18) * 0x4ef] == '\x02' ||
-               ((&DAT_002e0589)[(ram0x002ed407 >> 0x18) * 0xa84] == 0)) ||
-              (*(char *)((int)(&DAT_001ae9fc)
-                              [(ushort)(&DAT_002e0589)[(ram0x002ed407 >> 0x18) * 0xa84]] + 7) ==
+        g_bss_003d97b4 = (g_bss_003d97b4 + 1) % 4;
+        int_ptr[-1] = 0xdee85;
+        panmap_fn_062578();
+        if (g_bss_002ed402 != 0) {
+          if ((g_game_turn < (uint)(g_bss_002ed402 + g_bss_002ee894)) &&
+             ((((&g_bss_0019d0f1)[(ram0x002ed407 >> 0x18) * 0x4ef] == '\x02' ||
+               ((&g_dungeons)[(ram0x002ed407 >> 0x18) * 0xa84] == 0)) ||
+              (*(char *)((int)(&g_thing_ptrs)
+                              [(ushort)(&g_dungeons)[(ram0x002ed407 >> 0x18) * 0xa84]] + 7) ==
                '\x03')))) {
-            DAT_002ed402 = 0;
+            g_bss_002ed402 = 0;
           }
-          if (DAT_002ed402 + DAT_002ee894 == DAT_002e8bee) {
-            uVar11 = 1;
-            iVar12 = 0;
+          if (g_bss_002ed402 + g_bss_002ee894 == g_game_turn) {
+            uval_3 = 1;
+            thing_ptr_2 = 0;
             do {
-              if ((((&DAT_0019d0c8)[iVar12] & (byte)uVar11) != 0) &&
-                 ((&DAT_0019d0f4)[iVar12] == '\x01')) {
-                piVar16[-1] = 0xdef4a;
-                FUN_00070c0c();
-                uVar11 = extraout_EDX_02;
+              if ((((&g_players)[thing_ptr_2] & (byte)uval_3) != 0) &&
+                 ((&g_bss_0019d0f4)[thing_ptr_2] == '\x01')) {
+                int_ptr[-1] = 0xdef4a;
+                specials_fn_070c0c();
+                uval_3 = extraout_EDX_02;
               }
-              iVar12 = iVar12 + 0x4ef;
-            } while (iVar12 != 0x18ab);
+              thing_ptr_2 = thing_ptr_2 + 0x4ef;
+            } while (thing_ptr_2 != 0x18ab);
           }
-          if ((uint)(DAT_002ed402 + DAT_002ee894) < DAT_002e8bee) {
-            uVar9 = 0;
-            iVar12 = 0;
-            iVar13 = 0;
+          if ((uint)(g_bss_002ed402 + g_bss_002ee894) < g_game_turn) {
+            uval_2 = 0;
+            thing_ptr_2 = 0;
+            cctrl_ptr = 0;
             do {
-              if (((((&DAT_0019d0c8)[iVar12] & 1) != 0) && ((&DAT_0019d0f4)[iVar12] == '\x01')) &&
-                 (((&DAT_0019d0f1)[iVar12] == '\0' && ((&DAT_002e0ea2)[iVar13] == '\0')))) {
-                piVar16[-1] = 0xdefbf;
-                FUN_000275c1();
-                piVar16[-1] = 0xdefc7;
-                FUN_000dd6c8();
-                uVar9 = extraout_ECX_05;
-                uVar7 = extraout_DX;
-                if (extraout_ECX_05 == (byte)(&DAT_0019d0f3)[(DAT_002f10ce >> 0x18) * 0x4ef]) {
-                  piVar16[-1] = DAT_00199210;
-                  piVar16[-2] = 0xdeff0;
-                  FUN_000e846c();
-                  uVar9 = extraout_ECX_06;
-                  uVar7 = extraout_DX_00;
+              if (((((&g_players)[thing_ptr_2] & 1) != 0) && ((&g_bss_0019d0f4)[thing_ptr_2] == '\x01')) &&
+                 (((&g_bss_0019d0f1)[thing_ptr_2] == '\0' && ((&g_bss_002e0ea2)[cctrl_ptr] == '\0')))) {
+                int_ptr[-1] = 0xdefbf;
+                event_fn_0275c1();
+                int_ptr[-1] = 0xdefc7;
+                update_update_player_dungeon_0dd6c8();
+                uval_2 = extraout_ECX_05;
+                loop_i = extraout_DX;
+                if (extraout_ECX_05 == (byte)(&g_player_id_number)[(g_my_player_word >> 0x18) * 0x4ef]) {
+                  int_ptr[-1] = g_display_palette;
+                  int_ptr[-2] = 0xdeff0;
+                  LbPaletteSet();
+                  uval_2 = extraout_ECX_06;
+                  loop_i = extraout_DX_00;
                 }
-                if (uVar7 != *(ushort *)((int)&DAT_002e0589 + iVar13)) {
+                if (loop_i != *(ushort *)((int)&g_dungeons + cctrl_ptr)) {
                   *(undefined2 *)
-                   ((int)(&DAT_001ae9fc)[*(ushort *)((int)&DAT_002e0589 + iVar13)] + 0x5e) = 0xffff;
+                   ((int)(&g_thing_ptrs)[*(ushort *)((int)&g_dungeons + cctrl_ptr)] + 0x5e) = 0xffff;
                 }
               }
-              iVar12 = iVar12 + 0x4ef;
-              uVar9 = uVar9 + 1;
-              iVar13 = iVar13 + 0x1508;
-            } while ((int)uVar9 < 5);
+              thing_ptr_2 = thing_ptr_2 + 0x4ef;
+              uval_2 = uval_2 + 1;
+              cctrl_ptr = cctrl_ptr + 0x1508;
+            } while ((int)uval_2 < 5);
           }
         }
       }
-      *(undefined4 *)((int)piVar16 + -4) = 0xdf021;
-      FUN_0008ed2c();
-      *(undefined4 *)((int)piVar16 + 0x34) = 0;
+      *(undefined4 *)((int)int_ptr + -4) = 0xdf021;
+      draw_process_dungeon_room_08ed2c();
+      *(undefined4 *)((int)int_ptr + 0x34) = 0;
       do {
-        iVar12 = *(int *)((int)piVar16 + 0x34);
-        if ((((&DAT_0019d0c8)[iVar12] & 1) != 0) && (((&DAT_0019d0c8)[iVar12] & 0x40) == 0)) {
-          *(undefined4 *)((int)piVar16 + -4) = 0xdf0bf;
-          FUN_00077b8d();
-          puVar4 = *(undefined2 **)((int)&DAT_0019d100 + iVar12);
-          uVar1 = *(undefined1 *)(puVar4 + 3);
-          *(undefined4 *)((int)piVar16 + 0x30) = extraout_EDX_03;
-          switch(uVar1) {
+        thing_ptr_2 = *(int *)((int)int_ptr + 0x34);
+        if ((((&g_players)[thing_ptr_2] & 1) != 0) && (((&g_players)[thing_ptr_2] & 0x40) == 0)) {
+          *(undefined4 *)((int)int_ptr + -4) = 0xdf0bf;
+          workshop_fn_077b8d();
+          word_ptr = *(undefined2 **)((int)&g_player_active_camera + thing_ptr_2);
+          uval = *(undefined1 *)(word_ptr + 3);
+          *(undefined4 *)((int)int_ptr + 0x30) = extraout_EDX_03;
+          switch(uval) {
           case 1:
-            if (*(ushort *)((int)&DAT_0019d0f7 + iVar12) == 0) {
-              if ((&DAT_0019d578)[iVar12] != '\v') {
-                *(undefined4 *)((int)piVar16 + -4) = 0xdf4e3;
-                FUN_000ddaf0(); /* LbErrorLog("update.cpp", line 2207, "Cannot go first person without controlling creature") */
+            if (*(ushort *)((int)&g_bss_0019d0f7 + thing_ptr_2) == 0) {
+              if ((&g_bss_0019d578)[thing_ptr_2] != '\v') {
+                *(undefined4 *)((int)int_ptr + -4) = 0xdf4e3;
+                LbErrorLog(); /* LbErrorLog("update.cpp", line 2207, "Cannot go first person without controlling creature") */
               }
             }
             else {
-              iVar12 = (int)(&DAT_001ae9fc)[*(ushort *)((int)&DAT_0019d0f7 + iVar12)];
-              *(undefined **)((int)piVar16 + 0x2c) =
-                   &DAT_002e910d + (uint)*(byte *)(iVar12 + 0x1a) * 0xe6;
-              *(undefined4 *)((int)piVar16 + -4) = 0xdf130;
-              cVar6 = FUN_00081dd8();
-              if (*(char *)(iVar12 + 0x1f) == '\x05') {
-                iVar13 = (&DAT_001b0a00)[*(ushort *)(iVar12 + 100)];
-                if ((*(int *)(iVar13 + 0xc6) >> 0x10 == 0) ||
-                   ((int)(uint)*(ushort *)(iVar12 + 0x60) < *(int *)(iVar12 + 0xf) >> 0x10)) {
-                  *(undefined1 *)(iVar13 + 0x1e9) = 0;
+              thing_ptr_2 = (int)(&g_thing_ptrs)[*(ushort *)((int)&g_bss_0019d0f7 + thing_ptr_2)];
+              *(undefined **)((int)int_ptr + 0x2c) =
+                   &g_bss_002e910d + (uint)*(byte *)(thing_ptr_2 + 0x1a) * 0xe6;
+              *(undefined4 *)((int)int_ptr + -4) = 0xdf130;
+              ch = creature_fn_081dd8();
+              if (*(char *)(thing_ptr_2 + 0x1f) == '\x05') { /* thing->class_id */
+                cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr_2 + 100)]; /* thing->ccontrol_idx */
+                if ((*(int *)(cctrl_ptr + 0xc6) >> 0x10 == 0) ||
+                   ((int)(uint)*(ushort *)(thing_ptr_2 + 0x60) < *(int *)(thing_ptr_2 + 0xf) >> 0x10)) { /* thing->mappos.val_y */
+                  *(undefined1 *)(cctrl_ptr + 0x1e9) = 0;
                 }
                 else {
-                  *(char *)(iVar13 + 0x1e9) = cVar6 << 4;
+                  *(char *)(cctrl_ptr + 0x1e9) = ch << 4;
                 }
-                iVar17 = (uint)*(ushort *)(iVar12 + 0xd) +
-                         ((&DAT_001927e0)[*(ushort *)(iVar12 + 0x52)] * -0x5a >> 0x10);
-                iVar10 = (uint)*(ushort *)(iVar12 + 0xf) +
-                         (-((int)(&PTR_LAB_00192fe0)[*(ushort *)(iVar12 + 0x52)] * -0x5a >> 8) >> 8)
+                val_2 = (uint)*(ushort *)(thing_ptr_2 + 0xd) + /* thing->mappos.val_x */
+                         ((&g_slab_attr_table)[*(ushort *)(thing_ptr_2 + 0x52)] * -0x5a >> 0x10); /* thing->health */
+                val = (uint)*(ushort *)(thing_ptr_2 + 0xf) + /* thing->mappos.val_y */
+                         (-((int)(&PTR_LAB_00192fe0)[*(ushort *)(thing_ptr_2 + 0x52)] * -0x5a >> 8) >> 8) /* thing->health */
                 ;
-                if (iVar17 < 0) {
-                  iVar17 = 0;
+                if (val_2 < 0) {
+                  val_2 = 0;
                 }
-                else if (0xffff < iVar17) {
-                  iVar17 = 0xffff;
+                else if (0xffff < val_2) {
+                  val_2 = 0xffff;
                 }
-                if (iVar10 < 0) {
-                  iVar10 = 0;
+                if (val < 0) {
+                  val = 0;
                 }
-                else if (0xffff < iVar10) {
-                  iVar10 = 0xffff;
+                else if (0xffff < val) {
+                  val = 0xffff;
                 }
-                if ((*(byte *)(iVar12 + 0x25) & 0x20) == 0) {
-                  *puVar4 = (short)iVar17;
-                  puVar4[1] = (short)iVar10;
-                  *(uint *)((int)puVar4 + 7) = (uint)*(ushort *)(iVar12 + 0x52);
-                  uVar7 = *(ushort *)(iVar12 + 0x54);
-                  *(undefined4 *)((int)puVar4 + 0xf) = 0;
-                  *(uint *)((int)puVar4 + 0xb) = (uint)uVar7;
-                  iVar10 = *(int *)(iVar12 + 0xf) >> 0x10;
-                  uVar9 = (uint)*(ushort *)(*(int *)((int)piVar16 + 0x2c) + 0x55);
-                  iVar17 = *(int *)(puVar4 + 1) >> 0x10;
-                  sVar8 = (short)((uint)*(int *)(puVar4 + 1) >> 0x10);
-                  if (iVar17 < (int)(iVar10 + uVar9)) {
-                    puVar4[2] = (short)((int)((iVar10 + (*(int *)(iVar13 + 0x1e6) >> 0x18) + uVar9)
-                                             - iVar17) / 2) + sVar8;
-                    iVar10 = *(int *)((int)piVar16 + 0x2c);
-                    if ((int)((uint)*(ushort *)(iVar10 + 0x55) +
-                             (*(int *)(iVar12 + 0xf) >> 0x10) + (*(int *)(iVar13 + 0x1e6) >> 0x18))
-                        < *(int *)(puVar4 + 1) >> 0x10) {
+                if ((*(byte *)(thing_ptr_2 + 0x25) & 0x20) == 0) {
+                  *word_ptr = (short)val_2;
+                  word_ptr[1] = (short)val;
+                  *(uint *)((int)word_ptr + 7) = (uint)*(ushort *)(thing_ptr_2 + 0x52); /* thing->health */
+                  loop_i = *(ushort *)(thing_ptr_2 + 0x54);
+                  *(undefined4 *)((int)word_ptr + 0xf) = 0;
+                  *(uint *)((int)word_ptr + 0xb) = (uint)loop_i;
+                  val = *(int *)(thing_ptr_2 + 0xf) >> 0x10; /* thing->mappos.val_y */
+                  uval_2 = (uint)*(ushort *)(*(int *)((int)int_ptr + 0x2c) + 0x55);
+                  val_2 = *(int *)(word_ptr + 1) >> 0x10;
+                  short_val = (short)((uint)*(int *)(word_ptr + 1) >> 0x10);
+                  if (val_2 < (int)(val + uval_2)) {
+                    word_ptr[2] = (short)((int)((val + (*(int *)(cctrl_ptr + 0x1e6) >> 0x18) + uval_2)
+                                             - val_2) / 2) + short_val;
+                    val = *(int *)((int)int_ptr + 0x2c);
+                    if ((int)((uint)*(ushort *)(val + 0x55) +
+                             (*(int *)(thing_ptr_2 + 0xf) >> 0x10) + (*(int *)(cctrl_ptr + 0x1e6) >> 0x18)) /* thing->mappos.val_y */
+                        < *(int *)(word_ptr + 1) >> 0x10) {
 LAB_000df2e9:
-                      puVar4[2] = *(short *)(iVar12 + 0x11) + (short)*(char *)(iVar13 + 0x1e9) +
-                                  *(short *)(iVar10 + 0x55);
+                      word_ptr[2] = *(short *)(thing_ptr_2 + 0x11) + (short)*(char *)(cctrl_ptr + 0x1e9) +
+                                  *(short *)(val + 0x55);
                     }
                   }
                   else {
-                    puVar4[2] = (short)((int)((iVar10 + (*(int *)(iVar13 + 0x1e6) >> 0x18) + uVar9)
-                                             - iVar17) / 2) + sVar8;
-                    iVar10 = *(int *)((int)piVar16 + 0x2c);
-                    if (*(int *)(puVar4 + 1) >> 0x10 <
-                        (int)((*(int *)(iVar12 + 0xf) >> 0x10) + (*(int *)(iVar13 + 0x1e6) >> 0x18)
-                             + (uint)*(ushort *)(iVar10 + 0x55))) goto LAB_000df2e9;
+                    word_ptr[2] = (short)((int)((val + (*(int *)(cctrl_ptr + 0x1e6) >> 0x18) + uval_2)
+                                             - val_2) / 2) + short_val;
+                    val = *(int *)((int)int_ptr + 0x2c);
+                    if (*(int *)(word_ptr + 1) >> 0x10 <
+                        (int)((*(int *)(thing_ptr_2 + 0xf) >> 0x10) + (*(int *)(cctrl_ptr + 0x1e6) >> 0x18) /* thing->mappos.val_y */
+                             + (uint)*(ushort *)(val + 0x55))) goto LAB_000df2e9;
                   }
                 }
                 else {
-                  *puVar4 = (short)iVar17;
-                  puVar4[1] = (short)iVar10;
-                  puVar4[2] = *(undefined2 *)(iVar12 + 0x11);
-                  puVar4[2] = puVar4[2] + *(short *)(*(int *)((int)piVar16 + 0x2c) + 0x55);
-                  *(uint *)((int)puVar4 + 7) = (uint)*(ushort *)(iVar12 + 0x52);
-                  *(uint *)((int)puVar4 + 0xb) = (uint)*(ushort *)(iVar12 + 0x54);
-                  *(int *)((int)puVar4 + 0xf) = *(int *)(iVar13 + 0xca) >> 0x10;
+                  *word_ptr = (short)val_2;
+                  word_ptr[1] = (short)val;
+                  word_ptr[2] = *(undefined2 *)(thing_ptr_2 + 0x11);
+                  word_ptr[2] = word_ptr[2] + *(short *)(*(int *)((int)int_ptr + 0x2c) + 0x55);
+                  *(uint *)((int)word_ptr + 7) = (uint)*(ushort *)(thing_ptr_2 + 0x52); /* thing->health */
+                  *(uint *)((int)word_ptr + 0xb) = (uint)*(ushort *)(thing_ptr_2 + 0x54);
+                  *(int *)((int)word_ptr + 0xf) = *(int *)(cctrl_ptr + 0xca) >> 0x10;
                 }
-                iVar12 = (uint)*(byte *)(iVar12 + 0xe) + (uint)*(byte *)(iVar12 + 0x10) * 0x100;
-                iVar12 = (int)(((*(uint *)((int)&DAT_00279203 + iVar12 * 5 + 1) & 0xfffffff) >> 0x18
+                thing_ptr_2 = (uint)*(byte *)(thing_ptr_2 + 0xe) + (uint)*(byte *)(thing_ptr_2 + 0x10) * 0x100;
+                thing_ptr_2 = (int)(((*(uint *)((int)&g_map_subtiles + thing_ptr_2 * 5 + 1) & 0xfffffff) >> 0x18
                                ) * 0x100 +
-                               ((*(uint *)((int)&DAT_00279203 + (iVar12 + 1) * 5 + 1) & 0xfffffff)
+                               ((*(uint *)((int)&g_map_subtiles + (thing_ptr_2 + 1) * 5 + 1) & 0xfffffff)
                                >> 0x18) * 0x100 +
-                               ((*(uint *)((int)&DAT_00279203 + (iVar12 + 0x100) * 5 + 1) &
+                               ((*(uint *)((int)&g_map_subtiles + (thing_ptr_2 + 0x100) * 5 + 1) &
                                 0xfffffff) >> 0x18) * 0x100 +
-                              ((*(uint *)((int)&DAT_00279203 + (iVar12 + 0x101) * 5 + 1) & 0xfffffff
+                              ((*(uint *)((int)&g_map_subtiles + (thing_ptr_2 + 0x101) * 5 + 1) & 0xfffffff
                                ) >> 0x18) * 0x100) >> 2;
-                if (iVar12 + -0x40 < *(int *)(puVar4 + 1) >> 0x10) {
-                  puVar4[2] = (short)iVar12 + -0x40;
+                if (thing_ptr_2 + -0x40 < *(int *)(word_ptr + 1) >> 0x10) {
+                  word_ptr[2] = (short)thing_ptr_2 + -0x40;
                 }
               }
-              else if (*(char *)(iVar12 + 0x1a) == '\n') {
-                *puVar4 = *(undefined2 *)(iVar12 + 0xd);
-                puVar4[1] = *(undefined2 *)(iVar12 + 0xf);
-                puVar4[2] = *(short *)(iVar12 + 0x11) + 0xf0;
-                *(uint *)((int)puVar4 + 7) = (uint)*(ushort *)(iVar12 + 0x52);
-                uVar7 = *(ushort *)(iVar12 + 0x54);
-                *(undefined4 *)((int)puVar4 + 0xf) = 0;
-                *(uint *)((int)puVar4 + 0xb) = (uint)uVar7;
-                iVar13 = *(int *)(iVar12 + 0x13) >> 0x18;
-                *(undefined2 *)(iVar12 + 0x54) = 0;
-                if (iVar13 != 0) {
-                  cVar6 = (char)((uint)*(int *)(iVar12 + 0x13) >> 0x18);
-                  if (iVar13 < 4) {
-                    *(short *)(iVar12 + 0x54) = cVar6 * -0x74 + 0x800;
+              else if (*(char *)(thing_ptr_2 + 0x1a) == '\n') {
+                *word_ptr = *(undefined2 *)(thing_ptr_2 + 0xd); /* thing->mappos.val_x */
+                word_ptr[1] = *(undefined2 *)(thing_ptr_2 + 0xf); /* thing->mappos.val_y */
+                word_ptr[2] = *(short *)(thing_ptr_2 + 0x11) + 0xf0;
+                *(uint *)((int)word_ptr + 7) = (uint)*(ushort *)(thing_ptr_2 + 0x52); /* thing->health */
+                loop_i = *(ushort *)(thing_ptr_2 + 0x54);
+                *(undefined4 *)((int)word_ptr + 0xf) = 0;
+                *(uint *)((int)word_ptr + 0xb) = (uint)loop_i;
+                cctrl_ptr = *(int *)(thing_ptr_2 + 0x13) >> 0x18; /* thing->anim_sprite */
+                *(undefined2 *)(thing_ptr_2 + 0x54) = 0;
+                if (cctrl_ptr != 0) {
+                  ch = (char)((uint)*(int *)(thing_ptr_2 + 0x13) >> 0x18); /* thing->anim_sprite */
+                  if (cctrl_ptr < 4) {
+                    *(short *)(thing_ptr_2 + 0x54) = ch * -0x74 + 0x800;
                   }
                   else {
-                    *(short *)(iVar12 + 0x54) = (cVar6 + -3) * 0x74 + 0x6a4;
+                    *(short *)(thing_ptr_2 + 0x54) = (ch + -3) * 0x74 + 0x6a4;
                   }
                 }
               }
               else {
-                *puVar4 = *(undefined2 *)(iVar12 + 0xd);
-                puVar4[1] = *(undefined2 *)(iVar12 + 0xf);
-                *(uint *)((int)puVar4 + 7) = (uint)*(ushort *)(iVar12 + 0x52);
-                uVar7 = *(ushort *)(iVar12 + 0x54);
-                *(undefined4 *)((int)puVar4 + 0xf) = 0;
-                *(uint *)((int)puVar4 + 0xb) = (uint)uVar7;
-                iVar13 = *(int *)(iVar12 + 0xf) >> 0x10;
-                iVar10 = *(int *)(puVar4 + 1) >> 0x10;
-                sVar8 = (short)(((iVar13 + 0x40) - iVar10) / 2) +
-                        (short)((uint)*(int *)(puVar4 + 1) >> 0x10);
-                if (iVar10 < iVar13 + 0x20) {
-                  puVar4[2] = sVar8;
-                  if ((*(int *)(iVar12 + 0xf) >> 0x10) + 0x40 < *(int *)(puVar4 + 1) >> 0x10) {
-                    puVar4[2] = *(short *)(iVar12 + 0x11) + 0x40;
+                *word_ptr = *(undefined2 *)(thing_ptr_2 + 0xd); /* thing->mappos.val_x */
+                word_ptr[1] = *(undefined2 *)(thing_ptr_2 + 0xf); /* thing->mappos.val_y */
+                *(uint *)((int)word_ptr + 7) = (uint)*(ushort *)(thing_ptr_2 + 0x52); /* thing->health */
+                loop_i = *(ushort *)(thing_ptr_2 + 0x54);
+                *(undefined4 *)((int)word_ptr + 0xf) = 0;
+                *(uint *)((int)word_ptr + 0xb) = (uint)loop_i;
+                cctrl_ptr = *(int *)(thing_ptr_2 + 0xf) >> 0x10; /* thing->mappos.val_y */
+                val = *(int *)(word_ptr + 1) >> 0x10;
+                short_val = (short)(((cctrl_ptr + 0x40) - val) / 2) +
+                        (short)((uint)*(int *)(word_ptr + 1) >> 0x10);
+                if (val < cctrl_ptr + 0x20) {
+                  word_ptr[2] = short_val;
+                  if ((*(int *)(thing_ptr_2 + 0xf) >> 0x10) + 0x40 < *(int *)(word_ptr + 1) >> 0x10) { /* thing->mappos.val_y */
+                    word_ptr[2] = *(short *)(thing_ptr_2 + 0x11) + 0x40;
                   }
                 }
                 else {
-                  puVar4[2] = sVar8;
-                  if (*(int *)(puVar4 + 1) >> 0x10 < (*(int *)(iVar12 + 0xf) >> 0x10) + 0x40) {
-                    puVar4[2] = *(short *)(iVar12 + 0x11) + 0x40;
+                  word_ptr[2] = short_val;
+                  if (*(int *)(word_ptr + 1) >> 0x10 < (*(int *)(thing_ptr_2 + 0xf) >> 0x10) + 0x40) { /* thing->mappos.val_y */
+                    word_ptr[2] = *(short *)(thing_ptr_2 + 0x11) + 0x40;
                   }
                 }
               }
             }
             break;
           case 2:
-            *(undefined2 *)(&DAT_0019d182 + iVar12) = *puVar4;
-            *(undefined2 *)(&DAT_0019d184 + iVar12) =
-                 *(undefined2 *)(*(int *)((int)&DAT_0019d100 + iVar12) + 2);
+            *(undefined2 *)(&g_bss_0019d182 + thing_ptr_2) = *word_ptr;
+            *(undefined2 *)(&g_bss_0019d184 + thing_ptr_2) =
+                 *(undefined2 *)(*(int *)((int)&g_player_active_camera + thing_ptr_2) + 2);
             break;
           case 5:
-            *(undefined2 *)(&DAT_0019d104 + iVar12) = *puVar4;
-            *(undefined2 *)(&DAT_0019d106 + iVar12) =
-                 *(undefined2 *)(*(int *)((int)&DAT_0019d100 + iVar12) + 2);
+            *(undefined2 *)(&g_bss_0019d104 + thing_ptr_2) = *word_ptr;
+            *(undefined2 *)(&g_bss_0019d106 + thing_ptr_2) =
+                 *(undefined2 *)(*(int *)((int)&g_player_active_camera + thing_ptr_2) + 2);
           }
-          iVar12 = *(int *)(*(int *)((int)piVar16 + 0x30) + 0xea0);
-          if (iVar12 != 0) {
-            *(int *)(*(int *)((int)piVar16 + 0x30) + 0xea0) = iVar12 + -1;
+          thing_ptr_2 = *(int *)(*(int *)((int)int_ptr + 0x30) + 0xea0);
+          if (thing_ptr_2 != 0) {
+            *(int *)(*(int *)((int)int_ptr + 0x30) + 0xea0) = thing_ptr_2 + -1;
           }
-          iVar12 = *(int *)(*(int *)((int)piVar16 + 0x30) + 0xea4);
-          if (0 < iVar12) {
-            *(int *)(*(int *)((int)piVar16 + 0x30) + 0xea4) = iVar12 + -0x20;
+          thing_ptr_2 = *(int *)(*(int *)((int)int_ptr + 0x30) + 0xea4);
+          if (0 < thing_ptr_2) {
+            *(int *)(*(int *)((int)int_ptr + 0x30) + 0xea4) = thing_ptr_2 + -0x20;
           }
         }
-        iVar12 = *(int *)((int)piVar16 + 0x34);
-        *(int *)((int)piVar16 + 0x34) = iVar12 + 0x4ef;
-      } while (iVar12 + 0x4ef != 0x18ab);
-      if ((DAT_0019d0b8 & 1) == 0) {
-        *(undefined4 *)((int)piVar16 + -4) = 0xdf4fa;
-        FUN_00051417();
-        if (DAT_00334019 == 0) {
-          if (((DAT_0019d0bd & 0x10) == 0) && (DAT_0019d0bf != '\0')) {
-            *(undefined4 *)((int)piVar16 + -4) = 0xdf521;
-            FUN_000ecabc();
+        thing_ptr_2 = *(int *)((int)int_ptr + 0x34);
+        *(int *)((int)int_ptr + 0x34) = thing_ptr_2 + 0x4ef;
+      } while (thing_ptr_2 + 0x4ef != 0x18ab);
+      if ((g_game_operation_flags & 1) == 0) {
+        *(undefined4 *)((int)int_ptr + -4) = 0xdf4fa;
+        mapwho_fn_051417();
+        if (g_bss_00334019 == 0) {
+          if (((g_bss_0019d0bd & 0x10) == 0) && (g_bss_0019d0bf != '\0')) {
+            *(undefined4 *)((int)int_ptr + -4) = 0xdf521;
+            bflib_sound_bf110_play_cd_non_0ecabc();
           }
-          *(undefined4 *)((int)piVar16 + -4) = 0xdf54e;
-          FUN_0006f816();
-          *(undefined4 *)((int)piVar16 + -4) = 0xdf570;
-          FUN_0006f82f();
+          *(undefined4 *)((int)int_ptr + -4) = 0xdf54e;
+          sound3d_fn_06f816();
+          *(undefined4 *)((int)int_ptr + -4) = 0xdf570;
+          sound3d_fn_06f82f();
         }
-        DAT_002e8bee = DAT_002e8bee + 1;
+        g_game_turn = g_game_turn + 1;
       }
-      *(undefined4 *)((int)piVar16 + -4) = 0xdf57b;
-      FUN_000670b2();
-      *(undefined4 *)((int)piVar16 + -4) = 0xdf580;
-      FUN_0006f98e();
-      iVar12 = (int)(DAT_002ee88e - DAT_002e8bee) / 2;
-      *(undefined4 *)((int)piVar16 + -4) = 0xdf5a7;
-      uVar9 = FUN_00070bf9();
-      if ((uVar9 != 0) &&
+      *(undefined4 *)((int)int_ptr + -4) = 0xdf57b;
+      research_update_slab_subtile_columns_0670b2();
+      *(undefined4 *)((int)int_ptr + -4) = 0xdf580;
+      sound3d_attempt_query_sample_06f98e();
+      thing_ptr_2 = (int)(g_bss_002ee88e - g_game_turn) / 2;
+      *(undefined4 *)((int)int_ptr + -4) = 0xdf5a7;
+      uval_2 = specials_fn_070bf9();
+      if ((uval_2 != 0) &&
          ((extraout_ECX_07 == 0 ||
           ((0 < extraout_ECX_07 &&
-           ((((iVar12 < 0x65 && (iVar12 % 10 == 0)) || ((iVar12 < 0x12d && (iVar12 % 0x32 == 0))))
-            || (uVar9 = iVar12 / 0xfa, iVar12 % 0xfa == 0)))))))) {
-        *(undefined4 *)((int)piVar16 + -4) = 0xdf5fe;
-        uVar9 = FUN_0006e9ab();
+           ((((thing_ptr_2 < 0x65 && (thing_ptr_2 % 10 == 0)) || ((thing_ptr_2 < 0x12d && (thing_ptr_2 % 0x32 == 0))))
+            || (uval_2 = thing_ptr_2 / 0xfa, thing_ptr_2 % 0xfa == 0)))))))) {
+        *(undefined4 *)((int)int_ptr + -4) = 0xdf5fe;
+        uval_2 = sound_non_emitter_has_been_06e9ab();
       }
-      puVar15 = (undefined1 *)piVar16;
-      if (DAT_002e8bee != 0) {
-        uVar9 = DAT_002e8bee / 20000;
-        if ((int)((ulonglong)DAT_002e8bee % 20000) == 0) {
-          uVar9 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-          DAT_002e8bf6 = uVar9 >> 0xd | uVar9 * 0x80000;
-          uVar5 = (ulonglong)DAT_002e8bee % 20000 << 0x20 | (ulonglong)DAT_002e8bf6;
-          uVar9 = (uint)(uVar5 / 2000);
-          if ((int)(uVar5 % 2000) == 0) {
-            uVar9 = DAT_002e8bfa * 0x24a1 + 0x24df;
-            DAT_002e8bfa = uVar9 >> 0xd | uVar9 * 0x80000;
-            *(undefined4 *)((int)piVar16 + -4) = 0xdf690;
-            uVar9 = FUN_00051374();
+      word_ptr_2 = (undefined1 *)int_ptr;
+      if (g_game_turn != 0) {
+        uval_2 = g_game_turn / 20000;
+        if ((int)((ulonglong)g_game_turn % 20000) == 0) {
+          uval_2 = g_action_random_seed * 0x24a1 + 0x24df;
+          g_action_random_seed = uval_2 >> 0xd | uval_2 * 0x80000;
+          rand_seed = (ulonglong)g_game_turn % 20000 << 0x20 | (ulonglong)g_action_random_seed;
+          uval_2 = (uint)(rand_seed / 2000);
+          if ((int)(rand_seed % 2000) == 0) {
+            uval_2 = g_unsynced_random_seed * 0x24a1 + 0x24df;
+            g_unsynced_random_seed = uval_2 >> 0xd | uval_2 * 0x80000;
+            *(undefined4 *)((int)int_ptr + -4) = 0xdf690;
+            uval_2 = moodneed_fn_051374();
           }
         }
       }
     }
-    DAT_002ebaf7 = 0;
+    g_bss_002ebaf7 = 0;
   }
-  return CONCAT44(*(undefined4 *)(puVar15 + 0x48),uVar9);
+  return CONCAT44(*(undefined4 *)(word_ptr_2 + 0x48),uval_2);
 }
 
 /******************************************************************************
- * Function : sub_0df760 (Ghidra: FUN_000df760)
- * Prototype: void sub_0df760(void);
+ * Function : update_update_slab_subtile_columns_0df760 (Original VA: 0xdf760, Ghidra: FUN_000df760)
+ * Prototype: void update_update_slab_subtile_columns_0df760(void);
  * Address  : 0xdf760 (Size: 2606 bytes)
  * Module   : update.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0xde6a8
- * Callees  : 19 -> 0x24998, 0x444a9, 0x44dae, 0x4ef8a, 0x50349, 0x64a2e, 0x6f671, 0x6f69c, 0x6f6b8, 0x72af4 ...
+ * Purpose  : Updates 3x3 subtile map entries for slab coordinates
+ * Callers  : 1 -> update_go_first_person_without_0de6a8
+ * Callees  : 19 -> effect_allocate_light_effect_024998, inits_allocate_dynamic_light_shot_0444a9, inits_update_player_dungeon_044dae, magic_update_slab_subtile_columns_04ef8a, magic_update_slab_subtile_columns_050349, person_fn_064a2e, sound_fn_06f671, sound_fn_06f69c ...
  ******************************************************************************/
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void FUN_000df760(void)
+void update_update_slab_subtile_columns_0df760(void)
 
 {
-  longlong lVar1;
-  byte bVar2;
-  short sVar3;
-  ushort uVar4;
-  uint uVar5;
-  int iVar6;
-  undefined4 uVar7;
-  byte *pbVar8;
+  longlong rand_seed;
+  byte flag;
+  short short_val;
+  ushort uval;
+  uint thing_ptr;
+  int val;
+  undefined4 uval_2;
+  byte *thing_ptr_2;
   int extraout_ECX;
-  int iVar9;
+  int val_2;
   int extraout_ECX_00;
   int extraout_ECX_01;
   int extraout_ECX_02;
@@ -1984,366 +1979,366 @@ void FUN_000df760(void)
   int extraout_ECX_04;
   int extraout_ECX_05;
   int extraout_ECX_06;
-  byte *pbVar10;
-  uint uVar11;
-  ushort *puVar12;
-  undefined1 *puVar13;
-  int iVar14;
-  undefined8 uVar15;
+  byte *thing_ptr_3;
+  uint uval_3;
+  ushort *word_ptr;
+  undefined1 *word_ptr_2;
+  int val_3;
+  undefined8 uval_4;
   undefined4 auStack_5c [3];
   undefined1 local_50 [24];
   int local_38;
   
-  puVar12 = (ushort *)local_50;
-  puVar13 = local_50;
+  word_ptr = (ushort *)local_50;
+  word_ptr_2 = local_50;
   local_38 = 0;
-  _DAT_003d97c4 = 0;
-  _DAT_003d97c8 = 0;
-  DAT_003d97cc = DAT_001e31f9;
-  pbVar10 = (&DAT_001ae9fc)[DAT_002e6eb6];
-  if ((&DAT_001ae9fc)[DAT_002e6eb6] != DAT_001ae9fc) {
+  g_bss_003d97c4 = 0;
+  g_bss_003d97c8 = 0;
+  g_bss_003d97cc = g_bss_001e31f9;
+  thing_ptr_3 = (&g_thing_ptrs)[g_bss_002e6eb6];
+  if ((&g_thing_ptrs)[g_bss_002e6eb6] != g_thing_ptrs) {
     do {
-      pbVar8 = (&DAT_001ae9fc)[*(ushort *)(pbVar10 + 0x67)];
-      if ((*pbVar10 & 0x40) == 0) {
-        if ((*pbVar10 & 0x10) == 0) {
-          FUN_000e0880();
+      thing_ptr_2 = (&g_thing_ptrs)[*(ushort *)(thing_ptr_3 + 0x67)];
+      if ((*thing_ptr_3 & 0x40) == 0) {
+        if ((*thing_ptr_3 & 0x10) == 0) {
+          update_fn_0e0880();
         }
         else {
-          FUN_000e413c();
+          update_update_creature_control_0e413c();
         }
       }
-      FUN_00073fb9();
-      pbVar10 = pbVar8;
-    } while (pbVar8 != DAT_001ae9fc);
+      temple_update_creature_control_073fb9();
+      thing_ptr_3 = thing_ptr_2;
+    } while (thing_ptr_2 != g_thing_ptrs);
   }
-  FUN_000e01f4();
+  update_some_thing_has_been_0e01f4();
   local_38 = local_38 + extraout_ECX;
-  pbVar10 = (&DAT_001ae9fc)[DAT_002e6eee];
-  iVar9 = 0;
-  if (pbVar10 != DAT_001ae9fc) {
+  thing_ptr_3 = (&g_thing_ptrs)[g_bss_002e6eee];
+  val_2 = 0;
+  if (thing_ptr_3 != g_thing_ptrs) {
     do {
-      bVar2 = *pbVar10;
-      pbVar10 = (&DAT_001ae9fc)[*(ushort *)(pbVar10 + 0x67)];
-      if ((bVar2 & 0x40) == 0) {
-        if ((bVar2 & 0x10) == 0) {
-          FUN_000e0880();
+      flag = *thing_ptr_3;
+      thing_ptr_3 = (&g_thing_ptrs)[*(ushort *)(thing_ptr_3 + 0x67)];
+      if ((flag & 0x40) == 0) {
+        if ((flag & 0x10) == 0) {
+          update_fn_0e0880();
         }
         else {
-          FUN_000e413c();
+          update_update_creature_control_0e413c();
         }
       }
-      iVar9 = FUN_00073fb9();
-      iVar9 = extraout_ECX_00 + iVar9;
-    } while (pbVar10 != DAT_001ae9fc);
+      val_2 = temple_update_creature_control_073fb9();
+      val_2 = extraout_ECX_00 + val_2;
+    } while (thing_ptr_3 != g_thing_ptrs);
   }
-  local_38 = local_38 + iVar9;
-  pbVar10 = (&DAT_001ae9fc)[DAT_002e6ebe];
-  iVar9 = 0;
-  if (pbVar10 != DAT_001ae9fc) {
+  local_38 = local_38 + val_2;
+  thing_ptr_3 = (&g_thing_ptrs)[g_bss_002e6ebe];
+  val_2 = 0;
+  if (thing_ptr_3 != g_thing_ptrs) {
     do {
-      bVar2 = *pbVar10;
-      pbVar10 = (&DAT_001ae9fc)[*(ushort *)(pbVar10 + 0x67)];
-      if ((bVar2 & 0x40) == 0) {
-        if ((bVar2 & 0x10) == 0) {
-          FUN_000e0880();
+      flag = *thing_ptr_3;
+      thing_ptr_3 = (&g_thing_ptrs)[*(ushort *)(thing_ptr_3 + 0x67)];
+      if ((flag & 0x40) == 0) {
+        if ((flag & 0x10) == 0) {
+          update_fn_0e0880();
         }
         else {
-          FUN_000e413c();
+          update_update_creature_control_0e413c();
         }
       }
-      iVar9 = FUN_00073fb9();
-      iVar9 = extraout_ECX_01 + iVar9;
-    } while (pbVar10 != DAT_001ae9fc);
+      val_2 = temple_update_creature_control_073fb9();
+      val_2 = extraout_ECX_01 + val_2;
+    } while (thing_ptr_3 != g_thing_ptrs);
   }
-  local_38 = local_38 + iVar9;
-  iVar9 = 0;
-  pbVar10 = (&DAT_001ae9fc)[DAT_002e6ec6];
-  if ((&DAT_001ae9fc)[DAT_002e6ec6] != DAT_001ae9fc) {
+  local_38 = local_38 + val_2;
+  val_2 = 0;
+  thing_ptr_3 = (&g_thing_ptrs)[g_bss_002e6ec6];
+  if ((&g_thing_ptrs)[g_bss_002e6ec6] != g_thing_ptrs) {
     do {
-      pbVar8 = (&DAT_001ae9fc)[*(ushort *)(pbVar10 + 0x67)];
-      if ((*pbVar10 & 0x40) == 0) {
-        if ((*pbVar10 & 0x10) == 0) {
-          FUN_000e0880();
+      thing_ptr_2 = (&g_thing_ptrs)[*(ushort *)(thing_ptr_3 + 0x67)];
+      if ((*thing_ptr_3 & 0x40) == 0) {
+        if ((*thing_ptr_3 & 0x10) == 0) {
+          update_fn_0e0880();
         }
         else {
-          FUN_000e413c();
+          update_update_creature_control_0e413c();
         }
       }
-      iVar9 = FUN_00073fb9();
-      iVar9 = extraout_ECX_02 + iVar9;
-      pbVar10 = pbVar8;
-    } while (pbVar8 != DAT_001ae9fc);
+      val_2 = temple_update_creature_control_073fb9();
+      val_2 = extraout_ECX_02 + val_2;
+      thing_ptr_3 = thing_ptr_2;
+    } while (thing_ptr_2 != g_thing_ptrs);
   }
-  local_38 = local_38 + iVar9;
-  pbVar10 = (&DAT_001ae9fc)[DAT_002e6ede];
-  iVar9 = 0;
-  if (pbVar10 != DAT_001ae9fc) {
+  local_38 = local_38 + val_2;
+  thing_ptr_3 = (&g_thing_ptrs)[g_bss_002e6ede];
+  val_2 = 0;
+  if (thing_ptr_3 != g_thing_ptrs) {
     do {
-      bVar2 = *pbVar10;
-      pbVar10 = (&DAT_001ae9fc)[*(ushort *)(pbVar10 + 0x67)];
-      if ((bVar2 & 0x40) == 0) {
-        if ((bVar2 & 0x10) == 0) {
-          FUN_000e0880();
+      flag = *thing_ptr_3;
+      thing_ptr_3 = (&g_thing_ptrs)[*(ushort *)(thing_ptr_3 + 0x67)];
+      if ((flag & 0x40) == 0) {
+        if ((flag & 0x10) == 0) {
+          update_fn_0e0880();
         }
         else {
-          FUN_000e413c();
+          update_update_creature_control_0e413c();
         }
       }
-      iVar9 = FUN_00073fb9();
-      iVar9 = extraout_ECX_03 + iVar9;
-    } while (pbVar10 != DAT_001ae9fc);
+      val_2 = temple_update_creature_control_073fb9();
+      val_2 = extraout_ECX_03 + val_2;
+    } while (thing_ptr_3 != g_thing_ptrs);
   }
-  local_38 = local_38 + iVar9;
-  pbVar10 = (&DAT_001ae9fc)[DAT_002e6ece];
-  if (pbVar10 != DAT_001ae9fc) {
+  local_38 = local_38 + val_2;
+  thing_ptr_3 = (&g_thing_ptrs)[g_bss_002e6ece];
+  if (thing_ptr_3 != g_thing_ptrs) {
     do {
-      bVar2 = *pbVar10;
-      pbVar10 = (&DAT_001ae9fc)[*(ushort *)(pbVar10 + 0x67)];
-      if ((bVar2 & 0x40) == 0) {
-        if ((bVar2 & 0x10) == 0) {
-          FUN_000e0880();
+      flag = *thing_ptr_3;
+      thing_ptr_3 = (&g_thing_ptrs)[*(ushort *)(thing_ptr_3 + 0x67)];
+      if ((flag & 0x40) == 0) {
+        if ((flag & 0x10) == 0) {
+          update_fn_0e0880();
         }
         else {
-          FUN_000e413c();
+          update_update_creature_control_0e413c();
         }
       }
-      FUN_00073fb9();
-    } while (pbVar10 != DAT_001ae9fc);
+      temple_update_creature_control_073fb9();
+    } while (thing_ptr_3 != g_thing_ptrs);
   }
-  pbVar10 = (&DAT_001ae9fc)[DAT_002e6ed6];
-  iVar9 = 0;
-  if (pbVar10 != DAT_001ae9fc) {
+  thing_ptr_3 = (&g_thing_ptrs)[g_bss_002e6ed6];
+  val_2 = 0;
+  if (thing_ptr_3 != g_thing_ptrs) {
     do {
-      bVar2 = *pbVar10;
-      pbVar10 = (&DAT_001ae9fc)[*(ushort *)(pbVar10 + 0x67)];
-      if ((bVar2 & 0x40) == 0) {
-        if ((bVar2 & 0x10) == 0) {
-          FUN_000e0880();
+      flag = *thing_ptr_3;
+      thing_ptr_3 = (&g_thing_ptrs)[*(ushort *)(thing_ptr_3 + 0x67)];
+      if ((flag & 0x40) == 0) {
+        if ((flag & 0x10) == 0) {
+          update_fn_0e0880();
         }
         else {
-          FUN_000e413c();
+          update_update_creature_control_0e413c();
         }
       }
-      iVar9 = FUN_00073fb9();
-      iVar9 = extraout_ECX_04 + iVar9;
-    } while (pbVar10 != DAT_001ae9fc);
+      val_2 = temple_update_creature_control_073fb9();
+      val_2 = extraout_ECX_04 + val_2;
+    } while (thing_ptr_3 != g_thing_ptrs);
   }
-  local_38 = local_38 + iVar9;
-  iVar9 = 0;
-  pbVar10 = (&DAT_001ae9fc)[DAT_002e6ee6];
-  if ((&DAT_001ae9fc)[DAT_002e6ee6] != DAT_001ae9fc) {
+  local_38 = local_38 + val_2;
+  val_2 = 0;
+  thing_ptr_3 = (&g_thing_ptrs)[g_bss_002e6ee6];
+  if ((&g_thing_ptrs)[g_bss_002e6ee6] != g_thing_ptrs) {
     do {
-      pbVar8 = (&DAT_001ae9fc)[*(ushort *)(pbVar10 + 0x67)];
-      if ((*pbVar10 & 0x40) == 0) {
-        if ((*pbVar10 & 0x10) == 0) {
-          FUN_000e0880();
+      thing_ptr_2 = (&g_thing_ptrs)[*(ushort *)(thing_ptr_3 + 0x67)];
+      if ((*thing_ptr_3 & 0x40) == 0) {
+        if ((*thing_ptr_3 & 0x10) == 0) {
+          update_fn_0e0880();
         }
         else {
-          FUN_000e413c();
+          update_update_creature_control_0e413c();
         }
       }
-      iVar9 = FUN_00073fb9();
-      iVar9 = extraout_ECX_05 + iVar9;
-      pbVar10 = pbVar8;
-    } while (pbVar8 != DAT_001ae9fc);
+      val_2 = temple_update_creature_control_073fb9();
+      val_2 = extraout_ECX_05 + val_2;
+      thing_ptr_3 = thing_ptr_2;
+    } while (thing_ptr_2 != g_thing_ptrs);
   }
-  local_38 = local_38 + iVar9;
-  pbVar10 = (&DAT_001ae9fc)[DAT_002e6ef6];
-  iVar9 = 0;
-  if (pbVar10 != DAT_001ae9fc) {
+  local_38 = local_38 + val_2;
+  thing_ptr_3 = (&g_thing_ptrs)[g_bss_002e6ef6];
+  val_2 = 0;
+  if (thing_ptr_3 != g_thing_ptrs) {
     do {
-      if ((*pbVar10 & 0x40) == 0) {
-        if ((*pbVar10 & 0x10) == 0) {
-          FUN_000e0880();
+      if ((*thing_ptr_3 & 0x40) == 0) {
+        if ((*thing_ptr_3 & 0x10) == 0) {
+          update_fn_0e0880();
         }
         else {
-          FUN_000e413c();
+          update_update_creature_control_0e413c();
         }
       }
-      uVar15 = FUN_00073fb9();
-      pbVar10 = (byte *)((ulonglong)uVar15 >> 0x20);
-      iVar9 = extraout_ECX_06 + (int)uVar15;
-    } while (pbVar10 != DAT_001ae9fc);
+      uval_4 = temple_update_creature_control_073fb9();
+      thing_ptr_3 = (byte *)((ulonglong)uval_4 >> 0x20);
+      val_2 = extraout_ECX_06 + (int)uval_4;
+    } while (thing_ptr_3 != g_thing_ptrs);
   }
-  local_38 = local_38 + iVar9;
-  pbVar10 = (&DAT_001ae9fc)[DAT_002e6efe];
-  if ((&DAT_001ae9fc)[DAT_002e6efe] != DAT_001ae9fc) {
+  local_38 = local_38 + val_2;
+  thing_ptr_3 = (&g_thing_ptrs)[g_bss_002e6efe];
+  if ((&g_thing_ptrs)[g_bss_002e6efe] != g_thing_ptrs) {
     do {
-      pbVar8 = (&DAT_001ae9fc)[*(ushort *)(pbVar10 + 0x67)];
-      if (pbVar10[0x66] != 0) {
-        iVar9 = FUN_0006f6b8();
-        if (iVar9 == 0) {
-          FUN_0006f69c();
+      thing_ptr_2 = (&g_thing_ptrs)[*(ushort *)(thing_ptr_3 + 0x67)];
+      if (thing_ptr_3[0x66] != 0) {
+        val_2 = sound_fn_06f6b8();
+        if (val_2 == 0) {
+          sound_fn_06f69c();
         }
         else {
-          FUN_0006f671();
-          pbVar10[0x66] = 0;
+          sound_fn_06f671();
+          thing_ptr_3[0x66] = 0;
         }
       }
-      pbVar10 = pbVar8;
-    } while (pbVar8 != DAT_001ae9fc);
+      thing_ptr_3 = thing_ptr_2;
+    } while (thing_ptr_2 != g_thing_ptrs);
   }
-  pbVar10 = (&DAT_001ae9fc)[DAT_002e6f06];
-  if (pbVar10 != DAT_001ae9fc) {
+  thing_ptr_3 = (&g_thing_ptrs)[g_bss_002e6f06];
+  if (thing_ptr_3 != g_thing_ptrs) {
     do {
-      *(byte **)(puVar12 + 10) = (&DAT_001ae9fc)[*(ushort *)(pbVar10 + 0x67)];
-      iVar9 = _DAT_002eb049 / 5;
-      pbVar10[0x4f] = pbVar10[0x4f] | 1;
-      *(short *)(pbVar10 + 0x5e) = *(short *)(pbVar10 + 0x5e) + -1;
-      *(byte *)(puVar12 + 0x1a) = pbVar10[6];
-      if (*(int *)(pbVar10 + 0x5c) >> 0x10 < 1) {
-        puVar12[-0xffffffff00000002] = -0x420;
-        puVar12[-0xffffffff00000001] = 0xd;
-        FUN_00072af4();
+      *(byte **)(word_ptr + 10) = (&g_thing_ptrs)[*(ushort *)(thing_ptr_3 + 0x67)];
+      val_2 = g_bss_002eb049 / 5;
+      thing_ptr_3[0x4f] = thing_ptr_3[0x4f] | 1;
+      *(short *)(thing_ptr_3 + 0x5e) = *(short *)(thing_ptr_3 + 0x5e) + -1;
+      *(byte *)(word_ptr + 0x1a) = thing_ptr_3[6];
+      if (*(int *)(thing_ptr_3 + 0x5c) >> 0x10 < 1) {
+        word_ptr[-0xffffffff00000002] = -0x420;
+        word_ptr[-0xffffffff00000001] = 0xd;
+        structs_update_creature_control_072af4();
       }
       else {
-        if (DAT_002e8bee % 3 == 0) {
-          uVar5 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-          uVar5 = uVar5 >> 0xd | uVar5 * 0x80000;
-          uVar11 = uVar5 % 9;
-          puVar12[0x18] = 0x2c0;
-          puVar12[0x19] = 0;
-          uVar5 = uVar5 * 0x24a1 + 0x24df;
-          uVar5 = uVar5 >> 0xd | uVar5 * 0x80000;
-          *(uint *)(puVar12 + 0x18) =
-               (*(int *)((int)&DAT_0018b647 + uVar11 * 2) >> 0x18) *
-               (uVar5 % *(uint *)(puVar12 + 0x18));
-          *puVar12 = *(short *)(pbVar10 + 0xd) + (short)*(undefined4 *)(puVar12 + 0x18);
-          uVar5 = uVar5 * 0x24a1 + 0x24df;
-          DAT_002e8bf6 = uVar5 >> 0xd | uVar5 * 0x80000;
-          puVar12[1] = (short)(char)((uint)*(undefined4 *)((int)&DAT_0018b647 + uVar11 * 2 + 1) >>
-                                    0x18) * (short)((ulonglong)DAT_002e8bf6 % 0x2c0) +
-                       *(short *)(pbVar10 + 0xf);
-          puVar12[-0xffffffff00000002] = -0x314;
-          puVar12[-0xffffffff00000001] = 0xd;
-          sVar3 = FUN_000b2440();
-          puVar12[2] = sVar3 + -0x80;
-          puVar12[-0xffffffff00000002] = -0x2fc;
-          puVar12[-0xffffffff00000001] = 0xd;
-          iVar6 = FUN_000444a9();
-          if (iVar6 != 0) {
-            *(undefined2 *)(iVar6 + 0x5e) = DAT_002eb049;
+        if (g_game_turn % 3 == 0) {
+          thing_ptr = g_action_random_seed * 0x24a1 + 0x24df;
+          thing_ptr = thing_ptr >> 0xd | thing_ptr * 0x80000;
+          uval_3 = thing_ptr % 9;
+          word_ptr[0x18] = 0x2c0;
+          word_ptr[0x19] = 0;
+          thing_ptr = thing_ptr * 0x24a1 + 0x24df;
+          thing_ptr = thing_ptr >> 0xd | thing_ptr * 0x80000;
+          *(uint *)(word_ptr + 0x18) =
+               (*(int *)((int)&g_data_0018b647 + uval_3 * 2) >> 0x18) *
+               (thing_ptr % *(uint *)(word_ptr + 0x18));
+          *word_ptr = *(short *)(thing_ptr_3 + 0xd) + (short)*(undefined4 *)(word_ptr + 0x18); /* thing->mappos.val_x */
+          thing_ptr = thing_ptr * 0x24a1 + 0x24df;
+          g_action_random_seed = thing_ptr >> 0xd | thing_ptr * 0x80000;
+          word_ptr[1] = (short)(char)((uint)*(undefined4 *)((int)&g_data_0018b647 + uval_3 * 2 + 1) >>
+                                    0x18) * (short)((ulonglong)g_action_random_seed % 0x2c0) +
+                       *(short *)(thing_ptr_3 + 0xf); /* thing->mappos.val_y */
+          word_ptr[-0xffffffff00000002] = -0x314;
+          word_ptr[-0xffffffff00000001] = 0xd;
+          short_val = light_process_map_subtile_0b2440();
+          word_ptr[2] = short_val + -0x80;
+          word_ptr[-0xffffffff00000002] = -0x2fc;
+          word_ptr[-0xffffffff00000001] = 0xd;
+          val = inits_allocate_dynamic_light_shot_0444a9();
+          if (val != 0) {
+            *(undefined2 *)(val + 0x5e) = g_bss_002eb049;
           }
         }
-        uVar5 = DAT_002e8bee - *(int *)(pbVar10 + 9);
-        if ((uVar5 != 0) &&
-           ((int)uVar5 % iVar9 ==
-            ((int)((iVar9 + (iVar9 >> 0x1f) * -4) - (uint)((iVar9 >> 0x1f) << 1 < 0)) >> 2) * 3)) {
-          *puVar12 = *(short *)(pbVar10 + 0xd) + 0x80;
-          puVar12[1] = *(short *)(pbVar10 + 0xf) + 0x80;
-          puVar12[-0xffffffff00000002] = -0x29a;
-          puVar12[-0xffffffff00000001] = 0xd;
-          sVar3 = FUN_000b3788();
-          puVar12[2] = sVar3 + 0x180;
-          puVar12[-0xffffffff00000002] = -0x285;
-          puVar12[-0xffffffff00000001] = 0xd;
-          FUN_00024998();
+        thing_ptr = g_game_turn - *(int *)(thing_ptr_3 + 9);
+        if ((thing_ptr != 0) &&
+           ((int)thing_ptr % val_2 ==
+            ((int)((val_2 + (val_2 >> 0x1f) * -4) - (uint)((val_2 >> 0x1f) << 1 < 0)) >> 2) * 3)) {
+          *word_ptr = *(short *)(thing_ptr_3 + 0xd) + 0x80; /* thing->mappos.val_x */
+          word_ptr[1] = *(short *)(thing_ptr_3 + 0xf) + 0x80; /* thing->mappos.val_y */
+          word_ptr[-0xffffffff00000002] = -0x29a;
+          word_ptr[-0xffffffff00000001] = 0xd;
+          short_val = move_process_map_subtile_0b3788();
+          word_ptr[2] = short_val + 0x180;
+          word_ptr[-0xffffffff00000002] = -0x285;
+          word_ptr[-0xffffffff00000001] = 0xd;
+          effect_allocate_light_effect_024998();
         }
-        if (uVar5 % DAT_002ed41c == 0) {
-          bVar2 = pbVar10[0x10];
-          puVar12[0xe] = 0;
-          puVar12[0xf] = 0;
-          *(uint *)(puVar12 + 0x16) = bVar2 - 1;
+        if (thing_ptr % g_bss_002ed41c == 0) {
+          flag = thing_ptr_3[0x10];
+          word_ptr[0xe] = 0;
+          word_ptr[0xf] = 0;
+          *(uint *)(word_ptr + 0x16) = flag - 1;
           do {
-            bVar2 = pbVar10[0xe];
-            *(uint *)((int)puVar12 + 0x20) = bVar2 - 1;
-            *(undefined4 *)((int)puVar12 + 0x24) = 0;
-            *(uint *)((int)puVar12 + 0x28) = (bVar2 - 1) * 5 + *(int *)((int)puVar12 + 0x2c) * 0x500
+            flag = thing_ptr_3[0xe];
+            *(uint *)((int)word_ptr + 0x20) = flag - 1;
+            *(undefined4 *)((int)word_ptr + 0x24) = 0;
+            *(uint *)((int)word_ptr + 0x28) = (flag - 1) * 5 + *(int *)((int)word_ptr + 0x2c) * 0x500
             ;
             do {
-              pbVar8 = (&DAT_001ae9fc)
-                       [(*(uint *)((int)&DAT_00279203 + *(int *)((int)puVar12 + 0x28) + 1) &
+              thing_ptr_2 = (&g_thing_ptrs)
+                       [(*(uint *)((int)&g_map_subtiles + *(int *)((int)word_ptr + 0x28) + 1) &
                         0x3fffff) >> 0xb];
-              if (DAT_001ae9fc < pbVar8) {
-                iVar9 = *(int *)((int)puVar12 + 0x28);
+              if (g_thing_ptrs < thing_ptr_2) {
+                val_2 = *(int *)((int)word_ptr + 0x28);
                 do {
-                  if (pbVar8[0x1f] == 5) {
-                    *(undefined4 *)((int)puVar12 + -4) = 0xdfe99;
-                    FUN_00081c10();
-                    if (*(int *)(pbVar8 + 0x5c) >> 0x10 < 0) {
-                      *(undefined4 *)((int)puVar12 + -4) = 0;
-                      *(undefined4 *)((int)puVar12 + -8) = 1;
-                      *(undefined4 *)((int)puVar12 + -0xc) = 0xdfebf;
-                      FUN_0008608c();
-                      pbVar8 = (&DAT_001ae9fc)
-                               [(*(uint *)((int)&DAT_00279203 + iVar9 + 1) & 0x3fffff) >> 0xb];
-                      puVar12 = (ushort *)((int)puVar12 + -8);
+                  if (thing_ptr_2[0x1f] == 5) {
+                    *(undefined4 *)((int)word_ptr + -4) = 0xdfe99;
+                    creature_fn_081c10();
+                    if (*(int *)(thing_ptr_2 + 0x5c) >> 0x10 < 0) {
+                      *(undefined4 *)((int)word_ptr + -4) = 0;
+                      *(undefined4 *)((int)word_ptr + -8) = 1;
+                      *(undefined4 *)((int)word_ptr + -0xc) = 0xdfebf;
+                      creature_how_hero_have_tend_08608c();
+                      thing_ptr_2 = (&g_thing_ptrs)
+                               [(*(uint *)((int)&g_map_subtiles + val_2 + 1) & 0x3fffff) >> 0xb];
+                      word_ptr = (ushort *)((int)word_ptr + -8);
                     }
-                    else if ((*pbVar8 & 0x20) == 0) {
-                      bVar2 = pbVar8[7];
-                      if (bVar2 == 0xe) {
-                        bVar2 = pbVar8[8];
+                    else if ((*thing_ptr_2 & 0x20) == 0) {
+                      flag = thing_ptr_2[7];
+                      if (flag == 0xe) {
+                        flag = thing_ptr_2[8];
                       }
-                      if (bVar2 != 0x8f) {
-                        *(undefined4 *)((int)puVar12 + -4) = 0xdfe07;
-                        iVar6 = FUN_00064a2e();
-                        if (iVar6 != 0) {
-                          *(undefined4 *)((int)puVar12 + -4) = 0xdfe12;
-                          iVar6 = FUN_00050349();
-                          if (iVar6 != 0) {
-                            pbVar8[8] = 0x8f;
+                      if (flag != 0x8f) {
+                        *(undefined4 *)((int)word_ptr + -4) = 0xdfe07;
+                        val = person_fn_064a2e();
+                        if (val != 0) {
+                          *(undefined4 *)((int)word_ptr + -4) = 0xdfe12;
+                          val = magic_update_slab_subtile_columns_050349();
+                          if (val != 0) {
+                            thing_ptr_2[8] = 0x8f;
                           }
                         }
                       }
                     }
                   }
-                  pbVar8 = (&DAT_001ae9fc)[*(ushort *)(pbVar8 + 2)];
-                } while (DAT_001ae9fc < pbVar8);
+                  thing_ptr_2 = (&g_thing_ptrs)[*(ushort *)(thing_ptr_2 + 2)];
+                } while (g_thing_ptrs < thing_ptr_2);
               }
-              iVar9 = *(int *)((int)puVar12 + 0x24);
-              *(int *)((int)puVar12 + 0x24) = iVar9 + 1;
-              *(int *)((int)puVar12 + 0x28) = *(int *)((int)puVar12 + 0x28) + 5;
-              *(int *)((int)puVar12 + 0x20) = *(int *)((int)puVar12 + 0x20) + 1;
-            } while (iVar9 + 1 < 3);
-            iVar9 = *(int *)((int)puVar12 + 0x1c);
-            *(int *)((int)puVar12 + 0x1c) = iVar9 + 1;
-            *(int *)((int)puVar12 + 0x2c) = *(int *)((int)puVar12 + 0x2c) + 1;
-          } while (iVar9 + 1 < 3);
+              val_2 = *(int *)((int)word_ptr + 0x24);
+              *(int *)((int)word_ptr + 0x24) = val_2 + 1;
+              *(int *)((int)word_ptr + 0x28) = *(int *)((int)word_ptr + 0x28) + 5;
+              *(int *)((int)word_ptr + 0x20) = *(int *)((int)word_ptr + 0x20) + 1;
+            } while (val_2 + 1 < 3);
+            val_2 = *(int *)((int)word_ptr + 0x1c);
+            *(int *)((int)word_ptr + 0x1c) = val_2 + 1;
+            *(int *)((int)word_ptr + 0x2c) = *(int *)((int)word_ptr + 0x2c) + 1;
+          } while (val_2 + 1 < 3);
         }
-        iVar9 = *(int *)(pbVar10 + 0x5c) >> 0x10;
-        if (((iVar9 <= (_DAT_002eb049 << 3) / 10) && ((_DAT_002eb049 * 2) / 10 <= iVar9)) &&
-           (lVar1 = (longlong)iVar9 % (longlong)(_DAT_002eb049 / 10), (int)lVar1 == 0)) {
-          uVar5 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-          DAT_002e8bf6 = uVar5 >> 0xd | uVar5 * 0x80000;
-          iVar9 = (int)((lVar1 << 0x20 | (ulonglong)DAT_002e8bf6) % 9) * 2;
-          iVar6 = *(int *)((int)&DAT_0018b647 + iVar9 + 1);
-          *puVar12 = *(short *)(&DAT_0019033b +
-                               (*(int *)((int)&DAT_0018b647 + iVar9) >> 0x18) * 3 +
-                               (uint)pbVar10[0xe]) * 3 + 1;
-          sVar3 = *(short *)(&DAT_0019033b + (iVar6 >> 0x18) * 3 + (uint)pbVar10[0x10]);
-          puVar12[2] = 0;
-          uVar4 = sVar3 * 3 + 1;
-          puVar12[1] = uVar4;
-          if ((*puVar12 < 0xff) && (uVar4 < 0xff)) {
-            puVar12[-0xffffffff00000002] = 0xfff1;
-            puVar12[-0xffffffff00000001] = 0xd;
-            iVar9 = FUN_0004ef8a();
-            if (iVar9 != 0) {
-              uVar5 = (*(uint *)((int)&DAT_00279203 +
-                                ((uint)*puVar12 + (uint)puVar12[1] * 0x100) * 5 + 1) & 0x3fffff) >>
+        val_2 = *(int *)(thing_ptr_3 + 0x5c) >> 0x10;
+        if (((val_2 <= (g_bss_002eb049 << 3) / 10) && ((g_bss_002eb049 * 2) / 10 <= val_2)) &&
+           (rand_seed = (longlong)val_2 % (longlong)(g_bss_002eb049 / 10), (int)rand_seed == 0)) {
+          thing_ptr = g_action_random_seed * 0x24a1 + 0x24df;
+          g_action_random_seed = thing_ptr >> 0xd | thing_ptr * 0x80000;
+          val_2 = (int)((rand_seed << 0x20 | (ulonglong)g_action_random_seed) % 9) * 2;
+          val = *(int *)((int)&g_data_0018b647 + val_2 + 1);
+          *word_ptr = *(short *)(&g_subtile_to_slab_lut +
+                               (*(int *)((int)&g_data_0018b647 + val_2) >> 0x18) * 3 +
+                               (uint)thing_ptr_3[0xe]) * 3 + 1;
+          short_val = *(short *)(&g_subtile_to_slab_lut + (val >> 0x18) * 3 + (uint)thing_ptr_3[0x10]);
+          word_ptr[2] = 0;
+          uval = short_val * 3 + 1;
+          word_ptr[1] = uval;
+          if ((*word_ptr < 0xff) && (uval < 0xff)) {
+            word_ptr[-0xffffffff00000002] = 0xfff1;
+            word_ptr[-0xffffffff00000001] = 0xd;
+            val_2 = magic_update_slab_subtile_columns_04ef8a();
+            if (val_2 != 0) {
+              thing_ptr = (*(uint *)((int)&g_map_subtiles +
+                                ((uint)*word_ptr + (uint)word_ptr[1] * 0x100) * 5 + 1) & 0x3fffff) >>
                       0xb;
-              while ((uVar5 != 0 && (*(char *)((int)(&DAT_001ae9fc)[uVar5] + 0x1f) != '\r'))) {
-                uVar5 = (uint)*(ushort *)((int)(&DAT_001ae9fc)[uVar5] + 2);
+              while ((thing_ptr != 0 && (*(char *)((int)(&g_thing_ptrs)[thing_ptr] + 0x1f) != '\r'))) {
+                thing_ptr = (uint)*(ushort *)((int)(&g_thing_ptrs)[thing_ptr] + 2);
               }
-              if (uVar5 == 0) {
-                *puVar12 = (short)(*(int *)puVar12 << 8);
-                puVar12[1] = (ushort)(*(int *)(puVar12 + 1) << 8);
-                puVar12[4] = (ushort)pbVar10[0x13] << 8;
-                puVar12[5] = (ushort)pbVar10[0x14] << 8;
-                puVar12[-0xffffffff00000002] = 0x80;
-                puVar12[-0xffffffff00000001] = 0xe;
-                uVar7 = FUN_000dc440();
-                *(undefined4 *)(puVar12 + 8) = uVar7;
-                if ((int)(uint)*(byte *)((int)puVar12 + 0x11) <=
-                    *(int *)(&DAT_002eb04d + (uint)pbVar10[0x17] * 4)) {
-                  puVar12[-0xffffffff00000002] = 0xa9;
-                  puVar12[-0xffffffff00000001] = 0xe;
-                  pbVar8 = (byte *)FUN_00044dae();
-                  if ((DAT_001ae9fc < pbVar8) &&
-                     (*(short *)(pbVar8 + 0x5e) = *(short *)(pbVar10 + 0x5e) + 5,
-                     0 < *(int *)(pbVar8 + 0x5c) >> 0x10)) {
-                    pbVar8[0x13] = pbVar10[0x13];
-                    pbVar8[0x14] = pbVar10[0x14];
+              if (thing_ptr == 0) {
+                *word_ptr = (short)(*(int *)word_ptr << 8);
+                word_ptr[1] = (ushort)(*(int *)(word_ptr + 1) << 8);
+                word_ptr[4] = (ushort)thing_ptr_3[0x13] << 8;
+                word_ptr[5] = (ushort)thing_ptr_3[0x14] << 8;
+                word_ptr[-0xffffffff00000002] = 0x80;
+                word_ptr[-0xffffffff00000001] = 0xe;
+                uval_2 = update_fn_0dc440();
+                *(undefined4 *)(word_ptr + 8) = uval_2;
+                if ((int)(uint)*(byte *)((int)word_ptr + 0x11) <=
+                    *(int *)(&g_bss_002eb04d + (uint)thing_ptr_3[0x17] * 4)) {
+                  word_ptr[-0xffffffff00000002] = 0xa9;
+                  word_ptr[-0xffffffff00000001] = 0xe;
+                  thing_ptr_2 = (byte *)inits_update_player_dungeon_044dae();
+                  if ((g_thing_ptrs < thing_ptr_2) &&
+                     (*(short *)(thing_ptr_2 + 0x5e) = *(short *)(thing_ptr_3 + 0x5e) + 5,
+                     0 < *(int *)(thing_ptr_2 + 0x5c) >> 0x10)) {
+                    thing_ptr_2[0x13] = thing_ptr_3[0x13];
+                    thing_ptr_2[0x14] = thing_ptr_3[0x14];
                   }
                 }
               }
@@ -2351,229 +2346,223 @@ void FUN_000df760(void)
           }
         }
       }
-      pbVar10 = *(byte **)((int)puVar12 + 0x14);
-      puVar13 = (undefined1 *)puVar12;
-    } while (pbVar10 != DAT_001ae9fc);
+      thing_ptr_3 = *(byte **)((int)word_ptr + 0x14);
+      word_ptr_2 = (undefined1 *)word_ptr;
+    } while (thing_ptr_3 != g_thing_ptrs);
   }
-  iVar9 = 0;
+  val_2 = 0;
   do {
-    if ((((&DAT_0019d0c8)[iVar9] & 1) != 0) && (((&DAT_0019d0c8)[iVar9] & 0x40) == 0)) {
-      puVar12 = *(ushort **)((int)&DAT_0019d100 + iVar9);
-      iVar14 = *(int *)(puVar13 + 0x18) +
-               (*(int *)(puVar12 + 1) >> 0x10) + (uint)*puVar12 + (uint)puVar12[1];
-      iVar6 = *(int *)((int)&DAT_0019d579 + iVar9);
-      bVar2 = (&DAT_0019d578)[iVar9];
-      *(int *)(puVar13 + 0x18) = iVar14;
-      *(uint *)(puVar13 + 0x18) = iVar14 + (uint)bVar2 + iVar6;
+    if ((((&g_players)[val_2] & 1) != 0) && (((&g_players)[val_2] & 0x40) == 0)) {
+      word_ptr = *(ushort **)((int)&g_player_active_camera + val_2);
+      val_3 = *(int *)(word_ptr_2 + 0x18) +
+               (*(int *)(word_ptr + 1) >> 0x10) + (uint)*word_ptr + (uint)word_ptr[1];
+      val = *(int *)((int)&g_bss_0019d579 + val_2);
+      flag = (&g_bss_0019d578)[val_2];
+      *(int *)(word_ptr_2 + 0x18) = val_3;
+      *(uint *)(word_ptr_2 + 0x18) = val_3 + (uint)flag + val;
     }
-    iVar9 = iVar9 + 0x4ef;
-  } while (iVar9 != 0x18ab);
-  iVar9 = (DAT_002f10ce >> 0x18) * 0x4ef;
-  (&DAT_002e90bc)[(uint)(byte)(&DAT_0019d0d3)[iVar9] * 0x11] = puVar13[0x18];
-  (&DAT_002e90bc)[(uint)(byte)(&DAT_0019d0d3)[iVar9] * 0x11] =
-       (&DAT_002e90bc)[(uint)(byte)(&DAT_0019d0d3)[iVar9] * 0x11] + (char)DAT_002e8bf6;
+    val_2 = val_2 + 0x4ef;
+  } while (val_2 != 0x18ab);
+  val_2 = (g_my_player_word >> 0x18) * 0x4ef;
+  (&g_packet_status_flags)[(uint)(byte)(&g_player_packet_slot)[val_2] * 0x11] = word_ptr_2[0x18];
+  (&g_packet_status_flags)[(uint)(byte)(&g_player_packet_slot)[val_2] * 0x11] =
+       (&g_packet_status_flags)[(uint)(byte)(&g_player_packet_slot)[val_2] * 0x11] + (char)g_action_random_seed;
   return;
 }
 
 /******************************************************************************
- * Function : dk_some_thing_has_been_0e01f4 (Ghidra: FUN_000e01f4)
- * Prototype: void dk_some_thing_has_been_0e01f4(void);
+ * Function : update_some_thing_has_been_0e01f4 (Original VA: 0xe01f4, Ghidra: FUN_000e01f4)
+ * Prototype: void update_some_thing_has_been_0e01f4(void);
  * Address  : 0xe01f4 (Size: 113 bytes)
  * Module   : update.cpp [direct_file_string_xref]
- * OrigLine : update.cpp:597 ("Some THING has been deleted during the processing of another thing")
- * Naming   : String 'Some THING has been deleted during the processing of another'
- * Callers  : 1 -> 0xdf760
- * Callees  : 3 -> 0xddaf0, 0xe0880, 0xe413c
- * Strings  :
- *   - 0x16c9da: "update.cpp"
- *   - 0x16c997: "Some THING has been deleted during the processing of another thing"
+ * OrigLine : update.cpp lines 597
+ * Purpose  : String 'Some THING has been deleted during the processing of another'
+ * Callers  : 1 -> update_update_slab_subtile_columns_0df760
+ * Callees  : 3 -> LbErrorLog, update_fn_0e0880, update_update_creature_control_0e413c
  ******************************************************************************/
-void FUN_000e01f4(void)
+void update_some_thing_has_been_0e01f4(void)
 
 {
-  byte bVar1;
-  byte *pbVar2;
+  byte flag;
+  byte *thing_ptr;
   byte *extraout_EDX;
   byte *extraout_EDX_00;
   
-  pbVar2 = (&DAT_001ae9fc)[DAT_002e6eb6];
-  if (pbVar2 == DAT_001ae9fc) {
+  thing_ptr = (&g_thing_ptrs)[g_bss_002e6eb6];
+  if (thing_ptr == g_thing_ptrs) {
     return;
   }
   do {
-    if (*(short *)(pbVar2 + 0x1b) == 0) {
-      FUN_000ddaf0(); /* LbErrorLog("update.cpp", line 597, "Some THING has been deleted during the processing of another thing") */
+    if (*(short *)(thing_ptr + 0x1b) == 0) { /* thing->index_or_angle */
+      LbErrorLog(); /* LbErrorLog("update.cpp", line 597, "Some THING has been deleted during the processing of another thing") */
       return;
     }
-    bVar1 = *pbVar2;
-    pbVar2 = (&DAT_001ae9fc)[*(ushort *)(pbVar2 + 0x67)];
-    if ((bVar1 & 0x40) != 0) {
-      if ((bVar1 & 0x10) == 0) {
-        FUN_000e0880();
-        pbVar2 = extraout_EDX;
+    flag = *thing_ptr;
+    thing_ptr = (&g_thing_ptrs)[*(ushort *)(thing_ptr + 0x67)];
+    if ((flag & 0x40) != 0) {
+      if ((flag & 0x10) == 0) {
+        update_fn_0e0880();
+        thing_ptr = extraout_EDX;
       }
       else {
-        FUN_000e413c();
-        pbVar2 = extraout_EDX_00;
+        update_update_creature_control_0e413c();
+        thing_ptr = extraout_EDX_00;
       }
     }
-  } while (pbVar2 != DAT_001ae9fc);
+  } while (thing_ptr != g_thing_ptrs);
   return;
 }
 
 /******************************************************************************
- * Function : sub_0e0880 (Ghidra: FUN_000e0880)
- * Prototype: longlong sub_0e0880(void);
+ * Function : update_fn_0e0880 (Original VA: 0xe0880, Ghidra: FUN_000e0880)
+ * Prototype: longlong update_fn_0e0880(void);
  * Address  : 0xe0880 (Size: 667 bytes)
  * Module   : update.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0xdf760, 0xe01f4
- * Callees  : 7 -> 0x6f671, 0x6f69c, 0x6f6b8, 0xacdfc, 0xaced0, 0xe413c, 0xe6a10
+ * Purpose  : Module update.cpp procedure @ 0x0e0880
+ * Callers  : 2 -> update_update_slab_subtile_columns_0df760, update_some_thing_has_been_0e01f4
+ * Callees  : 7 -> sound_fn_06f671, sound_fn_06f69c, sound_fn_06f6b8, light_fn_0acdfc, light_fn_0aced0, update_update_creature_control_0e413c, LbScreenWaitVbi
  ******************************************************************************/
-longlong FUN_000e0880(void)
+longlong update_fn_0e0880(void)
 
 {
-  undefined4 uVar1;
-  int in_EAX;
-  int iVar2;
-  uint in_EDX;
-  int iVar3;
-  byte bVar4;
+  undefined4 uval;
+  int thing;
+  int val;
+  uint arg_edx;
+  int val_2;
+  byte flag;
   short local_24 [6];
   
-  bVar4 = 0;
-  if ((*(byte *)(in_EAX + 0x25) & 0x40) == 0) {
-    if ((*(byte *)(in_EAX + 1) & 4) != 0) {
-      *(short *)(in_EAX + 0x2c) = *(short *)(in_EAX + 0x2c) + *(short *)(in_EAX + 0x32);
-      *(short *)(in_EAX + 0x2e) = *(short *)(in_EAX + 0x2e) + *(short *)(in_EAX + 0x34);
-      *(short *)(in_EAX + 0x30) = *(short *)(in_EAX + 0x30) + *(short *)(in_EAX + 0x36);
-      FUN_000e6a10();
-      *(byte *)(in_EAX + 1) = *(byte *)(in_EAX + 1) & 0xfb;
+  flag = 0;
+  if ((*(byte *)(thing + 0x25) & 0x40) == 0) {
+    if ((*(byte *)(thing + 1) & 4) != 0) {
+      *(short *)(thing + 0x2c) = *(short *)(thing + 0x2c) + *(short *)(thing + 0x32);
+      *(short *)(thing + 0x2e) = *(short *)(thing + 0x2e) + *(short *)(thing + 0x34);
+      *(short *)(thing + 0x30) = *(short *)(thing + 0x30) + *(short *)(thing + 0x36);
+      LbScreenWaitVbi();
+      *(byte *)(thing + 1) = *(byte *)(thing + 1) & 0xfb;
     }
-    *(undefined4 *)(in_EAX + 0x38) = *(undefined4 *)(in_EAX + 0x2c);
-    *(undefined2 *)(in_EAX + 0x3c + (uint)bVar4 * -8) =
-         *(undefined2 *)(in_EAX + 0x30 + (uint)bVar4 * -8);
-    if ((*(byte *)(in_EAX + 1) & 8) != 0) {
-      *(short *)(in_EAX + 0x38) = *(short *)(in_EAX + 0x38) + *(short *)(in_EAX + 0x26);
-      *(short *)(in_EAX + 0x3c) = *(short *)(in_EAX + 0x3c) + *(short *)(in_EAX + 0x2a);
-      *(short *)(in_EAX + 0x3a) = *(short *)(in_EAX + 0x3a) + *(short *)(in_EAX + 0x28);
-      FUN_000e6a10();
-      *(byte *)(in_EAX + 1) = *(byte *)(in_EAX + 1) & 0xf7;
+    *(undefined4 *)(thing + 0x38) = *(undefined4 *)(thing + 0x2c);
+    *(undefined2 *)(thing + 0x3c + (uint)flag * -8) =
+         *(undefined2 *)(thing + 0x30 + (uint)flag * -8);
+    if ((*(byte *)(thing + 1) & 8) != 0) {
+      *(short *)(thing + 0x38) = *(short *)(thing + 0x38) + *(short *)(thing + 0x26);
+      *(short *)(thing + 0x3c) = *(short *)(thing + 0x3c) + *(short *)(thing + 0x2a);
+      *(short *)(thing + 0x3a) = *(short *)(thing + 0x3a) + *(short *)(thing + 0x28);
+      LbScreenWaitVbi();
+      *(byte *)(thing + 1) = *(byte *)(thing + 1) & 0xf7;
     }
   }
-  iVar2 = (uint)*(byte *)(in_EAX + 0x1f) * 4;
-  if (*(int *)(&DAT_00190303 + iVar2) != 0) {
-    iVar2 = (**(code **)(&DAT_00190303 + iVar2))();
-    if (-1 < iVar2) {
-      if ((*(byte *)(in_EAX + 0x25) & 0x40) == 0) {
-        if ((int)(uint)*(ushort *)(in_EAX + 0x60) < *(int *)(in_EAX + 0xf) >> 0x10) {
-          if (*(short *)(in_EAX + 0x2c) != 0) {
-            iVar2 = (0x100 - (uint)*(byte *)(in_EAX + 0x24)) * (*(int *)(in_EAX + 0x2a) >> 0x10);
-            iVar3 = iVar2 >> 0x1f;
-            *(short *)(in_EAX + 0x2c) =
-                 (short)((iVar2 + iVar3 * -0x100) - (uint)(iVar3 << 7 < 0) >> 8);
+  val = (uint)*(byte *)(thing + 0x1f) * 4; /* thing->class_id */
+  if (*(int *)(&g_data_00190303 + val) != 0) {
+    val = (**(code **)(&g_data_00190303 + val))();
+    if (-1 < val) {
+      if ((*(byte *)(thing + 0x25) & 0x40) == 0) {
+        if ((int)(uint)*(ushort *)(thing + 0x60) < *(int *)(thing + 0xf) >> 0x10) { /* thing->mappos.val_y */
+          if (*(short *)(thing + 0x2c) != 0) {
+            val = (0x100 - (uint)*(byte *)(thing + 0x24)) * (*(int *)(thing + 0x2a) >> 0x10);
+            val_2 = val >> 0x1f;
+            *(short *)(thing + 0x2c) =
+                 (short)((val + val_2 * -0x100) - (uint)(val_2 << 7 < 0) >> 8);
           }
-          if (*(short *)(in_EAX + 0x2e) != 0) {
-            iVar2 = (0x100 - (uint)*(byte *)(in_EAX + 0x24)) * (*(int *)(in_EAX + 0x2c) >> 0x10);
-            iVar3 = iVar2 >> 0x1f;
-            *(short *)(in_EAX + 0x2e) =
-                 (short)((iVar2 + iVar3 * -0x100) - (uint)(iVar3 << 7 < 0) >> 8);
+          if (*(short *)(thing + 0x2e) != 0) {
+            val = (0x100 - (uint)*(byte *)(thing + 0x24)) * (*(int *)(thing + 0x2c) >> 0x10);
+            val_2 = val >> 0x1f;
+            *(short *)(thing + 0x2e) =
+                 (short)((val + val_2 * -0x100) - (uint)(val_2 << 7 < 0) >> 8);
           }
-          if ((*(byte *)(in_EAX + 0x25) & 0x20) == 0) {
+          if ((*(byte *)(thing + 0x25) & 0x20) == 0) {
             local_24[2] = 0;
             local_24[3] = 0;
-            local_24[4] = -(short)*(char *)(in_EAX + 0x20);
-            *(short *)(in_EAX + 0x36) = *(short *)(in_EAX + 0x36) + local_24[4];
-            *(byte *)(in_EAX + 1) = *(byte *)(in_EAX + 1) | 4;
+            local_24[4] = -(short)*(char *)(thing + 0x20); /* thing->model */
+            *(short *)(thing + 0x36) = *(short *)(thing + 0x36) + local_24[4];
+            *(byte *)(thing + 1) = *(byte *)(thing + 1) | 4;
           }
         }
         else {
-          if (*(short *)(in_EAX + 0x2c) != 0) {
-            iVar2 = (*(int *)(in_EAX + 0x2a) >> 0x10) * (0x100 - (uint)*(byte *)(in_EAX + 0x23));
-            iVar3 = iVar2 >> 0x1f;
-            *(short *)(in_EAX + 0x2c) =
-                 (short)((iVar2 + iVar3 * -0x100) - (uint)(iVar3 << 7 < 0) >> 8);
+          if (*(short *)(thing + 0x2c) != 0) {
+            val = (*(int *)(thing + 0x2a) >> 0x10) * (0x100 - (uint)*(byte *)(thing + 0x23));
+            val_2 = val >> 0x1f;
+            *(short *)(thing + 0x2c) =
+                 (short)((val + val_2 * -0x100) - (uint)(val_2 << 7 < 0) >> 8);
           }
-          if (*(short *)(in_EAX + 0x2e) != 0) {
-            iVar2 = (0x100 - (uint)*(byte *)(in_EAX + 0x23)) * (*(int *)(in_EAX + 0x2c) >> 0x10);
-            iVar3 = iVar2 >> 0x1f;
-            *(short *)(in_EAX + 0x2e) =
-                 (short)((iVar2 + iVar3 * -0x100) - (uint)(iVar3 << 7 < 0) >> 8);
+          if (*(short *)(thing + 0x2e) != 0) {
+            val = (0x100 - (uint)*(byte *)(thing + 0x23)) * (*(int *)(thing + 0x2c) >> 0x10);
+            val_2 = val >> 0x1f;
+            *(short *)(thing + 0x2e) =
+                 (short)((val + val_2 * -0x100) - (uint)(val_2 << 7 < 0) >> 8);
           }
-          *(undefined2 *)(in_EAX + 0x11) = *(undefined2 *)(in_EAX + 0x60);
-          if ((*(byte *)(in_EAX + 0x25) & 8) != 0) {
-            *(undefined2 *)(in_EAX + 0x30) = 0;
+          *(undefined2 *)(thing + 0x11) = *(undefined2 *)(thing + 0x60);
+          if ((*(byte *)(thing + 0x25) & 8) != 0) {
+            *(undefined2 *)(thing + 0x30) = 0;
           }
         }
       }
-      FUN_000e413c();
-      if (*(char *)(in_EAX + 0x66) != '\0') {
-        iVar2 = FUN_0006f6b8();
-        if (iVar2 == 0) {
-          FUN_0006f69c();
+      update_update_creature_control_0e413c();
+      if (*(char *)(thing + 0x66) != '\0') {
+        val = sound_fn_06f6b8();
+        if (val == 0) {
+          sound_fn_06f69c();
         }
         else {
-          FUN_0006f671();
-          *(undefined1 *)(in_EAX + 0x66) = 0;
+          sound_fn_06f671();
+          *(undefined1 *)(thing + 0x66) = 0;
         }
       }
-      if ((DAT_003d97cc != '\0') && (*(short *)(in_EAX + 0x62) != 0)) {
-        iVar2 = FUN_000aced0();
-        if (iVar2 == 0) {
-          *(undefined2 *)(in_EAX + 0x62) = 0;
+      if ((g_bss_003d97cc != '\0') && (*(short *)(thing + 0x62) != 0)) {
+        val = light_fn_0aced0();
+        if (val == 0) {
+          *(undefined2 *)(thing + 0x62) = 0;
         }
         else {
-          uVar1 = *(undefined4 *)(in_EAX + 0xd);
-          local_24[(uint)bVar4 * -4] = *(short *)(in_EAX + 0x11 + (uint)bVar4 * -8);
-          local_24[0] = (short)local_24._0_4_ + *(short *)(in_EAX + 0x58);
-          FUN_000acdfc(uVar1);
+          uval = *(undefined4 *)(thing + 0xd); /* thing->mappos.val_x */
+          local_24[(uint)flag * -4] = *(short *)(thing + 0x11 + (uint)flag * -8);
+          local_24[0] = (short)local_24._0_4_ + *(short *)(thing + 0x58);
+          light_fn_0acdfc(uval);
         }
       }
-      return CONCAT44(in_EDX,1);
+      return CONCAT44(arg_edx,1);
     }
   }
-  return (ulonglong)in_EDX << 0x20;
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : dk_state_return_type_human_0e0b1c (Ghidra: FUN_000e0b1c)
- * Prototype: longlong dk_state_return_type_human_0e0b1c(void);
+ * Function : update_state_return_type_human_0e0b1c (Original VA: 0xe0b1c, Ghidra: FUN_000e0b1c)
+ * Prototype: longlong update_state_return_type_human_0e0b1c(void);
  * Address  : 0xe0b1c (Size: 3811 bytes)
  * Module   : update.cpp [direct_file_string_xref]
- * OrigLine : update.cpp:968 ("A state return type for a human controlled creature?")
- * Naming   : String 'A state return type for a human controlled creature?'
+ * OrigLine : update.cpp lines 968
+ * Purpose  : String 'A state return type for a human controlled creature?'
  * Callers  : 0 -> 
- * Callees  : 28 -> 0x10434, 0x24998, 0x29696, 0x39e7e, 0x39eca, 0x43ac3, 0x49df5, 0x627b5, 0x63b6d, 0x64a2e ...
- * Strings  :
- *   - 0x16ca1a: "update.cpp"
- *   - 0x16c9e5: "A state return type for a human controlled creature?"
+ * Callees  : 28 -> anger_fn_010434, effect_allocate_light_effect_024998, evil_update_creature_control_029696, group_fn_039e7e, group_update_creature_control_039eca, inits_fn_043ac3, instance_update_creature_control_049df5, panmap_update_player_view_state_0627b5 ...
  ******************************************************************************/
 /* WARNING: Type propagation algorithm not settling */
 
-longlong FUN_000e0b1c(void)
+longlong update_state_return_type_human_0e0b1c(void)
 
 {
-  short *psVar1;
-  undefined4 uVar2;
-  byte bVar3;
-  undefined *puVar4;
-  short sVar5;
-  short sVar6;
-  byte *pbVar7;
-  char cVar8;
-  undefined2 uVar9;
-  byte *in_EAX;
-  int iVar10;
-  int iVar11;
-  uint uVar12;
+  short *val;
+  undefined4 uval;
+  byte flag;
+  undefined *word_ptr;
+  short short_val;
+  short short_val_2;
+  byte *byte_ptr;
+  char ch;
+  undefined2 uval_2;
+  byte *thing;
+  int thing_ptr;
+  int val_2;
+  uint uval_3;
   uint extraout_ECX;
   undefined2 extraout_var;
-  uint in_EDX;
-  undefined4 *puVar13;
-  undefined4 *puVar14;
+  uint arg_edx;
+  undefined4 *word_ptr_2;
+  undefined4 *word_ptr_3;
   uint unaff_EDI;
-  bool bVar15;
-  byte bVar16;
+  bool flag_2;
+  byte flag_3;
   undefined2 auStack_830 [1010];
   undefined4 auStack_4c [3];
   undefined4 local_40;
@@ -2582,53 +2571,53 @@ longlong FUN_000e0b1c(void)
   int local_34 [6];
   byte *local_1c;
   
-  bVar16 = 0;
-  puVar14 = &local_40;
-  local_34[5] = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
+  flag_3 = 0;
+  word_ptr_3 = &local_40;
+  local_34[5] = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
   local_34[2] = 1;
-  if ((in_EAX[7] == 0x43) &&
-     ((*(byte *)((int)&DAT_00279203 + ((uint)in_EAX[0xe] + (uint)in_EAX[0x10] * 0x100) * 5) & 0x40)
+  if ((thing[7] == 0x43) &&
+     ((*(byte *)((int)&g_map_subtiles + ((uint)thing[0xe] + (uint)thing[0x10] * 0x100) * 5) & 0x40)
       != 0)) {
     auStack_4c[2] = 1;
-    puVar14 = auStack_4c + 1;
+    word_ptr_3 = auStack_4c + 1;
     auStack_4c[1] = 0;
-    FUN_0008608c();
+    creature_how_hero_have_tend_08608c();
     local_34[0] = 0;
     goto LAB_000e19f1;
   }
-  if (*(int *)(in_EAX + 0x5c) >> 0x10 < 0) {
+  if (*(int *)(thing + 0x5c) >> 0x10 < 0) {
     auStack_4c[2] = 0;
     auStack_4c[1] = 0;
-    FUN_0008608c();
+    creature_how_hero_have_tend_08608c();
     return (ulonglong)unaff_EDI << 0x20;
   }
-  if (((DAT_002ed402 != 0) && (*(uint *)(local_34[5] + 0x2ef) != 0)) &&
-     (*(uint *)(local_34[5] + 0x2ef) <= DAT_002e8bee)) {
+  if (((g_bss_002ed402 != 0) && (*(uint *)(local_34[5] + 0x2ef) != 0)) &&
+     (*(uint *)(local_34[5] + 0x2ef) <= g_game_turn)) {
     *(undefined4 *)(local_34[5] + 0x2ef) = 0;
     auStack_4c[2] = 0xe0c08;
-    FUN_00024998();
+    effect_allocate_light_effect_024998();
     auStack_4c[2] = 0xe0c14;
-    FUN_000b3b10();
+    move_fn_0b3b10();
   }
   if (*(char *)(local_34[5] + 0xb1) != '\0') {
     *(char *)(local_34[5] + 0xb1) = *(char *)(local_34[5] + 0xb1) + -1;
   }
   if (*(char *)(local_34[5] + 0x8b) == '\0') {
-    *(undefined1 *)(local_34[5] + 0x8b) = DAT_002ebaf7;
+    *(undefined1 *)(local_34[5] + 0x8b) = g_bss_002ebaf7;
   }
   if (*(char *)(local_34[5] + 0x302) == '\0') {
     auStack_4c[2] = 0xe0c5c;
-    FUN_00049df5();
+    instance_update_creature_control_049df5();
   }
   auStack_4c[2] = 0xe0c63;
-  FUN_000e5e04();
-  if ((*in_EAX & 0x20) == 0) {
+  bflib_system_io_update_creature_control_0e5e04();
+  if ((*thing & 0x20) == 0) {
     if (*(char *)(local_34[5] + 0xab) == '\0') {
       if (*(char *)(local_34[5] + 0x302) == '\0') {
         auStack_4c[2] = 0xe0c8e;
-        iVar10 = FUN_000e1b88();
-        if (iVar10 != 0) {
-          return (ulonglong)in_EDX << 0x20;
+        thing_ptr = update_creature_has_illegal_state_0e1b88();
+        if (thing_ptr != 0) {
+          return (ulonglong)arg_edx << 0x20;
         }
       }
       else {
@@ -2640,148 +2629,148 @@ longlong FUN_000e0b1c(void)
     if (*(char *)(local_34[5] + 0xab) == '\0') {
       if (*(char *)(local_34[5] + 0x302) == '\0') {
         auStack_4c[2] = 0xe0cda;
-        iVar10 = FUN_000e1b88();
-        if (iVar10 != 0) {
+        thing_ptr = update_creature_has_illegal_state_0e1b88();
+        if (thing_ptr != 0) {
           auStack_4c[2] = 0xe0cf2;
-          FUN_000ddaf0(); /* LbErrorLog("update.cpp", line 968, "A state return type for a human controlled creature?") */
+          LbErrorLog(); /* LbErrorLog("update.cpp", line 968, "A state return type for a human controlled creature?") */
         }
       }
       else {
         *(char *)(local_34[5] + 0x302) = *(char *)(local_34[5] + 0x302) + -1;
       }
     }
-    if ((*(byte *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 0xab) & 2) == 0) {
-      if (((&DAT_0019d0cb)[(*(int *)(in_EAX + 3) >> 0x18) * 0x4ef] & 4) != 0) goto LAB_000e0d4c;
+    if ((*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 0xab) & 2) == 0) { /* thing->ccontrol_idx */
+      if (((&g_bss_0019d0cb)[(*(int *)(thing + 3) >> 0x18) * 0x4ef] & 4) != 0) goto LAB_000e0d4c;
     }
-    else if (((&DAT_0019d0cb)[(*(int *)(in_EAX + 3) >> 0x18) * 0x4ef] & 4) == 0) {
+    else if (((&g_bss_0019d0cb)[(*(int *)(thing + 3) >> 0x18) * 0x4ef] & 4) == 0) {
 LAB_000e0d4c:
       auStack_4c[2] = 0xe0d56;
-      FUN_000627b5();
+      panmap_update_player_view_state_0627b5();
     }
   }
-  iVar10 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  uVar12 = 0;
-  if (*(char *)(iVar10 + 0xab) == '\0') {
-    if ((*in_EAX & 0x20) == 0) {
-      if ((*(byte *)(iVar10 + 2) & 1) == 0) {
-        if (*(short *)(iVar10 + 200) != 0) {
-          *(short *)(iVar10 + 0xbb) =
-               (short)((uint)((*(int *)(iVar10 + 0xc6) >> 0x10) *
-                             (&DAT_001927e0)[*(ushort *)(in_EAX + 0x52)]) >> 0x10);
-          puVar4 = (&PTR_LAB_00192fe0)[*(ushort *)(in_EAX + 0x52)];
-          *(undefined2 *)(iVar10 + 0xbf) = 0;
-          uVar12 = 1;
-          *(short *)(iVar10 + 0xbd) =
-               (short)((uint)-((*(int *)(iVar10 + 0xc6) >> 0x10) * (int)puVar4 >> 8) >> 8);
+  thing_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  uval_3 = 0;
+  if (*(char *)(thing_ptr + 0xab) == '\0') {
+    if ((*thing & 0x20) == 0) {
+      if ((*(byte *)(thing_ptr + 2) & 1) == 0) {
+        if (*(short *)(thing_ptr + 200) != 0) {
+          *(short *)(thing_ptr + 0xbb) =
+               (short)((uint)((*(int *)(thing_ptr + 0xc6) >> 0x10) *
+                             (&g_slab_attr_table)[*(ushort *)(thing + 0x52)]) >> 0x10); /* thing->health */
+          word_ptr = (&PTR_LAB_00192fe0)[*(ushort *)(thing + 0x52)]; /* thing->health */
+          *(undefined2 *)(thing_ptr + 0xbf) = 0;
+          uval_3 = 1;
+          *(short *)(thing_ptr + 0xbd) =
+               (short)((uint)-((*(int *)(thing_ptr + 0xc6) >> 0x10) * (int)word_ptr >> 8) >> 8);
         }
       }
       else {
-        uVar12 = 1;
-        *(byte *)(iVar10 + 2) = *(byte *)(iVar10 + 2) & 0xfe;
+        uval_3 = 1;
+        *(byte *)(thing_ptr + 2) = *(byte *)(thing_ptr + 2) & 0xfe;
       }
     }
-    else if ((in_EAX[0x25] & 0x20) == 0) {
-      bVar15 = *(short *)(iVar10 + 200) != 0;
-      if (bVar15) {
-        *(short *)(iVar10 + 0xbb) =
-             (short)((uint)((*(int *)(iVar10 + 0xc6) >> 0x10) *
-                           (&DAT_001927e0)[*(ushort *)(in_EAX + 0x52)]) >> 0x10);
-        *(short *)(iVar10 + 0xbd) =
-             (short)((uint)-((*(int *)(iVar10 + 0xc6) >> 0x10) *
-                             (int)(&PTR_LAB_00192fe0)[*(ushort *)(in_EAX + 0x52)] >> 8) >> 8);
+    else if ((thing[0x25] & 0x20) == 0) {
+      flag_2 = *(short *)(thing_ptr + 200) != 0;
+      if (flag_2) {
+        *(short *)(thing_ptr + 0xbb) =
+             (short)((uint)((*(int *)(thing_ptr + 0xc6) >> 0x10) *
+                           (&g_slab_attr_table)[*(ushort *)(thing + 0x52)]) >> 0x10); /* thing->health */
+        *(short *)(thing_ptr + 0xbd) =
+             (short)((uint)-((*(int *)(thing_ptr + 0xc6) >> 0x10) *
+                             (int)(&PTR_LAB_00192fe0)[*(ushort *)(thing + 0x52)] >> 8) >> 8); /* thing->health */
       }
-      uVar12 = (uint)bVar15;
-      if (*(short *)(iVar10 + 0xca) != 0) {
-        *(short *)(iVar10 + 0xbb) =
-             (short)((uint)*(undefined4 *)(iVar10 + 0xb9) >> 0x10) +
-             (short)((uint)((*(int *)(iVar10 + 200) >> 0x10) *
-                           (&DAT_001927e0)[*(ushort *)(in_EAX + 0x52) + 0x600 & 0x7ff]) >> 0x10);
-        uVar12 = 1;
-        *(short *)(iVar10 + 0xbd) =
-             (short)((uint)*(undefined4 *)(iVar10 + 0xbb) >> 0x10) +
-             (short)((uint)-((*(int *)(iVar10 + 200) >> 0x10) *
-                             (int)(&PTR_LAB_00192fe0)[*(ushort *)(in_EAX + 0x52) + 0x600 & 0x7ff] >>
+      uval_3 = (uint)flag_2;
+      if (*(short *)(thing_ptr + 0xca) != 0) {
+        *(short *)(thing_ptr + 0xbb) =
+             (short)((uint)*(undefined4 *)(thing_ptr + 0xb9) >> 0x10) +
+             (short)((uint)((*(int *)(thing_ptr + 200) >> 0x10) *
+                           (&g_slab_attr_table)[*(ushort *)(thing + 0x52) + 0x600 & 0x7ff]) >> 0x10); /* thing->health */
+        uval_3 = 1;
+        *(short *)(thing_ptr + 0xbd) =
+             (short)((uint)*(undefined4 *)(thing_ptr + 0xbb) >> 0x10) +
+             (short)((uint)-((*(int *)(thing_ptr + 200) >> 0x10) *
+                             (int)(&PTR_LAB_00192fe0)[*(ushort *)(thing + 0x52) + 0x600 & 0x7ff] >> /* thing->health */
                             8) >> 8);
       }
     }
     else {
-      if (*(short *)(iVar10 + 200) != 0) {
-        *(short *)(iVar10 + 0xbb) =
-             (short)((uint)(((int)(&DAT_001927e0)[*(ushort *)(in_EAX + 0x52)] >> 8) *
-                           ((*(int *)(iVar10 + 0xc6) >> 0x10) *
-                            (int)(&PTR_LAB_00192fe0)[*(ushort *)(in_EAX + 0x54)] >> 8)) >> 0x10);
-        *(short *)(iVar10 + 0xbd) =
-             (short)((uint)-(((int)(&PTR_LAB_00192fe0)[*(ushort *)(in_EAX + 0x52)] >> 8) *
-                             ((*(int *)(iVar10 + 0xc6) >> 0x10) *
-                              (int)(&PTR_LAB_00192fe0)[*(ushort *)(in_EAX + 0x54)] >> 8) >> 8) >> 8)
+      if (*(short *)(thing_ptr + 200) != 0) {
+        *(short *)(thing_ptr + 0xbb) =
+             (short)((uint)(((int)(&g_slab_attr_table)[*(ushort *)(thing + 0x52)] >> 8) * /* thing->health */
+                           ((*(int *)(thing_ptr + 0xc6) >> 0x10) *
+                            (int)(&PTR_LAB_00192fe0)[*(ushort *)(thing + 0x54)] >> 8)) >> 0x10);
+        *(short *)(thing_ptr + 0xbd) =
+             (short)((uint)-(((int)(&PTR_LAB_00192fe0)[*(ushort *)(thing + 0x52)] >> 8) * /* thing->health */
+                             ((*(int *)(thing_ptr + 0xc6) >> 0x10) *
+                              (int)(&PTR_LAB_00192fe0)[*(ushort *)(thing + 0x54)] >> 8) >> 8) >> 8)
         ;
-        *(short *)(iVar10 + 0xbf) =
-             (short)((uint)((*(int *)(iVar10 + 0xc6) >> 0x10) *
-                           (&DAT_001927e0)[*(ushort *)(in_EAX + 0x54)]) >> 0x10);
+        *(short *)(thing_ptr + 0xbf) =
+             (short)((uint)((*(int *)(thing_ptr + 0xc6) >> 0x10) *
+                           (&g_slab_attr_table)[*(ushort *)(thing + 0x54)]) >> 0x10);
       }
-      if (*(short *)(iVar10 + 0xca) != 0) {
-        *(short *)(iVar10 + 0xbb) =
-             (short)((uint)*(undefined4 *)(iVar10 + 0xb9) >> 0x10) +
-             (short)((uint)((*(int *)(iVar10 + 200) >> 0x10) *
-                           (&DAT_001927e0)[*(ushort *)(in_EAX + 0x52) + 0x600 & 0x7ff]) >> 0x10);
-        *(short *)(iVar10 + 0xbd) =
-             (short)((uint)*(undefined4 *)(iVar10 + 0xbb) >> 0x10) +
-             (short)((uint)-((*(int *)(iVar10 + 200) >> 0x10) *
-                             (int)(&PTR_LAB_00192fe0)[*(ushort *)(in_EAX + 0x52) + 0x600 & 0x7ff] >>
+      if (*(short *)(thing_ptr + 0xca) != 0) {
+        *(short *)(thing_ptr + 0xbb) =
+             (short)((uint)*(undefined4 *)(thing_ptr + 0xb9) >> 0x10) +
+             (short)((uint)((*(int *)(thing_ptr + 200) >> 0x10) *
+                           (&g_slab_attr_table)[*(ushort *)(thing + 0x52) + 0x600 & 0x7ff]) >> 0x10); /* thing->health */
+        *(short *)(thing_ptr + 0xbd) =
+             (short)((uint)*(undefined4 *)(thing_ptr + 0xbb) >> 0x10) +
+             (short)((uint)-((*(int *)(thing_ptr + 200) >> 0x10) *
+                             (int)(&PTR_LAB_00192fe0)[*(ushort *)(thing + 0x52) + 0x600 & 0x7ff] >> /* thing->health */
                             8) >> 8);
       }
     }
-    if (((in_EAX[0x25] & 0x20) == 0) || ((*in_EAX & 0x20) != 0)) goto LAB_000e10bd;
+    if (((thing[0x25] & 0x20) == 0) || ((*thing & 0x20) != 0)) goto LAB_000e10bd;
     auStack_4c[2] = 0xe102d;
-    iVar11 = FUN_000b3040();
-    iVar11 = (iVar11 + 0x100) - (*(int *)(in_EAX + 0xf) >> 0x10);
-    psVar1 = (short *)(iVar10 + 0xbf);
-    if (0 < iVar11) {
-      if (0x20 < iVar11) {
-        iVar11 = 0x20;
+    val_2 = move_process_map_subtile_0b3040();
+    val_2 = (val_2 + 0x100) - (*(int *)(thing + 0xf) >> 0x10); /* thing->mappos.val_y */
+    val = (short *)(thing_ptr + 0xbf);
+    if (0 < val_2) {
+      if (0x20 < val_2) {
+        val_2 = 0x20;
       }
-      uVar12 = 1;
-      *psVar1 = *psVar1 + (short)iVar11;
+      uval_3 = 1;
+      *val = *val + (short)val_2;
       goto LAB_000e10bd;
     }
-    uVar12 = extraout_ECX;
-    if (-1 < iVar11) goto LAB_000e10bd;
-    iVar10 = -iVar11;
-    if (iVar11 != -0x20 && 0x1f < iVar10) {
-      iVar10 = 0x20;
+    uval_3 = extraout_ECX;
+    if (-1 < val_2) goto LAB_000e10bd;
+    thing_ptr = -val_2;
+    if (val_2 != -0x20 && 0x1f < thing_ptr) {
+      thing_ptr = 0x20;
     }
-    *psVar1 = *psVar1 - (short)iVar10;
-    bVar15 = true;
+    *val = *val - (short)thing_ptr;
+    flag_2 = true;
   }
   else {
-    *(undefined2 *)(iVar10 + 0xbb) = 0;
-    *(undefined2 *)(iVar10 + 0xbd) = 0;
-    *(undefined2 *)(iVar10 + 0xbf) = 0;
-    *(undefined2 *)(iVar10 + 200) = 0;
-    uVar12 = 1;
-    *(byte *)(iVar10 + 2) = *(byte *)(iVar10 + 2) & 0xfe;
+    *(undefined2 *)(thing_ptr + 0xbb) = 0;
+    *(undefined2 *)(thing_ptr + 0xbd) = 0;
+    *(undefined2 *)(thing_ptr + 0xbf) = 0;
+    *(undefined2 *)(thing_ptr + 200) = 0;
+    uval_3 = 1;
+    *(byte *)(thing_ptr + 2) = *(byte *)(thing_ptr + 2) & 0xfe;
 LAB_000e10bd:
-    if (uVar12 == 0) {
-      if (((*(short *)(iVar10 + 0xbb) == 0) && (*(short *)(iVar10 + 0xbd) == 0)) &&
-         (*(short *)(iVar10 + 0xbf) == 0)) {
-        bVar15 = false;
+    if (uval_3 == 0) {
+      if (((*(short *)(thing_ptr + 0xbb) == 0) && (*(short *)(thing_ptr + 0xbd) == 0)) &&
+         (*(short *)(thing_ptr + 0xbf) == 0)) {
+        flag_2 = false;
       }
       else {
-        bVar15 = true;
+        flag_2 = true;
       }
     }
     else {
-      bVar15 = true;
+      flag_2 = true;
     }
   }
-  if (bVar15) {
-    *(short *)(in_EAX + 0x38) = *(short *)(in_EAX + 0x38) + *(short *)(local_34[5] + 0xbb);
-    *(short *)(in_EAX + 0x3a) = *(short *)(in_EAX + 0x3a) + *(short *)(local_34[5] + 0xbd);
-    *(short *)(in_EAX + 0x3c) = *(short *)(in_EAX + 0x3c) + *(short *)(local_34[5] + 0xbf);
+  if (flag_2) {
+    *(short *)(thing + 0x38) = *(short *)(thing + 0x38) + *(short *)(local_34[5] + 0xbb);
+    *(short *)(thing + 0x3a) = *(short *)(thing + 0x3a) + *(short *)(local_34[5] + 0xbd);
+    *(short *)(thing + 0x3c) = *(short *)(thing + 0x3c) + *(short *)(local_34[5] + 0xbf);
   }
   auStack_4c[2] = 0xe1139;
-  FUN_000b3dac();
-  if ((*in_EAX & 0x20) != 0) {
+  move_update_creature_control_0b3dac();
+  if ((*thing & 0x20) != 0) {
     if ((*(byte *)(local_34[5] + 1) & 0x40) == 0) {
       *(short *)(local_34[5] + 200) = *(short *)(local_34[5] + 200) / 2;
     }
@@ -2789,389 +2778,384 @@ LAB_000e10bd:
       *(short *)(local_34[5] + 0xca) = *(short *)(local_34[5] + 0xca) / 2;
     }
   }
-  if ((*in_EAX & 0x20) == 0) {
+  if ((*thing & 0x20) == 0) {
     *(undefined2 *)(local_34[5] + 200) = 0;
   }
   auStack_4c[2] = 0xe11a1;
-  FUN_0007231c();
-  local_34[4] = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  in_EAX[0x25] = in_EAX[0x25] & 0x7c;
+  spell_update_creature_control_07231c();
+  local_34[4] = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  thing[0x25] = thing[0x25] & 0x7c;
   *(undefined2 *)(local_34[4] + 0xb9) = 0;
-  if (*(int *)(in_EAX + 0xf) >> 0x10 ==
-      (uint)((&DAT_00269203)[(uint)in_EAX[0x10] * 0x100 + (uint)in_EAX[0xe]] & 0xf) << 8) {
+  if (*(int *)(thing + 0xf) >> 0x10 == /* thing->mappos.val_y */
+      (uint)((&g_bss_00269203)[(uint)thing[0x10] * 0x100 + (uint)thing[0xe]] & 0xf) << 8) {
     auStack_4c[2] = 0xe11fc;
-    local_1c = in_EAX;
-    uVar12 = FUN_000b23ec();
-    if ((uVar12 & 0xfffffffe) == 0x28) {
+    local_1c = thing;
+    uval_3 = light_process_map_subtile_0b23ec();
+    if ((uval_3 & 0xfffffffe) == 0x28) {
       auStack_4c[2] = 0xe122e;
-      FUN_00081c10();
-      in_EAX[0x25] = in_EAX[0x25] | 2;
+      creature_fn_081c10();
+      thing[0x25] = thing[0x25] | 2;
     }
-    else if (uVar12 == 0x27) {
-      in_EAX[0x25] = in_EAX[0x25] | 1;
+    else if (uval_3 == 0x27) {
+      thing[0x25] = thing[0x25] | 1;
     }
-    pbVar7 = local_1c;
+    byte_ptr = local_1c;
     if ((local_1c[0x25] & 1) == 0) {
       if (*(char *)(local_34[4] + 0xc1) == '\0') {
-        puVar14 = &local_40;
-        uVar12 = local_38;
-        if (DAT_002e7bed == '\x02') {
+        word_ptr_3 = &local_40;
+        uval_3 = local_38;
+        if (g_bss_002e7bed == '\x02') {
           auStack_4c[2] = 0xe12b0;
-          iVar10 = FUN_00081d84();
-          local_38 = *(uint *)(pbVar7 + 0xd);
-          uVar12 = local_38;
-          *(undefined2 *)(local_34 + (uint)bVar16 * -2) =
-               *(undefined2 *)(pbVar7 + (uint)bVar16 * -8 + 0x11);
-          puVar14 = &local_40;
-          if ((&DAT_002d33c5)
-              [((&DAT_0019033b)[local_38 >> 0x18] * 0x55 + (&DAT_0019033b)[local_38 >> 8 & 0xff]) *
+          thing_ptr = creature_update_creature_control_081d84();
+          local_38 = *(uint *)(byte_ptr + 0xd);
+          uval_3 = local_38;
+          *(undefined2 *)(local_34 + (uint)flag_3 * -2) =
+               *(undefined2 *)(byte_ptr + (uint)flag_3 * -8 + 0x11);
+          word_ptr_3 = &local_40;
+          if ((&g_slabmap_base)
+              [((&g_subtile_to_slab_lut)[local_38 >> 0x18] * 0x55 + (&g_subtile_to_slab_lut)[local_38 >> 8 & 0xff]) *
                6] == '\n') {
             local_1c[0x25] = local_1c[0x25] | 0x80;
             local_38._2_2_ = (short)(local_38 >> 0x10);
-            if (iVar10 == 1) {
-              sVar5 = (short)((uint)((&DAT_001927e0)[*(ushort *)(local_1c + 0x52) - 0x200 & 0x7ff]
+            if (thing_ptr == 1) {
+              short_val = (short)((uint)((&g_slab_attr_table)[*(ushort *)(local_1c + 0x52) - 0x200 & 0x7ff]
                                     << 6) >> 0x10);
-              sVar6 = (short)((uint)-(((int)(&PTR_LAB_00192fe0)
+              short_val_2 = (short)((uint)-(((int)(&PTR_LAB_00192fe0)
                                             [*(ushort *)(local_1c + 0x52) - 0x200 & 0x7ff] << 6) >>
                                      8) >> 8);
             }
             else {
-              puVar14 = &local_40;
-              if (iVar10 != 2) goto LAB_000e16f9;
-              sVar5 = -(short)((uint)((&DAT_001927e0)[*(ushort *)(local_1c + 0x52) - 0x200 & 0x7ff]
+              word_ptr_3 = &local_40;
+              if (thing_ptr != 2) goto LAB_000e16f9;
+              short_val = -(short)((uint)((&g_slab_attr_table)[*(ushort *)(local_1c + 0x52) - 0x200 & 0x7ff]
                                      << 6) >> 0x10);
-              sVar6 = -(short)((uint)-(((int)(&PTR_LAB_00192fe0)
+              short_val_2 = -(short)((uint)-(((int)(&PTR_LAB_00192fe0)
                                              [*(ushort *)(local_1c + 0x52) - 0x200 & 0x7ff] << 6) >>
                                       8) >> 8);
             }
             auStack_4c[2] = 0xffffffff;
-            local_38 = CONCAT22(local_38._2_2_ + sVar6,(short)local_38 + sVar5);
+            local_38 = CONCAT22(local_38._2_2_ + short_val_2,(short)local_38 + short_val);
             auStack_4c[1] = 0xe16f9;
-            FUN_00043ac3();
-            puVar14 = auStack_4c + 2;
-            uVar12 = local_38;
+            inits_fn_043ac3();
+            word_ptr_3 = auStack_4c + 2;
+            uval_3 = local_38;
           }
         }
       }
       else {
         auStack_4c[2] = 0xe14fb;
-        iVar10 = FUN_00081d84();
-        local_34[3] = (&DAT_001b0a00)[CONCAT22(extraout_var,*(undefined2 *)(local_1c + 100))];
-        bVar3 = local_1c[0x1a];
-        uVar2 = *(undefined4 *)(local_1c + 0xd);
-        local_3c[(uint)bVar16 * -4] = *(short *)(local_1c + (uint)bVar16 * -8 + 0x11);
-        bVar3 = (&DAT_0018b70c)[(uint)bVar3 * 0x10];
-        if (bVar3 < 3) {
+        thing_ptr = creature_update_creature_control_081d84();
+        local_34[3] = (&g_creature_ctrl_ptrs)[CONCAT22(extraout_var,*(undefined2 *)(local_1c + 100))];
+        flag = local_1c[0x1a];
+        uval = *(undefined4 *)(local_1c + 0xd);
+        local_3c[(uint)flag_3 * -4] = *(short *)(local_1c + (uint)flag_3 * -8 + 0x11);
+        flag = (&g_data_0018b70c)[(uint)flag * 0x10];
+        if (flag < 3) {
 LAB_000e153e:
-          local_40._0_2_ = (short)uVar2;
-          local_40._2_2_ = (short)((uint)uVar2 >> 0x10);
-          if (iVar10 == 1) {
+          local_40._0_2_ = (short)uval;
+          local_40._2_2_ = (short)((uint)uval >> 0x10);
+          if (thing_ptr == 1) {
             auStack_4c[2] = 0xffffffff;
             local_40 = CONCAT22(local_40._2_2_ +
                                 (short)((uint)-(((int)(&PTR_LAB_00192fe0)
                                                       [*(ushort *)(local_1c + 0x52) - 0x200 & 0x7ff]
                                                 << 6) >> 8) >> 8),
                                 (short)local_40 +
-                                (short)((uint)((&DAT_001927e0)
+                                (short)((uint)((&g_slab_attr_table)
                                                [*(ushort *)(local_1c + 0x52) - 0x200 & 0x7ff] << 6)
                                        >> 0x10));
             auStack_4c[1] = 0xe15bd;
-            FUN_00043ac3();
+            inits_fn_043ac3();
             *(char *)(local_34[2] + 0xc1) = *(char *)(local_34[2] + 0xc1) + -1;
-            puVar13 = auStack_4c + 2;
-            uVar2 = local_40;
+            word_ptr_2 = auStack_4c + 2;
+            uval = local_40;
           }
           else {
-            puVar13 = &local_40;
-            if (iVar10 == 2) {
+            word_ptr_2 = &local_40;
+            if (thing_ptr == 2) {
               auStack_4c[2] = 0xffffffff;
               local_40 = CONCAT22(local_40._2_2_ -
                                   (short)((uint)-(((int)(&PTR_LAB_00192fe0)
                                                         [*(ushort *)(local_1c + 0x52) - 0x200 &
                                                          0x7ff] << 6) >> 8) >> 8),
                                   (short)local_40 -
-                                  (short)((uint)((&DAT_001927e0)
+                                  (short)((uint)((&g_slab_attr_table)
                                                  [*(ushort *)(local_1c + 0x52) - 0x200 & 0x7ff] << 6
                                                 ) >> 0x10));
               auStack_4c[1] = 0xe14df;
-              FUN_00043ac3();
+              inits_fn_043ac3();
               *(char *)(local_34[2] + 0xc1) = *(char *)(local_34[2] + 0xc1) + -1;
-              puVar13 = auStack_4c + 2;
-              uVar2 = local_40;
+              word_ptr_2 = auStack_4c + 2;
+              uval = local_40;
             }
           }
         }
         else {
-          puVar13 = &local_40;
-          if (4 < bVar3) {
-            if (bVar3 != 5) goto LAB_000e153e;
-            puVar13 = &local_40;
-            if (iVar10 != 0) {
-              puVar13 = auStack_4c + 2;
+          word_ptr_2 = &local_40;
+          if (4 < flag) {
+            if (flag != 5) goto LAB_000e153e;
+            word_ptr_2 = &local_40;
+            if (thing_ptr != 0) {
+              word_ptr_2 = auStack_4c + 2;
               auStack_4c[2] = 0xffffffff;
               auStack_4c[1] = 0xe13a1;
-              local_40 = uVar2;
-              FUN_00043ac3();
+              local_40 = uval;
+              inits_fn_043ac3();
               *(char *)(local_34[2] + 0xc1) = *(char *)(local_34[2] + 0xc1) + -1;
-              uVar2 = local_40;
+              uval = local_40;
             }
           }
         }
-        local_40 = uVar2;
-        iVar10 = puVar13[9];
-        puVar13[0xffffffff] = 0xe13bc;
-        iVar11 = FUN_00081d84();
-        puVar13[2] = *(undefined4 *)(iVar10 + 0xd);
-        *(undefined2 *)(puVar13 + (uint)bVar16 * -2 + 3) =
-             *(undefined2 *)(iVar10 + 0x11 + (uint)bVar16 * -8);
-        if (iVar11 == 1) {
-          *(short *)(puVar13 + 2) =
-               *(short *)(puVar13 + 2) +
-               (short)((uint)((&DAT_001927e0)[*(ushort *)(puVar13[9] + 0x52) - 0x200 & 0x7ff] << 6)
+        local_40 = uval;
+        thing_ptr = word_ptr_2[9];
+        word_ptr_2[0xffffffff] = 0xe13bc;
+        val_2 = creature_update_creature_control_081d84();
+        word_ptr_2[2] = *(undefined4 *)(thing_ptr + 0xd); /* thing->mappos.val_x */
+        *(undefined2 *)(word_ptr_2 + (uint)flag_3 * -2 + 3) =
+             *(undefined2 *)(thing_ptr + 0x11 + (uint)flag_3 * -8);
+        if (val_2 == 1) {
+          *(short *)(word_ptr_2 + 2) =
+               *(short *)(word_ptr_2 + 2) +
+               (short)((uint)((&g_slab_attr_table)[*(ushort *)(word_ptr_2[9] + 0x52) - 0x200 & 0x7ff] << 6)
                       >> 0x10);
-          puVar4 = (&PTR_LAB_00192fe0)[*(ushort *)(puVar13[9] + 0x52) - 0x200 & 0x7ff];
-          puVar13[0xffffffff] = 0xffffffff;
-          *(short *)((int)puVar13 + 10) =
-               *(short *)((int)puVar13 + 10) + (short)((uint)-(((int)puVar4 << 6) >> 8) >> 8);
-          puVar13[0xfffffffe] = 0xe1451;
-          FUN_00043ac3();
-          *(char *)(puVar13[6] + 0xc1) = *(char *)(puVar13[6] + 0xc1) + -1;
-          puVar14 = puVar13 + 0xffffffff;
-          uVar12 = local_38;
+          word_ptr = (&PTR_LAB_00192fe0)[*(ushort *)(word_ptr_2[9] + 0x52) - 0x200 & 0x7ff];
+          word_ptr_2[0xffffffff] = 0xffffffff;
+          *(short *)((int)word_ptr_2 + 10) =
+               *(short *)((int)word_ptr_2 + 10) + (short)((uint)-(((int)word_ptr << 6) >> 8) >> 8);
+          word_ptr_2[0xfffffffe] = 0xe1451;
+          inits_fn_043ac3();
+          *(char *)(word_ptr_2[6] + 0xc1) = *(char *)(word_ptr_2[6] + 0xc1) + -1;
+          word_ptr_3 = word_ptr_2 + 0xffffffff;
+          uval_3 = local_38;
         }
         else {
-          puVar14 = puVar13;
-          uVar12 = local_38;
-          if (iVar11 == 2) {
-            *(short *)(puVar13 + 2) =
-                 *(short *)(puVar13 + 2) -
-                 (short)((uint)((&DAT_001927e0)[*(ushort *)(puVar13[9] + 0x52) - 0x200 & 0x7ff] << 6
+          word_ptr_3 = word_ptr_2;
+          uval_3 = local_38;
+          if (val_2 == 2) {
+            *(short *)(word_ptr_2 + 2) =
+                 *(short *)(word_ptr_2 + 2) -
+                 (short)((uint)((&g_slab_attr_table)[*(ushort *)(word_ptr_2[9] + 0x52) - 0x200 & 0x7ff] << 6
                                ) >> 0x10);
-            puVar4 = (&PTR_LAB_00192fe0)[*(ushort *)(puVar13[9] + 0x52) - 0x200 & 0x7ff];
-            puVar14 = puVar13 + 0xffffffff;
-            puVar13[0xffffffff] = 0xffffffff;
-            *(short *)((int)puVar13 + 10) =
-                 *(short *)((int)puVar13 + 10) - (short)((uint)-(((int)puVar4 << 6) >> 8) >> 8);
-            puVar13[0xfffffffe] = 0xe165b;
-            FUN_00043ac3();
-            *(char *)(puVar13[6] + 0xc1) = *(char *)(puVar13[6] + 0xc1) + -1;
-            uVar12 = local_38;
+            word_ptr = (&PTR_LAB_00192fe0)[*(ushort *)(word_ptr_2[9] + 0x52) - 0x200 & 0x7ff];
+            word_ptr_3 = word_ptr_2 + 0xffffffff;
+            word_ptr_2[0xffffffff] = 0xffffffff;
+            *(short *)((int)word_ptr_2 + 10) =
+                 *(short *)((int)word_ptr_2 + 10) - (short)((uint)-(((int)word_ptr << 6) >> 8) >> 8);
+            word_ptr_2[0xfffffffe] = 0xe165b;
+            inits_fn_043ac3();
+            *(char *)(word_ptr_2[6] + 0xc1) = *(char *)(word_ptr_2[6] + 0xc1) + -1;
+            uval_3 = local_38;
           }
         }
       }
     }
     else {
       auStack_4c[2] = 0xe1254;
-      iVar10 = FUN_00081d84();
-      if (iVar10 != 0) {
+      thing_ptr = creature_update_creature_control_081d84();
+      if (thing_ptr != 0) {
         auStack_4c[2] = 0xe126e;
-        FUN_00024998();
+        effect_allocate_light_effect_024998();
       }
       *(undefined1 *)(local_34[4] + 0xc1) = 0;
-      puVar14 = &local_40;
-      uVar12 = local_38;
+      word_ptr_3 = &local_40;
+      uval_3 = local_38;
     }
 LAB_000e16f9:
-    local_38 = uVar12;
-    iVar10 = puVar14[9];
-    iVar11 = *(int *)(iVar10 + 3);
-    puVar14[4] = (&DAT_001b0a00)[*(ushort *)(iVar10 + 100)];
-    if (iVar11 >> 0x18 == (uint)DAT_002eb542) {
-      iVar10 = (&DAT_001ae9fc)
-               [(*(uint *)((int)&DAT_00279203 +
-                          ((uint)*(byte *)(puVar14[9] + 0x10) * 0x100 +
-                          (uint)*(byte *)(iVar10 + 0xe)) * 5 + 1) & 0x3fffff) >> 0xb];
-      if (iVar10 != DAT_001ae9fc) {
+    local_38 = uval_3;
+    thing_ptr = word_ptr_3[9];
+    val_2 = *(int *)(thing_ptr + 3);
+    word_ptr_3[4] = (&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)]; /* thing->ccontrol_idx */
+    if (val_2 >> 0x18 == (uint)g_bss_002eb542) {
+      thing_ptr = (&g_thing_ptrs)
+               [(*(uint *)((int)&g_map_subtiles +
+                          ((uint)*(byte *)(word_ptr_3[9] + 0x10) * 0x100 +
+                          (uint)*(byte *)(thing_ptr + 0xe)) * 5 + 1) & 0x3fffff) >> 0xb];
+      if (thing_ptr != g_thing_ptrs) {
 LAB_000e1786:
-        if (*(char *)(iVar10 + 0x1f) != '\x04') goto LAB_000e1767;
-        iVar11 = puVar14[4];
-        *(undefined1 *)(iVar11 + 0xc1) = 0x14;
-        uVar9 = *(undefined2 *)(iVar10 + 0x1b);
+        if (*(char *)(thing_ptr + 0x1f) != '\x04') goto LAB_000e1767; /* thing->class_id */
+        val_2 = word_ptr_3[4];
+        *(undefined1 *)(val_2 + 0xc1) = 0x14;
+        uval_2 = *(undefined2 *)(thing_ptr + 0x1b); /* thing->index_or_angle */
 LAB_000e1864:
-        *(undefined2 *)(iVar11 + 0xb9) = uVar9;
+        *(undefined2 *)(val_2 + 0xb9) = uval_2;
       }
     }
     else {
-      for (iVar10 = (&DAT_001ae9fc)
-                    [(*(uint *)((int)&DAT_00279203 +
-                               (uint)CONCAT11(*(undefined1 *)(puVar14[9] + 0x10),
-                                              *(byte *)(iVar10 + 0xe)) * 5 + 1) & 0x3fffff) >> 0xb];
-          iVar10 != DAT_001ae9fc; iVar10 = (&DAT_001ae9fc)[*(ushort *)(iVar10 + 2)]) {
-        if (*(char *)(iVar10 + 0x1f) == '\x04') {
-          puVar14[0xffffffff] = 0xe1851;
-          FUN_00010434();
-          *(undefined1 *)(puVar14[4] + 0xc1) = 0x14;
-          iVar11 = puVar14[4];
-          uVar9 = *(undefined2 *)(iVar10 + 0x1b);
+      for (thing_ptr = (&g_thing_ptrs)
+                    [(*(uint *)((int)&g_map_subtiles +
+                               (uint)CONCAT11(*(undefined1 *)(word_ptr_3[9] + 0x10),
+                                              *(byte *)(thing_ptr + 0xe)) * 5 + 1) & 0x3fffff) >> 0xb];
+          thing_ptr != g_thing_ptrs; thing_ptr = (&g_thing_ptrs)[*(ushort *)(thing_ptr + 2)]) {
+        if (*(char *)(thing_ptr + 0x1f) == '\x04') { /* thing->class_id */
+          word_ptr_3[0xffffffff] = 0xe1851;
+          anger_fn_010434();
+          *(undefined1 *)(word_ptr_3[4] + 0xc1) = 0x14;
+          val_2 = word_ptr_3[4];
+          uval_2 = *(undefined2 *)(thing_ptr + 0x1b); /* thing->index_or_angle */
           goto LAB_000e1864;
         }
       }
     }
   }
 LAB_000e186b:
-  if ((((**(byte **)((int)puVar14 + 0x24) & 0x20) == 0) &&
-      (((*(byte **)((int)puVar14 + 0x24))[0x25] & 2) != 0)) &&
-     (iVar10 = *(int *)((int)puVar14 + 0x24),
-     (&DAT_002e9125)[(uint)*(byte *)(iVar10 + 0x1a) * 0xe6] != '\0')) {
-    cVar8 = *(char *)(iVar10 + 7);
-    if (cVar8 == '\x0e') {
-      cVar8 = *(char *)(iVar10 + 8);
+  if ((((**(byte **)((int)word_ptr_3 + 0x24) & 0x20) == 0) &&
+      (((*(byte **)((int)word_ptr_3 + 0x24))[0x25] & 2) != 0)) &&
+     (thing_ptr = *(int *)((int)word_ptr_3 + 0x24),
+     (&g_bss_002e9125)[(uint)*(byte *)(thing_ptr + 0x1a) * 0xe6] != '\0')) {
+    ch = *(char *)(thing_ptr + 7);
+    if (ch == '\x0e') {
+      ch = *(char *)(thing_ptr + 8); /* thing->active_state */
     }
-    if ((cVar8 != -0x71) && (*(int *)(*(int *)((int)puVar14 + 0x1c) + 0x2fe) + 0x40U < DAT_002e8bee)
+    if ((ch != -0x71) && (*(int *)(*(int *)((int)word_ptr_3 + 0x1c) + 0x2fe) + 0x40U < g_game_turn)
        ) {
-      *(uint *)(*(int *)((int)puVar14 + 0x1c) + 0x2fe) = DAT_002e8bee;
-      *(undefined4 *)((int)puVar14 + -4) = 0xe18e1;
-      iVar10 = FUN_00064a2e();
-      if (iVar10 != 0) {
-        *(undefined4 *)((int)puVar14 + -4) = 0xe18ee;
-        iVar10 = FUN_000655fa();
-        if (iVar10 == 0) {
-          *(undefined4 *)((int)puVar14 + -4) = 0xe1905;
-          FUN_00063b6d();
+      *(uint *)(*(int *)((int)word_ptr_3 + 0x1c) + 0x2fe) = g_game_turn;
+      *(undefined4 *)((int)word_ptr_3 + -4) = 0xe18e1;
+      thing_ptr = person_fn_064a2e();
+      if (thing_ptr != 0) {
+        *(undefined4 *)((int)word_ptr_3 + -4) = 0xe18ee;
+        thing_ptr = pom_update_slab_subtile_columns_0655fa();
+        if (thing_ptr == 0) {
+          *(undefined4 *)((int)word_ptr_3 + -4) = 0xe1905;
+          person_fn_063b6d();
         }
         else {
-          *(undefined1 *)(*(int *)((int)puVar14 + 0x24) + 8) = 0x8f;
+          *(undefined1 *)(*(int *)((int)word_ptr_3 + 0x24) + 8) = 0x8f;
         }
       }
     }
   }
-  *(undefined4 *)((int)puVar14 + -4) = 0xe190f;
-  FUN_000e1a00();
-  *(undefined4 *)((int)puVar14 + -4) = 0xe1916;
-  FUN_000b3b10();
-  *(undefined4 *)((int)puVar14 + -4) = 0xe191d;
-  FUN_000811d8();
-  if (*(char *)(*(int *)((int)puVar14 + 0x20) + 0x2b0) != '\0') {
-    *(undefined4 *)((int)puVar14 + -4) = 0xe1931;
-    FUN_00072739();
+  *(undefined4 *)((int)word_ptr_3 + -4) = 0xe190f;
+  update_update_creature_and_thing_0e1a00();
+  *(undefined4 *)((int)word_ptr_3 + -4) = 0xe1916;
+  move_fn_0b3b10();
+  *(undefined4 *)((int)word_ptr_3 + -4) = 0xe191d;
+  creature_update_creature_and_thing_0811d8();
+  if (*(char *)(*(int *)((int)word_ptr_3 + 0x20) + 0x2b0) != '\0') {
+    *(undefined4 *)((int)word_ptr_3 + -4) = 0xe1931;
+    spell_update_creature_control_072739();
   }
-  if (0 < *(int *)(in_EAX + 0x15) >> 0x10) {
-    *(short *)(in_EAX + 0x17) = *(short *)(in_EAX + 0x17) + -1;
+  if (0 < *(int *)(thing + 0x15) >> 0x10) {
+    *(short *)(thing + 0x17) = *(short *)(thing + 0x17) + -1;
   }
-  if ((*(ushort *)(*(int *)((int)puVar14 + 0x20) + 0x7a) & 0xfff) != 0) {
-    *(undefined4 *)((int)puVar14 + -4) = 0xe1952;
-    iVar10 = FUN_00039e7e();
-    if (iVar10 != 0) {
-      *(undefined4 *)((int)puVar14 + -4) = 0xe195d;
-      FUN_00039eca();
+  if ((*(ushort *)(*(int *)((int)word_ptr_3 + 0x20) + 0x7a) & 0xfff) != 0) {
+    *(undefined4 *)((int)word_ptr_3 + -4) = 0xe1952;
+    thing_ptr = group_fn_039e7e();
+    if (thing_ptr != 0) {
+      *(undefined4 *)((int)word_ptr_3 + -4) = 0xe195d;
+      group_update_creature_control_039eca();
     }
   }
-  if ((*(short *)(*(int *)((int)puVar14 + 0x20) + 0x6e) != 0) &&
-     ((*(byte *)((&DAT_001ae9fc)[*(ushort *)(*(int *)((int)puVar14 + 0x20) + 0x6e)] + 1) & 1) == 1))
+  if ((*(short *)(*(int *)((int)word_ptr_3 + 0x20) + 0x6e) != 0) &&
+     ((*(byte *)((&g_thing_ptrs)[*(ushort *)(*(int *)((int)word_ptr_3 + 0x20) + 0x6e)] + 1) & 1) == 1))
   {
-    *(undefined4 *)((int)puVar14 + -4) = 0xe1992;
-    FUN_000b3b10();
+    *(undefined4 *)((int)word_ptr_3 + -4) = 0xe1992;
+    move_fn_0b3b10();
   }
-  *(undefined4 *)((int)puVar14 + -4) = 0xe1999;
-  iVar10 = FUN_00081fec();
-  if (iVar10 == -1) {
-    *(undefined4 *)((int)puVar14 + 0x14) = 0;
-    return CONCAT44(*(undefined4 *)((int)puVar14 + 0x34),*(undefined4 *)((int)puVar14 + 0x14));
+  *(undefined4 *)((int)word_ptr_3 + -4) = 0xe1999;
+  thing_ptr = creature_could_create_creature_081fec();
+  if (thing_ptr == -1) {
+    *(undefined4 *)((int)word_ptr_3 + 0x14) = 0;
+    return CONCAT44(*(undefined4 *)((int)word_ptr_3 + 0x34),*(undefined4 *)((int)word_ptr_3 + 0x14));
   }
-  *(undefined4 *)((int)puVar14 + -4) = 0xe19be;
-  FUN_00029696();
-  *(undefined4 *)((int)puVar14 + -4) = 0xe19ce;
-  FUN_000e6a10();
-  iVar10 = *(int *)((int)puVar14 + 0x20);
-  *(byte *)(iVar10 + 1) = *(byte *)(iVar10 + 1) & 0x3f;
-  *(byte *)(iVar10 + 0xad) = *(byte *)(iVar10 + 0xad) & 0xfb;
-  *(undefined4 *)((int)puVar14 + -4) = 0xe19f1;
-  FUN_00071416();
+  *(undefined4 *)((int)word_ptr_3 + -4) = 0xe19be;
+  evil_update_creature_control_029696();
+  *(undefined4 *)((int)word_ptr_3 + -4) = 0xe19ce;
+  LbScreenWaitVbi();
+  thing_ptr = *(int *)((int)word_ptr_3 + 0x20);
+  *(byte *)(thing_ptr + 1) = *(byte *)(thing_ptr + 1) & 0x3f;
+  *(byte *)(thing_ptr + 0xad) = *(byte *)(thing_ptr + 0xad) & 0xfb;
+  *(undefined4 *)((int)word_ptr_3 + -4) = 0xe19f1;
+  spell_update_creature_control_071416();
 LAB_000e19f1:
-  return CONCAT44(puVar14[0xd],puVar14[5]);
+  return CONCAT44(word_ptr_3[0xd],word_ptr_3[5]);
 LAB_000e1767:
-  iVar10 = (&DAT_001ae9fc)[*(ushort *)(iVar10 + 2)];
-  if (iVar10 == DAT_001ae9fc) goto LAB_000e186b;
+  thing_ptr = (&g_thing_ptrs)[*(ushort *)(thing_ptr + 2)];
+  if (thing_ptr == g_thing_ptrs) goto LAB_000e186b;
   goto LAB_000e1786;
 }
 
 /******************************************************************************
- * Function : sub_0e1a00 (Ghidra: FUN_000e1a00)
- * Prototype: undefined8 sub_0e1a00(void);
+ * Function : update_update_creature_and_thing_0e1a00 (Original VA: 0xe1a00, Ghidra: FUN_000e1a00)
+ * Prototype: undefined8 update_update_creature_and_thing_0e1a00(void);
  * Address  : 0xe1a00 (Size: 392 bytes)
  * Module   : update.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0xe0b1c
- * Callees  : 2 -> 0x717de, 0x81c10
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
+ * Callers  : 1 -> update_state_return_type_human_0e0b1c
+ * Callees  : 2 -> spell_update_creature_control_0717de, creature_fn_081c10
  ******************************************************************************/
-undefined8 FUN_000e1a00(void)
+undefined8 update_update_creature_and_thing_0e1a00(void)
 
 {
-  byte bVar1;
-  byte bVar2;
-  int iVar3;
-  int in_EAX;
-  uint uVar4;
-  uint uVar5;
+  byte flag;
+  byte flag_2;
+  int cctrl_ptr;
+  int thing;
+  uint uval;
+  uint thing_ptr;
   uint extraout_ECX;
-  undefined4 in_EDX;
-  int iVar6;
+  undefined4 arg_edx;
+  int val;
   
-  uVar5 = (uint)*(ushort *)(in_EAX + 100);
-  iVar3 = (&DAT_001b0a00)[uVar5];
-  if ((*(byte *)(iVar3 + 0xad) & 1) != 0) {
-    uVar5 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-    DAT_002e8bf6 = uVar5 >> 0xd | uVar5 * 0x80000;
-    if (DAT_002e8bf6 % 100 < (uint)DAT_002ed3ff) {
-      bVar1 = *(byte *)(in_EAX + 0x10);
-      bVar2 = *(byte *)(in_EAX + 0xe);
-      iVar6 = 0;
+  thing_ptr = (uint)*(ushort *)(thing + 100); /* thing->ccontrol_idx */
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[thing_ptr];
+  if ((*(byte *)(cctrl_ptr + 0xad) & 1) != 0) {
+    thing_ptr = g_action_random_seed * 0x24a1 + 0x24df;
+    g_action_random_seed = thing_ptr >> 0xd | thing_ptr * 0x80000;
+    if (g_action_random_seed % 100 < (uint)g_bss_002ed3ff) {
+      flag = *(byte *)(thing + 0x10);
+      flag_2 = *(byte *)(thing + 0xe);
+      val = 0;
       do {
-        uVar5 = (&DAT_001ae9fc)
-                [(*(uint *)((int)&DAT_00279203 +
-                           ((*(int *)((int)&DAT_0018b624 + iVar6) >> 0x10) +
-                           (uint)bVar2 + (uint)bVar1 * 0x100) * 5 + 1) & 0x3fffff) >> 0xb];
-        if (DAT_001ae9fc < uVar5) {
+        thing_ptr = (&g_thing_ptrs)
+                [(*(uint *)((int)&g_map_subtiles +
+                           ((*(int *)((int)&g_data_0018b624 + val) >> 0x10) +
+                           (uint)flag_2 + (uint)flag * 0x100) * 5 + 1) & 0x3fffff) >> 0xb];
+        if (g_thing_ptrs < thing_ptr) {
           do {
-            if ((((*(char *)(uVar5 + 0x1f) == '\x05') && (*(char *)(uVar5 + 0x1a) != '\x17')) &&
-                (*(int *)(uVar5 + 3) >> 0x18 != (uint)*(byte *)(iVar3 + 0xb6))) &&
-               ((*(byte *)((&DAT_001b0a00)[*(ushort *)(uVar5 + 100)] + 0xad) & 1) == 0)) {
-              FUN_000717de();
-              *(undefined1 *)((&DAT_001b0a00)[*(ushort *)(extraout_ECX + 100)] + 0xb6) =
-                   *(undefined1 *)(iVar3 + 0xb6);
-              uVar5 = extraout_ECX;
+            if ((((*(char *)(thing_ptr + 0x1f) == '\x05') && (*(char *)(thing_ptr + 0x1a) != '\x17')) && /* thing->class_id */
+                (*(int *)(thing_ptr + 3) >> 0x18 != (uint)*(byte *)(cctrl_ptr + 0xb6))) &&
+               ((*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0xad) & 1) == 0)) { /* thing->ccontrol_idx */
+              spell_update_creature_control_0717de();
+              *(undefined1 *)((&g_creature_ctrl_ptrs)[*(ushort *)(extraout_ECX + 100)] + 0xb6) =
+                   *(undefined1 *)(cctrl_ptr + 0xb6);
+              thing_ptr = extraout_ECX;
             }
-            uVar5 = (&DAT_001ae9fc)[*(ushort *)(uVar5 + 2)];
-          } while (DAT_001ae9fc < uVar5);
+            thing_ptr = (&g_thing_ptrs)[*(ushort *)(thing_ptr + 2)];
+          } while (g_thing_ptrs < thing_ptr);
         }
-        iVar6 = iVar6 + 2;
-      } while (iVar6 != 0x12);
+        val = val + 2;
+      } while (val != 0x12);
     }
-    uVar4 = DAT_002e8bee - *(int *)(iVar3 + 0x2eb);
-    uVar5 = uVar4 / DAT_002ed401;
-    if (uVar4 % (uint)DAT_002ed401 == 0) {
-      uVar5 = FUN_00081c10();
+    uval = g_game_turn - *(int *)(cctrl_ptr + 0x2eb);
+    thing_ptr = uval / g_bss_002ed401;
+    if (uval % (uint)g_bss_002ed401 == 0) {
+      thing_ptr = creature_fn_081c10();
     }
   }
-  return CONCAT44(in_EDX,uVar5);
+  return CONCAT44(arg_edx,thing_ptr);
 }
 
 /******************************************************************************
- * Function : dk_creature_has_illegal_state_0e1b88 (Ghidra: FUN_000e1b88)
- * Prototype: undefined8 dk_creature_has_illegal_state_0e1b88(void);
+ * Function : update_creature_has_illegal_state_0e1b88 (Original VA: 0xe1b88, Ghidra: FUN_000e1b88)
+ * Prototype: undefined8 update_creature_has_illegal_state_0e1b88(void);
  * Address  : 0xe1b88 (Size: 827 bytes)
  * Module   : update.cpp [direct_file_string_xref]
- * OrigLine : update.cpp:1557; update.cpp:1571 ("GoldPile with no gold!")
- * Naming   : String 'Creature has illegal state[1], T%d, S%d, TCS%d'
- * Callers  : 1 -> 0xe0b1c
- * Callees  : 19 -> 0x10434, 0x13809, 0x15ed7, 0x16d38, 0x16f8b, 0x1829f, 0x22b3a, 0x39e7e, 0x52834, 0x63b6d ...
- * Strings  :
- *   - 0x16ca54: "update.cpp"
- *   - 0x16ca76: "update.cpp"
- *   - 0x16ca25: "Creature has illegal state[1], T%d, S%d, TCS%d"
- *   - 0x16ca5f: "GoldPile with no gold!"
+ * OrigLine : update.cpp lines 1557, 1571
+ * Purpose  : String 'Creature has illegal state[1], T%d, S%d, TCS%d'
+ * Callers  : 1 -> update_state_return_type_human_0e0b1c
+ * Callees  : 19 -> anger_fn_010434, barracks_update_creature_control_013809, combat_fn_015ed7, combobj_fn_016d38, combobj_fn_016f8b, combtool_update_creature_control_01829f, door_process_map_subtile_022b3a, group_fn_039e7e ...
  ******************************************************************************/
-undefined8 FUN_000e1b88(void)
+undefined8 update_creature_has_illegal_state_0e1b88(void)
 
 {
-  byte bVar1;
-  char cVar2;
-  short sVar3;
-  int in_EAX;
-  int iVar4;
-  int iVar5;
-  uint uVar6;
-  undefined4 uVar7;
+  byte flag;
+  char ch;
+  short short_val;
+  int thing;
+  int thing_ptr;
+  int cctrl_ptr;
+  uint uval;
+  undefined4 uval_2;
   int extraout_ECX;
   int extraout_ECX_00;
   int extraout_ECX_01;
@@ -3181,140 +3165,140 @@ undefined8 FUN_000e1b88(void)
   int extraout_ECX_05;
   uint extraout_ECX_06;
   uint extraout_ECX_07;
-  uint uVar8;
-  undefined4 in_EDX;
-  int iVar9;
-  undefined8 uVar10;
+  uint thing_ptr_2;
+  undefined4 arg_edx;
+  int val;
+  undefined8 uval_3;
   
-  FUN_00052834();
-  iVar4 = FUN_00015ed7();
-  iVar5 = extraout_ECX;
-  if ((((iVar4 != 0) && (iVar4 = FUN_0001829f(), iVar5 = extraout_ECX_00, iVar4 == 0)) &&
-      (*(char *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 3) == '\0')) &&
-     ((*(char *)(in_EAX + 0x1a) != '\x17' &&
-      (iVar4 = FUN_00084f04(), iVar5 = extraout_ECX_01, iVar4 != 0)))) {
-    FUN_00016d38();
-    iVar5 = extraout_ECX_02;
+  moodneed_fn_052834();
+  thing_ptr = combat_fn_015ed7();
+  cctrl_ptr = extraout_ECX;
+  if ((((thing_ptr != 0) && (thing_ptr = combtool_update_creature_control_01829f(), cctrl_ptr = extraout_ECX_00, thing_ptr == 0)) &&
+      (*(char *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 3) == '\0')) && /* thing->ccontrol_idx */
+     ((*(char *)(thing + 0x1a) != '\x17' &&
+      (thing_ptr = creature_update_player_dungeon_084f04(), cctrl_ptr = extraout_ECX_01, thing_ptr != 0)))) {
+    combobj_fn_016d38();
+    cctrl_ptr = extraout_ECX_02;
   }
-  if ((((*(byte *)(iVar5 + 3) & 0x10) == 0) && (*(short *)(iVar5 + 0x1d0) != 0)) &&
-     (((*(byte *)(iVar5 + 1) & 2) == 0 &&
-      (((cVar2 = FUN_00064c4d(), iVar5 = extraout_ECX_03, cVar2 != '\0' &&
-        (iVar4 = FUN_00022b3a(), iVar5 = extraout_ECX_04, iVar4 != 0)) &&
-       (*(char *)(iVar4 + 6) != *(char *)(in_EAX + 6))))))) {
-    FUN_00016f8b();
-    iVar5 = extraout_ECX_05;
+  if ((((*(byte *)(cctrl_ptr + 3) & 0x10) == 0) && (*(short *)(cctrl_ptr + 0x1d0) != 0)) &&
+     (((*(byte *)(cctrl_ptr + 1) & 2) == 0 &&
+      (((ch = person_fn_064c4d(), cctrl_ptr = extraout_ECX_03, ch != '\0' &&
+        (thing_ptr = door_process_map_subtile_022b3a(), cctrl_ptr = extraout_ECX_04, thing_ptr != 0)) &&
+       (*(char *)(thing_ptr + 6) != *(char *)(thing + 6))))))) { /* thing->owner */
+    combobj_fn_016f8b();
+    cctrl_ptr = extraout_ECX_05;
   }
-  *(undefined2 *)(iVar5 + 0x1d0) = 0;
-  if (((*(ushort *)(iVar5 + 0x7a) & 0xfff) != 0) && (iVar5 = FUN_00039e7e(), iVar5 == 0)) {
-    FUN_00013809();
+  *(undefined2 *)(cctrl_ptr + 0x1d0) = 0;
+  if (((*(ushort *)(cctrl_ptr + 0x7a) & 0xfff) != 0) && (cctrl_ptr = group_fn_039e7e(), cctrl_ptr == 0)) {
+    barracks_update_creature_control_013809();
   }
-  if ((*(byte *)(in_EAX + 7) == 0) || (0x90 < *(byte *)(in_EAX + 7))) {
-    FUN_000e7714(&DAT_0019cbac,s_Creature_has_illegal_state_1___T_0016ca25,
-                 *(undefined2 *)(in_EAX + 0x1b),*(undefined1 *)(in_EAX + 7),
-                 *(undefined1 *)(in_EAX + 8));
-    FUN_000ddaf0(); /* LbErrorLog("update.cpp", line 1557, g_log_buf) */
-    FUN_00063b6d();
+  if ((*(byte *)(thing + 7) == 0) || (0x90 < *(byte *)(thing + 7))) {
+    dk_sprintf(&g_log_sprintf_buf,s_Creature_has_illegal_state_1___T_0016ca25,
+                 *(undefined2 *)(thing + 0x1b),*(undefined1 *)(thing + 7), /* thing->index_or_angle */
+                 *(undefined1 *)(thing + 8)); /* thing->active_state */
+    LbErrorLog(); /* LbErrorLog("update.cpp", line 1557, g_log_buf) */
+    person_fn_063b6d();
   }
-  if (((*(byte *)(in_EAX + 0x25) & 0x20) == 0) && (*(char *)(in_EAX + 0x1a) != '\x17')) {
-    bVar1 = *(byte *)(in_EAX + 0x10);
-    iVar5 = 0;
-    uVar6 = (uint)*(byte *)(in_EAX + 0xe);
+  if (((*(byte *)(thing + 0x25) & 0x20) == 0) && (*(char *)(thing + 0x1a) != '\x17')) {
+    flag = *(byte *)(thing + 0x10);
+    cctrl_ptr = 0;
+    uval = (uint)*(byte *)(thing + 0xe);
     do {
-      iVar9 = (*(int *)((int)&DAT_0018b647 + iVar5) >> 0x18) + uVar6;
-      iVar4 = (*(int *)((int)&DAT_0018b647 + iVar5 + 1) >> 0x18) + (uint)bVar1;
-      if ((((-1 < iVar9) && (iVar9 < 0x100)) && (-1 < iVar4)) &&
-         (((iVar4 < 0x100 &&
-           (iVar4 = (iVar4 * 0x100 + iVar9) * 5, (*(byte *)((int)&DAT_00279203 + iVar4) & 0x10) == 0
-           )) && (uVar8 = (&DAT_001ae9fc)
-                          [(*(uint *)((int)&DAT_00279203 + iVar4 + 1) & 0x3fffff) >> 0xb],
-                 DAT_001ae9fc < uVar8)))) {
+      val = (*(int *)((int)&g_data_0018b647 + cctrl_ptr) >> 0x18) + uval;
+      thing_ptr = (*(int *)((int)&g_data_0018b647 + cctrl_ptr + 1) >> 0x18) + (uint)flag;
+      if ((((-1 < val) && (val < 0x100)) && (-1 < thing_ptr)) &&
+         (((thing_ptr < 0x100 &&
+           (thing_ptr = (thing_ptr * 0x100 + val) * 5, (*(byte *)((int)&g_map_subtiles + thing_ptr) & 0x10) == 0
+           )) && (thing_ptr_2 = (&g_thing_ptrs)
+                          [(*(uint *)((int)&g_map_subtiles + thing_ptr + 1) & 0x3fffff) >> 0xb],
+                 g_thing_ptrs < thing_ptr_2)))) {
         do {
-          if (*(char *)(uVar8 + 0x1f) == '\x01') {
-            if (*(char *)(uVar8 + 0x1a) == '+') {
-              uVar10 = FUN_0007df48();
-              uVar8 = (uint)((ulonglong)uVar10 >> 0x20);
-              uVar6 = extraout_ECX_06;
-              if ((int)uVar10 != 0) goto LAB_000e1dd1;
+          if (*(char *)(thing_ptr_2 + 0x1f) == '\x01') { /* thing->class_id */
+            if (*(char *)(thing_ptr_2 + 0x1a) == '+') {
+              uval_3 = ceiling_fn_07df48();
+              thing_ptr_2 = (uint)((ulonglong)uval_3 >> 0x20);
+              uval = extraout_ECX_06;
+              if ((int)uval_3 != 0) goto LAB_000e1dd1;
             }
-            if (*(char *)(uVar8 + 0x1a) == '\n') {
-              uVar10 = FUN_000d0f50();
-              uVar8 = (uint)((ulonglong)uVar10 >> 0x20);
-              if (((undefined *)uVar10 < &DAT_002ddd1c) ||
-                 (((sVar3 = *(short *)((undefined *)uVar10 + 10), uVar6 = extraout_ECX_07,
-                   sVar3 != 0xd && (sVar3 != 5)) && (sVar3 != 4)))) goto LAB_000e1dd1;
+            if (*(char *)(thing_ptr_2 + 0x1a) == '\n') {
+              uval_3 = room_update_slab_subtile_columns_0d0f50();
+              thing_ptr_2 = (uint)((ulonglong)uval_3 >> 0x20);
+              if (((undefined *)uval_3 < &g_bss_002ddd1c) ||
+                 (((short_val = *(short *)((undefined *)uval_3 + 10), uval = extraout_ECX_07,
+                   short_val != 0xd && (short_val != 5)) && (short_val != 4)))) goto LAB_000e1dd1;
             }
           }
-          uVar8 = (&DAT_001ae9fc)[*(ushort *)(uVar8 + 2)];
-        } while (DAT_001ae9fc < uVar8);
+          thing_ptr_2 = (&g_thing_ptrs)[*(ushort *)(thing_ptr_2 + 2)];
+        } while (g_thing_ptrs < thing_ptr_2);
       }
-      iVar5 = iVar5 + 2;
-    } while (iVar5 < 0x10);
-    uVar8 = 0;
+      cctrl_ptr = cctrl_ptr + 2;
+    } while (cctrl_ptr < 0x10);
+    thing_ptr_2 = 0;
 LAB_000e1dd1:
-    if (uVar8 != 0) {
-      if (*(char *)(uVar8 + 0x1a) == '+') {
-        if (*(int *)(uVar8 + 0x13) == 0) {
-          FUN_000ddaf0(); /* LbErrorLog("update.cpp", line 1571, "GoldPile with no gold!") */
-          FUN_00072af4();
+    if (thing_ptr_2 != 0) {
+      if (*(char *)(thing_ptr_2 + 0x1a) == '+') {
+        if (*(int *)(thing_ptr_2 + 0x13) == 0) { /* thing->anim_sprite */
+          LbErrorLog(); /* LbErrorLog("update.cpp", line 1571, "GoldPile with no gold!") */
+          structs_update_creature_control_072af4();
         }
         else {
-          uVar6 = (uint)*(ushort *)(&DAT_002e912a + (uint)*(byte *)(in_EAX + 0x1a) * 0xe6);
-          iVar5 = *(int *)(in_EAX + 0x13);
-          if (iVar5 < (int)uVar6) {
-            iVar4 = *(int *)(uVar8 + 0x13) + iVar5;
-            if ((int)uVar6 < iVar4) {
-              *(uint *)(in_EAX + 0x13) = iVar5 + (uVar6 - iVar5);
-              *(int *)(uVar8 + 0x13) = *(int *)(uVar8 + 0x13) - (uVar6 - iVar5);
+          uval = (uint)*(ushort *)(&g_bss_002e912a + (uint)*(byte *)(thing + 0x1a) * 0xe6);
+          cctrl_ptr = *(int *)(thing + 0x13); /* thing->anim_sprite */
+          if (cctrl_ptr < (int)uval) {
+            thing_ptr = *(int *)(thing_ptr_2 + 0x13) + cctrl_ptr; /* thing->anim_sprite */
+            if ((int)uval < thing_ptr) {
+              *(uint *)(thing + 0x13) = cctrl_ptr + (uval - cctrl_ptr); /* thing->anim_sprite */
+              *(int *)(thing_ptr_2 + 0x13) = *(int *)(thing_ptr_2 + 0x13) - (uval - cctrl_ptr); /* thing->anim_sprite */
             }
             else {
-              *(int *)(in_EAX + 0x13) = iVar4;
-              FUN_00072af4();
+              *(int *)(thing + 0x13) = thing_ptr; /* thing->anim_sprite */
+              structs_update_creature_control_072af4();
             }
           }
         }
-        FUN_00010434();
+        anger_fn_010434();
       }
-      else if ((*(char *)(uVar8 + 0x1a) == '\n') && (iVar5 = FUN_00085954(), iVar5 == 0)) {
-        FUN_00085cc4();
+      else if ((*(char *)(thing_ptr_2 + 0x1a) == '\n') && (cctrl_ptr = creature_update_player_view_state_085954(), cctrl_ptr == 0)) {
+        creature_update_creature_control_085cc4();
       }
     }
   }
-  iVar5 = (uint)*(byte *)(in_EAX + 7) * 0x29;
-  if ((*(int *)(&DAT_0018c4a0 + iVar5) == 0) ||
-     (sVar3 = (**(code **)(&DAT_0018c4a0 + iVar5))(), sVar3 != -1)) {
-    uVar7 = 0;
+  cctrl_ptr = (uint)*(byte *)(thing + 7) * 0x29;
+  if ((*(int *)(&g_data_0018c4a0 + cctrl_ptr) == 0) ||
+     (short_val = (**(code **)(&g_data_0018c4a0 + cctrl_ptr))(), short_val != -1)) {
+    uval_2 = 0;
   }
   else {
-    uVar7 = 1;
+    uval_2 = 1;
   }
-  return CONCAT44(in_EDX,uVar7);
+  return CONCAT44(arg_edx,uval_2);
 }
 
 /******************************************************************************
- * Function : sub_0e1ec4 (Ghidra: FUN_000e1ec4)
- * Prototype: longlong sub_0e1ec4(void);
+ * Function : update_process_thing_entity_0e1ec4 (Original VA: 0xe1ec4, Ghidra: FUN_000e1ec4)
+ * Prototype: longlong update_process_thing_entity_0e1ec4(void);
  * Address  : 0xe1ec4 (Size: 1791 bytes)
  * Module   : update.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Looks up Thing* in g_thing_ptrs[2048] and updates state
  * Callers  : 0 -> 
- * Callees  : 24 -> 0x10c1a, 0x10c44, 0x10d08, 0x24998, 0x250ef, 0x25780, 0x2585f, 0x25cf7, 0x263c9, 0x2649e ...
+ * Callees  : 24 -> anger_fn_010c1a, anger_fn_010c44, anger_fn_010d08, effect_allocate_light_effect_024998, effect_roll_action_random_0250ef, effect_update_player_view_state_025780, effect_illegal_hit_thing_type_02585f, effect_update_creature_and_thing_025cf7 ...
  ******************************************************************************/
-longlong FUN_000e1ec4(void)
+longlong update_process_thing_entity_0e1ec4(void)
 
 {
-  byte bVar1;
-  short sVar2;
-  short sVar3;
-  undefined2 uVar4;
-  int in_EAX;
-  int iVar5;
-  uint uVar6;
-  uint uVar7;
-  undefined4 uVar8;
-  undefined1 *puVar9;
-  undefined4 *puVar10;
-  undefined4 *puVar11;
-  byte bVar12;
+  byte flag;
+  short short_val;
+  short short_val_2;
+  undefined2 uval;
+  int thing;
+  int thing_ptr;
+  uint uval_2;
+  uint rand_seed;
+  undefined4 uval_3;
+  undefined1 *word_ptr;
+  undefined4 *word_ptr_2;
+  undefined4 *thing_ptr_2;
+  byte flag_2;
   undefined2 auStack_874 [1018];
   undefined4 uStack_80;
   int iStack_7c;
@@ -3326,485 +3310,480 @@ longlong FUN_000e1ec4(void)
   undefined4 local_20;
   undefined1 local_1c;
   
-  bVar12 = 0;
-  iVar5 = (uint)*(byte *)(in_EAX + 0x1a) * 0x65;
-  local_24 = &DAT_00188c94 + iVar5;
+  flag_2 = 0;
+  thing_ptr = (uint)*(byte *)(thing + 0x1a) * 0x65;
+  local_24 = &g_data_00188c94 + thing_ptr;
   local_1c = 0;
   local_20 = 0;
-  if (*(short *)(in_EAX + 0x1d) != *(short *)(in_EAX + 0x1b)) {
-    local_20 = (&DAT_001ae9fc)[*(ushort *)(in_EAX + 0x1d)];
+  if (*(short *)(thing + 0x1d) != *(short *)(thing + 0x1b)) { /* thing->index_or_angle */
+    local_20 = (&g_thing_ptrs)[*(ushort *)(thing + 0x1d)];
   }
-  puVar11 = (undefined4 *)local_70;
-  if (*(short *)(&DAT_00188cb2 + iVar5) != 0) {
+  thing_ptr_2 = (undefined4 *)local_70;
+  if (*(short *)(&g_data_00188cb2 + thing_ptr) != 0) {
     local_74 = 0xe1f27;
-    iVar5 = FUN_0006f865();
-    puVar11 = (undefined4 *)local_70;
-    if (iVar5 == 0) {
+    thing_ptr = sound_fn_06f865();
+    thing_ptr_2 = (undefined4 *)local_70;
+    if (thing_ptr == 0) {
       local_74 = 0x100;
       local_78 = 2;
-      puVar11 = &uStack_80;
+      thing_ptr_2 = &uStack_80;
       uStack_80 = 3;
-      iStack_7c = iVar5;
-      FUN_0006e538();
+      iStack_7c = thing_ptr;
+      sound_fn_06e538();
     }
   }
-  if (*(char *)(puVar11[0x13] + 0x47) != '\0') {
-    *(short *)(in_EAX + 0x5e) = *(short *)(in_EAX + 0x5e) + -1;
+  if (*(char *)(thing_ptr_2[0x13] + 0x47) != '\0') {
+    *(short *)(thing + 0x5e) = *(short *)(thing + 0x5e) + -1;
   }
-  if (*(int *)(in_EAX + 0x5c) >> 0x10 < 0) {
-    *(undefined1 *)(puVar11 + 0x15) = 1;
+  if (*(int *)(thing + 0x5c) >> 0x10 < 0) {
+    *(undefined1 *)(thing_ptr_2 + 0x15) = 1;
   }
   else {
-    bVar1 = *(byte *)(in_EAX + 0x1a);
-    puVar11[0x12] = in_EAX + 0xd;
-    if (bVar1 < 0xf) {
-      if (bVar1 < 6) {
-        if (1 < bVar1) {
-          if (bVar1 < 3) {
-            iVar5 = 0;
-            puVar10 = puVar11;
+    flag = *(byte *)(thing + 0x1a);
+    thing_ptr_2[0x12] = thing + 0xd; /* thing->mappos.val_x */
+    if (flag < 0xf) {
+      if (flag < 6) {
+        if (1 < flag) {
+          if (flag < 3) {
+            thing_ptr = 0;
+            word_ptr_2 = thing_ptr_2;
             do {
-              uVar7 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-              uVar7 = uVar7 >> 0xd | uVar7 * 0x80000;
-              *(short *)((int)puVar10 + 0x40) =
-                   (*(short *)(in_EAX + 0xd) + 0x40) - (short)((ulonglong)uVar7 % 0x7f);
-              uVar7 = uVar7 * 0x24a1 + 0x24df;
-              uVar7 = uVar7 >> 0xd | uVar7 * 0x80000;
-              *(short *)((int)puVar10 + 0x42) =
-                   (*(short *)(in_EAX + 0xf) + 0x40) - (short)((ulonglong)uVar7 % 0x7f);
-              uVar7 = uVar7 * 0x24a1 + 0x24df;
-              DAT_002e8bf6 = uVar7 >> 0xd | uVar7 * 0x80000;
-              uVar8 = *(undefined4 *)(in_EAX + 0xf);
-              puVar11 = (undefined4 *)((int)puVar10 + -4);
-              *(undefined4 *)((int)puVar10 + -4) = 0xffffffff;
-              *(short *)((int)puVar10 + 0x44) =
-                   ((short)((uint)uVar8 >> 0x10) + 0x40) - (short)((ulonglong)DAT_002e8bf6 % 0x7f);
-              iVar5 = iVar5 + 1;
-              *(undefined4 *)((int)puVar10 + -8) = 0xe2141;
-              FUN_00043ac3();
-              puVar10 = (undefined4 *)((int)puVar10 + -4);
-            } while (iVar5 < 2);
+              rand_seed = g_action_random_seed * 0x24a1 + 0x24df;
+              rand_seed = rand_seed >> 0xd | rand_seed * 0x80000;
+              *(short *)((int)word_ptr_2 + 0x40) =
+                   (*(short *)(thing + 0xd) + 0x40) - (short)((ulonglong)rand_seed % 0x7f); /* thing->mappos.val_x */
+              rand_seed = rand_seed * 0x24a1 + 0x24df;
+              rand_seed = rand_seed >> 0xd | rand_seed * 0x80000;
+              *(short *)((int)word_ptr_2 + 0x42) =
+                   (*(short *)(thing + 0xf) + 0x40) - (short)((ulonglong)rand_seed % 0x7f); /* thing->mappos.val_y */
+              rand_seed = rand_seed * 0x24a1 + 0x24df;
+              g_action_random_seed = rand_seed >> 0xd | rand_seed * 0x80000;
+              uval_3 = *(undefined4 *)(thing + 0xf); /* thing->mappos.val_y */
+              thing_ptr_2 = (undefined4 *)((int)word_ptr_2 + -4);
+              *(undefined4 *)((int)word_ptr_2 + -4) = 0xffffffff;
+              *(short *)((int)word_ptr_2 + 0x44) =
+                   ((short)((uint)uval_3 >> 0x10) + 0x40) - (short)((ulonglong)g_action_random_seed % 0x7f);
+              thing_ptr = thing_ptr + 1;
+              *(undefined4 *)((int)word_ptr_2 + -8) = 0xe2141;
+              inits_fn_043ac3();
+              word_ptr_2 = (undefined4 *)((int)word_ptr_2 + -4);
+            } while (thing_ptr < 2);
           }
-          else if (bVar1 == 4) {
-            puVar11[-1] = 0xe232a;
-            iVar5 = FUN_0002683b();
-            if ((((iVar5 != 0) &&
-                 ((uint)(byte)(&DAT_0019d0f3)[(DAT_002f10ce >> 0x18) * 0x4ef] ==
-                  *(int *)(in_EAX + 3) >> 0x18)) && (*(short *)(in_EAX + 0x1d) != 0)) &&
-               (*(short *)(in_EAX + 0x1d) ==
-                *(short *)((int)&DAT_0019d0f7 + (DAT_002f10ce >> 0x18) * 0x4ef))) {
-              puVar11[-1] = 0xe239c;
-              FUN_000627b5();
-              (&DAT_0019d0cb)[(DAT_002f10ce >> 0x18) * 0x4ef] =
-                   (&DAT_0019d0cb)[(DAT_002f10ce >> 0x18) * 0x4ef] | 8;
+          else if (flag == 4) {
+            thing_ptr_2[-1] = 0xe232a;
+            thing_ptr = effect_fn_02683b();
+            if ((((thing_ptr != 0) &&
+                 ((uint)(byte)(&g_player_id_number)[(g_my_player_word >> 0x18) * 0x4ef] ==
+                  *(int *)(thing + 3) >> 0x18)) && (*(short *)(thing + 0x1d) != 0)) &&
+               (*(short *)(thing + 0x1d) ==
+                *(short *)((int)&g_bss_0019d0f7 + (g_my_player_word >> 0x18) * 0x4ef))) {
+              thing_ptr_2[-1] = 0xe239c;
+              panmap_update_player_view_state_0627b5();
+              (&g_bss_0019d0cb)[(g_my_player_word >> 0x18) * 0x4ef] =
+                   (&g_bss_0019d0cb)[(g_my_player_word >> 0x18) * 0x4ef] | 8;
             }
           }
         }
       }
-      else if (bVar1 < 7) {
-        if ((*(ushort *)(in_EAX + 0x17) != 0) &&
-           (iVar5 = (&DAT_001ae9fc)[*(ushort *)(in_EAX + 0x17)], *(char *)(iVar5 + 0x1f) == '\x05'))
+      else if (flag < 7) {
+        if ((*(ushort *)(thing + 0x17) != 0) &&
+           (thing_ptr = (&g_thing_ptrs)[*(ushort *)(thing + 0x17)], *(char *)(thing_ptr + 0x1f) == '\x05')) /* thing->class_id */
         {
-          puVar11[6] = *(undefined4 *)(iVar5 + 0xd);
-          *(undefined2 *)(puVar11 + (uint)bVar12 * -2 + 7) =
-               *(undefined2 *)(iVar5 + 0x11 + (uint)bVar12 * -8);
-          *(short *)(puVar11 + 7) =
-               (short)((uint)*(undefined4 *)((int)puVar11 + 0x1a) >> 0x10) +
-               (short)((int)(uint)*(ushort *)(iVar5 + 0x58) >> 1);
-          puVar11[-1] = 0xe21a9;
-          uVar4 = FUN_00010c1a();
-          *(undefined2 *)(in_EAX + 0x52) = uVar4;
-          puVar11[-1] = 0xe21be;
-          uVar4 = FUN_00010c44();
-          *(undefined2 *)(in_EAX + 0x54) = uVar4;
-          puVar11[-1] = 0xe21dd;
-          FUN_00010d08();
-          sVar2 = *(short *)(in_EAX + 0x2e);
-          *(short *)(puVar11 + 2) = (short)puVar11[0xc] - *(short *)(in_EAX + 0x2c);
-          sVar3 = *(short *)(in_EAX + 0x30);
-          *(short *)((int)puVar11 + 10) = (short)*(undefined4 *)((int)puVar11 + 0x32) - sVar2;
-          *(short *)(puVar11 + 3) = (short)puVar11[0xd] - sVar3;
-          *puVar11 = puVar11[2];
-          *(undefined2 *)(puVar11 + (uint)bVar12 * -2 + 1) =
-               *(undefined2 *)(puVar11 + (uint)bVar12 * -2 + 3);
-          puVar11[0xc] = puVar11[2];
-          *(undefined2 *)(puVar11 + (uint)bVar12 * -2 + 0xd) =
-               *(undefined2 *)(puVar11 + (uint)bVar12 * -2 + 3);
-          puVar11[-1] = 0xe2245;
-          iVar5 = FUN_000e8cc8();
-          if (0x80 < iVar5) {
-            *(short *)(puVar11 + 8) = (short)(puVar11[0xc] << 7);
-            *(short *)(puVar11 + 9) = (short)(puVar11[0xd] << 7);
-            *(short *)((int)puVar11 + 0x22) = (short)(*(int *)((int)puVar11 + 0x32) << 7);
-            puVar11[0xe] = puVar11[8];
-            *(undefined2 *)(puVar11 + (uint)bVar12 * -2 + 0xf) =
-                 *(undefined2 *)(puVar11 + (uint)bVar12 * -2 + 9);
-            puVar11[0xc] = puVar11[8];
-            *(undefined2 *)(puVar11 + (uint)bVar12 * -2 + 0xd) =
-                 *(undefined2 *)(puVar11 + (uint)bVar12 * -2 + 9);
-            *(short *)(puVar11 + 4) = (short)((*(int *)((int)puVar11 + 0x2e) >> 0x10) / iVar5);
-            *(short *)((int)puVar11 + 0x12) = (short)(((int)puVar11[0xc] >> 0x10) / iVar5);
-            *(short *)(puVar11 + 5) = (short)((*(int *)((int)puVar11 + 0x32) >> 0x10) / iVar5);
-            puVar11[10] = puVar11[4];
-            *(undefined2 *)(puVar11 + (uint)bVar12 * -2 + 0xb) =
-                 *(undefined2 *)(puVar11 + (uint)bVar12 * -2 + 5);
-            puVar11[0xc] = puVar11[4];
-            *(undefined2 *)(puVar11 + (uint)bVar12 * -2 + 0xd) =
-                 *(undefined2 *)(puVar11 + (uint)bVar12 * -2 + 5);
+          thing_ptr_2[6] = *(undefined4 *)(thing_ptr + 0xd); /* thing->mappos.val_x */
+          *(undefined2 *)(thing_ptr_2 + (uint)flag_2 * -2 + 7) =
+               *(undefined2 *)(thing_ptr + 0x11 + (uint)flag_2 * -8);
+          *(short *)(thing_ptr_2 + 7) =
+               (short)((uint)*(undefined4 *)((int)thing_ptr_2 + 0x1a) >> 0x10) +
+               (short)((int)(uint)*(ushort *)(thing_ptr + 0x58) >> 1);
+          thing_ptr_2[-1] = 0xe21a9;
+          uval = anger_fn_010c1a();
+          *(undefined2 *)(thing + 0x52) = uval; /* thing->health */
+          thing_ptr_2[-1] = 0xe21be;
+          uval = anger_fn_010c44();
+          *(undefined2 *)(thing + 0x54) = uval;
+          thing_ptr_2[-1] = 0xe21dd;
+          anger_fn_010d08();
+          short_val = *(short *)(thing + 0x2e);
+          *(short *)(thing_ptr_2 + 2) = (short)thing_ptr_2[0xc] - *(short *)(thing + 0x2c);
+          short_val_2 = *(short *)(thing + 0x30);
+          *(short *)((int)thing_ptr_2 + 10) = (short)*(undefined4 *)((int)thing_ptr_2 + 0x32) - short_val;
+          *(short *)(thing_ptr_2 + 3) = (short)thing_ptr_2[0xd] - short_val_2;
+          *thing_ptr_2 = thing_ptr_2[2];
+          *(undefined2 *)(thing_ptr_2 + (uint)flag_2 * -2 + 1) =
+               *(undefined2 *)(thing_ptr_2 + (uint)flag_2 * -2 + 3);
+          thing_ptr_2[0xc] = thing_ptr_2[2];
+          *(undefined2 *)(thing_ptr_2 + (uint)flag_2 * -2 + 0xd) =
+               *(undefined2 *)(thing_ptr_2 + (uint)flag_2 * -2 + 3);
+          thing_ptr_2[-1] = 0xe2245;
+          thing_ptr = bflib_system_io_fn_0e8cc8();
+          if (0x80 < thing_ptr) {
+            *(short *)(thing_ptr_2 + 8) = (short)(thing_ptr_2[0xc] << 7); /* thing->active_state */
+            *(short *)(thing_ptr_2 + 9) = (short)(thing_ptr_2[0xd] << 7);
+            *(short *)((int)thing_ptr_2 + 0x22) = (short)(*(int *)((int)thing_ptr_2 + 0x32) << 7);
+            thing_ptr_2[0xe] = thing_ptr_2[8];
+            *(undefined2 *)(thing_ptr_2 + (uint)flag_2 * -2 + 0xf) =
+                 *(undefined2 *)(thing_ptr_2 + (uint)flag_2 * -2 + 9);
+            thing_ptr_2[0xc] = thing_ptr_2[8];
+            *(undefined2 *)(thing_ptr_2 + (uint)flag_2 * -2 + 0xd) =
+                 *(undefined2 *)(thing_ptr_2 + (uint)flag_2 * -2 + 9);
+            *(short *)(thing_ptr_2 + 4) = (short)((*(int *)((int)thing_ptr_2 + 0x2e) >> 0x10) / thing_ptr);
+            *(short *)((int)thing_ptr_2 + 0x12) = (short)(((int)thing_ptr_2[0xc] >> 0x10) / thing_ptr);
+            *(short *)(thing_ptr_2 + 5) = (short)((*(int *)((int)thing_ptr_2 + 0x32) >> 0x10) / thing_ptr);
+            thing_ptr_2[10] = thing_ptr_2[4];
+            *(undefined2 *)(thing_ptr_2 + (uint)flag_2 * -2 + 0xb) =
+                 *(undefined2 *)(thing_ptr_2 + (uint)flag_2 * -2 + 5);
+            thing_ptr_2[0xc] = thing_ptr_2[4];
+            *(undefined2 *)(thing_ptr_2 + (uint)flag_2 * -2 + 0xd) =
+                 *(undefined2 *)(thing_ptr_2 + (uint)flag_2 * -2 + 5);
           }
-          *(short *)(in_EAX + 0x32) = *(short *)(in_EAX + 0x32) + (short)puVar11[0xc];
-          *(short *)(in_EAX + 0x34) =
-               *(short *)(in_EAX + 0x34) + (short)*(undefined4 *)((int)puVar11 + 0x32);
-          *(short *)(in_EAX + 0x36) = *(short *)(in_EAX + 0x36) + (short)puVar11[0xd];
-          *(byte *)(in_EAX + 1) = *(byte *)(in_EAX + 1) | 4;
+          *(short *)(thing + 0x32) = *(short *)(thing + 0x32) + (short)thing_ptr_2[0xc];
+          *(short *)(thing + 0x34) =
+               *(short *)(thing + 0x34) + (short)*(undefined4 *)((int)thing_ptr_2 + 0x32);
+          *(short *)(thing + 0x36) = *(short *)(thing + 0x36) + (short)thing_ptr_2[0xd];
+          *(byte *)(thing + 1) = *(byte *)(thing + 1) | 4;
         }
       }
-      else if (7 < bVar1) {
-        if (bVar1 < 9) {
-          iVar5 = 0;
-          puVar10 = puVar11;
+      else if (7 < flag) {
+        if (flag < 9) {
+          thing_ptr = 0;
+          word_ptr_2 = thing_ptr_2;
           do {
-            puVar9 = (undefined1 *)puVar10;
-            uVar7 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-            uVar6 = uVar7 >> 0xd;
-            DAT_002e8bf6._0_2_ = (ushort)uVar6;
-            uVar6 = (uVar6 | uVar7 * 0x80000) * 0x24a1 + 0x24df;
-            *(ushort *)(puVar9 + 0x40) =
-                 CONCAT11((char)((ushort)*(undefined2 *)(in_EAX + 0xd) >> 8) + '\x02',
-                          (char)*(undefined2 *)(in_EAX + 0xd)) - ((ushort)DAT_002e8bf6 & 0x3ff);
-            uVar7 = uVar6 >> 0xd;
-            DAT_002e8bf6._0_2_ = (ushort)uVar7;
-            uVar7 = (uVar7 | uVar6 * 0x80000) * 0x24a1 + 0x24df;
-            *(ushort *)(puVar9 + 0x42) =
-                 CONCAT11((char)((ushort)*(undefined2 *)(in_EAX + 0xf) >> 8) + '\x02',
-                          (char)*(undefined2 *)(in_EAX + 0xf)) - ((ushort)DAT_002e8bf6 & 0x3ff);
-            uVar6 = uVar7 >> 0xd;
-            uVar4 = *(undefined2 *)(in_EAX + 0x11);
-            DAT_002e8bf6._0_2_ = (ushort)uVar6;
-            puVar11 = (undefined4 *)(puVar9 + -4);
-            *(undefined4 *)(puVar9 + -4) = 0xffffffff;
-            *(ushort *)(puVar9 + 0x44) =
-                 CONCAT11((char)((ushort)uVar4 >> 8) + '\x02',(char)uVar4) -
-                 ((ushort)DAT_002e8bf6 & 0x3ff);
-            iVar5 = iVar5 + 1;
-            *(undefined4 *)(puVar9 + -8) = 0xe2064;
-            DAT_002e8bf6 = uVar6 | uVar7 * 0x80000;
-            FUN_00043ac3();
-            puVar10 = (undefined4 *)(puVar9 + -4);
-          } while (iVar5 < 10);
-          *(undefined4 *)(puVar9 + -8) = 0xe2074;
-          FUN_00025cf7();
+            word_ptr = (undefined1 *)word_ptr_2;
+            rand_seed = g_action_random_seed * 0x24a1 + 0x24df;
+            uval_2 = rand_seed >> 0xd;
+            g_action_random_seed._0_2_ = (ushort)uval_2;
+            uval_2 = (uval_2 | rand_seed * 0x80000) * 0x24a1 + 0x24df;
+            *(ushort *)(word_ptr + 0x40) =
+                 CONCAT11((char)((ushort)*(undefined2 *)(thing + 0xd) >> 8) + '\x02', /* thing->mappos.val_x */
+                          (char)*(undefined2 *)(thing + 0xd)) - ((ushort)g_action_random_seed & 0x3ff); /* thing->mappos.val_x */
+            rand_seed = uval_2 >> 0xd;
+            g_action_random_seed._0_2_ = (ushort)rand_seed;
+            rand_seed = (rand_seed | uval_2 * 0x80000) * 0x24a1 + 0x24df;
+            *(ushort *)(word_ptr + 0x42) =
+                 CONCAT11((char)((ushort)*(undefined2 *)(thing + 0xf) >> 8) + '\x02', /* thing->mappos.val_y */
+                          (char)*(undefined2 *)(thing + 0xf)) - ((ushort)g_action_random_seed & 0x3ff); /* thing->mappos.val_y */
+            uval_2 = rand_seed >> 0xd;
+            uval = *(undefined2 *)(thing + 0x11);
+            g_action_random_seed._0_2_ = (ushort)uval_2;
+            thing_ptr_2 = (undefined4 *)(word_ptr + -4);
+            *(undefined4 *)(word_ptr + -4) = 0xffffffff;
+            *(ushort *)(word_ptr + 0x44) =
+                 CONCAT11((char)((ushort)uval >> 8) + '\x02',(char)uval) -
+                 ((ushort)g_action_random_seed & 0x3ff);
+            thing_ptr = thing_ptr + 1;
+            *(undefined4 *)(word_ptr + -8) = 0xe2064;
+            g_action_random_seed = uval_2 | rand_seed * 0x80000;
+            inits_fn_043ac3();
+            word_ptr_2 = (undefined4 *)(word_ptr + -4);
+          } while (thing_ptr < 10);
+          *(undefined4 *)(word_ptr + -8) = 0xe2074;
+          effect_update_creature_and_thing_025cf7();
         }
-        else if (bVar1 == 0xb) {
-          *(ushort *)(in_EAX + 0x52) = *(short *)(in_EAX + 0x52) + 0x71U & 0x7ff;
+        else if (flag == 0xb) {
+          *(ushort *)(thing + 0x52) = *(short *)(thing + 0x52) + 0x71U & 0x7ff; /* thing->health */
         }
       }
     }
-    else if (bVar1 < 0x10) {
+    else if (flag < 0x10) {
 LAB_000e23ed:
-      puVar11[-1] = 0xe23f4;
-      iVar5 = FUN_0006d4df();
-      if (iVar5 != 0) {
-        *(undefined1 *)(puVar11 + 0x15) = 1;
+      thing_ptr_2[-1] = 0xe23f4;
+      thing_ptr = shot_roll_action_random_06d4df();
+      if (thing_ptr != 0) {
+        *(undefined1 *)(thing_ptr_2 + 0x15) = 1;
       }
     }
-    else if (bVar1 < 0x13) {
-      if (bVar1 < 0x11) {
-        puVar11[-1] = 0xe23bd;
-        FUN_00025780();
-        puVar11[-1] = 0xe23c4;
-        FUN_0002684f();
+    else if (flag < 0x13) {
+      if (flag < 0x11) {
+        thing_ptr_2[-1] = 0xe23bd;
+        effect_update_player_view_state_025780();
+        thing_ptr_2[-1] = 0xe23c4;
+        entrance_update_player_view_state_02684f();
       }
-      else if (bVar1 == 0x12) {
-        puVar11[-1] = 0xe23dc;
-        FUN_0002649e();
-      }
-    }
-    else if (bVar1 < 0x14) {
-      puVar11[-1] = 0xe23e8;
-      FUN_0002649f();
-    }
-    else if (bVar1 < 0x18) {
-      if (bVar1 == 0x14) goto LAB_000e23ed;
-    }
-    else if (bVar1 < 0x19) {
-      puVar11[-1] = 0xe23d0;
-      FUN_000266af();
-    }
-    else if ((bVar1 == 0x1d) && ((DAT_002e8bee - *(int *)(in_EAX + 9)) % 0x10 == 0)) {
-      *(undefined1 *)(in_EAX + 0x19) = 5;
-      puVar11[-1] = 0xe242e;
-      FUN_00026795();
-      if (*(short *)(in_EAX + 0x17) != 0) {
-        puVar11[-1] = 0xe245d;
-        FUN_000250ef();
-        puVar11[-1] = 0xe247e;
-        FUN_00081c10();
+      else if (flag == 0x12) {
+        thing_ptr_2[-1] = 0xe23dc;
+        effect_fn_02649e();
       }
     }
-    if (*(char *)((int)puVar11 + 0x54) == '\0') {
-      *(undefined4 *)((int)puVar11 + -4) = 0xe2513;
-      uVar8 = FUN_000b41d8();
-      return CONCAT44(*(undefined4 *)((int)puVar11 + 100),uVar8);
+    else if (flag < 0x14) {
+      thing_ptr_2[-1] = 0xe23e8;
+      effect_update_creature_and_thing_02649f();
+    }
+    else if (flag < 0x18) {
+      if (flag == 0x14) goto LAB_000e23ed;
+    }
+    else if (flag < 0x19) {
+      thing_ptr_2[-1] = 0xe23d0;
+      effect_update_creature_and_thing_0266af();
+    }
+    else if ((flag == 0x1d) && ((g_game_turn - *(int *)(thing + 9)) % 0x10 == 0)) {
+      *(undefined1 *)(thing + 0x19) = 5;
+      thing_ptr_2[-1] = 0xe242e;
+      effect_process_thing_entity_026795();
+      if (*(short *)(thing + 0x17) != 0) {
+        thing_ptr_2[-1] = 0xe245d;
+        effect_roll_action_random_0250ef();
+        thing_ptr_2[-1] = 0xe247e;
+        creature_fn_081c10();
+      }
+    }
+    if (*(char *)((int)thing_ptr_2 + 0x54) == '\0') {
+      *(undefined4 *)((int)thing_ptr_2 + -4) = 0xe2513;
+      uval_3 = move_shot_has_hit_thing_0b41d8();
+      return CONCAT44(*(undefined4 *)((int)thing_ptr_2 + 100),uval_3); /* thing->ccontrol_idx */
     }
   }
-  if (*(char *)((int)puVar11 + 0x54) == '\0') {
-    return (ulonglong)*(uint *)((int)puVar11 + 100) << 0x20;
+  if (*(char *)((int)thing_ptr_2 + 0x54) == '\0') {
+    return (ulonglong)*(uint *)((int)thing_ptr_2 + 100) << 0x20; /* thing->ccontrol_idx */
   }
-  bVar12 = *(byte *)(in_EAX + 0x1a);
-  if (bVar12 < 0xf) {
-    if (bVar12 < 4) goto LAB_000e25ae;
-    if (4 < bVar12) {
-      if (bVar12 == 0xb) {
-        *(undefined4 *)((int)puVar11 + -4) = 0xe2531;
-        FUN_00024998();
-        *(undefined4 *)((int)puVar11 + -4) = 0xe2542;
-        FUN_00024998();
-        *(uint *)((int)puVar11 + -4) = (uint)*(byte *)(in_EAX + 0x16);
-        *(undefined4 *)((int)puVar11 + -8) = 0xe255d;
-        FUN_0002585f();
-        puVar11 = (undefined4 *)((int)puVar11 + -4);
+  flag_2 = *(byte *)(thing + 0x1a);
+  if (flag_2 < 0xf) {
+    if (flag_2 < 4) goto LAB_000e25ae;
+    if (4 < flag_2) {
+      if (flag_2 == 0xb) {
+        *(undefined4 *)((int)thing_ptr_2 + -4) = 0xe2531;
+        effect_allocate_light_effect_024998();
+        *(undefined4 *)((int)thing_ptr_2 + -4) = 0xe2542;
+        effect_allocate_light_effect_024998();
+        *(uint *)((int)thing_ptr_2 + -4) = (uint)*(byte *)(thing + 0x16);
+        *(undefined4 *)((int)thing_ptr_2 + -8) = 0xe255d;
+        effect_illegal_hit_thing_type_02585f();
+        thing_ptr_2 = (undefined4 *)((int)thing_ptr_2 + -4);
       }
       goto LAB_000e25ae;
     }
   }
   else {
-    if (bVar12 < 0x10) {
-      *(undefined4 *)((int)puVar11 + -4) = 0xe258b;
-      FUN_000263c9();
+    if (flag_2 < 0x10) {
+      *(undefined4 *)((int)thing_ptr_2 + -4) = 0xe258b;
+      effect_fn_0263c9();
       goto LAB_000e25ae;
     }
-    if ((0x10 < bVar12) && (bVar12 != 0x18)) goto LAB_000e25ae;
+    if ((0x10 < flag_2) && (flag_2 != 0x18)) goto LAB_000e25ae;
   }
-  *(undefined4 *)((int)puVar11 + -4) = 0xe257d;
-  FUN_000627b5();
+  *(undefined4 *)((int)thing_ptr_2 + -4) = 0xe257d;
+  panmap_update_player_view_state_0627b5();
 LAB_000e25ae:
-  *(undefined4 *)((int)puVar11 + -4) = 0xe25b7;
-  FUN_00072af4();
-  return (ulonglong)*(uint *)((int)puVar11 + 100) << 0x20;
+  *(undefined4 *)((int)thing_ptr_2 + -4) = 0xe25b7;
+  structs_update_creature_control_072af4();
+  return (ulonglong)*(uint *)((int)thing_ptr_2 + 100) << 0x20; /* thing->ccontrol_idx */
 }
 
 /******************************************************************************
- * Function : sub_0e25c4 (Ghidra: FUN_000e25c4)
- * Prototype: undefined8 sub_0e25c4(void);
+ * Function : update_fn_0e25c4 (Original VA: 0xe25c4, Ghidra: FUN_000e25c4)
+ * Prototype: undefined8 update_fn_0e25c4(void);
  * Address  : 0xe25c4 (Size: 259 bytes)
  * Module   : update.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Module update.cpp procedure @ 0x0e25c4
  * Callers  : 0 -> 
- * Callees  : 6 -> 0x72af4, 0x7df48, 0xabe58, 0xb2398, 0xb3afc, 0xb444c
+ * Callees  : 6 -> structs_update_creature_control_072af4, ceiling_fn_07df48, food_update_player_dungeon_0abe58, light_process_map_subtile_0b2398, move_fn_0b3afc, move_fn_0b444c
  ******************************************************************************/
-undefined8 FUN_000e25c4(void)
+undefined8 update_fn_0e25c4(void)
 
 {
-  byte bVar1;
-  byte *in_EAX;
-  int iVar2;
-  undefined4 uVar3;
-  undefined4 in_EDX;
+  byte flag;
+  byte *arg_eax;
+  int val;
+  undefined4 uval;
+  undefined4 arg_edx;
   
-  if (*(int *)(&DAT_0018dbed + (uint)in_EAX[0x1a] * 4) != 0) {
-    iVar2 = (**(code **)(&DAT_0018dbed + (uint)in_EAX[0x1a] * 4))();
-    if (iVar2 < 1) goto LAB_000e26c3;
+  if (*(int *)(&g_data_0018dbed + (uint)arg_eax[0x1a] * 4) != 0) {
+    val = (**(code **)(&g_data_0018dbed + (uint)arg_eax[0x1a] * 4))();
+    if (val < 1) goto LAB_000e26c3;
   }
-  if (*(int *)(&DAT_0018dbd9 + (uint)in_EAX[7] * 4) != 0) {
-    iVar2 = (**(code **)(&DAT_0018dbd9 + (uint)in_EAX[7] * 4))();
-    if (iVar2 < 1) goto LAB_000e26c3;
+  if (*(int *)(&g_data_0018dbd9 + (uint)arg_eax[7] * 4) != 0) {
+    val = (**(code **)(&g_data_0018dbd9 + (uint)arg_eax[7] * 4))();
+    if (val < 1) goto LAB_000e26c3;
   }
-  bVar1 = in_EAX[0x25];
-  in_EAX[0x25] = bVar1 & 0xfc;
-  if ((bVar1 & 0x40) == 0) {
-    iVar2 = FUN_0007df48();
-    if (iVar2 != 0) {
-      iVar2 = FUN_000b3afc();
-      if (iVar2 == 0) {
-        iVar2 = FUN_000b2398();
-        if (iVar2 == 0x27) {
-          in_EAX[0x25] = in_EAX[0x25] | 1;
+  flag = arg_eax[0x25];
+  arg_eax[0x25] = flag & 0xfc;
+  if ((flag & 0x40) == 0) {
+    val = ceiling_fn_07df48();
+    if (val != 0) {
+      val = move_fn_0b3afc();
+      if (val == 0) {
+        val = light_process_map_subtile_0b2398();
+        if (val == 0x27) {
+          arg_eax[0x25] = arg_eax[0x25] | 1;
         }
       }
       else {
-        in_EAX[0x25] = in_EAX[0x25] | 2;
-        if ((((&DAT_0018b918)[(uint)in_EAX[0x1a] * 0x16] != '\0') && ((in_EAX[1] & 1) == 0)) &&
-           ((*in_EAX & 0x80) == 0)) {
-          if (in_EAX[0x1a] == 10) {
-            FUN_000abe58();
+        arg_eax[0x25] = arg_eax[0x25] | 2;
+        if ((((&g_data_0018b918)[(uint)arg_eax[0x1a] * 0x16] != '\0') && ((arg_eax[1] & 1) == 0)) &&
+           ((*arg_eax & 0x80) == 0)) {
+          if (arg_eax[0x1a] == 10) {
+            food_update_player_dungeon_0abe58();
           }
           else {
-            FUN_00072af4();
+            structs_update_creature_control_072af4();
           }
-          return CONCAT44(in_EDX,0xffffffff);
+          return CONCAT44(arg_edx,0xffffffff);
         }
       }
     }
   }
-  if ((in_EAX[0x25] & 0x40) == 0) {
-    uVar3 = FUN_000b444c();
-    return CONCAT44(in_EDX,uVar3);
+  if ((arg_eax[0x25] & 0x40) == 0) {
+    uval = move_fn_0b444c();
+    return CONCAT44(arg_edx,uval);
   }
-  iVar2 = 1;
+  val = 1;
 LAB_000e26c3:
-  return CONCAT44(in_EDX,iVar2);
+  return CONCAT44(arg_edx,val);
 }
 
 /******************************************************************************
- * Function : dk_illegal_effect_element_bounce_0e26dc (Ghidra: FUN_000e26dc)
- * Prototype: undefined8 dk_illegal_effect_element_bounce_0e26dc(void);
+ * Function : update_illegal_effect_element_bounce_0e26dc (Original VA: 0xe26dc, Ghidra: FUN_000e26dc)
+ * Prototype: undefined8 update_illegal_effect_element_bounce_0e26dc(void);
  * Address  : 0xe26dc (Size: 822 bytes)
  * Module   : update.cpp [direct_file_string_xref]
- * OrigLine : update.cpp:2559; update.cpp:2001 ("Invalid effect element move type!")
- * Naming   : String 'Illegal effect element bounce life: %d'
+ * OrigLine : update.cpp lines 2001, 2559
+ * Purpose  : String 'Illegal effect element bounce life: %d'
  * Callers  : 0 -> 
- * Callees  : 9 -> 0x444a9, 0x44f33, 0x72af4, 0x7df48, 0xb2398, 0xb45b4, 0xddaf0, 0xe66ec, 0xe7714
- * Strings  :
- *   - 0x16caa8: "update.cpp"
- *   - 0x16cad5: "update.cpp"
- *   - 0x16ca81: "Illegal effect element bounce life: %d"
- *   - 0x16cab3: "Invalid effect element move type!"
+ * Callees  : 9 -> inits_allocate_dynamic_light_shot_0444a9, inits_roll_action_random_044f33, structs_update_creature_control_072af4, ceiling_fn_07df48, light_process_map_subtile_0b2398, move_fn_0b45b4, LbErrorLog, bflib_system_io_fn_0e66ec ...
  ******************************************************************************/
-undefined8 FUN_000e26dc(void)
+undefined8 update_illegal_effect_element_bounce_0e26dc(void)
 
 {
-  int iVar1;
-  undefined2 uVar2;
-  ushort uVar3;
-  int in_EAX;
-  undefined4 uVar4;
-  int iVar5;
-  uint uVar6;
+  int val;
+  undefined2 uval;
+  ushort uval_2;
+  int arg_eax;
+  undefined4 uval_3;
+  int val_2;
+  uint uval_4;
   int extraout_ECX;
   int extraout_ECX_00;
   int extraout_ECX_01;
   int extraout_ECX_02;
-  undefined4 in_EDX;
+  undefined4 arg_edx;
   
-  iVar1 = (uint)*(byte *)(in_EAX + 0x1a) * 0x4e;
-  if (*(int *)(in_EAX + 0x5c) >> 0x10 < 1) {
-    if (*(short *)(&DAT_0018996b + iVar1) == 0) {
-      FUN_00072af4();
+  val = (uint)*(byte *)(arg_eax + 0x1a) * 0x4e;
+  if (*(int *)(arg_eax + 0x5c) >> 0x10 < 1) {
+    if (*(short *)(&g_data_0018996b + val) == 0) {
+      structs_update_creature_control_072af4();
     }
     else {
-      FUN_00044f33();
+      inits_roll_action_random_044f33();
     }
-    uVar4 = 0;
+    uval_3 = 0;
     goto LAB_000e28a4;
   }
-  *(short *)(in_EAX + 0x5e) = *(short *)(in_EAX + 0x5e) + -1;
-  if (((&DAT_00189946)[iVar1] == '\0') &&
-     (*(int *)(in_EAX + 0xf) >> 0x10 <= (int)(uint)*(ushort *)(in_EAX + 0x60))) {
-    *(undefined2 *)(in_EAX + 0x3e) = 0;
+  *(short *)(arg_eax + 0x5e) = *(short *)(arg_eax + 0x5e) + -1;
+  if (((&g_data_00189946)[val] == '\0') &&
+     (*(int *)(arg_eax + 0xf) >> 0x10 <= (int)(uint)*(ushort *)(arg_eax + 0x60))) {
+    *(undefined2 *)(arg_eax + 0x3e) = 0;
   }
-  if ((&DAT_00189949)[iVar1] != '\0') {
-    *(byte *)(in_EAX + 0x25) = *(byte *)(in_EAX + 0x25) & 0xfc;
-    iVar5 = FUN_0007df48();
-    in_EAX = extraout_ECX;
-    if (iVar5 != 0) {
-      uVar6 = FUN_000b2398();
-      in_EAX = extraout_ECX_00;
-      if (uVar6 == 0x27) {
+  if ((&g_data_00189949)[val] != '\0') {
+    *(byte *)(arg_eax + 0x25) = *(byte *)(arg_eax + 0x25) & 0xfc;
+    val_2 = ceiling_fn_07df48();
+    arg_eax = extraout_ECX;
+    if (val_2 != 0) {
+      uval_4 = light_process_map_subtile_0b2398();
+      arg_eax = extraout_ECX_00;
+      if (uval_4 == 0x27) {
         *(byte *)(extraout_ECX_00 + 0x25) = *(byte *)(extraout_ECX_00 + 0x25) | 1;
       }
-      else if ((uVar6 & 0xfffffffe) == 0x28) {
+      else if ((uval_4 & 0xfffffffe) == 0x28) {
         *(byte *)(extraout_ECX_00 + 0x25) = *(byte *)(extraout_ECX_00 + 0x25) | 2;
       }
     }
   }
-  if ((*(ushort *)(&DAT_00189954 + iVar1) != 0) &&
-     ((uint)(*(int *)(in_EAX + 9) - DAT_002e8bee) % (uint)*(ushort *)(&DAT_00189954 + iVar1) == 0))
+  if ((*(ushort *)(&g_data_00189954 + val) != 0) &&
+     ((uint)(*(int *)(arg_eax + 9) - g_game_turn) % (uint)*(ushort *)(&g_data_00189954 + val) == 0))
   {
-    FUN_000444a9();
-    in_EAX = extraout_ECX_01;
+    inits_allocate_dynamic_light_shot_0444a9();
+    arg_eax = extraout_ECX_01;
   }
-  switch((&DAT_00189935)[iVar1]) {
+  switch((&g_data_00189935)[val]) {
   case 2:
-    *(short *)(in_EAX + 0x2c) = (short)(((*(int *)(in_EAX + 0x2a) >> 0x10) * 2) / 3);
-    *(short *)(in_EAX + 0x2e) = (short)(((*(int *)(in_EAX + 0x2c) >> 0x10) * 2) / 3);
-    iVar5 = *(int *)(in_EAX + 0x2e) >> 0x10;
-    uVar2 = (undefined2)((iVar5 * 2) / 3);
-    if (iVar5 < 0x21) {
-      if (iVar5 < 0x11) {
-        if (iVar5 < -0x10) {
-          *(undefined2 *)(in_EAX + 0x30) = uVar2;
-          FUN_000b45b4();
+    *(short *)(arg_eax + 0x2c) = (short)(((*(int *)(arg_eax + 0x2a) >> 0x10) * 2) / 3);
+    *(short *)(arg_eax + 0x2e) = (short)(((*(int *)(arg_eax + 0x2c) >> 0x10) * 2) / 3);
+    val_2 = *(int *)(arg_eax + 0x2e) >> 0x10;
+    uval = (undefined2)((val_2 * 2) / 3);
+    if (val_2 < 0x21) {
+      if (val_2 < 0x11) {
+        if (val_2 < -0x10) {
+          *(undefined2 *)(arg_eax + 0x30) = uval;
+          move_fn_0b45b4();
           break;
         }
-        *(short *)(in_EAX + 0x30) = *(short *)(in_EAX + 0x30) + 0x10;
-        if (0x10 < *(int *)(in_EAX + 0x2e) >> 0x10) goto LAB_000e2883;
+        *(short *)(arg_eax + 0x30) = *(short *)(arg_eax + 0x30) + 0x10;
+        if (0x10 < *(int *)(arg_eax + 0x2e) >> 0x10) goto LAB_000e2883;
       }
       else {
-        *(short *)(in_EAX + 0x30) = *(short *)(in_EAX + 0x30) + -0x10;
-        if (*(int *)(in_EAX + 0x2e) >> 0x10 < 0x10) {
+        *(short *)(arg_eax + 0x30) = *(short *)(arg_eax + 0x30) + -0x10;
+        if (*(int *)(arg_eax + 0x2e) >> 0x10 < 0x10) {
 LAB_000e2883:
-          *(undefined2 *)(in_EAX + 0x30) = 0x10;
+          *(undefined2 *)(arg_eax + 0x30) = 0x10;
         }
       }
     }
     else {
-      *(undefined2 *)(in_EAX + 0x30) = uVar2;
+      *(undefined2 *)(arg_eax + 0x30) = uval;
     }
-    FUN_000b45b4();
+    move_fn_0b45b4();
     break;
   case 3:
-    *(undefined2 *)(in_EAX + 0x30) = 0x20;
-    FUN_000b45b4();
+    *(undefined2 *)(arg_eax + 0x30) = 0x20;
+    move_fn_0b45b4();
     break;
   case 4:
-    iVar5 = *(int *)(in_EAX + 0x5c) >> 0x10;
-    if ((iVar5 < 0) || (0xf < iVar5)) {
-      FUN_000e7714(&DAT_0019cbac,s_Illegal_effect_element_bounce_li_0016ca81,
-                   *(int *)(in_EAX + 0x5c) >> 0x10);
-      FUN_000ddaf0(); /* LbErrorLog("update.cpp", line 2559, g_log_buf) */
+    val_2 = *(int *)(arg_eax + 0x5c) >> 0x10;
+    if ((val_2 < 0) || (0xf < val_2)) {
+      dk_sprintf(&g_log_sprintf_buf,s_Illegal_effect_element_bounce_li_0016ca81,
+                   *(int *)(arg_eax + 0x5c) >> 0x10);
+      LbErrorLog(); /* LbErrorLog("update.cpp", line 2559, g_log_buf) */
     }
     else {
-      *(undefined2 *)(in_EAX + 0x30) = *(undefined2 *)(&DAT_00192788 + iVar5 * 4);
+      *(undefined2 *)(arg_eax + 0x30) = *(undefined2 *)(&g_data_00192788 + val_2 * 4);
     }
   case 1:
-    FUN_000b45b4();
+    move_fn_0b45b4();
     break;
   case 5:
     break;
   default:
-    FUN_000ddaf0(); /* LbErrorLog("update.cpp", line 2001, "Invalid effect element move type!") */
+    LbErrorLog(); /* LbErrorLog("update.cpp", line 2001, "Invalid effect element move type!") */
   }
-  if (((&DAT_00189936)[iVar1] != '\0') && ((&DAT_00189936)[iVar1] == '\x01')) {
-    uVar3 = FUN_000e66ec();
-    uVar6 = (uint)uVar3 % 0x800 - 0x200 & 0x7ff;
-    if (0x400 < uVar6) {
-      uVar6 = uVar6 - 0x400;
+  if (((&g_data_00189936)[val] != '\0') && ((&g_data_00189936)[val] == '\x01')) {
+    uval_2 = bflib_system_io_fn_0e66ec();
+    uval_4 = (uint)uval_2 % 0x800 - 0x200 & 0x7ff;
+    if (0x400 < uval_4) {
+      uval_4 = uval_4 - 0x400;
     }
-    uVar6 = (int)((uVar6 + ((int)uVar6 >> 0x1f) * -0x80) - (uint)(((int)uVar6 >> 0x1f) << 6 < 0)) >>
+    uval_4 = (int)((uval_4 + ((int)uval_4 >> 0x1f) * -0x80) - (uint)(((int)uval_4 >> 0x1f) << 6 < 0)) >>
             7;
-    uVar3 = FUN_000e66ec();
+    uval_2 = bflib_system_io_fn_0e66ec();
     *(undefined2 *)(extraout_ECX_02 + 0x3e) = 0;
-    *(char *)(extraout_ECX_02 + 0x48) = (char)uVar6;
-    *(ushort *)(extraout_ECX_02 + 0x52) = uVar3 % 0x800;
-    *(uint *)(extraout_ECX_02 + 0x40) = (uVar6 & 0xff) << 8;
-    return CONCAT44(in_EDX,1);
+    *(char *)(extraout_ECX_02 + 0x48) = (char)uval_4;
+    *(ushort *)(extraout_ECX_02 + 0x52) = uval_2 % 0x800;
+    *(uint *)(extraout_ECX_02 + 0x40) = (uval_4 & 0xff) << 8;
+    return CONCAT44(arg_edx,1);
   }
-  uVar4 = 1;
+  uval_3 = 1;
 LAB_000e28a4:
-  return CONCAT44(in_EDX,uVar4);
+  return CONCAT44(arg_edx,uval_3);
 }
 
 /******************************************************************************
- * Function : sub_0e2a14 (Ghidra: FUN_000e2a14)
- * Prototype: longlong sub_0e2a14(void);
+ * Function : update_process_map_subtile_0e2a14 (Original VA: 0xe2a14, Ghidra: FUN_000e2a14)
+ * Prototype: longlong update_process_map_subtile_0e2a14(void);
  * Address  : 0xe2a14 (Size: 579 bytes)
  * Module   : update.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Reads/modifies Map[256x256] subtile data
  * Callers  : 0 -> 
- * Callees  : 10 -> 0x24998, 0x399d8, 0x44b13, 0x72af4, 0x81e5c, 0x8ccec, 0xb2398, 0xb3afc, 0xb4894, 0xdd2f0
+ * Callees  : 10 -> effect_allocate_light_effect_024998, gravyard_thing_was_graveyard_removed_0399d8, inits_told_you_so_create_044b13, structs_update_creature_control_072af4, creature_fn_081e5c, draw_roll_action_random_08ccec, light_process_map_subtile_0b2398, move_fn_0b3afc ...
  ******************************************************************************/
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-longlong FUN_000e2a14(void)
+longlong update_process_map_subtile_0e2a14(void)
 
 {
-  byte bVar1;
-  char cVar2;
-  byte *in_EAX;
-  int iVar3;
-  uint in_EDX;
-  undefined4 *puVar4;
+  byte flag;
+  char ch;
+  byte *arg_eax;
+  int val;
+  uint arg_edx;
+  undefined4 *word_ptr;
   undefined4 uStack_2c;
   int iStack_28;
   undefined4 uStack_24;
@@ -3812,311 +3791,308 @@ longlong FUN_000e2a14(void)
   undefined2 local_1e;
   short sStack_1c;
   
-  puVar4 = (undefined4 *)&uStack_20;
-  if ((*in_EAX & 0x80) == 0) {
-    if (in_EAX[7] == 1) {
-      uStack_20 = (undefined2)*(undefined4 *)(in_EAX + 0xd);
-      local_1e = (undefined2)((uint)*(undefined4 *)(in_EAX + 0xd) >> 0x10);
-      sStack_1c = *(short *)(in_EAX + 0x11) +
-                  (short)((int)((uint)*(ushort *)(in_EAX + 0x58) * 3) >> 2);
-      if (DAT_002ee9b9 == 3) {
-        bVar1 = in_EAX[0x1a];
-        if (((&DAT_002e91e7)[(uint)bVar1 * 0xe6] == '\0') || ((bVar1 != 0 && (bVar1 < 0xe)))) {
-          cVar2 = '\0';
+  word_ptr = (undefined4 *)&uStack_20;
+  if ((*arg_eax & 0x80) == 0) {
+    if (arg_eax[7] == 1) {
+      uStack_20 = (undefined2)*(undefined4 *)(arg_eax + 0xd);
+      local_1e = (undefined2)((uint)*(undefined4 *)(arg_eax + 0xd) >> 0x10);
+      sStack_1c = *(short *)(arg_eax + 0x11) +
+                  (short)((int)((uint)*(ushort *)(arg_eax + 0x58) * 3) >> 2);
+      if (g_bss_002ee9b9 == 3) {
+        flag = arg_eax[0x1a];
+        if (((&g_bss_002e91e7)[(uint)flag * 0xe6] == '\0') || ((flag != 0 && (flag < 0xe)))) {
+          ch = '\0';
         }
         else {
-          cVar2 = '\x01';
+          ch = '\x01';
         }
       }
       else {
-        cVar2 = (&DAT_002e91e7)[(uint)in_EAX[0x1a] * 0xe6];
+        ch = (&g_bss_002e91e7)[(uint)arg_eax[0x1a] * 0xe6];
       }
-      if (cVar2 != '\0') {
+      if (ch != '\0') {
         uStack_24 = 0xe2ac9;
-        FUN_00024998();
+        effect_allocate_light_effect_024998();
       }
-      if (*(short *)(in_EAX + 0x5e) != 0) {
-        *(short *)(in_EAX + 0x5e) = *(short *)(in_EAX + 0x5e) + -1;
+      if (*(short *)(arg_eax + 0x5e) != 0) {
+        *(short *)(arg_eax + 0x5e) = *(short *)(arg_eax + 0x5e) + -1;
       }
-      puVar4 = (undefined4 *)&uStack_20;
-      if (*(int *)(in_EAX + 0x5c) >> 0x10 == 0) {
+      word_ptr = (undefined4 *)&uStack_20;
+      if (*(int *)(arg_eax + 0x5c) >> 0x10 == 0) {
         uStack_24 = 2;
         uStack_2c = 1;
-        in_EAX[7] = 2;
-        iStack_28 = *(int *)(in_EAX + 0x5c) >> 0x10;
-        FUN_000dd2f0();
-        FUN_0008ccec();
-        puVar4 = &uStack_2c;
+        arg_eax[7] = 2;
+        iStack_28 = *(int *)(arg_eax + 0x5c) >> 0x10;
+        update_fn_0dd2f0();
+        draw_roll_action_random_08ccec();
+        word_ptr = &uStack_2c;
       }
     }
     else {
       uStack_24 = 0xe2b81;
-      iVar3 = FUN_00081e5c();
-      puVar4 = (undefined4 *)&uStack_20;
-      if (iVar3 != 0) {
-        if (in_EAX[0x14] == 0) {
-          puVar4 = (undefined4 *)&uStack_20;
-          if ((uint)(_DAT_002eb9fa >> 0x10) < (uint)(DAT_002e8bee - *(int *)(in_EAX + 9))) {
+      val = creature_fn_081e5c();
+      word_ptr = (undefined4 *)&uStack_20;
+      if (val != 0) {
+        if (arg_eax[0x14] == 0) {
+          word_ptr = (undefined4 *)&uStack_20;
+          if ((uint)(g_bss_002eb9fa >> 0x10) < (uint)(g_game_turn - *(int *)(arg_eax + 9))) {
             uStack_24 = 0xe2be7;
-            FUN_00072af4();
-            return (ulonglong)in_EDX << 0x20;
+            structs_update_creature_control_072af4();
+            return (ulonglong)arg_edx << 0x20;
           }
         }
         else {
-          if (*(short *)(in_EAX + 0x5e) != 0) {
-            *(short *)(in_EAX + 0x5e) = *(short *)(in_EAX + 0x5e) + -1;
+          if (*(short *)(arg_eax + 0x5e) != 0) {
+            *(short *)(arg_eax + 0x5e) = *(short *)(arg_eax + 0x5e) + -1;
           }
-          puVar4 = (undefined4 *)&uStack_20;
-          if (*(short *)(in_EAX + 0x5e) == 0) {
+          word_ptr = (undefined4 *)&uStack_20;
+          if (*(short *)(arg_eax + 0x5e) == 0) {
             uStack_24 = 0xe2bad;
-            FUN_000399d8();
+            gravyard_thing_was_graveyard_removed_0399d8();
             uStack_24 = 0xe2bb6;
-            FUN_00072af4();
-            return (ulonglong)in_EDX << 0x20;
+            structs_update_creature_control_072af4();
+            return (ulonglong)arg_edx << 0x20;
           }
         }
       }
     }
   }
-  *(undefined4 *)((int)puVar4 + -4) = 0xe2b1f;
-  iVar3 = FUN_000b2398();
-  if (iVar3 == 0x27) {
-    in_EAX[0x25] = in_EAX[0x25] | 1;
+  *(undefined4 *)((int)word_ptr + -4) = 0xe2b1f;
+  val = light_process_map_subtile_0b2398();
+  if (val == 0x27) {
+    arg_eax[0x25] = arg_eax[0x25] | 1;
   }
-  if ((*in_EAX & 0x20) == 0) {
-    *(undefined4 *)((int)puVar4 + -4) = 0xe2b49;
-    iVar3 = FUN_000b3afc();
-    if (((iVar3 != 0) && ((in_EAX[1] & 1) == 0)) && ((*in_EAX & 0x80) == 0)) {
-      *(undefined4 *)((int)puVar4 + -4) = 0xe2b6e;
-      FUN_00072af4();
-      return (ulonglong)*(uint *)((int)puVar4 + 0x14) << 0x20;
+  if ((*arg_eax & 0x20) == 0) {
+    *(undefined4 *)((int)word_ptr + -4) = 0xe2b49;
+    val = move_fn_0b3afc();
+    if (((val != 0) && ((arg_eax[1] & 1) == 0)) && ((*arg_eax & 0x80) == 0)) {
+      *(undefined4 *)((int)word_ptr + -4) = 0xe2b6e;
+      structs_update_creature_control_072af4();
+      return (ulonglong)*(uint *)((int)word_ptr + 0x14) << 0x20;
     }
-    if ((*(byte *)((int)&DAT_00279203 + ((uint)in_EAX[0x10] * 0x100 + (uint)in_EAX[0xe]) * 5) & 0x40
+    if ((*(byte *)((int)&g_map_subtiles + ((uint)arg_eax[0x10] * 0x100 + (uint)arg_eax[0xe]) * 5) & 0x40
         ) != 0) {
-      *(undefined4 *)((int)puVar4 + -4) = 0xe2c1c;
-      FUN_00072af4();
-      *(uint *)((int)puVar4 + -4) = (uint)in_EAX[0x13];
-      *(undefined4 *)((int)puVar4 + -8) = 0xe2c35;
-      FUN_00044b13();
-      return (ulonglong)*(uint *)((int)puVar4 + 0x10) << 0x20;
+      *(undefined4 *)((int)word_ptr + -4) = 0xe2c1c;
+      structs_update_creature_control_072af4();
+      *(uint *)((int)word_ptr + -4) = (uint)arg_eax[0x13];
+      *(undefined4 *)((int)word_ptr + -8) = 0xe2c35;
+      inits_told_you_so_create_044b13();
+      return (ulonglong)*(uint *)((int)word_ptr + 0x10) << 0x20;
     }
   }
-  *(undefined4 *)((int)puVar4 + -4) = 0xe2c48;
-  FUN_000b4894();
-  return CONCAT44(*(undefined4 *)((int)puVar4 + 0x14),1);
+  *(undefined4 *)((int)word_ptr + -4) = 0xe2c48;
+  move_fn_0b4894();
+  return CONCAT44(*(undefined4 *)((int)word_ptr + 0x14),1);
 }
 
 /******************************************************************************
- * Function : sub_0e2c58 (Ghidra: FUN_000e2c58)
- * Prototype: longlong sub_0e2c58(void);
+ * Function : update_fn_0e2c58 (Original VA: 0xe2c58, Ghidra: FUN_000e2c58)
+ * Prototype: longlong update_fn_0e2c58(void);
  * Address  : 0xe2c58 (Size: 98 bytes)
  * Module   : update.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Module update.cpp procedure @ 0x0e2c58
  * Callers  : 0 -> 
- * Callees  : 4 -> 0x72af4, 0x75ba4, 0x7691e, 0xb3afc
+ * Callees  : 4 -> structs_update_creature_control_072af4, trap_illegal_trap_trigger_type_075ba4, workshop_fn_07691e, move_fn_0b3afc
  ******************************************************************************/
-longlong FUN_000e2c58(void)
+longlong update_fn_0e2c58(void)
 
 {
-  byte *in_EAX;
-  int iVar1;
-  uint in_EDX;
+  byte *arg_eax;
+  int val;
+  uint arg_edx;
   
-  if (*(int *)(in_EAX + 0x5c) >> 0x10 < 0) {
-    FUN_00072af4();
-    return (ulonglong)in_EDX << 0x20;
+  if (*(int *)(arg_eax + 0x5c) >> 0x10 < 0) {
+    structs_update_creature_control_072af4();
+    return (ulonglong)arg_edx << 0x20;
   }
-  iVar1 = FUN_0007691e();
-  if (iVar1 != 0) {
-    FUN_00075ba4();
+  val = workshop_fn_07691e();
+  if (val != 0) {
+    trap_illegal_trap_trigger_type_075ba4();
   }
-  iVar1 = FUN_000b3afc();
-  if (((iVar1 != 0) && ((in_EAX[1] & 1) == 0)) && ((*in_EAX & 0x80) == 0)) {
-    FUN_00072af4();
-    return (ulonglong)in_EDX << 0x20;
+  val = move_fn_0b3afc();
+  if (((val != 0) && ((arg_eax[1] & 1) == 0)) && ((*arg_eax & 0x80) == 0)) {
+    structs_update_creature_control_072af4();
+    return (ulonglong)arg_edx << 0x20;
   }
-  return CONCAT44(in_EDX,1);
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : dk_go_first_person_without_0e2cd0 (Ghidra: FUN_000e2cd0)
- * Prototype: void dk_go_first_person_without_0e2cd0(void);
+ * Function : update_go_first_person_without_0e2cd0 (Original VA: 0xe2cd0, Ghidra: FUN_000e2cd0)
+ * Prototype: void update_go_first_person_without_0e2cd0(void);
  * Address  : 0xe2cd0 (Size: 1236 bytes)
  * Module   : update.cpp [direct_file_string_xref]
- * OrigLine : update.cpp:2207 ("Cannot go first person without controlling creature")
- * Naming   : String 'Cannot go first person without controlling creature'
+ * OrigLine : update.cpp lines 2207
+ * Purpose  : String 'Cannot go first person without controlling creature'
  * Callers  : 0 -> 
- * Callees  : 3 -> 0x77b8d, 0x81dd8, 0xddaf0
- * Strings  :
- *   - 0x16c98c: "update.cpp"
- *   - 0x16c958: "Cannot go first person without controlling creature"
+ * Callees  : 3 -> workshop_fn_077b8d, creature_fn_081dd8, LbErrorLog
  ******************************************************************************/
-void FUN_000e2cd0(void)
+void update_go_first_person_without_0e2cd0(void)
 
 {
-  ushort uVar1;
-  undefined2 *puVar2;
-  char cVar3;
-  short sVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
+  ushort uval;
+  undefined2 *word_ptr;
+  char ch;
+  short short_val;
+  int val;
+  int thing_ptr;
+  int cctrl_ptr;
   undefined2 *extraout_ECX;
   int extraout_EDX;
   int extraout_EDX_00;
-  uint uVar8;
-  int iVar9;
+  uint uval_2;
+  int val_2;
   int local_24;
   
   local_24 = 0;
   do {
-    if ((((&DAT_0019d0c8)[local_24] & 1) != 0) && (((&DAT_0019d0c8)[local_24] & 0x40) == 0)) {
-      FUN_00077b8d();
-      puVar2 = *(undefined2 **)((int)&DAT_0019d100 + local_24);
-      switch(*(undefined1 *)(puVar2 + 3)) {
+    if ((((&g_players)[local_24] & 1) != 0) && (((&g_players)[local_24] & 0x40) == 0)) {
+      workshop_fn_077b8d();
+      word_ptr = *(undefined2 **)((int)&g_player_active_camera + local_24);
+      switch(*(undefined1 *)(word_ptr + 3)) {
       case 1:
-        if (*(ushort *)((int)&DAT_0019d0f7 + local_24) == 0) {
-          if ((&DAT_0019d578)[local_24] != '\v') {
-            FUN_000ddaf0(); /* LbErrorLog("update.cpp", line 2207, "Cannot go first person without controlling creature") */
+        if (*(ushort *)((int)&g_bss_0019d0f7 + local_24) == 0) {
+          if ((&g_bss_0019d578)[local_24] != '\v') {
+            LbErrorLog(); /* LbErrorLog("update.cpp", line 2207, "Cannot go first person without controlling creature") */
           }
         }
         else {
-          iVar6 = (&DAT_001ae9fc)[*(ushort *)((int)&DAT_0019d0f7 + local_24)];
-          cVar3 = FUN_00081dd8();
-          if (*(char *)(iVar6 + 0x1f) == '\x05') {
-            iVar7 = (&DAT_001b0a00)[*(ushort *)(iVar6 + 100)];
-            if ((*(int *)(iVar7 + 0xc6) >> 0x10 == 0) ||
-               ((int)(uint)*(ushort *)(iVar6 + 0x60) < *(int *)(iVar6 + 0xf) >> 0x10)) {
-              *(undefined1 *)(iVar7 + 0x1e9) = 0;
+          thing_ptr = (&g_thing_ptrs)[*(ushort *)((int)&g_bss_0019d0f7 + local_24)];
+          ch = creature_fn_081dd8();
+          if (*(char *)(thing_ptr + 0x1f) == '\x05') { /* thing->class_id */
+            cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)]; /* thing->ccontrol_idx */
+            if ((*(int *)(cctrl_ptr + 0xc6) >> 0x10 == 0) ||
+               ((int)(uint)*(ushort *)(thing_ptr + 0x60) < *(int *)(thing_ptr + 0xf) >> 0x10)) { /* thing->mappos.val_y */
+              *(undefined1 *)(cctrl_ptr + 0x1e9) = 0;
             }
             else {
-              *(char *)(iVar7 + 0x1e9) = cVar3 << 4;
+              *(char *)(cctrl_ptr + 0x1e9) = ch << 4;
             }
-            iVar9 = (uint)*(ushort *)(iVar6 + 0xd) +
-                    ((&DAT_001927e0)[*(ushort *)(iVar6 + 0x52)] * -0x5a >> 0x10);
-            iVar5 = (uint)*(ushort *)(iVar6 + 0xf) +
-                    (-((int)(&PTR_LAB_00192fe0)[*(ushort *)(iVar6 + 0x52)] * -0x5a >> 8) >> 8);
-            if (iVar9 < 0) {
-              iVar9 = 0;
+            val_2 = (uint)*(ushort *)(thing_ptr + 0xd) + /* thing->mappos.val_x */
+                    ((&g_slab_attr_table)[*(ushort *)(thing_ptr + 0x52)] * -0x5a >> 0x10); /* thing->health */
+            val = (uint)*(ushort *)(thing_ptr + 0xf) + /* thing->mappos.val_y */
+                    (-((int)(&PTR_LAB_00192fe0)[*(ushort *)(thing_ptr + 0x52)] * -0x5a >> 8) >> 8); /* thing->health */
+            if (val_2 < 0) {
+              val_2 = 0;
             }
-            else if (0xffff < iVar9) {
-              iVar9 = 0xffff;
+            else if (0xffff < val_2) {
+              val_2 = 0xffff;
             }
-            if (iVar5 < 0) {
-              iVar5 = 0;
+            if (val < 0) {
+              val = 0;
             }
-            else if (0xffff < iVar5) {
-              iVar5 = 0xffff;
+            else if (0xffff < val) {
+              val = 0xffff;
             }
-            if ((*(byte *)(iVar6 + 0x25) & 0x20) == 0) {
-              *extraout_ECX = (short)iVar9;
-              extraout_ECX[1] = (short)iVar5;
-              *(uint *)((int)extraout_ECX + 7) = (uint)*(ushort *)(iVar6 + 0x52);
-              uVar1 = *(ushort *)(iVar6 + 0x54);
+            if ((*(byte *)(thing_ptr + 0x25) & 0x20) == 0) {
+              *extraout_ECX = (short)val_2;
+              extraout_ECX[1] = (short)val;
+              *(uint *)((int)extraout_ECX + 7) = (uint)*(ushort *)(thing_ptr + 0x52); /* thing->health */
+              uval = *(ushort *)(thing_ptr + 0x54);
               *(undefined4 *)((int)extraout_ECX + 0xf) = 0;
-              *(uint *)((int)extraout_ECX + 0xb) = (uint)uVar1;
-              uVar8 = (uint)*(ushort *)(extraout_EDX_00 + 0x55);
-              iVar5 = *(int *)(iVar6 + 0xf) >> 0x10;
-              iVar9 = *(int *)(extraout_ECX + 1) >> 0x10;
-              sVar4 = (short)((uint)*(int *)(extraout_ECX + 1) >> 0x10);
-              if (iVar9 < (int)(iVar5 + uVar8)) {
+              *(uint *)((int)extraout_ECX + 0xb) = (uint)uval;
+              uval_2 = (uint)*(ushort *)(extraout_EDX_00 + 0x55);
+              val = *(int *)(thing_ptr + 0xf) >> 0x10; /* thing->mappos.val_y */
+              val_2 = *(int *)(extraout_ECX + 1) >> 0x10;
+              short_val = (short)((uint)*(int *)(extraout_ECX + 1) >> 0x10);
+              if (val_2 < (int)(val + uval_2)) {
                 extraout_ECX[2] =
-                     (short)((int)((uVar8 + iVar5 + (*(int *)(iVar7 + 0x1e6) >> 0x18)) - iVar9) / 2)
-                     + sVar4;
-                if ((int)((*(int *)(iVar6 + 0xf) >> 0x10) + (*(int *)(iVar7 + 0x1e6) >> 0x18) +
+                     (short)((int)((uval_2 + val + (*(int *)(cctrl_ptr + 0x1e6) >> 0x18)) - val_2) / 2)
+                     + short_val;
+                if ((int)((*(int *)(thing_ptr + 0xf) >> 0x10) + (*(int *)(cctrl_ptr + 0x1e6) >> 0x18) + /* thing->mappos.val_y */
                          (uint)*(ushort *)(extraout_EDX_00 + 0x55)) <
                     *(int *)(extraout_ECX + 1) >> 0x10) {
 LAB_000e2fa4:
                   extraout_ECX[2] =
-                       *(short *)(iVar6 + 0x11) + (short)*(char *)(iVar7 + 0x1e9) +
+                       *(short *)(thing_ptr + 0x11) + (short)*(char *)(cctrl_ptr + 0x1e9) +
                        *(short *)(extraout_EDX_00 + 0x55);
                 }
               }
               else {
                 extraout_ECX[2] =
-                     (short)((int)((uVar8 + iVar5 + (*(int *)(iVar7 + 0x1e6) >> 0x18)) - iVar9) / 2)
-                     + sVar4;
+                     (short)((int)((uval_2 + val + (*(int *)(cctrl_ptr + 0x1e6) >> 0x18)) - val_2) / 2)
+                     + short_val;
                 if (*(int *)(extraout_ECX + 1) >> 0x10 <
-                    (int)((*(int *)(iVar6 + 0xf) >> 0x10) + (*(int *)(iVar7 + 0x1e6) >> 0x18) +
+                    (int)((*(int *)(thing_ptr + 0xf) >> 0x10) + (*(int *)(cctrl_ptr + 0x1e6) >> 0x18) + /* thing->mappos.val_y */
                          (uint)*(ushort *)(extraout_EDX_00 + 0x55))) goto LAB_000e2fa4;
               }
             }
             else {
-              *extraout_ECX = (short)iVar9;
-              extraout_ECX[1] = (short)iVar5;
-              extraout_ECX[2] = *(undefined2 *)(iVar6 + 0x11);
+              *extraout_ECX = (short)val_2;
+              extraout_ECX[1] = (short)val;
+              extraout_ECX[2] = *(undefined2 *)(thing_ptr + 0x11);
               extraout_ECX[2] = extraout_ECX[2] + *(short *)(extraout_EDX_00 + 0x55);
-              *(uint *)((int)extraout_ECX + 7) = (uint)*(ushort *)(iVar6 + 0x52);
-              *(uint *)((int)extraout_ECX + 0xb) = (uint)*(ushort *)(iVar6 + 0x54);
-              *(int *)((int)extraout_ECX + 0xf) = *(int *)(iVar7 + 0xca) >> 0x10;
+              *(uint *)((int)extraout_ECX + 7) = (uint)*(ushort *)(thing_ptr + 0x52); /* thing->health */
+              *(uint *)((int)extraout_ECX + 0xb) = (uint)*(ushort *)(thing_ptr + 0x54);
+              *(int *)((int)extraout_ECX + 0xf) = *(int *)(cctrl_ptr + 0xca) >> 0x10;
             }
-            iVar6 = (uint)*(byte *)(iVar6 + 0x10) * 0x100 + (uint)*(byte *)(iVar6 + 0xe);
-            iVar6 = (int)(((*(uint *)((int)&DAT_00279203 + iVar6 * 5 + 1) & 0xfffffff) >> 0x18) *
-                          0x100 + ((*(uint *)((int)&DAT_00279203 + (iVar6 + 1) * 5 + 1) & 0xfffffff)
+            thing_ptr = (uint)*(byte *)(thing_ptr + 0x10) * 0x100 + (uint)*(byte *)(thing_ptr + 0xe);
+            thing_ptr = (int)(((*(uint *)((int)&g_map_subtiles + thing_ptr * 5 + 1) & 0xfffffff) >> 0x18) *
+                          0x100 + ((*(uint *)((int)&g_map_subtiles + (thing_ptr + 1) * 5 + 1) & 0xfffffff)
                                   >> 0x18) * 0x100 +
-                          ((*(uint *)((int)&DAT_00279203 + (iVar6 + 0x100) * 5 + 1) & 0xfffffff) >>
+                          ((*(uint *)((int)&g_map_subtiles + (thing_ptr + 0x100) * 5 + 1) & 0xfffffff) >>
                           0x18) * 0x100 +
-                         ((*(uint *)((int)&DAT_00279203 + (iVar6 + 0x101) * 5 + 1) & 0xfffffff) >>
+                         ((*(uint *)((int)&g_map_subtiles + (thing_ptr + 0x101) * 5 + 1) & 0xfffffff) >>
                          0x18) * 0x100) >> 2;
-            if (iVar6 + -0x40 < *(int *)(extraout_ECX + 1) >> 0x10) {
-              extraout_ECX[2] = (short)iVar6 + -0x40;
+            if (thing_ptr + -0x40 < *(int *)(extraout_ECX + 1) >> 0x10) {
+              extraout_ECX[2] = (short)thing_ptr + -0x40;
             }
           }
-          else if (*(char *)(iVar6 + 0x1a) == '\n') {
-            *extraout_ECX = *(undefined2 *)(iVar6 + 0xd);
-            extraout_ECX[1] = *(undefined2 *)(iVar6 + 0xf);
-            extraout_ECX[2] = *(short *)(iVar6 + 0x11) + 0xf0;
-            *(uint *)((int)extraout_ECX + 7) = (uint)*(ushort *)(iVar6 + 0x52);
-            uVar1 = *(ushort *)(iVar6 + 0x54);
+          else if (*(char *)(thing_ptr + 0x1a) == '\n') {
+            *extraout_ECX = *(undefined2 *)(thing_ptr + 0xd); /* thing->mappos.val_x */
+            extraout_ECX[1] = *(undefined2 *)(thing_ptr + 0xf); /* thing->mappos.val_y */
+            extraout_ECX[2] = *(short *)(thing_ptr + 0x11) + 0xf0;
+            *(uint *)((int)extraout_ECX + 7) = (uint)*(ushort *)(thing_ptr + 0x52); /* thing->health */
+            uval = *(ushort *)(thing_ptr + 0x54);
             *(undefined4 *)((int)extraout_ECX + 0xf) = 0;
-            *(uint *)((int)extraout_ECX + 0xb) = (uint)uVar1;
-            iVar7 = *(int *)(iVar6 + 0x13) >> 0x18;
-            *(undefined2 *)(iVar6 + 0x54) = 0;
-            if (iVar7 != 0) {
-              cVar3 = (char)((uint)*(int *)(iVar6 + 0x13) >> 0x18);
-              if (iVar7 < 4) {
-                *(short *)(iVar6 + 0x54) = cVar3 * -0x74 + 0x800;
+            *(uint *)((int)extraout_ECX + 0xb) = (uint)uval;
+            cctrl_ptr = *(int *)(thing_ptr + 0x13) >> 0x18; /* thing->anim_sprite */
+            *(undefined2 *)(thing_ptr + 0x54) = 0;
+            if (cctrl_ptr != 0) {
+              ch = (char)((uint)*(int *)(thing_ptr + 0x13) >> 0x18); /* thing->anim_sprite */
+              if (cctrl_ptr < 4) {
+                *(short *)(thing_ptr + 0x54) = ch * -0x74 + 0x800;
               }
               else {
-                *(short *)(iVar6 + 0x54) = (cVar3 + -3) * 0x74 + 0x6a4;
+                *(short *)(thing_ptr + 0x54) = (ch + -3) * 0x74 + 0x6a4;
               }
             }
           }
           else {
-            *extraout_ECX = *(undefined2 *)(iVar6 + 0xd);
-            extraout_ECX[1] = *(undefined2 *)(iVar6 + 0xf);
-            *(uint *)((int)extraout_ECX + 7) = (uint)*(ushort *)(iVar6 + 0x52);
-            uVar1 = *(ushort *)(iVar6 + 0x54);
+            *extraout_ECX = *(undefined2 *)(thing_ptr + 0xd); /* thing->mappos.val_x */
+            extraout_ECX[1] = *(undefined2 *)(thing_ptr + 0xf); /* thing->mappos.val_y */
+            *(uint *)((int)extraout_ECX + 7) = (uint)*(ushort *)(thing_ptr + 0x52); /* thing->health */
+            uval = *(ushort *)(thing_ptr + 0x54);
             *(undefined4 *)((int)extraout_ECX + 0xf) = 0;
-            *(uint *)((int)extraout_ECX + 0xb) = (uint)uVar1;
-            iVar7 = *(int *)(iVar6 + 0xf) >> 0x10;
-            iVar5 = *(int *)(extraout_ECX + 1) >> 0x10;
-            sVar4 = (short)(((iVar7 + 0x40) - iVar5) / 2) +
+            *(uint *)((int)extraout_ECX + 0xb) = (uint)uval;
+            cctrl_ptr = *(int *)(thing_ptr + 0xf) >> 0x10; /* thing->mappos.val_y */
+            val = *(int *)(extraout_ECX + 1) >> 0x10;
+            short_val = (short)(((cctrl_ptr + 0x40) - val) / 2) +
                     (short)((uint)*(int *)(extraout_ECX + 1) >> 0x10);
-            if (iVar5 < iVar7 + 0x20) {
-              extraout_ECX[2] = sVar4;
-              if ((*(int *)(iVar6 + 0xf) >> 0x10) + 0x40 < *(int *)(extraout_ECX + 1) >> 0x10) {
-                extraout_ECX[2] = *(short *)(iVar6 + 0x11) + 0x40;
+            if (val < cctrl_ptr + 0x20) {
+              extraout_ECX[2] = short_val;
+              if ((*(int *)(thing_ptr + 0xf) >> 0x10) + 0x40 < *(int *)(extraout_ECX + 1) >> 0x10) { /* thing->mappos.val_y */
+                extraout_ECX[2] = *(short *)(thing_ptr + 0x11) + 0x40;
               }
             }
             else {
-              extraout_ECX[2] = sVar4;
-              if (*(int *)(extraout_ECX + 1) >> 0x10 < (*(int *)(iVar6 + 0xf) >> 0x10) + 0x40) {
-                extraout_ECX[2] = *(short *)(iVar6 + 0x11) + 0x40;
+              extraout_ECX[2] = short_val;
+              if (*(int *)(extraout_ECX + 1) >> 0x10 < (*(int *)(thing_ptr + 0xf) >> 0x10) + 0x40) { /* thing->mappos.val_y */
+                extraout_ECX[2] = *(short *)(thing_ptr + 0x11) + 0x40;
               }
             }
           }
         }
         break;
       case 2:
-        *(undefined2 *)(&DAT_0019d182 + local_24) = *puVar2;
-        *(undefined2 *)(&DAT_0019d184 + local_24) =
-             *(undefined2 *)(*(int *)((int)&DAT_0019d100 + local_24) + 2);
+        *(undefined2 *)(&g_bss_0019d182 + local_24) = *word_ptr;
+        *(undefined2 *)(&g_bss_0019d184 + local_24) =
+             *(undefined2 *)(*(int *)((int)&g_player_active_camera + local_24) + 2);
         break;
       case 5:
-        *(undefined2 *)(&DAT_0019d104 + local_24) = *puVar2;
-        *(undefined2 *)(&DAT_0019d106 + local_24) =
-             *(undefined2 *)(*(int *)((int)&DAT_0019d100 + local_24) + 2);
+        *(undefined2 *)(&g_bss_0019d104 + local_24) = *word_ptr;
+        *(undefined2 *)(&g_bss_0019d106 + local_24) =
+             *(undefined2 *)(*(int *)((int)&g_player_active_camera + local_24) + 2);
       }
       if (*(int *)(extraout_EDX + 0xea0) != 0) {
         *(int *)(extraout_EDX + 0xea0) = *(int *)(extraout_EDX + 0xea0) + -1;
@@ -4133,179 +4109,176 @@ LAB_000e2fa4:
 }
 
 /******************************************************************************
- * Function : dk_go_first_person_without_0e31b8 (Ghidra: FUN_000e31b8)
- * Prototype: void dk_go_first_person_without_0e31b8(void);
+ * Function : update_go_first_person_without_0e31b8 (Original VA: 0xe31b8, Ghidra: FUN_000e31b8)
+ * Prototype: void update_go_first_person_without_0e31b8(void);
  * Address  : 0xe31b8 (Size: 1234 bytes)
  * Module   : update.cpp [direct_file_string_xref]
- * OrigLine : update.cpp:2207 ("Cannot go first person without controlling creature")
- * Naming   : String 'Cannot go first person without controlling creature'
+ * OrigLine : update.cpp lines 2207
+ * Purpose  : String 'Cannot go first person without controlling creature'
  * Callers  : 0 -> 
- * Callees  : 3 -> 0x77b8d, 0x81dd8, 0xddaf0
- * Strings  :
- *   - 0x16c98c: "update.cpp"
- *   - 0x16c958: "Cannot go first person without controlling creature"
+ * Callees  : 3 -> workshop_fn_077b8d, creature_fn_081dd8, LbErrorLog
  ******************************************************************************/
-void FUN_000e31b8(void)
+void update_go_first_person_without_0e31b8(void)
 
 {
-  ushort uVar1;
-  undefined2 *puVar2;
-  char cVar3;
-  short sVar4;
-  int in_EAX;
-  int iVar5;
-  uint uVar6;
-  int iVar7;
+  ushort uval;
+  undefined2 *word_ptr;
+  char ch;
+  short short_val;
+  int arg_eax;
+  int val;
+  uint uval_2;
+  int cctrl_ptr;
   undefined2 *extraout_ECX;
   int extraout_EDX;
   int extraout_EDX_00;
-  int iVar8;
-  int iVar9;
+  int val_2;
+  int thing_ptr;
   
-  FUN_00077b8d();
-  puVar2 = *(undefined2 **)(in_EAX + 0x38);
-  switch(*(undefined1 *)(puVar2 + 3)) {
+  workshop_fn_077b8d();
+  word_ptr = *(undefined2 **)(arg_eax + 0x38);
+  switch(*(undefined1 *)(word_ptr + 3)) {
   case 1:
-    if (*(ushort *)(in_EAX + 0x2f) == 0) {
-      if (*(char *)(in_EAX + 0x4b0) != '\v') {
-        FUN_000ddaf0(); /* LbErrorLog("update.cpp", line 2207, "Cannot go first person without controlling creature") */
+    if (*(ushort *)(arg_eax + 0x2f) == 0) {
+      if (*(char *)(arg_eax + 0x4b0) != '\v') {
+        LbErrorLog(); /* LbErrorLog("update.cpp", line 2207, "Cannot go first person without controlling creature") */
       }
       break;
     }
-    iVar9 = (&DAT_001ae9fc)[*(ushort *)(in_EAX + 0x2f)];
-    cVar3 = FUN_00081dd8();
-    if (*(char *)(iVar9 + 0x1f) != '\x05') {
-      if (*(char *)(iVar9 + 0x1a) == '\n') {
-        *extraout_ECX = *(undefined2 *)(iVar9 + 0xd);
-        extraout_ECX[1] = *(undefined2 *)(iVar9 + 0xf);
-        extraout_ECX[2] = *(short *)(iVar9 + 0x11) + 0xf0;
-        *(uint *)((int)extraout_ECX + 7) = (uint)*(ushort *)(iVar9 + 0x52);
-        uVar1 = *(ushort *)(iVar9 + 0x54);
+    thing_ptr = (&g_thing_ptrs)[*(ushort *)(arg_eax + 0x2f)];
+    ch = creature_fn_081dd8();
+    if (*(char *)(thing_ptr + 0x1f) != '\x05') { /* thing->class_id */
+      if (*(char *)(thing_ptr + 0x1a) == '\n') {
+        *extraout_ECX = *(undefined2 *)(thing_ptr + 0xd); /* thing->mappos.val_x */
+        extraout_ECX[1] = *(undefined2 *)(thing_ptr + 0xf); /* thing->mappos.val_y */
+        extraout_ECX[2] = *(short *)(thing_ptr + 0x11) + 0xf0;
+        *(uint *)((int)extraout_ECX + 7) = (uint)*(ushort *)(thing_ptr + 0x52); /* thing->health */
+        uval = *(ushort *)(thing_ptr + 0x54);
         *(undefined4 *)((int)extraout_ECX + 0xf) = 0;
-        *(uint *)((int)extraout_ECX + 0xb) = (uint)uVar1;
-        iVar7 = *(int *)(iVar9 + 0x13) >> 0x18;
-        *(undefined2 *)(iVar9 + 0x54) = 0;
-        if (iVar7 != 0) {
-          cVar3 = (char)((uint)*(int *)(iVar9 + 0x13) >> 0x18);
-          if (iVar7 < 4) {
-            *(short *)(iVar9 + 0x54) = cVar3 * -0x74 + 0x800;
+        *(uint *)((int)extraout_ECX + 0xb) = (uint)uval;
+        cctrl_ptr = *(int *)(thing_ptr + 0x13) >> 0x18; /* thing->anim_sprite */
+        *(undefined2 *)(thing_ptr + 0x54) = 0;
+        if (cctrl_ptr != 0) {
+          ch = (char)((uint)*(int *)(thing_ptr + 0x13) >> 0x18); /* thing->anim_sprite */
+          if (cctrl_ptr < 4) {
+            *(short *)(thing_ptr + 0x54) = ch * -0x74 + 0x800;
           }
           else {
-            *(short *)(iVar9 + 0x54) = (cVar3 + -3) * 0x74 + 0x6a4;
+            *(short *)(thing_ptr + 0x54) = (ch + -3) * 0x74 + 0x6a4;
           }
         }
       }
       else {
-        *extraout_ECX = *(undefined2 *)(iVar9 + 0xd);
-        extraout_ECX[1] = *(undefined2 *)(iVar9 + 0xf);
-        *(uint *)((int)extraout_ECX + 7) = (uint)*(ushort *)(iVar9 + 0x52);
-        uVar1 = *(ushort *)(iVar9 + 0x54);
+        *extraout_ECX = *(undefined2 *)(thing_ptr + 0xd); /* thing->mappos.val_x */
+        extraout_ECX[1] = *(undefined2 *)(thing_ptr + 0xf); /* thing->mappos.val_y */
+        *(uint *)((int)extraout_ECX + 7) = (uint)*(ushort *)(thing_ptr + 0x52); /* thing->health */
+        uval = *(ushort *)(thing_ptr + 0x54);
         *(undefined4 *)((int)extraout_ECX + 0xf) = 0;
-        *(uint *)((int)extraout_ECX + 0xb) = (uint)uVar1;
-        iVar7 = *(int *)(iVar9 + 0xf) >> 0x10;
-        iVar5 = *(int *)(extraout_ECX + 1) >> 0x10;
-        sVar4 = (short)(((iVar7 + 0x40) - iVar5) / 2) +
+        *(uint *)((int)extraout_ECX + 0xb) = (uint)uval;
+        cctrl_ptr = *(int *)(thing_ptr + 0xf) >> 0x10; /* thing->mappos.val_y */
+        val = *(int *)(extraout_ECX + 1) >> 0x10;
+        short_val = (short)(((cctrl_ptr + 0x40) - val) / 2) +
                 (short)((uint)*(int *)(extraout_ECX + 1) >> 0x10);
-        if (iVar5 < iVar7 + 0x20) {
-          extraout_ECX[2] = sVar4;
-          if ((*(int *)(iVar9 + 0xf) >> 0x10) + 0x40 < *(int *)(extraout_ECX + 1) >> 0x10) {
-            extraout_ECX[2] = *(short *)(iVar9 + 0x11) + 0x40;
+        if (val < cctrl_ptr + 0x20) {
+          extraout_ECX[2] = short_val;
+          if ((*(int *)(thing_ptr + 0xf) >> 0x10) + 0x40 < *(int *)(extraout_ECX + 1) >> 0x10) { /* thing->mappos.val_y */
+            extraout_ECX[2] = *(short *)(thing_ptr + 0x11) + 0x40;
           }
         }
         else {
-          extraout_ECX[2] = sVar4;
-          if (*(int *)(extraout_ECX + 1) >> 0x10 < (*(int *)(iVar9 + 0xf) >> 0x10) + 0x40) {
-            extraout_ECX[2] = *(short *)(iVar9 + 0x11) + 0x40;
+          extraout_ECX[2] = short_val;
+          if (*(int *)(extraout_ECX + 1) >> 0x10 < (*(int *)(thing_ptr + 0xf) >> 0x10) + 0x40) { /* thing->mappos.val_y */
+            extraout_ECX[2] = *(short *)(thing_ptr + 0x11) + 0x40;
           }
         }
       }
       break;
     }
-    iVar7 = (&DAT_001b0a00)[*(ushort *)(iVar9 + 100)];
-    if ((*(int *)(iVar7 + 0xc6) >> 0x10 == 0) ||
-       ((int)(uint)*(ushort *)(iVar9 + 0x60) < *(int *)(iVar9 + 0xf) >> 0x10)) {
-      *(undefined1 *)(iVar7 + 0x1e9) = 0;
+    cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)]; /* thing->ccontrol_idx */
+    if ((*(int *)(cctrl_ptr + 0xc6) >> 0x10 == 0) ||
+       ((int)(uint)*(ushort *)(thing_ptr + 0x60) < *(int *)(thing_ptr + 0xf) >> 0x10)) { /* thing->mappos.val_y */
+      *(undefined1 *)(cctrl_ptr + 0x1e9) = 0;
     }
     else {
-      *(char *)(iVar7 + 0x1e9) = cVar3 << 4;
+      *(char *)(cctrl_ptr + 0x1e9) = ch << 4;
     }
-    iVar5 = (uint)*(ushort *)(iVar9 + 0xd) +
-            ((&DAT_001927e0)[*(ushort *)(iVar9 + 0x52)] * -0x5a >> 0x10);
-    iVar8 = (uint)*(ushort *)(iVar9 + 0xf) +
-            (-((int)(&PTR_LAB_00192fe0)[*(ushort *)(iVar9 + 0x52)] * -0x5a >> 8) >> 8);
-    if (iVar5 < 0) {
-      iVar5 = 0;
+    val = (uint)*(ushort *)(thing_ptr + 0xd) + /* thing->mappos.val_x */
+            ((&g_slab_attr_table)[*(ushort *)(thing_ptr + 0x52)] * -0x5a >> 0x10); /* thing->health */
+    val_2 = (uint)*(ushort *)(thing_ptr + 0xf) + /* thing->mappos.val_y */
+            (-((int)(&PTR_LAB_00192fe0)[*(ushort *)(thing_ptr + 0x52)] * -0x5a >> 8) >> 8); /* thing->health */
+    if (val < 0) {
+      val = 0;
     }
-    else if (0xffff < iVar5) {
-      iVar5 = 0xffff;
+    else if (0xffff < val) {
+      val = 0xffff;
     }
-    if (iVar8 < 0) {
-      iVar8 = 0;
+    if (val_2 < 0) {
+      val_2 = 0;
     }
-    else if (0xffff < iVar8) {
-      iVar8 = 0xffff;
+    else if (0xffff < val_2) {
+      val_2 = 0xffff;
     }
-    if ((*(byte *)(iVar9 + 0x25) & 0x20) == 0) {
-      *extraout_ECX = (short)iVar5;
-      extraout_ECX[1] = (short)iVar8;
-      *(uint *)((int)extraout_ECX + 7) = (uint)*(ushort *)(iVar9 + 0x52);
-      uVar1 = *(ushort *)(iVar9 + 0x54);
+    if ((*(byte *)(thing_ptr + 0x25) & 0x20) == 0) {
+      *extraout_ECX = (short)val;
+      extraout_ECX[1] = (short)val_2;
+      *(uint *)((int)extraout_ECX + 7) = (uint)*(ushort *)(thing_ptr + 0x52); /* thing->health */
+      uval = *(ushort *)(thing_ptr + 0x54);
       *(undefined4 *)((int)extraout_ECX + 0xf) = 0;
-      *(uint *)((int)extraout_ECX + 0xb) = (uint)uVar1;
-      iVar8 = *(int *)(iVar9 + 0xf) >> 0x10;
-      uVar6 = (uint)*(ushort *)(extraout_EDX_00 + 0x55);
-      iVar5 = *(int *)(extraout_ECX + 1) >> 0x10;
-      sVar4 = (short)((uint)*(int *)(extraout_ECX + 1) >> 0x10);
-      if (iVar5 < (int)(iVar8 + uVar6)) {
+      *(uint *)((int)extraout_ECX + 0xb) = (uint)uval;
+      val_2 = *(int *)(thing_ptr + 0xf) >> 0x10; /* thing->mappos.val_y */
+      uval_2 = (uint)*(ushort *)(extraout_EDX_00 + 0x55);
+      val = *(int *)(extraout_ECX + 1) >> 0x10;
+      short_val = (short)((uint)*(int *)(extraout_ECX + 1) >> 0x10);
+      if (val < (int)(val_2 + uval_2)) {
         extraout_ECX[2] =
-             (short)((int)((iVar8 + (*(int *)(iVar7 + 0x1e6) >> 0x18) + uVar6) - iVar5) / 2) + sVar4
+             (short)((int)((val_2 + (*(int *)(cctrl_ptr + 0x1e6) >> 0x18) + uval_2) - val) / 2) + short_val
         ;
         if ((int)((uint)*(ushort *)(extraout_EDX_00 + 0x55) +
-                 (*(int *)(iVar9 + 0xf) >> 0x10) + (*(int *)(iVar7 + 0x1e6) >> 0x18)) <
+                 (*(int *)(thing_ptr + 0xf) >> 0x10) + (*(int *)(cctrl_ptr + 0x1e6) >> 0x18)) < /* thing->mappos.val_y */
             *(int *)(extraout_ECX + 1) >> 0x10) {
 LAB_000e3464:
           extraout_ECX[2] =
-               *(short *)(iVar9 + 0x11) + (short)*(char *)(iVar7 + 0x1e9) +
+               *(short *)(thing_ptr + 0x11) + (short)*(char *)(cctrl_ptr + 0x1e9) +
                *(short *)(extraout_EDX_00 + 0x55);
         }
       }
       else {
         extraout_ECX[2] =
-             (short)((int)((iVar8 + (*(int *)(iVar7 + 0x1e6) >> 0x18) + uVar6) - iVar5) / 2) + sVar4
+             (short)((int)((val_2 + (*(int *)(cctrl_ptr + 0x1e6) >> 0x18) + uval_2) - val) / 2) + short_val
         ;
         if (*(int *)(extraout_ECX + 1) >> 0x10 <
             (int)((uint)*(ushort *)(extraout_EDX_00 + 0x55) +
-                 (*(int *)(iVar9 + 0xf) >> 0x10) + (*(int *)(iVar7 + 0x1e6) >> 0x18)))
+                 (*(int *)(thing_ptr + 0xf) >> 0x10) + (*(int *)(cctrl_ptr + 0x1e6) >> 0x18))) /* thing->mappos.val_y */
         goto LAB_000e3464;
       }
     }
     else {
-      *extraout_ECX = (short)iVar5;
-      extraout_ECX[1] = (short)iVar8;
-      extraout_ECX[2] = *(undefined2 *)(iVar9 + 0x11);
+      *extraout_ECX = (short)val;
+      extraout_ECX[1] = (short)val_2;
+      extraout_ECX[2] = *(undefined2 *)(thing_ptr + 0x11);
       extraout_ECX[2] = extraout_ECX[2] + *(short *)(extraout_EDX_00 + 0x55);
-      *(uint *)((int)extraout_ECX + 7) = (uint)*(ushort *)(iVar9 + 0x52);
-      *(uint *)((int)extraout_ECX + 0xb) = (uint)*(ushort *)(iVar9 + 0x54);
-      *(int *)((int)extraout_ECX + 0xf) = *(int *)(iVar7 + 0xca) >> 0x10;
+      *(uint *)((int)extraout_ECX + 7) = (uint)*(ushort *)(thing_ptr + 0x52); /* thing->health */
+      *(uint *)((int)extraout_ECX + 0xb) = (uint)*(ushort *)(thing_ptr + 0x54);
+      *(int *)((int)extraout_ECX + 0xf) = *(int *)(cctrl_ptr + 0xca) >> 0x10;
     }
-    iVar9 = (uint)*(byte *)(iVar9 + 0xe) + (uint)*(byte *)(iVar9 + 0x10) * 0x100;
-    iVar9 = (int)(((*(uint *)((int)&DAT_00279203 + (iVar9 + 1) * 5 + 1) & 0xfffffff) >> 0x18) *
-                  0x100 + ((*(uint *)((int)&DAT_00279203 + iVar9 * 5 + 1) & 0xfffffff) >> 0x18) *
+    thing_ptr = (uint)*(byte *)(thing_ptr + 0xe) + (uint)*(byte *)(thing_ptr + 0x10) * 0x100;
+    thing_ptr = (int)(((*(uint *)((int)&g_map_subtiles + (thing_ptr + 1) * 5 + 1) & 0xfffffff) >> 0x18) *
+                  0x100 + ((*(uint *)((int)&g_map_subtiles + thing_ptr * 5 + 1) & 0xfffffff) >> 0x18) *
                           0x100 +
-                  ((*(uint *)((int)&DAT_00279203 + (iVar9 + 0x100) * 5 + 1) & 0xfffffff) >> 0x18) *
-                  0x100 + ((*(uint *)(&DAT_00279709 + iVar9 * 5) & 0xfffffff) >> 0x18) * 0x100) >> 2
+                  ((*(uint *)((int)&g_map_subtiles + (thing_ptr + 0x100) * 5 + 1) & 0xfffffff) >> 0x18) *
+                  0x100 + ((*(uint *)(&g_bss_00279709 + thing_ptr * 5) & 0xfffffff) >> 0x18) * 0x100) >> 2
     ;
-    if (iVar9 + -0x40 < *(int *)(extraout_ECX + 1) >> 0x10) {
-      extraout_ECX[2] = (short)iVar9 + -0x40;
+    if (thing_ptr + -0x40 < *(int *)(extraout_ECX + 1) >> 0x10) {
+      extraout_ECX[2] = (short)thing_ptr + -0x40;
     }
     break;
   case 2:
-    *(undefined2 *)(in_EAX + 0xba) = *puVar2;
-    *(undefined2 *)(in_EAX + 0xbc) = *(undefined2 *)(*(int *)(in_EAX + 0x38) + 2);
+    *(undefined2 *)(arg_eax + 0xba) = *word_ptr;
+    *(undefined2 *)(arg_eax + 0xbc) = *(undefined2 *)(*(int *)(arg_eax + 0x38) + 2);
     break;
   case 5:
-    *(undefined2 *)(in_EAX + 0x3c) = *puVar2;
-    *(undefined2 *)(in_EAX + 0x3e) = *(undefined2 *)(*(int *)(in_EAX + 0x38) + 2);
+    *(undefined2 *)(arg_eax + 0x3c) = *word_ptr;
+    *(undefined2 *)(arg_eax + 0x3e) = *(undefined2 *)(*(int *)(arg_eax + 0x38) + 2);
   }
   if (*(int *)(extraout_EDX + 0xea0) != 0) {
     *(int *)(extraout_EDX + 0xea0) = *(int *)(extraout_EDX + 0xea0) + -1;
@@ -4317,536 +4290,530 @@ LAB_000e3464:
 }
 
 /******************************************************************************
- * Function : sub_0e3a8c (Ghidra: FUN_000e3a8c)
- * Prototype: undefined8 sub_0e3a8c(void);
+ * Function : update_update_creature_and_thing_0e3a8c (Original VA: 0xe3a8c, Ghidra: FUN_000e3a8c)
+ * Prototype: undefined8 update_update_creature_and_thing_0e3a8c(void);
  * Address  : 0xe3a8c (Size: 470 bytes)
  * Module   : update.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
  * Callers  : 0 -> 
- * Callees  : 5 -> 0x6e61e, 0x6f72b, 0x6f865, 0xdc440, 0xe6a10
+ * Callees  : 5 -> sound_update_creature_control_06e61e, sound3d_fn_06f72b, sound_fn_06f865, update_fn_0dc440, LbScreenWaitVbi
  ******************************************************************************/
-undefined8 FUN_000e3a8c(void)
+undefined8 update_update_creature_and_thing_0e3a8c(void)
 
 {
-  byte bVar1;
-  undefined4 *in_EAX;
-  int iVar2;
-  byte *pbVar3;
+  byte flag;
+  undefined4 *arg_eax;
+  int val;
+  byte *thing_ptr;
   byte *extraout_ECX;
-  byte *pbVar4;
-  undefined4 in_EDX;
-  int iVar5;
+  byte *thing_ptr_2;
+  undefined4 arg_edx;
+  int cctrl_ptr;
   int extraout_EDX;
   int aiStack_30 [5];
   undefined2 uStack_1c;
   
-  aiStack_30[1] = DAT_001927c8;
-  aiStack_30[2] = DAT_001927cc;
-  aiStack_30[3] = DAT_001927d0;
-  aiStack_30[4] = *in_EAX;
-  uStack_1c = *(undefined2 *)(in_EAX + 1);
-  if (DAT_003d97b4 == 0) {
+  aiStack_30[1] = g_data_001927c8;
+  aiStack_30[2] = g_data_001927cc;
+  aiStack_30[3] = g_data_001927d0;
+  aiStack_30[4] = *arg_eax;
+  uStack_1c = *(undefined2 *)(arg_eax + 1);
+  if (g_bss_003d97b4 == 0) {
     aiStack_30[0] = 0xe3ac5;
-    FUN_000e6a10();
-    pbVar4 = (&DAT_001ae9fc)[DAT_002e6eb6];
-    if ((&DAT_001ae9fc)[DAT_002e6eb6] != DAT_001ae9fc) {
+    LbScreenWaitVbi();
+    thing_ptr_2 = (&g_thing_ptrs)[g_bss_002e6eb6];
+    if ((&g_thing_ptrs)[g_bss_002e6eb6] != g_thing_ptrs) {
       do {
-        pbVar3 = (&DAT_001ae9fc)[*(ushort *)(pbVar4 + 0x67)];
-        bVar1 = pbVar4[1];
-        pbVar4[1] = bVar1 & 0xdf;
-        if ((((*pbVar4 & 0x10) == 0) && ((bVar1 & 2) == 0)) &&
-           (*(int *)(&DAT_001880f4 + (uint)pbVar4[0x1a] * 0x58) != 0)) {
-          iVar5 = (&DAT_001b0a00)[*(ushort *)(pbVar4 + 100)];
+        thing_ptr = (&g_thing_ptrs)[*(ushort *)(thing_ptr_2 + 0x67)];
+        flag = thing_ptr_2[1];
+        thing_ptr_2[1] = flag & 0xdf;
+        if ((((*thing_ptr_2 & 0x10) == 0) && ((flag & 2) == 0)) &&
+           (*(int *)(&g_data_001880f4 + (uint)thing_ptr_2[0x1a] * 0x58) != 0)) {
+          cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr_2 + 100)]; /* thing->ccontrol_idx */
           aiStack_30[0] = 0xe3b3c;
-          iVar2 = FUN_000dc440();
-          pbVar3 = extraout_ECX;
-          if ((iVar2 < aiStack_30[1]) &&
-             (((*(short *)(iVar5 + 9) != 0 &&
-               (*(int *)(pbVar4 + 0xf) >> 0x10 <= (int)(uint)*(ushort *)(pbVar4 + 0x60))) ||
-              ((pbVar4[0x25] & 0x20) != 0)))) {
-            iVar5 = 8;
+          val = update_fn_0dc440();
+          thing_ptr = extraout_ECX;
+          if ((val < aiStack_30[1]) &&
+             (((*(short *)(cctrl_ptr + 9) != 0 &&
+               (*(int *)(thing_ptr_2 + 0xf) >> 0x10 <= (int)(uint)*(ushort *)(thing_ptr_2 + 0x60))) || /* thing->mappos.val_y */
+              ((thing_ptr_2[0x25] & 0x20) != 0)))) {
+            cctrl_ptr = 8;
             do {
-              *(undefined4 *)((int)&DAT_003d97b8 + iVar5) =
-                   *(undefined4 *)((int)&DAT_003d97b4 + iVar5);
-              *(undefined4 *)((int)aiStack_30 + iVar5 + 4) =
-                   *(undefined4 *)((int)aiStack_30 + iVar5);
-              iVar5 = iVar5 + -4;
-            } while (iVar5 != 0);
-            DAT_003d97b8 = (uint)*(ushort *)(pbVar4 + 0x1b);
-            aiStack_30[1] = iVar2;
+              *(undefined4 *)((int)&g_bss_003d97b8 + cctrl_ptr) =
+                   *(undefined4 *)((int)&g_bss_003d97b4 + cctrl_ptr);
+              *(undefined4 *)((int)aiStack_30 + cctrl_ptr + 4) =
+                   *(undefined4 *)((int)aiStack_30 + cctrl_ptr);
+              cctrl_ptr = cctrl_ptr + -4;
+            } while (cctrl_ptr != 0);
+            g_bss_003d97b8 = (uint)*(ushort *)(thing_ptr_2 + 0x1b); /* thing->index_or_angle */
+            aiStack_30[1] = val;
           }
         }
-        pbVar4 = pbVar3;
-      } while (pbVar3 != DAT_001ae9fc);
+        thing_ptr_2 = thing_ptr;
+      } while (thing_ptr != g_thing_ptrs);
     }
   }
-  iVar5 = 0;
+  cctrl_ptr = 0;
   do {
-    if (*(int *)((int)&DAT_003d97b8 + iVar5) == 0) break;
-    if (*(char *)((int)(&DAT_001ae9fc)[*(int *)((int)&DAT_003d97b8 + iVar5)] + 0x1f) == '\x05') {
-      pbVar4 = (byte *)((int)(&DAT_001ae9fc)[*(int *)((int)&DAT_003d97b8 + iVar5)] + 1);
-      *pbVar4 = *pbVar4 | 0x20;
+    if (*(int *)((int)&g_bss_003d97b8 + cctrl_ptr) == 0) break;
+    if (*(char *)((int)(&g_thing_ptrs)[*(int *)((int)&g_bss_003d97b8 + cctrl_ptr)] + 0x1f) == '\x05') {
+      thing_ptr_2 = (byte *)((int)(&g_thing_ptrs)[*(int *)((int)&g_bss_003d97b8 + cctrl_ptr)] + 1);
+      *thing_ptr_2 = *thing_ptr_2 | 0x20;
       aiStack_30[0] = 0xe3bba;
-      FUN_0006e61e();
-      iVar5 = extraout_EDX;
+      sound_update_creature_control_06e61e();
+      cctrl_ptr = extraout_EDX;
     }
-    iVar5 = iVar5 + 4;
-  } while (iVar5 < 0xc);
-  if ((DAT_003d97b4 == 0) && (pbVar4 = (&DAT_001ae9fc)[DAT_002e6eb6], pbVar4 != DAT_001ae9fc)) {
+    cctrl_ptr = cctrl_ptr + 4;
+  } while (cctrl_ptr < 0xc);
+  if ((g_bss_003d97b4 == 0) && (thing_ptr_2 = (&g_thing_ptrs)[g_bss_002e6eb6], thing_ptr_2 != g_thing_ptrs)) {
     do {
-      pbVar3 = (&DAT_001ae9fc)[*(ushort *)(pbVar4 + 0x67)];
-      if ((pbVar4[0x1a] == 0x13) && (-1 < (char)(pbVar4[1] << 2))) {
+      thing_ptr = (&g_thing_ptrs)[*(ushort *)(thing_ptr_2 + 0x67)];
+      if ((thing_ptr_2[0x1a] == 0x13) && (-1 < (char)(thing_ptr_2[1] << 2))) {
         aiStack_30[0] = 0xe3c22;
-        iVar5 = FUN_0006f865();
-        if (iVar5 != 0) {
+        cctrl_ptr = sound_fn_06f865();
+        if (cctrl_ptr != 0) {
           aiStack_30[0] = 0xe3c34;
-          FUN_0006f72b();
+          sound3d_fn_06f72b();
         }
       }
-      pbVar4 = pbVar3;
-    } while (pbVar3 != DAT_001ae9fc);
+      thing_ptr_2 = thing_ptr;
+    } while (thing_ptr != g_thing_ptrs);
   }
-  iVar5 = DAT_003d97b4 + 1;
-  DAT_003d97b4 = iVar5 % 4;
-  return CONCAT44(in_EDX,iVar5 / 4);
+  cctrl_ptr = g_bss_003d97b4 + 1;
+  g_bss_003d97b4 = cctrl_ptr % 4;
+  return CONCAT44(arg_edx,cctrl_ptr / 4);
 }
 
 /******************************************************************************
- * Function : dk_illegal_effect_element_bounce_0e3db8 (Ghidra: FUN_000e3db8)
- * Prototype: void dk_illegal_effect_element_bounce_0e3db8(void);
+ * Function : update_illegal_effect_element_bounce_0e3db8 (Original VA: 0xe3db8, Ghidra: FUN_000e3db8)
+ * Prototype: void update_illegal_effect_element_bounce_0e3db8(void);
  * Address  : 0xe3db8 (Size: 80 bytes)
  * Module   : update.cpp [direct_file_string_xref]
- * OrigLine : update.cpp:2559
- * Naming   : String 'Illegal effect element bounce life: %d'
+ * OrigLine : update.cpp lines 2559
+ * Purpose  : String 'Illegal effect element bounce life: %d'
  * Callers  : 0 -> 
- * Callees  : 2 -> 0xddaf0, 0xe7714
- * Strings  :
- *   - 0x16caa8: "update.cpp"
- *   - 0x16ca81: "Illegal effect element bounce life: %d"
+ * Callees  : 2 -> LbErrorLog, dk_sprintf
  ******************************************************************************/
-void FUN_000e3db8(void)
+void update_illegal_effect_element_bounce_0e3db8(void)
 
 {
-  int in_EAX;
-  int iVar1;
+  int arg_eax;
+  int val;
   
-  iVar1 = *(int *)(in_EAX + 0x5c) >> 0x10;
-  if ((-1 < iVar1) && (iVar1 < 0x10)) {
-    *(undefined2 *)(in_EAX + 0x30) = *(undefined2 *)(&DAT_00192788 + iVar1 * 4);
+  val = *(int *)(arg_eax + 0x5c) >> 0x10;
+  if ((-1 < val) && (val < 0x10)) {
+    *(undefined2 *)(arg_eax + 0x30) = *(undefined2 *)(&g_data_00192788 + val * 4);
     return;
   }
-  FUN_000e7714(&DAT_0019cbac,s_Illegal_effect_element_bounce_li_0016ca81,
-               *(int *)(in_EAX + 0x5c) >> 0x10);
-  FUN_000ddaf0(); /* LbErrorLog("update.cpp", line 2559, g_log_buf) */
+  dk_sprintf(&g_log_sprintf_buf,s_Illegal_effect_element_bounce_li_0016ca81,
+               *(int *)(arg_eax + 0x5c) >> 0x10);
+  LbErrorLog(); /* LbErrorLog("update.cpp", line 2559, g_log_buf) */
   return;
 }
 
 /******************************************************************************
- * Function : sub_0e3e08 (Ghidra: FUN_000e3e08)
- * Prototype: undefined8 sub_0e3e08(void);
+ * Function : update_fn_0e3e08 (Original VA: 0xe3e08, Ghidra: FUN_000e3e08)
+ * Prototype: undefined8 update_fn_0e3e08(void);
  * Address  : 0xe3e08 (Size: 80 bytes)
  * Module   : update.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Module update.cpp procedure @ 0x0e3e08
  * Callers  : 0 -> 
- * Callees  : 3 -> 0x6f671, 0x6f69c, 0x6f6b8
+ * Callees  : 3 -> sound_fn_06f671, sound_fn_06f69c, sound_fn_06f6b8
  ******************************************************************************/
-undefined8 FUN_000e3e08(void)
+undefined8 update_fn_0e3e08(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  undefined4 in_EDX;
+  int arg_eax;
+  int val;
+  undefined4 arg_edx;
   int extraout_EDX;
   
-  if (*(char *)(in_EAX + 0x66) != '\0') {
-    iVar1 = FUN_0006f6b8();
-    if (iVar1 == 0) {
-      FUN_0006f69c();
+  if (*(char *)(arg_eax + 0x66) != '\0') {
+    val = sound_fn_06f6b8();
+    if (val == 0) {
+      sound_fn_06f69c();
     }
     else {
-      FUN_0006f671();
+      sound_fn_06f671();
       *(undefined1 *)(extraout_EDX + 0x66) = 0;
     }
   }
-  return CONCAT44(in_EDX,1);
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : dk_illegal_primary_target_type_0e3e78 (Ghidra: FUN_000e3e78)
- * Prototype: undefined2 dk_illegal_primary_target_type_0e3e78(void);
+ * Function : update_illegal_primary_target_type_0e3e78 (Original VA: 0xe3e78, Ghidra: FUN_000e3e78)
+ * Prototype: undefined2 update_illegal_primary_target_type_0e3e78(void);
  * Address  : 0xe3e78 (Size: 639 bytes)
  * Module   : update.cpp [direct_file_string_xref]
- * OrigLine : update.cpp:2654 ("Illegal primary target type for shot")
- * Naming   : String 'Illegal primary target type for shot'
- * Callers  : 2 -> 0x5ec71, 0x5f049
- * Callees  : 4 -> 0x101c2, 0x10c1a, 0x10c5f, 0xddaf0
- * Strings  :
- *   - 0x16cb05: "update.cpp"
- *   - 0x16cae0: "Illegal primary target type for shot"
+ * OrigLine : update.cpp lines 2654
+ * Purpose  : String 'Illegal primary target type for shot'
+ * Callers  : 2 -> process_players_creature_control_packet, process_players_map_view_packet
+ * Callees  : 4 -> anger_fn_0101c2, anger_fn_010c1a, anger_fn_010c5f, LbErrorLog
  ******************************************************************************/
-undefined2 FUN_000e3e78(void)
+undefined2 update_illegal_primary_target_type_0e3e78(void)
 
 {
-  char cVar1;
-  undefined2 uVar2;
-  int in_EAX;
-  int iVar3;
-  int iVar4;
-  int iVar5;
+  char ch;
+  undefined2 uval;
+  int arg_eax;
+  int val;
+  int val_2;
+  int val_3;
   int extraout_ECX;
   int extraout_ECX_00;
-  int iVar6;
-  undefined4 in_EDX;
-  uint uVar7;
-  uint uVar8;
-  int iVar9;
+  int thing_ptr;
+  undefined4 arg_edx;
+  uint uval_2;
+  uint uval_3;
+  int val_4;
   int local_2c;
   int local_28;
   int local_20;
   
-  iVar3 = *(byte *)(in_EAX + 0xe) - 0x14;
-  uVar2 = 0;
-  if (iVar3 < 0) {
-    iVar3 = 0;
+  val = *(byte *)(arg_eax + 0xe) - 0x14;
+  uval = 0;
+  if (val < 0) {
+    val = 0;
   }
-  local_2c = *(byte *)(in_EAX + 0x10) - 0x14;
+  local_2c = *(byte *)(arg_eax + 0x10) - 0x14;
   if (local_2c < 0) {
     local_2c = 0;
   }
-  uVar7 = *(byte *)(in_EAX + 0xe) + 0x14;
-  if (0xff < uVar7) {
-    uVar7 = 0xff;
+  uval_2 = *(byte *)(arg_eax + 0xe) + 0x14;
+  if (0xff < uval_2) {
+    uval_2 = 0xff;
   }
-  uVar8 = *(byte *)(in_EAX + 0x10) + 0x14;
-  if (0xff < uVar8) {
-    uVar8 = 0xff;
+  uval_3 = *(byte *)(arg_eax + 0x10) + 0x14;
+  if (0xff < uval_3) {
+    uval_3 = 0xff;
   }
-  iVar9 = 0x7fffffff;
-  if (local_2c <= (int)uVar8) {
+  val_4 = 0x7fffffff;
+  if (local_2c <= (int)uval_3) {
     local_28 = local_2c * 0x500;
     do {
-      if (iVar3 <= (int)uVar7) {
-        local_20 = iVar3 * 5 + local_28;
+      if (val <= (int)uval_2) {
+        local_20 = val * 5 + local_28;
         do {
-          iVar6 = (&DAT_001ae9fc)[(*(uint *)((int)&DAT_00279203 + local_20 + 1) & 0x3fffff) >> 0xb];
-          if (iVar6 != DAT_001ae9fc) {
+          thing_ptr = (&g_thing_ptrs)[(*(uint *)((int)&g_map_subtiles + local_20 + 1) & 0x3fffff) >> 0xb];
+          if (thing_ptr != g_thing_ptrs) {
             do {
-              if (iVar6 != in_EAX) {
-                switch(in_EDX) {
+              if (thing_ptr != arg_eax) {
+                switch(arg_edx) {
                 case 1:
                 case 7:
-                  if (*(char *)(iVar6 + 0x1f) != '\x05') {
-                    if (*(char *)(iVar6 + 0x1f) != '\x01') goto LAB_000e3f7f;
-                    cVar1 = *(char *)(iVar6 + 0x1a);
+                  if (*(char *)(thing_ptr + 0x1f) != '\x05') { /* thing->class_id */
+                    if (*(char *)(thing_ptr + 0x1f) != '\x01') goto LAB_000e3f7f; /* thing->class_id */
+                    ch = *(char *)(thing_ptr + 0x1a);
                     goto joined_r0x000e3fff;
                   }
                   break;
                 case 2:
-                  cVar1 = *(char *)(iVar6 + 0x1f);
+                  ch = *(char *)(thing_ptr + 0x1f); /* thing->class_id */
 joined_r0x000e3fff:
-                  if (cVar1 != '\x05') goto LAB_000e3f7f;
+                  if (ch != '\x05') goto LAB_000e3f7f;
                   break;
                 case 3:
-                  if (((*(char *)(iVar6 + 0x1f) != '\x05') &&
-                      ((*(char *)(iVar6 + 0x1f) != '\x01' || (*(char *)(iVar6 + 0x1a) != '\x05'))))
-                     || (*(char *)(iVar6 + 6) == *(char *)(in_EAX + 6))) goto LAB_000e3f7f;
+                  if (((*(char *)(thing_ptr + 0x1f) != '\x05') && /* thing->class_id */
+                      ((*(char *)(thing_ptr + 0x1f) != '\x01' || (*(char *)(thing_ptr + 0x1a) != '\x05')))) /* thing->class_id */
+                     || (*(char *)(thing_ptr + 6) == *(char *)(arg_eax + 6))) goto LAB_000e3f7f; /* thing->owner */
                   break;
                 case 4:
-                  if ((*(char *)(iVar6 + 0x1f) != '\x05') ||
-                     (*(char *)(iVar6 + 6) == *(char *)(in_EAX + 6))) goto LAB_000e3f7f;
+                  if ((*(char *)(thing_ptr + 0x1f) != '\x05') || /* thing->class_id */
+                     (*(char *)(thing_ptr + 6) == *(char *)(arg_eax + 6))) goto LAB_000e3f7f; /* thing->owner */
                   break;
                 case 5:
-                  if (((*(char *)(iVar6 + 0x1f) != '\x05') &&
-                      ((*(char *)(iVar6 + 0x1f) != '\x01' || (*(char *)(iVar6 + 0x1a) != '\x05'))))
-                     || (*(char *)(iVar6 + 6) != *(char *)(in_EAX + 6))) goto LAB_000e3f7f;
+                  if (((*(char *)(thing_ptr + 0x1f) != '\x05') && /* thing->class_id */
+                      ((*(char *)(thing_ptr + 0x1f) != '\x01' || (*(char *)(thing_ptr + 0x1a) != '\x05')))) /* thing->class_id */
+                     || (*(char *)(thing_ptr + 6) != *(char *)(arg_eax + 6))) goto LAB_000e3f7f; /* thing->owner */
                   break;
                 case 6:
-                  if ((*(char *)(iVar6 + 0x1f) != '\x05') ||
-                     (*(char *)(iVar6 + 6) != *(char *)(in_EAX + 6))) goto LAB_000e3f7f;
+                  if ((*(char *)(thing_ptr + 0x1f) != '\x05') || /* thing->class_id */
+                     (*(char *)(thing_ptr + 6) != *(char *)(arg_eax + 6))) goto LAB_000e3f7f; /* thing->owner */
                   break;
                 case 8:
                   break;
                 default:
-                  FUN_000ddaf0(); /* LbErrorLog("update.cpp", line 2654, "Illegal primary target type for shot") */
+                  LbErrorLog(); /* LbErrorLog("update.cpp", line 2654, "Illegal primary target type for shot") */
                 }
-                FUN_00010c1a();
-                iVar4 = FUN_00010c5f();
-                iVar6 = extraout_ECX;
-                if ((0x26 < iVar4) || (iVar5 = FUN_000101c2(), iVar6 = extraout_ECX_00, iVar5 == 0))
+                anger_fn_010c1a();
+                val_2 = anger_fn_010c5f();
+                thing_ptr = extraout_ECX;
+                if ((0x26 < val_2) || (val_3 = anger_fn_0101c2(), thing_ptr = extraout_ECX_00, val_3 == 0))
                 {
-                  iVar4 = 0x7fffffff;
+                  val_2 = 0x7fffffff;
                 }
-                if (iVar4 < iVar9) {
-                  uVar2 = *(undefined2 *)(iVar6 + 0x1b);
-                  iVar9 = iVar4;
+                if (val_2 < val_4) {
+                  uval = *(undefined2 *)(thing_ptr + 0x1b); /* thing->index_or_angle */
+                  val_4 = val_2;
                 }
               }
 LAB_000e3f7f:
-              iVar6 = (&DAT_001ae9fc)[*(ushort *)(iVar6 + 2)];
-            } while (iVar6 != DAT_001ae9fc);
+              thing_ptr = (&g_thing_ptrs)[*(ushort *)(thing_ptr + 2)];
+            } while (thing_ptr != g_thing_ptrs);
           }
           local_20 = local_20 + 5;
-        } while (local_20 <= (int)(local_28 + uVar7 * 5));
+        } while (local_20 <= (int)(local_28 + uval_2 * 5));
       }
       local_28 = local_28 + 0x500;
       local_2c = local_2c + 1;
-    } while (local_2c <= (int)uVar8);
+    } while (local_2c <= (int)uval_3);
   }
-  return uVar2;
+  return uval;
 }
 
 /******************************************************************************
- * Function : sub_0e40f8 (Ghidra: FUN_000e40f8)
- * Prototype: int sub_0e40f8(void);
+ * Function : update_fn_0e40f8 (Original VA: 0xe40f8, Ghidra: FUN_000e40f8)
+ * Prototype: int update_fn_0e40f8(void);
  * Address  : 0xe40f8 (Size: 65 bytes)
  * Module   : update.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Module update.cpp procedure @ 0x0e40f8
  * Callers  : 0 -> 
- * Callees  : 3 -> 0x101c2, 0x10c1a, 0x10c5f
+ * Callees  : 3 -> anger_fn_0101c2, anger_fn_010c1a, anger_fn_010c5f
  ******************************************************************************/
-int FUN_000e40f8(void)
+int update_fn_0e40f8(void)
 
 {
-  int iVar1;
-  int iVar2;
-  int unaff_EBX;
+  int val;
+  int val_2;
+  int arg_ebx;
   
-  FUN_00010c1a();
-  iVar1 = FUN_00010c5f();
-  if (iVar1 < unaff_EBX) {
-    iVar2 = FUN_000101c2();
-    if (iVar2 != 0) {
-      return iVar1;
+  anger_fn_010c1a();
+  val = anger_fn_010c5f();
+  if (val < arg_ebx) {
+    val_2 = anger_fn_0101c2();
+    if (val_2 != 0) {
+      return val;
     }
   }
   return 0x7fffffff;
 }
 
 /******************************************************************************
- * Function : sub_0e413c (Ghidra: FUN_000e413c)
- * Prototype: void sub_0e413c(void);
+ * Function : update_update_creature_control_0e413c (Original VA: 0xe413c, Ghidra: FUN_000e413c)
+ * Prototype: void update_update_creature_control_0e413c(void);
  * Address  : 0xe413c (Size: 228 bytes)
  * Module   : update.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0xdf760, 0xe01f4, 0xe0880
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
+ * Callers  : 3 -> update_update_slab_subtile_columns_0df760, update_some_thing_has_been_0e01f4, update_fn_0e0880
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_000e413c(void)
+void update_update_creature_control_0e413c(void)
 
 {
-  int in_EAX;
-  ushort uVar1;
-  int iVar2;
-  int iVar3;
+  int thing;
+  ushort uval;
+  int val;
+  int val_2;
   
-  if (*(char *)(in_EAX + 0x1f) == '\x05') {
-    *(undefined4 *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 0xce) =
-         *(undefined4 *)(in_EAX + 0x40);
+  if (*(char *)(thing + 0x1f) == '\x05') { /* thing->class_id */
+    *(undefined4 *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 0xce) = /* thing->ccontrol_idx */
+         *(undefined4 *)(thing + 0x40);
   }
-  if ((*(short *)(in_EAX + 0x3e) != 0) && (*(char *)(in_EAX + 0x49) != '\0')) {
-    iVar3 = *(int *)(in_EAX + 0x40) + (*(int *)(in_EAX + 0x3c) >> 0x10);
-    *(int *)(in_EAX + 0x40) = iVar3;
-    while (iVar3 < 0) {
-      iVar3 = *(int *)(in_EAX + 0x40) + (uint)*(byte *)(in_EAX + 0x49) * 0x100;
-      *(int *)(in_EAX + 0x40) = iVar3;
+  if ((*(short *)(thing + 0x3e) != 0) && (*(char *)(thing + 0x49) != '\0')) {
+    val_2 = *(int *)(thing + 0x40) + (*(int *)(thing + 0x3c) >> 0x10);
+    *(int *)(thing + 0x40) = val_2;
+    while (val_2 < 0) {
+      val_2 = *(int *)(thing + 0x40) + (uint)*(byte *)(thing + 0x49) * 0x100;
+      *(int *)(thing + 0x40) = val_2;
     }
-    iVar2 = (uint)*(byte *)(in_EAX + 0x49) * 0x100;
-    iVar3 = iVar2 + -1;
-    if (iVar3 < *(int *)(in_EAX + 0x40)) {
-      if ((*(byte *)(in_EAX + 0x4f) & 0x40) == 0) {
-        iVar3 = *(int *)(in_EAX + 0x40) % iVar2;
+    val = (uint)*(byte *)(thing + 0x49) * 0x100;
+    val_2 = val + -1;
+    if (val_2 < *(int *)(thing + 0x40)) {
+      if ((*(byte *)(thing + 0x4f) & 0x40) == 0) { /* thing->render_flags */
+        val_2 = *(int *)(thing + 0x40) % val;
       }
       else {
-        *(undefined2 *)(in_EAX + 0x3e) = 0;
+        *(undefined2 *)(thing + 0x3e) = 0;
       }
-      *(int *)(in_EAX + 0x40) = iVar3;
+      *(int *)(thing + 0x40) = val_2;
     }
-    *(char *)(in_EAX + 0x48) = (char)((uint)*(undefined4 *)(in_EAX + 0x40) >> 8);
+    *(char *)(thing + 0x48) = (char)((uint)*(undefined4 *)(thing + 0x40) >> 8);
   }
-  if (*(char *)(in_EAX + 0x4a) == '\0') {
+  if (*(char *)(thing + 0x4a) == '\0') {
     return;
   }
-  uVar1 = *(short *)(in_EAX + 0x46) + (short)*(char *)(in_EAX + 0x4a);
-  *(ushort *)(in_EAX + 0x46) = uVar1;
-  if (*(ushort *)(in_EAX + 0x4b) < uVar1) {
-    if (uVar1 < *(ushort *)(in_EAX + 0x4d)) {
+  uval = *(short *)(thing + 0x46) + (short)*(char *)(thing + 0x4a);
+  *(ushort *)(thing + 0x46) = uval;
+  if (*(ushort *)(thing + 0x4b) < uval) {
+    if (uval < *(ushort *)(thing + 0x4d)) {
       return;
     }
-    *(ushort *)(in_EAX + 0x46) = *(ushort *)(in_EAX + 0x4d);
-    if ((*(byte *)(in_EAX + 0x50) & 2) != 0) {
-      *(char *)(in_EAX + 0x4a) = -*(char *)(in_EAX + 0x4a);
+    *(ushort *)(thing + 0x46) = *(ushort *)(thing + 0x4d);
+    if ((*(byte *)(thing + 0x50) & 2) != 0) {
+      *(char *)(thing + 0x4a) = -*(char *)(thing + 0x4a);
       return;
     }
   }
   else {
-    *(ushort *)(in_EAX + 0x46) = *(ushort *)(in_EAX + 0x4b);
-    if ((*(byte *)(in_EAX + 0x50) & 2) != 0) {
-      *(char *)(in_EAX + 0x4a) = -*(char *)(in_EAX + 0x4a);
+    *(ushort *)(thing + 0x46) = *(ushort *)(thing + 0x4b);
+    if ((*(byte *)(thing + 0x50) & 2) != 0) {
+      *(char *)(thing + 0x4a) = -*(char *)(thing + 0x4a);
       return;
     }
   }
-  *(undefined1 *)(in_EAX + 0x4a) = 0;
+  *(undefined1 *)(thing + 0x4a) = 0;
   return;
 }
 
 /******************************************************************************
- * Function : sub_0e4220 (Ghidra: FUN_000e4220)
- * Prototype: longlong sub_0e4220(void);
+ * Function : update_update_creature_control_0e4220 (Original VA: 0xe4220, Ghidra: FUN_000e4220)
+ * Prototype: longlong update_update_creature_control_0e4220(void);
  * Address  : 0xe4220 (Size: 928 bytes)
  * Module   : update.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
  * Callers  : 0 -> 
- * Callees  : 1 -> 0xb3040
+ * Callees  : 1 -> move_process_map_subtile_0b3040
  ******************************************************************************/
-longlong FUN_000e4220(void)
+longlong update_update_creature_control_0e4220(void)
 
 {
-  short *psVar1;
-  undefined *puVar2;
-  byte *in_EAX;
-  int iVar3;
+  short *val;
+  undefined *word_ptr;
+  byte *thing;
+  int val_2;
   int extraout_ECX;
-  int iVar4;
-  uint in_EDX;
-  bool bVar5;
+  int cctrl_ptr;
+  uint arg_edx;
+  bool flag;
   
-  iVar4 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  bVar5 = false;
-  if (*(char *)(iVar4 + 0xab) == '\0') {
-    if ((*in_EAX & 0x20) == 0) {
-      if ((*(byte *)(iVar4 + 2) & 1) == 0) {
-        if (*(short *)(iVar4 + 200) != 0) {
-          *(short *)(iVar4 + 0xbb) =
-               (short)((uint)((*(int *)(iVar4 + 0xc6) >> 0x10) *
-                             (&DAT_001927e0)[*(ushort *)(in_EAX + 0x52)]) >> 0x10);
-          puVar2 = (&PTR_LAB_00192fe0)[*(ushort *)(in_EAX + 0x52)];
-          *(undefined2 *)(iVar4 + 0xbf) = 0;
-          bVar5 = true;
-          *(short *)(iVar4 + 0xbd) =
-               (short)((uint)-((*(int *)(iVar4 + 0xc6) >> 0x10) * (int)puVar2 >> 8) >> 8);
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  flag = false;
+  if (*(char *)(cctrl_ptr + 0xab) == '\0') {
+    if ((*thing & 0x20) == 0) {
+      if ((*(byte *)(cctrl_ptr + 2) & 1) == 0) {
+        if (*(short *)(cctrl_ptr + 200) != 0) {
+          *(short *)(cctrl_ptr + 0xbb) =
+               (short)((uint)((*(int *)(cctrl_ptr + 0xc6) >> 0x10) *
+                             (&g_slab_attr_table)[*(ushort *)(thing + 0x52)]) >> 0x10); /* thing->health */
+          word_ptr = (&PTR_LAB_00192fe0)[*(ushort *)(thing + 0x52)]; /* thing->health */
+          *(undefined2 *)(cctrl_ptr + 0xbf) = 0;
+          flag = true;
+          *(short *)(cctrl_ptr + 0xbd) =
+               (short)((uint)-((*(int *)(cctrl_ptr + 0xc6) >> 0x10) * (int)word_ptr >> 8) >> 8);
         }
       }
       else {
-        bVar5 = true;
-        *(byte *)(iVar4 + 2) = *(byte *)(iVar4 + 2) & 0xfe;
+        flag = true;
+        *(byte *)(cctrl_ptr + 2) = *(byte *)(cctrl_ptr + 2) & 0xfe;
       }
     }
-    else if ((in_EAX[0x25] & 0x20) == 0) {
-      bVar5 = *(short *)(iVar4 + 200) != 0;
-      if (bVar5) {
-        *(short *)(iVar4 + 0xbb) =
-             (short)((uint)((*(int *)(iVar4 + 0xc6) >> 0x10) *
-                           (&DAT_001927e0)[*(ushort *)(in_EAX + 0x52)]) >> 0x10);
-        *(short *)(iVar4 + 0xbd) =
-             (short)((uint)-((*(int *)(iVar4 + 0xc6) >> 0x10) *
-                             (int)(&PTR_LAB_00192fe0)[*(ushort *)(in_EAX + 0x52)] >> 8) >> 8);
+    else if ((thing[0x25] & 0x20) == 0) {
+      flag = *(short *)(cctrl_ptr + 200) != 0;
+      if (flag) {
+        *(short *)(cctrl_ptr + 0xbb) =
+             (short)((uint)((*(int *)(cctrl_ptr + 0xc6) >> 0x10) *
+                           (&g_slab_attr_table)[*(ushort *)(thing + 0x52)]) >> 0x10); /* thing->health */
+        *(short *)(cctrl_ptr + 0xbd) =
+             (short)((uint)-((*(int *)(cctrl_ptr + 0xc6) >> 0x10) *
+                             (int)(&PTR_LAB_00192fe0)[*(ushort *)(thing + 0x52)] >> 8) >> 8); /* thing->health */
       }
-      if (*(short *)(iVar4 + 0xca) != 0) {
-        *(short *)(iVar4 + 0xbb) =
-             (short)((uint)*(undefined4 *)(iVar4 + 0xb9) >> 0x10) +
-             (short)((uint)((*(int *)(iVar4 + 200) >> 0x10) *
-                           (&DAT_001927e0)[*(ushort *)(in_EAX + 0x52) + 0x600 & 0x7ff]) >> 0x10);
-        bVar5 = true;
-        *(short *)(iVar4 + 0xbd) =
-             (short)((uint)*(undefined4 *)(iVar4 + 0xbb) >> 0x10) +
-             (short)((uint)-((*(int *)(iVar4 + 200) >> 0x10) *
-                             (int)(&PTR_LAB_00192fe0)[*(ushort *)(in_EAX + 0x52) + 0x600 & 0x7ff] >>
+      if (*(short *)(cctrl_ptr + 0xca) != 0) {
+        *(short *)(cctrl_ptr + 0xbb) =
+             (short)((uint)*(undefined4 *)(cctrl_ptr + 0xb9) >> 0x10) +
+             (short)((uint)((*(int *)(cctrl_ptr + 200) >> 0x10) *
+                           (&g_slab_attr_table)[*(ushort *)(thing + 0x52) + 0x600 & 0x7ff]) >> 0x10); /* thing->health */
+        flag = true;
+        *(short *)(cctrl_ptr + 0xbd) =
+             (short)((uint)*(undefined4 *)(cctrl_ptr + 0xbb) >> 0x10) +
+             (short)((uint)-((*(int *)(cctrl_ptr + 200) >> 0x10) *
+                             (int)(&PTR_LAB_00192fe0)[*(ushort *)(thing + 0x52) + 0x600 & 0x7ff] >> /* thing->health */
                             8) >> 8);
       }
     }
     else {
-      if (*(short *)(iVar4 + 200) != 0) {
-        *(short *)(iVar4 + 0xbb) =
-             (short)((uint)(((int)(&DAT_001927e0)[*(ushort *)(in_EAX + 0x52)] >> 8) *
-                           ((*(int *)(iVar4 + 0xc6) >> 0x10) *
-                            (int)(&PTR_LAB_00192fe0)[*(ushort *)(in_EAX + 0x54)] >> 8)) >> 0x10);
-        *(short *)(iVar4 + 0xbd) =
-             (short)((uint)-(((int)(&PTR_LAB_00192fe0)[*(ushort *)(in_EAX + 0x52)] >> 8) *
-                             ((*(int *)(iVar4 + 0xc6) >> 0x10) *
-                              (int)(&PTR_LAB_00192fe0)[*(ushort *)(in_EAX + 0x54)] >> 8) >> 8) >> 8)
+      if (*(short *)(cctrl_ptr + 200) != 0) {
+        *(short *)(cctrl_ptr + 0xbb) =
+             (short)((uint)(((int)(&g_slab_attr_table)[*(ushort *)(thing + 0x52)] >> 8) * /* thing->health */
+                           ((*(int *)(cctrl_ptr + 0xc6) >> 0x10) *
+                            (int)(&PTR_LAB_00192fe0)[*(ushort *)(thing + 0x54)] >> 8)) >> 0x10);
+        *(short *)(cctrl_ptr + 0xbd) =
+             (short)((uint)-(((int)(&PTR_LAB_00192fe0)[*(ushort *)(thing + 0x52)] >> 8) * /* thing->health */
+                             ((*(int *)(cctrl_ptr + 0xc6) >> 0x10) *
+                              (int)(&PTR_LAB_00192fe0)[*(ushort *)(thing + 0x54)] >> 8) >> 8) >> 8)
         ;
-        *(short *)(iVar4 + 0xbf) =
-             (short)((uint)((*(int *)(iVar4 + 0xc6) >> 0x10) *
-                           (&DAT_001927e0)[*(ushort *)(in_EAX + 0x54)]) >> 0x10);
+        *(short *)(cctrl_ptr + 0xbf) =
+             (short)((uint)((*(int *)(cctrl_ptr + 0xc6) >> 0x10) *
+                           (&g_slab_attr_table)[*(ushort *)(thing + 0x54)]) >> 0x10);
       }
-      if (*(short *)(iVar4 + 0xca) != 0) {
-        *(short *)(iVar4 + 0xbb) =
-             (short)((uint)*(undefined4 *)(iVar4 + 0xb9) >> 0x10) +
-             (short)((uint)((*(int *)(iVar4 + 200) >> 0x10) *
-                           (&DAT_001927e0)[*(ushort *)(in_EAX + 0x52) + 0x600 & 0x7ff]) >> 0x10);
-        *(short *)(iVar4 + 0xbd) =
-             (short)((uint)*(undefined4 *)(iVar4 + 0xbb) >> 0x10) +
-             (short)((uint)-((*(int *)(iVar4 + 200) >> 0x10) *
-                             (int)(&PTR_LAB_00192fe0)[*(ushort *)(in_EAX + 0x52) + 0x600 & 0x7ff] >>
+      if (*(short *)(cctrl_ptr + 0xca) != 0) {
+        *(short *)(cctrl_ptr + 0xbb) =
+             (short)((uint)*(undefined4 *)(cctrl_ptr + 0xb9) >> 0x10) +
+             (short)((uint)((*(int *)(cctrl_ptr + 200) >> 0x10) *
+                           (&g_slab_attr_table)[*(ushort *)(thing + 0x52) + 0x600 & 0x7ff]) >> 0x10); /* thing->health */
+        *(short *)(cctrl_ptr + 0xbd) =
+             (short)((uint)*(undefined4 *)(cctrl_ptr + 0xbb) >> 0x10) +
+             (short)((uint)-((*(int *)(cctrl_ptr + 200) >> 0x10) *
+                             (int)(&PTR_LAB_00192fe0)[*(ushort *)(thing + 0x52) + 0x600 & 0x7ff] >> /* thing->health */
                             8) >> 8);
       }
     }
-    if (((in_EAX[0x25] & 0x20) != 0) && ((*in_EAX & 0x20) == 0)) {
-      iVar3 = FUN_000b3040();
-      iVar3 = (iVar3 + 0x100) - (*(int *)(extraout_ECX + 0xf) >> 0x10);
-      psVar1 = (short *)(iVar4 + 0xbf);
-      if (iVar3 < 1) {
-        if (iVar3 < 0) {
-          iVar4 = -iVar3;
-          if (iVar3 != -0x20 && 0x1f < iVar4) {
-            iVar4 = 0x20;
+    if (((thing[0x25] & 0x20) != 0) && ((*thing & 0x20) == 0)) {
+      val_2 = move_process_map_subtile_0b3040();
+      val_2 = (val_2 + 0x100) - (*(int *)(extraout_ECX + 0xf) >> 0x10);
+      val = (short *)(cctrl_ptr + 0xbf);
+      if (val_2 < 1) {
+        if (val_2 < 0) {
+          cctrl_ptr = -val_2;
+          if (val_2 != -0x20 && 0x1f < cctrl_ptr) {
+            cctrl_ptr = 0x20;
           }
-          *psVar1 = *psVar1 - (short)iVar4;
-          return CONCAT44(in_EDX,1);
+          *val = *val - (short)cctrl_ptr;
+          return CONCAT44(arg_edx,1);
         }
       }
       else {
-        if (0x20 < iVar3) {
-          iVar3 = 0x20;
+        if (0x20 < val_2) {
+          val_2 = 0x20;
         }
-        *psVar1 = *psVar1 + (short)iVar3;
-        bVar5 = true;
+        *val = *val + (short)val_2;
+        flag = true;
       }
     }
   }
   else {
-    *(undefined2 *)(iVar4 + 0xbb) = 0;
-    *(undefined2 *)(iVar4 + 0xbd) = 0;
-    *(undefined2 *)(iVar4 + 0xbf) = 0;
-    *(undefined2 *)(iVar4 + 200) = 0;
-    bVar5 = true;
-    *(byte *)(iVar4 + 2) = *(byte *)(iVar4 + 2) & 0xfe;
+    *(undefined2 *)(cctrl_ptr + 0xbb) = 0;
+    *(undefined2 *)(cctrl_ptr + 0xbd) = 0;
+    *(undefined2 *)(cctrl_ptr + 0xbf) = 0;
+    *(undefined2 *)(cctrl_ptr + 200) = 0;
+    flag = true;
+    *(byte *)(cctrl_ptr + 2) = *(byte *)(cctrl_ptr + 2) & 0xfe;
   }
-  if (!bVar5) {
-    if (((*(short *)(iVar4 + 0xbb) == 0) && (*(short *)(iVar4 + 0xbd) == 0)) &&
-       (*(short *)(iVar4 + 0xbf) == 0)) {
-      return (ulonglong)in_EDX << 0x20;
+  if (!flag) {
+    if (((*(short *)(cctrl_ptr + 0xbb) == 0) && (*(short *)(cctrl_ptr + 0xbd) == 0)) &&
+       (*(short *)(cctrl_ptr + 0xbf) == 0)) {
+      return (ulonglong)arg_edx << 0x20;
     }
-    return CONCAT44(in_EDX,1);
+    return CONCAT44(arg_edx,1);
   }
-  return CONCAT44(in_EDX,1);
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : sub_0e45c0 (Ghidra: FUN_000e45c0)
- * Prototype: void sub_0e45c0(void);
+ * Function : update_update_slab_subtile_columns_0e45c0 (Original VA: 0xe45c0, Ghidra: FUN_000e45c0)
+ * Prototype: void update_update_slab_subtile_columns_0e45c0(void);
  * Address  : 0xe45c0 (Size: 1780 bytes)
  * Module   : update.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Updates 3x3 subtile map entries for slab coordinates
  * Callers  : 0 -> 
- * Callees  : 9 -> 0x10434, 0x24998, 0x43ac3, 0x63b6d, 0x64a2e, 0x655fa, 0x81c10, 0x81d84, 0xb23ec
+ * Callees  : 9 -> anger_fn_010434, effect_allocate_light_effect_024998, inits_fn_043ac3, person_fn_063b6d, person_fn_064a2e, pom_update_slab_subtile_columns_0655fa, creature_fn_081c10, creature_update_creature_control_081d84 ...
  ******************************************************************************/
-void FUN_000e45c0(void)
+void update_update_slab_subtile_columns_0e45c0(void)
 
 {
-  undefined4 uVar1;
-  byte bVar2;
-  undefined *puVar3;
-  short sVar4;
-  short sVar5;
-  undefined2 uVar6;
-  byte *in_EAX;
-  uint uVar7;
-  int iVar8;
-  int iVar9;
-  short *psVar10;
-  short *psVar11;
-  byte bVar12;
+  undefined4 uval;
+  byte flag;
+  undefined *word_ptr;
+  short short_val;
+  short short_val_2;
+  undefined2 uval_2;
+  byte *thing;
+  uint uval_3;
+  int thing_ptr;
+  int val;
+  short *val_2;
+  short *val_3;
+  byte flag_2;
   short asStack_82c [1014];
   undefined4 auStack_40 [3];
   undefined4 local_34;
@@ -4854,234 +4821,234 @@ void FUN_000e45c0(void)
   undefined4 local_2c;
   int aiStack_28 [4];
   
-  bVar12 = 0;
-  psVar11 = (short *)&local_34;
-  aiStack_28[1] = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  in_EAX[0x25] = in_EAX[0x25] & 0x7c;
+  flag_2 = 0;
+  val_3 = (short *)&local_34;
+  aiStack_28[1] = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  thing[0x25] = thing[0x25] & 0x7c;
   *(undefined2 *)(aiStack_28[1] + 0xb9) = 0;
-  if (*(int *)(in_EAX + 0xf) >> 0x10 !=
-      (uint)((&DAT_00269203)[(uint)in_EAX[0x10] * 0x100 + (uint)in_EAX[0xe]] & 0xf) << 8)
+  if (*(int *)(thing + 0xf) >> 0x10 != /* thing->mappos.val_y */
+      (uint)((&g_bss_00269203)[(uint)thing[0x10] * 0x100 + (uint)thing[0xe]] & 0xf) << 8)
   goto LAB_000e4c25;
   auStack_40[2] = 0xe4621;
-  uVar7 = FUN_000b23ec();
-  if ((uVar7 & 0xfffffffe) == 0x28) {
+  uval_3 = light_process_map_subtile_0b23ec();
+  if ((uval_3 & 0xfffffffe) == 0x28) {
     auStack_40[2] = 0xe4653;
-    FUN_00081c10();
-    in_EAX[0x25] = in_EAX[0x25] | 2;
+    creature_fn_081c10();
+    thing[0x25] = thing[0x25] | 2;
   }
-  else if (uVar7 == 0x27) {
-    in_EAX[0x25] = in_EAX[0x25] | 1;
+  else if (uval_3 == 0x27) {
+    thing[0x25] = thing[0x25] | 1;
   }
-  if ((in_EAX[0x25] & 1) == 0) {
+  if ((thing[0x25] & 1) == 0) {
     if (*(char *)(aiStack_28[1] + 0xc1) == '\0') {
-      psVar11 = (short *)&local_34;
-      uVar7 = local_34;
-      if (DAT_002e7bed == '\x02') {
+      val_3 = (short *)&local_34;
+      uval_3 = local_34;
+      if (g_bss_002e7bed == '\x02') {
         auStack_40[2] = 0xe46c7;
-        iVar8 = FUN_00081d84();
-        local_34 = *(uint *)(in_EAX + 0xd);
-        uVar7 = local_34;
-        asStack_30[(uint)bVar12 * -4] = *(short *)(in_EAX + (uint)bVar12 * -8 + 0x11);
-        psVar11 = (short *)&local_34;
-        if ((&DAT_002d33c5)
-            [((&DAT_0019033b)[local_34 >> 0x18] * 0x55 + (&DAT_0019033b)[local_34 >> 8 & 0xff]) * 6]
+        thing_ptr = creature_update_creature_control_081d84();
+        local_34 = *(uint *)(thing + 0xd); /* thing->mappos.val_x */
+        uval_3 = local_34;
+        asStack_30[(uint)flag_2 * -4] = *(short *)(thing + (uint)flag_2 * -8 + 0x11);
+        val_3 = (short *)&local_34;
+        if ((&g_slabmap_base)
+            [((&g_subtile_to_slab_lut)[local_34 >> 0x18] * 0x55 + (&g_subtile_to_slab_lut)[local_34 >> 8 & 0xff]) * 6]
             == '\n') {
-          in_EAX[0x25] = in_EAX[0x25] | 0x80;
+          thing[0x25] = thing[0x25] | 0x80;
           local_34._2_2_ = (short)(local_34 >> 0x10);
-          if (iVar8 == 1) {
-            sVar4 = (short)((uint)((&DAT_001927e0)[*(ushort *)(in_EAX + 0x52) - 0x200 & 0x7ff] << 6)
+          if (thing_ptr == 1) {
+            short_val = (short)((uint)((&g_slab_attr_table)[*(ushort *)(thing + 0x52) - 0x200 & 0x7ff] << 6) /* thing->health */
                            >> 0x10);
-            sVar5 = (short)((uint)-(((int)(&PTR_LAB_00192fe0)
-                                          [*(ushort *)(in_EAX + 0x52) - 0x200 & 0x7ff] << 6) >> 8)
+            short_val_2 = (short)((uint)-(((int)(&PTR_LAB_00192fe0)
+                                          [*(ushort *)(thing + 0x52) - 0x200 & 0x7ff] << 6) >> 8) /* thing->health */
                            >> 8);
           }
           else {
-            psVar11 = (short *)&local_34;
-            if (iVar8 != 2) goto LAB_000e4aca;
-            sVar4 = -(short)((uint)((&DAT_001927e0)[*(ushort *)(in_EAX + 0x52) - 0x200 & 0x7ff] << 6
+            val_3 = (short *)&local_34;
+            if (thing_ptr != 2) goto LAB_000e4aca;
+            short_val = -(short)((uint)((&g_slab_attr_table)[*(ushort *)(thing + 0x52) - 0x200 & 0x7ff] << 6 /* thing->health */
                                    ) >> 0x10);
-            sVar5 = -(short)((uint)-(((int)(&PTR_LAB_00192fe0)
-                                           [*(ushort *)(in_EAX + 0x52) - 0x200 & 0x7ff] << 6) >> 8)
+            short_val_2 = -(short)((uint)-(((int)(&PTR_LAB_00192fe0)
+                                           [*(ushort *)(thing + 0x52) - 0x200 & 0x7ff] << 6) >> 8) /* thing->health */
                             >> 8);
           }
           auStack_40[2] = 0xffffffff;
-          local_34 = CONCAT22(local_34._2_2_ + sVar5,(short)local_34 + sVar4);
-          FUN_00043ac3();
-          psVar11 = (short *)(auStack_40 + 2);
-          uVar7 = local_34;
+          local_34 = CONCAT22(local_34._2_2_ + short_val_2,(short)local_34 + short_val);
+          inits_fn_043ac3();
+          val_3 = (short *)(auStack_40 + 2);
+          uval_3 = local_34;
         }
       }
     }
     else {
       auStack_40[2] = 0xe48e6;
-      iVar8 = FUN_00081d84();
-      aiStack_28[3] = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-      bVar2 = in_EAX[0x1a];
-      uVar1 = *(undefined4 *)(in_EAX + 0xd);
-      *(undefined2 *)(aiStack_28 + (uint)bVar12 * -2) =
-           *(undefined2 *)(in_EAX + (uint)bVar12 * -8 + 0x11);
-      bVar2 = (&DAT_0018b70c)[(uint)bVar2 * 0x10];
-      if (bVar2 < 3) {
+      thing_ptr = creature_update_creature_control_081d84();
+      aiStack_28[3] = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+      flag = thing[0x1a];
+      uval = *(undefined4 *)(thing + 0xd); /* thing->mappos.val_x */
+      *(undefined2 *)(aiStack_28 + (uint)flag_2 * -2) =
+           *(undefined2 *)(thing + (uint)flag_2 * -8 + 0x11);
+      flag = (&g_data_0018b70c)[(uint)flag * 0x10];
+      if (flag < 3) {
 LAB_000e492b:
-        local_2c._0_2_ = (short)uVar1;
-        local_2c._2_2_ = (short)((uint)uVar1 >> 0x10);
-        if (iVar8 == 1) {
+        local_2c._0_2_ = (short)uval;
+        local_2c._2_2_ = (short)((uint)uval >> 0x10);
+        if (thing_ptr == 1) {
           auStack_40[2] = 0xffffffff;
           local_2c = CONCAT22(local_2c._2_2_ +
                               (short)((uint)-(((int)(&PTR_LAB_00192fe0)
-                                                    [*(ushort *)(in_EAX + 0x52) - 0x200 & 0x7ff] <<
+                                                    [*(ushort *)(thing + 0x52) - 0x200 & 0x7ff] << /* thing->health */
                                               6) >> 8) >> 8),
                               (short)local_2c +
-                              (short)((uint)((&DAT_001927e0)
-                                             [*(ushort *)(in_EAX + 0x52) - 0x200 & 0x7ff] << 6) >>
+                              (short)((uint)((&g_slab_attr_table)
+                                             [*(ushort *)(thing + 0x52) - 0x200 & 0x7ff] << 6) >> /* thing->health */
                                      0x10));
-          FUN_00043ac3();
+          inits_fn_043ac3();
           *(char *)(aiStack_28[2] + 0xc1) = *(char *)(aiStack_28[2] + 0xc1) + -1;
-          psVar10 = (short *)(auStack_40 + 2);
-          uVar1 = local_2c;
+          val_2 = (short *)(auStack_40 + 2);
+          uval = local_2c;
         }
         else {
-          psVar10 = (short *)&local_34;
-          if (iVar8 == 2) {
+          val_2 = (short *)&local_34;
+          if (thing_ptr == 2) {
             auStack_40[2] = 0xffffffff;
             local_2c = CONCAT22(local_2c._2_2_ -
                                 (short)((uint)-(((int)(&PTR_LAB_00192fe0)
-                                                      [*(ushort *)(in_EAX + 0x52) - 0x200 & 0x7ff]
+                                                      [*(ushort *)(thing + 0x52) - 0x200 & 0x7ff] /* thing->health */
                                                 << 6) >> 8) >> 8),
                                 (short)local_2c -
-                                (short)((uint)((&DAT_001927e0)
-                                               [*(ushort *)(in_EAX + 0x52) - 0x200 & 0x7ff] << 6) >>
+                                (short)((uint)((&g_slab_attr_table)
+                                               [*(ushort *)(thing + 0x52) - 0x200 & 0x7ff] << 6) >> /* thing->health */
                                        0x10));
-            FUN_00043ac3();
+            inits_fn_043ac3();
             *(char *)(aiStack_28[2] + 0xc1) = *(char *)(aiStack_28[2] + 0xc1) + -1;
-            psVar10 = (short *)(auStack_40 + 2);
-            uVar1 = local_2c;
+            val_2 = (short *)(auStack_40 + 2);
+            uval = local_2c;
           }
         }
       }
       else {
-        psVar10 = (short *)&local_34;
-        if (4 < bVar2) {
-          if (bVar2 != 5) goto LAB_000e492b;
-          psVar10 = (short *)&local_34;
-          if (iVar8 != 0) {
-            psVar10 = (short *)(auStack_40 + 2);
+        val_2 = (short *)&local_34;
+        if (4 < flag) {
+          if (flag != 5) goto LAB_000e492b;
+          val_2 = (short *)&local_34;
+          if (thing_ptr != 0) {
+            val_2 = (short *)(auStack_40 + 2);
             auStack_40[2] = 0xffffffff;
-            local_2c = uVar1;
-            FUN_00043ac3();
+            local_2c = uval;
+            inits_fn_043ac3();
             *(char *)(aiStack_28[2] + 0xc1) = *(char *)(aiStack_28[2] + 0xc1) + -1;
-            uVar1 = local_2c;
+            uval = local_2c;
           }
         }
       }
-      local_2c = uVar1;
-      psVar10[-0xffffffff00000002] = 0x47b7;
-      psVar10[-0xffffffff00000001] = 0xe;
-      iVar8 = FUN_00081d84();
-      *(undefined4 *)psVar10 = *(undefined4 *)(in_EAX + 0xd);
-      psVar10[(uint)bVar12 * -4 + 2] = *(short *)(in_EAX + (uint)bVar12 * -8 + 0x11);
-      if (iVar8 == 1) {
-        *psVar10 = *psVar10 +
-                   (short)((uint)((&DAT_001927e0)[*(ushort *)(in_EAX + 0x52) - 0x200 & 0x7ff] << 6)
+      local_2c = uval;
+      val_2[-0xffffffff00000002] = 0x47b7;
+      val_2[-0xffffffff00000001] = 0xe;
+      thing_ptr = creature_update_creature_control_081d84();
+      *(undefined4 *)val_2 = *(undefined4 *)(thing + 0xd); /* thing->mappos.val_x */
+      val_2[(uint)flag_2 * -4 + 2] = *(short *)(thing + (uint)flag_2 * -8 + 0x11);
+      if (thing_ptr == 1) {
+        *val_2 = *val_2 +
+                   (short)((uint)((&g_slab_attr_table)[*(ushort *)(thing + 0x52) - 0x200 & 0x7ff] << 6) /* thing->health */
                           >> 0x10);
-        puVar3 = (&PTR_LAB_00192fe0)[*(ushort *)(in_EAX + 0x52) - 0x200 & 0x7ff];
-        psVar10[-0xffffffff00000002] = -1;
-        psVar10[-0xffffffff00000001] = -1;
-        psVar10[1] = psVar10[1] + (short)((uint)-(((int)puVar3 << 6) >> 8) >> 8);
-        psVar10[-0xffffffff00000004] = 0x483e;
-        psVar10[-0xffffffff00000003] = 0xe;
-        FUN_00043ac3();
-        *(char *)(*(int *)(psVar10 + 6) + 0xc1) = *(char *)(*(int *)(psVar10 + 6) + 0xc1) + -1;
-        psVar11 = psVar10 + -2;
-        uVar7 = local_34;
+        word_ptr = (&PTR_LAB_00192fe0)[*(ushort *)(thing + 0x52) - 0x200 & 0x7ff]; /* thing->health */
+        val_2[-0xffffffff00000002] = -1;
+        val_2[-0xffffffff00000001] = -1;
+        val_2[1] = val_2[1] + (short)((uint)-(((int)word_ptr << 6) >> 8) >> 8);
+        val_2[-0xffffffff00000004] = 0x483e;
+        val_2[-0xffffffff00000003] = 0xe;
+        inits_fn_043ac3();
+        *(char *)(*(int *)(val_2 + 6) + 0xc1) = *(char *)(*(int *)(val_2 + 6) + 0xc1) + -1;
+        val_3 = val_2 + -2;
+        uval_3 = local_34;
       }
       else {
-        psVar11 = psVar10;
-        uVar7 = local_34;
-        if (iVar8 == 2) {
-          *psVar10 = *psVar10 -
-                     (short)((uint)((&DAT_001927e0)[*(ushort *)(in_EAX + 0x52) - 0x200 & 0x7ff] << 6
+        val_3 = val_2;
+        uval_3 = local_34;
+        if (thing_ptr == 2) {
+          *val_2 = *val_2 -
+                     (short)((uint)((&g_slab_attr_table)[*(ushort *)(thing + 0x52) - 0x200 & 0x7ff] << 6 /* thing->health */
                                    ) >> 0x10);
-          puVar3 = (&PTR_LAB_00192fe0)[*(ushort *)(in_EAX + 0x52) - 0x200 & 0x7ff];
-          psVar11 = psVar10 + -2;
-          psVar10[-0xffffffff00000002] = -1;
-          psVar10[-0xffffffff00000001] = -1;
-          psVar10[1] = psVar10[1] - (short)((uint)-(((int)puVar3 << 6) >> 8) >> 8);
-          psVar10[-0xffffffff00000004] = 0x4a3e;
-          psVar10[-0xffffffff00000003] = 0xe;
-          FUN_00043ac3();
-          *(char *)(*(int *)(psVar10 + 6) + 0xc1) = *(char *)(*(int *)(psVar10 + 6) + 0xc1) + -1;
-          uVar7 = local_34;
+          word_ptr = (&PTR_LAB_00192fe0)[*(ushort *)(thing + 0x52) - 0x200 & 0x7ff]; /* thing->health */
+          val_3 = val_2 + -2;
+          val_2[-0xffffffff00000002] = -1;
+          val_2[-0xffffffff00000001] = -1;
+          val_2[1] = val_2[1] - (short)((uint)-(((int)word_ptr << 6) >> 8) >> 8);
+          val_2[-0xffffffff00000004] = 0x4a3e;
+          val_2[-0xffffffff00000003] = 0xe;
+          inits_fn_043ac3();
+          *(char *)(*(int *)(val_2 + 6) + 0xc1) = *(char *)(*(int *)(val_2 + 6) + 0xc1) + -1;
+          uval_3 = local_34;
         }
       }
     }
   }
   else {
     auStack_40[2] = 0xe4677;
-    iVar8 = FUN_00081d84();
-    if (iVar8 != 0) {
+    thing_ptr = creature_update_creature_control_081d84();
+    if (thing_ptr != 0) {
       auStack_40[2] = 0xe468d;
-      FUN_00024998();
+      effect_allocate_light_effect_024998();
     }
     *(undefined1 *)(aiStack_28[1] + 0xc1) = 0;
-    psVar11 = (short *)&local_34;
-    uVar7 = local_34;
+    val_3 = (short *)&local_34;
+    uval_3 = local_34;
   }
 LAB_000e4aca:
-  local_34 = uVar7;
-  iVar8 = *(int *)(in_EAX + 3);
-  *(undefined4 *)((int)psVar11 + 0x14) = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  if (iVar8 >> 0x18 == (uint)DAT_002eb542) {
-    for (iVar8 = (&DAT_001ae9fc)
-                 [(*(uint *)((int)&DAT_00279203 + (uint)CONCAT11(in_EAX[0x10],in_EAX[0xe]) * 5 + 1)
-                  & 0x3fffff) >> 0xb]; iVar8 != DAT_001ae9fc;
-        iVar8 = (&DAT_001ae9fc)[*(ushort *)(iVar8 + 2)]) {
-      if (*(char *)(iVar8 + 0x1f) == '\x04') {
-        iVar9 = *(int *)((int)psVar11 + 0x14);
-        *(undefined1 *)(iVar9 + 0xc1) = 0x14;
-        uVar6 = *(undefined2 *)(iVar8 + 0x1b);
+  local_34 = uval_3;
+  thing_ptr = *(int *)(thing + 3);
+  *(undefined4 *)((int)val_3 + 0x14) = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  if (thing_ptr >> 0x18 == (uint)g_bss_002eb542) {
+    for (thing_ptr = (&g_thing_ptrs)
+                 [(*(uint *)((int)&g_map_subtiles + (uint)CONCAT11(thing[0x10],thing[0xe]) * 5 + 1)
+                  & 0x3fffff) >> 0xb]; thing_ptr != g_thing_ptrs;
+        thing_ptr = (&g_thing_ptrs)[*(ushort *)(thing_ptr + 2)]) {
+      if (*(char *)(thing_ptr + 0x1f) == '\x04') { /* thing->class_id */
+        val = *(int *)((int)val_3 + 0x14);
+        *(undefined1 *)(val + 0xc1) = 0x14;
+        uval_2 = *(undefined2 *)(thing_ptr + 0x1b); /* thing->index_or_angle */
 LAB_000e4c1e:
-        *(undefined2 *)(iVar9 + 0xb9) = uVar6;
+        *(undefined2 *)(val + 0xb9) = uval_2;
         break;
       }
     }
   }
   else {
-    for (iVar8 = (&DAT_001ae9fc)
-                 [(*(uint *)((int)&DAT_00279203 + (uint)CONCAT11(in_EAX[0x10],in_EAX[0xe]) * 5 + 1)
-                  & 0x3fffff) >> 0xb]; iVar8 != DAT_001ae9fc;
-        iVar8 = (&DAT_001ae9fc)[*(ushort *)(iVar8 + 2)]) {
-      if (*(char *)(iVar8 + 0x1f) == '\x04') {
-        *(undefined4 *)((int)psVar11 + -4) = 0xe4c0b;
-        FUN_00010434();
-        *(undefined1 *)(*(int *)((int)psVar11 + 0x14) + 0xc1) = 0x14;
-        iVar9 = *(int *)((int)psVar11 + 0x14);
-        uVar6 = *(undefined2 *)(iVar8 + 0x1b);
+    for (thing_ptr = (&g_thing_ptrs)
+                 [(*(uint *)((int)&g_map_subtiles + (uint)CONCAT11(thing[0x10],thing[0xe]) * 5 + 1)
+                  & 0x3fffff) >> 0xb]; thing_ptr != g_thing_ptrs;
+        thing_ptr = (&g_thing_ptrs)[*(ushort *)(thing_ptr + 2)]) {
+      if (*(char *)(thing_ptr + 0x1f) == '\x04') { /* thing->class_id */
+        *(undefined4 *)((int)val_3 + -4) = 0xe4c0b;
+        anger_fn_010434();
+        *(undefined1 *)(*(int *)((int)val_3 + 0x14) + 0xc1) = 0x14;
+        val = *(int *)((int)val_3 + 0x14);
+        uval_2 = *(undefined2 *)(thing_ptr + 0x1b); /* thing->index_or_angle */
         goto LAB_000e4c1e;
       }
     }
   }
 LAB_000e4c25:
-  if ((((*in_EAX & 0x20) == 0) && ((in_EAX[0x25] & 2) != 0)) &&
-     ((&DAT_002e9125)[(uint)in_EAX[0x1a] * 0xe6] != '\0')) {
-    bVar12 = in_EAX[7];
-    if (bVar12 == 0xe) {
-      bVar12 = in_EAX[8];
+  if ((((*thing & 0x20) == 0) && ((thing[0x25] & 2) != 0)) &&
+     ((&g_bss_002e9125)[(uint)thing[0x1a] * 0xe6] != '\0')) {
+    flag_2 = thing[7];
+    if (flag_2 == 0xe) {
+      flag_2 = thing[8];
     }
-    if ((bVar12 != 0x8f) && (*(int *)(*(int *)((int)psVar11 + 0x10) + 0x2fe) + 0x40U < DAT_002e8bee)
+    if ((flag_2 != 0x8f) && (*(int *)(*(int *)((int)val_3 + 0x10) + 0x2fe) + 0x40U < g_game_turn)
        ) {
-      *(uint *)(*(int *)((int)psVar11 + 0x10) + 0x2fe) = DAT_002e8bee;
-      *(undefined4 *)((int)psVar11 + -4) = 0xe4c8e;
-      iVar8 = FUN_00064a2e();
-      if (iVar8 != 0) {
-        *(undefined4 *)((int)psVar11 + -4) = 0xe4c99;
-        iVar8 = FUN_000655fa();
-        if (iVar8 == 0) {
-          *(undefined4 *)((int)psVar11 + -4) = 0xe4caa;
-          FUN_00063b6d();
+      *(uint *)(*(int *)((int)val_3 + 0x10) + 0x2fe) = g_game_turn;
+      *(undefined4 *)((int)val_3 + -4) = 0xe4c8e;
+      thing_ptr = person_fn_064a2e();
+      if (thing_ptr != 0) {
+        *(undefined4 *)((int)val_3 + -4) = 0xe4c99;
+        thing_ptr = pom_update_slab_subtile_columns_0655fa();
+        if (thing_ptr == 0) {
+          *(undefined4 *)((int)val_3 + -4) = 0xe4caa;
+          person_fn_063b6d();
         }
         else {
-          in_EAX[8] = 0x8f;
+          thing[8] = 0x8f;
         }
       }
     }
@@ -5090,229 +5057,224 @@ LAB_000e4c25:
 }
 
 /******************************************************************************
- * Function : sub_0e4cb4 (Ghidra: FUN_000e4cb4)
- * Prototype: void sub_0e4cb4(void);
+ * Function : update_update_creature_and_thing_0e4cb4 (Original VA: 0xe4cb4, Ghidra: FUN_000e4cb4)
+ * Prototype: void update_update_creature_and_thing_0e4cb4(void);
  * Address  : 0xe4cb4 (Size: 343 bytes)
  * Module   : update.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
  * Callers  : 0 -> 
- * Callees  : 1 -> 0x10434
+ * Callees  : 1 -> anger_fn_010434
  ******************************************************************************/
-void FUN_000e4cb4(void)
+void update_update_creature_and_thing_0e4cb4(void)
 
 {
-  int iVar1;
-  undefined2 uVar2;
-  int in_EAX;
-  int in_EDX;
-  int iVar3;
+  int cctrl_ptr;
+  undefined2 uval;
+  int thing;
+  int arg_edx;
+  int thing_ptr;
   
-  iVar1 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  if (*(int *)(in_EAX + 3) >> 0x18 == (uint)DAT_002eb542) {
-    for (iVar3 = (&DAT_001ae9fc)
-                 [(*(uint *)((int)&DAT_00279203 +
-                            ((uint)*(byte *)(in_EDX + 3) * 0x100 + (uint)*(byte *)(in_EDX + 1)) * 5
-                            + 1) & 0x3fffff) >> 0xb]; iVar3 != DAT_001ae9fc;
-        iVar3 = (&DAT_001ae9fc)[*(ushort *)(iVar3 + 2)]) {
-      if (*(char *)(iVar3 + 0x1f) == '\x04') {
-        *(undefined1 *)(iVar1 + 0xc1) = 0x14;
-        uVar2 = *(undefined2 *)(iVar3 + 0x1b);
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  if (*(int *)(thing + 3) >> 0x18 == (uint)g_bss_002eb542) {
+    for (thing_ptr = (&g_thing_ptrs)
+                 [(*(uint *)((int)&g_map_subtiles +
+                            ((uint)*(byte *)(arg_edx + 3) * 0x100 + (uint)*(byte *)(arg_edx + 1)) * 5
+                            + 1) & 0x3fffff) >> 0xb]; thing_ptr != g_thing_ptrs;
+        thing_ptr = (&g_thing_ptrs)[*(ushort *)(thing_ptr + 2)]) {
+      if (*(char *)(thing_ptr + 0x1f) == '\x04') { /* thing->class_id */
+        *(undefined1 *)(cctrl_ptr + 0xc1) = 0x14;
+        uval = *(undefined2 *)(thing_ptr + 0x1b); /* thing->index_or_angle */
         goto LAB_000e4dfe;
       }
     }
   }
   else {
-    iVar3 = (&DAT_001ae9fc)
-            [(*(uint *)((int)&DAT_00279203 +
-                       (uint)CONCAT11(*(undefined1 *)(in_EDX + 3),*(byte *)(in_EDX + 1)) * 5 + 1) &
+    thing_ptr = (&g_thing_ptrs)
+            [(*(uint *)((int)&g_map_subtiles +
+                       (uint)CONCAT11(*(undefined1 *)(arg_edx + 3),*(byte *)(arg_edx + 1)) * 5 + 1) &
              0x3fffff) >> 0xb];
-    if (iVar3 == DAT_001ae9fc) {
+    if (thing_ptr == g_thing_ptrs) {
       return;
     }
-    while (*(char *)(iVar3 + 0x1f) != '\x04') {
-      iVar3 = (&DAT_001ae9fc)[*(ushort *)(iVar3 + 2)];
-      if (iVar3 == DAT_001ae9fc) {
+    while (*(char *)(thing_ptr + 0x1f) != '\x04') { /* thing->class_id */
+      thing_ptr = (&g_thing_ptrs)[*(ushort *)(thing_ptr + 2)];
+      if (thing_ptr == g_thing_ptrs) {
         return;
       }
     }
-    FUN_00010434();
-    *(undefined1 *)(iVar1 + 0xc1) = 0x14;
-    uVar2 = *(undefined2 *)(iVar3 + 0x1b);
+    anger_fn_010434();
+    *(undefined1 *)(cctrl_ptr + 0xc1) = 0x14;
+    uval = *(undefined2 *)(thing_ptr + 0x1b); /* thing->index_or_angle */
 LAB_000e4dfe:
-    *(undefined2 *)(iVar1 + 0xb9) = uVar2;
+    *(undefined2 *)(cctrl_ptr + 0xb9) = uval;
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0e4e0c (Ghidra: FUN_000e4e0c)
- * Prototype: void sub_0e4e0c(void);
+ * Function : update_update_creature_control_0e4e0c (Original VA: 0xe4e0c, Ghidra: FUN_000e4e0c)
+ * Prototype: void update_update_creature_control_0e4e0c(void);
  * Address  : 0xe4e0c (Size: 412 bytes)
  * Module   : update.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
  * Callers  : 0 -> 
- * Callees  : 2 -> 0x43ac3, 0x81d84
+ * Callees  : 2 -> inits_fn_043ac3, creature_update_creature_control_081d84
  ******************************************************************************/
-void FUN_000e4e0c(void)
+void update_update_creature_control_0e4e0c(void)
 
 {
-  undefined4 uVar1;
-  byte bVar2;
-  ushort uVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  byte bVar7;
-  undefined8 uVar8;
-  short sVar9;
+  undefined4 uval;
+  byte flag;
+  ushort uval_2;
+  int cctrl_ptr;
+  int val;
+  int thing_ptr;
+  byte flag_2;
+  undefined8 uval_3;
+  short short_val;
   undefined2 auStack_1c [2];
   
-  bVar7 = 0;
-  uVar8 = FUN_00081d84();
-  iVar6 = (int)((ulonglong)uVar8 >> 0x20);
-  iVar5 = (int)uVar8;
-  bVar2 = *(byte *)(iVar6 + 0x1a);
-  uVar3 = *(ushort *)(iVar6 + 100);
-  uVar1 = *(undefined4 *)(iVar6 + 0xd);
-  auStack_1c[(uint)bVar7 * -4] = *(undefined2 *)(iVar6 + 0x11 + (uint)bVar7 * -8);
-  bVar2 = (&DAT_0018b70c)[(uint)bVar2 * 0x10];
-  iVar4 = (&DAT_001b0a00)[uVar3];
-  if (2 < bVar2) {
-    if (bVar2 < 5) {
+  flag_2 = 0;
+  uval_3 = creature_update_creature_control_081d84();
+  thing_ptr = (int)((ulonglong)uval_3 >> 0x20);
+  val = (int)uval_3;
+  flag = *(byte *)(thing_ptr + 0x1a);
+  uval_2 = *(ushort *)(thing_ptr + 100); /* thing->ccontrol_idx */
+  uval = *(undefined4 *)(thing_ptr + 0xd); /* thing->mappos.val_x */
+  auStack_1c[(uint)flag_2 * -4] = *(undefined2 *)(thing_ptr + 0x11 + (uint)flag_2 * -8);
+  flag = (&g_data_0018b70c)[(uint)flag * 0x10];
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[uval_2];
+  if (2 < flag) {
+    if (flag < 5) {
       return;
     }
-    if (bVar2 == 5) {
-      if (iVar5 == 0) {
+    if (flag == 5) {
+      if (val == 0) {
         return;
       }
-      FUN_00043ac3(0xffffffff,uVar1);
-      *(char *)(iVar4 + 0xc1) = *(char *)(iVar4 + 0xc1) + -1;
+      inits_fn_043ac3(0xffffffff,uval);
+      *(char *)(cctrl_ptr + 0xc1) = *(char *)(cctrl_ptr + 0xc1) + -1;
       return;
     }
   }
-  sVar9 = (short)((uint)uVar1 >> 0x10);
-  if (iVar5 == 1) {
-    FUN_00043ac3(0xffffffff,
-                 CONCAT22(sVar9 + (short)((uint)-(((int)(&PTR_LAB_00192fe0)
-                                                        [*(ushort *)(iVar6 + 0x52) - 0x200 & 0x7ff]
+  short_val = (short)((uint)uval >> 0x10);
+  if (val == 1) {
+    inits_fn_043ac3(0xffffffff,
+                 CONCAT22(short_val + (short)((uint)-(((int)(&PTR_LAB_00192fe0)
+                                                        [*(ushort *)(thing_ptr + 0x52) - 0x200 & 0x7ff] /* thing->health */
                                                   << 6) >> 8) >> 8),
-                          (short)uVar1 +
-                          (short)((uint)((&DAT_001927e0)[*(ushort *)(iVar6 + 0x52) - 0x200 & 0x7ff]
+                          (short)uval +
+                          (short)((uint)((&g_slab_attr_table)[*(ushort *)(thing_ptr + 0x52) - 0x200 & 0x7ff] /* thing->health */
                                         << 6) >> 0x10)));
-    *(char *)(iVar4 + 0xc1) = *(char *)(iVar4 + 0xc1) + -1;
+    *(char *)(cctrl_ptr + 0xc1) = *(char *)(cctrl_ptr + 0xc1) + -1;
     return;
   }
-  if (iVar5 != 2) {
+  if (val != 2) {
     return;
   }
-  FUN_00043ac3(0xffffffff,
-               CONCAT22(sVar9 - (short)((uint)-(((int)(&PTR_LAB_00192fe0)
-                                                      [*(ushort *)(iVar6 + 0x52) - 0x200 & 0x7ff] <<
+  inits_fn_043ac3(0xffffffff,
+               CONCAT22(short_val - (short)((uint)-(((int)(&PTR_LAB_00192fe0)
+                                                      [*(ushort *)(thing_ptr + 0x52) - 0x200 & 0x7ff] << /* thing->health */
                                                 6) >> 8) >> 8),
-                        (short)uVar1 -
-                        (short)((uint)((&DAT_001927e0)[*(ushort *)(iVar6 + 0x52) - 0x200 & 0x7ff] <<
+                        (short)uval -
+                        (short)((uint)((&g_slab_attr_table)[*(ushort *)(thing_ptr + 0x52) - 0x200 & 0x7ff] << /* thing->health */
                                       6) >> 0x10)));
-  *(char *)(iVar4 + 0xc1) = *(char *)(iVar4 + 0xc1) + -1;
+  *(char *)(cctrl_ptr + 0xc1) = *(char *)(cctrl_ptr + 0xc1) + -1;
   return;
 }
 
 /******************************************************************************
- * Function : sub_0e4fa8 (Ghidra: FUN_000e4fa8)
- * Prototype: void sub_0e4fa8(void);
+ * Function : update_fn_0e4fa8 (Original VA: 0xe4fa8, Ghidra: FUN_000e4fa8)
+ * Prototype: void update_fn_0e4fa8(void);
  * Address  : 0xe4fa8 (Size: 84 bytes)
  * Module   : update.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Module update.cpp procedure @ 0x0e4fa8
  * Callers  : 0 -> 
- * Callees  : 2 -> 0x7df48, 0xb2398
+ * Callees  : 2 -> ceiling_fn_07df48, light_process_map_subtile_0b2398
  ******************************************************************************/
-void FUN_000e4fa8(void)
+void update_fn_0e4fa8(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  uint uVar2;
+  int arg_eax;
+  int val;
+  uint uval;
   
-  *(byte *)(in_EAX + 0x25) = *(byte *)(in_EAX + 0x25) & 0xfc;
-  iVar1 = FUN_0007df48();
-  if (iVar1 != 0) {
-    uVar2 = FUN_000b2398();
-    if (uVar2 == 0x27) {
-      *(byte *)(in_EAX + 0x25) = *(byte *)(in_EAX + 0x25) | 1;
+  *(byte *)(arg_eax + 0x25) = *(byte *)(arg_eax + 0x25) & 0xfc;
+  val = ceiling_fn_07df48();
+  if (val != 0) {
+    uval = light_process_map_subtile_0b2398();
+    if (uval == 0x27) {
+      *(byte *)(arg_eax + 0x25) = *(byte *)(arg_eax + 0x25) | 1;
       return;
     }
-    if ((uVar2 & 0xfffffffe) == 0x28) {
-      *(byte *)(in_EAX + 0x25) = *(byte *)(in_EAX + 0x25) | 2;
+    if ((uval & 0xfffffffe) == 0x28) {
+      *(byte *)(arg_eax + 0x25) = *(byte *)(arg_eax + 0x25) | 2;
     }
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0e4ffc (Ghidra: FUN_000e4ffc)
- * Prototype: void sub_0e4ffc(void);
+ * Function : update_update_player_view_state_0e4ffc (Original VA: 0xe4ffc, Ghidra: FUN_000e4ffc)
+ * Prototype: void update_update_player_view_state_0e4ffc(void);
  * Address  : 0xe4ffc (Size: 37 bytes)
  * Module   : update.cpp [direct_file_string_xref]
- * OrigLine : update.cpp:3472 ("Check door failed - flagged position but no door!")
- * Naming   : Address-based identifier
+ * OrigLine : update.cpp lines 3472
+ * Purpose  : Accesses per-player PlayerInfo state (stride 0x4ef)
  * Callers  : 0 -> 
- * Callees  : 1 -> 0x49f4e
- * Strings  :
- *   - 0x16cb42: "update.cpp"
+ * Callees  : 1 -> instance_fn_049f4e
  ******************************************************************************/
-void FUN_000e4ffc(void)
+void update_update_player_view_state_0e4ffc(void)
 
 {
-  byte *pbVar1;
+  byte *byte_ptr;
   byte *extraout_EDX;
-  int iVar2;
+  int val;
   
-  pbVar1 = &DAT_0019d0c8;
-  iVar2 = 0;
+  byte_ptr = &g_players;
+  val = 0;
   do {
-    if ((*pbVar1 & 1) != 0) {
-      FUN_00049f4e();
-      pbVar1 = extraout_EDX;
+    if ((*byte_ptr & 1) != 0) {
+      instance_fn_049f4e();
+      byte_ptr = extraout_EDX;
     }
-    iVar2 = iVar2 + 1;
-    pbVar1 = pbVar1 + 0x4ef;
-  } while (iVar2 < 5);
+    val = val + 1;
+    byte_ptr = byte_ptr + 0x4ef;
+  } while (val < 5);
   return;
 }
 
 /******************************************************************************
- * Function : dk_oh_fuck_illegal_bastard_0e5564 (Ghidra: FUN_000e5564)
- * Prototype: void dk_oh_fuck_illegal_bastard_0e5564(void);
+ * Function : update_oh_fuck_illegal_bastard_0e5564 (Original VA: 0xe5564, Ghidra: FUN_000e5564)
+ * Prototype: void update_oh_fuck_illegal_bastard_0e5564(void);
  * Address  : 0xe5564 (Size: 145 bytes)
  * Module   : update.cpp [direct_file_string_xref]
- * OrigLine : update.cpp:3692
- * Naming   : String 'Oh fuck, illegal bastard in room list'
+ * OrigLine : update.cpp lines 3692
+ * Purpose  : String 'Oh fuck, illegal bastard in room list'
  * Callers  : 0 -> 
- * Callees  : 1 -> 0xddaf0
- * Strings  :
- *   - 0x16cb73: "update.cpp"
- *   - 0x16cb4d: "Oh fuck, illegal bastard in room list"
+ * Callees  : 1 -> LbErrorLog
  ******************************************************************************/
-void FUN_000e5564(void)
+void update_oh_fuck_illegal_bastard_0e5564(void)
 
 {
-  uint uVar1;
+  uint thing_ptr;
   uint extraout_ECX;
-  byte *pbVar2;
+  byte *room_ptr;
   
-  pbVar2 = &DAT_002ddd1b;
+  room_ptr = &g_rooms;
   do {
-    if (((*pbVar2 & 1) != 0) &&
-       (uVar1 = (&DAT_001ae9fc)[*(ushort *)(pbVar2 + 0x3d)], DAT_001ae9fc < uVar1)) {
+    if (((*room_ptr & 1) != 0) &&
+       (thing_ptr = (&g_thing_ptrs)[*(ushort *)(room_ptr + 0x3d)], g_thing_ptrs < thing_ptr)) {
       do {
-        if (*(short *)(uVar1 + 0x1b) == 0) {
-          FUN_000ddaf0(); /* LbErrorLog(NULL, line 3692, g_log_buf) */
-          uVar1 = extraout_ECX;
+        if (*(short *)(thing_ptr + 0x1b) == 0) { /* thing->index_or_angle */
+          LbErrorLog(); /* LbErrorLog(NULL, line 3692, g_log_buf) */
+          thing_ptr = extraout_ECX;
         }
-        uVar1 = (&DAT_001ae9fc)[*(ushort *)((&DAT_001b0a00)[*(ushort *)(uVar1 + 100)] + 0x2aa)];
-      } while (DAT_001ae9fc < uVar1);
+        thing_ptr = (&g_thing_ptrs)[*(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x2aa)]; /* thing->ccontrol_idx */
+      } while (g_thing_ptrs < thing_ptr);
     }
-    pbVar2 = pbVar2 + 0x45;
-  } while (pbVar2 <= &DAT_002e0544);
+    room_ptr = room_ptr + 0x45;
+  } while (room_ptr <= &g_bss_002e0544);
   return;
 }
 

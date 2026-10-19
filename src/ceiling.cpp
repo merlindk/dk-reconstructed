@@ -1,7 +1,7 @@
 /**
- * Dungeon Keeper (KEEPER.EXE) - Reconstructed Source Module: ceiling.cpp
+ * Dungeon Keeper (KEEPER.EXE) - Reconstructed & Semantically Named Module: ceiling.cpp
  * Binary Subject: /home/merlin/Dungeon Keeper/re/KEEPER.elf
- * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 (x86:LE:32:default)
+ * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 + DK Semantic Analyzer
  * Functions in this translation unit: 20
  */
 
@@ -11,31 +11,31 @@
 #include "../include/dk_functions.h"
 
 /******************************************************************************
- * Function : sub_07bb10 (Ghidra: FUN_0007bb10)
- * Prototype: int sub_07bb10(void);
+ * Function : ceiling_fn_07bb10 (Original VA: 0x7bb10, Ghidra: FUN_0007bb10)
+ * Prototype: int ceiling_fn_07bb10(void);
  * Address  : 0x7bb10 (Size: 381 bytes)
  * Module   : ceiling.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x16175
- * Callees  : 3 -> 0x7ba98, 0x7bc8d, 0xe66ec
+ * Purpose  : Module ceiling.cpp procedure @ 0x07bb10
+ * Callers  : 1 -> combchk_fn_016175
+ * Callees  : 3 -> command_process_slabmap_tile_07ba98, ceiling_fn_07bc8d, bflib_system_io_fn_0e66ec
  ******************************************************************************/
-int FUN_0007bb10(void)
+int ceiling_fn_07bb10(void)
 
 {
-  undefined4 uVar1;
-  char cVar2;
-  undefined4 uVar3;
-  short sVar4;
-  int in_EAX;
-  uint uVar5;
-  uint uVar6;
-  int iVar7;
-  int iVar8;
-  undefined4 *in_EDX;
-  int unaff_EBX;
-  undefined1 *puVar9;
-  undefined1 *puVar10;
-  byte bVar11;
+  undefined4 uval;
+  char ch;
+  undefined4 uval_2;
+  short short_val;
+  int arg_eax;
+  uint uval_3;
+  uint uval_4;
+  int val;
+  int val_2;
+  undefined4 *arg_edx;
+  int arg_ebx;
+  undefined1 *word_ptr;
+  undefined1 *word_ptr_2;
+  byte flag;
   int aiStack_48 [2];
   undefined1 local_40 [4];
   uint local_3c;
@@ -51,102 +51,102 @@ int FUN_0007bb10(void)
   uint local_20;
   undefined1 local_18;
   
-  bVar11 = 0;
-  uVar1 = *(undefined4 *)(in_EAX + 0xd);
-  uStack_38 = *(undefined2 *)(in_EAX + 0x11);
-  local_2c._1_1_ = (byte)((uint)uVar1 >> 8);
-  local_2c._2_2_ = (undefined2)((uint)uVar1 >> 0x10);
-  local_2c._0_1_ = (undefined1)uVar1;
+  flag = 0;
+  uval = *(undefined4 *)(arg_eax + 0xd);
+  uStack_38 = *(undefined2 *)(arg_eax + 0x11);
+  local_2c._1_1_ = (byte)((uint)uval >> 8);
+  local_2c._2_2_ = (undefined2)((uint)uval >> 0x10);
+  local_2c._0_1_ = (undefined1)uval;
   local_2c._0_2_ = CONCAT11((local_2c._1_1_ / 3) * '\x03' + '\x01',(undefined1)local_2c);
-  uVar3 = local_2c;
-  local_2c._3_1_ = (byte)((uint)uVar1 >> 0x18);
-  local_2c._0_3_ = (undefined3)uVar3;
+  uval_2 = local_2c;
+  local_2c._3_1_ = (byte)((uint)uval >> 0x18);
+  local_2c._0_3_ = (undefined3)uval_2;
   local_2c = CONCAT13((local_2c._3_1_ / 3) * '\x03' + '\x01',(undefined3)local_2c);
-  uVar5 = (*(byte *)((int)in_EDX + 1) / 3) * 3 + 1;
-  local_20 = (*(byte *)((int)in_EDX + 3) / 3) * 3 + 1;
-  uStack_32 = *(undefined2 *)(in_EDX + 1);
-  local_18 = (undefined1)uVar5;
-  uStack_34 = (undefined2)((uint)*in_EDX >> 0x10);
-  _local_36 = CONCAT11(local_18,(char)*in_EDX);
+  uval_3 = (*(byte *)((int)arg_edx + 1) / 3) * 3 + 1;
+  local_20 = (*(byte *)((int)arg_edx + 3) / 3) * 3 + 1;
+  uStack_32 = *(undefined2 *)(arg_edx + 1);
+  local_18 = (undefined1)uval_3;
+  uStack_34 = (undefined2)((uint)*arg_edx >> 0x10);
+  _local_36 = CONCAT11(local_18,(char)*arg_edx);
   _local_36 = CONCAT13((undefined1)local_20,_local_36);
   local_3c = local_2c;
   local_30 = 0;
-  puVar10 = local_40;
+  word_ptr_2 = local_40;
   auStack_28[0] = uStack_38;
   do {
-    if (unaff_EBX <= local_30) {
+    if (arg_ebx <= local_30) {
       return 0;
     }
-    if (((local_2c >> 8 & 0xff) == uVar5) && (local_2c >> 0x18 == local_20)) {
+    if (((local_2c >> 8 & 0xff) == uval_3) && (local_2c >> 0x18 == local_20)) {
       return local_30 + 1;
     }
-    *(undefined4 *)(puVar10 + -4) = 0x7bba7;
-    uVar6 = FUN_000e66ec();
-    iVar7 = (int)((uVar6 & 0xffff) % 0x800 + 0x100 & 0x7ff) >> 9;
-    *(undefined4 *)(puVar10 + -4) = 0x7bbd5;
-    iVar8 = FUN_0007ba98();
-    if (iVar8 == 0) {
-      local_24 = unaff_EBX - local_30;
-      puVar9 = puVar10 + -4;
-      *(int **)(puVar10 + -4) = &local_24;
-      *(undefined4 *)(puVar10 + -8) = 0x7bc2b;
-      sVar4 = FUN_0007bc8d();
-      if (sVar4 == -1) {
+    *(undefined4 *)(word_ptr_2 + -4) = 0x7bba7;
+    uval_4 = bflib_system_io_fn_0e66ec();
+    val = (int)((uval_4 & 0xffff) % 0x800 + 0x100 & 0x7ff) >> 9;
+    *(undefined4 *)(word_ptr_2 + -4) = 0x7bbd5;
+    val_2 = command_process_slabmap_tile_07ba98();
+    if (val_2 == 0) {
+      local_24 = arg_ebx - local_30;
+      word_ptr = word_ptr_2 + -4;
+      *(int **)(word_ptr_2 + -4) = &local_24;
+      *(undefined4 *)(word_ptr_2 + -8) = 0x7bc2b;
+      short_val = ceiling_fn_07bc8d();
+      if (short_val == -1) {
         return -1;
       }
       local_30 = local_30 + local_24;
-      if (sVar4 == 1) {
+      if (short_val == 1) {
         return local_30 + 1;
       }
       local_2c = local_3c;
-      auStack_28[(uint)bVar11 * -4] = (&uStack_38)[(uint)bVar11 * -4];
+      auStack_28[(uint)flag * -4] = (&uStack_38)[(uint)flag * -4];
     }
     else {
-      cVar2 = *(char *)((int)&DAT_0018b67b + iVar7 * 2 + 3);
+      ch = *(char *)((int)&g_data_0018b67b + val * 2 + 3);
       local_3c = local_2c;
-      (&uStack_38)[(uint)bVar11 * -4] = auStack_28[(uint)bVar11 * -4];
-      uVar6 = local_2c;
-      local_2c._0_2_ = CONCAT11(local_2c._1_1_ + cVar2 * '\x03',(undefined1)local_2c);
-      uVar1 = local_2c;
-      local_2c._3_1_ = SUB41(uVar6,3);
-      local_2c._0_3_ = (undefined3)uVar1;
-      local_2c = CONCAT13(local_2c._3_1_ + (&DAT_0018b67f)[iVar7 * 2] * '\x03',(undefined3)local_2c)
+      (&uStack_38)[(uint)flag * -4] = auStack_28[(uint)flag * -4];
+      uval_4 = local_2c;
+      local_2c._0_2_ = CONCAT11(local_2c._1_1_ + ch * '\x03',(undefined1)local_2c);
+      uval = local_2c;
+      local_2c._3_1_ = SUB41(uval_4,3);
+      local_2c._0_3_ = (undefined3)uval;
+      local_2c = CONCAT13(local_2c._3_1_ + (&g_data_0018b67f)[val * 2] * '\x03',(undefined3)local_2c)
       ;
-      puVar9 = puVar10;
+      word_ptr = word_ptr_2;
     }
     local_30 = local_30 + 1;
-    puVar10 = puVar9;
+    word_ptr_2 = word_ptr;
   } while( true );
 }
 
 /******************************************************************************
- * Function : sub_07bc8d (Ghidra: FUN_0007bc8d)
- * Prototype: undefined4 sub_07bc8d(void);
+ * Function : ceiling_fn_07bc8d (Original VA: 0x7bc8d, Ghidra: FUN_0007bc8d)
+ * Prototype: undefined4 ceiling_fn_07bc8d(void);
  * Address  : 0x7bc8d (Size: 1364 bytes)
  * Module   : ceiling.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x7bb10
- * Callees  : 3 -> 0x7ba98, 0xe66ec, 0xe69fc
+ * Purpose  : Module ceiling.cpp procedure @ 0x07bc8d
+ * Callers  : 1 -> ceiling_fn_07bb10
+ * Callees  : 3 -> command_process_slabmap_tile_07ba98, bflib_system_io_fn_0e66ec, bflib_system_io_fn_0e69fc
  ******************************************************************************/
-undefined4 FUN_0007bc8d(void)
+undefined4 ceiling_fn_07bc8d(void)
 
 {
-  ushort uVar1;
-  ushort uVar2;
-  ushort uVar3;
-  ushort uVar4;
-  byte bVar5;
-  byte bVar6;
-  ushort uVar7;
-  ushort uVar8;
-  byte bVar9;
-  short sVar10;
-  short sVar11;
-  int iVar12;
-  uint uVar13;
-  int iVar14;
-  undefined4 uVar15;
-  char in_CL;
+  ushort uval;
+  ushort uval_2;
+  ushort uval_3;
+  ushort uval_4;
+  byte flag;
+  byte flag_2;
+  ushort uval_5;
+  ushort uval_6;
+  byte flag_3;
+  short short_val;
+  short short_val_2;
+  int val;
+  uint uval_7;
+  int val_2;
+  undefined4 uval_8;
+  char arg_cl;
   ushort *extraout_ECX;
   int *extraout_ECX_00;
   int *extraout_ECX_01;
@@ -155,12 +155,12 @@ undefined4 FUN_0007bc8d(void)
   int *extraout_ECX_04;
   int *extraout_ECX_05;
   int *extraout_ECX_06;
-  int *piVar16;
+  int *int_ptr;
   int *extraout_ECX_07;
   int *extraout_ECX_08;
   char extraout_DL;
-  int in_EDX;
-  int unaff_EBX;
+  int arg_edx;
+  int arg_ebx;
   uint local_5c;
   undefined1 local_4c;
   undefined1 local_48;
@@ -173,228 +173,219 @@ undefined4 FUN_0007bc8d(void)
   char local_14;
   char local_10;
   
-  bVar5 = *(byte *)(unaff_EBX + 1);
-  bVar6 = *(byte *)(unaff_EBX + 3);
-  uVar1 = (ushort)*(byte *)(in_EDX + 1);
-  uVar2 = (ushort)*(byte *)(in_EDX + 3);
-  FUN_000e69fc();
-  local_20 = (byte)(in_CL + 1) & 0xffffff03;
-  FUN_000e69fc();
-  iVar12 = FUN_000e69fc();
-  local_3c = iVar12 - 1;
+  flag = *(byte *)(arg_ebx + 1);
+  flag_2 = *(byte *)(arg_ebx + 3);
+  uval = (ushort)*(byte *)(arg_edx + 1);
+  uval_2 = (ushort)*(byte *)(arg_edx + 3);
+  bflib_system_io_fn_0e69fc();
+  local_20 = (byte)(arg_cl + 1) & 0xffffff03;
+  bflib_system_io_fn_0e69fc();
+  val = bflib_system_io_fn_0e69fc();
+  local_3c = val - 1;
   local_5c = (byte)(extraout_DL + 3) & 0xffffff03;
-  uVar3 = (ushort)*(byte *)(in_EDX + 1);
-  bVar9 = *(byte *)(in_EDX + 3);
-  FUN_000e69fc();
-  uVar4 = (ushort)bVar9;
+  uval_3 = (ushort)*(byte *)(arg_edx + 1);
+  flag_3 = *(byte *)(arg_edx + 3);
+  bflib_system_io_fn_0e69fc();
+  uval_4 = (ushort)flag_3;
   local_10 = '\0';
-  FUN_000e69fc();
-  iVar12 = FUN_000e69fc();
-  local_18 = iVar12 - 1;
-  uVar7 = *extraout_ECX;
+  bflib_system_io_fn_0e69fc();
+  val = bflib_system_io_fn_0e69fc();
+  local_18 = val - 1;
+  uval_5 = *extraout_ECX;
   local_14 = '\0';
   while( true ) {
-    local_38 = (undefined1)uVar3;
-    local_48 = (undefined1)uVar4;
-    local_4c = (undefined1)uVar1;
-    local_34 = (undefined1)uVar2;
-    if ((uVar7 == 0) || ((local_10 == '\x02' && (local_14 == '\x02')))) break;
+    local_38 = (undefined1)uval_3;
+    local_48 = (undefined1)uval_4;
+    local_4c = (undefined1)uval;
+    local_34 = (undefined1)uval_2;
+    if ((uval_5 == 0) || ((local_10 == '\x02' && (local_14 == '\x02')))) break;
     if (local_10 != '\x02') {
-      uVar13 = FUN_000e66ec();
-      FUN_000e69fc();
-      FUN_000e69fc();
-      iVar12 = FUN_000e69fc();
-      piVar16 = extraout_ECX_00;
-      if ((int)(local_3c & 0xffff) < iVar12) {
+      uval_7 = bflib_system_io_fn_0e66ec();
+      bflib_system_io_fn_0e69fc();
+      bflib_system_io_fn_0e69fc();
+      val = bflib_system_io_fn_0e69fc();
+      int_ptr = extraout_ECX_00;
+      if ((int)(local_3c & 0xffff) < val) {
 LAB_0007beb8:
         if (local_10 == '\x01') {
-          *(undefined1 *)(in_EDX + 1) = local_4c;
+          *(undefined1 *)(arg_edx + 1) = local_4c;
           local_48 = local_34;
           goto LAB_0007c1d0;
         }
-        bVar9 = (char)local_20 + 3;
-        uVar8 = 0;
+        flag_3 = (char)local_20 + 3;
+        uval_6 = 0;
         while( true ) {
-          uVar13 = bVar9 & 0xffffff03;
-          if (3 < uVar8) break;
-          iVar12 = (bVar9 & 0xff03) * 2;
-          iVar14 = FUN_0007ba98();
-          piVar16 = extraout_ECX_03;
-          if (iVar14 != 0) {
-            uVar1 = uVar1 + *(char *)((int)&DAT_0018b67b + iVar12 + 3) * 3;
-            uVar2 = uVar2 + (char)(&DAT_0018b67f)[iVar12] * 3;
-            local_20 = uVar13;
+          uval_7 = flag_3 & 0xffffff03;
+          if (3 < uval_6) break;
+          val = (flag_3 & 0xff03) * 2;
+          val_2 = command_process_slabmap_tile_07ba98();
+          int_ptr = extraout_ECX_03;
+          if (val_2 != 0) {
+            uval = uval + *(char *)((int)&g_data_0018b67b + val + 3) * 3;
+            uval_2 = uval_2 + (char)(&g_data_0018b67f)[val] * 3;
+            local_20 = uval_7;
             break;
           }
-          bVar9 = (char)uVar13 + 1;
-          uVar8 = uVar8 + 1;
+          flag_3 = (char)uval_7 + 1;
+          uval_6 = uval_6 + 1;
         }
       }
       else {
-        iVar12 = ((int)((uVar13 & 0xffff) % 0x800 + 0x100 & 0x7ff) >> 9) * 2;
-        iVar14 = FUN_0007ba98();
-        piVar16 = extraout_ECX_01;
-        if (iVar14 == 0) goto LAB_0007beb8;
-        uVar1 = uVar1 + *(char *)((int)&DAT_0018b67b + iVar12 + 3) * 3;
-        uVar2 = uVar2 + (char)(&DAT_0018b67f)[iVar12] * 3;
-        FUN_000e69fc();
-        FUN_000e69fc();
-        local_3c = FUN_000e69fc();
+        val = ((int)((uval_7 & 0xffff) % 0x800 + 0x100 & 0x7ff) >> 9) * 2;
+        val_2 = command_process_slabmap_tile_07ba98();
+        int_ptr = extraout_ECX_01;
+        if (val_2 == 0) goto LAB_0007beb8;
+        uval = uval + *(char *)((int)&g_data_0018b67b + val + 3) * 3;
+        uval_2 = uval_2 + (char)(&g_data_0018b67f)[val] * 3;
+        bflib_system_io_fn_0e69fc();
+        bflib_system_io_fn_0e69fc();
+        local_3c = bflib_system_io_fn_0e69fc();
         local_10 = '\x01';
-        piVar16 = extraout_ECX_02;
+        int_ptr = extraout_ECX_02;
       }
-      if ((uVar1 == bVar5) && (uVar2 == bVar6)) goto LAB_0007bf6c;
+      if ((uval == flag) && (uval_2 == flag_2)) goto LAB_0007bf6c;
     }
     if (local_14 != '\x02') {
-      uVar13 = FUN_000e66ec();
-      FUN_000e69fc();
-      FUN_000e69fc();
-      iVar12 = FUN_000e69fc();
-      piVar16 = extraout_ECX_04;
-      if ((int)(local_18 & 0xffff) < iVar12) {
+      uval_7 = bflib_system_io_fn_0e66ec();
+      bflib_system_io_fn_0e69fc();
+      bflib_system_io_fn_0e69fc();
+      val = bflib_system_io_fn_0e69fc();
+      int_ptr = extraout_ECX_04;
+      if ((int)(local_18 & 0xffff) < val) {
 LAB_0007c0a2:
         if (local_14 == '\x01') {
-          *(undefined1 *)(in_EDX + 1) = local_38;
+          *(undefined1 *)(arg_edx + 1) = local_38;
           goto LAB_0007c1d0;
         }
-        bVar9 = (char)local_5c + 1;
-        uVar8 = 0;
+        flag_3 = (char)local_5c + 1;
+        uval_6 = 0;
         while( true ) {
-          uVar13 = bVar9 & 0xffffff03;
-          if (3 < uVar8) break;
-          iVar12 = (bVar9 & 0xff03) * 2;
-          iVar14 = FUN_0007ba98();
-          piVar16 = extraout_ECX_07;
-          if (iVar14 != 0) {
-            uVar3 = uVar3 + *(char *)((int)&DAT_0018b67b + iVar12 + 3) * 3;
-            uVar4 = uVar4 + (char)(&DAT_0018b67f)[iVar12] * 3;
-            local_5c = uVar13;
+          uval_7 = flag_3 & 0xffffff03;
+          if (3 < uval_6) break;
+          val = (flag_3 & 0xff03) * 2;
+          val_2 = command_process_slabmap_tile_07ba98();
+          int_ptr = extraout_ECX_07;
+          if (val_2 != 0) {
+            uval_3 = uval_3 + *(char *)((int)&g_data_0018b67b + val + 3) * 3;
+            uval_4 = uval_4 + (char)(&g_data_0018b67f)[val] * 3;
+            local_5c = uval_7;
             break;
           }
-          bVar9 = (char)uVar13 + 3;
-          uVar8 = uVar8 + 1;
+          flag_3 = (char)uval_7 + 3;
+          uval_6 = uval_6 + 1;
         }
       }
       else {
-        iVar12 = ((int)((uVar13 & 0xffff) % 0x800 + 0x100 & 0x7ff) >> 9) * 2;
-        iVar14 = FUN_0007ba98();
-        piVar16 = extraout_ECX_05;
-        if (iVar14 == 0) goto LAB_0007c0a2;
-        uVar3 = uVar3 + *(char *)((int)&DAT_0018b67b + iVar12 + 3) * 3;
-        uVar4 = uVar4 + (char)(&DAT_0018b67f)[iVar12] * 3;
-        FUN_000e69fc();
-        FUN_000e69fc();
-        local_18 = FUN_000e69fc();
+        val = ((int)((uval_7 & 0xffff) % 0x800 + 0x100 & 0x7ff) >> 9) * 2;
+        val_2 = command_process_slabmap_tile_07ba98();
+        int_ptr = extraout_ECX_05;
+        if (val_2 == 0) goto LAB_0007c0a2;
+        uval_3 = uval_3 + *(char *)((int)&g_data_0018b67b + val + 3) * 3;
+        uval_4 = uval_4 + (char)(&g_data_0018b67f)[val] * 3;
+        bflib_system_io_fn_0e69fc();
+        bflib_system_io_fn_0e69fc();
+        local_18 = bflib_system_io_fn_0e69fc();
         local_14 = '\x01';
-        piVar16 = extraout_ECX_06;
+        int_ptr = extraout_ECX_06;
       }
-      if ((uVar3 == bVar5) && (uVar4 == bVar6)) {
+      if ((uval_3 == flag) && (uval_4 == flag_2)) {
 LAB_0007bf6c:
-        *piVar16 = *piVar16 - (uint)uVar7;
+        *int_ptr = *int_ptr - (uint)uval_5;
         return 1;
       }
     }
-    uVar7 = uVar7 - 1;
+    uval_5 = uval_5 - 1;
   }
-  if (uVar7 == 0) {
-    uVar15 = 0xffffffff;
+  if (uval_5 == 0) {
+    uval_8 = 0xffffffff;
   }
   else {
-    sVar10 = FUN_000e69fc();
-    sVar11 = FUN_000e69fc();
-    local_40 = sVar10 + sVar11;
-    sVar10 = FUN_000e69fc();
-    sVar11 = FUN_000e69fc();
-    piVar16 = extraout_ECX_08;
-    if ((ushort)(sVar10 + sVar11) < local_40) {
-      *(undefined1 *)(in_EDX + 1) = local_38;
+    short_val = bflib_system_io_fn_0e69fc();
+    short_val_2 = bflib_system_io_fn_0e69fc();
+    local_40 = short_val + short_val_2;
+    short_val = bflib_system_io_fn_0e69fc();
+    short_val_2 = bflib_system_io_fn_0e69fc();
+    int_ptr = extraout_ECX_08;
+    if ((ushort)(short_val + short_val_2) < local_40) {
+      *(undefined1 *)(arg_edx + 1) = local_38;
     }
     else {
-      *(undefined1 *)(in_EDX + 1) = local_4c;
+      *(undefined1 *)(arg_edx + 1) = local_4c;
       local_48 = local_34;
     }
 LAB_0007c1d0:
-    *(undefined1 *)(in_EDX + 3) = local_48;
-    *piVar16 = *piVar16 - (uint)uVar7;
-    uVar15 = 0;
+    *(undefined1 *)(arg_edx + 3) = local_48;
+    *int_ptr = *int_ptr - (uint)uval_5;
+    uval_8 = 0;
   }
-  return uVar15;
+  return uval_8;
 }
 
 /******************************************************************************
- * Function : dk_illegal_ceiling_step_value_07c1f0 (Ghidra: FUN_0007c1f0)
- * Prototype: undefined4 dk_illegal_ceiling_step_value_07c1f0(void);
+ * Function : ceiling_illegal_ceiling_step_value_07c1f0 (Original VA: 0x7c1f0, Ghidra: FUN_0007c1f0)
+ * Prototype: undefined4 ceiling_illegal_ceiling_step_value_07c1f0(void);
  * Address  : 0x7c1f0 (Size: 190 bytes)
  * Module   : ceiling.cpp [direct_file_string_xref]
- * OrigLine : ceiling.cpp:46 ("Max height is too high"); ceiling.cpp:50 ("Ceiling max height is smaller than min height"); ceiling.cpp:58 ("Ceiling search distance too big")
- * Naming   : String 'Illegal ceiling step value'
- * Callers  : 2 -> 0x225c0, 0x6a553
- * Callees  : 1 -> 0xddaf0
- * Strings  :
- *   - 0x169d63: "ceiling.cpp"
- *   - 0x169d86: "ceiling.cpp"
- *   - 0x169dc0: "ceiling.cpp"
- *   - 0x169dec: "ceiling.cpp"
- *   - 0x169d48: "Illegal ceiling step value"
- *   - 0x169d6f: "Max height is too high"
- *   - 0x169d92: "Ceiling max height is smaller than min height"
- *   - 0x169dcc: "Ceiling search distance too big"
+ * OrigLine : ceiling.cpp lines 46, 50, 58
+ * Purpose  : String 'Illegal ceiling step value'
+ * Callers  : 2 -> compturn_fn_0225c0, setup_load_core_game_data
+ * Callees  : 1 -> LbErrorLog
  ******************************************************************************/
-undefined4 FUN_0007c1f0(void)
+undefined4 ceiling_illegal_ceiling_step_value_07c1f0(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  int in_EDX;
-  int unaff_EBX;
+  int arg_eax;
+  int val;
+  int arg_edx;
+  int arg_ebx;
   
-  if (0 < unaff_EBX) {
-    if (0xf < in_EAX) {
-      FUN_000ddaf0(); /* LbErrorLog("ceiling.cpp", line 46, "Max height is too high") */
+  if (0 < arg_ebx) {
+    if (0xf < arg_eax) {
+      LbErrorLog(); /* LbErrorLog("ceiling.cpp", line 46, "Max height is too high") */
       return 0;
     }
-    if (in_EAX < in_EDX) {
-      FUN_000ddaf0(); /* LbErrorLog("ceiling.cpp", line 50, "Ceiling max height is smaller than min height") */
+    if (arg_eax < arg_edx) {
+      LbErrorLog(); /* LbErrorLog("ceiling.cpp", line 50, "Ceiling max height is smaller than min height") */
       return 0;
     }
-    DAT_002e78b8 = (in_EAX - in_EDX) / unaff_EBX;
-    if (0x9c3 < DAT_002e78b8) {
-      DAT_002e78b8 = 0x9c4;
+    g_bss_002e78b8 = (arg_eax - arg_edx) / arg_ebx;
+    if (0x9c3 < g_bss_002e78b8) {
+      g_bss_002e78b8 = 0x9c4;
     }
-    if (DAT_002e78b8 < 0x15) {
-      iVar1 = DAT_002e78b8 * 2 + 1;
-      DAT_002e78b0 = in_EAX;
-      DAT_002e78b4 = in_EDX;
-      DAT_002e78c0 = unaff_EBX;
-      DAT_002e78bc = iVar1 * iVar1;
+    if (g_bss_002e78b8 < 0x15) {
+      val = g_bss_002e78b8 * 2 + 1;
+      g_bss_002e78b0 = arg_eax;
+      g_bss_002e78b4 = arg_edx;
+      g_bss_002e78c0 = arg_ebx;
+      g_bss_002e78bc = val * val;
       return 1;
     }
   }
-  FUN_000ddaf0(); /* LbErrorLog("ceiling.cpp", line 58, "Ceiling search distance too big") */
+  LbErrorLog(); /* LbErrorLog("ceiling.cpp", line 58, "Ceiling search distance too big") */
   return 0;
 }
 
 /******************************************************************************
- * Function : sub_07c3c8 (Ghidra: FUN_0007c3c8)
- * Prototype: undefined4 sub_07c3c8(void);
+ * Function : ceiling_process_map_subtile_07c3c8 (Original VA: 0x7c3c8, Ghidra: FUN_0007c3c8)
+ * Prototype: undefined4 ceiling_process_map_subtile_07c3c8(void);
  * Address  : 0x7c3c8 (Size: 455 bytes)
  * Module   : ceiling.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x2a25c
- * Callees  : 2 -> 0x7caf0, 0x7cd3c
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 1 -> file_fn_02a25c
+ * Callees  : 2 -> ceiling_fn_07caf0, ceiling_process_map_subtile_07cd3c
  ******************************************************************************/
-undefined4 FUN_0007c3c8(void)
+undefined4 ceiling_process_map_subtile_07c3c8(void)
 
 {
-  bool bVar1;
-  int *piVar2;
-  uint uVar3;
-  int iVar4;
-  uint uVar5;
+  bool flag;
+  int *int_ptr;
+  uint uval;
+  int val;
+  uint uval_2;
   int extraout_ECX;
   int extraout_ECX_00;
-  int iVar6;
-  char *pcVar7;
+  int val_2;
+  char *str_ptr;
   int local_44;
   uint local_40;
   int local_3c;
@@ -414,54 +405,54 @@ undefined4 FUN_0007c3c8(void)
     local_2c = local_3c * 0x500;
     local_30 = 0;
     do {
-      local_28 = (uint *)((int)&DAT_00279203 + local_2c + 1);
-      iVar4 = (int)((local_24 + (local_24 >> 0x1f) * -0x100) - (uint)((local_24 >> 0x1f) << 7 < 0))
+      local_28 = (uint *)((int)&g_map_subtiles + local_2c + 1);
+      val = (int)((local_24 + (local_24 >> 0x1f) * -0x100) - (uint)((local_24 >> 0x1f) << 7 < 0))
               >> 8;
-      local_40 = FUN_0007cd3c();
-      uVar5 = local_40;
+      local_40 = ceiling_process_map_subtile_07cd3c();
+      uval_2 = local_40;
       if (0x7fffffff < local_40) {
         local_20 = local_24;
-        iVar6 = 0;
-        pcVar7 = (char *)&DAT_002ee9c1;
+        val_2 = 0;
+        str_ptr = (char *)&g_bss_002ee9c1;
         local_38 = &local_40;
         local_34 = &local_44;
-        piVar2 = &local_44;
-        local_1c = iVar4;
+        int_ptr = &local_44;
+        local_1c = val;
         local_18 = extraout_ECX_00;
-        if (0 < DAT_002e78bc) {
+        if (0 < g_bss_002e78bc) {
           do {
-            iVar4 = *pcVar7 + local_1c;
-            if ((((-1 < pcVar7[1] + local_18) && (pcVar7[1] + local_18 < 0x100)) && (-1 < iVar4)) &&
-               ((iVar4 < 0x100 && (uVar5 = FUN_0007cd3c(), -1 < (int)uVar5)))) {
-              *local_38 = uVar5;
-              uVar3 = local_18 - extraout_ECX;
-              uVar5 = local_1c - iVar4;
-              if ((int)((uVar5 ^ (int)uVar5 >> 0x1f) - ((int)uVar5 >> 0x1f)) <
-                  (int)((uVar3 ^ (int)uVar3 >> 0x1f) - ((int)uVar3 >> 0x1f))) {
-                uVar5 = uVar3;
+            val = *str_ptr + local_1c;
+            if ((((-1 < str_ptr[1] + local_18) && (str_ptr[1] + local_18 < 0x100)) && (-1 < val)) &&
+               ((val < 0x100 && (uval_2 = ceiling_process_map_subtile_07cd3c(), -1 < (int)uval_2)))) {
+              *local_38 = uval_2;
+              uval = local_18 - extraout_ECX;
+              uval_2 = local_1c - val;
+              if ((int)((uval_2 ^ (int)uval_2 >> 0x1f) - ((int)uval_2 >> 0x1f)) <
+                  (int)((uval ^ (int)uval >> 0x1f) - ((int)uval >> 0x1f))) {
+                uval_2 = uval;
               }
-              *local_34 = (uVar5 ^ (int)uVar5 >> 0x1f) - ((int)uVar5 >> 0x1f);
-              bVar1 = true;
+              *local_34 = (uval_2 ^ (int)uval_2 >> 0x1f) - ((int)uval_2 >> 0x1f);
+              flag = true;
               goto LAB_0007c568;
             }
-            iVar6 = iVar6 + 1;
-            pcVar7 = pcVar7 + 4;
-            piVar2 = local_34;
-          } while (iVar6 < DAT_002e78bc);
+            val_2 = val_2 + 1;
+            str_ptr = str_ptr + 4;
+            int_ptr = local_34;
+          } while (val_2 < g_bss_002e78bc);
         }
-        local_34 = piVar2;
-        bVar1 = false;
+        local_34 = int_ptr;
+        flag = false;
 LAB_0007c568:
-        uVar5 = DAT_002e78b0;
-        if (bVar1) {
-          uVar5 = FUN_0007caf0();
+        uval_2 = g_bss_002e78b0;
+        if (flag) {
+          uval_2 = ceiling_fn_07caf0();
         }
       }
       local_30 = local_30 + 1;
       *(byte *)((int)local_28 + 3) = *(byte *)((int)local_28 + 3) & 0xf0;
       local_24 = local_24 + 1;
       local_2c = local_2c + 5;
-      *local_28 = *local_28 | (uVar5 & 0xf) << 0x18;
+      *local_28 = *local_28 | (uval_2 & 0xf) << 0x18;
     } while (local_30 < 0xff);
     local_3c = local_3c + 1;
     if (0xfe < local_3c) {
@@ -471,32 +462,32 @@ LAB_0007c568:
 }
 
 /******************************************************************************
- * Function : sub_07c590 (Ghidra: FUN_0007c590)
- * Prototype: undefined4 sub_07c590(void);
+ * Function : ceiling_process_map_subtile_07c590 (Original VA: 0x7c590, Ghidra: FUN_0007c590)
+ * Prototype: undefined4 ceiling_process_map_subtile_07c590(void);
  * Address  : 0x7c590 (Size: 736 bytes)
  * Module   : ceiling.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0x14a68, 0x22660, 0x449a4
- * Callees  : 2 -> 0x7caf0, 0x7cd3c
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 3 -> build_fn_014a68, compturn_process_map_subtile_022660, inits_told_you_so_create_0449a4
+ * Callees  : 2 -> ceiling_fn_07caf0, ceiling_process_map_subtile_07cd3c
  ******************************************************************************/
-undefined4 FUN_0007c590(void)
+undefined4 ceiling_process_map_subtile_07c590(void)
 
 {
-  uint *puVar1;
-  char cVar2;
-  bool bVar3;
-  undefined1 uVar4;
-  int in_EAX;
-  int iVar5;
-  uint uVar6;
-  int *piVar7;
-  int in_ECX;
+  uint *word_ptr;
+  char ch;
+  bool flag;
+  undefined1 uval;
+  int arg_eax;
+  int val;
+  uint uval_2;
+  int *int_ptr;
+  int arg_ecx;
   int extraout_ECX;
-  int iVar8;
-  int in_EDX;
-  int unaff_EBX;
-  int iVar9;
-  int iVar10;
+  int val_2;
+  int arg_edx;
+  int arg_ebx;
+  int val_3;
+  int val_4;
   uint local_50;
   int local_4c;
   int local_48;
@@ -515,55 +506,55 @@ undefined4 FUN_0007c590(void)
   int local_14;
   int local_10;
   
-  local_4c = DAT_002e78b8;
-  if (4 < DAT_002e78b8) {
+  local_4c = g_bss_002e78b8;
+  if (4 < g_bss_002e78b8) {
     local_4c = 4;
   }
-  local_34 = in_EAX - local_4c;
+  local_34 = arg_eax - local_4c;
   if (local_34 < 1) {
     local_34 = 0;
   }
-  local_48 = in_EDX - local_4c;
+  local_48 = arg_edx - local_4c;
   if (local_48 < 1) {
     local_48 = 0;
   }
-  local_2c = unaff_EBX + local_4c;
+  local_2c = arg_ebx + local_4c;
   if (0xff < local_2c) {
     local_2c = 0x100;
   }
-  local_4c = local_4c + in_ECX;
+  local_4c = local_4c + arg_ecx;
   if (0xff < local_4c) {
     local_4c = 0x100;
   }
-  DAT_00377760 = DAT_00199228;
-  local_38 = local_34 - DAT_002e78b8;
+  g_bss_00377760 = g_scratch_work_buf;
+  local_38 = local_34 - g_bss_002e78b8;
   if (local_38 < 1) {
     local_38 = 0;
   }
-  iVar5 = local_48 - DAT_002e78b8;
-  if (iVar5 < 1) {
-    iVar5 = 0;
+  val = local_48 - g_bss_002e78b8;
+  if (val < 1) {
+    val = 0;
   }
-  iVar10 = local_2c + DAT_002e78b8;
-  if (0xff < iVar10) {
-    iVar10 = 0x100;
+  val_4 = local_2c + g_bss_002e78b8;
+  if (0xff < val_4) {
+    val_4 = 0x100;
   }
-  local_44 = DAT_002e78b8 + local_4c;
+  local_44 = g_bss_002e78b8 + local_4c;
   if (0xff < local_44) {
     local_44 = 0x100;
   }
-  if (iVar5 < local_44) {
-    local_3c = iVar5 << 8;
-    iVar8 = local_38;
+  if (val < local_44) {
+    local_3c = val << 8;
+    val_2 = local_38;
     do {
-      for (; iVar8 < iVar10; iVar8 = iVar8 + 1) {
-        uVar4 = FUN_0007cd3c();
-        *(undefined1 *)(extraout_ECX + DAT_00377760) = uVar4;
+      for (; val_2 < val_4; val_2 = val_2 + 1) {
+        uval = ceiling_process_map_subtile_07cd3c();
+        *(undefined1 *)(extraout_ECX + g_bss_00377760) = uval;
       }
       local_3c = local_3c + 0x100;
-      iVar5 = iVar5 + 1;
-      iVar8 = local_38;
-    } while (iVar5 < local_44);
+      val = val + 1;
+      val_2 = local_38;
+    } while (val < local_44);
   }
   if (local_48 < local_4c) {
     local_30 = local_48 << 8;
@@ -574,44 +565,44 @@ undefined4 FUN_0007c590(void)
       if (local_34 < local_2c) {
         local_20 = local_1c * 5;
         do {
-          iVar5 = local_20;
-          puVar1 = (uint *)((int)&DAT_00279203 + local_20 + 1);
-          uVar6 = (uint)*(char *)(DAT_00377760 + local_1c);
-          if (0x7fffffff < uVar6) {
+          val = local_20;
+          word_ptr = (uint *)((int)&g_map_subtiles + local_20 + 1);
+          uval_2 = (uint)*(char *)(g_bss_00377760 + local_1c);
+          if (0x7fffffff < uval_2) {
             local_28 = &local_50;
             local_18 = local_1c;
             local_10 = local_1c % 0x100;
             local_14 = local_1c / 0x100;
-            iVar10 = 0;
-            piVar7 = &DAT_002ee9c1;
-            if (0 < DAT_002e78bc) {
+            val_4 = 0;
+            int_ptr = &g_bss_002ee9c1;
+            if (0 < g_bss_002e78bc) {
               do {
-                iVar8 = *(char *)((int)piVar7 + 1) + local_10;
-                iVar9 = (char)*piVar7 + local_14;
-                if ((((-1 < iVar8) && (iVar8 < 0x100)) && (-1 < iVar9)) &&
-                   ((iVar9 < 0x100 &&
-                    (cVar2 = *(char *)(DAT_00377760 + (*piVar7 >> 0x10) + local_1c),
-                    local_50 = (uint)cVar2, -1 < cVar2)))) {
-                  bVar3 = true;
+                val_2 = *(char *)((int)int_ptr + 1) + local_10;
+                val_3 = (char)*int_ptr + local_14;
+                if ((((-1 < val_2) && (val_2 < 0x100)) && (-1 < val_3)) &&
+                   ((val_3 < 0x100 &&
+                    (ch = *(char *)(g_bss_00377760 + (*int_ptr >> 0x10) + local_1c),
+                    local_50 = (uint)ch, -1 < ch)))) {
+                  flag = true;
                   goto LAB_0007c807;
                 }
-                iVar10 = iVar10 + 1;
-                piVar7 = piVar7 + 1;
-              } while (iVar10 < DAT_002e78bc);
+                val_4 = val_4 + 1;
+                int_ptr = int_ptr + 1;
+              } while (val_4 < g_bss_002e78bc);
             }
-            bVar3 = false;
-            local_50 = uVar6;
+            flag = false;
+            local_50 = uval_2;
 LAB_0007c807:
-            uVar6 = DAT_002e78b0;
-            if (bVar3) {
-              uVar6 = FUN_0007caf0();
+            uval_2 = g_bss_002e78b0;
+            if (flag) {
+              uval_2 = ceiling_fn_07caf0();
             }
           }
           local_20 = local_20 + 5;
           local_1c = local_1c + 1;
-          (&DAT_00279207)[iVar5] = (&DAT_00279207)[iVar5] & 0xf0;
+          (&g_bss_00279207)[val] = (&g_bss_00279207)[val] & 0xf0;
           local_24 = local_24 + 1;
-          *puVar1 = *puVar1 | (uVar6 & 0xf) << 0x18;
+          *word_ptr = *word_ptr | (uval_2 & 0xf) << 0x18;
         } while (local_24 < local_2c);
       }
       local_30 = local_30 + 0x100;
@@ -621,28 +612,28 @@ LAB_0007c807:
 }
 
 /******************************************************************************
- * Function : sub_07c870 (Ghidra: FUN_0007c870)
- * Prototype: undefined8 sub_07c870(void);
+ * Function : ceiling_fn_07c870 (Original VA: 0x7c870, Ghidra: FUN_0007c870)
+ * Prototype: undefined8 ceiling_fn_07c870(void);
  * Address  : 0x7c870 (Size: 295 bytes)
  * Module   : ceiling.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module ceiling.cpp procedure @ 0x07c870
  * Callers  : 0 -> 
- * Callees  : 2 -> 0x7caf0, 0x7cd3c
+ * Callees  : 2 -> ceiling_fn_07caf0, ceiling_process_map_subtile_07cd3c
  ******************************************************************************/
-undefined8 FUN_0007c870(void)
+undefined8 ceiling_fn_07c870(void)
 
 {
-  bool bVar1;
-  int *piVar2;
-  int in_EAX;
-  int iVar3;
-  uint uVar4;
-  char *pcVar5;
+  bool flag;
+  int *int_ptr;
+  int arg_eax;
+  int val;
+  uint uval;
+  char *str_ptr;
   char *extraout_ECX;
-  uint uVar6;
-  undefined4 in_EDX;
-  int iVar7;
-  int iVar8;
+  uint uval_2;
+  undefined4 arg_edx;
+  int val_2;
+  int val_3;
   int local_34;
   uint local_30;
   int *local_2c;
@@ -650,391 +641,391 @@ undefined8 FUN_0007c870(void)
   int local_20;
   int local_1c;
   
-  iVar3 = (int)((in_EAX + (in_EAX >> 0x1f) * -0x100) - (uint)((in_EAX >> 0x1f) << 7 < 0)) >> 8;
-  local_30 = FUN_0007cd3c();
-  uVar4 = local_30;
+  val = (int)((arg_eax + (arg_eax >> 0x1f) * -0x100) - (uint)((arg_eax >> 0x1f) << 7 < 0)) >> 8;
+  local_30 = ceiling_process_map_subtile_07cd3c();
+  uval = local_30;
   if (0x7fffffff < local_30) {
-    iVar7 = 0;
+    val_2 = 0;
     local_28 = &local_30;
-    pcVar5 = (char *)&DAT_002ee9c1;
+    str_ptr = (char *)&g_bss_002ee9c1;
     local_2c = &local_34;
-    piVar2 = &local_34;
-    local_20 = in_EAX % 0x100;
-    local_1c = iVar3;
-    if (0 < DAT_002e78bc) {
+    int_ptr = &local_34;
+    local_20 = arg_eax % 0x100;
+    local_1c = val;
+    if (0 < g_bss_002e78bc) {
       do {
-        iVar3 = pcVar5[1] + local_20;
-        iVar8 = *pcVar5 + local_1c;
-        if ((((-1 < iVar3) && (iVar3 < 0x100)) && (-1 < iVar8)) &&
-           ((iVar8 < 0x100 && (uVar4 = FUN_0007cd3c(), pcVar5 = extraout_ECX, -1 < (int)uVar4)))) {
-          *local_28 = uVar4;
-          uVar6 = local_20 - iVar3;
-          uVar4 = local_1c - iVar8;
-          if ((int)((uVar4 ^ (int)uVar4 >> 0x1f) - ((int)uVar4 >> 0x1f)) <
-              (int)((uVar6 ^ (int)uVar6 >> 0x1f) - ((int)uVar6 >> 0x1f))) {
-            uVar4 = uVar6;
+        val = str_ptr[1] + local_20;
+        val_3 = *str_ptr + local_1c;
+        if ((((-1 < val) && (val < 0x100)) && (-1 < val_3)) &&
+           ((val_3 < 0x100 && (uval = ceiling_process_map_subtile_07cd3c(), str_ptr = extraout_ECX, -1 < (int)uval)))) {
+          *local_28 = uval;
+          uval_2 = local_20 - val;
+          uval = local_1c - val_3;
+          if ((int)((uval ^ (int)uval >> 0x1f) - ((int)uval >> 0x1f)) <
+              (int)((uval_2 ^ (int)uval_2 >> 0x1f) - ((int)uval_2 >> 0x1f))) {
+            uval = uval_2;
           }
-          *local_2c = (uVar4 ^ (int)uVar4 >> 0x1f) - ((int)uVar4 >> 0x1f);
-          bVar1 = true;
+          *local_2c = (uval ^ (int)uval >> 0x1f) - ((int)uval >> 0x1f);
+          flag = true;
           goto LAB_0007c976;
         }
-        iVar7 = iVar7 + 1;
-        pcVar5 = pcVar5 + 4;
-        piVar2 = local_2c;
-      } while (iVar7 < DAT_002e78bc);
+        val_2 = val_2 + 1;
+        str_ptr = str_ptr + 4;
+        int_ptr = local_2c;
+      } while (val_2 < g_bss_002e78bc);
     }
-    local_2c = piVar2;
-    bVar1 = false;
+    local_2c = int_ptr;
+    flag = false;
 LAB_0007c976:
-    uVar4 = DAT_002e78b0;
-    if (bVar1) {
-      uVar4 = FUN_0007caf0();
+    uval = g_bss_002e78b0;
+    if (flag) {
+      uval = ceiling_fn_07caf0();
     }
   }
-  return CONCAT44(in_EDX,uVar4);
+  return CONCAT44(arg_edx,uval);
 }
 
 /******************************************************************************
- * Function : sub_07c998 (Ghidra: FUN_0007c998)
- * Prototype: undefined8 sub_07c998(void);
+ * Function : ceiling_fn_07c998 (Original VA: 0x7c998, Ghidra: FUN_0007c998)
+ * Prototype: undefined8 ceiling_fn_07c998(void);
  * Address  : 0x7c998 (Size: 281 bytes)
  * Module   : ceiling.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module ceiling.cpp procedure @ 0x07c998
  * Callers  : 0 -> 
- * Callees  : 1 -> 0x7caf0
+ * Callees  : 1 -> ceiling_fn_07caf0
  ******************************************************************************/
-undefined8 FUN_0007c998(void)
+undefined8 ceiling_fn_07c998(void)
 
 {
-  bool bVar1;
-  int in_EAX;
-  uint uVar2;
-  int *piVar3;
-  uint uVar4;
-  int iVar5;
-  undefined4 in_EDX;
-  int iVar6;
-  int iVar7;
+  bool flag;
+  int arg_eax;
+  uint uval;
+  int *int_ptr;
+  uint uval_2;
+  int val;
+  undefined4 arg_edx;
+  int val_2;
+  int val_3;
   int local_30;
   uint local_2c;
   int *local_28;
   int local_20;
   int local_1c;
   
-  uVar2 = (uint)*(char *)(in_EAX + DAT_00377760);
-  if (0x7fffffff < uVar2) {
-    local_1c = in_EAX % 0x100;
-    local_20 = in_EAX / 0x100;
-    iVar6 = 0;
-    piVar3 = &DAT_002ee9c1;
-    if (0 < DAT_002e78bc) {
+  uval = (uint)*(char *)(arg_eax + g_bss_00377760);
+  if (0x7fffffff < uval) {
+    local_1c = arg_eax % 0x100;
+    local_20 = arg_eax / 0x100;
+    val_2 = 0;
+    int_ptr = &g_bss_002ee9c1;
+    if (0 < g_bss_002e78bc) {
       do {
-        iVar5 = *(char *)((int)piVar3 + 1) + local_1c;
-        iVar7 = (char)*piVar3 + local_20;
-        if ((((-1 < iVar5) && (iVar5 < 0x100)) && (-1 < iVar7)) &&
-           ((iVar7 < 0x100 &&
-            (local_2c = (uint)*(char *)(DAT_00377760 + (*piVar3 >> 0x10) + in_EAX),
+        val = *(char *)((int)int_ptr + 1) + local_1c;
+        val_3 = (char)*int_ptr + local_20;
+        if ((((-1 < val) && (val < 0x100)) && (-1 < val_3)) &&
+           ((val_3 < 0x100 &&
+            (local_2c = (uint)*(char *)(g_bss_00377760 + (*int_ptr >> 0x10) + arg_eax),
             -1 < (int)local_2c)))) {
-          uVar4 = local_1c - iVar5;
-          uVar2 = local_20 - iVar7;
-          if ((int)((uVar2 ^ (int)uVar2 >> 0x1f) - ((int)uVar2 >> 0x1f)) <
-              (int)((uVar4 ^ (int)uVar4 >> 0x1f) - ((int)uVar4 >> 0x1f))) {
-            uVar2 = uVar4;
+          uval_2 = local_1c - val;
+          uval = local_20 - val_3;
+          if ((int)((uval ^ (int)uval >> 0x1f) - ((int)uval >> 0x1f)) <
+              (int)((uval_2 ^ (int)uval_2 >> 0x1f) - ((int)uval_2 >> 0x1f))) {
+            uval = uval_2;
           }
-          local_30 = (uVar2 ^ (int)uVar2 >> 0x1f) - ((int)uVar2 >> 0x1f);
-          bVar1 = true;
+          local_30 = (uval ^ (int)uval >> 0x1f) - ((int)uval >> 0x1f);
+          flag = true;
           goto LAB_0007ca90;
         }
-        iVar6 = iVar6 + 1;
-        piVar3 = piVar3 + 1;
-      } while (iVar6 < DAT_002e78bc);
+        val_2 = val_2 + 1;
+        int_ptr = int_ptr + 1;
+      } while (val_2 < g_bss_002e78bc);
     }
-    bVar1 = false;
-    local_2c = uVar2;
+    flag = false;
+    local_2c = uval;
 LAB_0007ca90:
     local_28 = &local_30;
-    uVar2 = DAT_002e78b0;
-    if (bVar1) {
-      uVar2 = FUN_0007caf0();
+    uval = g_bss_002e78b0;
+    if (flag) {
+      uval = ceiling_fn_07caf0();
     }
   }
-  return CONCAT44(in_EDX,uVar2);
+  return CONCAT44(arg_edx,uval);
 }
 
 /******************************************************************************
- * Function : sub_07caf0 (Ghidra: FUN_0007caf0)
- * Prototype: int sub_07caf0(void);
+ * Function : ceiling_fn_07caf0 (Original VA: 0x7caf0, Ghidra: FUN_0007caf0)
+ * Prototype: int ceiling_fn_07caf0(void);
  * Address  : 0x7caf0 (Size: 49 bytes)
  * Module   : ceiling.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 4 -> 0x7c3c8, 0x7c590, 0x7c870, 0x7c998
+ * Purpose  : Module ceiling.cpp procedure @ 0x07caf0
+ * Callers  : 4 -> ceiling_process_map_subtile_07c3c8, ceiling_process_map_subtile_07c590, ceiling_fn_07c870, ceiling_fn_07c998
  * Callees  : 0 -> 
  ******************************************************************************/
-int FUN_0007caf0(void)
+int ceiling_fn_07caf0(void)
 
 {
-  int in_EAX;
-  int in_EDX;
+  int arg_eax;
+  int arg_edx;
   
-  if (in_EAX < DAT_002e78b0) {
-    in_EAX = in_EAX + in_EDX * DAT_002e78c0;
-    if (DAT_002e78b0 <= in_EAX) {
-      return DAT_002e78b0;
+  if (arg_eax < g_bss_002e78b0) {
+    arg_eax = arg_eax + arg_edx * g_bss_002e78c0;
+    if (g_bss_002e78b0 <= arg_eax) {
+      return g_bss_002e78b0;
     }
   }
-  else if (DAT_002e78b0 < in_EAX) {
-    in_EAX = in_EAX - in_EDX * DAT_002e78c0;
-    if (in_EAX <= DAT_002e78b4) {
-      in_EAX = DAT_002e78b4;
+  else if (g_bss_002e78b0 < arg_eax) {
+    arg_eax = arg_eax - arg_edx * g_bss_002e78c0;
+    if (arg_eax <= g_bss_002e78b4) {
+      arg_eax = g_bss_002e78b4;
     }
   }
-  return in_EAX;
+  return arg_eax;
 }
 
 /******************************************************************************
- * Function : sub_07cd3c (Ghidra: FUN_0007cd3c)
- * Prototype: uint sub_07cd3c(void);
+ * Function : ceiling_process_map_subtile_07cd3c (Original VA: 0x7cd3c, Ghidra: FUN_0007cd3c)
+ * Prototype: uint ceiling_process_map_subtile_07cd3c(void);
  * Address  : 0x7cd3c (Size: 781 bytes)
  * Module   : ceiling.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0x7c3c8, 0x7c590, 0x7c870
- * Callees  : 1 -> 0x157e4
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 3 -> ceiling_process_map_subtile_07c3c8, ceiling_process_map_subtile_07c590, ceiling_fn_07c870
+ * Callees  : 1 -> column_fn_0157e4
  ******************************************************************************/
-uint FUN_0007cd3c(void)
+uint ceiling_process_map_subtile_07cd3c(void)
 
 {
-  byte bVar1;
-  int iVar2;
-  bool bVar3;
-  int in_EAX;
-  uint uVar4;
-  int in_EDX;
-  int unaff_EBX;
+  byte flag;
+  int val;
+  bool flag_2;
+  int arg_eax;
+  uint uval;
+  int arg_edx;
+  int arg_ebx;
   
-  if ((*(byte *)((int)&DAT_00279203 + in_EAX * 5) & 0x10) == 0) {
-    if ((*(byte *)((int)&DAT_0019e973 +
-                  (*(uint *)((int)&DAT_00279203 + in_EAX * 5 + 1) & 0x7ff) * 0x18 + 2) & 0xe) == 0)
+  if ((*(byte *)((int)&g_map_subtiles + arg_eax * 5) & 0x10) == 0) {
+    if ((*(byte *)((int)&g_bss_0019e973 +
+                  (*(uint *)((int)&g_map_subtiles + arg_eax * 5 + 1) & 0x7ff) * 0x18 + 2) & 0xe) == 0)
     {
-      bVar3 = false;
+      flag_2 = false;
     }
     else {
-      bVar3 = true;
+      flag_2 = true;
     }
   }
   else {
-    bVar3 = true;
+    flag_2 = true;
   }
-  if (bVar3) {
-    bVar1 = *(byte *)((int)&DAT_0019e973 +
-                     (*(uint *)((int)&DAT_00279203 + in_EAX * 5 + 1) & 0x7ff) * 0x18 + 2);
-    if ((bVar1 & 0xe) == 0) {
-      uVar4 = (uint)(bVar1 >> 4);
+  if (flag_2) {
+    flag = *(byte *)((int)&g_bss_0019e973 +
+                     (*(uint *)((int)&g_map_subtiles + arg_eax * 5 + 1) & 0x7ff) * 0x18 + 2);
+    if ((flag & 0xe) == 0) {
+      uval = (uint)(flag >> 4);
     }
     else {
-      uVar4 = FUN_000157e4();
+      uval = column_fn_0157e4();
     }
   }
   else {
-    if (in_EDX < 1) {
-      if (0 < unaff_EBX) {
-        iVar2 = (in_EAX + -0x100) * 5;
-        if ((*(byte *)((int)&DAT_00279203 + iVar2) & 0x10) == 0) {
-          if ((*(byte *)((int)&DAT_0019e973 +
-                        (*(uint *)((int)&DAT_00279203 + iVar2 + 1) & 0x7ff) * 0x18 + 2) & 0xe) == 0)
+    if (arg_edx < 1) {
+      if (0 < arg_ebx) {
+        val = (arg_eax + -0x100) * 5;
+        if ((*(byte *)((int)&g_map_subtiles + val) & 0x10) == 0) {
+          if ((*(byte *)((int)&g_bss_0019e973 +
+                        (*(uint *)((int)&g_map_subtiles + val + 1) & 0x7ff) * 0x18 + 2) & 0xe) == 0)
           {
-            bVar3 = false;
+            flag_2 = false;
           }
           else {
-            bVar3 = true;
+            flag_2 = true;
           }
         }
         else {
-          bVar3 = true;
+          flag_2 = true;
         }
-        if (bVar3) {
-          bVar1 = *(byte *)((int)&DAT_0019e973 +
-                           (*(uint *)((int)&DAT_00279203 + (in_EAX + -0x100) * 5 + 1) & 0x7ff) *
+        if (flag_2) {
+          flag = *(byte *)((int)&g_bss_0019e973 +
+                           (*(uint *)((int)&g_map_subtiles + (arg_eax + -0x100) * 5 + 1) & 0x7ff) *
                            0x18 + 2);
-          if ((bVar1 & 0xe) != 0) {
-            uVar4 = FUN_000157e4();
-            return uVar4;
+          if ((flag & 0xe) != 0) {
+            uval = column_fn_0157e4();
+            return uval;
           }
-          return (uint)(bVar1 >> 4);
+          return (uint)(flag >> 4);
         }
       }
     }
     else {
-      iVar2 = (in_EAX + -1) * 5;
-      if ((*(byte *)((int)&DAT_00279203 + iVar2) & 0x10) == 0) {
-        if ((*(byte *)((int)&DAT_0019e973 +
-                      (*(uint *)((int)&DAT_00279203 + iVar2 + 1) & 0x7ff) * 0x18 + 2) & 0xe) == 0) {
-          bVar3 = false;
+      val = (arg_eax + -1) * 5;
+      if ((*(byte *)((int)&g_map_subtiles + val) & 0x10) == 0) {
+        if ((*(byte *)((int)&g_bss_0019e973 +
+                      (*(uint *)((int)&g_map_subtiles + val + 1) & 0x7ff) * 0x18 + 2) & 0xe) == 0) {
+          flag_2 = false;
         }
         else {
-          bVar3 = true;
+          flag_2 = true;
         }
       }
       else {
-        bVar3 = true;
+        flag_2 = true;
       }
-      if (bVar3) {
-        bVar1 = *(byte *)((int)&DAT_0019e973 +
-                         (*(uint *)((int)&DAT_00279203 + (in_EAX + -1) * 5 + 1) & 0x7ff) * 0x18 + 2)
+      if (flag_2) {
+        flag = *(byte *)((int)&g_bss_0019e973 +
+                         (*(uint *)((int)&g_map_subtiles + (arg_eax + -1) * 5 + 1) & 0x7ff) * 0x18 + 2)
         ;
-        if ((bVar1 & 0xe) != 0) {
-          uVar4 = FUN_000157e4();
-          return uVar4;
+        if ((flag & 0xe) != 0) {
+          uval = column_fn_0157e4();
+          return uval;
         }
-        return (uint)(bVar1 >> 4);
+        return (uint)(flag >> 4);
       }
-      if (0 < unaff_EBX) {
-        iVar2 = (in_EAX + -0x100) * 5;
-        if ((*(byte *)((int)&DAT_00279203 + iVar2) & 0x10) == 0) {
-          if ((*(byte *)((int)&DAT_0019e973 +
-                        (*(uint *)((int)&DAT_00279203 + iVar2 + 1) & 0x7ff) * 0x18 + 2) & 0xe) == 0)
+      if (0 < arg_ebx) {
+        val = (arg_eax + -0x100) * 5;
+        if ((*(byte *)((int)&g_map_subtiles + val) & 0x10) == 0) {
+          if ((*(byte *)((int)&g_bss_0019e973 +
+                        (*(uint *)((int)&g_map_subtiles + val + 1) & 0x7ff) * 0x18 + 2) & 0xe) == 0)
           {
-            bVar3 = false;
+            flag_2 = false;
           }
           else {
-            bVar3 = true;
+            flag_2 = true;
           }
         }
         else {
-          bVar3 = true;
+          flag_2 = true;
         }
-        if (bVar3) {
-          bVar1 = *(byte *)((int)&DAT_0019e973 +
-                           (*(uint *)((int)&DAT_00279203 + (in_EAX + -0x100) * 5 + 1) & 0x7ff) *
+        if (flag_2) {
+          flag = *(byte *)((int)&g_bss_0019e973 +
+                           (*(uint *)((int)&g_map_subtiles + (arg_eax + -0x100) * 5 + 1) & 0x7ff) *
                            0x18 + 2);
-          if ((bVar1 & 0xe) != 0) {
-            uVar4 = FUN_000157e4();
-            return uVar4;
+          if ((flag & 0xe) != 0) {
+            uval = column_fn_0157e4();
+            return uval;
           }
-          return (uint)(bVar1 >> 4);
+          return (uint)(flag >> 4);
         }
-        iVar2 = (in_EAX + -0x101) * 5;
-        if ((*(byte *)((int)&DAT_00279203 + iVar2) & 0x10) == 0) {
-          if ((*(byte *)((int)&DAT_0019e973 +
-                        (*(uint *)((int)&DAT_00279203 + iVar2 + 1) & 0x7ff) * 0x18 + 2) & 0xe) == 0)
+        val = (arg_eax + -0x101) * 5;
+        if ((*(byte *)((int)&g_map_subtiles + val) & 0x10) == 0) {
+          if ((*(byte *)((int)&g_bss_0019e973 +
+                        (*(uint *)((int)&g_map_subtiles + val + 1) & 0x7ff) * 0x18 + 2) & 0xe) == 0)
           {
-            bVar3 = false;
+            flag_2 = false;
           }
           else {
-            bVar3 = true;
+            flag_2 = true;
           }
         }
         else {
-          bVar3 = true;
+          flag_2 = true;
         }
-        if (bVar3) {
-          bVar1 = *(byte *)((int)&DAT_0019e973 +
-                           (*(uint *)((int)&DAT_00279203 + (in_EAX + -0x101) * 5 + 1) & 0x7ff) *
+        if (flag_2) {
+          flag = *(byte *)((int)&g_bss_0019e973 +
+                           (*(uint *)((int)&g_map_subtiles + (arg_eax + -0x101) * 5 + 1) & 0x7ff) *
                            0x18 + 2);
-          if ((bVar1 & 0xe) != 0) {
-            uVar4 = FUN_000157e4();
-            return uVar4;
+          if ((flag & 0xe) != 0) {
+            uval = column_fn_0157e4();
+            return uval;
           }
-          return (uint)(bVar1 >> 4);
+          return (uint)(flag >> 4);
         }
       }
     }
-    uVar4 = 0xffffffff;
+    uval = 0xffffffff;
   }
-  return uVar4;
+  return uval;
 }
 
 /******************************************************************************
- * Function : sub_07d100 (Ghidra: FUN_0007d100)
- * Prototype: byte * sub_07d100(void);
+ * Function : ceiling_process_thing_entity_07d100 (Original VA: 0x7d100, Ghidra: FUN_0007d100)
+ * Prototype: byte * ceiling_process_thing_entity_07d100(void);
  * Address  : 0x7d100 (Size: 755 bytes)
  * Module   : ceiling.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0xab8dc
+ * Purpose  : Looks up Thing* in g_thing_ptrs[2048] and updates state
+ * Callers  : 1 -> food_process_dungeon_room_0ab8dc
  * Callees  : 0 -> 
  ******************************************************************************/
-byte * FUN_0007d100(void)
+byte * ceiling_process_thing_entity_07d100(void)
 
 {
-  byte *pbVar1;
-  int in_EAX;
-  int iVar2;
-  int iVar3;
-  ushort in_CX;
-  int in_EDX;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  short unaff_BX;
-  int iVar7;
-  byte *pbVar8;
+  byte *thing_ptr;
+  int arg_eax;
+  int val;
+  int val_2;
+  ushort arg_cx;
+  int arg_edx;
+  uint uval;
+  uint uval_2;
+  uint uval_3;
+  short arg_bx;
+  int val_3;
+  byte *byte_ptr;
   int local_24;
   int local_20;
   int local_1c;
   
-  iVar7 = 0x7fffffff;
-  pbVar8 = (byte *)0x0;
-  if ((unaff_BX == 5) && (in_CX == 0xffff)) {
-    for (pbVar1 = (&DAT_001ae9fc)[DAT_002e6eb6]; DAT_001ae9fc < pbVar1;
-        pbVar1 = (&DAT_001ae9fc)[*(ushort *)(pbVar1 + 0x67)]) {
-      if ((((*pbVar1 & 0x10) == 0) && ((pbVar1[1] & 2) == 0)) &&
-         (uVar4 = (int)(in_EAX - (uint)*(ushort *)(pbVar1 + 0xd)) >> 0x1f,
-         uVar5 = (int)(in_EDX - (uint)*(ushort *)(pbVar1 + 0xf)) >> 0x1f,
-         iVar2 = ((in_EDX - (uint)*(ushort *)(pbVar1 + 0xf) ^ uVar5) - uVar5) +
-                 ((in_EAX - (uint)*(ushort *)(pbVar1 + 0xd) ^ uVar4) - uVar4), iVar2 < iVar7)) {
-        iVar7 = iVar2;
-        pbVar8 = pbVar1;
+  val_3 = 0x7fffffff;
+  byte_ptr = (byte *)0x0;
+  if ((arg_bx == 5) && (arg_cx == 0xffff)) {
+    for (thing_ptr = (&g_thing_ptrs)[g_bss_002e6eb6]; g_thing_ptrs < thing_ptr;
+        thing_ptr = (&g_thing_ptrs)[*(ushort *)(thing_ptr + 0x67)]) {
+      if ((((*thing_ptr & 0x10) == 0) && ((thing_ptr[1] & 2) == 0)) &&
+         (uval = (int)(arg_eax - (uint)*(ushort *)(thing_ptr + 0xd)) >> 0x1f, /* thing->mappos.val_x */
+         uval_2 = (int)(arg_edx - (uint)*(ushort *)(thing_ptr + 0xf)) >> 0x1f, /* thing->mappos.val_y */
+         val = ((arg_edx - (uint)*(ushort *)(thing_ptr + 0xf) ^ uval_2) - uval_2) + /* thing->mappos.val_y */
+                 ((arg_eax - (uint)*(ushort *)(thing_ptr + 0xd) ^ uval) - uval), val < val_3)) { /* thing->mappos.val_x */
+        val_3 = val;
+        byte_ptr = thing_ptr;
       }
     }
   }
-  else if ((unaff_BX == -1) && (in_CX == 0xffff)) {
-    iVar2 = 4;
+  else if ((arg_bx == -1) && (arg_cx == 0xffff)) {
+    val = 4;
     do {
-      pbVar1 = *(byte **)((int)&DAT_001ae9fc + iVar2);
-      if ((((*pbVar1 & 1) != 0) && ((*pbVar1 & 0x10) == 0)) &&
-         (((pbVar1[1] & 2) == 0 &&
-          (uVar4 = (int)(in_EAX - (uint)*(ushort *)(pbVar1 + 0xd)) >> 0x1f,
-          uVar5 = (int)(in_EDX - (uint)*(ushort *)(pbVar1 + 0xf)) >> 0x1f,
-          iVar3 = ((in_EDX - (uint)*(ushort *)(pbVar1 + 0xf) ^ uVar5) - uVar5) +
-                  ((in_EAX - (uint)*(ushort *)(pbVar1 + 0xd) ^ uVar4) - uVar4), iVar3 < iVar7)))) {
-        iVar7 = iVar3;
-        pbVar8 = pbVar1;
+      thing_ptr = *(byte **)((int)&g_thing_ptrs + val);
+      if ((((*thing_ptr & 1) != 0) && ((*thing_ptr & 0x10) == 0)) &&
+         (((thing_ptr[1] & 2) == 0 &&
+          (uval = (int)(arg_eax - (uint)*(ushort *)(thing_ptr + 0xd)) >> 0x1f, /* thing->mappos.val_x */
+          uval_2 = (int)(arg_edx - (uint)*(ushort *)(thing_ptr + 0xf)) >> 0x1f, /* thing->mappos.val_y */
+          val_2 = ((arg_edx - (uint)*(ushort *)(thing_ptr + 0xf) ^ uval_2) - uval_2) + /* thing->mappos.val_y */
+                  ((arg_eax - (uint)*(ushort *)(thing_ptr + 0xd) ^ uval) - uval), val_2 < val_3)))) { /* thing->mappos.val_x */
+        val_3 = val_2;
+        byte_ptr = thing_ptr;
       }
-      iVar2 = iVar2 + 4;
-    } while (iVar2 != 0x2000);
+      val = val + 4;
+    } while (val != 0x2000);
   }
   else {
-    uVar4 = (uint)unaff_BX;
-    if (uVar4 == 0xffffffff) {
+    uval = (uint)arg_bx;
+    if (uval == 0xffffffff) {
       local_24 = 4;
       do {
-        pbVar1 = *(byte **)((int)&DAT_001ae9fc + local_24);
-        if (((((*pbVar1 & 1) != 0) && (pbVar1[0x1a] == in_CX)) && ((*pbVar1 & 0x10) == 0)) &&
-           (((pbVar1[1] & 2) == 0 &&
-            (uVar4 = (int)(in_EAX - (uint)*(ushort *)(pbVar1 + 0xd)) >> 0x1f,
-            uVar5 = (int)(in_EDX - (uint)*(ushort *)(pbVar1 + 0xf)) >> 0x1f,
-            iVar2 = ((in_EDX - (uint)*(ushort *)(pbVar1 + 0xf) ^ uVar5) - uVar5) +
-                    ((in_EAX - (uint)*(ushort *)(pbVar1 + 0xd) ^ uVar4) - uVar4), iVar2 < iVar7))))
+        thing_ptr = *(byte **)((int)&g_thing_ptrs + local_24);
+        if (((((*thing_ptr & 1) != 0) && (thing_ptr[0x1a] == arg_cx)) && ((*thing_ptr & 0x10) == 0)) &&
+           (((thing_ptr[1] & 2) == 0 &&
+            (uval = (int)(arg_eax - (uint)*(ushort *)(thing_ptr + 0xd)) >> 0x1f, /* thing->mappos.val_x */
+            uval_2 = (int)(arg_edx - (uint)*(ushort *)(thing_ptr + 0xf)) >> 0x1f, /* thing->mappos.val_y */
+            val = ((arg_edx - (uint)*(ushort *)(thing_ptr + 0xf) ^ uval_2) - uval_2) + /* thing->mappos.val_y */
+                    ((arg_eax - (uint)*(ushort *)(thing_ptr + 0xd) ^ uval) - uval), val < val_3)))) /* thing->mappos.val_x */
         {
-          iVar7 = iVar2;
-          pbVar8 = pbVar1;
+          val_3 = val;
+          byte_ptr = thing_ptr;
         }
         local_24 = local_24 + 4;
       } while (local_24 != 0x2000);
     }
-    else if (in_CX == 0xffff) {
+    else if (arg_cx == 0xffff) {
       local_1c = 4;
       do {
-        pbVar1 = *(byte **)((int)&DAT_001ae9fc + local_1c);
-        if ((((*pbVar1 & 1) != 0) && (pbVar1[0x1f] == uVar4)) &&
-           (((*pbVar1 & 0x10) == 0 &&
-            (((pbVar1[1] & 2) == 0 &&
-             (uVar5 = (int)(in_EAX - (uint)*(ushort *)(pbVar1 + 0xd)) >> 0x1f,
-             uVar6 = (int)(in_EDX - (uint)*(ushort *)(pbVar1 + 0xf)) >> 0x1f,
-             iVar2 = ((in_EDX - (uint)*(ushort *)(pbVar1 + 0xf) ^ uVar6) - uVar6) +
-                     ((in_EAX - (uint)*(ushort *)(pbVar1 + 0xd) ^ uVar5) - uVar5), iVar2 < iVar7))))
+        thing_ptr = *(byte **)((int)&g_thing_ptrs + local_1c);
+        if ((((*thing_ptr & 1) != 0) && (thing_ptr[0x1f] == uval)) &&
+           (((*thing_ptr & 0x10) == 0 &&
+            (((thing_ptr[1] & 2) == 0 &&
+             (uval_2 = (int)(arg_eax - (uint)*(ushort *)(thing_ptr + 0xd)) >> 0x1f, /* thing->mappos.val_x */
+             uval_3 = (int)(arg_edx - (uint)*(ushort *)(thing_ptr + 0xf)) >> 0x1f, /* thing->mappos.val_y */
+             val = ((arg_edx - (uint)*(ushort *)(thing_ptr + 0xf) ^ uval_3) - uval_3) + /* thing->mappos.val_y */
+                     ((arg_eax - (uint)*(ushort *)(thing_ptr + 0xd) ^ uval_2) - uval_2), val < val_3)))) /* thing->mappos.val_x */
            )) {
-          iVar7 = iVar2;
-          pbVar8 = pbVar1;
+          val_3 = val;
+          byte_ptr = thing_ptr;
         }
         local_1c = local_1c + 4;
       } while (local_1c != 0x2000);
@@ -1042,280 +1033,280 @@ byte * FUN_0007d100(void)
     else {
       local_20 = 4;
       do {
-        pbVar1 = *(byte **)((int)&DAT_001ae9fc + local_20);
-        if (((((*pbVar1 & 1) != 0) && (pbVar1[0x1a] == in_CX)) &&
-            (CONCAT31((int3)(char)(in_CX >> 8),pbVar1[0x1f]) == uVar4)) &&
-           ((((*pbVar1 & 0x10) == 0 && ((pbVar1[1] & 2) == 0)) &&
-            (uVar5 = (int)(in_EAX - (uint)*(ushort *)(pbVar1 + 0xd)) >> 0x1f,
-            uVar6 = (int)(in_EDX - (uint)*(ushort *)(pbVar1 + 0xf)) >> 0x1f,
-            iVar2 = ((in_EDX - (uint)*(ushort *)(pbVar1 + 0xf) ^ uVar6) - uVar6) +
-                    ((in_EAX - (uint)*(ushort *)(pbVar1 + 0xd) ^ uVar5) - uVar5), iVar2 < iVar7))))
+        thing_ptr = *(byte **)((int)&g_thing_ptrs + local_20);
+        if (((((*thing_ptr & 1) != 0) && (thing_ptr[0x1a] == arg_cx)) &&
+            (CONCAT31((int3)(char)(arg_cx >> 8),thing_ptr[0x1f]) == uval)) &&
+           ((((*thing_ptr & 0x10) == 0 && ((thing_ptr[1] & 2) == 0)) &&
+            (uval_2 = (int)(arg_eax - (uint)*(ushort *)(thing_ptr + 0xd)) >> 0x1f, /* thing->mappos.val_x */
+            uval_3 = (int)(arg_edx - (uint)*(ushort *)(thing_ptr + 0xf)) >> 0x1f, /* thing->mappos.val_y */
+            val = ((arg_edx - (uint)*(ushort *)(thing_ptr + 0xf) ^ uval_3) - uval_3) + /* thing->mappos.val_y */
+                    ((arg_eax - (uint)*(ushort *)(thing_ptr + 0xd) ^ uval_2) - uval_2), val < val_3)))) /* thing->mappos.val_x */
         {
-          iVar7 = iVar2;
-          pbVar8 = pbVar1;
+          val_3 = val;
+          byte_ptr = thing_ptr;
         }
         local_20 = local_20 + 4;
       } while (local_20 != 0x2000);
     }
   }
-  return pbVar8;
+  return byte_ptr;
 }
 
 /******************************************************************************
- * Function : sub_07d3f4 (Ghidra: FUN_0007d3f4)
- * Prototype: byte * sub_07d3f4(void);
+ * Function : ceiling_process_thing_entity_07d3f4 (Original VA: 0x7d3f4, Ghidra: FUN_0007d3f4)
+ * Prototype: byte * ceiling_process_thing_entity_07d3f4(void);
  * Address  : 0x7d3f4 (Size: 638 bytes)
  * Module   : ceiling.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Looks up Thing* in g_thing_ptrs[2048] and updates state
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-byte * FUN_0007d3f4(void)
+byte * ceiling_process_thing_entity_07d3f4(void)
 
 {
-  byte *pbVar1;
-  byte *in_EAX;
-  int iVar2;
-  int iVar3;
-  ushort in_CX;
-  int iVar4;
-  int in_EDX;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  int unaff_EBX;
-  byte *pbVar8;
+  byte *thing_ptr;
+  byte *arg_eax;
+  int val;
+  int val_2;
+  ushort arg_cx;
+  int val_3;
+  int arg_edx;
+  uint uval;
+  uint uval_2;
+  uint uval_3;
+  int arg_ebx;
+  byte *byte_ptr;
   int in_stack_00000002;
   int local_28;
   int local_20;
   int local_18;
   
-  iVar4 = 0x7fffffff;
-  pbVar8 = (byte *)0x0;
-  uVar5 = in_stack_00000002 >> 0x10;
-  if ((in_CX == 0xffff) && (uVar5 == 0xffffffff)) {
+  val_3 = 0x7fffffff;
+  byte_ptr = (byte *)0x0;
+  uval = in_stack_00000002 >> 0x10;
+  if ((arg_cx == 0xffff) && (uval == 0xffffffff)) {
     local_20 = 4;
     do {
-      pbVar1 = *(byte **)((int)&DAT_001ae9fc + local_20);
-      if ((((*pbVar1 & 1) != 0) && ((*pbVar1 & 0x10) == 0)) &&
-         (((pbVar1[1] & 2) == 0 && (pbVar1 != in_EAX)))) {
-        uVar5 = (int)(in_EDX - (uint)*(ushort *)(pbVar1 + 0xd)) >> 0x1f;
-        uVar6 = (int)(unaff_EBX - (uint)*(ushort *)(pbVar1 + 0xf)) >> 0x1f;
-        iVar2 = ((unaff_EBX - (uint)*(ushort *)(pbVar1 + 0xf) ^ uVar6) - uVar6) +
-                ((in_EDX - (uint)*(ushort *)(pbVar1 + 0xd) ^ uVar5) - uVar5);
-        if (iVar2 < iVar4) {
-          iVar4 = iVar2;
-          pbVar8 = pbVar1;
+      thing_ptr = *(byte **)((int)&g_thing_ptrs + local_20);
+      if ((((*thing_ptr & 1) != 0) && ((*thing_ptr & 0x10) == 0)) &&
+         (((thing_ptr[1] & 2) == 0 && (thing_ptr != arg_eax)))) {
+        uval = (int)(arg_edx - (uint)*(ushort *)(thing_ptr + 0xd)) >> 0x1f; /* thing->mappos.val_x */
+        uval_2 = (int)(arg_ebx - (uint)*(ushort *)(thing_ptr + 0xf)) >> 0x1f; /* thing->mappos.val_y */
+        val = ((arg_ebx - (uint)*(ushort *)(thing_ptr + 0xf) ^ uval_2) - uval_2) + /* thing->mappos.val_y */
+                ((arg_edx - (uint)*(ushort *)(thing_ptr + 0xd) ^ uval) - uval); /* thing->mappos.val_x */
+        if (val < val_3) {
+          val_3 = val;
+          byte_ptr = thing_ptr;
         }
       }
       local_20 = local_20 + 4;
     } while (local_20 != 0x2000);
   }
-  else if (in_CX == 0xffff) {
+  else if (arg_cx == 0xffff) {
     local_28 = 4;
     do {
-      pbVar1 = *(byte **)((int)&DAT_001ae9fc + local_28);
-      if (((((*pbVar1 & 1) != 0) && (pbVar1[0x1a] == uVar5)) && ((*pbVar1 & 0x10) == 0)) &&
-         (((pbVar1[1] & 2) == 0 && (pbVar1 != in_EAX)))) {
-        uVar6 = (int)(in_EDX - (uint)*(ushort *)(pbVar1 + 0xd)) >> 0x1f;
-        uVar7 = (int)(unaff_EBX - (uint)*(ushort *)(pbVar1 + 0xf)) >> 0x1f;
-        iVar2 = ((unaff_EBX - (uint)*(ushort *)(pbVar1 + 0xf) ^ uVar7) - uVar7) +
-                ((in_EDX - (uint)*(ushort *)(pbVar1 + 0xd) ^ uVar6) - uVar6);
-        if (iVar2 < iVar4) {
-          iVar4 = iVar2;
-          pbVar8 = pbVar1;
+      thing_ptr = *(byte **)((int)&g_thing_ptrs + local_28);
+      if (((((*thing_ptr & 1) != 0) && (thing_ptr[0x1a] == uval)) && ((*thing_ptr & 0x10) == 0)) &&
+         (((thing_ptr[1] & 2) == 0 && (thing_ptr != arg_eax)))) {
+        uval_2 = (int)(arg_edx - (uint)*(ushort *)(thing_ptr + 0xd)) >> 0x1f; /* thing->mappos.val_x */
+        uval_3 = (int)(arg_ebx - (uint)*(ushort *)(thing_ptr + 0xf)) >> 0x1f; /* thing->mappos.val_y */
+        val = ((arg_ebx - (uint)*(ushort *)(thing_ptr + 0xf) ^ uval_3) - uval_3) + /* thing->mappos.val_y */
+                ((arg_edx - (uint)*(ushort *)(thing_ptr + 0xd) ^ uval_2) - uval_2); /* thing->mappos.val_x */
+        if (val < val_3) {
+          val_3 = val;
+          byte_ptr = thing_ptr;
         }
       }
       local_28 = local_28 + 4;
     } while (local_28 != 0x2000);
   }
-  else if (uVar5 == 0xffffffff) {
-    iVar2 = 4;
+  else if (uval == 0xffffffff) {
+    val = 4;
     do {
-      pbVar1 = *(byte **)((int)&DAT_001ae9fc + iVar2);
-      if ((((*pbVar1 & 1) != 0) && (pbVar1[0x1f] == in_CX)) &&
-         (((*pbVar1 & 0x10) == 0 && (((pbVar1[1] & 2) == 0 && (pbVar1 != in_EAX)))))) {
-        uVar5 = (int)(in_EDX - (uint)*(ushort *)(pbVar1 + 0xd)) >> 0x1f;
-        uVar6 = (int)(unaff_EBX - (uint)*(ushort *)(pbVar1 + 0xf)) >> 0x1f;
-        iVar3 = ((unaff_EBX - (uint)*(ushort *)(pbVar1 + 0xf) ^ uVar6) - uVar6) +
-                ((in_EDX - (uint)*(ushort *)(pbVar1 + 0xd) ^ uVar5) - uVar5);
-        if (iVar3 < iVar4) {
-          iVar4 = iVar3;
-          pbVar8 = pbVar1;
+      thing_ptr = *(byte **)((int)&g_thing_ptrs + val);
+      if ((((*thing_ptr & 1) != 0) && (thing_ptr[0x1f] == arg_cx)) &&
+         (((*thing_ptr & 0x10) == 0 && (((thing_ptr[1] & 2) == 0 && (thing_ptr != arg_eax)))))) {
+        uval = (int)(arg_edx - (uint)*(ushort *)(thing_ptr + 0xd)) >> 0x1f; /* thing->mappos.val_x */
+        uval_2 = (int)(arg_ebx - (uint)*(ushort *)(thing_ptr + 0xf)) >> 0x1f; /* thing->mappos.val_y */
+        val_2 = ((arg_ebx - (uint)*(ushort *)(thing_ptr + 0xf) ^ uval_2) - uval_2) + /* thing->mappos.val_y */
+                ((arg_edx - (uint)*(ushort *)(thing_ptr + 0xd) ^ uval) - uval); /* thing->mappos.val_x */
+        if (val_2 < val_3) {
+          val_3 = val_2;
+          byte_ptr = thing_ptr;
         }
       }
-      iVar2 = iVar2 + 4;
-    } while (iVar2 != 0x2000);
+      val = val + 4;
+    } while (val != 0x2000);
   }
   else {
     local_18 = 4;
     do {
-      pbVar1 = *(byte **)((int)&DAT_001ae9fc + local_18);
-      if ((*pbVar1 & 1) != 0) {
-        if ((((pbVar1[0x1a] == uVar5) &&
-             (CONCAT31((int3)(char)((uint)in_stack_00000002 >> 0x18),pbVar1[0x1f]) ==
-              (int)(short)in_CX)) && ((*pbVar1 & 0x10) == 0)) &&
-           (((pbVar1[1] & 2) == 0 && (pbVar1 != in_EAX)))) {
-          uVar6 = (int)(in_EDX - (uint)*(ushort *)(pbVar1 + 0xd)) >> 0x1f;
-          uVar7 = (int)(unaff_EBX - (uint)*(ushort *)(pbVar1 + 0xf)) >> 0x1f;
-          iVar2 = ((unaff_EBX - (uint)*(ushort *)(pbVar1 + 0xf) ^ uVar7) - uVar7) +
-                  ((in_EDX - (uint)*(ushort *)(pbVar1 + 0xd) ^ uVar6) - uVar6);
-          if (iVar2 < iVar4) {
-            iVar4 = iVar2;
-            pbVar8 = pbVar1;
+      thing_ptr = *(byte **)((int)&g_thing_ptrs + local_18);
+      if ((*thing_ptr & 1) != 0) {
+        if ((((thing_ptr[0x1a] == uval) &&
+             (CONCAT31((int3)(char)((uint)in_stack_00000002 >> 0x18),thing_ptr[0x1f]) ==
+              (int)(short)arg_cx)) && ((*thing_ptr & 0x10) == 0)) &&
+           (((thing_ptr[1] & 2) == 0 && (thing_ptr != arg_eax)))) {
+          uval_2 = (int)(arg_edx - (uint)*(ushort *)(thing_ptr + 0xd)) >> 0x1f; /* thing->mappos.val_x */
+          uval_3 = (int)(arg_ebx - (uint)*(ushort *)(thing_ptr + 0xf)) >> 0x1f; /* thing->mappos.val_y */
+          val = ((arg_ebx - (uint)*(ushort *)(thing_ptr + 0xf) ^ uval_3) - uval_3) + /* thing->mappos.val_y */
+                  ((arg_edx - (uint)*(ushort *)(thing_ptr + 0xd) ^ uval_2) - uval_2); /* thing->mappos.val_x */
+          if (val < val_3) {
+            val_3 = val;
+            byte_ptr = thing_ptr;
           }
         }
       }
       local_18 = local_18 + 4;
     } while (local_18 != 0x2000);
   }
-  return pbVar8;
+  return byte_ptr;
 }
 
 /******************************************************************************
- * Function : sub_07d674 (Ghidra: FUN_0007d674)
- * Prototype: int sub_07d674(void);
+ * Function : ceiling_roll_action_random_07d674 (Original VA: 0x7d674, Ghidra: FUN_0007d674)
+ * Prototype: int ceiling_roll_action_random_07d674(void);
  * Address  : 0x7d674 (Size: 212 bytes)
  * Module   : ceiling.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x10f6c
- * Callees  : 2 -> 0x5131e, 0x827fc
+ * Purpose  : Evaluates deterministic lockstep PRNG (g_action_random_seed)
+ * Callers  : 1 -> angtool_process_dungeon_room_010f6c
+ * Callees  : 2 -> mapwho_process_map_subtile_05131e, creature_fn_0827fc
  ******************************************************************************/
-int FUN_0007d674(void)
+int ceiling_roll_action_random_07d674(void)
 
 {
-  char cVar1;
-  int iVar2;
-  int in_EDX;
-  uint uVar3;
-  int iVar4;
+  char ch;
+  int val;
+  int arg_edx;
+  uint rand_seed;
+  int val_2;
   int local_20;
   
   local_20 = 0;
-  uVar3 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-  DAT_002e8bf6 = uVar3 >> 0xd | uVar3 * 0x80000;
-  uVar3 = DAT_002e8bf6 % (uint)*(ushort *)(in_EDX + 0x3b);
-  iVar4 = 0;
+  rand_seed = g_action_random_seed * 0x24a1 + 0x24df;
+  g_action_random_seed = rand_seed >> 0xd | rand_seed * 0x80000;
+  rand_seed = g_action_random_seed % (uint)*(ushort *)(arg_edx + 0x3b);
+  val_2 = 0;
   while( true ) {
-    if ((int)(uint)*(ushort *)(in_EDX + 0x3b) <= iVar4) {
+    if ((int)(uint)*(ushort *)(arg_edx + 0x3b) <= val_2) {
       return local_20;
     }
-    iVar2 = FUN_0005131e();
-    if (((iVar2 != 0) && (cVar1 = FUN_000827fc(), cVar1 != '\0')) &&
-       (uVar3 = uVar3 - 1, local_20 = iVar2, uVar3 == 0)) break;
-    iVar4 = iVar4 + 1;
+    val = mapwho_process_map_subtile_05131e();
+    if (((val != 0) && (ch = creature_fn_0827fc(), ch != '\0')) &&
+       (rand_seed = rand_seed - 1, local_20 = val, rand_seed == 0)) break;
+    val_2 = val_2 + 1;
   }
-  return iVar2;
+  return val;
 }
 
 /******************************************************************************
- * Function : sub_07d748 (Ghidra: FUN_0007d748)
- * Prototype: byte * sub_07d748(void);
+ * Function : ceiling_fn_07d748 (Original VA: 0x7d748, Ghidra: FUN_0007d748)
+ * Prototype: byte * ceiling_fn_07d748(void);
  * Address  : 0x7d748 (Size: 120 bytes)
  * Module   : ceiling.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module ceiling.cpp procedure @ 0x07d748
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-byte * FUN_0007d748(void)
+byte * ceiling_fn_07d748(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  int in_EDX;
-  uint uVar2;
-  uint uVar3;
-  byte *pbVar4;
-  int iVar5;
-  byte *pbVar6;
+  int arg_eax;
+  int val;
+  int arg_edx;
+  uint uval;
+  uint uval_2;
+  byte *byte_ptr;
+  int val_2;
+  byte *byte_ptr_2;
   
-  iVar5 = 0x7fffffff;
-  pbVar6 = (byte *)0x0;
-  pbVar4 = &DAT_002eb40b;
+  val_2 = 0x7fffffff;
+  byte_ptr_2 = (byte *)0x0;
+  byte_ptr = &g_bss_002eb40b;
   do {
-    if (((*pbVar4 & 1) != 0) &&
-       (uVar2 = (int)(in_EAX - (uint)*(ushort *)(pbVar4 + 1)) >> 0x1f,
-       uVar3 = (int)(in_EDX - (uint)*(ushort *)(pbVar4 + 3)) >> 0x1f,
-       iVar1 = ((in_EDX - (uint)*(ushort *)(pbVar4 + 3) ^ uVar3) - uVar3) +
-               ((in_EAX - (uint)*(ushort *)(pbVar4 + 1) ^ uVar2) - uVar2), iVar1 < iVar5)) {
-      iVar5 = iVar1;
-      pbVar6 = pbVar4;
+    if (((*byte_ptr & 1) != 0) &&
+       (uval = (int)(arg_eax - (uint)*(ushort *)(byte_ptr + 1)) >> 0x1f,
+       uval_2 = (int)(arg_edx - (uint)*(ushort *)(byte_ptr + 3)) >> 0x1f,
+       val = ((arg_edx - (uint)*(ushort *)(byte_ptr + 3) ^ uval_2) - uval_2) +
+               ((arg_eax - (uint)*(ushort *)(byte_ptr + 1) ^ uval) - uval), val < val_2)) {
+      val_2 = val;
+      byte_ptr_2 = byte_ptr;
     }
-    pbVar4 = pbVar4 + 10;
-  } while (pbVar4 != &DAT_002eb541);
-  return pbVar6;
+    byte_ptr = byte_ptr + 10;
+  } while (byte_ptr != &g_network_game_active);
+  return byte_ptr_2;
 }
 
 /******************************************************************************
- * Function : sub_07d7c0 (Ghidra: FUN_0007d7c0)
- * Prototype: byte * sub_07d7c0(int param_1);
+ * Function : ceiling_process_thing_entity_07d7c0 (Original VA: 0x7d7c0, Ghidra: FUN_0007d7c0)
+ * Prototype: byte * ceiling_process_thing_entity_07d7c0(int param_1);
  * Address  : 0x7d7c0 (Size: 598 bytes)
  * Module   : ceiling.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Looks up Thing* in g_thing_ptrs[2048] and updates state
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-byte * FUN_0007d7c0(int param_1)
+byte * ceiling_process_thing_entity_07d7c0(int param_1)
 
 {
-  byte *pbVar1;
-  int in_EAX;
-  int iVar2;
-  int iVar3;
-  ushort in_CX;
-  int in_EDX;
-  uint uVar4;
-  uint uVar5;
-  short unaff_BX;
-  int iVar6;
-  byte *pbVar7;
+  byte *thing_ptr;
+  int arg_eax;
+  int val;
+  int val_2;
+  ushort arg_cx;
+  int arg_edx;
+  uint uval;
+  uint uval_2;
+  short arg_bx;
+  int val_3;
+  byte *byte_ptr;
   int local_24;
   int local_20;
   int local_1c;
   
-  iVar6 = 0x7fffffff;
-  pbVar7 = (byte *)0x0;
-  if ((unaff_BX == -1) && (in_CX == 0xffff)) {
+  val_3 = 0x7fffffff;
+  byte_ptr = (byte *)0x0;
+  if ((arg_bx == -1) && (arg_cx == 0xffff)) {
     local_24 = 4;
     do {
-      pbVar1 = *(byte **)((int)&DAT_001ae9fc + local_24);
-      if (((*pbVar1 & 1) != 0) &&
-         (uVar4 = (int)(in_EAX - (uint)*(ushort *)(pbVar1 + 0xd)) >> 0x1f,
-         uVar5 = (int)(in_EDX - (uint)*(ushort *)(pbVar1 + 0xf)) >> 0x1f,
-         iVar2 = ((in_EDX - (uint)*(ushort *)(pbVar1 + 0xf) ^ uVar5) - uVar5) +
-                 ((in_EAX - (uint)*(ushort *)(pbVar1 + 0xd) ^ uVar4) - uVar4), iVar2 < iVar6)) {
-        iVar6 = iVar2;
-        pbVar7 = pbVar1;
+      thing_ptr = *(byte **)((int)&g_thing_ptrs + local_24);
+      if (((*thing_ptr & 1) != 0) &&
+         (uval = (int)(arg_eax - (uint)*(ushort *)(thing_ptr + 0xd)) >> 0x1f, /* thing->mappos.val_x */
+         uval_2 = (int)(arg_edx - (uint)*(ushort *)(thing_ptr + 0xf)) >> 0x1f, /* thing->mappos.val_y */
+         val = ((arg_edx - (uint)*(ushort *)(thing_ptr + 0xf) ^ uval_2) - uval_2) + /* thing->mappos.val_y */
+                 ((arg_eax - (uint)*(ushort *)(thing_ptr + 0xd) ^ uval) - uval), val < val_3)) { /* thing->mappos.val_x */
+        val_3 = val;
+        byte_ptr = thing_ptr;
       }
       local_24 = local_24 + 4;
     } while (local_24 != 0x2000);
   }
-  else if (unaff_BX == -1) {
-    iVar2 = 4;
+  else if (arg_bx == -1) {
+    val = 4;
     do {
-      pbVar1 = *(byte **)((int)&DAT_001ae9fc + iVar2);
-      if ((((*pbVar1 & 1) != 0) && (pbVar1[0x1a] == in_CX)) &&
-         (uVar4 = (int)(in_EAX - (uint)*(ushort *)(pbVar1 + 0xd)) >> 0x1f,
-         uVar5 = (int)(in_EDX - (uint)*(ushort *)(pbVar1 + 0xf)) >> 0x1f,
-         iVar3 = ((in_EDX - (uint)*(ushort *)(pbVar1 + 0xf) ^ uVar5) - uVar5) +
-                 ((in_EAX - (uint)*(ushort *)(pbVar1 + 0xd) ^ uVar4) - uVar4), iVar3 < iVar6)) {
-        iVar6 = iVar3;
-        pbVar7 = pbVar1;
+      thing_ptr = *(byte **)((int)&g_thing_ptrs + val);
+      if ((((*thing_ptr & 1) != 0) && (thing_ptr[0x1a] == arg_cx)) &&
+         (uval = (int)(arg_eax - (uint)*(ushort *)(thing_ptr + 0xd)) >> 0x1f, /* thing->mappos.val_x */
+         uval_2 = (int)(arg_edx - (uint)*(ushort *)(thing_ptr + 0xf)) >> 0x1f, /* thing->mappos.val_y */
+         val_2 = ((arg_edx - (uint)*(ushort *)(thing_ptr + 0xf) ^ uval_2) - uval_2) + /* thing->mappos.val_y */
+                 ((arg_eax - (uint)*(ushort *)(thing_ptr + 0xd) ^ uval) - uval), val_2 < val_3)) { /* thing->mappos.val_x */
+        val_3 = val_2;
+        byte_ptr = thing_ptr;
       }
-      iVar2 = iVar2 + 4;
-    } while (iVar2 != 0x2000);
+      val = val + 4;
+    } while (val != 0x2000);
   }
-  else if (in_CX == 0xffff) {
+  else if (arg_cx == 0xffff) {
     local_20 = 4;
     do {
-      pbVar1 = *(byte **)((int)&DAT_001ae9fc + local_20);
-      if ((((*pbVar1 & 1) != 0) && ((uint)pbVar1[0x1f] == (int)unaff_BX)) &&
-         (uVar4 = (int)(in_EAX - (uint)*(ushort *)(pbVar1 + 0xd)) >> 0x1f,
-         uVar5 = (int)(in_EDX - (uint)*(ushort *)(pbVar1 + 0xf)) >> 0x1f,
-         iVar2 = ((in_EDX - (uint)*(ushort *)(pbVar1 + 0xf) ^ uVar5) - uVar5) +
-                 ((in_EAX - (uint)*(ushort *)(pbVar1 + 0xd) ^ uVar4) - uVar4), iVar2 < iVar6)) {
-        iVar6 = iVar2;
-        pbVar7 = pbVar1;
+      thing_ptr = *(byte **)((int)&g_thing_ptrs + local_20);
+      if ((((*thing_ptr & 1) != 0) && ((uint)thing_ptr[0x1f] == (int)arg_bx)) &&
+         (uval = (int)(arg_eax - (uint)*(ushort *)(thing_ptr + 0xd)) >> 0x1f, /* thing->mappos.val_x */
+         uval_2 = (int)(arg_edx - (uint)*(ushort *)(thing_ptr + 0xf)) >> 0x1f, /* thing->mappos.val_y */
+         val = ((arg_edx - (uint)*(ushort *)(thing_ptr + 0xf) ^ uval_2) - uval_2) + /* thing->mappos.val_y */
+                 ((arg_eax - (uint)*(ushort *)(thing_ptr + 0xd) ^ uval) - uval), val < val_3)) { /* thing->mappos.val_x */
+        val_3 = val;
+        byte_ptr = thing_ptr;
       }
       local_20 = local_20 + 4;
     } while (local_20 != 0x2000);
@@ -1323,285 +1314,285 @@ byte * FUN_0007d7c0(int param_1)
   else {
     local_1c = 4;
     do {
-      pbVar1 = *(byte **)((int)&DAT_001ae9fc + local_1c);
-      if (((((*pbVar1 & 1) != 0) && (pbVar1[0x1a] == in_CX)) &&
-          (CONCAT31((int3)(char)(in_CX >> 8),pbVar1[0x1f]) == (int)unaff_BX)) &&
-         (uVar4 = (int)(in_EAX - (uint)*(ushort *)(pbVar1 + 0xd)) >> 0x1f,
-         uVar5 = (int)(in_EDX - (uint)*(ushort *)(pbVar1 + 0xf)) >> 0x1f,
-         iVar2 = ((in_EDX - (uint)*(ushort *)(pbVar1 + 0xf) ^ uVar5) - uVar5) +
-                 ((in_EAX - (uint)*(ushort *)(pbVar1 + 0xd) ^ uVar4) - uVar4), iVar2 < iVar6)) {
-        iVar6 = iVar2;
-        pbVar7 = pbVar1;
+      thing_ptr = *(byte **)((int)&g_thing_ptrs + local_1c);
+      if (((((*thing_ptr & 1) != 0) && (thing_ptr[0x1a] == arg_cx)) &&
+          (CONCAT31((int3)(char)(arg_cx >> 8),thing_ptr[0x1f]) == (int)arg_bx)) &&
+         (uval = (int)(arg_eax - (uint)*(ushort *)(thing_ptr + 0xd)) >> 0x1f, /* thing->mappos.val_x */
+         uval_2 = (int)(arg_edx - (uint)*(ushort *)(thing_ptr + 0xf)) >> 0x1f, /* thing->mappos.val_y */
+         val = ((arg_edx - (uint)*(ushort *)(thing_ptr + 0xf) ^ uval_2) - uval_2) + /* thing->mappos.val_y */
+                 ((arg_eax - (uint)*(ushort *)(thing_ptr + 0xd) ^ uval) - uval), val < val_3)) { /* thing->mappos.val_x */
+        val_3 = val;
+        byte_ptr = thing_ptr;
       }
       local_1c = local_1c + 4;
     } while (local_1c != 0x2000);
   }
-  if ((pbVar7 != (byte *)0x0) &&
-     (uVar4 = (int)(in_EAX - (uint)*(ushort *)(pbVar7 + 0xd)) >> 0x1f,
-     uVar5 = (int)(in_EDX - (uint)*(ushort *)(pbVar7 + 0xf)) >> 0x1f,
-     param_1 < (int)(((in_EDX - (uint)*(ushort *)(pbVar7 + 0xf) ^ uVar5) - uVar5) +
-                    ((in_EAX - (uint)*(ushort *)(pbVar7 + 0xd) ^ uVar4) - uVar4)))) {
-    pbVar7 = (byte *)0x0;
+  if ((byte_ptr != (byte *)0x0) &&
+     (uval = (int)(arg_eax - (uint)*(ushort *)(byte_ptr + 0xd)) >> 0x1f,
+     uval_2 = (int)(arg_edx - (uint)*(ushort *)(byte_ptr + 0xf)) >> 0x1f,
+     param_1 < (int)(((arg_edx - (uint)*(ushort *)(byte_ptr + 0xf) ^ uval_2) - uval_2) +
+                    ((arg_eax - (uint)*(ushort *)(byte_ptr + 0xd) ^ uval) - uval)))) {
+    byte_ptr = (byte *)0x0;
   }
-  return pbVar7;
+  return byte_ptr;
 }
 
 /******************************************************************************
- * Function : sub_07da18 (Ghidra: FUN_0007da18)
- * Prototype: undefined8 sub_07da18(void);
+ * Function : ceiling_process_map_subtile_07da18 (Original VA: 0x7da18, Ghidra: FUN_0007da18)
+ * Prototype: undefined8 ceiling_process_map_subtile_07da18(void);
  * Address  : 0x7da18 (Size: 148 bytes)
  * Module   : ceiling.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 13 -> 0x7daac, 0xdc4cc, 0xdc5c4, 0xdc800, 0xdc859, 0xdc8ad, 0xdc8f9, 0xdccfc, 0xdcd44, 0xdd414 ...
- * Callees  : 1 -> 0xb391c
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 13 -> ceiling_fn_07daac, get_2d_angle_between_positions, get_3d_angles_between_positions, ssprite_blit_span_alpha_mode0, ssprite_blit_span_alpha_mode1, ssprite_blit_span_alpha_mode2, ssprite_blit_span_alpha_mode3, can_thing_traverse_subtile ...
+ * Callees  : 1 -> move_process_map_subtile_0b391c
  ******************************************************************************/
-undefined8 FUN_0007da18(void)
+undefined8 ceiling_process_map_subtile_07da18(void)
 
 {
-  int iVar1;
-  int in_EAX;
-  int iVar2;
-  undefined4 *puVar3;
-  uint uVar4;
+  int val;
+  int arg_eax;
+  int val_2;
+  undefined4 *word_ptr;
+  uint uval;
   uint extraout_ECX;
-  undefined4 in_EDX;
+  undefined4 arg_edx;
   uint local_14;
   uint local_10;
   
-  iVar1 = (uint)CONCAT11(*(undefined1 *)(in_EAX + 3),*(undefined1 *)(in_EAX + 1)) * 5;
-  uVar4 = *(uint *)((int)&DAT_00279203 + iVar1 + 1) & 0x7ff;
-  iVar2 = uVar4 * 0x18;
-  puVar3 = &DAT_0019e973 + uVar4 * 6;
-  if ((*(byte *)((int)&DAT_0019e973 + iVar2 + 2) & 0xe) == 0) {
-    if (((undefined4 *)((*(uint *)((int)&DAT_00279203 + iVar1 + 1) & 0xfffffff) >> 0x18) <=
-         (undefined4 *)(uint)*(byte *)(in_EAX + 5)) ||
-       (puVar3 = (undefined4 *)(uint)(*(byte *)((int)&DAT_0019e973 + iVar2 + 2) >> 4),
-       (undefined4 *)(uint)*(byte *)(in_EAX + 5) < puVar3)) {
-      uVar4 = CONCAT31((int3)((uint)puVar3 >> 8),1);
+  val = (uint)CONCAT11(*(undefined1 *)(arg_eax + 3),*(undefined1 *)(arg_eax + 1)) * 5;
+  uval = *(uint *)((int)&g_map_subtiles + val + 1) & 0x7ff;
+  val_2 = uval * 0x18;
+  word_ptr = &g_bss_0019e973 + uval * 6;
+  if ((*(byte *)((int)&g_bss_0019e973 + val_2 + 2) & 0xe) == 0) {
+    if (((undefined4 *)((*(uint *)((int)&g_map_subtiles + val + 1) & 0xfffffff) >> 0x18) <=
+         (undefined4 *)(uint)*(byte *)(arg_eax + 5)) ||
+       (word_ptr = (undefined4 *)(uint)(*(byte *)((int)&g_bss_0019e973 + val_2 + 2) >> 4),
+       (undefined4 *)(uint)*(byte *)(arg_eax + 5) < word_ptr)) {
+      uval = CONCAT31((int3)((uint)word_ptr >> 8),1);
       goto LAB_0007daa5;
     }
   }
   else {
-    puVar3 = (undefined4 *)FUN_000b391c();
+    word_ptr = (undefined4 *)move_process_map_subtile_0b391c();
     if ((local_10 <= extraout_ECX) || (extraout_ECX < local_14)) {
-      uVar4 = CONCAT31((int3)((uint)puVar3 >> 8),1);
+      uval = CONCAT31((int3)((uint)word_ptr >> 8),1);
       goto LAB_0007daa5;
     }
   }
-  uVar4 = (uint)puVar3 & 0xffffff00;
+  uval = (uint)word_ptr & 0xffffff00;
 LAB_0007daa5:
-  return CONCAT44(in_EDX,uVar4);
+  return CONCAT44(arg_edx,uval);
 }
 
 /******************************************************************************
- * Function : sub_07daac (Ghidra: FUN_0007daac)
- * Prototype: undefined4 sub_07daac(void);
+ * Function : ceiling_fn_07daac (Original VA: 0x7daac, Ghidra: FUN_0007daac)
+ * Prototype: undefined4 ceiling_fn_07daac(void);
  * Address  : 0x7daac (Size: 52 bytes)
  * Module   : ceiling.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0xdc984
- * Callees  : 2 -> 0x22b3a, 0x7da18
+ * Purpose  : Module ceiling.cpp procedure @ 0x07daac
+ * Callers  : 1 -> move_coord3d_along_angle_checked
+ * Callees  : 2 -> door_process_map_subtile_022b3a, ceiling_process_map_subtile_07da18
  ******************************************************************************/
-undefined4 FUN_0007daac(void)
+undefined4 ceiling_fn_07daac(void)
 
 {
-  int iVar1;
-  undefined4 uVar2;
+  int val;
+  undefined4 uval;
   int extraout_ECX;
   
-  iVar1 = FUN_00022b3a();
-  if (iVar1 == 0) {
-    uVar2 = FUN_0007da18();
-    return uVar2;
+  val = door_process_map_subtile_022b3a();
+  if (val == 0) {
+    uval = ceiling_process_map_subtile_07da18();
+    return uval;
   }
-  if (iVar1 == extraout_ECX) {
+  if (val == extraout_ECX) {
     return 0;
   }
   return 1;
 }
 
 /******************************************************************************
- * Function : sub_07dae0 (Ghidra: FUN_0007dae0)
- * Prototype: undefined4 sub_07dae0(void);
+ * Function : ceiling_fn_07dae0 (Original VA: 0x7dae0, Ghidra: FUN_0007dae0)
+ * Prototype: undefined4 ceiling_fn_07dae0(void);
  * Address  : 0x7dae0 (Size: 223 bytes)
  * Module   : ceiling.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x7f690
+ * Purpose  : Module ceiling.cpp procedure @ 0x07dae0
+ * Callers  : 1 -> creature_process_map_subtile_07f690
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_0007dae0(void)
+undefined4 ceiling_fn_07dae0(void)
 
 {
-  int in_EAX;
-  uint uVar1;
-  uint uVar2;
-  undefined4 uVar3;
-  ushort *in_EDX;
-  uint uVar4;
-  int unaff_EBX;
+  int arg_eax;
+  uint uval;
+  uint uval_2;
+  undefined4 uval_3;
+  ushort *arg_edx;
+  uint uval_4;
+  int arg_ebx;
   
-  if ((((*(short *)(in_EAX + 0x1d) == *(short *)(unaff_EBX + 0x1d)) ||
-       (uVar1 = ((uint)*(ushort *)(unaff_EBX + 0x5a) + (uint)*(ushort *)(in_EAX + 0x5a)) / 2,
-       uVar2 = (uint)*in_EDX - (uint)*(ushort *)(unaff_EBX + 0xd), uVar4 = (int)uVar2 >> 0x1f,
-       (int)uVar1 <= (int)((uVar2 ^ uVar4) - uVar4))) ||
-      (uVar2 = (uint)in_EDX[1] - (uint)*(ushort *)(unaff_EBX + 0xf), uVar4 = (int)uVar2 >> 0x1f,
-      (int)uVar1 <= (int)((uVar2 ^ uVar4) - uVar4))) ||
-     (uVar1 = ((*(int *)(in_EDX + 1) >> 0x10) + *(ushort *)(in_EAX + 0x5c) / 2) -
-              (*(ushort *)(unaff_EBX + 0x5c) / 2 + (*(int *)(unaff_EBX + 0xf) >> 0x10)),
-     uVar2 = (int)uVar1 >> 0x1f,
-     (int)(((uint)*(ushort *)(in_EAX + 0x5c) + (uint)*(ushort *)(unaff_EBX + 0x5c)) / 2) <=
-     (int)((uVar1 ^ uVar2) - uVar2))) {
-    uVar3 = 0;
+  if ((((*(short *)(arg_eax + 0x1d) == *(short *)(arg_ebx + 0x1d)) ||
+       (uval = ((uint)*(ushort *)(arg_ebx + 0x5a) + (uint)*(ushort *)(arg_eax + 0x5a)) / 2,
+       uval_2 = (uint)*arg_edx - (uint)*(ushort *)(arg_ebx + 0xd), uval_4 = (int)uval_2 >> 0x1f,
+       (int)uval <= (int)((uval_2 ^ uval_4) - uval_4))) ||
+      (uval_2 = (uint)arg_edx[1] - (uint)*(ushort *)(arg_ebx + 0xf), uval_4 = (int)uval_2 >> 0x1f,
+      (int)uval <= (int)((uval_2 ^ uval_4) - uval_4))) ||
+     (uval = ((*(int *)(arg_edx + 1) >> 0x10) + *(ushort *)(arg_eax + 0x5c) / 2) -
+              (*(ushort *)(arg_ebx + 0x5c) / 2 + (*(int *)(arg_ebx + 0xf) >> 0x10)),
+     uval_2 = (int)uval >> 0x1f,
+     (int)(((uint)*(ushort *)(arg_eax + 0x5c) + (uint)*(ushort *)(arg_ebx + 0x5c)) / 2) <=
+     (int)((uval ^ uval_2) - uval_2))) {
+    uval_3 = 0;
   }
   else {
-    uVar3 = 1;
+    uval_3 = 1;
   }
-  return uVar3;
+  return uval_3;
 }
 
 /******************************************************************************
- * Function : sub_07dbc0 (Ghidra: FUN_0007dbc0)
- * Prototype: undefined4 sub_07dbc0(void);
+ * Function : ceiling_process_map_subtile_07dbc0 (Original VA: 0x7dbc0, Ghidra: FUN_0007dbc0)
+ * Prototype: undefined4 ceiling_process_map_subtile_07dbc0(void);
  * Address  : 0x7dbc0 (Size: 435 bytes)
  * Module   : ceiling.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 35 -> 0x171e4, 0x2606f, 0x39eca, 0x5f6c5, 0x69268, 0x694d4, 0x6972c, 0x6d4df, 0x6d668, 0x7225e ...
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 35 -> combold_thing_stuck_finding_melee_0171e4, effect_process_thing_entity_02606f, group_update_creature_control_039eca, process_players_dungeon_command_packet, scrsupp_allocate_light_new_hero_069268, scrsupp_script_could_find_hero_0694d4, scrsupp_allocate_light_new_hero_06972c, shot_roll_action_random_06d4df ...
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_0007dbc0(void)
+undefined4 ceiling_process_map_subtile_07dbc0(void)
 
 {
-  byte bVar1;
-  ushort uVar2;
-  bool bVar3;
-  uint uVar4;
-  byte *pbVar5;
-  int in_EAX;
-  uint uVar6;
-  uint uVar7;
-  ushort *in_EDX;
-  uint uVar8;
-  uint uVar9;
-  byte *pbVar10;
+  byte flag;
+  ushort uval;
+  bool flag_2;
+  uint uval_2;
+  byte *byte_ptr;
+  int thing;
+  uint uval_3;
+  uint uval_4;
+  ushort *arg_edx;
+  uint uval_5;
+  uint uval_6;
+  byte *byte_ptr_2;
   
-  if (*(char *)(in_EAX + 0x1f) == '\x05') {
-    uVar2 = *(ushort *)(&DAT_0019073b + (uint)*(ushort *)(in_EAX + 0x56) * 2);
+  if (*(char *)(thing + 0x1f) == '\x05') { /* thing->class_id */
+    uval = *(ushort *)(&g_data_0019073b + (uint)*(ushort *)(thing + 0x56) * 2);
   }
   else {
-    uVar2 = *(ushort *)(in_EAX + 0x56);
+    uval = *(ushort *)(thing + 0x56);
   }
-  uVar6 = uVar2 / 2;
-  uVar8 = in_EDX[1] - uVar6 >> 8;
-  uVar9 = *in_EDX - uVar6 >> 8;
-  pbVar10 = (byte *)((int)&DAT_00279203 + (uVar9 + uVar8 * 0x100) * 5);
-  uVar7 = (uint)*(ushort *)(in_EAX + 0x58) + (*(int *)(in_EDX + 1) >> 0x10);
+  uval_3 = uval / 2;
+  uval_5 = arg_edx[1] - uval_3 >> 8;
+  uval_6 = *arg_edx - uval_3 >> 8;
+  byte_ptr_2 = (byte *)((int)&g_map_subtiles + (uval_6 + uval_5 * 0x100) * 5);
+  uval_4 = (uint)*(ushort *)(thing + 0x58) + (*(int *)(arg_edx + 1) >> 0x10);
   do {
-    uVar4 = uVar9;
-    pbVar5 = pbVar10;
-    if (in_EDX[1] + uVar6 >> 8 < uVar8) {
+    uval_2 = uval_6;
+    byte_ptr = byte_ptr_2;
+    if (arg_edx[1] + uval_3 >> 8 < uval_5) {
       return 0;
     }
-    for (; uVar4 <= *in_EDX + uVar6 >> 8; uVar4 = uVar4 + 1) {
-      if ((*pbVar5 & 0x10) == 0) {
-        bVar1 = *(byte *)((int)&DAT_0019e973 + (*(uint *)(pbVar5 + 1) & 0x7ff) * 0x18 + 2);
-        if (*(int *)(in_EDX + 1) >> 0x10 < (int)((uint)(bVar1 >> 4) * 0x100)) {
+    for (; uval_2 <= *arg_edx + uval_3 >> 8; uval_2 = uval_2 + 1) {
+      if ((*byte_ptr & 0x10) == 0) {
+        flag = *(byte *)((int)&g_bss_0019e973 + (*(uint *)(byte_ptr + 1) & 0x7ff) * 0x18 + 2);
+        if (*(int *)(arg_edx + 1) >> 0x10 < (int)((uint)(flag >> 4) * 0x100)) {
           return 1;
         }
-        if ((bVar1 & 0xe) == 0) {
-          if (((*(uint *)(pbVar5 + 1) & 0xfffffff) >> 0x18) * 0x100 < uVar7) {
+        if ((flag & 0xe) == 0) {
+          if (((*(uint *)(byte_ptr + 1) & 0xfffffff) >> 0x18) * 0x100 < uval_4) {
             return 1;
           }
         }
-        else if ((8 - (uint)((bVar1 & 0xf) >> 1)) * 0x100 < uVar7) {
+        else if ((8 - (uint)((flag & 0xf) >> 1)) * 0x100 < uval_4) {
           return 1;
         }
-        bVar3 = false;
+        flag_2 = false;
       }
       else {
-        bVar3 = true;
+        flag_2 = true;
       }
-      if (bVar3) {
+      if (flag_2) {
         return 1;
       }
-      pbVar5 = pbVar5 + 5;
+      byte_ptr = byte_ptr + 5;
     }
-    uVar8 = uVar8 + 1;
-    pbVar10 = pbVar10 + 0x500;
+    uval_5 = uval_5 + 1;
+    byte_ptr_2 = byte_ptr_2 + 0x500;
   } while( true );
 }
 
 /******************************************************************************
- * Function : sub_07ddf8 (Ghidra: FUN_0007ddf8)
- * Prototype: undefined4 sub_07ddf8(void);
+ * Function : ceiling_process_map_subtile_07ddf8 (Original VA: 0x7ddf8, Ghidra: FUN_0007ddf8)
+ * Prototype: undefined4 ceiling_process_map_subtile_07ddf8(void);
  * Address  : 0x7ddf8 (Size: 333 bytes)
  * Module   : ceiling.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 7 -> 0x739b9, 0xcc968, 0xccc08, 0xccf10, 0xcd1d4, 0xcdcd0, 0xdacf0
+ * Purpose  : Reads/modifies Map[256x256] subtile data
+ * Callers  : 7 -> temple_update_slab_subtile_columns_0739b9, room_number_slabs_room_zero_0cc968, room_could_find_valid_first_0ccc08, room_number_slabs_room_zero_0ccf10, room_could_find_valid_random_0cd1d4, room_update_slab_subtile_columns_0cdcd0, slab_could_find_nearby_space_0dacf0
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_0007ddf8(void)
+undefined4 ceiling_process_map_subtile_07ddf8(void)
 
 {
-  byte bVar1;
-  int iVar2;
-  byte *pbVar3;
-  int in_EAX;
-  uint uVar4;
-  ushort *in_EDX;
-  int iVar5;
-  int unaff_EBX;
-  int iVar6;
-  byte *pbVar7;
+  byte flag;
+  int val;
+  byte *byte_ptr;
+  int arg_eax;
+  uint uval;
+  ushort *arg_edx;
+  int val_2;
+  int arg_ebx;
+  int val_3;
+  byte *byte_ptr_2;
   
-  iVar5 = (int)((uint)in_EDX[1] - unaff_EBX) >> 8;
-  iVar6 = (int)((uint)*in_EDX - unaff_EBX) >> 8;
-  uVar4 = (uint)*(ushort *)(in_EAX + 0x58) + (*(int *)(in_EDX + 1) >> 0x10);
-  pbVar7 = (byte *)((int)&DAT_00279203 + (iVar6 + iVar5 * 0x100) * 5);
+  val_2 = (int)((uint)arg_edx[1] - arg_ebx) >> 8;
+  val_3 = (int)((uint)*arg_edx - arg_ebx) >> 8;
+  uval = (uint)*(ushort *)(arg_eax + 0x58) + (*(int *)(arg_edx + 1) >> 0x10);
+  byte_ptr_2 = (byte *)((int)&g_map_subtiles + (val_3 + val_2 * 0x100) * 5);
   do {
-    iVar2 = iVar6;
-    pbVar3 = pbVar7;
-    if ((int)((uint)in_EDX[1] + unaff_EBX) >> 8 < iVar5) {
+    val = val_3;
+    byte_ptr = byte_ptr_2;
+    if ((int)((uint)arg_edx[1] + arg_ebx) >> 8 < val_2) {
       return 0;
     }
-    for (; iVar2 <= (int)((uint)*in_EDX + unaff_EBX) >> 8; iVar2 = iVar2 + 1) {
-      if ((*pbVar3 & 0x10) != 0) {
+    for (; val <= (int)((uint)*arg_edx + arg_ebx) >> 8; val = val + 1) {
+      if ((*byte_ptr & 0x10) != 0) {
         return 1;
       }
-      bVar1 = *(byte *)((int)&DAT_0019e973 + (*(uint *)(pbVar3 + 1) & 0x7ff) * 0x18 + 2);
-      if (*(int *)(in_EDX + 1) >> 0x10 < (int)((uint)(bVar1 >> 4) * 0x100)) {
+      flag = *(byte *)((int)&g_bss_0019e973 + (*(uint *)(byte_ptr + 1) & 0x7ff) * 0x18 + 2);
+      if (*(int *)(arg_edx + 1) >> 0x10 < (int)((uint)(flag >> 4) * 0x100)) {
         return 1;
       }
-      if ((bVar1 & 0xe) == 0) {
-        if (((*(uint *)(pbVar3 + 1) & 0xfffffff) >> 0x18) * 0x100 < uVar4) {
+      if ((flag & 0xe) == 0) {
+        if (((*(uint *)(byte_ptr + 1) & 0xfffffff) >> 0x18) * 0x100 < uval) {
           return 1;
         }
       }
-      else if ((int)((8 - (uint)((bVar1 & 0xf) >> 1)) * 0x100) < (int)uVar4) {
+      else if ((int)((8 - (uint)((flag & 0xf) >> 1)) * 0x100) < (int)uval) {
         return 1;
       }
-      pbVar3 = pbVar3 + 5;
+      byte_ptr = byte_ptr + 5;
     }
-    iVar5 = iVar5 + 1;
-    pbVar7 = pbVar7 + 0x500;
+    val_2 = val_2 + 1;
+    byte_ptr_2 = byte_ptr_2 + 0x500;
   } while( true );
 }
 
 /******************************************************************************
- * Function : sub_07df48 (Ghidra: FUN_0007df48)
- * Prototype: undefined8 sub_07df48(void);
+ * Function : ceiling_fn_07df48 (Original VA: 0x7df48, Ghidra: FUN_0007df48)
+ * Prototype: undefined8 ceiling_fn_07df48(void);
  * Address  : 0x7df48 (Size: 28 bytes)
  * Module   : ceiling.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 12 -> 0x16b29, 0x3ed80, 0x63dd3, 0x640f7, 0x6d4df, 0x7231c, 0x73607, 0xc6be0, 0xe1b88, 0xe25c4 ...
+ * Purpose  : Module ceiling.cpp procedure @ 0x07df48
+ * Callers  : 12 -> combmove_update_creature_control_016b29, impset_fn_03ed80, person_update_creature_control_063dd3, person_update_creature_control_0640f7, shot_roll_action_random_06d4df, spell_update_creature_control_07231c, temple_update_creature_control_073607, room_process_dungeon_room_0c6be0 ...
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined8 FUN_0007df48(void)
+undefined8 ceiling_fn_07df48(void)
 
 {
-  int in_EAX;
-  undefined4 in_EDX;
+  int arg_eax;
+  undefined4 arg_edx;
   
-  return CONCAT44(in_EDX,(uint)(*(int *)(in_EAX + 0xf) >> 0x10 == (uint)*(ushort *)(in_EAX + 0x60)))
+  return CONCAT44(arg_edx,(uint)(*(int *)(arg_eax + 0xf) >> 0x10 == (uint)*(ushort *)(arg_eax + 0x60)))
   ;
 }
 

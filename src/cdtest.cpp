@@ -1,7 +1,7 @@
 /**
- * Dungeon Keeper (KEEPER.EXE) - Reconstructed Source Module: cdtest.cpp
+ * Dungeon Keeper (KEEPER.EXE) - Reconstructed & Semantically Named Module: cdtest.cpp
  * Binary Subject: /home/merlin/Dungeon Keeper/re/KEEPER.elf
- * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 (x86:LE:32:default)
+ * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 + DK Semantic Analyzer
  * Functions in this translation unit: 8
  */
 
@@ -11,100 +11,100 @@
 #include "../include/dk_functions.h"
 
 /******************************************************************************
- * Function : sub_014c9a (Ghidra: FUN_00014c9a)
- * Prototype: void sub_014c9a(void);
+ * Function : cdtest_process_slabmap_tile_014c9a (Original VA: 0x14c9a, Ghidra: FUN_00014c9a)
+ * Prototype: void cdtest_process_slabmap_tile_014c9a(void);
  * Address  : 0x14c9a (Size: 171 bytes)
  * Module   : cdtest.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x4a6a2
- * Callees  : 2 -> 0xd7688, 0xda6fc
+ * Purpose  : Reads/modifies SlabMap[85x85] tile entry
+ * Callers  : 1 -> instance_process_dungeon_room_04a6a2
+ * Callees  : 2 -> slab_attempt_place_animating_slab_0d7688, slab_process_slabmap_tile_0da6fc
  ******************************************************************************/
-void FUN_00014c9a(void)
+void cdtest_process_slabmap_tile_014c9a(void)
 
 {
-  byte bVar1;
-  int in_EAX;
-  int in_EDX;
-  undefined4 uVar2;
+  byte slab_coord;
+  int arg_eax;
+  int arg_edx;
+  undefined4 uval;
   
-  bVar1 = ((&DAT_002d33ca)
-           [((&DAT_0019033b)[(in_EAX / 3) * 3] + (&DAT_0019033b)[(in_EDX / 3) * 3] * 0x55) * 6] &
+  slab_coord = ((&g_slabmap)
+           [((&g_subtile_to_slab_lut)[(arg_eax / 3) * 3] + (&g_subtile_to_slab_lut)[(arg_edx / 3) * 3] * 0x55) * 6] &
           0x1f) >> 3;
-  if (bVar1 == 1) {
-    uVar2 = 0;
+  if (slab_coord == 1) {
+    uval = 0;
   }
-  else if (bVar1 == 2) {
-    uVar2 = 0;
+  else if (slab_coord == 2) {
+    uval = 0;
   }
   else {
-    uVar2 = 1;
+    uval = 1;
   }
-  FUN_000d7688(uVar2,(in_EDX / 3) * 3);
-  FUN_000da6fc();
+  slab_attempt_place_animating_slab_0d7688(uval,(arg_edx / 3) * 3);
+  slab_process_slabmap_tile_0da6fc();
   return;
 }
 
 /******************************************************************************
- * Function : sub_014e9f (Ghidra: FUN_00014e9f)
- * Prototype: void sub_014e9f(void);
+ * Function : cdtest_update_player_view_state_014e9f (Original VA: 0x14e9f, Ghidra: FUN_00014e9f)
+ * Prototype: void cdtest_update_player_view_state_014e9f(void);
  * Address  : 0x14e9f (Size: 267 bytes)
  * Module   : cdtest.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x4bf40
- * Callees  : 7 -> 0x400da, 0x401aa, 0xa5d4c, 0xd7688, 0xd99f8, 0xda6fc, 0xda7bc
+ * Purpose  : Accesses per-player PlayerInfo state (stride 0x4ef)
+ * Callers  : 1 -> instance_update_creature_control_04bf40
+ * Callees  : 7 -> imptool_stack_pos_0400da, imptool_update_player_dungeon_0401aa, engine3_mark_slab_subtiles_rendered, slab_attempt_place_animating_slab_0d7688, slab_process_slabmap_tile_0d99f8, slab_process_slabmap_tile_0da6fc, slab_process_slabmap_tile_0da7bc
  ******************************************************************************/
-void FUN_00014e9f(void)
+void cdtest_update_player_view_state_014e9f(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  undefined1 unaff_BL;
-  uint uVar2;
+  int arg_eax;
+  int val;
+  undefined1 arg_bl;
+  uint uval;
   
-  FUN_000d99f8(unaff_BL);
-  FUN_000d7688(0);
-  FUN_000da6fc();
-  uVar2 = 0;
+  slab_process_slabmap_tile_0d99f8(arg_bl);
+  slab_attempt_place_animating_slab_0d7688(0);
+  slab_process_slabmap_tile_0da6fc();
+  uval = 0;
   do {
-    if (uVar2 != (int)*(char *)(in_EAX + 6)) {
-      iVar1 = FUN_000401aa();
-      if (-1 < iVar1) {
-        FUN_000400da();
-        if (uVar2 == (byte)(&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef]) {
-          FUN_000a5d4c();
+    if (uval != (int)*(char *)(arg_eax + 6)) {
+      val = imptool_update_player_dungeon_0401aa();
+      if (-1 < val) {
+        imptool_stack_pos_0400da();
+        if (uval == (byte)(&g_player_id_number)[g_my_player_word._3_1_ * 0x4ef]) {
+          engine3_mark_slab_subtiles_rendered();
         }
       }
     }
-    uVar2 = uVar2 + 1;
-  } while ((int)uVar2 < 5);
-  FUN_000da7bc();
+    uval = uval + 1;
+  } while ((int)uval < 5);
+  slab_process_slabmap_tile_0da7bc();
   return;
 }
 
 /******************************************************************************
- * Function : sub_014faa (Ghidra: FUN_00014faa)
- * Prototype: undefined4 sub_014faa(void);
+ * Function : cdtest_process_slabmap_tile_014faa (Original VA: 0x14faa, Ghidra: FUN_00014faa)
+ * Prototype: undefined4 cdtest_process_slabmap_tile_014faa(void);
  * Address  : 0x14faa (Size: 134 bytes)
  * Module   : cdtest.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x15030
- * Callees  : 1 -> 0x3f80c
+ * Purpose  : Reads/modifies SlabMap[85x85] tile entry
+ * Callers  : 1 -> cdtest_fn_015030
+ * Callees  : 1 -> imptool_fn_03f80c
  ******************************************************************************/
-undefined4 FUN_00014faa(void)
+undefined4 cdtest_process_slabmap_tile_014faa(void)
 
 {
-  byte in_AL;
-  int iVar1;
-  int in_EDX;
-  int unaff_EBX;
+  byte arg_al;
+  int val;
+  int arg_edx;
+  int arg_ebx;
   
-  if (((&DAT_001921cf)[(uint)(byte)(&DAT_002d33c5)[(unaff_EBX * 0x55 + in_EDX) * 6] * 0x16] ==
+  if (((&g_data_001921cf)[(uint)(byte)(&g_slabmap_base)[(arg_ebx * 0x55 + arg_edx) * 6] * 0x16] ==
        '\x03') &&
-     (in_AL != ((&DAT_002d33ca)
-                [((&DAT_0019033b)[in_EDX * 3 + 1] + (&DAT_0019033b)[unaff_EBX * 3 + 1] * 0x55) * 6]
+     (arg_al != ((&g_slabmap)
+                [((&g_subtile_to_slab_lut)[arg_edx * 3 + 1] + (&g_subtile_to_slab_lut)[arg_ebx * 3 + 1] * 0x55) * 6]
                & 7))) {
-    iVar1 = FUN_0003f80c();
-    if (iVar1 == 0) {
+    val = imptool_fn_03f80c();
+    if (val == 0) {
       return 1;
     }
   }
@@ -112,217 +112,211 @@ undefined4 FUN_00014faa(void)
 }
 
 /******************************************************************************
- * Function : sub_015030 (Ghidra: FUN_00015030)
- * Prototype: void sub_015030(void);
+ * Function : cdtest_fn_015030 (Original VA: 0x15030, Ghidra: FUN_00015030)
+ * Prototype: void cdtest_fn_015030(void);
  * Address  : 0x15030 (Size: 189 bytes)
  * Module   : cdtest.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 5 -> 0x4a40c, 0xc4b0c, 0xd0118, 0xd0488, 0xd137c
- * Callees  : 5 -> 0x14faa, 0xd7688, 0xd9dc0, 0xda6fc, 0xdab3c
+ * Purpose  : Module cdtest.cpp procedure @ 0x015030
+ * Callers  : 5 -> instance_update_player_dungeon_04a40c, object_process_slabmap_tile_0c4b0c, room_how_room_exist_slabs_0d0118, room_how_room_exist_slabs_0d0488, room_fn_0d137c
+ * Callees  : 5 -> cdtest_process_slabmap_tile_014faa, slab_attempt_place_animating_slab_0d7688, slab_process_slabmap_tile_0d9dc0, slab_process_slabmap_tile_0da6fc, slab_process_slabmap_tile_0dab3c
  ******************************************************************************/
-void FUN_00015030(void)
+void cdtest_fn_015030(void)
 
 {
-  byte in_AL;
-  int iVar1;
-  undefined4 in_EDX;
-  undefined1 *puVar2;
-  uint *puVar3;
+  byte arg_al;
+  int val;
+  undefined4 arg_edx;
+  undefined1 *word_ptr;
+  uint *word_ptr_2;
   uint auStack_3c [5];
   char local_1c;
   byte local_14;
   
-  puVar3 = auStack_3c + 2;
-  auStack_3c[4] = in_EDX;
+  word_ptr_2 = auStack_3c + 2;
+  auStack_3c[4] = arg_edx;
   for (local_14 = 0; local_14 < 4; local_14 = local_14 + 1) {
-    local_1c = (char)auStack_3c[4] + *(char *)((int)&DAT_0018b67b + (uint)local_14 * 2 + 3);
-    auStack_3c[3] = (uint)in_AL;
-    *(undefined4 *)((int)puVar3 + -4) = 0x15082;
-    iVar1 = FUN_00014faa();
-    puVar2 = (undefined1 *)puVar3;
-    if (iVar1 != 0) {
-      puVar2 = (undefined1 *)((int)puVar3 + -4);
-      *(undefined4 *)((int)puVar3 + -4) = 0;
+    local_1c = (char)auStack_3c[4] + *(char *)((int)&g_data_0018b67b + (uint)local_14 * 2 + 3);
+    auStack_3c[3] = (uint)arg_al;
+    *(undefined4 *)((int)word_ptr_2 + -4) = 0x15082;
+    val = cdtest_process_slabmap_tile_014faa();
+    word_ptr = (undefined1 *)word_ptr_2;
+    if (val != 0) {
+      word_ptr = (undefined1 *)((int)word_ptr_2 + -4);
+      *(undefined4 *)((int)word_ptr_2 + -4) = 0;
       auStack_3c[2] = (uint)(byte)(local_1c * '\x03' + 1);
-      *(undefined4 *)((int)puVar3 + -8) = 0x150c5;
-      FUN_000d9dc0();
-      *(undefined4 *)((int)puVar3 + -8) = 0x150d3;
-      FUN_000d7688();
-      *(undefined4 *)((int)puVar3 + -8) = 0x150df;
-      FUN_000dab3c();
-      *(undefined4 *)((int)puVar3 + -8) = 0x150e8;
-      FUN_000da6fc();
+      *(undefined4 *)((int)word_ptr_2 + -8) = 0x150c5;
+      slab_process_slabmap_tile_0d9dc0();
+      *(undefined4 *)((int)word_ptr_2 + -8) = 0x150d3;
+      slab_attempt_place_animating_slab_0d7688();
+      *(undefined4 *)((int)word_ptr_2 + -8) = 0x150df;
+      slab_process_slabmap_tile_0dab3c();
+      *(undefined4 *)((int)word_ptr_2 + -8) = 0x150e8;
+      slab_process_slabmap_tile_0da6fc();
     }
-    puVar3 = (uint *)puVar2;
+    word_ptr_2 = (uint *)word_ptr;
   }
   return;
 }
 
 /******************************************************************************
- * Function : dk_ldata_dkwind00_dat_0150f0 (Ghidra: FUN_000150f0)
- * Prototype: void dk_ldata_dkwind00_dat_0150f0(void);
+ * Function : cdtest_ldata_dkwind00_dat_0150f0 (Original VA: 0x150f0, Ghidra: FUN_000150f0)
+ * Prototype: void cdtest_ldata_dkwind00_dat_0150f0(void);
  * Address  : 0x150f0 (Size: 258 bytes)
  * Module   : cdtest.cpp [direct_file_string_xref]
- * OrigLine : cdtest.cpp:61 ("Unable to test for CD in drive")
- * Naming   : String 'LDATA\DKWIND00.DAT'
- * Callers  : 41 -> 0x29738, 0x29800, 0x298b5, 0x29979, 0x299f8, 0x29ac2, 0x29b54, 0x29bfe, 0x29d32, 0x29d96 ...
- * Callees  : 12 -> 0x151f8, 0x15251, 0xddaf0, 0xe7714, 0xe7904, 0xe797c, 0xe79fc, 0xe830c, 0xe83f0, 0xe846c ...
- * Strings  :
- *   - 0x1603d8: "cdtest.cpp"
- *   - 0x1603a0: "LDATA\DKWIND00.DAT"
- *   - 0x1603b3: "%s\%s"
- *   - 0x174b00: "data\nocd.raw"
- *   - 0x1603b9: "Unable to test for CD in drive"
+ * OrigLine : cdtest.cpp lines 61
+ * Purpose  : String 'LDATA\DKWIND00.DAT'
+ * Callers  : 41 -> evil_settings_dat_029738, evil_fn_029800, evil_process_map_subtile_0298b5, file_process_map_subtile_029979, file_process_slabmap_tile_0299f8, file_process_map_subtile_029ac2, file_fn_029b54, file_fn_029bfe ...
+ * Callees  : 12 -> cdtest_fn_0151f8, cdtest_fn_015251, LbErrorLog, dk_sprintf, bflib_system_io_fn_0e7904, LbScreenLock, bflib_system_io_fn_0e79fc, LbDataLoadAll ...
  ******************************************************************************/
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void FUN_000150f0(void)
+void cdtest_ldata_dkwind00_dat_0150f0(void)
 
 {
-  int iVar1;
+  int screen_res;
   int extraout_EDX;
-  undefined8 uVar2;
+  undefined8 screen_res_2;
   undefined1 local_9c [144];
   
-  FUN_000e7714(local_9c,s__s__s_001603b3,&DAT_002ee923,s_LDATA_DKWIND00_DAT_001603a0); /* 0x1603a0="LDATA\DKWIND00.DAT" */
-  uVar2 = FUN_000151f8();
-  if ((int)uVar2 == 0) {
-    if ((int)((ulonglong)uVar2 >> 0x20) != 0) {
-      FUN_000e797c();
+  dk_sprintf(local_9c,s__s__s_001603b3,&g_bss_002ee923,s_LDATA_DKWIND00_DAT_001603a0); /* 0x1603a0="LDATA\DKWIND00.DAT" */
+  screen_res_2 = cdtest_fn_0151f8();
+  if ((int)screen_res_2 == 0) {
+    if ((int)((ulonglong)screen_res_2 >> 0x20) != 0) {
+      LbScreenLock();
     }
-    iVar1 = FUN_000e830c();
-    if (iVar1 != 0) {
-      FUN_000ddaf0(); /* LbErrorLog("cdtest.cpp", line 61, "Unable to test for CD in drive") */
+    screen_res = LbDataLoadAll();
+    if (screen_res != 0) {
+      LbErrorLog(); /* LbErrorLog("cdtest.cpp", line 61, "Unable to test for CD in drive") */
       return;
     }
-    FUN_000e7904(0);
-    FUN_000e846c(_DAT_001991a4);
-    while (DAT_0019a2a1 == '\0') {
-      iVar1 = FUN_000151f8();
-      if (iVar1 != 0) break;
-      iVar1 = FUN_00015251();
-      if (iVar1 != 0) {
-        FUN_000e79fc();
+    bflib_system_io_fn_0e7904(0);
+    LbPaletteSet(g_data_001991a4);
+    while (g_bss_0019a2a1 == '\0') {
+      screen_res = cdtest_fn_0151f8();
+      if (screen_res != 0) break;
+      screen_res = cdtest_fn_015251();
+      if (screen_res != 0) {
+        bflib_system_io_fn_0e79fc();
       }
       while( true ) {
-        iVar1 = FUN_000e8560();
-        if (iVar1 == 0) break;
-        iVar1 = FUN_000e797c();
-        if (((iVar1 != 0) || (DAT_0019a2a1 != '\0')) || (DAT_0019a2a0 != '\0')) goto LAB_000151cf;
+        screen_res = LbKeyboardRead();
+        if (screen_res == 0) break;
+        screen_res = LbScreenLock();
+        if (((screen_res != 0) || (g_bss_0019a2a1 != '\0')) || (g_bss_0019a2a0 != '\0')) goto LAB_000151cf;
       }
-      DAT_0019a2a1 = '\x01';
+      g_bss_0019a2a1 = '\x01';
 LAB_000151cf:
-      FUN_000e8858();
+      bflib_system_io_fn_0e8858();
     }
-    FUN_000e83f0();
+    LbDataFree();
     if (extraout_EDX != 0) {
-      FUN_000e797c();
+      LbScreenLock();
     }
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0151f2 (Ghidra: FUN_000151f2)
- * Prototype: undefined4 sub_0151f2(void);
+ * Function : cdtest_fn_0151f2 (Original VA: 0x151f2, Ghidra: FUN_000151f2)
+ * Prototype: undefined4 cdtest_fn_0151f2(void);
  * Address  : 0x151f2 (Size: 6 bytes)
  * Module   : cdtest.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Module cdtest.cpp procedure @ 0x0151f2
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_000151f2(void)
+undefined4 cdtest_fn_0151f2(void)
 
 {
   return 3;
 }
 
 /******************************************************************************
- * Function : sub_0151f8 (Ghidra: FUN_000151f8)
- * Prototype: longlong sub_0151f8(void);
+ * Function : cdtest_fn_0151f8 (Original VA: 0x151f8, Ghidra: FUN_000151f8)
+ * Prototype: longlong cdtest_fn_0151f8(void);
  * Address  : 0x151f8 (Size: 89 bytes)
  * Module   : cdtest.cpp [callgraph_affinity_to_preceding_unit]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x150f0
- * Callees  : 4 -> 0xe8876, 0xe8980, 0xe8a1c, 0xe8a80
+ * Purpose  : Module cdtest.cpp procedure @ 0x0151f8
+ * Callers  : 1 -> cdtest_ldata_dkwind00_dat_0150f0
+ * Callees  : 4 -> bflib_system_io_fn_0e8876, LbFileOpen, bflib_system_io_fn_0e8a1c, LbFileRead
  ******************************************************************************/
-longlong FUN_000151f8(void)
+longlong cdtest_fn_0151f8(void)
 
 {
-  int iVar1;
-  uint in_EDX;
+  int file_handle;
+  uint arg_edx;
   
-  FUN_000e8876();
-  iVar1 = FUN_000e8980();
-  if (iVar1 != -1) {
-    iVar1 = FUN_000e8a80();
-    if (iVar1 != -1) {
-      FUN_000e8a1c();
-      return CONCAT44(in_EDX,1);
+  bflib_system_io_fn_0e8876();
+  file_handle = LbFileOpen();
+  if (file_handle != -1) {
+    file_handle = LbFileRead();
+    if (file_handle != -1) {
+      bflib_system_io_fn_0e8a1c();
+      return CONCAT44(arg_edx,1);
     }
-    FUN_000e8a1c();
+    bflib_system_io_fn_0e8a1c();
   }
-  return (ulonglong)in_EDX << 0x20;
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : sub_015251 (Ghidra: FUN_00015251)
- * Prototype: undefined8 sub_015251(void);
+ * Function : cdtest_fn_015251 (Original VA: 0x15251, Ghidra: FUN_00015251)
+ * Prototype: undefined8 cdtest_fn_015251(void);
  * Address  : 0x15251 (Size: 198 bytes)
  * Module   : cdtest.cpp [callgraph_affinity_to_preceding_unit]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x150f0
- * Callees  : 2 -> 0xe797c, 0xe8c83
+ * Purpose  : Module cdtest.cpp procedure @ 0x015251
+ * Callers  : 1 -> cdtest_ldata_dkwind00_dat_0150f0
+ * Callees  : 2 -> LbScreenLock, LbFileClose
  ******************************************************************************/
-undefined8 FUN_00015251(void)
+undefined8 cdtest_fn_015251(void)
 
 {
-  undefined1 uVar1;
-  int iVar2;
-  int iVar3;
-  undefined4 uVar4;
-  undefined1 *puVar5;
+  undefined1 uval;
+  int screen_res;
+  int val;
+  undefined4 uval_2;
+  undefined1 *word_ptr;
   int extraout_ECX;
-  undefined4 in_EDX;
-  undefined1 *puVar6;
+  undefined4 arg_edx;
+  undefined1 *word_ptr_2;
   
-  iVar2 = FUN_000e797c();
-  if (iVar2 == 1) {
-    if ((DAT_003d9878 == 0xd) || (DAT_003d9878 == 10)) {
-      puVar5 = DAT_003d9818;
-      if (DAT_003d9878 == 0xd) {
-        puVar5 = DAT_003d9818 + DAT_003d9834 * 0x28;
+  screen_res = LbScreenLock();
+  if (screen_res == 1) {
+    if ((g_active_screen_mode == 0xd) || (g_active_screen_mode == 10)) {
+      word_ptr = g_display_bss_003d9818;
+      if (g_active_screen_mode == 0xd) {
+        word_ptr = g_display_bss_003d9818 + g_screen_pitch * 0x28;
       }
-      iVar2 = 0;
-      puVar6 = DAT_001991a0;
+      screen_res = 0;
+      word_ptr_2 = g_data_001991a0;
       do {
-        iVar3 = 0;
+        val = 0;
         do {
-          uVar1 = *puVar6;
-          *puVar5 = uVar1;
-          iVar3 = iVar3 + 1;
-          puVar6 = puVar6 + 1;
-          puVar5[1] = uVar1;
-          puVar5 = puVar5 + 2;
-        } while (iVar3 < 0x140);
-        iVar2 = iVar2 + 1;
-        FUN_000e8c83();
-        puVar5 = (undefined1 *)(extraout_ECX + DAT_003d9834);
-      } while (iVar2 < 200);
+          uval = *word_ptr_2;
+          *word_ptr = uval;
+          val = val + 1;
+          word_ptr_2 = word_ptr_2 + 1;
+          word_ptr[1] = uval;
+          word_ptr = word_ptr + 2;
+        } while (val < 0x140);
+        screen_res = screen_res + 1;
+        LbFileClose();
+        word_ptr = (undefined1 *)(extraout_ECX + g_screen_pitch);
+      } while (screen_res < 200);
     }
     else {
-      iVar2 = 0;
+      screen_res = 0;
       do {
-        FUN_000e8c83();
-        iVar2 = iVar2 + 1;
-      } while (iVar2 < 200);
+        LbFileClose();
+        screen_res = screen_res + 1;
+      } while (screen_res < 200);
     }
-    FUN_000e797c();
-    uVar4 = 1;
+    LbScreenLock();
+    uval_2 = 1;
   }
   else {
-    uVar4 = 0;
+    uval_2 = 0;
   }
-  return CONCAT44(in_EDX,uVar4);
+  return CONCAT44(arg_edx,uval_2);
 }
 

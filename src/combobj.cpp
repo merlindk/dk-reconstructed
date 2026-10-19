@@ -1,7 +1,7 @@
 /**
- * Dungeon Keeper (KEEPER.EXE) - Reconstructed Source Module: combobj.cpp
+ * Dungeon Keeper (KEEPER.EXE) - Reconstructed & Semantically Named Module: combobj.cpp
  * Binary Subject: /home/merlin/Dungeon Keeper/re/KEEPER.elf
- * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 (x86:LE:32:default)
+ * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 + DK Semantic Analyzer
  * Functions in this translation unit: 14
  */
 
@@ -11,437 +11,418 @@
 #include "../include/dk_functions.h"
 
 /******************************************************************************
- * Function : sub_016cd0 (Ghidra: FUN_00016cd0)
- * Prototype: void sub_016cd0(void);
+ * Function : combobj_update_creature_control_016cd0 (Original VA: 0x16cd0, Ghidra: FUN_00016cd0)
+ * Prototype: void combobj_update_creature_control_016cd0(void);
  * Address  : 0x16cd0 (Size: 104 bytes)
  * Module   : combobj.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x16d38
- * Callees  : 1 -> 0x15e26
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
+ * Callers  : 1 -> combobj_fn_016d38
+ * Callees  : 1 -> combat_update_creature_control_015e26
  ******************************************************************************/
-void FUN_00016cd0(void)
+void combobj_update_creature_control_016cd0(void)
 
 {
-  byte bVar1;
-  undefined4 uVar2;
-  int in_EAX;
-  int in_EDX;
-  int iVar3;
-  undefined8 uVar4;
+  byte flag;
+  undefined4 uval;
+  int thing;
+  int arg_edx;
+  int cctrl_ptr;
+  undefined8 uval_2;
   
-  bVar1 = *(byte *)(in_EAX + 0x1a);
-  iVar3 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  *(undefined2 *)(iVar3 + 0xa2) = *(undefined2 *)(in_EDX + 0x1b);
-  uVar2 = *(undefined4 *)(in_EDX + 9);
-  *(undefined1 *)(iVar3 + 0xaa) = 0;
-  *(undefined4 *)(iVar3 + 0x9e) = uVar2;
-  *(byte *)(iVar3 + 3) = *(byte *)(iVar3 + 3) | 8;
-  if ((&DAT_002e918a)[(uint)bVar1 * 0xe6] == '\x02') {
-    uVar4 = FUN_00015e26();
-    iVar3 = (int)((ulonglong)uVar4 >> 0x20);
-    if ((int)uVar4 != 0) {
-      *(undefined1 *)(iVar3 + 0xa6) = 2;
+  flag = *(byte *)(thing + 0x1a);
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  *(undefined2 *)(cctrl_ptr + 0xa2) = *(undefined2 *)(arg_edx + 0x1b);
+  uval = *(undefined4 *)(arg_edx + 9);
+  *(undefined1 *)(cctrl_ptr + 0xaa) = 0;
+  *(undefined4 *)(cctrl_ptr + 0x9e) = uval;
+  *(byte *)(cctrl_ptr + 3) = *(byte *)(cctrl_ptr + 3) | 8;
+  if ((&g_bss_002e918a)[(uint)flag * 0xe6] == '\x02') {
+    uval_2 = combat_update_creature_control_015e26();
+    cctrl_ptr = (int)((ulonglong)uval_2 >> 0x20);
+    if ((int)uval_2 != 0) {
+      *(undefined1 *)(cctrl_ptr + 0xa6) = 2;
       return;
     }
   }
-  *(undefined1 *)(iVar3 + 0xa6) = 1;
+  *(undefined1 *)(cctrl_ptr + 0xa6) = 1;
   return;
 }
 
 /******************************************************************************
- * Function : sub_016d38 (Ghidra: FUN_00016d38)
- * Prototype: undefined4 sub_016d38(void);
+ * Function : combobj_fn_016d38 (Original VA: 0x16d38, Ghidra: FUN_00016d38)
+ * Prototype: undefined4 combobj_fn_016d38(void);
  * Address  : 0x16d38 (Size: 42 bytes)
  * Module   : combobj.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 4 -> 0x15b37, 0x38edc, 0x63dd3, 0xe1b88
- * Callees  : 2 -> 0x16cd0, 0x64a5f
+ * Purpose  : Module combobj.cpp procedure @ 0x016d38
+ * Callers  : 4 -> combat_fn_015b37, good_update_player_dungeon_038edc, person_update_creature_control_063dd3, update_creature_has_illegal_state_0e1b88
+ * Callees  : 2 -> combobj_update_creature_control_016cd0, person_external_change_state_but_064a5f
  ******************************************************************************/
-undefined4 FUN_00016d38(void)
+undefined4 combobj_fn_016d38(void)
 
 {
-  char cVar1;
+  char ch;
   
-  cVar1 = FUN_00064a5f();
-  if (cVar1 != '\0') {
-    FUN_00016cd0();
+  ch = person_external_change_state_but_064a5f();
+  if (ch != '\0') {
+    combobj_update_creature_control_016cd0();
     return 1;
   }
   return 0;
 }
 
 /******************************************************************************
- * Function : dk_object_combat_but_should_016d62 (Ghidra: FUN_00016d62)
- * Prototype: longlong dk_object_combat_but_should_016d62(void);
+ * Function : combobj_object_combat_but_should_016d62 (Original VA: 0x16d62, Ghidra: FUN_00016d62)
+ * Prototype: longlong combobj_object_combat_but_should_016d62(void);
  * Address  : 0x16d62 (Size: 147 bytes)
  * Module   : combobj.cpp [direct_file_string_xref]
- * OrigLine : combobj.cpp:93 ("Invalid fight object state")
- * Naming   : String 'NOT IN OBJECT COMBAT BUT SHOULD BE'
+ * OrigLine : combobj.cpp lines 93
+ * Purpose  : String 'NOT IN OBJECT COMBAT BUT SHOULD BE'
  * Callers  : 0 -> 
- * Callees  : 3 -> 0x16423, 0x63b6d, 0xddaf0
- * Strings  :
- *   - 0x16055b: "combobj.cpp"
- *   - 0x160582: "combobj.cpp"
- *   - 0x160538: "NOT IN OBJECT COMBAT BUT SHOULD BE"
- *   - 0x160567: "Invalid fight object state"
+ * Callees  : 3 -> combchk_control_structure_gt_ca_016423, person_fn_063b6d, LbErrorLog
  ******************************************************************************/
-longlong FUN_00016d62(void)
+longlong combobj_object_combat_but_should_016d62(void)
 
 {
-  int iVar1;
-  int in_EAX;
-  int iVar2;
-  int iVar3;
-  uint in_EDX;
+  int thing_ptr;
+  int thing;
+  int val;
+  int cctrl_ptr;
+  uint arg_edx;
   
-  iVar3 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  iVar1 = (&DAT_001ae9fc)[*(ushort *)(iVar3 + 0xa2)];
-  if ((*(byte *)(iVar3 + 3) & 8) != 0) {
-    iVar2 = FUN_00016423();
-    if ((iVar2 == 0) || (*(char *)(iVar1 + 7) == '\x03')) goto LAB_00016de7;
-    iVar3 = (uint)*(byte *)(iVar3 + 0xa6) * 4;
-    if (*(int *)(&DAT_00174b94 + iVar3) != 0) {
-      (**(code **)(&DAT_00174b94 + iVar3))();
-      return CONCAT44(in_EDX,1);
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  thing_ptr = (&g_thing_ptrs)[*(ushort *)(cctrl_ptr + 0xa2)];
+  if ((*(byte *)(cctrl_ptr + 3) & 8) != 0) {
+    val = combchk_control_structure_gt_ca_016423();
+    if ((val == 0) || (*(char *)(thing_ptr + 7) == '\x03')) goto LAB_00016de7;
+    cctrl_ptr = (uint)*(byte *)(cctrl_ptr + 0xa6) * 4;
+    if (*(int *)(&g_data_00174b94 + cctrl_ptr) != 0) {
+      (**(code **)(&g_data_00174b94 + cctrl_ptr))();
+      return CONCAT44(arg_edx,1);
     }
   }
-  FUN_000ddaf0(); /* LbErrorLog("combobj.cpp", line 93, "Invalid fight object state") */
+  LbErrorLog(); /* LbErrorLog("combobj.cpp", line 93, "Invalid fight object state") */
 LAB_00016de7:
-  FUN_00063b6d();
-  return (ulonglong)in_EDX << 0x20;
+  person_fn_063b6d();
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : dk_creature_has_melee_instance_016df5 (Ghidra: FUN_00016df5)
- * Prototype: void dk_creature_has_melee_instance_016df5(void);
+ * Function : combobj_creature_has_melee_instance_016df5 (Original VA: 0x16df5, Ghidra: FUN_00016df5)
+ * Prototype: void combobj_creature_has_melee_instance_016df5(void);
  * Address  : 0x16df5 (Size: 166 bytes)
  * Module   : combobj.cpp [direct_file_string_xref]
- * OrigLine : combobj.cpp:121
- * Naming   : String 'CREATURE %d HAS NO MELEE INSTANCE IN FIGHT'
+ * OrigLine : combobj.cpp lines 121
+ * Purpose  : String 'CREATURE %d HAS NO MELEE INSTANCE IN FIGHT'
  * Callers  : 0 -> 
- * Callees  : 6 -> 0x169a5, 0x18671, 0x189d4, 0x63b6d, 0xddaf0, 0xe7714
- * Strings  :
- *   - 0x1605b9: "combobj.cpp"
- *   - 0x16058e: "CREATURE %d HAS NO MELEE INSTANCE IN FIGHT"
+ * Callees  : 6 -> combmove_update_creature_control_0169a5, combtool_fn_018671, combtool_fn_0189d4, person_fn_063b6d, LbErrorLog, dk_sprintf
  ******************************************************************************/
-void FUN_00016df5(void)
+void combobj_creature_has_melee_instance_016df5(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  int iVar2;
+  int arg_eax;
+  int val;
+  int val_2;
   
-  FUN_000189d4();
-  iVar1 = FUN_00018671();
-  if (iVar1 == 0) {
-    FUN_000e7714(&DAT_0019cbac,s_CREATURE__d_HAS_NO_MELEE_INSTANC_0016058e,
-                 *(undefined1 *)(in_EAX + 0x1a));
-    FUN_000ddaf0(); /* LbErrorLog("combobj.cpp", line 121, g_log_buf) */
-    FUN_00063b6d();
+  combtool_fn_0189d4();
+  val = combtool_fn_018671();
+  if (val == 0) {
+    dk_sprintf(&g_log_sprintf_buf,s_CREATURE__d_HAS_NO_MELEE_INSTANC_0016058e,
+                 *(undefined1 *)(arg_eax + 0x1a));
+    LbErrorLog(); /* LbErrorLog("combobj.cpp", line 121, g_log_buf) */
+    person_fn_063b6d();
   }
   else {
-    iVar2 = FUN_000169a5();
-    if ((iVar2 != 0) && (0 < iVar1)) {
-      FUN_00049bfc(0);
+    val_2 = combmove_update_creature_control_0169a5();
+    if ((val_2 != 0) && (0 < val)) {
+      instance_negative_instance_049bfc(0);
     }
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_016e9b (Ghidra: FUN_00016e9b)
- * Prototype: void sub_016e9b(void);
+ * Function : combobj_fn_016e9b (Original VA: 0x16e9b, Ghidra: FUN_00016e9b)
+ * Prototype: void combobj_fn_016e9b(void);
  * Address  : 0x16e9b (Size: 106 bytes)
  * Module   : combobj.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Module combobj.cpp procedure @ 0x016e9b
  * Callers  : 0 -> 
- * Callees  : 4 -> 0x168a2, 0x186d2, 0x189d4, 0x49bfc
+ * Callees  : 4 -> combmove_update_creature_control_0168a2, combtool_fn_0186d2, combtool_fn_0189d4, instance_negative_instance_049bfc
  ******************************************************************************/
-void FUN_00016e9b(void)
+void combobj_fn_016e9b(void)
 
 {
-  int iVar1;
-  int iVar2;
+  int val;
+  int val_2;
   
-  FUN_000189d4();
-  iVar1 = FUN_000186d2();
-  iVar2 = FUN_000168a2();
-  if ((iVar2 != 0) && (0 < iVar1)) {
-    FUN_00049bfc(0);
+  combtool_fn_0189d4();
+  val = combtool_fn_0186d2();
+  val_2 = combmove_update_creature_control_0168a2();
+  if ((val_2 != 0) && (0 < val)) {
+    instance_negative_instance_049bfc(0);
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_016f05 (Ghidra: FUN_00016f05)
- * Prototype: undefined4 sub_016f05(void);
+ * Function : combobj_update_creature_control_016f05 (Original VA: 0x16f05, Ghidra: FUN_00016f05)
+ * Prototype: undefined4 combobj_update_creature_control_016f05(void);
  * Address  : 0x16f05 (Size: 30 bytes)
  * Module   : combobj.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_00016f05(void)
+undefined4 combobj_update_creature_control_016f05(void)
 
 {
-  byte *pbVar1;
-  int iVar2;
-  int in_EAX;
+  byte *byte_ptr;
+  int cctrl_ptr;
+  int thing;
   
-  iVar2 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  *(undefined2 *)(iVar2 + 0xa2) = 0;
-  pbVar1 = (byte *)(iVar2 + 3);
-  *pbVar1 = *pbVar1 & 0xf7;
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  *(undefined2 *)(cctrl_ptr + 0xa2) = 0;
+  byte_ptr = (byte *)(cctrl_ptr + 3);
+  *byte_ptr = *byte_ptr & 0xf7;
   return 1;
 }
 
 /******************************************************************************
- * Function : sub_016f23 (Ghidra: FUN_00016f23)
- * Prototype: void sub_016f23(void);
+ * Function : combobj_update_creature_control_016f23 (Original VA: 0x16f23, Ghidra: FUN_00016f23)
+ * Prototype: void combobj_update_creature_control_016f23(void);
  * Address  : 0x16f23 (Size: 104 bytes)
  * Module   : combobj.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x16f8b
- * Callees  : 1 -> 0x15e26
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
+ * Callers  : 1 -> combobj_fn_016f8b
+ * Callees  : 1 -> combat_update_creature_control_015e26
  ******************************************************************************/
-void FUN_00016f23(void)
+void combobj_update_creature_control_016f23(void)
 
 {
-  byte bVar1;
-  undefined4 uVar2;
-  int in_EAX;
-  int in_EDX;
-  int iVar3;
-  undefined8 uVar4;
+  byte flag;
+  undefined4 uval;
+  int thing;
+  int arg_edx;
+  int cctrl_ptr;
+  undefined8 uval_2;
   
-  bVar1 = *(byte *)(in_EAX + 0x1a);
-  iVar3 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  *(undefined2 *)(iVar3 + 0xa2) = *(undefined2 *)(in_EDX + 0x1b);
-  uVar2 = *(undefined4 *)(in_EDX + 9);
-  *(undefined1 *)(iVar3 + 0xaa) = 0;
-  *(undefined4 *)(iVar3 + 0x9e) = uVar2;
-  *(byte *)(iVar3 + 3) = *(byte *)(iVar3 + 3) | 0x10;
-  if ((&DAT_002e918a)[(uint)bVar1 * 0xe6] == '\x02') {
-    uVar4 = FUN_00015e26();
-    iVar3 = (int)((ulonglong)uVar4 >> 0x20);
-    if ((int)uVar4 != 0) {
-      *(undefined1 *)(iVar3 + 0xa6) = 2;
+  flag = *(byte *)(thing + 0x1a);
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  *(undefined2 *)(cctrl_ptr + 0xa2) = *(undefined2 *)(arg_edx + 0x1b);
+  uval = *(undefined4 *)(arg_edx + 9);
+  *(undefined1 *)(cctrl_ptr + 0xaa) = 0;
+  *(undefined4 *)(cctrl_ptr + 0x9e) = uval;
+  *(byte *)(cctrl_ptr + 3) = *(byte *)(cctrl_ptr + 3) | 0x10;
+  if ((&g_bss_002e918a)[(uint)flag * 0xe6] == '\x02') {
+    uval_2 = combat_update_creature_control_015e26();
+    cctrl_ptr = (int)((ulonglong)uval_2 >> 0x20);
+    if ((int)uval_2 != 0) {
+      *(undefined1 *)(cctrl_ptr + 0xa6) = 2;
       return;
     }
   }
-  *(undefined1 *)(iVar3 + 0xa6) = 1;
+  *(undefined1 *)(cctrl_ptr + 0xa6) = 1;
   return;
 }
 
 /******************************************************************************
- * Function : sub_016f8b (Ghidra: FUN_00016f8b)
- * Prototype: void sub_016f8b(void);
+ * Function : combobj_fn_016f8b (Original VA: 0x16f8b, Ghidra: FUN_00016f8b)
+ * Prototype: void combobj_fn_016f8b(void);
  * Address  : 0x16f8b (Size: 32 bytes)
  * Module   : combobj.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 4 -> 0x115a4, 0x2855c, 0x63dd3, 0xe1b88
- * Callees  : 2 -> 0x16f23, 0x64a5f
+ * Purpose  : Module combobj.cpp procedure @ 0x016f8b
+ * Callers  : 4 -> angtool_update_creature_control_0115a4, evil_roll_action_random_02855c, person_update_creature_control_063dd3, update_creature_has_illegal_state_0e1b88
+ * Callees  : 2 -> combobj_update_creature_control_016f23, person_external_change_state_but_064a5f
  ******************************************************************************/
-void FUN_00016f8b(void)
+void combobj_fn_016f8b(void)
 
 {
-  char cVar1;
+  char ch;
   
-  cVar1 = FUN_00064a5f();
-  if (cVar1 != '\0') {
-    FUN_00016f23();
+  ch = person_external_change_state_but_064a5f();
+  if (ch != '\0') {
+    combobj_update_creature_control_016f23();
   }
   return;
 }
 
 /******************************************************************************
- * Function : dk_door_combat_but_should_016fab (Ghidra: FUN_00016fab)
- * Prototype: longlong dk_door_combat_but_should_016fab(void);
+ * Function : combobj_door_combat_but_should_016fab (Original VA: 0x16fab, Ghidra: FUN_00016fab)
+ * Prototype: longlong combobj_door_combat_but_should_016fab(void);
  * Address  : 0x16fab (Size: 167 bytes)
  * Module   : combobj.cpp [direct_file_string_xref]
- * OrigLine : combobj.cpp:240 ("NOT IN DOOR COMBAT BUT SHOULD BE"); combobj.cpp:256 ("No valid fight door state")
- * Naming   : String 'NOT IN DOOR COMBAT BUT SHOULD BE'
+ * OrigLine : combobj.cpp lines 240, 256
+ * Purpose  : String 'NOT IN DOOR COMBAT BUT SHOULD BE'
  * Callers  : 0 -> 
- * Callees  : 4 -> 0x16423, 0x63b6d, 0x82cac, 0xddaf0
- * Strings  :
- *   - 0x1605e6: "combobj.cpp"
- *   - 0x16060c: "combobj.cpp"
- *   - 0x1605c5: "NOT IN DOOR COMBAT BUT SHOULD BE"
- *   - 0x1605f2: "No valid fight door state"
+ * Callees  : 4 -> combchk_control_structure_gt_ca_016423, person_fn_063b6d, creature_update_creature_and_thing_082cac, LbErrorLog
  ******************************************************************************/
-longlong FUN_00016fab(void)
+longlong combobj_door_combat_but_should_016fab(void)
 
 {
-  int iVar1;
-  int in_EAX;
-  int iVar2;
-  int iVar3;
-  uint in_EDX;
+  int thing_ptr;
+  int thing;
+  int val;
+  int cctrl_ptr;
+  uint arg_edx;
   
-  iVar3 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  iVar1 = (&DAT_001ae9fc)[*(ushort *)(iVar3 + 0xa2)];
-  if ((*(byte *)(iVar3 + 3) & 0x10) == 0) {
-    FUN_000ddaf0(); /* LbErrorLog("combobj.cpp", line 240, "NOT IN DOOR COMBAT BUT SHOULD BE") */
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  thing_ptr = (&g_thing_ptrs)[*(ushort *)(cctrl_ptr + 0xa2)];
+  if ((*(byte *)(cctrl_ptr + 3) & 0x10) == 0) {
+    LbErrorLog(); /* LbErrorLog("combobj.cpp", line 240, "NOT IN DOOR COMBAT BUT SHOULD BE") */
   }
   else {
-    iVar2 = FUN_00016423();
-    if ((iVar2 != 0) && (*(char *)(iVar1 + 7) != '\x01')) {
-      iVar3 = (uint)*(byte *)(iVar3 + 0xa6) * 4;
-      if (*(int *)(&DAT_00174ba0 + iVar3) != 0) {
-        (**(code **)(&DAT_00174ba0 + iVar3))();
-        return CONCAT44(in_EDX,1);
+    val = combchk_control_structure_gt_ca_016423();
+    if ((val != 0) && (*(char *)(thing_ptr + 7) != '\x01')) {
+      cctrl_ptr = (uint)*(byte *)(cctrl_ptr + 0xa6) * 4;
+      if (*(int *)(&g_data_00174ba0 + cctrl_ptr) != 0) {
+        (**(code **)(&g_data_00174ba0 + cctrl_ptr))();
+        return CONCAT44(arg_edx,1);
       }
-      FUN_000ddaf0(); /* LbErrorLog("combobj.cpp", line 256, "No valid fight door state") */
+      LbErrorLog(); /* LbErrorLog("combobj.cpp", line 256, "No valid fight door state") */
     }
-    FUN_00082cac();
+    creature_update_creature_and_thing_082cac();
   }
-  FUN_00063b6d();
-  return (ulonglong)in_EDX << 0x20;
+  person_fn_063b6d();
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : dk_creature_has_melee_instance_017052 (Ghidra: FUN_00017052)
- * Prototype: void dk_creature_has_melee_instance_017052(void);
+ * Function : combobj_creature_has_melee_instance_017052 (Original VA: 0x17052, Ghidra: FUN_00017052)
+ * Prototype: void combobj_creature_has_melee_instance_017052(void);
  * Address  : 0x17052 (Size: 126 bytes)
  * Module   : combobj.cpp [direct_file_string_xref]
- * OrigLine : combobj.cpp:280
- * Naming   : String 'CREATURE %d HAS NO MELEE INSTANCE IN FIGHT'
+ * OrigLine : combobj.cpp lines 280
+ * Purpose  : String 'CREATURE %d HAS NO MELEE INSTANCE IN FIGHT'
  * Callers  : 0 -> 
- * Callees  : 5 -> 0x18671, 0x189d4, 0x63b6d, 0xddaf0, 0xe7714
- * Strings  :
- *   - 0x160643: "combobj.cpp"
- *   - 0x160618: "CREATURE %d HAS NO MELEE INSTANCE IN FIGHT"
+ * Callees  : 5 -> combtool_fn_018671, combtool_fn_0189d4, person_fn_063b6d, LbErrorLog, dk_sprintf
  ******************************************************************************/
-void FUN_00017052(void)
+void combobj_creature_has_melee_instance_017052(void)
 
 {
-  int iVar1;
-  int in_EAX;
-  int iVar2;
+  int val;
+  int arg_eax;
+  int val_2;
   
-  FUN_000189d4();
-  iVar2 = FUN_00018671();
-  if (iVar2 == 0) {
-    FUN_000e7714(&DAT_0019cbac,s_CREATURE__d_HAS_NO_MELEE_INSTANC_00160618,
-                 *(undefined1 *)(in_EAX + 0x1a));
-    FUN_000ddaf0(); /* LbErrorLog("combobj.cpp", line 280, g_log_buf) */
-    FUN_00063b6d();
+  combtool_fn_0189d4();
+  val_2 = combtool_fn_018671();
+  if (val_2 == 0) {
+    dk_sprintf(&g_log_sprintf_buf,s_CREATURE__d_HAS_NO_MELEE_INSTANC_00160618,
+                 *(undefined1 *)(arg_eax + 0x1a));
+    LbErrorLog(); /* LbErrorLog("combobj.cpp", line 280, g_log_buf) */
+    person_fn_063b6d();
   }
   else {
-    iVar1 = FUN_000169a5();
-    if ((iVar1 != 0) && (0 < iVar2)) {
-      FUN_00049bfc(0);
+    val = combmove_update_creature_control_0169a5();
+    if ((val != 0) && (0 < val_2)) {
+      instance_negative_instance_049bfc(0);
     }
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_0170d0 (Ghidra: FUN_000170d0)
- * Prototype: void sub_0170d0(void);
+ * Function : combobj_fn_0170d0 (Original VA: 0x170d0, Ghidra: FUN_000170d0)
+ * Prototype: void combobj_fn_0170d0(void);
  * Address  : 0x170d0 (Size: 59 bytes)
  * Module   : combobj.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Module combobj.cpp procedure @ 0x0170d0
  * Callers  : 0 -> 
- * Callees  : 1 -> 0x189d4
+ * Callees  : 1 -> combtool_fn_0189d4
  ******************************************************************************/
-void FUN_000170d0(void)
+void combobj_fn_0170d0(void)
 
 {
-  int iVar1;
-  int iVar2;
+  int val;
+  int val_2;
   
-  FUN_000189d4();
-  iVar1 = FUN_000186d2();
-  iVar2 = FUN_000168a2();
-  if ((iVar2 != 0) && (0 < iVar1)) {
-    FUN_00049bfc(0);
+  combtool_fn_0189d4();
+  val = combtool_fn_0186d2();
+  val_2 = combmove_update_creature_control_0168a2();
+  if ((val_2 != 0) && (0 < val)) {
+    instance_negative_instance_049bfc(0);
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_01710b (Ghidra: FUN_0001710b)
- * Prototype: undefined4 sub_01710b(void);
+ * Function : combobj_update_creature_control_01710b (Original VA: 0x1710b, Ghidra: FUN_0001710b)
+ * Prototype: undefined4 combobj_update_creature_control_01710b(void);
  * Address  : 0x1710b (Size: 29 bytes)
  * Module   : combobj.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_0001710b(void)
+undefined4 combobj_update_creature_control_01710b(void)
 
 {
-  byte *pbVar1;
-  int iVar2;
-  int in_EAX;
+  byte *byte_ptr;
+  int cctrl_ptr;
+  int thing;
   
-  iVar2 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  *(undefined2 *)(iVar2 + 0xa2) = 0;
-  pbVar1 = (byte *)(iVar2 + 3);
-  *pbVar1 = *pbVar1 & 0xef;
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  *(undefined2 *)(cctrl_ptr + 0xa2) = 0;
+  byte_ptr = (byte *)(cctrl_ptr + 3);
+  *byte_ptr = *byte_ptr & 0xef;
   return 1;
 }
 
 /******************************************************************************
- * Function : dk_thing_this_check_017128 (Ghidra: FUN_00017128)
- * Prototype: longlong dk_thing_this_check_017128(void);
+ * Function : combobj_thing_this_check_017128 (Original VA: 0x17128, Ghidra: FUN_00017128)
+ * Prototype: longlong combobj_thing_this_check_017128(void);
  * Address  : 0x17128 (Size: 91 bytes)
  * Module   : combobj.cpp [direct_file_string_xref]
- * OrigLine : combobj.cpp:334 ("INVALID THING FOR THIS CHECK")
- * Naming   : String 'INVALID THING FOR THIS CHECK'
- * Callers  : 2 -> 0x6bdda, 0x6c2cc
- * Callees  : 2 -> 0x63b6d, 0xddaf0
- * Strings  :
- *   - 0x16066c: "combobj.cpp"
- *   - 0x16064f: "INVALID THING FOR THIS CHECK"
+ * OrigLine : combobj.cpp lines 334
+ * Purpose  : String 'INVALID THING FOR THIS CHECK'
+ * Callers  : 2 -> setup_compute_creature_eye_offset, setup_apply_possession_lens_and_eye
+ * Callees  : 2 -> person_fn_063b6d, LbErrorLog
  ******************************************************************************/
-longlong FUN_00017128(void)
+longlong combobj_thing_this_check_017128(void)
 
 {
-  int in_EAX;
-  char cVar1;
-  uint in_EDX;
+  int thing;
+  char ch;
+  uint arg_edx;
   
-  if (*(char *)(in_EAX + 0x1f) != '\x05') {
-    FUN_000ddaf0(); /* LbErrorLog("combobj.cpp", line 334, "INVALID THING FOR THIS CHECK") */
-    return (ulonglong)in_EDX << 0x20;
+  if (*(char *)(thing + 0x1f) != '\x05') { /* thing->class_id */
+    LbErrorLog(); /* LbErrorLog("combobj.cpp", line 334, "INVALID THING FOR THIS CHECK") */
+    return (ulonglong)arg_edx << 0x20;
   }
-  if ((*(byte *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 3) & 0x10) != 0) {
-    if (*(char *)(in_EAX + 7) == '\x0e') {
-      cVar1 = *(char *)(in_EAX + 8);
+  if ((*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 3) & 0x10) != 0) { /* thing->ccontrol_idx */
+    if (*(char *)(thing + 7) == '\x0e') {
+      ch = *(char *)(thing + 8); /* thing->active_state */
     }
     else {
-      cVar1 = *(char *)(in_EAX + 7);
+      ch = *(char *)(thing + 7);
     }
-    if (cVar1 != 'W') {
-      FUN_00063b6d();
+    if (ch != 'W') {
+      person_fn_063b6d();
     }
   }
-  return CONCAT44(in_EDX,1);
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : sub_017184 (Ghidra: FUN_00017184)
- * Prototype: undefined4 sub_017184(void);
+ * Function : combobj_update_creature_control_017184 (Original VA: 0x17184, Ghidra: FUN_00017184)
+ * Prototype: undefined4 combobj_update_creature_control_017184(void);
  * Address  : 0x17184 (Size: 72 bytes)
  * Module   : combobj.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
  * Callers  : 0 -> 
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined4 FUN_00017184(void)
+undefined4 combobj_update_creature_control_017184(void)
 
 {
-  int iVar1;
-  int in_EAX;
-  int in_EDX;
+  int cctrl_ptr;
+  int thing;
+  int arg_edx;
   
-  if ((((*(char *)(in_EAX + 0x1f) == '\x05') &&
-       (iVar1 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)], *(char *)(iVar1 + 3) != '\0')) &&
-      (*(char *)(iVar1 + 0xaa) != '\0')) &&
-     ((*(char *)(iVar1 + 3) == *(char *)((&DAT_001b0a00)[*(ushort *)(in_EDX + 100)] + 3) &&
-      (in_EAX != in_EDX)))) {
+  if ((((*(char *)(thing + 0x1f) == '\x05') && /* thing->class_id */
+       (cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)], *(char *)(cctrl_ptr + 3) != '\0')) && /* thing->ccontrol_idx */
+      (*(char *)(cctrl_ptr + 0xaa) != '\0')) &&
+     ((*(char *)(cctrl_ptr + 3) == *(char *)((&g_creature_ctrl_ptrs)[*(ushort *)(arg_edx + 100)] + 3) &&
+      (thing != arg_edx)))) {
     return 1;
   }
   return 0;

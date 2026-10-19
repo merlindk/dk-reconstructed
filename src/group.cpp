@@ -1,7 +1,7 @@
 /**
- * Dungeon Keeper (KEEPER.EXE) - Reconstructed Source Module: group.cpp
+ * Dungeon Keeper (KEEPER.EXE) - Reconstructed & Semantically Named Module: group.cpp
  * Binary Subject: /home/merlin/Dungeon Keeper/re/KEEPER.elf
- * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 (x86:LE:32:default)
+ * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 + DK Semantic Analyzer
  * Functions in this translation unit: 10
  */
 
@@ -11,226 +11,226 @@
 #include "../include/dk_functions.h"
 
 /******************************************************************************
- * Function : sub_039c3e (Ghidra: FUN_00039c3e)
- * Prototype: undefined8 sub_039c3e(void);
+ * Function : group_update_creature_and_thing_039c3e (Original VA: 0x39c3e, Ghidra: FUN_00039c3e)
+ * Prototype: undefined8 group_update_creature_and_thing_039c3e(void);
  * Address  : 0x39c3e (Size: 279 bytes)
  * Module   : group.cpp [callgraph_affinity_to_following_unit]
- * Naming   : Address-based identifier
- * Callers  : 10 -> 0x11214, 0x138c9, 0x39a74, 0x39ba4, 0x39d55, 0x3a237, 0x63a25, 0x63dd3, 0x72af4, 0x8608c
- * Callees  : 2 -> 0x39de2, 0x39e7e
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
+ * Callers  : 10 -> angtool_update_creature_and_thing_011214, barracks_update_creature_control_0138c9, gravyard_update_creature_control_039a74, gravyard_update_creature_control_039ba4, gravyard_fn_039d55, group_infinate_loop_dispand_group_03a237, person_update_creature_control_063a25, person_update_creature_control_063dd3 ...
+ * Callees  : 2 -> group_update_creature_and_thing_039de2, group_fn_039e7e
  ******************************************************************************/
-undefined8 FUN_00039c3e(void)
+undefined8 group_update_creature_and_thing_039c3e(void)
 
 {
-  ushort *puVar1;
-  int iVar2;
-  int iVar3;
-  byte *in_EAX;
-  undefined4 in_EDX;
-  int iVar4;
-  undefined8 uVar5;
+  ushort *cctrl_ptr;
+  int thing_ptr;
+  int thing_ptr_2;
+  byte *arg_eax;
+  undefined4 arg_edx;
+  int cctrl_ptr_2;
+  undefined8 thing_ptr_3;
   
-  uVar5 = FUN_00039e7e();
-  iVar4 = (int)((ulonglong)uVar5 >> 0x20);
-  if ((int)uVar5 == 0) {
-    iVar2 = (&DAT_001ae9fc)[*(ushort *)(iVar4 + 0x78)];
-    if (*(short *)(iVar4 + 0x76) == 0) {
-      *(undefined2 *)((&DAT_001b0a00)[*(ushort *)(iVar2 + 100)] + 0x76) = 0;
+  thing_ptr_3 = group_fn_039e7e();
+  cctrl_ptr_2 = (int)((ulonglong)thing_ptr_3 >> 0x20);
+  if ((int)thing_ptr_3 == 0) {
+    thing_ptr = (&g_thing_ptrs)[*(ushort *)(cctrl_ptr_2 + 0x78)];
+    if (*(short *)(cctrl_ptr_2 + 0x76) == 0) {
+      *(undefined2 *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x76) = 0; /* thing->ccontrol_idx */
     }
     else {
-      iVar3 = (&DAT_001ae9fc)[*(ushort *)(iVar4 + 0x76)];
-      *(undefined2 *)((&DAT_001b0a00)[*(ushort *)(iVar3 + 100)] + 0x78) =
-           *(undefined2 *)(iVar2 + 0x1b);
-      *(undefined2 *)((&DAT_001b0a00)[*(ushort *)(iVar2 + 100)] + 0x76) =
-           *(undefined2 *)(iVar3 + 0x1b);
+      thing_ptr_2 = (&g_thing_ptrs)[*(ushort *)(cctrl_ptr_2 + 0x76)];
+      *(undefined2 *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr_2 + 100)] + 0x78) = /* thing->ccontrol_idx */
+           *(undefined2 *)(thing_ptr + 0x1b); /* thing->index_or_angle */
+      *(undefined2 *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x76) = /* thing->ccontrol_idx */
+           *(undefined2 *)(thing_ptr_2 + 0x1b); /* thing->index_or_angle */
     }
-    *(undefined2 *)(iVar4 + 0x76) = 0;
-    *(undefined2 *)(iVar4 + 0x78) = 0;
-    *(ushort *)(iVar4 + 0x7a) = *(ushort *)(iVar4 + 0x7a) & 0xf000;
-    iVar4 = (&DAT_001b0a00)[*(ushort *)(iVar2 + 100)];
-    if ((*(short *)(iVar4 + 0x78) == 0) && (*(short *)(iVar4 + 0x76) == 0)) {
-      *(ushort *)(iVar4 + 0x7a) = *(ushort *)(iVar4 + 0x7a) & 0xf000;
+    *(undefined2 *)(cctrl_ptr_2 + 0x76) = 0;
+    *(undefined2 *)(cctrl_ptr_2 + 0x78) = 0;
+    *(ushort *)(cctrl_ptr_2 + 0x7a) = *(ushort *)(cctrl_ptr_2 + 0x7a) & 0xf000;
+    cctrl_ptr_2 = (&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)]; /* thing->ccontrol_idx */
+    if ((*(short *)(cctrl_ptr_2 + 0x78) == 0) && (*(short *)(cctrl_ptr_2 + 0x76) == 0)) {
+      *(ushort *)(cctrl_ptr_2 + 0x7a) = *(ushort *)(cctrl_ptr_2 + 0x7a) & 0xf000;
     }
   }
-  else if (*(short *)(iVar4 + 0x76) != 0) {
-    iVar2 = (&DAT_001ae9fc)[*(ushort *)(iVar4 + 0x76)];
-    *(undefined2 *)((&DAT_001b0a00)[*(ushort *)(iVar2 + 100)] + 0x78) = 0;
-    *(undefined2 *)(iVar4 + 0x76) = 0;
-    *(undefined2 *)(iVar4 + 0x78) = 0;
-    *(ushort *)(iVar4 + 0x7a) = *(ushort *)(iVar4 + 0x7a) & 0xf000;
-    if (*(short *)((&DAT_001b0a00)[*(ushort *)(iVar2 + 100)] + 0x76) == 0) {
-      puVar1 = (ushort *)((&DAT_001b0a00)[*(ushort *)(iVar2 + 100)] + 0x7a);
-      *puVar1 = *puVar1 & 0xf000;
+  else if (*(short *)(cctrl_ptr_2 + 0x76) != 0) {
+    thing_ptr = (&g_thing_ptrs)[*(ushort *)(cctrl_ptr_2 + 0x76)];
+    *(undefined2 *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x78) = 0; /* thing->ccontrol_idx */
+    *(undefined2 *)(cctrl_ptr_2 + 0x76) = 0;
+    *(undefined2 *)(cctrl_ptr_2 + 0x78) = 0;
+    *(ushort *)(cctrl_ptr_2 + 0x7a) = *(ushort *)(cctrl_ptr_2 + 0x7a) & 0xf000;
+    if (*(short *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x76) == 0) { /* thing->ccontrol_idx */
+      cctrl_ptr = (ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x7a); /* thing->ccontrol_idx */
+      *cctrl_ptr = *cctrl_ptr & 0xf000;
     }
     else {
-      FUN_00039de2();
+      group_update_creature_and_thing_039de2();
     }
   }
-  *in_EAX = *in_EAX & 0xbf;
-  return CONCAT44(in_EDX,1);
+  *arg_eax = *arg_eax & 0xbf;
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : sub_039dab (Ghidra: FUN_00039dab)
- * Prototype: void sub_039dab(void);
+ * Function : group_update_creature_and_thing_039dab (Original VA: 0x39dab, Ghidra: FUN_00039dab)
+ * Prototype: void group_update_creature_and_thing_039dab(void);
  * Address  : 0x39dab (Size: 55 bytes)
  * Module   : group.cpp [callgraph_affinity_to_following_unit]
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0x39a74, 0x3a237, 0x3a32d
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
+ * Callers  : 3 -> gravyard_update_creature_control_039a74, group_infinate_loop_dispand_group_03a237, group_infinate_loop_dispand_group_03a32d
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_00039dab(void)
+void group_update_creature_and_thing_039dab(void)
 
 {
-  int in_EAX;
+  int thing;
   
-  if ((*(ushort *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 0x7a) & 0xfff) != 0) {
-    while (*(short *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 0x76) != 0) {
-      in_EAX = (&DAT_001ae9fc)[*(ushort *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 0x76)];
+  if ((*(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 0x7a) & 0xfff) != 0) { /* thing->ccontrol_idx */
+    while (*(short *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 0x76) != 0) { /* thing->ccontrol_idx */
+      thing = (&g_thing_ptrs)[*(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 0x76)]; /* thing->ccontrol_idx */
     }
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_039de2 (Ghidra: FUN_00039de2)
- * Prototype: void sub_039de2(void);
+ * Function : group_update_creature_and_thing_039de2 (Original VA: 0x39de2, Ghidra: FUN_00039de2)
+ * Prototype: void group_update_creature_and_thing_039de2(void);
  * Address  : 0x39de2 (Size: 84 bytes)
  * Module   : group.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 2 -> 0x39ba4, 0x39c3e
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
+ * Callers  : 2 -> gravyard_update_creature_control_039ba4, group_update_creature_and_thing_039c3e
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_00039de2(void)
+void group_update_creature_and_thing_039de2(void)
 
 {
-  ushort *puVar1;
-  int iVar2;
-  uint in_EAX;
-  ushort in_DX;
-  uint uVar3;
+  ushort *word_ptr;
+  int cctrl_ptr;
+  uint thing;
+  ushort arg_dx;
+  uint thing_ptr;
   
-  for (uVar3 = in_EAX; DAT_001ae9fc < uVar3;
-      uVar3 = (&DAT_001ae9fc)[*(ushort *)((&DAT_001b0a00)[*(ushort *)(uVar3 + 100)] + 0x76)]) {
-    iVar2 = (&DAT_001b0a00)[*(ushort *)(uVar3 + 100)];
-    puVar1 = (ushort *)(iVar2 + 0x7a);
-    *puVar1 = *puVar1 & 0xf000;
-    puVar1 = (ushort *)(iVar2 + 0x7a);
-    *puVar1 = *puVar1 | in_DX & 0xfff;
+  for (thing_ptr = thing; g_thing_ptrs < thing_ptr;
+      thing_ptr = (&g_thing_ptrs)[*(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x76)]) { /* thing->ccontrol_idx */
+    cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)]; /* thing->ccontrol_idx */
+    word_ptr = (ushort *)(cctrl_ptr + 0x7a);
+    *word_ptr = *word_ptr & 0xf000;
+    word_ptr = (ushort *)(cctrl_ptr + 0x7a);
+    *word_ptr = *word_ptr | arg_dx & 0xfff;
   }
-  *(byte *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 0x7b) =
-       *(byte *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 0x7b) & 0xf;
+  *(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 0x7b) = /* thing->ccontrol_idx */
+       *(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 0x7b) & 0xf; /* thing->ccontrol_idx */
   return;
 }
 
 /******************************************************************************
- * Function : sub_039e36 (Ghidra: FUN_00039e36)
- * Prototype: undefined8 sub_039e36(void);
+ * Function : group_update_creature_and_thing_039e36 (Original VA: 0x39e36, Ghidra: FUN_00039e36)
+ * Prototype: undefined8 group_update_creature_and_thing_039e36(void);
  * Address  : 0x39e36 (Size: 72 bytes)
  * Module   : group.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x688a4
- * Callees  : 1 -> 0x39d83
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
+ * Callers  : 1 -> script_party_big_0688a4
+ * Callees  : 1 -> gravyard_update_creature_and_thing_039d83
  ******************************************************************************/
-undefined8 FUN_00039e36(void)
+undefined8 group_update_creature_and_thing_039e36(void)
 
 {
-  uint uVar1;
-  undefined4 in_EDX;
-  byte bVar2;
+  uint thing_ptr;
+  undefined4 arg_edx;
+  byte cctrl_ptr;
   
-  uVar1 = FUN_00039d83();
-  bVar2 = 0;
-  if (uVar1 != 0) {
-    for (; DAT_001ae9fc < uVar1;
-        uVar1 = (&DAT_001ae9fc)[*(ushort *)((&DAT_001b0a00)[*(ushort *)(uVar1 + 100)] + 0x76)]) {
-      if (bVar2 < *(byte *)((&DAT_001b0a00)[*(ushort *)(uVar1 + 100)] + 0x23)) {
-        bVar2 = *(byte *)((&DAT_001b0a00)[*(ushort *)(uVar1 + 100)] + 0x23);
+  thing_ptr = gravyard_update_creature_and_thing_039d83();
+  cctrl_ptr = 0;
+  if (thing_ptr != 0) {
+    for (; g_thing_ptrs < thing_ptr;
+        thing_ptr = (&g_thing_ptrs)[*(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x76)]) { /* thing->ccontrol_idx */
+      if (cctrl_ptr < *(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x23)) { /* thing->ccontrol_idx */
+        cctrl_ptr = *(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x23); /* thing->ccontrol_idx */
       }
     }
   }
-  return CONCAT44(in_EDX,(uint)bVar2);
+  return CONCAT44(arg_edx,(uint)cctrl_ptr);
 }
 
 /******************************************************************************
- * Function : sub_039e7e (Ghidra: FUN_00039e7e)
- * Prototype: undefined8 sub_039e7e(void);
+ * Function : group_fn_039e7e (Original VA: 0x39e7e, Ghidra: FUN_00039e7e)
+ * Prototype: undefined8 group_fn_039e7e(void);
  * Address  : 0x39e7e (Size: 18 bytes)
  * Module   : group.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0x39c3e, 0xe0b1c, 0xe1b88
- * Callees  : 1 -> 0x39d83
+ * Purpose  : Module group.cpp procedure @ 0x039e7e
+ * Callers  : 3 -> group_update_creature_and_thing_039c3e, update_state_return_type_human_0e0b1c, update_creature_has_illegal_state_0e1b88
+ * Callees  : 1 -> gravyard_update_creature_and_thing_039d83
  ******************************************************************************/
-undefined8 FUN_00039e7e(void)
+undefined8 group_fn_039e7e(void)
 
 {
-  undefined4 in_EDX;
-  undefined8 uVar1;
+  undefined4 arg_edx;
+  undefined8 uval;
   
-  uVar1 = FUN_00039d83();
-  return CONCAT44(in_EDX,(uint)((int)uVar1 == (int)((ulonglong)uVar1 >> 0x20)));
+  uval = gravyard_update_creature_and_thing_039d83();
+  return CONCAT44(arg_edx,(uint)((int)uval == (int)((ulonglong)uval >> 0x20)));
 }
 
 /******************************************************************************
- * Function : sub_039e90 (Ghidra: FUN_00039e90)
- * Prototype: undefined8 sub_039e90(void);
+ * Function : group_update_creature_and_thing_039e90 (Original VA: 0x39e90, Ghidra: FUN_00039e90)
+ * Prototype: undefined8 group_update_creature_and_thing_039e90(void);
  * Address  : 0x39e90 (Size: 58 bytes)
  * Module   : group.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0x138c9, 0x39eca, 0x6bdda
- * Callees  : 1 -> 0x39d83
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
+ * Callers  : 3 -> barracks_update_creature_control_0138c9, group_update_creature_control_039eca, setup_compute_creature_eye_offset
+ * Callees  : 1 -> gravyard_update_creature_and_thing_039d83
  ******************************************************************************/
-undefined8 FUN_00039e90(void)
+undefined8 group_update_creature_and_thing_039e90(void)
 
 {
-  uint uVar1;
-  undefined4 in_EDX;
-  int iVar2;
+  uint thing_ptr;
+  undefined4 arg_edx;
+  int val;
   
-  uVar1 = FUN_00039d83();
-  iVar2 = 0;
-  if (uVar1 == 0) {
-    return CONCAT44(in_EDX,1);
+  thing_ptr = gravyard_update_creature_and_thing_039d83();
+  val = 0;
+  if (thing_ptr == 0) {
+    return CONCAT44(arg_edx,1);
   }
-  for (; DAT_001ae9fc < uVar1;
-      uVar1 = (&DAT_001ae9fc)[*(ushort *)((&DAT_001b0a00)[*(ushort *)(uVar1 + 100)] + 0x76)]) {
-    iVar2 = iVar2 + 1;
+  for (; g_thing_ptrs < thing_ptr;
+      thing_ptr = (&g_thing_ptrs)[*(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x76)]) { /* thing->ccontrol_idx */
+    val = val + 1;
   }
-  return CONCAT44(in_EDX,iVar2);
+  return CONCAT44(arg_edx,val);
 }
 
 /******************************************************************************
- * Function : sub_039eca (Ghidra: FUN_00039eca)
- * Prototype: void sub_039eca(void);
+ * Function : group_update_creature_control_039eca (Original VA: 0x39eca, Ghidra: FUN_00039eca)
+ * Prototype: void group_update_creature_control_039eca(void);
  * Address  : 0x39eca (Size: 877 bytes)
  * Module   : group.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0xe0b1c
- * Callees  : 4 -> 0x39e90, 0x7dbc0, 0xb3788, 0xe6a10
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
+ * Callers  : 1 -> update_state_return_type_human_0e0b1c
+ * Callees  : 4 -> group_update_creature_and_thing_039e90, ceiling_process_map_subtile_07dbc0, move_process_map_subtile_0b3788, LbScreenWaitVbi
  ******************************************************************************/
-void FUN_00039eca(void)
+void group_update_creature_control_039eca(void)
 
 {
-  int iVar1;
-  ushort uVar2;
-  undefined2 uVar3;
-  int in_EAX;
-  uint uVar4;
-  int iVar5;
-  uint uVar7;
-  uint uVar8;
-  int iVar9;
-  int iVar10;
-  int iVar11;
-  int iVar12;
+  int cctrl_ptr;
+  ushort uval;
+  undefined2 uval_2;
+  int thing;
+  uint uval_3;
+  int val;
+  uint uval_4;
+  uint uval_5;
+  int val_3;
+  int val_4;
+  int val_5;
+  int val_6;
   int extraout_ECX;
   int extraout_ECX_00;
   int extraout_ECX_01;
-  int iVar13;
-  int iVar14;
-  int iVar15;
-  int iVar16;
-  int iVar17;
+  int val_7;
+  int val_8;
+  int val_9;
+  int val_10;
+  int val_11;
   int local_ac;
   int local_a4;
   int local_5c;
@@ -244,231 +244,225 @@ void FUN_00039eca(void)
   int local_3c;
   int local_38;
   int local_34;
-  int iVar6;
+  int val_2;
   
-  iVar1 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  uVar4 = FUN_00039e90();
-  if ((uVar4 == *(ushort *)(iVar1 + 0x7a) >> 0xc) && (((byte)DAT_002e8bee & 0x1f) != 0)) {
-    iVar6 = iVar1;
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  uval_3 = group_update_creature_and_thing_039e90();
+  if ((uval_3 == *(ushort *)(cctrl_ptr + 0x7a) >> 0xc) && (((byte)g_game_turn & 0x1f) != 0)) {
+    val_2 = cctrl_ptr;
     do {
-      iVar5 = iVar6 + 3;
-      *(byte *)(iVar6 + 0x294) = *(byte *)(iVar6 + 0x294) & 0xfe;
-      iVar6 = iVar5;
-    } while (iVar5 != iVar1 + 0x18);
+      val = val_2 + 3;
+      *(byte *)(val_2 + 0x294) = *(byte *)(val_2 + 0x294) & 0xfe;
+      val_2 = val;
+    } while (val != cctrl_ptr + 0x18);
   }
   else {
-    *(byte *)(iVar1 + 0x7b) = *(byte *)(iVar1 + 0x7b) & 0xf;
-    *(ushort *)(iVar1 + 0x7a) = *(ushort *)(iVar1 + 0x7a) | (ushort)((uVar4 & 0xf) << 0xc);
-    FUN_000e6a10();
-    uVar7 = *(ushort *)(extraout_ECX + 0x52) + 0x400 & 0x7ff;
-    local_50 = -(((int)(&PTR_LAB_00192fe0)[uVar7] << 8) >> 8) >> 8;
-    uVar8 = *(ushort *)(extraout_ECX + 0x52) - 0x200 & 0x7ff;
-    iVar5 = -(((int)(&PTR_LAB_00192fe0)[uVar8] << 8) >> 8) >> 8;
+    *(byte *)(cctrl_ptr + 0x7b) = *(byte *)(cctrl_ptr + 0x7b) & 0xf;
+    *(ushort *)(cctrl_ptr + 0x7a) = *(ushort *)(cctrl_ptr + 0x7a) | (ushort)((uval_3 & 0xf) << 0xc);
+    LbScreenWaitVbi();
+    uval_4 = *(ushort *)(extraout_ECX + 0x52) + 0x400 & 0x7ff;
+    local_50 = -(((int)(&PTR_LAB_00192fe0)[uval_4] << 8) >> 8) >> 8;
+    uval_5 = *(ushort *)(extraout_ECX + 0x52) - 0x200 & 0x7ff;
+    val = -(((int)(&PTR_LAB_00192fe0)[uval_5] << 8) >> 8) >> 8;
     local_4c = local_50 * 2;
-    local_44 = (int)((&DAT_001927e0)[uVar7] << 8) >> 0x10;
+    local_44 = (int)((&g_slab_attr_table)[uval_4] << 8) >> 0x10;
     local_54 = local_44 * 2;
-    iVar13 = (int)((&DAT_001927e0)[uVar8] << 8) >> 0x10;
+    val_7 = (int)((&g_slab_attr_table)[uval_5] << 8) >> 0x10;
     local_a4 = 0;
-    iVar6 = extraout_ECX;
-    for (local_3c = 2; local_3c <= (int)(uVar4 * 2); local_3c = local_3c + 2) {
-      local_40 = iVar5 * -2 + local_4c;
-      local_58 = iVar13 * -2 + local_54;
-      iVar14 = local_a4 * 3 + iVar1;
+    val_2 = extraout_ECX;
+    for (local_3c = 2; local_3c <= (int)(uval_3 * 2); local_3c = local_3c + 2) {
+      local_40 = val * -2 + local_4c;
+      local_58 = val_7 * -2 + local_54;
+      val_8 = local_a4 * 3 + cctrl_ptr;
       for (local_34 = -2; local_34 < 3; local_34 = local_34 + 2) {
-        iVar11 = (uint)*(ushort *)(iVar6 + 0xd) + local_58;
-        iVar9 = iVar11 / 0x300;
-        iVar16 = (uint)*(ushort *)(iVar6 + 0xf) + local_40;
-        iVar15 = iVar14;
-        if ((((0 < iVar9) && (iVar10 = iVar16 / 0x300, 0 < iVar10)) && (iVar9 < 0x55)) &&
-           (iVar10 < 0x55)) {
-          uVar2 = (ushort)iVar11;
-          uVar3 = FUN_000b3788();
-          iVar11 = FUN_0007dbc0(uVar2,uVar3);
-          iVar6 = extraout_ECX_00;
-          if (iVar11 == 0) {
-            iVar15 = iVar14 + 3;
+        val_5 = (uint)*(ushort *)(val_2 + 0xd) + local_58;
+        val_3 = val_5 / 0x300;
+        val_10 = (uint)*(ushort *)(val_2 + 0xf) + local_40;
+        val_9 = val_8;
+        if ((((0 < val_3) && (val_4 = val_10 / 0x300, 0 < val_4)) && (val_3 < 0x55)) &&
+           (val_4 < 0x55)) {
+          uval = (ushort)val_5;
+          uval_2 = move_process_map_subtile_0b3788();
+          val_5 = ceiling_process_map_subtile_07dbc0(uval,uval_2);
+          val_2 = extraout_ECX_00;
+          if (val_5 == 0) {
+            val_9 = val_8 + 3;
             local_a4 = local_a4 + 1;
-            *(ushort *)(iVar14 + 0x292) = ((ushort)iVar16 & 0xff00) + (uVar2 >> 8);
-            *(byte *)(iVar14 + 0x294) = *(byte *)(iVar14 + 0x294) | 2;
-            if ((int)uVar4 <= local_a4) {
+            *(ushort *)(val_8 + 0x292) = ((ushort)val_10 & 0xff00) + (uval >> 8);
+            *(byte *)(val_8 + 0x294) = *(byte *)(val_8 + 0x294) | 2;
+            if ((int)uval_3 <= local_a4) {
               return;
             }
           }
         }
-        local_40 = local_40 + iVar5 * 2;
-        local_58 = local_58 + iVar13 * 2;
-        iVar14 = iVar15;
+        local_40 = local_40 + val * 2;
+        local_58 = local_58 + val_7 * 2;
+        val_8 = val_9;
       }
       local_4c = local_4c + local_50 * 2;
       local_54 = local_54 + local_44 * 2;
     }
-    iVar14 = local_50 * 2;
-    iVar11 = local_44 * 2;
-    for (local_ac = 1; local_ac <= (int)(uVar4 * 2); local_ac = local_ac + 2) {
-      iVar15 = local_a4 * 3 + iVar1;
-      local_5c = -iVar5;
-      local_48 = -iVar13;
+    val_8 = local_50 * 2;
+    val_5 = local_44 * 2;
+    for (local_ac = 1; local_ac <= (int)(uval_3 * 2); local_ac = local_ac + 2) {
+      val_9 = local_a4 * 3 + cctrl_ptr;
+      local_5c = -val;
+      local_48 = -val_7;
       for (local_38 = -1; local_38 < 3; local_38 = local_38 + 2) {
-        iVar10 = local_44 + (uint)*(ushort *)(iVar6 + 0xd) + local_48;
-        iVar16 = iVar10 / 0x300;
-        iVar17 = (uint)*(ushort *)(iVar6 + 0xf) + local_5c + local_50;
-        iVar9 = iVar15;
-        if (((0 < iVar16) && (iVar12 = iVar17 / 0x300, 0 < iVar12)) &&
-           ((iVar16 < 0x55 && (iVar12 < 0x55)))) {
-          uVar2 = (ushort)iVar10;
-          uVar3 = FUN_000b3788();
-          iVar16 = FUN_0007dbc0(uVar2,uVar3);
-          iVar6 = extraout_ECX_01;
-          if (iVar16 == 0) {
-            iVar9 = iVar15 + 3;
+        val_4 = local_44 + (uint)*(ushort *)(val_2 + 0xd) + local_48;
+        val_10 = val_4 / 0x300;
+        val_11 = (uint)*(ushort *)(val_2 + 0xf) + local_5c + local_50;
+        val_3 = val_9;
+        if (((0 < val_10) && (val_6 = val_11 / 0x300, 0 < val_6)) &&
+           ((val_10 < 0x55 && (val_6 < 0x55)))) {
+          uval = (ushort)val_4;
+          uval_2 = move_process_map_subtile_0b3788();
+          val_10 = ceiling_process_map_subtile_07dbc0(uval,uval_2);
+          val_2 = extraout_ECX_01;
+          if (val_10 == 0) {
+            val_3 = val_9 + 3;
             local_a4 = local_a4 + 1;
-            *(ushort *)(iVar15 + 0x292) = (uVar2 >> 8) + ((ushort)iVar17 & 0xff00);
-            *(byte *)(iVar15 + 0x294) = *(byte *)(iVar15 + 0x294) | 2;
-            if ((int)uVar4 <= local_a4) {
+            *(ushort *)(val_9 + 0x292) = (uval >> 8) + ((ushort)val_11 & 0xff00);
+            *(byte *)(val_9 + 0x294) = *(byte *)(val_9 + 0x294) | 2;
+            if ((int)uval_3 <= local_a4) {
               return;
             }
           }
         }
-        local_5c = local_5c + iVar5 * 2;
-        local_48 = local_48 + iVar13 * 2;
-        iVar15 = iVar9;
+        local_5c = local_5c + val * 2;
+        local_48 = local_48 + val_7 * 2;
+        val_9 = val_3;
       }
-      local_50 = local_50 + iVar14;
-      local_44 = local_44 + iVar11;
+      local_50 = local_50 + val_8;
+      local_44 = local_44 + val_5;
     }
   }
   return;
 }
 
 /******************************************************************************
- * Function : dk_infinate_loop_dispand_group_03a237 (Ghidra: FUN_0003a237)
- * Prototype: longlong dk_infinate_loop_dispand_group_03a237(void);
+ * Function : group_infinate_loop_dispand_group_03a237 (Original VA: 0x3a237, Ghidra: FUN_0003a237)
+ * Prototype: longlong group_infinate_loop_dispand_group_03a237(void);
  * Address  : 0x3a237 (Size: 118 bytes)
  * Module   : group.cpp [direct_file_string_xref]
- * OrigLine : group.cpp:459 ("INFINATE LOOP IN DISPAND GROUP")
- * Naming   : String 'INFINATE LOOP IN DISPAND GROUP'
- * Callers  : 2 -> 0x11214, 0x80fbc
- * Callees  : 3 -> 0x39c3e, 0x39dab, 0xddaf0
- * Strings  :
- *   - 0x164abb: "group.cpp"
- *   - 0x164a9c: "INFINATE LOOP IN DISPAND GROUP"
+ * OrigLine : group.cpp lines 459
+ * Purpose  : String 'INFINATE LOOP IN DISPAND GROUP'
+ * Callers  : 2 -> angtool_update_creature_and_thing_011214, creature_update_creature_control_080fbc
+ * Callees  : 3 -> group_update_creature_and_thing_039c3e, group_update_creature_and_thing_039dab, LbErrorLog
  ******************************************************************************/
-longlong FUN_0003a237(void)
+longlong group_infinate_loop_dispand_group_03a237(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  uint in_EDX;
+  int thing;
+  int thing_ptr;
+  uint arg_edx;
   int extraout_EDX;
-  int iVar2;
+  int val;
   
-  if ((*(ushort *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 0x7a) & 0xfff) != 0) {
-    iVar1 = FUN_00039dab();
-    iVar2 = 0;
-    while (iVar1 != 0) {
-      if (*(short *)((&DAT_001b0a00)[*(ushort *)(iVar1 + 100)] + 0x78) == 0) {
-        iVar1 = 0;
+  if ((*(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 0x7a) & 0xfff) != 0) { /* thing->ccontrol_idx */
+    thing_ptr = group_update_creature_and_thing_039dab();
+    val = 0;
+    while (thing_ptr != 0) {
+      if (*(short *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x78) == 0) { /* thing->ccontrol_idx */
+        thing_ptr = 0;
       }
       else {
-        FUN_00039c3e();
-        iVar1 = extraout_EDX;
+        group_update_creature_and_thing_039c3e();
+        thing_ptr = extraout_EDX;
       }
-      if (199 < iVar2) {
-        FUN_000ddaf0(); /* LbErrorLog("group.cpp", line 459, "INFINATE LOOP IN DISPAND GROUP") */
-        return (ulonglong)in_EDX << 0x20;
+      if (199 < val) {
+        LbErrorLog(); /* LbErrorLog("group.cpp", line 459, "INFINATE LOOP IN DISPAND GROUP") */
+        return (ulonglong)arg_edx << 0x20;
       }
-      iVar2 = iVar2 + 1;
+      val = val + 1;
     }
   }
-  return CONCAT44(in_EDX,1);
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : sub_03a2ad (Ghidra: FUN_0003a2ad)
- * Prototype: longlong sub_03a2ad(void);
+ * Function : group_update_player_view_state_03a2ad (Original VA: 0x3a2ad, Ghidra: FUN_0003a2ad)
+ * Prototype: longlong group_update_player_view_state_03a2ad(void);
  * Address  : 0x3a2ad (Size: 128 bytes)
  * Module   : group.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x3a32d
- * Callees  : 4 -> 0x51374, 0x64ae7, 0xc9988, 0xcc4a0
+ * Purpose  : Accesses per-player PlayerInfo state (stride 0x4ef)
+ * Callers  : 1 -> group_infinate_loop_dispand_group_03a32d
+ * Callees  : 4 -> moodneed_fn_051374, person_update_creature_control_064ae7, room_process_dungeon_room_0c9988, room_fn_0cc4a0
  ******************************************************************************/
-longlong FUN_0003a2ad(void)
+longlong group_update_player_view_state_03a2ad(void)
 
 {
-  char cVar1;
-  int in_EAX;
-  int iVar2;
-  uint in_EDX;
+  char ch;
+  int arg_eax;
+  int val;
+  uint arg_edx;
   
-  iVar2 = FUN_000c9988();
-  if (iVar2 != 0) {
-    cVar1 = FUN_00064ae7();
-    if (cVar1 != '\0') {
-      iVar2 = FUN_000cc4a0();
-      if (iVar2 != 0) {
-        if ((int)*(char *)(in_EAX + 6) == (uint)(byte)(&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef]) {
-          FUN_00051374();
+  val = room_process_dungeon_room_0c9988();
+  if (val != 0) {
+    ch = person_update_creature_control_064ae7();
+    if (ch != '\0') {
+      val = room_fn_0cc4a0();
+      if (val != 0) {
+        if ((int)*(char *)(arg_eax + 6) == (uint)(byte)(&g_player_id_number)[g_my_player_word._3_1_ * 0x4ef]) {
+          moodneed_fn_051374();
         }
-        *(undefined1 *)(in_EAX + 8) = 0x33;
-        return CONCAT44(in_EDX,1);
+        *(undefined1 *)(arg_eax + 8) = 0x33;
+        return CONCAT44(arg_edx,1);
       }
     }
   }
-  return (ulonglong)in_EDX << 0x20;
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : dk_infinate_loop_dispand_group_03a32d (Ghidra: FUN_0003a32d)
- * Prototype: longlong dk_infinate_loop_dispand_group_03a32d(void);
+ * Function : group_infinate_loop_dispand_group_03a32d (Original VA: 0x3a32d, Ghidra: FUN_0003a32d)
+ * Prototype: longlong group_infinate_loop_dispand_group_03a32d(void);
  * Address  : 0x3a32d (Size: 167 bytes)
  * Module   : group.cpp [direct_file_string_xref]
- * OrigLine : group.cpp:524 ("INFINATE LOOP IN DISPAND GROUP")
- * Naming   : String 'INFINATE LOOP IN DISPAND GROUP'
- * Callers  : 1 -> 0x11342
- * Callees  : 4 -> 0x39dab, 0x3a2ad, 0x63b6d, 0xddaf0
- * Strings  :
- *   - 0x164ae4: "group.cpp"
- *   - 0x164ac5: "INFINATE LOOP IN DISPAND GROUP"
+ * OrigLine : group.cpp lines 524
+ * Purpose  : String 'INFINATE LOOP IN DISPAND GROUP'
+ * Callers  : 1 -> angtool_update_creature_and_thing_011342
+ * Callees  : 4 -> group_update_creature_and_thing_039dab, group_update_player_view_state_03a2ad, person_fn_063b6d, LbErrorLog
  ******************************************************************************/
-longlong FUN_0003a32d(void)
+longlong group_infinate_loop_dispand_group_03a32d(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  int iVar2;
+  int thing;
+  int thing_ptr;
+  int val;
   int extraout_ECX;
   int extraout_ECX_00;
-  uint in_EDX;
-  int iVar3;
+  uint arg_edx;
+  int val_2;
   
-  if ((*(ushort *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 0x7a) & 0xfff) != 0) {
-    iVar1 = FUN_00039dab();
-    iVar3 = 0;
-    while (iVar1 != 0) {
-      if (*(short *)((&DAT_001b0a00)[*(ushort *)(iVar1 + 100)] + 0x78) == 0) {
-        iVar1 = 0;
+  if ((*(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 0x7a) & 0xfff) != 0) { /* thing->ccontrol_idx */
+    thing_ptr = group_update_creature_and_thing_039dab();
+    val_2 = 0;
+    while (thing_ptr != 0) {
+      if (*(short *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x78) == 0) { /* thing->ccontrol_idx */
+        thing_ptr = 0;
       }
       else {
-        iVar2 = FUN_0003a2ad();
-        iVar1 = extraout_ECX;
-        if (iVar2 == 0) {
-          FUN_00063b6d();
-          iVar1 = extraout_ECX_00;
+        val = group_update_player_view_state_03a2ad();
+        thing_ptr = extraout_ECX;
+        if (val == 0) {
+          person_fn_063b6d();
+          thing_ptr = extraout_ECX_00;
         }
       }
-      if (199 < iVar3) {
-        FUN_000ddaf0(); /* LbErrorLog("group.cpp", line 524, "INFINATE LOOP IN DISPAND GROUP") */
+      if (199 < val_2) {
+        LbErrorLog(); /* LbErrorLog("group.cpp", line 524, "INFINATE LOOP IN DISPAND GROUP") */
         goto LAB_0003a3b8;
       }
-      iVar3 = iVar3 + 1;
+      val_2 = val_2 + 1;
     }
-    iVar1 = FUN_0003a2ad();
-    if (iVar1 != 0) {
-      return CONCAT44(in_EDX,1);
+    thing_ptr = group_update_player_view_state_03a2ad();
+    if (thing_ptr != 0) {
+      return CONCAT44(arg_edx,1);
     }
   }
-  FUN_00063b6d();
+  person_fn_063b6d();
 LAB_0003a3b8:
-  return (ulonglong)in_EDX << 0x20;
+  return (ulonglong)arg_edx << 0x20;
 }
 

@@ -1,7 +1,7 @@
 /**
- * Dungeon Keeper (KEEPER.EXE) - Reconstructed Source Module: setup.cpp
+ * Dungeon Keeper (KEEPER.EXE) - Reconstructed & Semantically Named Module: setup.cpp
  * Binary Subject: /home/merlin/Dungeon Keeper/re/KEEPER.elf
- * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 (x86:LE:32:default)
+ * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 + DK Semantic Analyzer
  * Functions in this translation unit: 26
  */
 
@@ -11,217 +11,211 @@
 #include "../include/dk_functions.h"
 
 /******************************************************************************
- * Function : sub_069a90 (Ghidra: FUN_00069a90)
- * Prototype: undefined8 sub_069a90(void);
+ * Function : setup_init_color_tables (Original VA: 0x69a90, Ghidra: FUN_00069a90)
+ * Prototype: undefined8 setup_init_color_tables(void);
  * Address  : 0x69a90 (Size: 59 bytes)
  * Module   : setup.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0xde6a8
- * Callees  : 1 -> 0x69acb
+ * Purpose  : Initialize colour lookup tables before screen setup
+ * Callers  : 1 -> update_go_first_person_without_0de6a8
+ * Callees  : 1 -> setup_build_fade_palette_steps
  ******************************************************************************/
-undefined8 FUN_00069a90(void)
+undefined8 setup_init_color_tables(void)
 
 {
-  byte bVar1;
-  undefined4 in_EDX;
-  byte *pbVar2;
+  byte flag;
+  undefined4 arg_edx;
+  byte *loop_i;
   byte *extraout_EDX;
   
-  for (pbVar2 = &DAT_002eb40b; pbVar2 < (byte *)0x2eb538; pbVar2 = pbVar2 + 10) {
-    if (((*pbVar2 & 1) != 0) && (((uint)*(ushort *)(pbVar2 + 7) + DAT_002e8bee & 0x1f) == 0)) {
-      bVar1 = FUN_00069acb();
-      extraout_EDX[9] = bVar1;
-      pbVar2 = extraout_EDX;
+  for (loop_i = &g_bss_002eb40b; loop_i < (byte *)0x2eb538; loop_i = loop_i + 10) {
+    if (((*loop_i & 1) != 0) && (((uint)*(ushort *)(loop_i + 7) + g_game_turn & 0x1f) == 0)) {
+      flag = setup_build_fade_palette_steps();
+      extraout_EDX[9] = flag;
+      loop_i = extraout_EDX;
     }
   }
-  return CONCAT44(in_EDX,1);
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : sub_069acb (Ghidra: FUN_00069acb)
- * Prototype: undefined8 sub_069acb(void);
+ * Function : setup_build_fade_palette_steps (Original VA: 0x69acb, Ghidra: FUN_00069acb)
+ * Prototype: undefined8 setup_build_fade_palette_steps(void);
  * Address  : 0x69acb (Size: 213 bytes)
  * Module   : setup.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x69a90
- * Callees  : 1 -> 0x69ba0
+ * Purpose  : Precompute palette fade step tables
+ * Callers  : 1 -> setup_init_color_tables
+ * Callees  : 1 -> setup_compare_display_modes
  ******************************************************************************/
-undefined8 FUN_00069acb(void)
+undefined8 setup_build_fade_palette_steps(void)
 
 {
-  ushort uVar1;
-  int in_EAX;
-  int iVar2;
-  uint uVar3;
-  undefined1 uVar4;
-  ushort uVar5;
+  ushort cctrl_ptr;
+  int arg_eax;
+  int val;
+  uint thing_ptr;
+  undefined1 uval;
+  ushort cctrl_ptr_2;
   uint extraout_ECX;
-  uint uVar6;
+  uint thing_ptr_2;
   uint extraout_ECX_00;
-  undefined4 in_EDX;
-  int iVar7;
+  undefined4 arg_edx;
+  int val_2;
   uint local_1c;
   
   local_1c = 0;
-  iVar7 = 0;
-  uVar5 = CONCAT11(1,(&DAT_002eb40a)[in_EAX * 10]);
+  val_2 = 0;
+  cctrl_ptr_2 = CONCAT11(1,(&g_bss_002eb40a)[arg_eax * 10]);
   do {
-    uVar6 = (uint)uVar5;
-    uVar3 = local_1c;
-    if ((((&DAT_0019d0c8)[local_1c] & 1) != 0) && (uVar3 = uVar6 & 0xff, (uVar3 & uVar5 >> 8) == 0))
+    thing_ptr_2 = (uint)cctrl_ptr_2;
+    thing_ptr = local_1c;
+    if ((((&g_players)[local_1c] & 1) != 0) && (thing_ptr = thing_ptr_2 & 0xff, (thing_ptr & cctrl_ptr_2 >> 8) == 0))
     {
-      uVar5 = *(ushort *)((int)&DAT_002e05b6 + iVar7);
-      while (uVar3 = (&DAT_001ae9fc)[uVar5], DAT_001ae9fc < uVar3) {
-        iVar2 = FUN_00069ba0();
-        if (iVar2 != 0) {
-          uVar6 = CONCAT31((int3)(extraout_ECX >> 8),(byte)extraout_ECX | (byte)(extraout_ECX >> 8))
+      cctrl_ptr_2 = *(ushort *)((int)&g_bss_002e05b6 + val_2);
+      while (thing_ptr = (&g_thing_ptrs)[cctrl_ptr_2], g_thing_ptrs < thing_ptr) {
+        val = setup_compare_display_modes();
+        if (val != 0) {
+          thing_ptr_2 = CONCAT31((int3)(extraout_ECX >> 8),(byte)extraout_ECX | (byte)(extraout_ECX >> 8))
           ;
           break;
         }
-        uVar6 = extraout_ECX;
-        uVar5 = *(ushort *)((&DAT_001b0a00)[*(ushort *)(uVar3 + 100)] + 0x1f);
+        thing_ptr_2 = extraout_ECX;
+        cctrl_ptr_2 = *(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x1f); /* thing->ccontrol_idx */
       }
-      uVar5 = (ushort)uVar6;
-      uVar3 = uVar6 & 0xff;
-      if ((uVar3 & uVar6 >> 8 & 0xff) == 0) {
-        uVar1 = *(ushort *)((int)&DAT_002e05b8 + iVar7);
+      cctrl_ptr_2 = (ushort)thing_ptr_2;
+      thing_ptr = thing_ptr_2 & 0xff;
+      if ((thing_ptr & thing_ptr_2 >> 8 & 0xff) == 0) {
+        cctrl_ptr = *(ushort *)((int)&g_bss_002e05b8 + val_2);
         while( true ) {
-          uVar5 = (ushort)uVar6;
-          uVar6 = (&DAT_001ae9fc)[uVar1];
-          if (uVar6 <= DAT_001ae9fc) break;
-          uVar3 = FUN_00069ba0();
-          if (uVar3 != 0) {
-            uVar5 = (ushort)CONCAT31((int3)(extraout_ECX_00 >> 8),
+          cctrl_ptr_2 = (ushort)thing_ptr_2;
+          thing_ptr_2 = (&g_thing_ptrs)[cctrl_ptr];
+          if (thing_ptr_2 <= g_thing_ptrs) break;
+          thing_ptr = setup_compare_display_modes();
+          if (thing_ptr != 0) {
+            cctrl_ptr_2 = (ushort)CONCAT31((int3)(extraout_ECX_00 >> 8),
                                      (byte)extraout_ECX_00 | (byte)(extraout_ECX_00 >> 8));
             break;
           }
-          uVar1 = *(ushort *)((&DAT_001b0a00)[*(ushort *)(uVar6 + 100)] + 0x1f);
-          uVar6 = extraout_ECX_00;
+          cctrl_ptr = *(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr_2 + 100)] + 0x1f); /* thing->ccontrol_idx */
+          thing_ptr_2 = extraout_ECX_00;
         }
       }
     }
     local_1c = local_1c + 0x4ef;
-    iVar7 = iVar7 + 0x1508;
-    uVar4 = (undefined1)uVar5;
-    uVar5 = CONCAT11((char)(uVar5 >> 8) * '\x02',uVar4);
-    if (iVar7 == 0x6928) {
-      return CONCAT44(in_EDX,CONCAT31((int3)(uVar3 >> 8),uVar4));
+    val_2 = val_2 + 0x1508;
+    uval = (undefined1)cctrl_ptr_2;
+    cctrl_ptr_2 = CONCAT11((char)(cctrl_ptr_2 >> 8) * '\x02',uval);
+    if (val_2 == 0x6928) {
+      return CONCAT44(arg_edx,CONCAT31((int3)(thing_ptr >> 8),uval));
     }
   } while( true );
 }
 
 /******************************************************************************
- * Function : sub_069ba0 (Ghidra: FUN_00069ba0)
- * Prototype: undefined4 sub_069ba0(void);
+ * Function : setup_compare_display_modes (Original VA: 0x69ba0, Ghidra: FUN_00069ba0)
+ * Prototype: undefined4 setup_compare_display_modes(void);
  * Address  : 0x69ba0 (Size: 139 bytes)
  * Module   : setup.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x69acb
- * Callees  : 1 -> 0xe69fc
+ * Purpose  : Compare two display mode descriptors for compatibility
+ * Callers  : 1 -> setup_build_fade_palette_steps
+ * Callees  : 1 -> bflib_system_io_fn_0e69fc
  ******************************************************************************/
-undefined4 FUN_00069ba0(void)
+undefined4 setup_compare_display_modes(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int in_EDX;
+  int arg_eax;
+  int val;
+  int val_2;
+  int val_3;
+  int arg_edx;
   
-  if (*(short *)(in_EDX + 5) == 0) {
-    if (*(char *)(in_EAX + 1) != *(char *)(in_EDX + 2)) {
+  if (*(short *)(arg_edx + 5) == 0) {
+    if (*(char *)(arg_eax + 1) != *(char *)(arg_edx + 2)) {
       return 0;
     }
-    if (*(char *)(in_EAX + 3) == *(char *)(in_EDX + 4)) {
+    if (*(char *)(arg_eax + 3) == *(char *)(arg_edx + 4)) {
       return 1;
     }
     return 0;
   }
-  iVar1 = FUN_000e69fc();
-  iVar2 = FUN_000e69fc();
-  if (iVar2 < iVar1) {
-    iVar1 = *(int *)(&DAT_0017a4d0 + ((iVar2 << 8) / iVar1) * 8) * iVar1;
+  val = bflib_system_io_fn_0e69fc();
+  val_2 = bflib_system_io_fn_0e69fc();
+  if (val_2 < val) {
+    val = *(int *)(&g_data_0017a4d0 + ((val_2 << 8) / val) * 8) * val;
   }
   else {
-    iVar3 = 0;
-    if (iVar2 == 0) goto LAB_00069c05;
-    iVar1 = *(int *)(&DAT_0017a4d0 + ((iVar1 << 8) / iVar2) * 8) * iVar2;
+    val_3 = 0;
+    if (val_2 == 0) goto LAB_00069c05;
+    val = *(int *)(&g_data_0017a4d0 + ((val << 8) / val_2) * 8) * val_2;
   }
-  iVar3 = iVar1 >> 0xd;
+  val_3 = val >> 0xd;
 LAB_00069c05:
-  if (iVar3 < (int)(uint)*(byte *)(in_EDX + 6)) {
+  if (val_3 < (int)(uint)*(byte *)(arg_edx + 6)) {
     return 1;
   }
   return 0;
 }
 
 /******************************************************************************
- * Function : dk_unhandled_physicalmemory_069c2c (Ghidra: FUN_00069c2c)
- * Prototype: longlong dk_unhandled_physicalmemory_069c2c(void);
+ * Function : setup_detect_physical_memory_tier (Original VA: 0x69c2c, Ghidra: FUN_00069c2c)
+ * Prototype: longlong setup_detect_physical_memory_tier(void);
  * Address  : 0x69c2c (Size: 83 bytes)
  * Module   : setup.cpp [direct_file_string_xref]
- * OrigLine : setup.cpp:59 ("Unhandled PhysicalMemory")
- * Naming   : String 'Unhandled PhysicalMemory'
- * Callers  : 2 -> 0x45bb8, 0x6b16f
- * Callees  : 1 -> 0xddaf0
- * Strings  :
- *   - 0x166f0d: "setup.cpp"
- *   - 0x166ef4: "Unhandled PhysicalMemory"
+ * OrigLine : setup.cpp lines 59
+ * Purpose  : Map detected physical RAM (MB) to asset caching tier (8/16/24/32 MB)
+ * Callers  : 2 -> inits_fn_045bb8, setup_allocate_graphics_heap
+ * Callees  : 1 -> LbErrorLog
  ******************************************************************************/
-longlong FUN_00069c2c(void)
+longlong setup_detect_physical_memory_tier(void)
 
 {
-  uint in_EAX;
-  uint in_EDX;
+  uint arg_eax;
+  uint arg_edx;
   
-  if (in_EAX < 0x10) {
-    if (in_EAX == 8) {
-      return CONCAT44(in_EDX,0x100000);
+  if (arg_eax < 0x10) {
+    if (arg_eax == 8) {
+      return CONCAT44(arg_edx,0x100000);
     }
   }
   else {
-    if (in_EAX < 0x11) {
-      return CONCAT44(in_EDX,0x200000);
+    if (arg_eax < 0x11) {
+      return CONCAT44(arg_edx,0x200000);
     }
-    if (0x17 < in_EAX) {
-      if (in_EAX < 0x19) {
-        return CONCAT44(in_EDX,0x500000);
+    if (0x17 < arg_eax) {
+      if (arg_eax < 0x19) {
+        return CONCAT44(arg_edx,0x500000);
       }
-      if (in_EAX == 0x20) {
-        return CONCAT44(in_EDX,0x800000);
+      if (arg_eax == 0x20) {
+        return CONCAT44(arg_edx,0x800000);
       }
     }
   }
-  FUN_000ddaf0(); /* LbErrorLog("setup.cpp", line 59, "Unhandled PhysicalMemory") */
-  return (ulonglong)in_EDX << 0x20;
+  LbErrorLog(); /* LbErrorLog("setup.cpp", line 59, "Unhandled PhysicalMemory") */
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : sub_069c7f (Ghidra: FUN_00069c7f)
- * Prototype: void sub_069c7f(void);
+ * Function : setup_load_vga_256_palettes (Original VA: 0x69c7f, Ghidra: FUN_00069c7f)
+ * Prototype: void setup_load_vga_256_palettes(void);
  * Address  : 0x69c7f (Size: 605 bytes)
  * Module   : setup.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x6a412
- * Callees  : 8 -> 0x150f0, 0x2c3d0, 0x69edc, 0xdd920, 0xe7714, 0xe8f34, 0xe984c, 0xe98c8
- * Strings  :
- *   - 0x166f17: "DATA"
- *   - 0x166f1e: "%s\tables.dat"
+ * Purpose  : Load VGA 256-color palettes and shade tables from DATA/
+ * Callers  : 1 -> setup_verify_cdrom_installation
+ * Callees  : 8 -> cdtest_ldata_dkwind00_dat_0150f0, file_fn_02c3d0, setup_load_alpha_and_light_tables, prepare_file_path, dk_sprintf, bflib_system_io_fn_0e8f34, bflib_system_io_fn_0e984c, bflib_system_io_fn_0e98c8
  ******************************************************************************/
-void FUN_00069c7f(void)
+void setup_load_vga_256_palettes(void)
 
 {
-  char cVar1;
-  undefined1 uVar2;
-  undefined4 uVar3;
-  int *piVar4;
+  char ch;
+  undefined1 uval;
+  undefined4 uval_2;
+  int *int_ptr;
   int extraout_EDX;
-  int iVar5;
-  int iVar6;
-  byte *pbVar7;
-  int iVar8;
-  undefined1 *puVar9;
-  byte *pbVar10;
+  int val;
+  int loop_i;
+  byte *byte_ptr;
+  int val_2;
+  undefined1 *word_ptr;
+  byte *byte_ptr_2;
   undefined1 local_e0 [152];
   uint local_48;
   int local_44;
@@ -236,30 +230,30 @@ void FUN_00069c7f(void)
   int local_20;
   int local_1c;
   
-  FUN_000dd920();
-  uVar3 = FUN_000dd920();
-  iVar5 = 0;
-  FUN_000e7714(local_e0,s__s_tables_dat_00166f1e,uVar3);
-  piVar4 = &DAT_002f18e3;
+  prepare_file_path();
+  uval_2 = prepare_file_path();
+  val = 0;
+  dk_sprintf(local_e0,s__s_tables_dat_00166f1e,uval_2);
+  int_ptr = &g_bss_002f18e3;
   local_34 = extraout_EDX;
   do {
-    iVar8 = iVar5;
-    for (iVar6 = 0; iVar6 < 0x100; iVar6 = iVar6 + 0x20) {
-      if (0x21f < iVar8) {
-        FUN_000150f0();
-        cVar1 = FUN_0002c3d0();
-        if (cVar1 == '\0') {
-          puVar9 = &DAT_00361c10;
+    val_2 = val;
+    for (loop_i = 0; loop_i < 0x100; loop_i = loop_i + 0x20) {
+      if (0x21f < val_2) {
+        cdtest_ldata_dkwind00_dat_0150f0();
+        ch = file_fn_02c3d0();
+        if (ch == '\0') {
+          word_ptr = &g_pixmap_fade_tables;
           local_1c = 0;
           do {
             local_2c = 0x100;
-            pbVar7 = DAT_00199210;
+            byte_ptr = g_display_palette;
             do {
-              local_44 = (int)((uint)*pbVar7 * local_1c) >> 5;
-              pbVar7 = pbVar7 + 3;
-              uVar2 = FUN_000e8f34();
-              *puVar9 = uVar2;
-              puVar9 = puVar9 + 1;
+              local_44 = (int)((uint)*byte_ptr * local_1c) >> 5;
+              byte_ptr = byte_ptr + 3;
+              uval = bflib_system_io_fn_0e8f34();
+              *word_ptr = uval;
+              word_ptr = word_ptr + 1;
               local_2c = local_2c + -1;
             } while (local_2c != 0);
             local_1c = local_1c + 1;
@@ -268,84 +262,81 @@ void FUN_00069c7f(void)
           local_2c = 0;
           do {
             local_24 = 0x100;
-            pbVar7 = DAT_00199210;
+            byte_ptr = g_display_palette;
             do {
-              local_44 = (int)((uint)*pbVar7 * local_20) >> 5;
-              pbVar7 = pbVar7 + 3;
-              uVar2 = FUN_000e8f34();
-              *puVar9 = uVar2;
-              puVar9 = puVar9 + 1;
+              local_44 = (int)((uint)*byte_ptr * local_20) >> 5;
+              byte_ptr = byte_ptr + 3;
+              uval = bflib_system_io_fn_0e8f34();
+              *word_ptr = uval;
+              word_ptr = word_ptr + 1;
               local_24 = local_24 + -1;
             } while (local_24 != 0);
             local_20 = local_20 + 3;
           } while (local_20 < 0xc0);
-          local_40 = &DAT_00365c10;
+          local_40 = &g_pixmap_ghost_tables;
           local_28 = 0;
           local_24 = 0;
-          pbVar7 = DAT_00199210;
+          byte_ptr = g_display_palette;
           do {
-            local_48 = (uint)*pbVar7;
-            local_38 = (uint)pbVar7[1];
+            local_48 = (uint)*byte_ptr;
+            local_38 = (uint)byte_ptr[1];
             local_3c = 0x100;
-            local_30 = (uint)pbVar7[2];
-            pbVar7 = pbVar7 + 3;
-            pbVar10 = DAT_00199210;
+            local_30 = (uint)byte_ptr[2];
+            byte_ptr = byte_ptr + 3;
+            byte_ptr_2 = g_display_palette;
             do {
-              local_44 = (int)((uint)*pbVar10 * 2 + local_48) / 3;
-              uVar2 = FUN_000e8f34();
-              pbVar10 = pbVar10 + 3;
-              puVar9 = local_40 + 1;
-              *local_40 = uVar2;
+              local_44 = (int)((uint)*byte_ptr_2 * 2 + local_48) / 3;
+              uval = bflib_system_io_fn_0e8f34();
+              byte_ptr_2 = byte_ptr_2 + 3;
+              word_ptr = local_40 + 1;
+              *local_40 = uval;
               local_3c = local_3c + -1;
-              local_40 = puVar9;
+              local_40 = word_ptr;
             } while (local_3c != 0);
             local_28 = local_28 + 1;
           } while (local_28 < 0x100);
-          FUN_000e98c8();
+          bflib_system_io_fn_0e98c8();
         }
         else {
-          FUN_000e984c();
+          bflib_system_io_fn_0e984c();
         }
-        DAT_003d9820 = &DAT_00361c10;
-        iVar5 = 0;
+        g_display_bss_003d9820 = &g_pixmap_fade_tables;
+        val = 0;
         do {
-          if ((&DAT_00361c10)[iVar5] == '\0') {
-            (&DAT_00361c10)[iVar5] = 0x90;
+          if ((&g_pixmap_fade_tables)[val] == '\0') {
+            (&g_pixmap_fade_tables)[val] = 0x90;
           }
-          iVar5 = iVar5 + 1;
-        } while (iVar5 < 0x2000);
-        FUN_00069edc();
+          val = val + 1;
+        } while (val < 0x2000);
+        setup_load_alpha_and_light_tables();
         return;
       }
-      iVar8 = iVar8 + 1;
-      *piVar4 = DAT_002f2223 + iVar6 + local_34;
-      piVar4 = piVar4 + 1;
+      val_2 = val_2 + 1;
+      *int_ptr = g_bss_002f2223 + loop_i + local_34;
+      int_ptr = int_ptr + 1;
     }
-    iVar5 = iVar5 + 8;
+    val = val + 8;
     local_34 = local_34 + 0x2000;
   } while( true );
 }
 
 /******************************************************************************
- * Function : sub_069edc (Ghidra: FUN_00069edc)
- * Prototype: void sub_069edc(void);
+ * Function : setup_load_alpha_and_light_tables (Original VA: 0x69edc, Ghidra: FUN_00069edc)
+ * Prototype: void setup_load_alpha_and_light_tables(void);
  * Address  : 0x69edc (Size: 1146 bytes)
  * Module   : setup.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x69c7f
- * Callees  : 7 -> 0x150f0, 0x2c3d0, 0xdd920, 0xe7714, 0xe8f34, 0xe984c, 0xe98c8
- * Strings  :
- *   - 0x166f2c: "DATA"
- *   - 0x166f33: "%s\alpha.col"
+ * Purpose  : Load DATA/ALPHA.COL and lighting tables
+ * Callers  : 1 -> setup_load_vga_256_palettes
+ * Callees  : 7 -> cdtest_ldata_dkwind00_dat_0150f0, file_fn_02c3d0, prepare_file_path, dk_sprintf, bflib_system_io_fn_0e8f34, bflib_system_io_fn_0e984c, bflib_system_io_fn_0e98c8
  ******************************************************************************/
-void FUN_00069edc(void)
+void setup_load_alpha_and_light_tables(void)
 
 {
-  char cVar1;
-  undefined1 uVar2;
-  undefined4 uVar3;
-  int iVar4;
-  int iVar5;
+  char ch;
+  undefined1 uval;
+  undefined4 uval_2;
+  int val;
+  int val_2;
   undefined1 local_144 [152];
   int local_ac;
   int local_a8;
@@ -385,33 +376,33 @@ void FUN_00069edc(void)
   int local_20;
   int local_1c;
   
-  FUN_000dd920();
-  uVar3 = FUN_000dd920();
-  FUN_000e7714(local_144,s__s_alpha_col_00166f33,uVar3);
-  FUN_000150f0();
-  cVar1 = FUN_0002c3d0();
-  if (cVar1 == '\0') {
+  prepare_file_path();
+  uval_2 = prepare_file_path();
+  dk_sprintf(local_144,s__s_alpha_col_00166f33,uval_2);
+  cdtest_ldata_dkwind00_dat_0150f0();
+  ch = file_fn_02c3d0();
+  if (ch == '\0') {
     local_ac = 0;
     local_6c = 0x100;
     do {
       local_74 = 0;
       local_70 = local_6c;
-      iVar5 = local_ac * 4;
+      val_2 = local_ac * 4;
       do {
-        local_a0 = (uint)*(byte *)(DAT_00199210 + local_74) + iVar5;
+        local_a0 = (uint)*(byte *)(g_display_palette + local_74) + val_2;
         if (0x3f < (int)local_a0) {
           local_a0 = 0x3f;
         }
-        local_a8 = (uint)*(byte *)(DAT_00199210 + local_74 + 2) + iVar5;
+        local_a8 = (uint)*(byte *)(g_display_palette + local_74 + 2) + val_2;
         if (0x3f < local_a8) {
           local_a8 = 0x3f;
         }
         local_a0 = local_a0 & 0xff;
-        uVar2 = FUN_000e8f34();
+        uval = bflib_system_io_fn_0e8f34();
         local_74 = local_74 + 3;
-        iVar4 = local_70 + 1;
-        (&DAT_0019a2a2)[local_70] = uVar2;
-        local_70 = iVar4;
+        val = local_70 + 1;
+        (&g_bss_0019a2a2)[local_70] = uval;
+        local_70 = val;
       } while (local_74 != 0x300);
       local_6c = local_6c + 0x100;
       local_ac = local_ac + 1;
@@ -426,15 +417,15 @@ void FUN_00069edc(void)
       local_9c = local_5c;
       local_98 = local_60;
       local_94 = local_64;
-      iVar5 = 0;
+      val_2 = 0;
       local_68 = local_58;
       do {
-        uVar2 = FUN_000e8f34();
-        iVar5 = iVar5 + 3;
-        iVar4 = local_68 + 1;
-        (&DAT_0019a2a2)[local_68] = uVar2;
-        local_68 = iVar4;
-      } while (iVar5 != 0x300);
+        uval = bflib_system_io_fn_0e8f34();
+        val_2 = val_2 + 3;
+        val = local_68 + 1;
+        (&g_bss_0019a2a2)[local_68] = uval;
+        local_68 = val;
+      } while (val_2 != 0x300);
       local_64 = local_64 + 7;
       local_60 = local_60 + 4;
     }
@@ -445,16 +436,16 @@ void FUN_00069edc(void)
       local_90 = local_1c;
       local_8c = local_1c;
       local_88 = local_4c;
-      iVar5 = 0;
+      val_2 = 0;
       local_50 = local_48;
       do {
-        local_a0 = DAT_00199210;
-        uVar2 = FUN_000e8f34();
-        iVar5 = iVar5 + 3;
-        iVar4 = local_50 + 1;
-        (&DAT_0019a2a2)[local_50] = uVar2;
-        local_50 = iVar4;
-      } while (iVar5 != 0x300);
+        local_a0 = g_display_palette;
+        uval = bflib_system_io_fn_0e8f34();
+        val_2 = val_2 + 3;
+        val = local_50 + 1;
+        (&g_bss_0019a2a2)[local_50] = uval;
+        local_50 = val;
+      } while (val_2 != 0x300);
       local_4c = local_4c + 6;
       local_1c = local_1c + 1;
     }
@@ -464,24 +455,24 @@ void FUN_00069edc(void)
     for (local_38 = 0x1900; local_38 < local_34; local_38 = local_38 + 0x100) {
       local_84 = local_3c;
       local_80 = local_20 * 2;
-      iVar5 = 0;
+      val_2 = 0;
       local_40 = local_38;
       do {
-        local_a0 = (uint)*(byte *)(DAT_00199210 + 1 + iVar5) + local_80;
+        local_a0 = (uint)*(byte *)(g_display_palette + 1 + val_2) + local_80;
         if (0x3f < (int)local_a0) {
           local_a0 = 0x3f;
         }
-        local_a4 = (uint)*(byte *)(iVar5 + 2 + DAT_00199210) + local_84;
+        local_a4 = (uint)*(byte *)(val_2 + 2 + g_display_palette) + local_84;
         if (0x3f < local_a4) {
           local_a4 = 0x3f;
         }
         local_a0 = local_a0 & 0xff;
-        uVar2 = FUN_000e8f34();
-        iVar5 = iVar5 + 3;
-        iVar4 = local_40 + 1;
-        (&DAT_0019a2a2)[local_40] = uVar2;
-        local_40 = iVar4;
-      } while (iVar5 != 0x300);
+        uval = bflib_system_io_fn_0e8f34();
+        val_2 = val_2 + 3;
+        val = local_40 + 1;
+        (&g_bss_0019a2a2)[local_40] = uval;
+        local_40 = val;
+      } while (val_2 != 0x300);
       local_3c = local_3c + 6;
       local_20 = local_20 + 1;
     }
@@ -490,1154 +481,1054 @@ void FUN_00069edc(void)
     local_28 = 0x2900;
     for (local_2c = 0x2100; local_2c < local_28; local_2c = local_2c + 0x100) {
       local_7c = local_24 * 2;
-      iVar4 = 0;
+      val = 0;
       local_78 = local_30;
-      iVar5 = local_2c;
+      val_2 = local_2c;
       do {
-        iVar4 = iVar4 + 3;
-        uVar2 = FUN_000e8f34();
-        (&DAT_0019a2a2)[iVar5] = uVar2;
-        iVar5 = iVar5 + 1;
-      } while (iVar4 != 0x300);
+        val = val + 3;
+        uval = bflib_system_io_fn_0e8f34();
+        (&g_bss_0019a2a2)[val_2] = uval;
+        val_2 = val_2 + 1;
+      } while (val != 0x300);
       local_30 = local_30 + 6;
       local_24 = local_24 + 1;
     }
-    FUN_000e98c8();
+    bflib_system_io_fn_0e98c8();
   }
   else {
-    FUN_000e984c();
+    bflib_system_io_fn_0e984c();
   }
   return;
 }
 
 /******************************************************************************
- * Function : dk_data_gui_dat_06a356 (Ghidra: FUN_0006a356)
- * Prototype: longlong dk_data_gui_dat_06a356(void);
+ * Function : setup_free_gui_data_files (Original VA: 0x6a356, Ghidra: FUN_0006a356)
+ * Prototype: longlong setup_free_gui_data_files(void);
  * Address  : 0x6a356 (Size: 188 bytes)
  * Module   : setup.cpp [direct_file_string_xref]
- * OrigLine : setup.cpp:363 ("No memory for MCGA files")
- * Naming   : String 'data\gui.dat'
- * Callers  : 2 -> 0x6a553, 0x6a689
- * Callees  : 6 -> 0xddaf0, 0xe7714, 0xe823c, 0xe83c8, 0xe9498, 0xe94b0
- * Strings  :
- *   - 0x166f59: "setup.cpp"
- *   - 0x166f7d: "setup.cpp"
- *   - 0x187500: "data\gui.dat"
- *   - 0x166f40: "No memory for MCGA files"
- *   - 0x166f63: "Unable to load file, '%s'"
+ * OrigLine : setup.cpp lines 363
+ * Purpose  : Free loaded GUI data/sprite tables (data/gui.dat)
+ * Callers  : 2 -> setup_load_core_game_data, setup_init_game_screen_and_subsystems
+ * Callees  : 6 -> LbErrorLog, dk_sprintf, bflib_system_io_fn_0e823c, LbDataFreeAll, bflib_system_io_fn_0e9498, bflib_system_io_fn_0e94b0
  ******************************************************************************/
-longlong FUN_0006a356(void)
+longlong setup_free_gui_data_files(void)
 
 {
-  bool bVar1;
+  bool flag;
   undefined4 extraout_ECX;
-  uint in_EDX;
-  char *pcVar2;
+  uint arg_edx;
+  char *str_ptr;
   int extraout_EDX;
-  int iVar3;
-  undefined8 uVar4;
-  undefined8 uVar5;
+  int val;
+  undefined8 uval;
+  undefined8 uval_2;
   
-  pcVar2 = s_data_gui_dat_00187500;
-  while (*(int *)(pcVar2 + 0x1c) != 0) {
-    FUN_000e83c8();
-    pcVar2 = (char *)(extraout_EDX + 0x2c);
+  str_ptr = s_data_gui_dat_00187500;
+  while (*(int *)(str_ptr + 0x1c) != 0) {
+    LbDataFreeAll();
+    str_ptr = (char *)(extraout_EDX + 0x2c);
   }
-  bVar1 = true;
-  uVar4 = FUN_000e9498();
+  flag = true;
+  uval = bflib_system_io_fn_0e9498();
   while( true ) {
     while( true ) {
-      iVar3 = (int)((ulonglong)uVar4 >> 0x20);
-      if (*(int *)(iVar3 + 0x1c) == 0) {
-        if ((int)uVar4 != 0) {
-          FUN_000e94b0();
+      val = (int)((ulonglong)uval >> 0x20);
+      if (*(int *)(val + 0x1c) == 0) {
+        if ((int)uval != 0) {
+          bflib_system_io_fn_0e94b0();
         }
-        return CONCAT44(in_EDX,1);
+        return CONCAT44(arg_edx,1);
       }
-      *(ushort *)(iVar3 + 0x28) = (ushort)bVar1;
-      uVar5 = FUN_000e823c();
-      iVar3 = (int)((ulonglong)uVar5 >> 0x20);
-      uVar4 = CONCAT44(iVar3,extraout_ECX);
-      if ((int)uVar5 != -100) break;
-      if (!bVar1) goto LAB_0006a3bc;
-      bVar1 = false;
+      *(ushort *)(val + 0x28) = (ushort)flag;
+      uval_2 = bflib_system_io_fn_0e823c();
+      val = (int)((ulonglong)uval_2 >> 0x20);
+      uval = CONCAT44(val,extraout_ECX);
+      if ((int)uval_2 != -100) break;
+      if (!flag) goto LAB_0006a3bc;
+      flag = false;
     }
-    if ((int)uVar5 == -0x65) break;
-    bVar1 = true;
-    uVar4 = CONCAT44(iVar3 + 0x2c,extraout_ECX);
+    if ((int)uval_2 == -0x65) break;
+    flag = true;
+    uval = CONCAT44(val + 0x2c,extraout_ECX);
   }
-  FUN_000e7714(&DAT_0019cbac,s_Unable_to_load_file____s__00166f63,iVar3);
+  dk_sprintf(&g_log_sprintf_buf,s_Unable_to_load_file____s__00166f63,val);
 LAB_0006a3bc:
-  FUN_000ddaf0(); /* LbErrorLog("setup.cpp", line 363, "No memory for MCGA files") */
-  return (ulonglong)in_EDX << 0x20;
+  LbErrorLog(); /* LbErrorLog("setup.cpp", line 363, "No memory for MCGA files") */
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : dk_please_run_install_dungeon_06a412 (Ghidra: FUN_0006a412)
- * Prototype: longlong dk_please_run_install_dungeon_06a412(void);
+ * Function : setup_verify_cdrom_installation (Original VA: 0x6a412, Ghidra: FUN_0006a412)
+ * Prototype: longlong setup_verify_cdrom_installation(void);
  * Address  : 0x6a412 (Size: 321 bytes)
  * Module   : setup.cpp [contiguous_same_unit_span]
- * Naming   : String 'Please run INSTALL from the Dungeon Keeper CDRom.'
- * Callers  : 1 -> 0x633c4
- * Callees  : 21 -> 0x2245b, 0x29738, 0x29eef, 0x401ec, 0x44eb6, 0x65724, 0x69c7f, 0x6a553, 0x6adc5, 0x6b04d ...
- * Strings  :
- *   - 0x166f87: "Please run INSTALL from the Dungeon Keeper CDRom."
+ * Purpose  : Verify installation files and prompt for Dungeon Keeper CD-ROM if missing
+ * Callers  : 1 -> panmap_fn_0633c4
+ * Callees  : 21 -> compturn_fn_02245b, evil_settings_dat_029738, file_install_path_029eef, inits_fn_0401ec, inits_update_creature_and_thing_044eb6, pom_iterations_065724, setup_load_vga_256_palettes, setup_load_core_game_data ...
  ******************************************************************************/
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-longlong FUN_0006a412(void)
+longlong setup_verify_cdrom_installation(void)
 
 {
-  int iVar1;
-  uint uVar2;
-  uint in_EDX;
-  longdouble lVar3;
+  int val;
+  uint uval;
+  uint arg_edx;
+  longdouble val_2;
   int local_30;
   
-  FUN_0002245b();
-  FUN_0006b04d();
-  lVar3 = (longdouble)FUN_00065724();
-  _DAT_0033401d = (float)lVar3;
-  if ((lVar3 <= (longdouble)_DAT_00166fb9) || (_DAT_00166fc1 <= (double)lVar3)) {
-    DAT_002ee88d = 0;
+  compturn_fn_02245b();
+  setup_init_mouse_and_pointer();
+  val_2 = (longdouble)pom_iterations_065724();
+  g_bss_0033401d = (float)val_2;
+  if ((val_2 <= (longdouble)g_data_00166fb9) || (g_data_00166fc1 <= (double)val_2)) {
+    g_bss_002ee88d = 0;
   }
   else {
-    DAT_002ee88d = 1;
+    g_bss_002ee88d = 1;
   }
-  iVar1 = FUN_00029eef();
-  if (iVar1 != 0) {
-    FUN_000f4908();
-    iVar1 = FUN_0006b4c7();
-    if (iVar1 == 0) goto LAB_0006a550;
-    FUN_0006adc5();
-    iVar1 = FUN_0006a553();
-    if (iVar1 == 0) {
-      DAT_00334021 = 1;
+  val = file_install_path_029eef();
+  if (val != 0) {
+    bflib_system_io_fn_0f4908();
+    val = setup_show_bullfrog_legal_splash();
+    if (val == 0) goto LAB_0006a550;
+    setup_load_text_strings_dat();
+    val = setup_load_core_game_data();
+    if (val == 0) {
+      g_bss_00334021 = 1;
     }
     else {
-      iVar1 = FUN_000ebc80();
-      if (iVar1 == 1) {
-        FUN_00029738();
-        iVar1 = FUN_0006b16f();
-        if (iVar1 != 0) {
-          FUN_000401ec();
+      val = bflib_system_io_fn_0ebc80();
+      if (val == 1) {
+        evil_settings_dat_029738();
+        val = setup_allocate_graphics_heap();
+        if (val != 0) {
+          inits_fn_0401ec();
           if (local_30 == 0) {
-            uVar2 = 4;
+            uval = 4;
           }
           else {
-            uVar2 = local_30 >> 8 & 0xf;
+            uval = local_30 >> 8 & 0xf;
           }
-          if (5 < uVar2) {
-            FUN_0012f930();
+          if (5 < uval) {
+            watcom_crt_fn_12f930();
           }
-          FUN_0008cc24();
-          FUN_000ecf70();
-          FUN_000f32ae();
-          FUN_000f3264();
-          FUN_0006b7d0();
-          FUN_00069c7f();
-          FUN_00044eb6();
-          return CONCAT44(in_EDX,1);
+          draw_load_palette_file_08cc24();
+          bflib_system_io_bf110_set_redbook_volume_0ecf70();
+          bflib_system_io_fn_0f32ae();
+          bflib_system_io_fn_0f3264();
+          setup_init_trig_and_projection_tables();
+          setup_load_vga_256_palettes();
+          inits_update_creature_and_thing_044eb6();
+          return CONCAT44(arg_edx,1);
         }
         goto LAB_0006a550;
       }
     }
   }
-  FUN_000e8ca8();
+  LbMemoryCopy();
 LAB_0006a550:
-  return (ulonglong)in_EDX << 0x20;
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : sub_06a553 (Ghidra: FUN_0006a553)
- * Prototype: longlong sub_06a553(void);
+ * Function : setup_load_core_game_data (Original VA: 0x6a553, Ghidra: FUN_0006a553)
+ * Prototype: longlong setup_load_core_game_data(void);
  * Address  : 0x6a553 (Size: 255 bytes)
  * Module   : setup.cpp [direct_file_string_xref]
- * OrigLine : setup.cpp:493
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x6a412
- * Callees  : 11 -> 0x6a356, 0x6b0c8, 0x7c1f0, 0xac630, 0xddaf0, 0xe6a6c, 0xe6b20, 0xe830c, 0xeba38, 0xebc98 ...
- * Strings  :
- *   - 0x166fe8: "setup.cpp"
- *   - 0x18731c: "*VESA"
+ * OrigLine : setup.cpp lines 493
+ * Purpose  : Load core game data files via LbDataLoadAll
+ * Callers  : 1 -> setup_verify_cdrom_installation
+ * Callees  : 11 -> setup_free_gui_data_files, setup_load_pointer_sprites, ceiling_illegal_ceiling_step_value_07c1f0, light_fn_0ac630, LbErrorLog, bflib_system_io_fn_0e6a6c, LbTextDraw, LbDataLoadAll ...
  ******************************************************************************/
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-longlong FUN_0006a553(void)
+longlong setup_load_core_game_data(void)
 
 {
-  int iVar1;
-  uint in_EDX;
+  int val;
+  uint arg_edx;
   
-  iVar1 = FUN_000e830c();
-  if (iVar1 != 0) {
-    FUN_000ddaf0(); /* LbErrorLog("setup.cpp", line 493, g_log_buf) */
-    return (ulonglong)in_EDX << 0x20;
+  val = LbDataLoadAll();
+  if (val != 0) {
+    LbErrorLog(); /* LbErrorLog("setup.cpp", line 493, g_log_buf) */
+    return (ulonglong)arg_edx << 0x20;
   }
-  iVar1 = FUN_0006a356();
-  if (iVar1 != 0) {
-    FUN_0006b0c8();
-    DAT_0019cba4 = 0x280;
-    DAT_0019cba2 = 400;
-    DAT_0019cba6 = 2;
-    _DAT_0019cba8 = 0x20;
-    _DAT_0019cbaa = 8;
-    FUN_000f05f0();
-    FUN_000ebc98();
-    FUN_000eba38();
-    FUN_000e6a6c();
-    FUN_000e6b20();
-    FUN_000ac630();
-    FUN_0007c1f0();
-    DAT_003d9874._0_1_ = (byte)DAT_003d9874 | 0x40;
+  val = setup_free_gui_data_files();
+  if (val != 0) {
+    setup_load_pointer_sprites();
+    g_mouse_cursor_y = 0x280;
+    g_mouse_cursor_x = 400;
+    g_units_per_pixel = 2;
+    g_bss_0019cba8 = 0x20;
+    g_bss_0019cbaa = 8;
+    bflib_system_io_fn_0f05f0();
+    bflib_system_io_fn_0ebc98();
+    bflib_system_io_fn_0eba38();
+    bflib_system_io_fn_0e6a6c();
+    LbTextDraw();
+    light_fn_0ac630();
+    ceiling_illegal_ceiling_step_value_07c1f0();
+    g_lb_display_draw_flags._0_1_ = (byte)g_lb_display_draw_flags | 0x40;
   }
-  return CONCAT44(in_EDX,(uint)(iVar1 != 0));
+  return CONCAT44(arg_edx,(uint)(val != 0));
 }
 
 /******************************************************************************
- * Function : sub_06a652 (Ghidra: FUN_0006a652)
- * Prototype: void sub_06a652(void);
+ * Function : setup_shutdown_video_and_audio (Original VA: 0x6a652, Ghidra: FUN_0006a652)
+ * Prototype: void setup_shutdown_video_and_audio(void);
  * Address  : 0x6a652 (Size: 55 bytes)
  * Module   : setup.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x633c4
- * Callees  : 7 -> 0xe792c, 0xe83f0, 0xe94b0, 0xe94f8, 0xebe68, 0xf4960, 0xf4c6c
- * Strings  :
- *   - 0x18731c: "*VESA"
+ * Purpose  : Shutdown sound, timer, and LbScreenReset on game exit
+ * Callers  : 1 -> panmap_fn_0633c4
+ * Callees  : 7 -> LbScreenReset, LbDataFree, bflib_system_io_fn_0e94b0, bflib_system_io_fn_0e94f8, bflib_system_io_fn_0ebe68, bflib_system_io_fn_0f4960, bflib_system_io_fn_0f4c6c
  ******************************************************************************/
-void FUN_0006a652(void)
+void setup_shutdown_video_and_audio(void)
 
 {
-  FUN_000ebe68();
-  FUN_000f4960();
-  FUN_000e792c();
-  FUN_000e83f0();
-  FUN_000e94b0();
-  DAT_00333f73 = 0;
-  FUN_000f4c6c();
-  FUN_000e94f8();
+  bflib_system_io_fn_0ebe68();
+  bflib_system_io_fn_0f4960();
+  LbScreenReset();
+  LbDataFree();
+  bflib_system_io_fn_0e94b0();
+  g_bss_00333f73 = 0;
+  bflib_system_io_fn_0f4c6c();
+  bflib_system_io_fn_0e94f8();
   return;
 }
 
 /******************************************************************************
- * Function : dk_mcga_minimal_allowed_06a689 (Ghidra: FUN_0006a689)
- * Prototype: undefined8 dk_mcga_minimal_allowed_06a689(void);
+ * Function : setup_init_game_screen_and_subsystems (Original VA: 0x6a689, Ghidra: FUN_0006a689)
+ * Prototype: undefined8 setup_init_game_screen_and_subsystems(void);
  * Address  : 0x6a689 (Size: 1079 bytes)
  * Module   : setup.cpp [direct_file_string_xref]
- * OrigLine : setup.cpp:619 ("MCGA Minimal not allowed"); setup.cpp:671 ("Unhandled Screen Mode (Reset)")
- * Naming   : String 'MCGA Minimal not allowed'
- * Callers  : 1 -> 0x30e88
- * Callees  : 28 -> 0x270e0, 0x27320, 0x3a3d4, 0x3a4bb, 0x3a4e3, 0x3a57e, 0x6a356, 0x6ae37, 0x6b0c8, 0x6b12b ...
- * Strings  :
- *   - 0x16700b: "setup.cpp"
- *   - 0x167033: "setup.cpp"
- *   - 0x16704e: "setup.cpp"
- *   - 0x16708d: "setup.cpp"
- *   - 0x1670ca: "setup.cpp"
- *   - 0x187844: "*W_SCREEN"
- *   - 0x166ff2: "MCGA Minimal not allowed"
- *   - 0x187500: "data\gui.dat"
- *   - 0x1670ac: "Unhandled Screen Mode (Setup)"
- *   - 0x18789c: "LDATA\FRONTFT1.DAT"
- *   - 0x18768c: "data\guihi.dat"
- *   - 0x167015: "Unhandled Screen Mode (Reset)"
- *   - 0x16703d: "Load Mcga failed"
- *   - 0x167058: "DATA"
- *   - 0x16705f: "%s\gmap.raw"
- *   - 0x16706b: "Unable to load vres256_load_files"
- *   - 0x167097: "DATA"
- *   - 0x16709e: "%s\gmaphi.raw"
+ * OrigLine : setup.cpp lines 619, 671
+ * Purpose  : Initialize VESA/VGA screen mode (disallow MCGA minimal) and game subsystems
+ * Callers  : 1 -> frontend_fn_030e88
+ * Callees  : 28 -> eyelens_fn_0270e0, eyelens_fn_027320, heap_graphics_heap_already_allocated_03a3d4, heap_fn_03a4bb, heap_graphics_heap_allocated_03a4e3, heap_fn_03a57e, setup_free_gui_data_files, setup_clear_screen_backbuffer ...
  ******************************************************************************/
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined8 FUN_0006a689(void)
+undefined8 setup_init_game_screen_and_subsystems(void)
 
 {
-  undefined2 uVar1;
-  ushort in_AX;
-  undefined4 uVar2;
-  int iVar3;
-  int iVar4;
+  undefined2 saved_draw_flags;
+  ushort arg_ax;
+  undefined4 uval;
+  int val;
+  int screen_res;
   ushort extraout_CX;
   ushort extraout_CX_00;
-  ushort uVar5;
+  ushort uval_2;
   ushort extraout_CX_01;
   uint extraout_ECX;
   uint extraout_ECX_00;
   uint extraout_ECX_01;
   uint extraout_ECX_02;
   uint extraout_ECX_03;
-  undefined4 in_EDX;
-  uint uVar6;
+  undefined4 arg_edx;
+  uint screen_res_2;
   
-  uVar1 = DAT_003d9874;
-  iVar4 = DAT_00376518;
-  uVar6 = (uint)DAT_003d9878;
-  if ((in_AX == DAT_003d9878) && (DAT_00376518 == 0)) {
-    uVar2 = 1;
+  saved_draw_flags = g_lb_display_draw_flags;
+  screen_res = g_bss_00376518;
+  screen_res_2 = (uint)g_active_screen_mode;
+  if ((arg_ax == g_active_screen_mode) && (g_bss_00376518 == 0)) {
+    uval = 1;
     goto LAB_00069ed6;
   }
-  FUN_000ebc10(DAT_0019d0c7);
-  if (DAT_003d9878 < 10) {
-    if (DAT_003d9878 == 1) {
-      if (DAT_00376518 == 0) {
-        FUN_000270e0();
-        FUN_0003a57e();
-        FUN_0003a4bb();
-        FUN_0006b12b();
-        if (uVar6 != (extraout_ECX & 0xffff)) {
-          FUN_000e792c();
+  bflib_system_io_fn_0ebc10(g_bss_0019d0c7);
+  if (g_active_screen_mode < 10) {
+    if (g_active_screen_mode == 1) {
+      if (g_bss_00376518 == 0) {
+        eyelens_fn_0270e0();
+        heap_fn_03a57e();
+        heap_fn_03a4bb();
+        setup_free_pointer_sprites();
+        if (screen_res_2 != (extraout_ECX & 0xffff)) {
+          LbScreenReset();
         }
         goto LAB_0006a734;
       }
-      if (uVar6 != (extraout_ECX_01 & 0xffff)) {
-        FUN_000e792c();
+      if (screen_res_2 != (extraout_ECX_01 & 0xffff)) {
+        LbScreenReset();
       }
-      FUN_000e83f0();
-      FUN_000ddaf0(); /* LbErrorLog("setup.cpp", line 619, "MCGA Minimal not allowed") */
-      uVar5 = extraout_CX;
+      LbDataFree();
+      LbErrorLog(); /* LbErrorLog("setup.cpp", line 619, "MCGA Minimal not allowed") */
+      uval_2 = extraout_CX;
 LAB_0006a6fe:
-      DAT_00376518 = 0;
+      g_bss_00376518 = 0;
       goto LAB_0006a739;
     }
 LAB_0006a809:
-    FUN_000ddaf0(); /* LbErrorLog("setup.cpp", line 671, "Unhandled Screen Mode (Reset)") */
+    LbErrorLog(); /* LbErrorLog("setup.cpp", line 671, "Unhandled Screen Mode (Reset)") */
   }
   else {
-    if ((10 < DAT_003d9878) && (DAT_003d9878 != 0xd)) goto LAB_0006a809;
-    if (DAT_00376518 != 0) {
-      if ((uVar6 != (extraout_ECX_01 & 0xffff)) || (iVar4 != 0)) {
-        FUN_000e792c();
+    if ((10 < g_active_screen_mode) && (g_active_screen_mode != 0xd)) goto LAB_0006a809;
+    if (g_bss_00376518 != 0) {
+      if ((screen_res_2 != (extraout_ECX_01 & 0xffff)) || (screen_res != 0)) {
+        LbScreenReset();
       }
-      FUN_000e83f0();
-      uVar5 = extraout_CX_01;
+      LbDataFree();
+      uval_2 = extraout_CX_01;
       goto LAB_0006a6fe;
     }
-    FUN_000270e0();
-    FUN_0003a57e();
-    FUN_0003a4bb();
-    FUN_0006b12b();
-    if ((uVar6 != (extraout_ECX_00 & 0xffff)) || (iVar4 != 0)) {
-      FUN_000e792c();
+    eyelens_fn_0270e0();
+    heap_fn_03a57e();
+    heap_fn_03a4bb();
+    setup_free_pointer_sprites();
+    if ((screen_res_2 != (extraout_ECX_00 & 0xffff)) || (screen_res != 0)) {
+      LbScreenReset();
     }
 LAB_0006a734:
-    FUN_000e83f0();
-    uVar5 = extraout_CX_00;
+    LbDataFree();
+    uval_2 = extraout_CX_00;
 LAB_0006a739:
-    if (uVar5 == 0) goto LAB_0006a809;
-    if (1 < uVar5) {
-      if ((uVar5 == 0xd) && (iVar3 = FUN_000e830c(), iVar3 == 0)) {
-        if ((uVar6 != (extraout_ECX_03 & 0xffff)) || (iVar4 != 0)) {
-          iVar4 = FUN_000e6a30();
-          if (iVar4 == 0) {
-            iVar4 = FUN_000e7750(0xd,0x280,0x1e0,DAT_00199210,1,0);
+    if (uval_2 == 0) goto LAB_0006a809;
+    if (1 < uval_2) {
+      if ((uval_2 == 0xd) && (val = LbDataLoadAll(), val == 0)) {
+        if ((screen_res_2 != (extraout_ECX_03 & 0xffff)) || (screen_res != 0)) {
+          screen_res = bflib_system_io_fn_0e6a30();
+          if (screen_res == 0) {
+            screen_res = LbScreenSetup(0xd,0x280,0x1e0,g_display_palette,1,0);
           }
           else {
-            iVar4 = FUN_000e7750(10,0x280,400,DAT_00199210,1,0);
+            screen_res = LbScreenSetup(10,0x280,400,g_display_palette,1,0);
           }
-          if (iVar4 != 1) goto LAB_0006a80e;
-          DAT_0019cba4 = 0x280;
-          DAT_0019cba2 = 400;
+          if (screen_res != 1) goto LAB_0006a80e;
+          g_mouse_cursor_y = 0x280;
+          g_mouse_cursor_x = 400;
         }
-        FUN_0006b0c8();
-        DAT_0019cba6 = 1;
-        _DAT_0019cba8 = 0x10;
-        _DAT_0019cbaa = 0x10;
-        if (DAT_00377768 != 0) {
-          FUN_000dd920();
-          uVar2 = FUN_000dd920();
-          FUN_000e7714(&DAT_0019cbac,s__s_gmaphi_raw_0016709e,uVar2);
-          FUN_000e984c();
+        setup_load_pointer_sprites();
+        g_units_per_pixel = 1;
+        g_bss_0019cba8 = 0x10;
+        g_bss_0019cbaa = 0x10;
+        if (g_bss_00377768 != 0) {
+          prepare_file_path();
+          uval = prepare_file_path();
+          dk_sprintf(&g_log_sprintf_buf,s__s_gmaphi_raw_0016709e,uval);
+          bflib_system_io_fn_0e984c();
         }
-        FUN_0006ae37();
+        setup_clear_screen_backbuffer();
 LAB_0006a9e5:
-        FUN_000e7904(0);
-        FUN_000e79fc();
-        FUN_00027320();
-        FUN_000f05f0();
-        FUN_000ebc98();
-        FUN_000eba38();
-        FUN_000e6a6c();
-        FUN_000e6b20();
-        FUN_000ebf9c();
-        DAT_003d9874 = uVar1;
-        iVar4 = FUN_0003a3d4();
-        uVar2 = 0;
-        if (iVar4 != 0) {
-          FUN_0003a4e3();
-          uVar2 = 1;
-          DAT_0019d0b8 = DAT_0019d0b8 & 0xfb;
+        bflib_system_io_fn_0e7904(0);
+        bflib_system_io_fn_0e79fc();
+        eyelens_fn_027320();
+        bflib_system_io_fn_0f05f0();
+        bflib_system_io_fn_0ebc98();
+        bflib_system_io_fn_0eba38();
+        bflib_system_io_fn_0e6a6c();
+        LbTextDraw();
+        bflib_system_io_fn_0ebf9c();
+        g_lb_display_draw_flags = saved_draw_flags;
+        screen_res = heap_graphics_heap_already_allocated_03a3d4();
+        uval = 0;
+        if (screen_res != 0) {
+          heap_graphics_heap_allocated_03a4e3();
+          uval = 1;
+          g_game_operation_flags = g_game_operation_flags & 0xfb;
         }
         goto LAB_00069ed6;
       }
       goto LAB_0006a809;
     }
-    iVar4 = FUN_0006a356();
-    if (iVar4 == 0) goto LAB_0006a809;
-    if ((uVar6 == (extraout_ECX_02 & 0xffff)) ||
-       (iVar4 = FUN_000e7750(1,0x140,200,DAT_00199210,2,0), iVar4 == 1)) {
-      FUN_0006b0c8();
-      DAT_0019cba4 = 0x280;
-      DAT_0019cba2 = 400;
-      DAT_0019cba6 = 2;
-      _DAT_0019cba8 = 0x20;
-      _DAT_0019cbaa = 8;
-      if (DAT_00377768 != 0) {
-        FUN_000dd920();
-        uVar2 = FUN_000dd920();
-        FUN_000e7714(&DAT_0019cbac,s__s_gmap_raw_0016705f,uVar2);
-        FUN_000e984c();
+    screen_res = setup_free_gui_data_files();
+    if (screen_res == 0) goto LAB_0006a809;
+    if ((screen_res_2 == (extraout_ECX_02 & 0xffff)) ||
+       (screen_res = LbScreenSetup(1,0x140,200,g_display_palette,2,0), screen_res == 1)) {
+      setup_load_pointer_sprites();
+      g_mouse_cursor_y = 0x280;
+      g_mouse_cursor_x = 400;
+      g_units_per_pixel = 2;
+      g_bss_0019cba8 = 0x20;
+      g_bss_0019cbaa = 8;
+      if (g_bss_00377768 != 0) {
+        prepare_file_path();
+        uval = prepare_file_path();
+        dk_sprintf(&g_log_sprintf_buf,s__s_gmap_raw_0016705f,uval);
+        bflib_system_io_fn_0e984c();
       }
       goto LAB_0006a9e5;
     }
   }
 LAB_0006a80e:
-  uVar2 = 0;
+  uval = 0;
 LAB_00069ed6:
-  return CONCAT44(in_EDX,uVar2);
+  return CONCAT44(arg_edx,uval);
 }
 
 /******************************************************************************
- * Function : dk_data_gui_dat_06aac0 (Ghidra: FUN_0006aac0)
- * Prototype: undefined8 dk_data_gui_dat_06aac0(void);
+ * Function : setup_reload_gui_and_mode_sprites (Original VA: 0x6aac0, Ghidra: FUN_0006aac0)
+ * Prototype: undefined8 setup_reload_gui_and_mode_sprites(void);
  * Address  : 0x6aac0 (Size: 773 bytes)
  * Module   : setup.cpp [direct_file_string_xref]
- * OrigLine : setup.cpp:878 ("Unhandled Screen Mode (Reset)"); setup.cpp:889 ("Unable to load mcga_load_files_minimal")
- * Naming   : String 'data\gui.dat'
- * Callers  : 2 -> 0x2dfac, 0x2f9f5
- * Callees  : 18 -> 0x270e0, 0x2f1c8, 0x2f1d2, 0x3a4bb, 0x3a57e, 0x6b12b, 0xddaf0, 0xe6a6c, 0xe6b20, 0xe7750 ...
- * Strings  :
- *   - 0x1670f2: "setup.cpp"
- *   - 0x167123: "setup.cpp"
- *   - 0x16714f: "setup.cpp"
- *   - 0x167183: "setup.cpp"
- *   - 0x1671ab: "setup.cpp"
- *   - 0x187844: "*W_SCREEN"
- *   - 0x187500: "data\gui.dat"
- *   - 0x18789c: "LDATA\FRONTFT1.DAT"
- *   - 0x18768c: "data\guihi.dat"
- *   - 0x1670d4: "Unhandled Screen Mode (Reset)"
- *   - 0x1670fc: "Unable to load mcga_load_files_minimal"
- *   - 0x16712d: "Unable to setup screen resolution"
- *   - 0x167159: "Unable to load vres256_load_files_minimal"
- *   - 0x16718d: "Unhandled Screen Mode (Setup)"
+ * OrigLine : setup.cpp lines 878, 889
+ * Purpose  : Reload GUI sprite tables (data/gui.dat) for current screen resolution
+ * Callers  : 2 -> frontend_why_are_we_here_02dfac, frontend_fn_02f9f5
+ * Callees  : 18 -> eyelens_fn_0270e0, frontend_fn_02f1c8, frontend_fn_02f1d2, heap_fn_03a4bb, heap_fn_03a57e, setup_free_pointer_sprites, LbErrorLog, bflib_system_io_fn_0e6a6c ...
  ******************************************************************************/
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined8 FUN_0006aac0(void)
+undefined8 setup_reload_gui_and_mode_sprites(void)
 
 {
-  undefined2 uVar1;
-  ushort in_AX;
-  undefined4 uVar2;
-  int iVar3;
+  undefined2 saved_draw_flags;
+  ushort arg_ax;
+  undefined4 uval;
+  int screen_res;
   ushort extraout_CX;
   ushort extraout_CX_00;
   ushort extraout_CX_01;
-  ushort uVar4;
+  ushort uval_2;
   uint extraout_ECX;
   uint extraout_ECX_00;
   uint extraout_ECX_01;
   uint extraout_ECX_02;
   uint extraout_ECX_03;
-  undefined4 in_EDX;
-  uint uVar5;
+  undefined4 arg_edx;
+  uint screen_res_2;
   
-  uVar1 = DAT_003d9874;
-  uVar5 = (uint)DAT_003d9878;
-  if ((in_AX == DAT_003d9878) && (DAT_00376518 != 0)) {
-    uVar2 = 1;
-    DAT_003d9874 = uVar1;
+  saved_draw_flags = g_lb_display_draw_flags;
+  screen_res_2 = (uint)g_active_screen_mode;
+  if ((arg_ax == g_active_screen_mode) && (g_bss_00376518 != 0)) {
+    uval = 1;
+    g_lb_display_draw_flags = saved_draw_flags;
     goto LAB_00069ed6;
   }
-  if (DAT_003d9878 < 10) {
-    if (DAT_003d9878 != 1) goto LAB_0006abbd;
-    if (DAT_00376518 != 0) {
-      if (in_AX != 1) {
-        FUN_000e792c();
+  if (g_active_screen_mode < 10) {
+    if (g_active_screen_mode != 1) goto LAB_0006abbd;
+    if (g_bss_00376518 != 0) {
+      if (arg_ax != 1) {
+        LbScreenReset();
       }
       goto LAB_0006ab26;
     }
-    FUN_000270e0();
-    FUN_0003a57e();
-    FUN_0003a4bb();
-    FUN_0006b12b();
+    eyelens_fn_0270e0();
+    heap_fn_03a57e();
+    heap_fn_03a4bb();
+    setup_free_pointer_sprites();
     if ((extraout_ECX & 0xffff) != 1) {
-      FUN_000e792c();
+      LbScreenReset();
     }
 LAB_0006ab61:
-    FUN_000e83f0();
-    uVar4 = extraout_CX_00;
+    LbDataFree();
+    uval_2 = extraout_CX_00;
   }
-  else if ((DAT_003d9878 < 0xb) || (DAT_003d9878 == 0xd)) {
-    if (DAT_00376518 == 0) {
-      FUN_000270e0();
-      FUN_0003a57e();
-      FUN_0003a4bb();
-      if (uVar5 != (extraout_ECX_01 & 0xffff)) {
-        FUN_000e792c();
+  else if ((g_active_screen_mode < 0xb) || (g_active_screen_mode == 0xd)) {
+    if (g_bss_00376518 == 0) {
+      eyelens_fn_0270e0();
+      heap_fn_03a57e();
+      heap_fn_03a4bb();
+      if (screen_res_2 != (extraout_ECX_01 & 0xffff)) {
+        LbScreenReset();
       }
       goto LAB_0006ab61;
     }
-    FUN_0006b12b();
-    if (uVar5 != (extraout_ECX_00 & 0xffff)) {
-      FUN_000e792c();
+    setup_free_pointer_sprites();
+    if (screen_res_2 != (extraout_ECX_00 & 0xffff)) {
+      LbScreenReset();
     }
 LAB_0006ab26:
-    FUN_000e83f0();
-    DAT_00376518 = 0;
-    uVar4 = extraout_CX;
+    LbDataFree();
+    g_bss_00376518 = 0;
+    uval_2 = extraout_CX;
   }
   else {
 LAB_0006abbd:
-    FUN_000ddaf0(); /* LbErrorLog("setup.cpp", line 878, "Unhandled Screen Mode (Reset)") */
-    uVar4 = extraout_CX_01;
+    LbErrorLog(); /* LbErrorLog("setup.cpp", line 878, "Unhandled Screen Mode (Reset)") */
+    uval_2 = extraout_CX_01;
   }
-  if (uVar4 == 0) {
+  if (uval_2 == 0) {
 LAB_0006ac13:
-    FUN_000ddaf0(); /* LbErrorLog("setup.cpp", line 889, "Unable to load mcga_load_files_minimal") */
+    LbErrorLog(); /* LbErrorLog("setup.cpp", line 889, "Unable to load mcga_load_files_minimal") */
   }
   else {
-    if (uVar4 < 2) {
-      DAT_00376518 = 1;
-      iVar3 = FUN_000e830c();
-      if ((iVar3 == 0) &&
-         ((uVar5 == (extraout_ECX_02 & 0xffff) ||
-          (iVar3 = FUN_000e7750(1,0x140,200,DAT_00199210,2,0), iVar3 == 1)))) {
-        DAT_0019cba4 = 0x280;
-        DAT_0019cba2 = 400;
-        DAT_0019cba6 = 2;
-        _DAT_0019cba8 = 0x20;
-        _DAT_0019cbaa = 8;
+    if (uval_2 < 2) {
+      g_bss_00376518 = 1;
+      screen_res = LbDataLoadAll();
+      if ((screen_res == 0) &&
+         ((screen_res_2 == (extraout_ECX_02 & 0xffff) ||
+          (screen_res = LbScreenSetup(1,0x140,200,g_display_palette,2,0), screen_res == 1)))) {
+        g_mouse_cursor_y = 0x280;
+        g_mouse_cursor_x = 400;
+        g_units_per_pixel = 2;
+        g_bss_0019cba8 = 0x20;
+        g_bss_0019cbaa = 8;
 LAB_0006ac87:
-        FUN_000e7904(0);
-        FUN_000e79fc();
-        FUN_000ebc98();
-        FUN_000eba38();
-        FUN_000e6a6c();
-        FUN_000e6b20();
-        uVar2 = 1;
-        DAT_003d9874 = uVar1;
+        bflib_system_io_fn_0e7904(0);
+        bflib_system_io_fn_0e79fc();
+        bflib_system_io_fn_0ebc98();
+        bflib_system_io_fn_0eba38();
+        bflib_system_io_fn_0e6a6c();
+        LbTextDraw();
+        uval = 1;
+        g_lb_display_draw_flags = saved_draw_flags;
         goto LAB_00069ed6;
       }
       goto LAB_0006ac13;
     }
-    if (uVar4 != 0xd) goto LAB_0006ac13;
-    DAT_00376518 = 1;
-    FUN_0002f1c8();
-    iVar3 = FUN_000e830c();
-    if (iVar3 != 0) goto LAB_0006ac13;
-    FUN_0002f1d2();
-    if ((uVar5 == (extraout_ECX_03 & 0xffff)) ||
-       (iVar3 = FUN_000e7750(0xd,0x280,0x1e0,DAT_00199210,1,0), iVar3 == 1)) {
-      DAT_0019cba4 = 0x280;
-      DAT_0019cba2 = 0x1e0;
-      DAT_0019cba6 = 1;
-      _DAT_0019cba8 = 0x10;
-      _DAT_0019cbaa = 0x10;
-      FUN_000f05f0();
+    if (uval_2 != 0xd) goto LAB_0006ac13;
+    g_bss_00376518 = 1;
+    frontend_fn_02f1c8();
+    screen_res = LbDataLoadAll();
+    if (screen_res != 0) goto LAB_0006ac13;
+    frontend_fn_02f1d2();
+    if ((screen_res_2 == (extraout_ECX_03 & 0xffff)) ||
+       (screen_res = LbScreenSetup(0xd,0x280,0x1e0,g_display_palette,1,0), screen_res == 1)) {
+      g_mouse_cursor_y = 0x280;
+      g_mouse_cursor_x = 0x1e0;
+      g_units_per_pixel = 1;
+      g_bss_0019cba8 = 0x10;
+      g_bss_0019cbaa = 0x10;
+      bflib_system_io_fn_0f05f0();
       goto LAB_0006ac87;
     }
   }
-  uVar2 = 0;
+  uval = 0;
 LAB_00069ed6:
-  return CONCAT44(in_EDX,uVar2);
+  return CONCAT44(arg_edx,uval);
 }
 
 /******************************************************************************
- * Function : dk_data_text_dat_06adc5 (Ghidra: FUN_0006adc5)
- * Prototype: void dk_data_text_dat_06adc5(void);
+ * Function : setup_load_text_strings_dat (Original VA: 0x6adc5, Ghidra: FUN_0006adc5)
+ * Prototype: void setup_load_text_strings_dat(void);
  * Address  : 0x6adc5 (Size: 79 bytes)
  * Module   : setup.cpp [contiguous_same_unit_span]
- * Naming   : String 'DATA/TEXT.DAT'
- * Callers  : 1 -> 0x6a412
- * Callees  : 5 -> 0x6ae14, 0xe9484, 0xe97a0, 0xe984c, 0xf4c8a
- * Strings  :
- *   - 0x1671b5: "DATA/TEXT.DAT"
- *   - 0x1671c3: "DATA/TEXT.DAT"
+ * Purpose  : Load localized text strings from DATA/TEXT.DAT
+ * Callers  : 1 -> setup_verify_cdrom_installation
+ * Callees  : 5 -> setup_clear_pointer_array, LbFileLoadAt, bflib_system_io_fn_0e97a0, bflib_system_io_fn_0e984c, bflib_system_io_fn_0f4c8a
  ******************************************************************************/
-void FUN_0006adc5(void)
+void setup_load_text_strings_dat(void)
 
 {
-  FUN_000e97a0();
-  DAT_00333f73 = FUN_000e9484();
-  if (DAT_00333f73 != 0) {
-    FUN_000e984c();
-    FUN_0006ae14();
+  bflib_system_io_fn_0e97a0();
+  g_bss_00333f73 = LbFileLoadAt();
+  if (g_bss_00333f73 != 0) {
+    bflib_system_io_fn_0e984c();
+    setup_clear_pointer_array();
     return;
   }
-  FUN_000f4c8a();
+  bflib_system_io_fn_0f4c8a();
   return;
 }
 
 /******************************************************************************
- * Function : sub_06ae14 (Ghidra: FUN_0006ae14)
- * Prototype: void sub_06ae14(void);
+ * Function : setup_clear_pointer_array (Original VA: 0x6ae14, Ghidra: FUN_0006ae14)
+ * Prototype: void setup_clear_pointer_array(void);
  * Address  : 0x6ae14 (Size: 35 bytes)
  * Module   : setup.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x6adc5
+ * Purpose  : Zero out array of pointers
+ * Callers  : 1 -> setup_load_text_strings_dat
  * Callees  : 0 -> 
  ******************************************************************************/
-void FUN_0006ae14(void)
+void setup_clear_pointer_array(void)
 
 {
-  char cVar1;
-  char *in_EAX;
-  int iVar2;
-  int iVar3;
-  int in_EDX;
-  short unaff_BX;
-  short sVar4;
+  char ch;
+  char *arg_eax;
+  int val;
+  int val_2;
+  int arg_edx;
+  short arg_bx;
+  short short_val;
   
-  iVar2 = 0;
-  while (sVar4 = unaff_BX + -1, unaff_BX != 0) {
-    iVar3 = iVar2 + 4;
-    *(char **)(iVar2 + in_EDX) = in_EAX;
+  val = 0;
+  while (short_val = arg_bx + -1, arg_bx != 0) {
+    val_2 = val + 4;
+    *(char **)(val + arg_edx) = arg_eax;
     do {
-      cVar1 = *in_EAX;
-      in_EAX = in_EAX + 1;
-      iVar2 = iVar3;
-      unaff_BX = sVar4;
-    } while (cVar1 != '\0');
+      ch = *arg_eax;
+      arg_eax = arg_eax + 1;
+      val = val_2;
+      arg_bx = short_val;
+    } while (ch != '\0');
   }
   return;
 }
 
 /******************************************************************************
- * Function : sub_06ae37 (Ghidra: FUN_0006ae37)
- * Prototype: void sub_06ae37(void);
+ * Function : setup_clear_screen_backbuffer (Original VA: 0x6ae37, Ghidra: FUN_0006ae37)
+ * Prototype: void setup_clear_screen_backbuffer(void);
  * Address  : 0x6ae37 (Size: 73 bytes)
  * Module   : setup.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x6a689
- * Callees  : 2 -> 0xe6a10, 0xf0d1c
+ * Purpose  : Clear full screen backbuffer (g_screen_width * g_screen_height)
+ * Callers  : 1 -> setup_init_game_screen_and_subsystems
+ * Callees  : 2 -> LbScreenWaitVbi, bflib_system_io_fn_0f0d1c
  ******************************************************************************/
-void FUN_0006ae37(void)
+void setup_clear_screen_backbuffer(void)
 
 {
-  int iVar1;
+  int val;
   int extraout_ECX;
   
-  iVar1 = DAT_003d982c * DAT_003d9830;
-  while (0 < iVar1) {
-    FUN_000f0d1c();
-    FUN_000e6a10();
-    iVar1 = extraout_ECX + -0x10000;
+  val = g_screen_width * g_screen_height;
+  while (0 < val) {
+    bflib_system_io_fn_0f0d1c();
+    LbScreenWaitVbi();
+    val = extraout_ECX + -0x10000;
   }
   return;
 }
 
 /******************************************************************************
- * Function : dk_loading_raw_06ae80 (Ghidra: FUN_0006ae80)
- * Prototype: void dk_loading_raw_06ae80(void);
+ * Function : setup_show_loading_raw_screen (Original VA: 0x6ae80, Ghidra: FUN_0006ae80)
+ * Prototype: void setup_show_loading_raw_screen(void);
  * Address  : 0x6ae80 (Size: 461 bytes)
  * Module   : setup.cpp [direct_file_string_xref]
- * OrigLine : setup.cpp:1036 ("Unable to load LOADING palette")
- * Naming   : String 'LOADING.RAW'
- * Callers  : 2 -> 0x2dfac, 0x6b4c7
- * Callees  : 13 -> 0x150f0, 0x30782, 0xdd920, 0xddaf0, 0xe6a10, 0xe7714, 0xe7904, 0xe797c, 0xe79fc, 0xe846c ...
- * Strings  :
- *   - 0x167222: "setup.cpp"
- *   - 0x1671d1: "LOADING.RAW"
- *   - 0x1671dd: "DATA"
- *   - 0x1671e4: "%s\%s"
- *   - 0x1671ea: "LOADING.PAL"
- *   - 0x1671f6: "DATA"
- *   - 0x1671fd: "%s\%s"
- *   - 0x167203: "Unable to load LOADING palette"
+ * OrigLine : setup.cpp lines 1036
+ * Purpose  : Load and display LOADING.RAW splash screen with palette
+ * Callers  : 2 -> frontend_why_are_we_here_02dfac, setup_show_bullfrog_legal_splash
+ * Callees  : 13 -> cdtest_ldata_dkwind00_dat_0150f0, frontend_fn_030782, prepare_file_path, LbErrorLog, LbScreenWaitVbi, dk_sprintf, bflib_system_io_fn_0e7904, LbScreenLock ...
  ******************************************************************************/
-void FUN_0006ae80(void)
+void setup_show_loading_raw_screen(void)
 
 {
-  undefined1 uVar1;
-  undefined4 uVar2;
-  int iVar3;
-  int iVar4;
-  undefined1 *puVar5;
+  undefined1 uval;
+  undefined4 uval_2;
+  int screen_res;
+  int val;
+  undefined1 *word_ptr;
   int extraout_ECX;
-  undefined1 *puVar6;
+  undefined1 *word_ptr_2;
   
-  FUN_000e6a10();
-  FUN_000e846c(DAT_00199228);
-  FUN_000150f0();
-  FUN_000dd920(s_LOADING_RAW_001671d1);
-  uVar2 = FUN_000dd920();
-  FUN_000e7714(&DAT_0019cbac,s__s__s_001671e4,uVar2);
-  iVar3 = FUN_000e984c();
-  if (iVar3 != -1) {
-    FUN_000dd920(s_LOADING_PAL_001671ea);
-    uVar2 = FUN_000dd920();
-    FUN_000e7714(&DAT_0019cbac,s__s__s_001671fd,uVar2);
-    FUN_000150f0();
-    iVar3 = FUN_000e984c();
-    if (iVar3 != 0x300) {
-      FUN_000ddaf0(); /* LbErrorLog("setup.cpp", line 1036, "Unable to load LOADING palette") */
-      FUN_000e8c83();
+  LbScreenWaitVbi();
+  LbPaletteSet(g_scratch_work_buf);
+  cdtest_ldata_dkwind00_dat_0150f0();
+  prepare_file_path(s_LOADING_RAW_001671d1);
+  uval_2 = prepare_file_path();
+  dk_sprintf(&g_log_sprintf_buf,s__s__s_001671e4,uval_2);
+  screen_res = bflib_system_io_fn_0e984c();
+  if (screen_res != -1) {
+    prepare_file_path(s_LOADING_PAL_001671ea);
+    uval_2 = prepare_file_path();
+    dk_sprintf(&g_log_sprintf_buf,s__s__s_001671fd,uval_2);
+    cdtest_ldata_dkwind00_dat_0150f0();
+    screen_res = bflib_system_io_fn_0e984c();
+    if (screen_res != 0x300) {
+      LbErrorLog(); /* LbErrorLog("setup.cpp", line 1036, "Unable to load LOADING palette") */
+      LbFileClose();
     }
-    FUN_000e7904(0);
-    iVar3 = FUN_000e797c();
-    if (iVar3 == 1) {
-      if ((DAT_003d9878 == 0xd) || (DAT_003d9878 == 10)) {
-        puVar5 = DAT_003d9818;
-        if (DAT_003d9878 == 0xd) {
-          puVar5 = DAT_003d9818 + DAT_003d9834 * 0x28;
+    bflib_system_io_fn_0e7904(0);
+    screen_res = LbScreenLock();
+    if (screen_res == 1) {
+      if ((g_active_screen_mode == 0xd) || (g_active_screen_mode == 10)) {
+        word_ptr = g_display_bss_003d9818;
+        if (g_active_screen_mode == 0xd) {
+          word_ptr = g_display_bss_003d9818 + g_screen_pitch * 0x28;
         }
-        iVar3 = 0;
-        puVar6 = DAT_00199228;
+        screen_res = 0;
+        word_ptr_2 = g_scratch_work_buf;
         do {
-          iVar4 = 0;
+          val = 0;
           do {
-            uVar1 = *puVar6;
-            *puVar5 = uVar1;
-            iVar4 = iVar4 + 1;
-            puVar6 = puVar6 + 1;
-            puVar5[1] = uVar1;
-            puVar5 = puVar5 + 2;
-          } while (iVar4 < 0x140);
-          iVar3 = iVar3 + 1;
-          FUN_000e8c83();
-          puVar5 = (undefined1 *)(extraout_ECX + DAT_003d9834);
-        } while (iVar3 < 200);
+            uval = *word_ptr_2;
+            *word_ptr = uval;
+            val = val + 1;
+            word_ptr_2 = word_ptr_2 + 1;
+            word_ptr[1] = uval;
+            word_ptr = word_ptr + 2;
+          } while (val < 0x140);
+          screen_res = screen_res + 1;
+          LbFileClose();
+          word_ptr = (undefined1 *)(extraout_ECX + g_screen_pitch);
+        } while (screen_res < 200);
       }
       else {
-        iVar3 = 0;
+        screen_res = 0;
         do {
-          FUN_000e8c83();
-          iVar3 = iVar3 + 1;
-        } while (iVar3 < 200);
+          LbFileClose();
+          screen_res = screen_res + 1;
+        } while (screen_res < 200);
       }
-      FUN_000e797c();
-      FUN_000e79fc();
+      LbScreenLock();
+      bflib_system_io_fn_0e79fc();
     }
   }
-  FUN_000e8f24();
-  FUN_00030782();
+  bflib_system_io_fn_0e8f24();
+  frontend_fn_030782();
   return;
 }
 
 /******************************************************************************
- * Function : sub_06b04d (Ghidra: FUN_0006b04d)
- * Prototype: void sub_06b04d(void);
+ * Function : setup_init_mouse_and_pointer (Original VA: 0x6b04d, Ghidra: FUN_0006b04d)
+ * Prototype: void setup_init_mouse_and_pointer(void);
  * Address  : 0x6b04d (Size: 123 bytes)
  * Module   : setup.cpp [contiguous_same_unit_span]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x6a412
- * Callees  : 3 -> 0xf0f8c, 0xf4cb8, 0xf4d9b
- * Strings  :
- *   - 0x16722c: "PhysicalMemory %d"
+ * Purpose  : Initialize mouse driver and cursor pointer
+ * Callers  : 1 -> setup_verify_cdrom_installation
+ * Callees  : 3 -> bflib_system_io_fn_0f0f8c, bflib_system_io_fn_0f4cb8, bflib_system_io_fn_0f4d9b
  ******************************************************************************/
-void FUN_0006b04d(void)
+void setup_init_mouse_and_pointer(void)
 
 {
-  int iVar1;
+  int val;
   
-  iVar1 = FUN_000f4cb8();
-  if (iVar1 == 0) {
-    iVar1 = FUN_000f4cb8();
-    if (iVar1 == 0) {
-      iVar1 = FUN_000f4cb8();
-      if (iVar1 == 0) {
-        DAT_00334065 = 8;
+  val = bflib_system_io_fn_0f4cb8();
+  if (val == 0) {
+    val = bflib_system_io_fn_0f4cb8();
+    if (val == 0) {
+      val = bflib_system_io_fn_0f4cb8();
+      if (val == 0) {
+        g_bss_00334065 = 8;
       }
       else {
-        FUN_000f4d9b();
-        DAT_00334065 = 0x10;
+        bflib_system_io_fn_0f4d9b();
+        g_bss_00334065 = 0x10;
       }
     }
     else {
-      FUN_000f4d9b();
-      DAT_00334065 = 0x18;
+      bflib_system_io_fn_0f4d9b();
+      g_bss_00334065 = 0x18;
     }
   }
   else {
-    FUN_000f4d9b();
-    DAT_00334065 = 0x20;
+    bflib_system_io_fn_0f4d9b();
+    g_bss_00334065 = 0x20;
   }
-  FUN_000f0f8c(s_PhysicalMemory__d_0016722c,DAT_00334065);
+  bflib_system_io_fn_0f0f8c(s_PhysicalMemory__d_0016722c,g_bss_00334065);
   return;
 }
 
 /******************************************************************************
- * Function : dk_data_hpointer_dat_06b0c8 (Ghidra: FUN_0006b0c8)
- * Prototype: void dk_data_hpointer_dat_06b0c8(void);
+ * Function : setup_load_pointer_sprites (Original VA: 0x6b0c8, Ghidra: FUN_0006b0c8)
+ * Prototype: void setup_load_pointer_sprites(void);
  * Address  : 0x6b0c8 (Size: 99 bytes)
  * Module   : setup.cpp [direct_file_string_xref]
- * OrigLine : setup.cpp:1187 ("Unable to load pointer files")
- * Naming   : String 'data\hpointer.dat'
- * Callers  : 2 -> 0x6a553, 0x6a689
- * Callees  : 3 -> 0xddaf0, 0xe830c, 0xf05d8
- * Strings  :
- *   - 0x16725b: "setup.cpp"
- *   - 0x1870b8: "data\hpointer.dat"
- *   - 0x186fb0: "data\lpointer.dat"
- *   - 0x18713c: "data\hpoints.dat"
- *   - 0x187034: "data\lpoints.dat"
- *   - 0x16723e: "Unable to load pointer files"
+ * OrigLine : setup.cpp lines 1187
+ * Purpose  : Load mouse pointer sprite sheet (data/hpointer.dat)
+ * Callers  : 2 -> setup_load_core_game_data, setup_init_game_screen_and_subsystems
+ * Callees  : 3 -> LbErrorLog, LbDataLoadAll, bflib_system_io_fn_0f05d8
  ******************************************************************************/
-void FUN_0006b0c8(void)
+void setup_load_pointer_sprites(void)
 
 {
-  int iVar1;
+  int val;
   
-  iVar1 = FUN_000e830c();
-  if (iVar1 != 0) {
-    FUN_000ddaf0(); /* LbErrorLog("setup.cpp", line 1187, "Unable to load pointer files") */
+  val = LbDataLoadAll();
+  if (val != 0) {
+    LbErrorLog(); /* LbErrorLog("setup.cpp", line 1187, "Unable to load pointer files") */
   }
-  FUN_000f05d8();
+  bflib_system_io_fn_0f05d8();
   return;
 }
 
 /******************************************************************************
- * Function : dk_data_hpointer_dat_06b12b (Ghidra: FUN_0006b12b)
- * Prototype: void dk_data_hpointer_dat_06b12b(void);
+ * Function : setup_free_pointer_sprites (Original VA: 0x6b12b, Ghidra: FUN_0006b12b)
+ * Prototype: void setup_free_pointer_sprites(void);
  * Address  : 0x6b12b (Size: 68 bytes)
  * Module   : setup.cpp [contiguous_same_unit_span]
- * Naming   : String 'data\hpointer.dat'
- * Callers  : 2 -> 0x6a689, 0x6aac0
- * Callees  : 2 -> 0xe83f0, 0xebc10
- * Strings  :
- *   - 0x1870b8: "data\hpointer.dat"
- *   - 0x186fb0: "data\lpointer.dat"
- *   - 0x18713c: "data\hpoints.dat"
- *   - 0x187034: "data\lpoints.dat"
+ * Purpose  : Detach mouse cursor and free pointer sprite sheet
+ * Callers  : 2 -> setup_init_game_screen_and_subsystems, setup_reload_gui_and_mode_sprites
+ * Callees  : 2 -> LbDataFree, bflib_system_io_fn_0ebc10
  ******************************************************************************/
-void FUN_0006b12b(void)
+void setup_free_pointer_sprites(void)
 
 {
-  FUN_000ebc10();
-  FUN_000e83f0();
+  bflib_system_io_fn_0ebc10();
+  LbDataFree();
   return;
 }
 
 /******************************************************************************
- * Function : dk_graphics_heap_already_allocated_06b16f (Ghidra: FUN_0006b16f)
- * Prototype: longlong dk_graphics_heap_already_allocated_06b16f(void);
+ * Function : setup_allocate_graphics_heap (Original VA: 0x6b16f, Ghidra: FUN_0006b16f)
+ * Prototype: longlong setup_allocate_graphics_heap(void);
  * Address  : 0x6b16f (Size: 856 bytes)
  * Module   : setup.cpp [direct_file_string_xref]
- * OrigLine : setup.cpp:1235 ("Graphics heap already allocated"); setup.cpp:1299 ("Unable to allocate heaps (small_mem)"); setup.cpp:None
- * Naming   : String 'Graphics heap already allocated'
- * Callers  : 1 -> 0x6a412
- * Callees  : 9 -> 0x69c2c, 0x6deac, 0x6df91, 0xddaf0, 0xe7714, 0xe9484, 0xe94b0, 0xf0730, 0xf0f8c
- * Strings  :
- *   - 0x167285: "setup.cpp"
- *   - 0x1672b4: "setup.cpp"
- *   - 0x1672e3: "setup.cpp"
- *   - 0x16735b: "setup.cpp"
- *   - 0x167265: "Graphics heap already allocated"
- *   - 0x16728f: "Unable to allocate heaps (small_mem)"
- *   - 0x1672be: "Unable to allocate heaps (small_mem)"
- *   - 0x1672ed: "GraphicsHeap Size %d"
- *   - 0x167302: "SoundHeap Size %d"
- *   - 0x167314: "SOUND"
- *   - 0x16731a: "%s\SOUND.DAT"
- *   - 0x167327: "SOUND"
- *   - 0x16732d: "%s\SPEECH.DAT"
- *   - 0x16733b: "Unable to initialise sound heap"
+ * OrigLine : setup.cpp lines 1235, 1299
+ * Purpose  : Allocate and initialize sprite/texture graphics heap
+ * Callers  : 1 -> setup_verify_cdrom_installation
+ * Callees  : 9 -> setup_detect_physical_memory_tier, sndheap_fn_06deac, sndheap_fn_06df91, LbErrorLog, dk_sprintf, LbFileLoadAt, bflib_system_io_fn_0e94b0, bflib_system_io_fn_0f0730 ...
  ******************************************************************************/
-longlong FUN_0006b16f(void)
+longlong setup_allocate_graphics_heap(void)
 
 {
-  bool bVar1;
-  int iVar2;
+  bool flag;
+  int val;
   int extraout_ECX;
   int extraout_ECX_00;
   int extraout_ECX_01;
   int extraout_ECX_02;
   int extraout_ECX_03;
-  uint in_EDX;
-  int iVar3;
-  int iVar4;
-  longlong lVar5;
-  longlong lVar6;
+  uint arg_edx;
+  int val_2;
+  int val_3;
+  longlong val_4;
+  longlong val_5;
   undefined1 local_130 [144];
   undefined1 local_a0 [144];
   
-  iVar2 = 0;
-  if (DAT_00334019 == 0) {
-    FUN_000f0730();
-    FUN_0006df91();
-    iVar2 = extraout_ECX;
-    if (DAT_0033318b != 0) {
-      FUN_000e94b0();
-      iVar2 = extraout_ECX_00;
-      DAT_0033318b = extraout_ECX_00;
+  val = 0;
+  if (g_bss_00334019 == 0) {
+    bflib_system_io_fn_0f0730();
+    sndheap_fn_06df91();
+    val = extraout_ECX;
+    if (g_bss_0033318b != 0) {
+      bflib_system_io_fn_0e94b0();
+      val = extraout_ECX_00;
+      g_bss_0033318b = extraout_ECX_00;
     }
   }
-  if (DAT_00333187 != 0) {
-    FUN_000ddaf0(); /* LbErrorLog("setup.cpp", line 1235, "Graphics heap already allocated") */
-    FUN_000e94b0();
-    DAT_00333187 = 0;
-    iVar2 = extraout_ECX_01;
+  if (g_bss_00333187 != 0) {
+    LbErrorLog(); /* LbErrorLog("setup.cpp", line 1235, "Graphics heap already allocated") */
+    bflib_system_io_fn_0e94b0();
+    g_bss_00333187 = 0;
+    val = extraout_ECX_01;
   }
-  lVar6 = CONCAT44(DAT_00334065,DAT_00333187);
-  if (DAT_00334019 == 0) {
+  val_5 = CONCAT44(g_bss_00334065,g_bss_00333187);
+  if (g_bss_00334019 == 0) {
     do {
-      lVar6 = CONCAT44(DAT_00334065,DAT_00333187);
-      if (DAT_0033318b != 0) goto LAB_0006b23e;
-      DAT_0033318f = FUN_00069c2c();
-      lVar5 = FUN_000e9484();
-      lVar6 = CONCAT44(DAT_00334065,DAT_00333187);
-      DAT_0033318b = (int)lVar5;
-      iVar2 = extraout_ECX_02;
-    } while (lVar5 != 0x800000000);
-    iVar2 = 1;
+      val_5 = CONCAT44(g_bss_00334065,g_bss_00333187);
+      if (g_bss_0033318b != 0) goto LAB_0006b23e;
+      g_bss_0033318f = setup_detect_physical_memory_tier();
+      val_4 = LbFileLoadAt();
+      val_5 = CONCAT44(g_bss_00334065,g_bss_00333187);
+      g_bss_0033318b = (int)val_4;
+      val = extraout_ECX_02;
+    } while (val_4 != 0x800000000);
+    val = 1;
   }
 LAB_0006b23e:
   do {
-    iVar3 = (int)((ulonglong)lVar6 >> 0x20);
-    DAT_00333187 = (int)lVar6;
-    if (DAT_00333187 != 0) goto LAB_0006b2b4;
-    if (iVar3 == 0x20) {
-      DAT_00333183 = 0x800000;
+    val_2 = (int)((ulonglong)val_5 >> 0x20);
+    g_bss_00333187 = (int)val_5;
+    if (g_bss_00333187 != 0) goto LAB_0006b2b4;
+    if (val_2 == 0x20) {
+      g_bss_00333183 = 0x800000;
     }
-    else if (iVar3 == 0x18) {
-      DAT_00333183 = 0x500000;
+    else if (val_2 == 0x18) {
+      g_bss_00333183 = 0x500000;
     }
-    else if (iVar3 == 0x10) {
-      DAT_00333183 = 0x200000;
+    else if (val_2 == 0x10) {
+      g_bss_00333183 = 0x200000;
     }
     else {
-      DAT_00333183 = 0x100000;
+      g_bss_00333183 = 0x100000;
     }
-    lVar6 = FUN_000e9484();
-    iVar2 = extraout_ECX_03;
-  } while (lVar6 != 0x800000000);
-  iVar2 = 1;
-  DAT_00333187 = 0;
+    val_5 = LbFileLoadAt();
+    val = extraout_ECX_03;
+  } while (val_5 != 0x800000000);
+  val = 1;
+  g_bss_00333187 = 0;
 LAB_0006b2b4:
-  if (iVar2 != 0) {
-    while ((DAT_00333187 == 0 && ((DAT_00334019 != 0 || (DAT_0033318b != 0))))) {
-      iVar2 = DAT_00333183 + -0x4000;
-      if (DAT_00334019 == 0) {
-        iVar3 = iVar2;
-        if ((DAT_00333183 <= DAT_0033318f) &&
-           (iVar4 = DAT_0033318f + -0x4000, bVar1 = DAT_0033318f <= DAT_00333183,
-           iVar3 = DAT_00333183, DAT_0033318f = iVar4, bVar1)) {
-          iVar3 = iVar2;
+  if (val != 0) {
+    while ((g_bss_00333187 == 0 && ((g_bss_00334019 != 0 || (g_bss_0033318b != 0))))) {
+      val = g_bss_00333183 + -0x4000;
+      if (g_bss_00334019 == 0) {
+        val_2 = val;
+        if ((g_bss_00333183 <= g_bss_0033318f) &&
+           (val_3 = g_bss_0033318f + -0x4000, flag = g_bss_0033318f <= g_bss_00333183,
+           val_2 = g_bss_00333183, g_bss_0033318f = val_3, flag)) {
+          val_2 = val;
         }
-        DAT_00333183 = iVar3;
-        iVar2 = DAT_00333183;
-        if (DAT_0033318f < 0x80000) goto LAB_0006b347;
+        g_bss_00333183 = val_2;
+        val = g_bss_00333183;
+        if (g_bss_0033318f < 0x80000) goto LAB_0006b347;
       }
-      DAT_00333183 = iVar2;
-      if (DAT_00333183 < 0x80000) {
-        if (DAT_0033318b != 0) {
-          FUN_000e94b0();
-          DAT_0033318b = 0;
+      g_bss_00333183 = val;
+      if (g_bss_00333183 < 0x80000) {
+        if (g_bss_0033318b != 0) {
+          bflib_system_io_fn_0e94b0();
+          g_bss_0033318b = 0;
         }
 LAB_0006b347:
-        FUN_000ddaf0(); /* LbErrorLog("setup.cpp", line 1299, "Unable to allocate heaps (small_mem)") */
-        return (ulonglong)in_EDX << 0x20;
+        LbErrorLog(); /* LbErrorLog("setup.cpp", line 1299, "Unable to allocate heaps (small_mem)") */
+        return (ulonglong)arg_edx << 0x20;
       }
-      if (DAT_0033318b != 0) {
-        FUN_000e94b0();
-        DAT_0033318b = 0;
+      if (g_bss_0033318b != 0) {
+        bflib_system_io_fn_0e94b0();
+        g_bss_0033318b = 0;
       }
-      if (DAT_00333187 != 0) {
-        FUN_000e94b0();
-        DAT_00333187 = 0;
+      if (g_bss_00333187 != 0) {
+        bflib_system_io_fn_0e94b0();
+        g_bss_00333187 = 0;
       }
-      if (DAT_00334019 == 0) {
-        DAT_0033318b = FUN_000e9484();
+      if (g_bss_00334019 == 0) {
+        g_bss_0033318b = LbFileLoadAt();
       }
-      DAT_00333187 = FUN_000e9484();
+      g_bss_00333187 = LbFileLoadAt();
     }
   }
-  FUN_000f0f8c(s_GraphicsHeap_Size__d_001672ed,DAT_00333183);
-  if (DAT_00334019 == 0) {
-    FUN_000f0f8c(s_SoundHeap_Size__d_00167302,DAT_0033318f);
+  bflib_system_io_fn_0f0f8c(s_GraphicsHeap_Size__d_001672ed,g_bss_00333183);
+  if (g_bss_00334019 == 0) {
+    bflib_system_io_fn_0f0f8c(s_SoundHeap_Size__d_00167302,g_bss_0033318f);
   }
-  if (DAT_00334019 == 0) {
-    FUN_000e7714(local_130,s__s_SOUND_DAT_0016731a,s_SOUND_00167314); /* 0x16731a="%s\SOUND.DAT" */
-    FUN_000e7714(local_a0,s__s_SPEECH_DAT_0016732d,s_SOUND_00167327); /* 0x16732d="%s\SPEECH.DAT" */
-    iVar2 = FUN_0006deac(0x656);
-    if (iVar2 == 0) {
-      FUN_000e94b0();
-      DAT_0033318b = 0;
-      DAT_00334019 = 1;
-      FUN_000ddaf0(); /* LbErrorLog("setup.cpp", line ?, g_log_buf) */
+  if (g_bss_00334019 == 0) {
+    dk_sprintf(local_130,s__s_SOUND_DAT_0016731a,s_SOUND_00167314); /* 0x16731a="%s\SOUND.DAT" */
+    dk_sprintf(local_a0,s__s_SPEECH_DAT_0016732d,s_SOUND_00167327); /* 0x16732d="%s\SPEECH.DAT" */
+    val = sndheap_fn_06deac(0x656);
+    if (val == 0) {
+      bflib_system_io_fn_0e94b0();
+      g_bss_0033318b = 0;
+      g_bss_00334019 = 1;
+      LbErrorLog(); /* LbErrorLog("setup.cpp", line ?, g_log_buf) */
     }
   }
-  return CONCAT44(in_EDX,1);
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : dk_data_legal_raw_06b4c7 (Ghidra: FUN_0006b4c7)
- * Prototype: undefined8 dk_data_legal_raw_06b4c7(void);
+ * Function : setup_show_bullfrog_legal_splash (Original VA: 0x6b4c7, Ghidra: FUN_0006b4c7)
+ * Prototype: undefined8 setup_show_bullfrog_legal_splash(void);
  * Address  : 0x6b4c7 (Size: 775 bytes)
  * Module   : setup.cpp [direct_file_string_xref]
- * OrigLine : setup.cpp:1457 ("Unable to open Legal Screen"); setup.cpp:1535 ("Smacker error")
- * Naming   : String 'DATA\LEGAL.RAW'
- * Callers  : 1 -> 0x6a412
- * Callees  : 22 -> 0x150f0, 0x45bb8, 0x6ae80, 0xdd920, 0xddaf0, 0xe6a10, 0xe7714, 0xe7750, 0xe7904, 0xe797c ...
- * Strings  :
- *   - 0x167390: "setup.cpp"
- *   - 0x1673c6: "setup.cpp"
- *   - 0x1673f6: "setup.cpp"
- *   - 0x1871c0: "*VESA"
- *   - 0x167365: "DATA\LEGAL.RAW"
- *   - 0x167374: "Unable to open Legal Screen"
- *   - 0x16739a: "DATA\LEGAL.PAL"
- *   - 0x1673a9: "Unable to open Legal Palette"
- *   - 0x1673d0: "LDATA"
- *   - 0x1673d8: "%s\INTROMIX.SMK"
- *   - 0x1673e8: "Smacker error"
+ * OrigLine : setup.cpp lines 1457, 1535
+ * Purpose  : Enter 640x480 mode (0x0d) and display DATA/LEGAL.RAW splash
+ * Callers  : 1 -> setup_verify_cdrom_installation
+ * Callees  : 22 -> cdtest_ldata_dkwind00_dat_0150f0, inits_fn_045bb8, setup_show_loading_raw_screen, prepare_file_path, LbErrorLog, LbScreenWaitVbi, dk_sprintf, LbScreenSetup ...
  ******************************************************************************/
-undefined8 FUN_0006b4c7(void)
+undefined8 setup_show_bullfrog_legal_splash(void)
 
 {
-  int iVar1;
-  undefined4 uVar2;
+  int clock_ms;
+  undefined4 uval;
   undefined2 extraout_DX;
-  undefined4 in_EDX;
+  undefined4 arg_edx;
   undefined1 local_b0 [144];
   int local_20;
   int local_1c;
   
-  iVar1 = FUN_000e830c();
-  if (iVar1 == 0) {
-    FUN_000e6a10();
-    iVar1 = FUN_000e7750(0xd,0x280,0x1e0,DAT_00199210,1,0);
-    if (iVar1 == 1) {
-      FUN_000e7904(0);
-      FUN_000e79fc();
-      FUN_00045bb8();
-      local_1c = FUN_000e9484();
+  clock_ms = LbDataLoadAll();
+  if (clock_ms == 0) {
+    LbScreenWaitVbi();
+    clock_ms = LbScreenSetup(0xd,0x280,0x1e0,g_display_palette,1,0);
+    if (clock_ms == 1) {
+      bflib_system_io_fn_0e7904(0);
+      bflib_system_io_fn_0e79fc();
+      inits_fn_045bb8();
+      local_1c = LbFileLoadAt();
       if (local_1c == 0) {
 LAB_0006b56a:
-        DAT_00334021 = 1;
-        FUN_000e8ca8();
+        g_bss_00334021 = 1;
+        LbMemoryCopy();
       }
       else {
-        iVar1 = FUN_000e984c();
-        if ((iVar1 == 0x4b000) && (iVar1 = FUN_000e984c(), iVar1 == 0x300)) {
-          FUN_000e846c(DAT_00199210);
-          local_20 = FUN_000eb818();
+        clock_ms = bflib_system_io_fn_0e984c();
+        if ((clock_ms == 0x4b000) && (clock_ms = bflib_system_io_fn_0e984c(), clock_ms == 0x300)) {
+          LbPaletteSet(g_display_palette);
+          local_20 = LbTimerClock();
           local_20 = local_20 + 3000;
           do {
-            iVar1 = FUN_000eb818();
-            if (local_20 <= iVar1) goto LAB_0006b694;
-            FUN_000e8560();
-            iVar1 = FUN_000e797c();
-            if (iVar1 == 1) {
-              for (iVar1 = 0; iVar1 < DAT_003d9830; iVar1 = iVar1 + 1) {
-                FUN_000e8c83();
+            clock_ms = LbTimerClock();
+            if (local_20 <= clock_ms) goto LAB_0006b694;
+            LbKeyboardRead();
+            clock_ms = LbScreenLock();
+            if (clock_ms == 1) {
+              for (clock_ms = 0; clock_ms < g_screen_height; clock_ms = clock_ms + 1) {
+                LbFileClose();
               }
-              FUN_000e797c();
+              LbScreenLock();
             }
-            FUN_000e79fc();
-          } while ((((DAT_003db535 == '\0') && (DAT_003db4fd == '\0')) && (DAT_003db518 == '\0')) &&
-                  (DAT_003d987b == '\0'));
-          DAT_003db535 = '\0';
-          DAT_003db4fd = '\0';
-          DAT_003db518 = '\0';
-          DAT_003d987b = '\0';
+            bflib_system_io_fn_0e79fc();
+          } while ((((g_bss_003db535 == '\0') && (g_bss_003db4fd == '\0')) && (g_bss_003db518 == '\0')) &&
+                  (g_display_bss_003d987b == '\0'));
+          g_bss_003db535 = '\0';
+          g_bss_003db4fd = '\0';
+          g_bss_003db518 = '\0';
+          g_display_bss_003d987b = '\0';
 LAB_0006b694:
-          FUN_000e94b0();
-          FUN_000e6a10();
-          FUN_000e7904(0);
-          FUN_000e79fc();
-          iVar1 = FUN_000e7750(1,0x140,200,DAT_00199210,2,0);
-          if (iVar1 == 1) {
-            FUN_000e7904(0);
-            FUN_000e79fc();
-            FUN_000150f0();
-            if (DAT_002ed3ee == '\0') {
-              FUN_000dd920();
-              uVar2 = FUN_000dd920();
-              FUN_000e7714(local_b0,s__s_INTROMIX_SMK_001673d8,uVar2);
-              iVar1 = FUN_000efde0();
-              if (iVar1 == 0) {
-                FUN_000ddaf0(); /* LbErrorLog("setup.cpp", line 1457, "Unable to open Legal Screen") */
+          bflib_system_io_fn_0e94b0();
+          LbScreenWaitVbi();
+          bflib_system_io_fn_0e7904(0);
+          bflib_system_io_fn_0e79fc();
+          clock_ms = LbScreenSetup(1,0x140,200,g_display_palette,2,0);
+          if (clock_ms == 1) {
+            bflib_system_io_fn_0e7904(0);
+            bflib_system_io_fn_0e79fc();
+            cdtest_ldata_dkwind00_dat_0150f0();
+            if (g_bss_002ed3ee == '\0') {
+              prepare_file_path();
+              uval = prepare_file_path();
+              dk_sprintf(local_b0,s__s_INTROMIX_SMK_001673d8,uval);
+              clock_ms = bflib_system_io_fn_0efde0();
+              if (clock_ms == 0) {
+                LbErrorLog(); /* LbErrorLog("setup.cpp", line 1457, "Unable to open Legal Screen") */
               }
-              FUN_000e6a10();
-              FUN_000e846c(DAT_00199210);
-              FUN_000e7904(0);
-              FUN_000e79fc();
+              LbScreenWaitVbi();
+              LbPaletteSet(g_display_palette);
+              bflib_system_io_fn_0e7904(0);
+              bflib_system_io_fn_0e79fc();
             }
-            DAT_003d9878 = 1;
-            FUN_0006ae80();
-            DAT_003d9878 = extraout_DX;
-            FUN_000e83f0();
-            uVar2 = 1;
+            g_active_screen_mode = 1;
+            setup_show_loading_raw_screen();
+            g_active_screen_mode = extraout_DX;
+            LbDataFree();
+            uval = 1;
             goto LAB_00069ecf;
           }
           goto LAB_0006b56a;
         }
-        FUN_000ddaf0(); /* LbErrorLog("setup.cpp", line 1535, "Smacker error") */
-        FUN_000e94b0();
+        LbErrorLog(); /* LbErrorLog("setup.cpp", line 1535, "Smacker error") */
+        bflib_system_io_fn_0e94b0();
       }
-      FUN_000e83f0();
+      LbDataFree();
     }
     else {
-      DAT_00334021 = 1;
-      FUN_000e8ca8();
+      g_bss_00334021 = 1;
+      LbMemoryCopy();
     }
   }
-  uVar2 = 0;
+  uval = 0;
 LAB_00069ecf:
-  return CONCAT44(in_EDX,uVar2);
+  return CONCAT44(arg_edx,uval);
 }
 
 /******************************************************************************
- * Function : sub_06b7d0 (Ghidra: FUN_0006b7d0)
- * Prototype: undefined8 sub_06b7d0(void);
+ * Function : setup_init_trig_and_projection_tables (Original VA: 0x6b7d0, Ghidra: FUN_0006b7d0)
+ * Prototype: undefined8 setup_init_trig_and_projection_tables(void);
  * Address  : 0x6b7d0 (Size: 77 bytes)
  * Module   : setup.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x6a412
+ * Purpose  : Initialize 512-entry trigonometry/projection lookup tables
+ * Callers  : 1 -> setup_verify_cdrom_installation
  * Callees  : 0 -> 
  ******************************************************************************/
-undefined8 FUN_0006b7d0(void)
+undefined8 setup_init_trig_and_projection_tables(void)
 
 {
-  uint uVar1;
-  int iVar2;
-  undefined4 in_EDX;
-  int *piVar3;
+  uint uval;
+  int val;
+  undefined4 arg_edx;
+  int *int_ptr;
   uint local_18;
   
   local_18 = 0;
-  iVar2 = 0x200;
-  piVar3 = &DAT_002f10e3;
+  val = 0x200;
+  int_ptr = &g_bss_002f10e3;
   do {
-    uVar1 = local_18 * 0x24a1 + 0x24df;
-    local_18 = uVar1 >> 0xd | uVar1 * 0x80000;
-    *piVar3 = local_18 % 0x7f - 0x3f;
-    piVar3 = piVar3 + 1;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
-  return CONCAT44(in_EDX,local_18 / 0x7f);
+    uval = local_18 * 0x24a1 + 0x24df;
+    local_18 = uval >> 0xd | uval * 0x80000;
+    *int_ptr = local_18 % 0x7f - 0x3f;
+    int_ptr = int_ptr + 1;
+    val = val + -1;
+  } while (val != 0);
+  return CONCAT44(arg_edx,local_18 / 0x7f);
 }
 
 /******************************************************************************
- * Function : sub_06b820 (Ghidra: FUN_0006b820)
- * Prototype: void sub_06b820(undefined1 param_1);
+ * Function : setup_switch_screen_resolution (Original VA: 0x6b820, Ghidra: FUN_0006b820)
+ * Prototype: void setup_switch_screen_resolution(undefined1 param_1);
  * Address  : 0x6b820 (Size: 1466 bytes)
  * Module   : setup.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 3 -> 0x49fda, 0x72109, 0x7220a
- * Callees  : 10 -> 0x10c1a, 0x10c44, 0x10d08, 0x250ef, 0x25504, 0x43ac3, 0x6d453, 0x6e538, 0xdc354, 0xdd414
+ * Purpose  : Switch active screen mode, reallocate viewport, and reload sprites
+ * Callers  : 3 -> instance_update_creature_and_thing_049fda, spell_update_creature_control_072109, spell_handle_object_thing_07220a
+ * Callees  : 10 -> anger_fn_010c1a, anger_fn_010c44, anger_fn_010d08, effect_roll_action_random_0250ef, effect_roll_action_random_025504, inits_fn_043ac3, shot_update_creature_control_06d453, sound_fn_06e538 ...
  ******************************************************************************/
 /* WARNING: Type propagation algorithm not settling */
 
-void FUN_0006b820(undefined1 param_1)
+void setup_switch_screen_resolution(undefined1 param_1)
 
 {
-  undefined2 uVar1;
-  short sVar2;
-  undefined2 uVar3;
-  int in_EAX;
-  int iVar4;
-  int in_EDX;
-  int iVar5;
-  ushort unaff_BX;
-  int *piVar6;
-  int *piVar7;
-  int *piVar8;
-  int *piVar9;
-  undefined1 *puVar10;
+  undefined2 uval;
+  short short_val;
+  undefined2 uval_2;
+  int thing;
+  int val;
+  int arg_edx;
+  int val_2;
+  ushort arg_bx;
+  int *int_ptr;
+  int *int_ptr_2;
+  int *int_ptr_3;
+  int *int_ptr_4;
+  undefined1 *word_ptr;
   int aiStack_54 [2];
   int local_48;
   int local_44;
@@ -1649,71 +1540,71 @@ void FUN_0006b820(undefined1 param_1)
   char local_18;
   int local_14;
   
-  piVar6 = (int *)&stack0xffffffb4;
-  piVar9 = (int *)&stack0xffffffb4;
-  iVar5 = (uint)unaff_BX * 0x65;
+  int_ptr = (int *)&stack0xffffffb4;
+  int_ptr_4 = (int *)&stack0xffffffb4;
+  val_2 = (uint)arg_bx * 0x65;
   local_14 = 0;
-  uVar1 = 0;
+  uval = 0;
   local_18 = '\0';
-  local_48 = in_EDX;
-  local_44 = in_EAX;
-  if (in_EDX == 0) {
-    local_20 = *(short *)(in_EAX + 0x52);
-    sVar2 = *(short *)(in_EAX + 0x54);
+  local_48 = arg_edx;
+  local_44 = thing;
+  if (arg_edx == 0) {
+    local_20 = *(short *)(thing + 0x52); /* thing->health */
+    short_val = *(short *)(thing + 0x54);
   }
   else {
     local_18 = '\0';
-    if (((&DAT_00188cdc)[iVar5] != '\0') && (*(char *)(in_EDX + 0x1f) != '\t')) {
+    if (((&g_data_00188cdc)[val_2] != '\0') && (*(char *)(arg_edx + 0x1f) != '\t')) {
       local_18 = '\x01';
     }
     aiStack_54[1] = 0x6b975;
-    local_20 = FUN_00010c1a();
+    local_20 = anger_fn_010c1a();
     aiStack_54[1] = 0x6b983;
-    sVar2 = FUN_00010c44();
+    short_val = anger_fn_010c44();
   }
-  if ((&DAT_00188cdc)[iVar5] == '\0') {
-    uVar3 = *(undefined2 *)(&DAT_00188caa + iVar5);
+  if ((&g_data_00188cdc)[val_2] == '\0') {
+    uval_2 = *(undefined2 *)(&g_data_00188caa + val_2);
   }
   else {
     aiStack_54[1] = 0x6b9a9;
-    uVar3 = FUN_0006d453();
+    uval_2 = shot_update_creature_control_06d453();
   }
-  if ((unaff_BX == 6) && (local_48 != 0)) {
-    uVar1 = *(undefined2 *)(local_48 + 0x1b);
+  if ((arg_bx == 6) && (local_48 != 0)) {
+    uval = *(undefined2 *)(local_48 + 0x1b);
   }
-  if (6 < unaff_BX) {
-    if (7 < unaff_BX) {
-      if (0xb < unaff_BX) {
-        if (unaff_BX < 0xd) goto LAB_0006ba01;
-        if (unaff_BX == 0xd) {
+  if (6 < arg_bx) {
+    if (7 < arg_bx) {
+      if (0xb < arg_bx) {
+        if (arg_bx < 0xd) goto LAB_0006ba01;
+        if (arg_bx == 0xd) {
           local_1c = 0;
-          puVar10 = &stack0xffffffb4;
-          while (piVar7 = (int *)puVar10, local_1c < 0x20) {
-            piVar7 = (int *)(puVar10 + -4);
-            *(undefined4 *)(puVar10 + -4) = 0xffffffff;
-            *(undefined4 *)(puVar10 + -8) = 0x6bcfb;
-            local_14 = FUN_00043ac3();
+          word_ptr = &stack0xffffffb4;
+          while (int_ptr_2 = (int *)word_ptr, local_1c < 0x20) {
+            int_ptr_2 = (int *)(word_ptr + -4);
+            *(undefined4 *)(word_ptr + -4) = 0xffffffff;
+            *(undefined4 *)(word_ptr + -8) = 0x6bcfb;
+            local_14 = inits_fn_043ac3();
             if (local_14 == 0) break;
             *(undefined1 *)(local_14 + 0x16) = param_1;
-            DAT_002e8bf6 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-            DAT_002e8bf6 = DAT_002e8bf6 >> 0xd | DAT_002e8bf6 * 0x80000;
+            g_action_random_seed = g_action_random_seed * 0x24a1 + 0x24df;
+            g_action_random_seed = g_action_random_seed >> 0xd | g_action_random_seed * 0x80000;
             *(ushort *)(local_14 + 0x52) =
-                 (local_20 + (short)((ulonglong)DAT_002e8bf6 % 100)) - 0x32U & 0x7ff;
-            DAT_002e8bf6 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-            DAT_002e8bf6 = DAT_002e8bf6 >> 0xd | DAT_002e8bf6 * 0x80000;
+                 (local_20 + (short)((ulonglong)g_action_random_seed % 100)) - 0x32U & 0x7ff;
+            g_action_random_seed = g_action_random_seed * 0x24a1 + 0x24df;
+            g_action_random_seed = g_action_random_seed >> 0xd | g_action_random_seed * 0x80000;
             *(ushort *)(local_14 + 0x54) =
-                 sVar2 + -0x32 + (short)((ulonglong)DAT_002e8bf6 % 100) & 0x7ff;
-            *(undefined4 *)(puVar10 + -8) = 0x6bc9e;
-            FUN_00010d08();
+                 short_val + -0x32 + (short)((ulonglong)g_action_random_seed % 100) & 0x7ff;
+            *(undefined4 *)(word_ptr + -8) = 0x6bc9e;
+            anger_fn_010d08();
             *(short *)(local_14 + 0x32) = *(short *)(local_14 + 0x32) + local_38;
             *(short *)(local_14 + 0x34) = *(short *)(local_14 + 0x34) + sStack_36;
             *(short *)(local_14 + 0x36) = *(short *)(local_14 + 0x36) + local_34;
-            *(undefined2 *)(local_14 + 0x14) = uVar3;
+            *(undefined2 *)(local_14 + 0x14) = uval_2;
             *(byte *)(local_14 + 1) = *(byte *)(local_14 + 1) | 4;
             *(undefined2 *)(local_14 + 0x5e) = uRam001891c9;
             local_1c = local_1c + 1;
             *(undefined2 *)(local_14 + 0x1d) = *(undefined2 *)(local_44 + 0x1b);
-            puVar10 = puVar10 + -4;
+            word_ptr = word_ptr + -4;
           }
           goto LAB_0006baa8;
         }
@@ -1723,54 +1614,54 @@ void FUN_0006b820(undefined1 param_1)
     if (local_48 == 0) {
 LAB_0006bb7d:
       aiStack_54[1] = 4;
-      piVar9 = aiStack_54;
+      int_ptr_4 = aiStack_54;
       aiStack_54[0] = 0x100;
-      FUN_000dd414();
+      update_fn_0dd414();
     }
     else {
       aiStack_54[1] = 0x6bb76;
-      iVar4 = FUN_000dc354();
-      if (0x300 < iVar4) goto LAB_0006bb7d;
+      val = get_2d_box_distance();
+      if (0x300 < val) goto LAB_0006bb7d;
     }
-    *(undefined4 *)((int)piVar9 + -4) = 0xffffffff;
-    *(undefined4 *)((int)piVar9 + -8) = 0x6bbb7;
-    local_14 = FUN_00043ac3();
-    piVar7 = (int *)((int)piVar9 + -4);
+    *(undefined4 *)((int)int_ptr_4 + -4) = 0xffffffff;
+    *(undefined4 *)((int)int_ptr_4 + -8) = 0x6bbb7;
+    local_14 = inits_fn_043ac3();
+    int_ptr_2 = (int *)((int)int_ptr_4 + -4);
     if (local_14 != 0) {
-      *(undefined4 *)((int)piVar9 + -8) = 0x6bbd9;
-      FUN_00025504();
-      *(undefined2 *)(local_14 + 0x5e) = *(undefined2 *)(&DAT_00188ca8 + iVar5);
-      *(undefined2 *)(local_14 + 0x14) = *(undefined2 *)(&DAT_00188caa + iVar5);
+      *(undefined4 *)((int)int_ptr_4 + -8) = 0x6bbd9;
+      effect_roll_action_random_025504();
+      *(undefined2 *)(local_14 + 0x5e) = *(undefined2 *)(&g_data_00188ca8 + val_2);
+      *(undefined2 *)(local_14 + 0x14) = *(undefined2 *)(&g_data_00188caa + val_2);
       *(undefined2 *)(local_14 + 0x1d) = *(undefined2 *)(local_44 + 0x1b);
-      piVar7 = (int *)((int)piVar9 + -4);
+      int_ptr_2 = (int *)((int)int_ptr_4 + -4);
     }
     goto LAB_0006baa8;
   }
-  if (unaff_BX != 4) {
+  if (arg_bx != 4) {
 LAB_0006bd18:
     aiStack_54[1] = 0xffffffff;
     aiStack_54[0] = 0x6bd32;
-    local_14 = FUN_00043ac3();
-    piVar7 = aiStack_54 + 1;
+    local_14 = inits_fn_043ac3();
+    int_ptr_2 = aiStack_54 + 1;
     if (local_14 != 0) {
-      *(short *)(local_14 + 0x54) = sVar2;
+      *(short *)(local_14 + 0x54) = short_val;
       *(short *)(local_14 + 0x52) = local_20;
       aiStack_54[0] = 0x6bd5d;
-      FUN_00010d08();
+      anger_fn_010d08();
       *(short *)(local_14 + 0x32) = *(short *)(local_14 + 0x32) + local_38;
       *(short *)(local_14 + 0x34) = *(short *)(local_14 + 0x34) + sStack_36;
       *(short *)(local_14 + 0x36) = *(short *)(local_14 + 0x36) + local_34;
-      *(undefined2 *)(local_14 + 0x14) = uVar3;
+      *(undefined2 *)(local_14 + 0x14) = uval_2;
       *(byte *)(local_14 + 1) = *(byte *)(local_14 + 1) | 4;
-      *(undefined2 *)(local_14 + 0x5e) = *(undefined2 *)(&DAT_00188ca8 + iVar5);
+      *(undefined2 *)(local_14 + 0x5e) = *(undefined2 *)(&g_data_00188ca8 + val_2);
       *(undefined2 *)(local_14 + 0x1d) = *(undefined2 *)(local_44 + 0x1b);
-      *(undefined2 *)(local_14 + 0x17) = uVar1;
+      *(undefined2 *)(local_14 + 0x17) = uval;
       *(char *)(local_14 + 0x13) =
            (char)((ulonglong)
-                  ((uint)(byte)(&DAT_002e911a)[(uint)*(byte *)(local_44 + 0x1a) * 0xe6] *
-                   (uint)*(byte *)((&DAT_001b0a00)[*(ushort *)(local_44 + 100)] + 0x23) * 0x23) /
-                 100) + (&DAT_002e911a)[(uint)*(byte *)(local_44 + 0x1a) * 0xe6];
-      piVar7 = aiStack_54 + 1;
+                  ((uint)(byte)(&g_bss_002e911a)[(uint)*(byte *)(local_44 + 0x1a) * 0xe6] *
+                   (uint)*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(local_44 + 100)] + 0x23) * 0x23) /
+                 100) + (&g_bss_002e911a)[(uint)*(byte *)(local_44 + 0x1a) * 0xe6];
+      int_ptr_2 = aiStack_54 + 1;
     }
     goto LAB_0006baa8;
   }
@@ -1778,49 +1669,49 @@ LAB_0006ba01:
   if (local_48 == 0) {
 LAB_0006ba1c:
     aiStack_54[1] = 0x14;
-    piVar6 = aiStack_54;
+    int_ptr = aiStack_54;
     aiStack_54[0] = 0x100;
-    FUN_000dd414();
+    update_fn_0dd414();
   }
   else {
     aiStack_54[1] = 0x6ba15;
-    iVar4 = FUN_000dc354();
-    if (0x1400 < iVar4) goto LAB_0006ba1c;
+    val = get_2d_box_distance();
+    if (0x1400 < val) goto LAB_0006ba1c;
   }
-  *(undefined4 *)((int)piVar6 + -4) = 0xffffffff;
-  *(undefined4 *)((int)piVar6 + -8) = 0x6ba58;
-  local_14 = FUN_00043ac3();
-  piVar7 = (int *)((int)piVar6 + -4);
+  *(undefined4 *)((int)int_ptr + -4) = 0xffffffff;
+  *(undefined4 *)((int)int_ptr + -8) = 0x6ba58;
+  local_14 = inits_fn_043ac3();
+  int_ptr_2 = (int *)((int)int_ptr + -4);
   if (local_14 != 0) {
-    *(undefined4 *)((int)piVar6 + -8) = 0x6ba84;
-    FUN_000250ef();
-    *(undefined2 *)(local_14 + 0x5e) = *(undefined2 *)(&DAT_00188ca8 + iVar5);
-    *(undefined2 *)(local_14 + 0x14) = *(undefined2 *)(&DAT_00188caa + iVar5);
+    *(undefined4 *)((int)int_ptr + -8) = 0x6ba84;
+    effect_roll_action_random_0250ef();
+    *(undefined2 *)(local_14 + 0x5e) = *(undefined2 *)(&g_data_00188ca8 + val_2);
+    *(undefined2 *)(local_14 + 0x14) = *(undefined2 *)(&g_data_00188caa + val_2);
     *(undefined2 *)(local_14 + 0x1d) = *(undefined2 *)(local_44 + 0x1b);
-    piVar7 = (int *)((int)piVar6 + -4);
+    int_ptr_2 = (int *)((int)int_ptr + -4);
   }
 LAB_0006baa8:
   if (local_14 != 0) {
     *(undefined1 *)(local_14 + 0x16) = param_1;
-    piVar8 = piVar7;
-    if (*(short *)(&DAT_00188caf + iVar5) != 0) {
-      piVar7[0xffffffff] = 0x100;
-      piVar7[0xfffffffe] = 3;
-      piVar7[0xfffffffd] = 0;
-      DAT_002e8bfa = DAT_002e8bfa * 0x24a1 + 0x24df;
-      piVar8 = piVar7 + 0xfffffffc;
-      piVar7[0xfffffffc] = 3;
-      DAT_002e8bfa = DAT_002e8bfa >> 0xd | DAT_002e8bfa * 0x80000;
-      piVar7[0xfffffffb] = 0x6bb1c;
-      FUN_0006e538();
+    int_ptr_3 = int_ptr_2;
+    if (*(short *)(&g_data_00188caf + val_2) != 0) {
+      int_ptr_2[0xffffffff] = 0x100;
+      int_ptr_2[0xfffffffe] = 3;
+      int_ptr_2[0xfffffffd] = 0;
+      g_unsynced_random_seed = g_unsynced_random_seed * 0x24a1 + 0x24df;
+      int_ptr_3 = int_ptr_2 + 0xfffffffc;
+      int_ptr_2[0xfffffffc] = 3;
+      g_unsynced_random_seed = g_unsynced_random_seed >> 0xd | g_unsynced_random_seed * 0x80000;
+      int_ptr_2[0xfffffffb] = 0x6bb1c;
+      sound_fn_06e538();
     }
-    if (*(short *)(&DAT_00188cb2 + iVar5) != 0) {
-      *(undefined4 *)((int)piVar8 + -4) = 0x100;
-      *(uint *)((int)piVar8 + -8) = (uint)*(ushort *)(&DAT_00188cb4 + iVar5);
-      *(undefined4 *)((int)piVar8 + -0xc) = 0;
-      *(undefined4 *)((int)piVar8 + -0x10) = 3;
-      *(undefined4 *)((int)piVar8 + -0x14) = 0x6bb4a;
-      FUN_0006e538();
+    if (*(short *)(&g_data_00188cb2 + val_2) != 0) {
+      *(undefined4 *)((int)int_ptr_3 + -4) = 0x100;
+      *(uint *)((int)int_ptr_3 + -8) = (uint)*(ushort *)(&g_data_00188cb4 + val_2);
+      *(undefined4 *)((int)int_ptr_3 + -0xc) = 0;
+      *(undefined4 *)((int)int_ptr_3 + -0x10) = 3;
+      *(undefined4 *)((int)int_ptr_3 + -0x14) = 0x6bb4a;
+      sound_fn_06e538();
     }
     *(byte *)(local_14 + 0x25) = *(byte *)(local_14 + 0x25) & 0xef;
     *(byte *)(local_14 + 0x25) = *(byte *)(local_14 + 0x25) | local_18 << 4;
@@ -1829,25 +1720,25 @@ LAB_0006baa8:
 }
 
 /******************************************************************************
- * Function : sub_06bdda (Ghidra: FUN_0006bdda)
- * Prototype: undefined4 sub_06bdda(void);
+ * Function : setup_compute_creature_eye_offset (Original VA: 0x6bdda, Ghidra: FUN_0006bdda)
+ * Prototype: undefined4 setup_compute_creature_eye_offset(void);
  * Address  : 0x6bdda (Size: 1105 bytes)
  * Module   : setup.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0xb41d8
- * Callees  : 18 -> 0x10c1a, 0x10c44, 0x10cf5, 0x10d08, 0x17128, 0x24998, 0x39a74, 0x39e90, 0x6c2cc, 0x6c444 ...
+ * Purpose  : Compute first-person camera eye height offset for creature breed
+ * Callers  : 1 -> move_shot_has_hit_thing_0b41d8
+ * Callees  : 18 -> anger_fn_010c1a, anger_fn_010c44, anger_fn_010cf5, anger_fn_010d08, combobj_thing_this_check_017128, effect_allocate_light_effect_024998, gravyard_update_creature_control_039a74, group_update_creature_and_thing_039e90 ...
  ******************************************************************************/
-undefined4 FUN_0006bdda(void)
+undefined4 setup_compute_creature_eye_offset(void)
 
 {
-  undefined2 uVar1;
-  int in_EAX;
-  undefined4 uVar2;
-  int iVar3;
-  int in_EDX;
-  int iVar4;
-  short *psVar5;
-  byte bVar6;
+  undefined2 uval;
+  int thing;
+  undefined4 uval_2;
+  int thing_ptr;
+  int arg_edx;
+  int val;
+  short *val_2;
+  byte flag;
   undefined4 uStack_4c;
   undefined4 uStack_48;
   undefined4 uStack_44;
@@ -1865,131 +1756,131 @@ undefined4 FUN_0006bdda(void)
   undefined *local_18;
   int local_14;
   
-  bVar6 = 0;
-  psVar5 = &local_3c;
-  local_1c = (int)*(char *)(in_EAX + 0x20);
-  local_18 = &DAT_00188c94 + (uint)*(byte *)(in_EAX + 0x1a) * 0x65;
-  if (*(ushort *)(in_EAX + 0x1d) == *(ushort *)(in_EAX + 0x1b)) {
+  flag = 0;
+  val_2 = &local_3c;
+  local_1c = (int)*(char *)(thing + 0x20); /* thing->model */
+  local_18 = &g_data_00188c94 + (uint)*(byte *)(thing + 0x1a) * 0x65;
+  if (*(ushort *)(thing + 0x1d) == *(ushort *)(thing + 0x1b)) { /* thing->index_or_angle */
     local_20 = 0;
   }
   else {
-    local_20 = (&DAT_001ae9fc)[*(ushort *)(in_EAX + 0x1d)];
+    local_20 = (&g_thing_ptrs)[*(ushort *)(thing + 0x1d)];
   }
-  if (*(char *)(in_EDX + 0x1f) == '\x01') {
+  if (*(char *)(arg_edx + 0x1f) == '\x01') {
     uStack_40 = 0x6be33;
-    uVar2 = FUN_0006c444();
-    return uVar2;
+    uval_2 = shot_update_creature_and_thing_06c444();
+    return uval_2;
   }
-  if (*(char *)(in_EDX + 0x1f) == '\x05') {
+  if (*(char *)(arg_edx + 0x1f) == '\x05') {
     if ((local_20 != 0) && (*(char *)(local_20 + 0x1f) == '\x05')) {
       uStack_40 = 0x6be68;
-      FUN_0006d7d5();
+      shot_update_creature_control_06d7d5();
     }
     if (local_18[0x48] != '\0') {
       uStack_40 = 0x6be7c;
-      uVar2 = FUN_0006c2cc();
-      return uVar2;
+      uval_2 = setup_apply_possession_lens_and_eye();
+      return uval_2;
     }
-    if ((local_18[0x28] == '\0') && (-1 < *(short *)(in_EDX + 0x5e))) {
-      if ((*(short *)(in_EDX + 100) == 0) ||
-         (((*(byte *)((&DAT_001b0a00)[*(ushort *)(in_EDX + 100)] + 0xac) & 8) == 0 ||
+    if ((local_18[0x28] == '\0') && (-1 < *(short *)(arg_edx + 0x5e))) {
+      if ((*(short *)(arg_edx + 100) == 0) ||
+         (((*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(arg_edx + 100)] + 0xac) & 8) == 0 ||
           (local_18[0x29] != '\0')))) {
-        if ((*(char *)(in_EAX + 0x1a) == '\x0f') && (*(char *)(in_EDX + 0x1a) == '\a')) {
+        if ((*(char *)(thing + 0x1a) == '\x0f') && (*(char *)(arg_edx + 0x1a) == '\a')) {
           uStack_40 = 0x6c001;
-          iVar3 = FUN_00024998();
-          if (iVar3 != 0) {
-            *(undefined1 *)(iVar3 + 0x16) = 8;
+          thing_ptr = effect_allocate_light_effect_024998();
+          if (thing_ptr != 0) {
+            *(undefined1 *)(thing_ptr + 0x16) = 8;
           }
-          *(undefined2 *)(in_EAX + 0x5e) = 0xffff;
+          *(undefined2 *)(thing + 0x5e) = 0xffff;
           return 1;
         }
         if (*(short *)(local_18 + 0x22) != 0) {
           uStack_40 = 0x6c033;
-          FUN_0006edb9();
+          sound_roll_unsynced_random_06edb9();
           uStack_40 = 0x100;
           uStack_44 = 2;
           uStack_48 = 0;
-          psVar5 = (short *)&uStack_4c;
+          val_2 = (short *)&uStack_4c;
           uStack_4c = 3;
-          FUN_0006e538();
+          sound_fn_06e538();
         }
-        if (*(short *)(in_EAX + 0x14) != 0) {
+        if (*(short *)(thing + 0x14) != 0) {
           if ((local_18[0x27] != '\0') && (local_20 != 0)) {
             *(short *)(local_20 + 0x5e) =
-                 *(short *)(local_20 + 0x5e) + (*(short *)(in_EAX + 0x14) >> 1);
-            iVar3 = (int)((int)(short)(&DAT_002e9114)[(uint)*(byte *)(local_20 + 0x1a) * 0x73] *
-                          (uint)*(byte *)((&DAT_001b0a00)[*(ushort *)(local_20 + 100)] + 0x23) *
+                 *(short *)(local_20 + 0x5e) + (*(short *)(thing + 0x14) >> 1);
+            thing_ptr = (int)((int)(short)(&g_bss_002e9114)[(uint)*(byte *)(local_20 + 0x1a) * 0x73] *
+                          (uint)*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(local_20 + 100)] + 0x23) *
                          0x23) / 100 +
-                    (int)(short)(&DAT_002e9114)[(uint)*(byte *)(local_20 + 0x1a) * 0x73];
-            if (iVar3 < *(short *)(local_20 + 0x5e)) {
-              *(short *)(local_20 + 0x5e) = (short)iVar3;
+                    (int)(short)(&g_bss_002e9114)[(uint)*(byte *)(local_20 + 0x1a) * 0x73];
+            if (thing_ptr < *(short *)(local_20 + 0x5e)) {
+              *(short *)(local_20 + 0x5e) = (short)thing_ptr;
             }
           }
-          *(undefined4 *)((int)psVar5 + -4) = 0x6c0ec;
-          FUN_00081c10();
+          *(undefined4 *)((int)val_2 + -4) = 0x6c0ec;
+          creature_fn_081c10();
         }
         if ((local_18[0x24] != '\0') &&
-           (*(char *)((&DAT_001b0a00)[*(ushort *)(in_EDX + 100)] + 0xb1) == '\0')) {
-          *(undefined *)((&DAT_001b0a00)[*(ushort *)(in_EDX + 100)] + 0xb1) = local_18[0x24];
+           (*(char *)((&g_creature_ctrl_ptrs)[*(ushort *)(arg_edx + 100)] + 0xb1) == '\0')) {
+          *(undefined *)((&g_creature_ctrl_ptrs)[*(ushort *)(arg_edx + 100)] + 0xb1) = local_18[0x24];
         }
         if (*(short *)(local_18 + 0x25) != 0) {
-          *(undefined4 *)((int)psVar5 + -4) = 0x6c14d;
-          FUN_000717de();
+          *(undefined4 *)((int)val_2 + -4) = 0x6c14d;
+          spell_update_creature_control_0717de();
         }
         if ((local_18[0x4b] != '\0') && (local_20 != 0)) {
-          *(undefined4 *)((int)psVar5 + -4) = 0x6c164;
-          iVar3 = FUN_00039e90();
-          if (iVar3 < 8) {
-            *(undefined4 *)((int)psVar5 + -4) = 0x6c173;
-            FUN_00039a74();
+          *(undefined4 *)((int)val_2 + -4) = 0x6c164;
+          thing_ptr = group_update_creature_and_thing_039e90();
+          if (thing_ptr < 8) {
+            *(undefined4 *)((int)val_2 + -4) = 0x6c173;
+            gravyard_update_creature_control_039a74();
           }
         }
         if (local_18[0x2a] != '\0') {
-          iVar3 = *(short *)(in_EAX + 0x38) * local_1c;
-          iVar4 = iVar3 >> 0x1f;
-          local_3c = (short)((int)((iVar3 + iVar4 * -0x10) - (uint)(iVar4 << 3 < 0)) >> 4);
-          iVar3 = *(short *)(in_EAX + 0x3a) * local_1c;
-          iVar4 = iVar3 >> 0x1f;
+          thing_ptr = *(short *)(thing + 0x38) * local_1c;
+          val = thing_ptr >> 0x1f;
+          local_3c = (short)((int)((thing_ptr + val * -0x10) - (uint)(val << 3 < 0)) >> 4);
+          thing_ptr = *(short *)(thing + 0x3a) * local_1c;
+          val = thing_ptr >> 0x1f;
           local_38 = 0;
-          sStack_3a = (short)((int)((iVar3 + iVar4 * -0x10) - (uint)(iVar4 << 3 < 0)) >> 4);
-          *(short *)(in_EDX + 0x32) = *(short *)(in_EDX + 0x32) + local_3c;
-          *(short *)(in_EDX + 0x34) = *(short *)(in_EDX + 0x34) + sStack_3a;
-          *(byte *)(in_EDX + 1) = *(byte *)(in_EDX + 1) | 4;
-          *(undefined2 *)(in_EDX + 0x36) = *(undefined2 *)(in_EDX + 0x36);
+          sStack_3a = (short)((int)((thing_ptr + val * -0x10) - (uint)(val << 3 < 0)) >> 4);
+          *(short *)(arg_edx + 0x32) = *(short *)(arg_edx + 0x32) + local_3c;
+          *(short *)(arg_edx + 0x34) = *(short *)(arg_edx + 0x34) + sStack_3a;
+          *(byte *)(arg_edx + 1) = *(byte *)(arg_edx + 1) | 4;
+          *(undefined2 *)(arg_edx + 0x36) = *(undefined2 *)(arg_edx + 0x36);
         }
-        *(undefined4 *)((int)psVar5 + -4) = 0x6c1ce;
-        FUN_0006d223();
+        *(undefined4 *)((int)val_2 + -4) = 0x6c1ce;
+        shot_update_creature_control_06d223();
         if (*(short *)(local_18 + 0x45) != 0) {
-          *(short *)(in_EAX + 0x5e) =
-               *(short *)(in_EAX + 0x5e) -
-               *(short *)(&DAT_002e91f1 + (uint)*(byte *)(in_EDX + 0x1a) * 0xe6);
+          *(short *)(thing + 0x5e) =
+               *(short *)(thing + 0x5e) -
+               *(short *)(&g_bss_002e91f1 + (uint)*(byte *)(arg_edx + 0x1a) * 0xe6);
         }
-        if (*(short *)(in_EDX + 0x5e) < 0) {
-          *(undefined4 *)((int)psVar5 + -4) = 0x6c1fe;
-          FUN_0006d0a8();
+        if (*(short *)(arg_edx + 0x5e) < 0) {
+          *(undefined4 *)((int)val_2 + -4) = 0x6c1fe;
+          shot_update_creature_control_06d0a8();
         }
-        else if (*(char *)(in_EDX + 6) != *(char *)(in_EAX + 6)) {
-          *(undefined4 *)((int)psVar5 + -4) = 0x6c20f;
-          FUN_00017128();
+        else if (*(char *)(arg_edx + 6) != *(char *)(thing + 6)) { /* thing->owner */
+          *(undefined4 *)((int)val_2 + -4) = 0x6c20f;
+          combobj_thing_this_check_017128();
         }
         if (local_18[0x18] != '\0') {
-          *(undefined4 *)((int)psVar5 + -4) = 0x6c221;
-          FUN_00072af4();
+          *(undefined4 *)((int)val_2 + -4) = 0x6c221;
+          structs_update_creature_control_072af4();
         }
       }
       else {
-        if (*(ushort *)(in_EAX + 0x1d) == *(ushort *)(in_EAX + 0x1b)) {
-          iVar3 = 0;
+        if (*(ushort *)(thing + 0x1d) == *(ushort *)(thing + 0x1b)) { /* thing->index_or_angle */
+          thing_ptr = 0;
         }
         else {
-          iVar3 = (&DAT_001ae9fc)[*(ushort *)(in_EAX + 0x1d)];
+          thing_ptr = (&g_thing_ptrs)[*(ushort *)(thing + 0x1d)];
         }
-        local_24 = in_EDX;
-        local_14 = in_EAX;
-        if (iVar3 == 0) {
+        local_24 = arg_edx;
+        local_14 = thing;
+        if (thing_ptr == 0) {
           uStack_40 = 0x6bee9;
-          FUN_00010cf5();
-          iVar3 = local_14;
+          anger_fn_010cf5();
+          thing_ptr = local_14;
           *(ushort *)(local_14 + 0x52) =
                CONCAT11((char)((ushort)*(undefined2 *)(local_14 + 0x52) >> 8) + '\x04',
                         (char)*(undefined2 *)(local_14 + 0x52)) & 0x7ff;
@@ -1997,31 +1888,31 @@ undefined4 FUN_0006bdda(void)
                CONCAT11((char)((ushort)*(undefined2 *)(local_14 + 0x54) >> 8) + '\x04',
                         (char)*(undefined2 *)(local_14 + 0x54)) & 0x7ff;
           uStack_40 = 0x6bf28;
-          FUN_00010d08();
-          *(undefined4 *)(iVar3 + 0x2c) = local_2c;
-          *(undefined2 *)(iVar3 + 0x30 + (uint)bVar6 * -8) = auStack_28[(uint)bVar6 * -4];
+          anger_fn_010d08();
+          *(undefined4 *)(thing_ptr + 0x2c) = local_2c;
+          *(undefined2 *)(thing_ptr + 0x30 + (uint)flag * -8) = auStack_28[(uint)flag * -4];
           if (*(char *)(local_24 + 0x1f) == '\x05') {
             *(undefined2 *)(local_14 + 0x1d) = *(undefined2 *)(local_24 + 0x1d);
           }
         }
         else {
-          local_34 = *(undefined4 *)(iVar3 + 0xd);
-          local_30[(uint)bVar6 * -4] = *(short *)(iVar3 + 0x11 + (uint)bVar6 * -8);
+          local_34 = *(undefined4 *)(thing_ptr + 0xd); /* thing->mappos.val_x */
+          local_30[(uint)flag * -4] = *(short *)(thing_ptr + 0x11 + (uint)flag * -8);
           local_30[0] = local_30[0] +
-                        *(short *)(&DAT_002e9162 + (uint)*(byte *)(iVar3 + 0x1a) * 0xe6);
+                        *(short *)(&g_bss_002e9162 + (uint)*(byte *)(thing_ptr + 0x1a) * 0xe6);
           uStack_40 = 0x6bf80;
-          FUN_00010cf5();
+          anger_fn_010cf5();
           uStack_40 = 0x6bf87;
-          uVar1 = FUN_00010c1a();
-          *(undefined2 *)(local_14 + 0x52) = uVar1;
+          uval = anger_fn_010c1a();
+          *(undefined2 *)(local_14 + 0x52) = uval;
           uStack_40 = 0x6bf98;
-          uVar1 = FUN_00010c44();
-          iVar3 = local_14;
-          *(undefined2 *)(local_14 + 0x54) = uVar1;
+          uval = anger_fn_010c44();
+          thing_ptr = local_14;
+          *(undefined2 *)(local_14 + 0x54) = uval;
           uStack_40 = 0x6bfbc;
-          FUN_00010d08();
-          *(undefined4 *)(iVar3 + 0x2c) = local_2c;
-          *(undefined2 *)(iVar3 + 0x30 + (uint)bVar6 * -8) = auStack_28[(uint)bVar6 * -4];
+          anger_fn_010d08();
+          *(undefined4 *)(thing_ptr + 0x2c) = local_2c;
+          *(undefined2 *)(thing_ptr + 0x30 + (uint)flag * -8) = auStack_28[(uint)flag * -4];
           *(undefined2 *)(local_14 + 0x1d) = *(undefined2 *)(local_24 + 0x1d);
           *(undefined1 *)(local_14 + 6) = *(undefined1 *)(local_24 + 6);
         }
@@ -2033,58 +1924,58 @@ undefined4 FUN_0006bdda(void)
 }
 
 /******************************************************************************
- * Function : sub_06c22b (Ghidra: FUN_0006c22b)
- * Prototype: int sub_06c22b(void);
+ * Function : setup_interpolate_creature_eye_bob (Original VA: 0x6c22b, Ghidra: FUN_0006c22b)
+ * Prototype: int setup_interpolate_creature_eye_bob(void);
  * Address  : 0x6c22b (Size: 161 bytes)
  * Module   : setup.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x6c2cc
+ * Purpose  : Interpolate head-bob offset during creature possession movement
+ * Callers  : 1 -> setup_apply_possession_lens_and_eye
  * Callees  : 0 -> 
  ******************************************************************************/
-int FUN_0006c22b(void)
+int setup_interpolate_creature_eye_bob(void)
 
 {
-  uint uVar1;
-  int in_EAX;
-  int iVar2;
-  int in_EDX;
+  uint rand_seed;
+  int arg_eax;
+  int cctrl_ptr;
+  int arg_edx;
   
-  iVar2 = (int)((uint)*(byte *)(in_EAX + 0x13) -
-               (((uint)(byte)(&DAT_002e911c)[(uint)*(byte *)(in_EDX + 0x1a) * 0xe6] *
-                 (uint)*(byte *)((&DAT_001b0a00)[*(ushort *)(in_EDX + 100)] + 0x23) * 0x23) / 100 +
-               (uint)(byte)(&DAT_002e911c)[(uint)*(byte *)(in_EDX + 0x1a) * 0xe6])) / 2;
-  if (iVar2 < -0x60) {
-    iVar2 = -0x60;
+  cctrl_ptr = (int)((uint)*(byte *)(arg_eax + 0x13) -
+               (((uint)(byte)(&g_bss_002e911c)[(uint)*(byte *)(arg_edx + 0x1a) * 0xe6] *
+                 (uint)*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(arg_edx + 100)] + 0x23) * 0x23) / 100 +
+               (uint)(byte)(&g_bss_002e911c)[(uint)*(byte *)(arg_edx + 0x1a) * 0xe6])) / 2;
+  if (cctrl_ptr < -0x60) {
+    cctrl_ptr = -0x60;
   }
-  else if (0x60 < iVar2) {
-    iVar2 = 0x60;
+  else if (0x60 < cctrl_ptr) {
+    cctrl_ptr = 0x60;
   }
-  DAT_002e8bf6 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-  uVar1 = DAT_002e8bf6 >> 0xd;
-  DAT_002e8bf6 = uVar1 | DAT_002e8bf6 * 0x80000;
-  if ((uVar1 & 0xff) < iVar2 + 0x80U) {
-    return (int)*(short *)(in_EAX + 0x14);
+  g_action_random_seed = g_action_random_seed * 0x24a1 + 0x24df;
+  rand_seed = g_action_random_seed >> 0xd;
+  g_action_random_seed = rand_seed | g_action_random_seed * 0x80000;
+  if ((rand_seed & 0xff) < cctrl_ptr + 0x80U) {
+    return (int)*(short *)(arg_eax + 0x14);
   }
   return 0;
 }
 
 /******************************************************************************
- * Function : sub_06c2cc (Ghidra: FUN_0006c2cc)
- * Prototype: undefined4 sub_06c2cc(void);
+ * Function : setup_apply_possession_lens_and_eye (Original VA: 0x6c2cc, Ghidra: FUN_0006c2cc)
+ * Prototype: undefined4 setup_apply_possession_lens_and_eye(void);
  * Address  : 0x6c2cc (Size: 376 bytes)
  * Module   : setup.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x6bdda
- * Callees  : 8 -> 0x17128, 0x6c22b, 0x6d0a8, 0x6d223, 0x6e538, 0x6edb9, 0x72af4, 0x81c10
+ * Purpose  : Configure eye lens effect and camera height when entering possession
+ * Callers  : 1 -> setup_compute_creature_eye_offset
+ * Callees  : 8 -> combobj_thing_this_check_017128, setup_interpolate_creature_eye_bob, shot_update_creature_control_06d0a8, shot_update_creature_control_06d223, sound_fn_06e538, sound_roll_unsynced_random_06edb9, structs_update_creature_control_072af4, creature_fn_081c10
  ******************************************************************************/
-undefined4 FUN_0006c2cc(void)
+undefined4 setup_apply_possession_lens_and_eye(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  int in_EDX;
-  int iVar2;
-  short *psVar3;
+  int thing;
+  int val;
+  int arg_edx;
+  int val_2;
+  short *val_3;
   undefined4 uStack_34;
   undefined4 uStack_30;
   undefined4 uStack_2c;
@@ -2096,63 +1987,63 @@ undefined4 FUN_0006c2cc(void)
   int local_18;
   undefined *local_14;
   
-  psVar3 = &local_24;
-  local_18 = (int)*(char *)(in_EAX + 0x20);
-  local_14 = &DAT_00188c94 + (uint)*(byte *)(in_EAX + 0x1a) * 0x65;
-  if (*(short *)(in_EDX + 0x5e) < 0) {
+  val_3 = &local_24;
+  local_18 = (int)*(char *)(thing + 0x20); /* thing->model */
+  local_14 = &g_data_00188c94 + (uint)*(byte *)(thing + 0x1a) * 0x65;
+  if (*(short *)(arg_edx + 0x5e) < 0) {
     return 0;
   }
-  if (*(ushort *)(in_EAX + 0x1d) == *(ushort *)(in_EAX + 0x1b)) {
+  if (*(ushort *)(thing + 0x1d) == *(ushort *)(thing + 0x1b)) { /* thing->index_or_angle */
     local_1c = 0;
   }
   else {
-    local_1c = (&DAT_001ae9fc)[*(ushort *)(in_EAX + 0x1d)];
+    local_1c = (&g_thing_ptrs)[*(ushort *)(thing + 0x1d)];
   }
   uStack_28 = 0x6c327;
-  iVar1 = FUN_0006c22b();
-  if (iVar1 != 0) {
-    psVar3 = &local_24;
+  val = setup_interpolate_creature_eye_bob();
+  if (val != 0) {
+    val_3 = &local_24;
     if (*(short *)(local_14 + 0x22) != 0) {
       uStack_28 = 0x100;
       uStack_2c = 2;
       uStack_30 = 0;
-      psVar3 = (short *)&uStack_34;
+      val_3 = (short *)&uStack_34;
       uStack_34 = 3;
-      FUN_0006e538();
-      FUN_0006edb9();
+      sound_fn_06e538();
+      sound_roll_unsynced_random_06edb9();
     }
-    *(undefined4 *)((int)psVar3 + -4) = 0x6c38b;
-    FUN_00081c10();
+    *(undefined4 *)((int)val_3 + -4) = 0x6c38b;
+    creature_fn_081c10();
     if (local_14[0x24] != '\0') {
-      *(undefined *)((&DAT_001b0a00)[*(ushort *)(in_EDX + 100)] + 0xb1) = local_14[0x24];
+      *(undefined *)((&g_creature_ctrl_ptrs)[*(ushort *)(arg_edx + 100)] + 0xb1) = local_14[0x24];
     }
     if (local_14[0x2a] != '\0') {
-      iVar1 = *(short *)(in_EAX + 0x38) * local_18;
-      iVar2 = iVar1 >> 0x1f;
-      local_24 = (short)((int)((iVar1 + iVar2 * -0x10) - (uint)(iVar2 << 3 < 0)) >> 4);
-      iVar1 = *(short *)(in_EAX + 0x3a) * local_18;
-      iVar2 = iVar1 >> 0x1f;
+      val = *(short *)(thing + 0x38) * local_18;
+      val_2 = val >> 0x1f;
+      local_24 = (short)((int)((val + val_2 * -0x10) - (uint)(val_2 << 3 < 0)) >> 4);
+      val = *(short *)(thing + 0x3a) * local_18;
+      val_2 = val >> 0x1f;
       local_20 = 0;
-      sStack_22 = (short)((int)((iVar1 + iVar2 * -0x10) - (uint)(iVar2 << 3 < 0)) >> 4);
-      *(short *)(in_EDX + 0x32) = *(short *)(in_EDX + 0x32) + local_24;
-      *(short *)(in_EDX + 0x34) = *(short *)(in_EDX + 0x34) + sStack_22;
-      *(byte *)(in_EDX + 1) = *(byte *)(in_EDX + 1) | 4;
-      *(undefined2 *)(in_EDX + 0x36) = *(undefined2 *)(in_EDX + 0x36);
+      sStack_22 = (short)((int)((val + val_2 * -0x10) - (uint)(val_2 << 3 < 0)) >> 4);
+      *(short *)(arg_edx + 0x32) = *(short *)(arg_edx + 0x32) + local_24;
+      *(short *)(arg_edx + 0x34) = *(short *)(arg_edx + 0x34) + sStack_22;
+      *(byte *)(arg_edx + 1) = *(byte *)(arg_edx + 1) | 4;
+      *(undefined2 *)(arg_edx + 0x36) = *(undefined2 *)(arg_edx + 0x36);
     }
-    *(undefined4 *)((int)psVar3 + -4) = 0x6c406;
-    FUN_0006d223();
-    if (*(short *)(in_EDX + 0x5e) < 0) {
-      *(undefined4 *)((int)psVar3 + -4) = 0x6c417;
-      FUN_0006d0a8();
+    *(undefined4 *)((int)val_3 + -4) = 0x6c406;
+    shot_update_creature_control_06d223();
+    if (*(short *)(arg_edx + 0x5e) < 0) {
+      *(undefined4 *)((int)val_3 + -4) = 0x6c417;
+      shot_update_creature_control_06d0a8();
     }
-    else if (*(char *)(in_EDX + 6) != *(char *)(in_EAX + 6)) {
-      *(undefined4 *)((int)psVar3 + -4) = 0x6c428;
-      FUN_00017128();
+    else if (*(char *)(arg_edx + 6) != *(char *)(thing + 6)) { /* thing->owner */
+      *(undefined4 *)((int)val_3 + -4) = 0x6c428;
+      combobj_thing_this_check_017128();
     }
   }
   if (local_14[0x18] != '\0') {
-    *(undefined4 *)((int)psVar3 + -4) = 0x6c43a;
-    FUN_00072af4();
+    *(undefined4 *)((int)val_3 + -4) = 0x6c43a;
+    structs_update_creature_control_072af4();
   }
   return 1;
 }

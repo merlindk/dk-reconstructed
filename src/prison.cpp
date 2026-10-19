@@ -1,7 +1,7 @@
 /**
- * Dungeon Keeper (KEEPER.EXE) - Reconstructed Source Module: prison.cpp
+ * Dungeon Keeper (KEEPER.EXE) - Reconstructed & Semantically Named Module: prison.cpp
  * Binary Subject: /home/merlin/Dungeon Keeper/re/KEEPER.elf
- * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 (x86:LE:32:default)
+ * Decompiler Engine: REA 6.5.0 + Ghidra 12.1.4 + DK Semantic Analyzer
  * Functions in this translation unit: 9
  */
 
@@ -11,80 +11,80 @@
 #include "../include/dk_functions.h"
 
 /******************************************************************************
- * Function : sub_065c8e (Ghidra: FUN_00065c8e)
- * Prototype: undefined4 sub_065c8e(void);
+ * Function : prison_update_player_view_state_065c8e (Original VA: 0x65c8e, Ghidra: FUN_00065c8e)
+ * Prototype: undefined4 prison_update_player_view_state_065c8e(void);
  * Address  : 0x65c8e (Size: 176 bytes)
  * Module   : prison.cpp [callgraph_affinity_to_following_unit]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x65ebd
- * Callees  : 2 -> 0x51374, 0x66016
+ * Purpose  : Accesses per-player PlayerInfo state (stride 0x4ef)
+ * Callers  : 1 -> prison_update_creature_control_065ebd
+ * Callees  : 2 -> moodneed_fn_051374, prison_couldn_create_skeleton_prison_066016
  ******************************************************************************/
-undefined4 FUN_00065c8e(void)
+undefined4 prison_update_player_view_state_065c8e(void)
 
 {
-  int in_EAX;
-  int in_EDX;
+  int arg_eax;
+  int arg_edx;
   
-  if ((*(short *)(in_EAX + 0x5e) < 0) &&
-     ((&DAT_002e91a2)[(uint)*(byte *)(in_EAX + 0x1a) * 0xe6] != '\0')) {
-    if (1 < DAT_002ebc4c) {
-      DAT_002e8bf6 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-      DAT_002e8bf6 = DAT_002e8bf6 >> 0xd | DAT_002e8bf6 * 0x80000;
-      if (DAT_002e8bf6 % (uint)DAT_002ebc4c != 0) {
+  if ((*(short *)(arg_eax + 0x5e) < 0) &&
+     ((&g_bss_002e91a2)[(uint)*(byte *)(arg_eax + 0x1a) * 0xe6] != '\0')) {
+    if (1 < g_bss_002ebc4c) {
+      g_action_random_seed = g_action_random_seed * 0x24a1 + 0x24df;
+      g_action_random_seed = g_action_random_seed >> 0xd | g_action_random_seed * 0x80000;
+      if (g_action_random_seed % (uint)g_bss_002ebc4c != 0) {
         return 0;
       }
     }
-    if ((int)*(char *)(in_EDX + 3) == (uint)(byte)(&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef]) {
-      FUN_00051374();
+    if ((int)*(char *)(arg_edx + 3) == (uint)(byte)(&g_player_id_number)[g_my_player_word._3_1_ * 0x4ef]) {
+      moodneed_fn_051374();
     }
-    FUN_00066016();
+    prison_couldn_create_skeleton_prison_066016();
     return 1;
   }
   return 0;
 }
 
 /******************************************************************************
- * Function : sub_065d3e (Ghidra: FUN_00065d3e)
- * Prototype: undefined4 sub_065d3e(void);
+ * Function : prison_update_creature_control_065d3e (Original VA: 0x65d3e, Ghidra: FUN_00065d3e)
+ * Prototype: undefined4 prison_update_creature_control_065d3e(void);
  * Address  : 0x65d3e (Size: 383 bytes)
  * Module   : prison.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x65ebd
- * Callees  : 10 -> 0x49bfc, 0x50de3, 0x64ae7, 0x6e538, 0x72af4, 0x85954, 0xaafa4, 0xb3b58, 0xd1030, 0xdd20c
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
+ * Callers  : 1 -> prison_update_creature_control_065ebd
+ * Callees  : 10 -> instance_negative_instance_049bfc, mapwho_process_map_subtile_050de3, person_update_creature_control_064ae7, sound_fn_06e538, structs_update_creature_control_072af4, creature_update_player_view_state_085954, food_update_creature_control_0aafa4, move_update_creature_control_0b3b58 ...
  ******************************************************************************/
-undefined4 FUN_00065d3e(void)
+undefined4 prison_update_creature_control_065d3e(void)
 
 {
-  char cVar1;
-  short sVar2;
-  int in_EAX;
-  int iVar3;
-  int in_EDX;
+  char ch;
+  short short_val;
+  int thing;
+  int val;
+  int arg_edx;
   undefined4 extraout_EDX;
-  undefined4 uVar4;
+  undefined4 cctrl_ptr;
   
-  uVar4 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  if (*(short *)(&DAT_002e911f + (uint)*(byte *)(in_EAX + 0x1a) * 0xe6) != 0) {
-    iVar3 = FUN_00050de3(uVar4);
-    if (iVar3 != 0) {
-      DAT_002e8bf6 = DAT_002e8bf6 * 0x24a1 + 0x24df;
-      DAT_002e8bf6 = DAT_002e8bf6 >> 0xd | DAT_002e8bf6 * 0x80000;
-      FUN_0006e538(3,0,2,0x100);
-      if (*(char *)(in_EAX + 7) != ')') {
-        FUN_00064ae7();
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  if (*(short *)(&g_bss_002e911f + (uint)*(byte *)(thing + 0x1a) * 0xe6) != 0) {
+    val = mapwho_process_map_subtile_050de3(cctrl_ptr);
+    if (val != 0) {
+      g_action_random_seed = g_action_random_seed * 0x24a1 + 0x24df;
+      g_action_random_seed = g_action_random_seed >> 0xd | g_action_random_seed * 0x80000;
+      sound_fn_06e538(3,0,2,0x100);
+      if (*(char *)(thing + 7) != ')') {
+        person_update_creature_control_064ae7();
       }
-      FUN_00049bfc(0);
-      FUN_00072af4();
-      *(int *)(&DAT_002e181c + *(char *)(in_EDX + 3) * 0x1508) =
-           *(int *)(&DAT_002e181c + *(char *)(in_EDX + 3) * 0x1508) + 1;
+      instance_negative_instance_049bfc(0);
+      structs_update_creature_control_072af4();
+      *(int *)(&g_bss_002e181c + *(char *)(arg_edx + 3) * 0x1508) =
+           *(int *)(&g_bss_002e181c + *(char *)(arg_edx + 3) * 0x1508) + 1;
       return 1;
     }
-    if ((((((uint)*(ushort *)(in_EAX + 0x1b) + DAT_002e8bee & 0x3f) == 0) &&
-         (iVar3 = FUN_00050de3(uVar4), iVar3 == 0)) && (iVar3 = FUN_000d1030(), iVar3 != 0)) &&
-       (((iVar3 = FUN_00085954(), iVar3 == 0 && (cVar1 = FUN_000dd20c(), cVar1 != '\0')) &&
-        (sVar2 = FUN_000b3b58(), sVar2 != 0)))) {
-      *(undefined1 *)(in_EAX + 8) = 0x29;
-      FUN_000aafa4();
+    if ((((((uint)*(ushort *)(thing + 0x1b) + g_game_turn & 0x3f) == 0) && /* thing->index_or_angle */
+         (val = mapwho_process_map_subtile_050de3(cctrl_ptr), val == 0)) && (val = room_passed_0d1030(), val != 0)) &&
+       (((val = creature_update_player_view_state_085954(), val == 0 && (ch = update_fn_0dd20c(), ch != '\0')) &&
+        (short_val = move_update_creature_control_0b3b58(), short_val != 0)))) {
+      *(undefined1 *)(thing + 8) = 0x29; /* thing->active_state */
+      food_update_creature_control_0aafa4();
       return extraout_EDX;
     }
   }
@@ -92,269 +92,266 @@ undefined4 FUN_00065d3e(void)
 }
 
 /******************************************************************************
- * Function : sub_065ebd (Ghidra: FUN_00065ebd)
- * Prototype: undefined8 sub_065ebd(void);
+ * Function : prison_update_creature_control_065ebd (Original VA: 0x65ebd, Ghidra: FUN_00065ebd)
+ * Prototype: undefined8 prison_update_creature_control_065ebd(void);
  * Address  : 0x65ebd (Size: 197 bytes)
  * Module   : prison.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x65f8a
- * Callees  : 7 -> 0x51374, 0x522f0, 0x63b6d, 0x65c8e, 0x65d3e, 0x66111, 0x6709c
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
+ * Callers  : 1 -> prison_update_creature_control_065f8a
+ * Callees  : 7 -> moodneed_fn_051374, moodneed_update_creature_control_0522f0, person_fn_063b6d, prison_update_player_view_state_065c8e, prison_update_creature_control_065d3e, prison_fn_066111, scavenge_fn_06709c
  ******************************************************************************/
-undefined8 FUN_00065ebd(void)
+undefined8 prison_update_creature_control_065ebd(void)
 
 {
-  ushort uVar1;
-  int in_EAX;
-  int iVar2;
-  undefined4 uVar3;
-  int iVar4;
+  ushort uval;
+  int thing;
+  int val;
+  undefined4 uval_2;
+  int cctrl_ptr;
   int extraout_ECX;
   int extraout_ECX_00;
-  undefined4 in_EDX;
+  undefined4 arg_edx;
   
-  iVar4 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  uVar1 = *(ushort *)(iVar4 + 0x7e);
-  iVar2 = FUN_0006709c();
-  if (iVar2 == 0) {
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  uval = *(ushort *)(cctrl_ptr + 0x7e);
+  val = scavenge_fn_06709c();
+  if (val == 0) {
 LAB_00065eef:
-    FUN_00063b6d();
+    person_fn_063b6d();
   }
   else {
-    FUN_000522f0();
-    iVar2 = FUN_00065c8e();
-    if (iVar2 != 0) {
-      uVar3 = 0xffffffff;
+    moodneed_update_creature_control_0522f0();
+    val = prison_update_player_view_state_065c8e();
+    if (val != 0) {
+      uval_2 = 0xffffffff;
       goto LAB_00065f84;
     }
-    iVar2 = extraout_ECX;
-    if (*(char *)(iVar4 + 0xd2) != '\0') {
+    val = extraout_ECX;
+    if (*(char *)(cctrl_ptr + 0xd2) != '\0') {
 LAB_00065f33:
-      if (((uint)*(ushort *)(iVar2 + 0x1b) + DAT_002e8bee & 0x3f) == 0) {
-        iVar4 = FUN_00066111();
-        if (iVar4 != 0) {
-          if ((int)(char)(&DAT_002ddd1e)[(uint)uVar1 * 0x45] ==
-              (uint)(byte)(&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef]) {
-            FUN_00051374();
+      if (((uint)*(ushort *)(val + 0x1b) + g_game_turn & 0x3f) == 0) {
+        cctrl_ptr = prison_fn_066111();
+        if (cctrl_ptr != 0) {
+          if ((int)(char)(&g_bss_002ddd1e)[(uint)uval * 0x45] ==
+              (uint)(byte)(&g_player_id_number)[g_my_player_word._3_1_ * 0x4ef]) {
+            moodneed_fn_051374();
           }
           goto LAB_00065eef;
         }
       }
-      uVar3 = 0;
+      uval_2 = 0;
       goto LAB_00065f84;
     }
-    iVar4 = FUN_00065d3e();
-    iVar2 = extraout_ECX_00;
-    if (iVar4 == 0) goto LAB_00065f33;
+    cctrl_ptr = prison_update_creature_control_065d3e();
+    val = extraout_ECX_00;
+    if (cctrl_ptr == 0) goto LAB_00065f33;
   }
-  uVar3 = 1;
+  uval_2 = 1;
 LAB_00065f84:
-  return CONCAT44(in_EDX,uVar3);
+  return CONCAT44(arg_edx,uval_2);
 }
 
 /******************************************************************************
- * Function : sub_065f82 (Ghidra: FUN_00065f82)
- * Prototype: longlong sub_065f82(undefined4 param_1,uint param_2);
+ * Function : prison_fn_065f82 (Original VA: 0x65f82, Ghidra: FUN_00065f82)
+ * Prototype: longlong prison_fn_065f82(undefined4 param_1,uint param_2);
  * Address  : 0x65f82 (Size: 8 bytes)
  * Module   : prison.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x66247
+ * Purpose  : Module prison.cpp procedure @ 0x065f82
+ * Callers  : 1 -> research_update_creature_control_066247
  * Callees  : 0 -> 
  ******************************************************************************/
-longlong FUN_00065f82(undefined4 param_1,uint param_2)
+longlong prison_fn_065f82(undefined4 param_1,uint param_2)
 
 {
   return (ulonglong)param_2 << 0x20;
 }
 
 /******************************************************************************
- * Function : sub_065f8a (Ghidra: FUN_00065f8a)
- * Prototype: longlong sub_065f8a(void);
+ * Function : prison_update_creature_control_065f8a (Original VA: 0x65f8a, Ghidra: FUN_00065f8a)
+ * Prototype: longlong prison_update_creature_control_065f8a(void);
  * Address  : 0x65f8a (Size: 140 bytes)
  * Module   : prison.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
  * Callers  : 0 -> 
- * Callees  : 5 -> 0x51374, 0x63b6d, 0x65be8, 0x65ebd, 0xd0f50
+ * Callees  : 5 -> moodneed_fn_051374, person_fn_063b6d, pom_update_creature_control_065be8, prison_update_creature_control_065ebd, room_update_slab_subtile_columns_0d0f50
  ******************************************************************************/
-longlong FUN_00065f8a(void)
+longlong prison_update_creature_control_065f8a(void)
 
 {
-  int in_EAX;
-  int iVar1;
-  int iVar2;
-  uint in_EDX;
+  int thing;
+  int val;
+  int cctrl_ptr;
+  uint arg_edx;
   
-  iVar2 = (&DAT_001b0a00)[*(ushort *)(in_EAX + 100)];
-  iVar1 = FUN_000d0f50();
-  if (((iVar1 != 0) && (*(short *)(iVar1 + 10) == 4)) &&
-     (*(short *)(iVar1 + 1) == *(short *)(iVar2 + 0x7e))) {
-    if (*(ushort *)(iVar1 + 0x10) <= *(ushort *)(iVar1 + 0xe)) {
-      iVar2 = FUN_00065ebd();
-      if (iVar2 == 0) {
-        FUN_00065be8();
+  cctrl_ptr = (&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)]; /* thing->ccontrol_idx */
+  val = room_update_slab_subtile_columns_0d0f50();
+  if (((val != 0) && (*(short *)(val + 10) == 4)) &&
+     (*(short *)(val + 1) == *(short *)(cctrl_ptr + 0x7e))) {
+    if (*(ushort *)(val + 0x10) <= *(ushort *)(val + 0xe)) {
+      cctrl_ptr = prison_update_creature_control_065ebd();
+      if (cctrl_ptr == 0) {
+        pom_update_creature_control_065be8();
       }
-      return CONCAT44(in_EDX,iVar2);
+      return CONCAT44(arg_edx,cctrl_ptr);
     }
-    if ((int)*(char *)(iVar1 + 3) == (uint)(byte)(&DAT_0019d0f3)[DAT_002f10ce._3_1_ * 0x4ef]) {
-      FUN_00051374();
+    if ((int)*(char *)(val + 3) == (uint)(byte)(&g_player_id_number)[g_my_player_word._3_1_ * 0x4ef]) {
+      moodneed_fn_051374();
     }
   }
-  FUN_00063b6d();
-  return (ulonglong)in_EDX << 0x20;
+  person_fn_063b6d();
+  return (ulonglong)arg_edx << 0x20;
 }
 
 /******************************************************************************
- * Function : dk_couldn_create_skeleton_prison_066016 (Ghidra: FUN_00066016)
- * Prototype: void dk_couldn_create_skeleton_prison_066016(void);
+ * Function : prison_couldn_create_skeleton_prison_066016 (Original VA: 0x66016, Ghidra: FUN_00066016)
+ * Prototype: void prison_couldn_create_skeleton_prison_066016(void);
  * Address  : 0x66016 (Size: 219 bytes)
  * Module   : prison.cpp [direct_file_string_xref]
- * OrigLine : prison.cpp:299 ("COULDN'T CREATE SKELETON IN PRISON")
- * Naming   : String 'COULDN'T CREATE SKELETON IN PRISON'
- * Callers  : 1 -> 0x65c8e
- * Callees  : 6 -> 0x263c9, 0x43bb3, 0x63b6d, 0x8240c, 0x8608c, 0xddaf0
- * Strings  :
- *   - 0x16690b: "prison.cpp"
- *   - 0x1668e8: "COULDN'T CREATE SKELETON IN PRISON"
+ * OrigLine : prison.cpp lines 299
+ * Purpose  : String 'COULDN'T CREATE SKELETON IN PRISON'
+ * Callers  : 1 -> prison_update_player_view_state_065c8e
+ * Callees  : 6 -> effect_fn_0263c9, inits_told_you_so_create_043bb3, person_fn_063b6d, creature_update_creature_control_08240c, creature_how_hero_have_tend_08608c, LbErrorLog
  ******************************************************************************/
-void FUN_00066016(void)
+void prison_couldn_create_skeleton_prison_066016(void)
 
 {
-  char cVar1;
-  int in_EAX;
-  int iVar2;
-  uint uVar3;
-  int in_EDX;
+  char ch;
+  int arg_eax;
+  int val;
+  uint uval;
+  int arg_edx;
   
-  iVar2 = FUN_00043bb3();
-  if (iVar2 != 0) {
-    FUN_0008240c();
-    FUN_00063b6d();
-    if (DAT_002ee9b9 == 3) {
-      uVar3 = (uint)*(byte *)(in_EDX + 0x1a);
-      if (((&DAT_002e91e7)[uVar3 * 0xe6] == '\0') || ((uVar3 != 0 && (uVar3 < 0xe)))) {
-        cVar1 = '\0';
+  val = inits_told_you_so_create_043bb3();
+  if (val != 0) {
+    creature_update_creature_control_08240c();
+    person_fn_063b6d();
+    if (g_bss_002ee9b9 == 3) {
+      uval = (uint)*(byte *)(arg_edx + 0x1a);
+      if (((&g_bss_002e91e7)[uval * 0xe6] == '\0') || ((uval != 0 && (uval < 0xe)))) {
+        ch = '\0';
       }
       else {
-        cVar1 = '\x01';
+        ch = '\x01';
       }
     }
     else {
-      cVar1 = (&DAT_002e91e7)[(uint)*(byte *)(in_EDX + 0x1a) * 0xe6];
+      ch = (&g_bss_002e91e7)[(uint)*(byte *)(arg_edx + 0x1a) * 0xe6];
     }
-    if (cVar1 != '\0') {
-      FUN_000263c9();
+    if (ch != '\0') {
+      effect_fn_0263c9();
     }
-    FUN_0008608c(0,0);
-    *(int *)(&DAT_002e182c + *(char *)(in_EAX + 3) * 0x1508) =
-         *(int *)(&DAT_002e182c + *(char *)(in_EAX + 3) * 0x1508) + 1;
+    creature_how_hero_have_tend_08608c(0,0);
+    *(int *)(&g_bss_002e182c + *(char *)(arg_eax + 3) * 0x1508) =
+         *(int *)(&g_bss_002e182c + *(char *)(arg_eax + 3) * 0x1508) + 1;
     return;
   }
-  FUN_000ddaf0(); /* LbErrorLog("prison.cpp", line 299, "COULDN'T CREATE SKELETON IN PRISON") */
+  LbErrorLog(); /* LbErrorLog("prison.cpp", line 299, "COULDN'T CREATE SKELETON IN PRISON") */
   return;
 }
 
 /******************************************************************************
- * Function : sub_0660f1 (Ghidra: FUN_000660f1)
- * Prototype: undefined8 sub_0660f1(void);
+ * Function : prison_update_creature_control_0660f1 (Original VA: 0x660f1, Ghidra: FUN_000660f1)
+ * Prototype: undefined8 prison_update_creature_control_0660f1(void);
  * Address  : 0x660f1 (Size: 32 bytes)
  * Module   : prison.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
+ * Purpose  : Accesses CreatureControl state in g_creature_ctrl_ptrs
  * Callers  : 0 -> 
- * Callees  : 1 -> 0x64e59
+ * Callees  : 1 -> person_fn_064e59
  ******************************************************************************/
-undefined8 FUN_000660f1(void)
+undefined8 prison_update_creature_control_0660f1(void)
 
 {
-  int in_EAX;
-  undefined4 in_EDX;
+  int thing;
+  undefined4 arg_edx;
   
-  *(byte *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 1) =
-       *(byte *)((&DAT_001b0a00)[*(ushort *)(in_EAX + 100)] + 1) & 0xfd;
-  FUN_00064e59();
-  return CONCAT44(in_EDX,1);
+  *(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 1) = /* thing->ccontrol_idx */
+       *(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing + 100)] + 1) & 0xfd; /* thing->ccontrol_idx */
+  person_fn_064e59();
+  return CONCAT44(arg_edx,1);
 }
 
 /******************************************************************************
- * Function : sub_066111 (Ghidra: FUN_00066111)
- * Prototype: undefined4 sub_066111(void);
+ * Function : prison_fn_066111 (Original VA: 0x66111, Ghidra: FUN_00066111)
+ * Prototype: undefined4 prison_fn_066111(void);
  * Address  : 0x66111 (Size: 92 bytes)
  * Module   : prison.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x65ebd
- * Callees  : 1 -> 0x3f80c
+ * Purpose  : Module prison.cpp procedure @ 0x066111
+ * Callers  : 1 -> prison_update_creature_control_065ebd
+ * Callees  : 1 -> imptool_fn_03f80c
  ******************************************************************************/
-undefined4 FUN_00066111(void)
+undefined4 prison_fn_066111(void)
 
 {
-  short sVar1;
-  int in_EAX;
-  int iVar2;
+  short short_val;
+  int arg_eax;
+  int val;
   int extraout_ECX;
-  int in_EDX;
+  int arg_edx;
   
-  if (*(char *)(in_EAX + 3) != in_EDX) {
-    sVar1 = *(short *)(in_EAX + 0x37);
-    while (sVar1 != 0) {
-      iVar2 = FUN_0003f80c();
-      if (iVar2 != 0) {
+  if (*(char *)(arg_eax + 3) != arg_edx) {
+    short_val = *(short *)(arg_eax + 0x37);
+    while (short_val != 0) {
+      val = imptool_fn_03f80c();
+      if (val != 0) {
         return 1;
       }
-      sVar1 = *(short *)(&DAT_002d33c6 + extraout_ECX * 6);
+      short_val = *(short *)(&g_bss_002d33c6 + extraout_ECX * 6);
     }
   }
   return 0;
 }
 
 /******************************************************************************
- * Function : sub_06616d (Ghidra: FUN_0006616d)
- * Prototype: undefined8 sub_06616d(void);
+ * Function : prison_update_creature_and_thing_06616d (Original VA: 0x6616d, Ghidra: FUN_0006616d)
+ * Prototype: undefined8 prison_update_creature_and_thing_06616d(void);
  * Address  : 0x6616d (Size: 218 bytes)
  * Module   : prison.cpp [address_order_boundary_interpolation]
- * Naming   : Address-based identifier
- * Callers  : 1 -> 0x66247
- * Callees  : 3 -> 0x713cc, 0xca474, 0xdc440
+ * Purpose  : Accesses CreatureControl (g_creature_ctrl_ptrs) and Thing (g_thing_ptrs)
+ * Callers  : 1 -> research_update_creature_control_066247
+ * Callees  : 3 -> spell_type_thing_0713cc, room_process_dungeon_room_0ca474, update_fn_0dc440
  ******************************************************************************/
-undefined8 FUN_0006616d(void)
+undefined8 prison_update_creature_and_thing_06616d(void)
 
 {
-  ushort uVar1;
-  uint uVar2;
-  bool bVar3;
-  int in_EAX;
-  int iVar4;
-  int iVar5;
-  undefined4 in_EDX;
-  uint uVar6;
+  ushort cctrl_ptr;
+  uint thing_ptr;
+  bool flag;
+  int arg_eax;
+  int val;
+  int val_2;
+  undefined4 arg_edx;
+  uint uval;
   int local_20;
   
   local_20 = 0x7fffffff;
-  uVar6 = 0;
-  bVar3 = false;
-  if ((*(char *)(in_EAX + 6) < '\x05') && (iVar4 = FUN_000ca474(1), iVar4 != 0)) {
-    uVar1 = *(ushort *)(iVar4 + 0x3d);
-    while (uVar2 = (&DAT_001ae9fc)[uVar1], DAT_001ae9fc < uVar2) {
-      iVar5 = FUN_000dc440();
-      iVar4 = local_20;
-      if (bVar3) {
-        if ((iVar5 < 0x7fffffff) &&
-           ((*(byte *)((&DAT_001b0a00)[*(ushort *)(uVar2 + 100)] + 0xab) & 2) == 0))
+  uval = 0;
+  flag = false;
+  if ((*(char *)(arg_eax + 6) < '\x05') && (val = room_process_dungeon_room_0ca474(1), val != 0)) {
+    cctrl_ptr = *(ushort *)(val + 0x3d);
+    while (thing_ptr = (&g_thing_ptrs)[cctrl_ptr], g_thing_ptrs < thing_ptr) {
+      val_2 = update_fn_0dc440();
+      val = local_20;
+      if (flag) {
+        if ((val_2 < 0x7fffffff) &&
+           ((*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0xab) & 2) == 0)) /* thing->ccontrol_idx */
         goto LAB_00066200;
       }
       else {
-        if ((*(byte *)((&DAT_001b0a00)[*(ushort *)(uVar2 + 100)] + 0xab) & 2) == 0) {
-          bVar3 = true;
+        if ((*(byte *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0xab) & 2) == 0) { /* thing->ccontrol_idx */
+          flag = true;
         }
         else {
-          iVar4 = FUN_000713cc();
-          if ((iVar4 < 1) || (local_20 <= iVar4)) goto LAB_000661b0;
+          val = spell_type_thing_0713cc();
+          if ((val < 1) || (local_20 <= val)) goto LAB_000661b0;
         }
 LAB_00066200:
-        local_20 = iVar4;
-        uVar6 = uVar2;
+        local_20 = val;
+        uval = thing_ptr;
       }
 LAB_000661b0:
-      uVar1 = *(ushort *)((&DAT_001b0a00)[*(ushort *)(uVar2 + 100)] + 0x2aa);
+      cctrl_ptr = *(ushort *)((&g_creature_ctrl_ptrs)[*(ushort *)(thing_ptr + 100)] + 0x2aa); /* thing->ccontrol_idx */
     }
   }
-  return CONCAT44(in_EDX,uVar6);
+  return CONCAT44(arg_edx,uval);
 }
 
