@@ -23,14 +23,16 @@ build:
 linux: build
 	$(CC_LINUX) $(CFLAGS_COMMON) -c runtime/keeper_runtime.c -o build/keeper_runtime.o
 	$(CC_LINUX) $(CFLAGS_COMMON) -c runtime/stb_vorbis_impl.c -o build/stb_vorbis_impl.o
+	$(CXX_LINUX) $(CFLAGS_COMMON) -O3 -c runtime/xbrz.cpp -o build/xbrz.o
 	$(CXX_LINUX) $(CFLAGS_COMMON) -c runtime/recompiled_modules.cpp -o build/recompiled_modules.o
-	$(CXX_LINUX) build/keeper_runtime.o build/stb_vorbis_impl.o build/recompiled_modules.o $(LDFLAGS_LINUX) -o build/keeper_linux32
+	$(CXX_LINUX) build/keeper_runtime.o build/stb_vorbis_impl.o build/xbrz.o build/recompiled_modules.o $(LDFLAGS_LINUX) -o build/keeper_linux32
 
 win32: build
 	$(CC_WIN32) $(CFLAGS_COMMON) -c runtime/keeper_runtime.c -o build/keeper_runtime_win32.o
 	$(CC_WIN32) $(CFLAGS_COMMON) -c runtime/stb_vorbis_impl.c -o build/stb_vorbis_impl_win32.o
+	$(CXX_WIN32) $(CFLAGS_COMMON) -O3 -c runtime/xbrz.cpp -o build/xbrz_win32.o
 	$(CXX_WIN32) $(CFLAGS_COMMON) -c runtime/recompiled_modules.cpp -o build/recompiled_modules_win32.o
-	$(CXX_WIN32) build/keeper_runtime_win32.o build/stb_vorbis_impl_win32.o build/recompiled_modules_win32.o $(LDFLAGS_WIN32) -o build/keeper_win32.exe
+	$(CXX_WIN32) build/keeper_runtime_win32.o build/stb_vorbis_impl_win32.o build/xbrz_win32.o build/recompiled_modules_win32.o $(LDFLAGS_WIN32) -o build/keeper_win32.exe
 
 rebase: build
 	python3 tools/le_to_elf32.py "/home/merlin/Dungeon Keeper/KEEPER.EXE" build/KEEPER_20000000.elf 0x20000000

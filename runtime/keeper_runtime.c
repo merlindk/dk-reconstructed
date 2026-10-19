@@ -58,6 +58,29 @@ static uint8_t  g_vga_palette_6bit[768];
 static uint32_t g_argb_palette[256];
 static uint32_t g_frame_argb_buf[640 * 480];
 
+#define CANVAS_1080P_WIDTH    1920
+#define CANVAS_1080P_HEIGHT   1080
+#define VIEWPORT_43_WIDTH     1440
+#define VIEWPORT_43_HEIGHT    1080
+#define VIEWPORT_43_OFFSET_X  240
+#define VIEWPORT_43_OFFSET_Y  0
+#define BORDER_WIDTH          240
+
+static uint32_t g_backbuffer_1080p[CANVAS_1080P_WIDTH * CANVAS_1080P_HEIGHT];
+static uint32_t g_border_texture[BORDER_WIDTH * CANVAS_1080P_HEIGHT];
+static uint32_t g_xbrz_temp_buf[1920 * 1440];
+static uint8_t  g_persistent_wscreen[640 * 480 + 4096];
+static uint8_t  g_persistent_pscreen[640 * 480 + 4096];
+static uint8_t  g_persistent_bscreen[640 * 480 + 4096];
+static bool     g_border_inited = false;
+static bool     g_upscale_1080p_enabled = true;
+static int      g_xbrz_factor = 2; /* 2 = 2x, 3 = 3x, 0 = nearest-neighbor */
+
+#ifdef __cplusplus
+extern "C"
+#endif
+void dk_xbrz_scale(int factor, const uint32_t *src, uint32_t *dst, int width, int height);
+
 /* Global base relocation delta (0 on Linux, 0x20000000 on Windows/rebased ELFs) */
 uint32_t g_rebase_delta = 0;
 #define DK_VA(orig_va)   ((uint32_t)((orig_va) + g_rebase_delta))
@@ -227,6 +250,167 @@ void dk_install_direct_c_hook(uint32_t target_va, void *c_func_ptr) {
 }
 
 /* ============================================================================
+ * 2b. Thematic Pillarbox Borders & Frame Composition (1080p Widescreen)
+ * ============================================================================ */
+static void init_thematic_borders(void) {
+    if (g_border_inited) return;
+
+    for (int y = 0; y < CANVAS_1080P_HEIGHT; y++) {
+        for (int x = 0; x < BORDER_WIDTH; x++) {
+            /* Create gothic dungeon stone brick pattern (approx 60px high, 120px wide bricks) */
+            int brick_h = 60;
+            int brick_w = 120;
+            int row = y / brick_h;
+            int x_offset = (row % 2) * (brick_w / 2);
+            int col_x = (x + x_offset) % brick_w;
+            int col_y = y % brick_h;
+
+            /* Base dark obsidian / granite color */
+            int base_lum = 22;
+
+            /* Mortar lines between bricks */
+            bool is_mortar = (col_y <= 2) || (col_x <= 2);
+
+            /* Subtle torchlight vignette: warmer and brighter towards inner game screen edge (x = 240) */
+            float edge_dist = (float)x / (float)BORDER_WIDTH; /* 0.0 at outer edge, 1.0 at screen edge */
+            int ambient = (int)(edge_dist * 18.0f);
+
+            /* Procedural pseudo-random stone noise */
+            int noise = (((x * 37 + y * 17) ^ (x >> 2)) % 11) - 5;
+
+            int r = base_lum + ambient + noise;
+            int g = base_lum - 4 + (ambient * 3 / 4) + noise;
+            int b = base_lum - 2 + (ambient / 2) + noise;
+
+            if (is_mortar) {
+                r = r / 3;
+                g = g / 3;
+                b = b / 3;
+            }
+
+            /* Golden runic bezel trim right at the game border seam (x = 236..239) */
+            if (x >= BORDER_WIDTH - 4) {
+                int trim_dist = x - (BORDER_WIDTH - 4);
+                if (trim_dist == 0) {
+                    r = 85; g = 65; b = 25; /* dark brass bevel */
+                } else if (trim_dist == 1) {
+                    r = 140; g = 110; b = 45; /* polished gold highlight */
+                } else if (trim_dist == 2) {
+                    r = 60; g = 45; b = 15;
+                } else {
+                    r = 0; g = 0; b = 0; /* inner drop shadow */
+                }
+            }
+
+            if (r < 0) r = 0; else if (r > 255) r = 255;
+            if (g < 0) g = 0; else if (g > 255) g = 255;
+            if (b < 0) b = 0; else if (b > 255) b = 255;
+
+            uint32_t color = (0xFF << 24) | (r << 16) | (g << 8) | b;
+            g_border_texture[y * BORDER_WIDTH + x] = color;
+        }
+    }
+    g_border_inited = true;
+}
+
+static inline uint32_t bilinear_sample(const uint32_t *src, int sw, int sh, float u, float v) {
+    if (u < 0.0f) u = 0.0f;
+    if (v < 0.0f) v = 0.0f;
+    if (u > (float)(sw - 1)) u = (float)(sw - 1);
+    if (v > (float)(sh - 1)) v = (float)(sh - 1);
+
+    int x0 = (int)u;
+    int y0 = (int)v;
+    int x1 = (x0 < sw - 1) ? x0 + 1 : x0;
+    int y1 = (y0 < sh - 1) ? y0 + 1 : y0;
+
+    float fx = u - (float)x0;
+    float fy = v - (float)y0;
+    float ifx = 1.0f - fx;
+    float ify = 1.0f - fy;
+
+    float w00 = ifx * ify;
+    float w10 = fx  * ify;
+    float w01 = ifx * fy;
+    float w11 = fx  * fy;
+
+    uint32_t c00 = src[y0 * sw + x0];
+    uint32_t c10 = src[y0 * sw + x1];
+    uint32_t c01 = src[y1 * sw + x0];
+    uint32_t c11 = src[y1 * sw + x1];
+
+    int r = (int)(w00 * ((c00 >> 16) & 0xFF) + w10 * ((c10 >> 16) & 0xFF) + w01 * ((c01 >> 16) & 0xFF) + w11 * ((c11 >> 16) & 0xFF));
+    int g = (int)(w00 * ((c00 >>  8) & 0xFF) + w10 * ((c10 >>  8) & 0xFF) + w01 * ((c01 >>  8) & 0xFF) + w11 * ((c11 >>  8) & 0xFF));
+    int b = (int)(w00 * ( c00        & 0xFF) + w10 * ( c10        & 0xFF) + w01 * ( c01        & 0xFF) + w11 * ( c11        & 0xFF));
+
+    return (0xFFU << 24) | ((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF);
+}
+
+static void blit_bilinear_to_viewport(const uint32_t *src, int sw, int sh) {
+    float x_ratio = (float)sw / (float)VIEWPORT_43_WIDTH;
+    float y_ratio = (float)sh / (float)VIEWPORT_43_HEIGHT;
+
+    for (int dy = 0; dy < VIEWPORT_43_HEIGHT; dy++) {
+        float src_y = ((float)dy + 0.5f) * y_ratio - 0.5f;
+        uint32_t *row_dst = g_backbuffer_1080p + dy * CANVAS_1080P_WIDTH + VIEWPORT_43_OFFSET_X;
+        for (int dx = 0; dx < VIEWPORT_43_WIDTH; dx++) {
+            float src_x = ((float)dx + 0.5f) * x_ratio - 0.5f;
+            row_dst[dx] = bilinear_sample(src, sw, sh, src_x, src_y);
+        }
+    }
+}
+
+static void render_1080p_frame(int game_w, int game_h) {
+    if (!g_border_inited) {
+        init_thematic_borders();
+    }
+
+    /* 1. Blit thematic side borders into 1080p canvas */
+    for (int y = 0; y < CANVAS_1080P_HEIGHT; y++) {
+        uint32_t *dst_row = g_backbuffer_1080p + y * CANVAS_1080P_WIDTH;
+        const uint32_t *src_border = g_border_texture + y * BORDER_WIDTH;
+
+        /* Left pillarbox border (x = 0 .. 239) */
+        memcpy(dst_row, src_border, BORDER_WIDTH * sizeof(uint32_t));
+
+        /* Right pillarbox border (x = 1680 .. 1919), horizontally mirrored */
+        uint32_t *right_dst = dst_row + (CANVAS_1080P_WIDTH - BORDER_WIDTH);
+        for (int x = 0; x < BORDER_WIDTH; x++) {
+            right_dst[x] = src_border[BORDER_WIDTH - 1 - x];
+        }
+    }
+
+    /* 2. Upscale native game framebuffer into the 1440x1080 4:3 viewport */
+    if (g_xbrz_factor >= 2) {
+        int target_factor = g_xbrz_factor;
+        /* For 320x200 low-res, use 4x xBRZ (or 3x) to generate high-resolution intermediate */
+        if (game_w <= 320 && target_factor < 4) {
+            target_factor = 4;
+        }
+
+        int up_w = game_w * target_factor;
+        int up_h = game_h * target_factor;
+        if (up_w <= 1920 && up_h <= 1440) {
+            dk_xbrz_scale(target_factor, g_frame_argb_buf, g_xbrz_temp_buf, game_w, game_h);
+            blit_bilinear_to_viewport(g_xbrz_temp_buf, up_w, up_h);
+        } else {
+            blit_bilinear_to_viewport(g_frame_argb_buf, game_w, game_h);
+        }
+    } else {
+        /* Nearest-neighbor direct scaling */
+        for (int dy = 0; dy < VIEWPORT_43_HEIGHT; dy++) {
+            int sy = (dy * game_h) / VIEWPORT_43_HEIGHT;
+            uint32_t *dst_row = g_backbuffer_1080p + dy * CANVAS_1080P_WIDTH + VIEWPORT_43_OFFSET_X;
+            const uint32_t *src_row = g_frame_argb_buf + sy * game_w;
+            for (int dx = 0; dx < VIEWPORT_43_WIDTH; dx++) {
+                int sx = (dx * game_w) / VIEWPORT_43_WIDTH;
+                dst_row[dx] = src_row[sx];
+            }
+        }
+    }
+}
+
+/* ============================================================================
  * 3. BMP Frame Exporter (for Headless Verification & Screenshot Capture)
  * ============================================================================ */
 static void save_bmp_frame(const char *filepath, const uint32_t *argb, int width, int height) {
@@ -371,23 +555,43 @@ static LRESULT CALLBACK dk_wndproc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
             HDC hdc = BeginPaint(hwnd, &ps);
             RECT rc;
             GetClientRect(hwnd, &rc);
-            int w = DK_MEM_S32(VA_LB_WSCREEN_WIDTH);
-            int h = DK_MEM_S32(VA_LB_WSCREEN_HEIGHT);
-            if (w > 0 && h > 0 && g_frame_argb_buf) {
+            int cw = rc.right - rc.left;
+            int ch = rc.bottom - rc.top;
+
+            if (g_upscale_1080p_enabled) {
                 BITMAPINFO bmi;
                 memset(&bmi, 0, sizeof(bmi));
                 bmi.bmiHeader.biSize        = sizeof(BITMAPINFOHEADER);
-                bmi.bmiHeader.biWidth       = w;
-                bmi.bmiHeader.biHeight      = -h;
+                bmi.bmiHeader.biWidth       = CANVAS_1080P_WIDTH;
+                bmi.bmiHeader.biHeight      = -CANVAS_1080P_HEIGHT;
                 bmi.bmiHeader.biPlanes      = 1;
                 bmi.bmiHeader.biBitCount    = 32;
                 bmi.bmiHeader.biCompression = BI_RGB;
                 StretchDIBits(
                     hdc,
-                    0, 0, rc.right - rc.left, rc.bottom - rc.top,
-                    0, 0, w, h,
-                    g_frame_argb_buf, &bmi, DIB_RGB_COLORS, SRCCOPY
+                    0, 0, cw, ch,
+                    0, 0, CANVAS_1080P_WIDTH, CANVAS_1080P_HEIGHT,
+                    g_backbuffer_1080p, &bmi, DIB_RGB_COLORS, SRCCOPY
                 );
+            } else {
+                int w = DK_MEM_S32(VA_LB_WSCREEN_WIDTH);
+                int h = DK_MEM_S32(VA_LB_WSCREEN_HEIGHT);
+                if (w > 0 && h > 0 && g_frame_argb_buf) {
+                    BITMAPINFO bmi;
+                    memset(&bmi, 0, sizeof(bmi));
+                    bmi.bmiHeader.biSize        = sizeof(BITMAPINFOHEADER);
+                    bmi.bmiHeader.biWidth       = w;
+                    bmi.bmiHeader.biHeight      = -h;
+                    bmi.bmiHeader.biPlanes      = 1;
+                    bmi.bmiHeader.biBitCount    = 32;
+                    bmi.bmiHeader.biCompression = BI_RGB;
+                    StretchDIBits(
+                        hdc,
+                        0, 0, cw, ch,
+                        0, 0, w, h,
+                        g_frame_argb_buf, &bmi, DIB_RGB_COLORS, SRCCOPY
+                    );
+                }
             }
             EndPaint(hwnd, &ps);
             return 0;
@@ -399,10 +603,31 @@ static LRESULT CALLBACK dk_wndproc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
             int ch = (rc.bottom - rc.top) > 0 ? (rc.bottom - rc.top) : 480;
             int sw = DK_MEM_S32(VA_LB_PHYS_WIDTH)  > 0 ? DK_MEM_S32(VA_LB_PHYS_WIDTH)  : 640;
             int sh = DK_MEM_S32(VA_LB_PHYS_HEIGHT) > 0 ? DK_MEM_S32(VA_LB_PHYS_HEIGHT) : 480;
-            int mx = ((int)(short)LOWORD(lParam) * sw) / cw;
-            int my = ((int)(short)HIWORD(lParam) * sh) / ch;
-            DK_MEM_S32(VA_LB_MMOUSE_X) = mx;
-            DK_MEM_S32(VA_LB_MMOUSE_Y) = my;
+
+            if (g_upscale_1080p_enabled) {
+                /* Map window client coordinates -> 1080p canvas -> 1440x1080 4:3 viewport -> game coords */
+                float canvas_x = ((float)(short)LOWORD(lParam) * (float)CANVAS_1080P_WIDTH) / (float)cw;
+                float canvas_y = ((float)(short)HIWORD(lParam) * (float)CANVAS_1080P_HEIGHT) / (float)ch;
+
+                float rel_x = canvas_x - (float)VIEWPORT_43_OFFSET_X;
+                float rel_y = canvas_y - (float)VIEWPORT_43_OFFSET_Y;
+
+                int game_x = (int)((rel_x * (float)sw) / (float)VIEWPORT_43_WIDTH);
+                int game_y = (int)((rel_y * (float)sh) / (float)VIEWPORT_43_HEIGHT);
+
+                if (game_x < 0) game_x = 0;
+                if (game_x >= sw) game_x = sw - 1;
+                if (game_y < 0) game_y = 0;
+                if (game_y >= sh) game_y = sh - 1;
+
+                DK_MEM_S32(VA_LB_MMOUSE_X) = game_x;
+                DK_MEM_S32(VA_LB_MMOUSE_Y) = game_y;
+            } else {
+                int mx = ((int)(short)LOWORD(lParam) * sw) / cw;
+                int my = ((int)(short)HIWORD(lParam) * sh) / ch;
+                DK_MEM_S32(VA_LB_MMOUSE_X) = mx;
+                DK_MEM_S32(VA_LB_MMOUSE_Y) = my;
+            }
             return 0;
         }
         case WM_LBUTTONDOWN:
@@ -521,23 +746,77 @@ static void platform_poll_events(void) {
 static void platform_present_frame(int width, int height) {
     const uint8_t *wscreen = (const uint8_t *)(uintptr_t)DK_MEM_U32(VA_LB_WSCREEN_PTR);
     int pitch = DK_MEM_S32(VA_LB_WSCREEN_WIDTH);
-    if (!wscreen || width <= 0 || height <= 0 || width > 640 || height > 480) return;
-    if (pitch <= 0) pitch = width;
+    if (!wscreen) return;
+    if (pitch <= 0) pitch = 640;
 
-    for (int y = 0; y < height; y++) {
-        const uint8_t *src = wscreen + y * pitch;
-        uint32_t *dst = g_frame_argb_buf + y * width;
-        for (int x = 0; x < width; x++) {
+    int active_w = (int)DK_MEM_U16(0x0019cba4);
+    int active_h = (int)DK_MEM_U16(0x0019cba2);
+    if (active_w <= 0 || active_w > 640) active_w = (width > 0 && width <= 640) ? width : 640;
+    if (active_h <= 0 || active_h > 480) active_h = (height > 0 && height <= 480) ? height : 480;
+
+    /* Detect true rendered bounds: check if content extends beyond 320x200 */
+    int render_w = 320;
+    int render_h = 200;
+    if (active_w >= 640 && pitch >= 640) {
+        int non_zero_count = 0;
+        for (int y = 50; y < 150; y += 10) {
+            const uint8_t *row = wscreen + y * pitch;
+            for (int x = 340; x < 620; x += 10) {
+                if (row[x] != 0) non_zero_count++;
+            }
+        }
+        if (non_zero_count > 10) {
+            render_w = 640;
+            render_h = (active_h >= 400) ? active_h : 400;
+        }
+    }
+
+    static int print_count = 0;
+    if (print_count++ < 5 || print_count % 30 == 0) {
+        printf("[Present] width=%d, height=%d, active=%dx%d, render=%dx%d, pitch=%d\n",
+               width, height, active_w, active_h, render_w, render_h, pitch);
+        fflush(stdout);
+    }
+
+    /* Detect vertical content start offset in wscreen (e.g. 40-line centering offset) */
+    int start_y = 0;
+    while (start_y < 80) {
+        const uint8_t *row = wscreen + start_y * pitch;
+        int non_zero = 0;
+        for (int x = 0; x < 320; x += 16) {
+            if (row[x] != 0) non_zero++;
+        }
+        if (non_zero >= 3) break;
+        start_y++;
+    }
+    if (start_y >= 80) start_y = 0;
+
+    for (int y = 0; y < render_h; y++) {
+        int sy = start_y + y;
+        if (sy >= 480) sy = 479;
+        const uint8_t *src = wscreen + sy * pitch;
+        uint32_t *dst = g_frame_argb_buf + y * render_w;
+        for (int x = 0; x < render_w; x++) {
             dst[x] = g_argb_palette[src[x]];
         }
+    }
+
+    if (g_upscale_1080p_enabled) {
+        render_1080p_frame(render_w, render_h);
     }
 
     g_swap_counter++;
     if (g_dump_dir[0] != '\0' && (g_swap_counter == 1 || g_swap_counter == 5 || g_swap_counter % 20 == 0 || g_swap_counter == g_max_frames)) {
         char bmp_path[1200];
-        snprintf(bmp_path, sizeof(bmp_path), "%s/frame_%04d_%dx%d.bmp", g_dump_dir, g_swap_counter, width, height);
-        save_bmp_frame(bmp_path, g_frame_argb_buf, width, height);
-        printf("[Runtime] Saved rendered frame #%d (%dx%d) -> %s\n", g_swap_counter, width, height, bmp_path);
+        if (g_upscale_1080p_enabled) {
+            snprintf(bmp_path, sizeof(bmp_path), "%s/frame_%04d_1080p.bmp", g_dump_dir, g_swap_counter);
+            save_bmp_frame(bmp_path, g_backbuffer_1080p, CANVAS_1080P_WIDTH, CANVAS_1080P_HEIGHT);
+            printf("[Runtime] Saved 1080p rendered frame #%d (%dx%d) -> %s\n", g_swap_counter, CANVAS_1080P_WIDTH, CANVAS_1080P_HEIGHT, bmp_path);
+        } else {
+            snprintf(bmp_path, sizeof(bmp_path), "%s/frame_%04d_%dx%d.bmp", g_dump_dir, g_swap_counter, width, height);
+            save_bmp_frame(bmp_path, g_frame_argb_buf, width, height);
+            printf("[Runtime] Saved rendered frame #%d (%dx%d) -> %s\n", g_swap_counter, width, height, bmp_path);
+        }
         fflush(stdout);
     }
 
@@ -549,7 +828,7 @@ static void platform_present_frame(int width, int height) {
     }
 
     if (!g_headless_mode && (g_swap_counter == 1 || g_swap_counter % 300 == 0)) {
-        printf("[Runtime] Interactive running: Frame #%d (%dx%d)\n", g_swap_counter, width, height);
+        printf("[Runtime] Interactive running: Frame #%d (%dx%d -> 1080p)\n", g_swap_counter, width, height);
         fflush(stdout);
     }
 
@@ -557,10 +836,12 @@ static void platform_present_frame(int width, int height) {
     if (!g_headless_mode) {
         if (!g_sdl_window) {
             if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) == 0) {
+                int win_w = g_upscale_1080p_enabled ? 1280 : 960;
+                int win_h = g_upscale_1080p_enabled ? 720 : 720;
                 g_sdl_window = SDL_CreateWindow(
-                    "Dungeon Keeper (Reconstructed Native Runtime)",
+                    "Dungeon Keeper (Reconstructed Native Runtime - 1080p)",
                     SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                    960, 720, SDL_WINDOW_RESIZABLE | SDL_WINDOW_SHOWN
+                    win_w, win_h, SDL_WINDOW_RESIZABLE | SDL_WINDOW_SHOWN
                 );
                 if (g_sdl_window) {
                     g_sdl_renderer = SDL_CreateRenderer(g_sdl_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
@@ -572,13 +853,17 @@ static void platform_present_frame(int width, int height) {
             }
         }
         if (g_sdl_renderer) {
-            if (!g_sdl_texture || g_tex_w != width || g_tex_h != height) {
+            int out_w = g_upscale_1080p_enabled ? CANVAS_1080P_WIDTH : width;
+            int out_h = g_upscale_1080p_enabled ? CANVAS_1080P_HEIGHT : height;
+            const uint32_t *out_pixels = g_upscale_1080p_enabled ? g_backbuffer_1080p : g_frame_argb_buf;
+
+            if (!g_sdl_texture || g_tex_w != out_w || g_tex_h != out_h) {
                 if (g_sdl_texture) SDL_DestroyTexture(g_sdl_texture);
-                g_sdl_texture = SDL_CreateTexture(g_sdl_renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
-                g_tex_w = width;
-                g_tex_h = height;
+                g_sdl_texture = SDL_CreateTexture(g_sdl_renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, out_w, out_h);
+                g_tex_w = out_w;
+                g_tex_h = out_h;
             }
-            SDL_UpdateTexture(g_sdl_texture, NULL, g_frame_argb_buf, width * 4);
+            SDL_UpdateTexture(g_sdl_texture, NULL, out_pixels, out_w * 4);
             SDL_RenderClear(g_sdl_renderer);
             SDL_RenderCopy(g_sdl_renderer, g_sdl_texture, NULL, NULL);
             SDL_RenderPresent(g_sdl_renderer);
@@ -594,14 +879,32 @@ static void platform_present_frame(int width, int height) {
             wc.lpszClassName = "DKReconstructedWnd";
             wc.hCursor       = LoadCursor(NULL, IDC_ARROW);
             RegisterClassA(&wc);
-            RECT rc = {0, 0, 960, 720};
+
+            /* Default window size: 1600x900 (or 1920x1080 if screen permits) */
+            int screen_w = GetSystemMetrics(SM_CXSCREEN);
+            int screen_h = GetSystemMetrics(SM_CYSCREEN);
+            int win_w = 1600;
+            int win_h = 900;
+            if (screen_w < 1600 || screen_h < 900) {
+                win_w = 1280;
+                win_h = 720;
+            }
+
+            RECT rc = {0, 0, win_w, win_h};
             AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
+            int actual_w = rc.right - rc.left;
+            int actual_h = rc.bottom - rc.top;
+            int pos_x = (screen_w - actual_w) / 2;
+            int pos_y = (screen_h - actual_h) / 2;
+            if (pos_x < 0) pos_x = 0;
+            if (pos_y < 0) pos_y = 0;
+
             g_hwnd = CreateWindowA(
                 "DKReconstructedWnd",
-                "Dungeon Keeper (Reconstructed Native Runtime)",
+                "Dungeon Keeper (Reconstructed Native Runtime - 1080p HD)",
                 WS_OVERLAPPEDWINDOW | WS_VISIBLE,
-                CW_USEDEFAULT, CW_USEDEFAULT,
-                rc.right - rc.left, rc.bottom - rc.top,
+                pos_x, pos_y,
+                actual_w, actual_h,
                 NULL, NULL, wc.hInstance, NULL
             );
             ShowCursor(FALSE);
@@ -610,20 +913,40 @@ static void platform_present_frame(int width, int height) {
             HDC hdc = GetDC(g_hwnd);
             RECT rc;
             GetClientRect(g_hwnd, &rc);
-            BITMAPINFO bmi;
-            memset(&bmi, 0, sizeof(bmi));
-            bmi.bmiHeader.biSize        = sizeof(BITMAPINFOHEADER);
-            bmi.bmiHeader.biWidth       = width;
-            bmi.bmiHeader.biHeight      = -height;
-            bmi.bmiHeader.biPlanes      = 1;
-            bmi.bmiHeader.biBitCount    = 32;
-            bmi.bmiHeader.biCompression = BI_RGB;
-            StretchDIBits(
-                hdc,
-                0, 0, rc.right - rc.left, rc.bottom - rc.top,
-                0, 0, width, height,
-                g_frame_argb_buf, &bmi, DIB_RGB_COLORS, SRCCOPY
-            );
+            int cw = rc.right - rc.left;
+            int ch = rc.bottom - rc.top;
+
+            if (g_upscale_1080p_enabled) {
+                BITMAPINFO bmi;
+                memset(&bmi, 0, sizeof(bmi));
+                bmi.bmiHeader.biSize        = sizeof(BITMAPINFOHEADER);
+                bmi.bmiHeader.biWidth       = CANVAS_1080P_WIDTH;
+                bmi.bmiHeader.biHeight      = -CANVAS_1080P_HEIGHT;
+                bmi.bmiHeader.biPlanes      = 1;
+                bmi.bmiHeader.biBitCount    = 32;
+                bmi.bmiHeader.biCompression = BI_RGB;
+                StretchDIBits(
+                    hdc,
+                    0, 0, cw, ch,
+                    0, 0, CANVAS_1080P_WIDTH, CANVAS_1080P_HEIGHT,
+                    g_backbuffer_1080p, &bmi, DIB_RGB_COLORS, SRCCOPY
+                );
+            } else {
+                BITMAPINFO bmi;
+                memset(&bmi, 0, sizeof(bmi));
+                bmi.bmiHeader.biSize        = sizeof(BITMAPINFOHEADER);
+                bmi.bmiHeader.biWidth       = width;
+                bmi.bmiHeader.biHeight      = -height;
+                bmi.bmiHeader.biPlanes      = 1;
+                bmi.bmiHeader.biBitCount    = 32;
+                bmi.bmiHeader.biCompression = BI_RGB;
+                StretchDIBits(
+                    hdc,
+                    0, 0, cw, ch,
+                    0, 0, width, height,
+                    g_frame_argb_buf, &bmi, DIB_RGB_COLORS, SRCCOPY
+                );
+            }
             ReleaseDC(g_hwnd, hdc);
         }
     }
@@ -718,8 +1041,25 @@ static void resolve_dk_path(const char *orig_path, char *out_path, size_t out_sz
 /* 0x0ddaf0: LbErrorLog(const char *file=EAX, int line=EDX, const char *msg=EBX) */
 static uint32_t hook_LbErrorLog(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
     (void)ecx; (void)stack;
-    const char *file = (eax >= 0x10000 && eax < 0x3f0000) ? (const char *)(uintptr_t)eax : "unknown";
-    const char *msg  = (ebx >= 0x10000 && ebx < 0x3f0000) ? (const char *)(uintptr_t)ebx : "";
+    const char *file = (eax >= DK_VA(0x10000) && eax < DK_VA(0x400000)) ? (const char *)(uintptr_t)eax :
+                       ((eax >= 0x10000 && eax < 0x400000) ? (const char *)(uintptr_t)eax : "unknown");
+    const char *msg  = (ebx >= DK_VA(0x10000) && ebx < DK_VA(0x400000)) ? (const char *)(uintptr_t)ebx :
+                       ((ebx >= 0x10000 && ebx < 0x400000) ? (const char *)(uintptr_t)ebx : "");
+    static char last_msg_buf[128] = {0};
+    static int repeat_count = 0;
+    if (msg != NULL && msg[0] != '\0' && strncmp(msg, last_msg_buf, sizeof(last_msg_buf)) == 0) {
+        repeat_count++;
+        if (repeat_count == 5) {
+            printf("[LbErrorLog] (suppressing repeated error: '%s')\n", last_msg_buf);
+            fflush(stdout);
+        }
+        if (repeat_count >= 5) {
+            return 1;
+        }
+    } else {
+        if (msg) snprintf(last_msg_buf, sizeof(last_msg_buf), "%s", msg);
+        repeat_count = 0;
+    }
     printf("[LbErrorLog] %s:%u: %s\n", file, edx, msg);
     fflush(stdout);
     return 1;
@@ -749,6 +1089,13 @@ static uint32_t hook_LbMemoryCheck(uint32_t eax, uint32_t edx, uint32_t ebx, uin
 static uint32_t hook_LbMemoryAlloc(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
     (void)edx; (void)ebx; (void)ecx; (void)stack;
     if (eax == 0 || eax > 0x10000000u) return 0;
+    if (eax == 0x4b000u || eax == 0xfa00u || eax == 640 * 480) {
+        static int sc_idx = 0;
+        void *sc_bufs[3] = { g_persistent_wscreen, g_persistent_pscreen, g_persistent_bscreen };
+        void *ptr = sc_bufs[(sc_idx++) % 3];
+        memset(ptr, 0, 640 * 480 + 4096);
+        return (uint32_t)(uintptr_t)ptr;
+    }
     void *ptr = calloc(1, eax + 64);
     return (uint32_t)(uintptr_t)ptr;
 }
@@ -756,6 +1103,11 @@ static uint32_t hook_LbMemoryAlloc(uint32_t eax, uint32_t edx, uint32_t ebx, uin
 /* 0x0e94b0 / 0x0f4d9b: LbMemoryFree / watcom_free (ptr=EAX) */
 static uint32_t hook_LbMemoryFree(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
     (void)edx; (void)ebx; (void)ecx; (void)stack;
+    if (eax == (uint32_t)(uintptr_t)g_persistent_wscreen ||
+        eax == (uint32_t)(uintptr_t)g_persistent_pscreen ||
+        eax == (uint32_t)(uintptr_t)g_persistent_bscreen) {
+        return 1;
+    }
     if (eax >= 0x00400000u) {
         free((void *)(uintptr_t)eax);
     }
@@ -909,8 +1261,9 @@ static uint32_t hook_LbFileFindEnd(uint32_t eax, uint32_t edx, uint32_t ebx, uin
 
 /* 0x0e6a30: LbScreenIsModeAvailable(int mode=EAX) */
 static uint32_t hook_LbScreenIsModeAvailable(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
-    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    (void)edx; (void)ebx; (void)ecx; (void)stack;
     DK_MEM_U32(VA_LB_SCREEN_INITIALIZED) = 1;
+    if (eax == 10) return 0; /* Reject legacy Mode 10 (640x400) so engine chooses Mode 13 (640x480) */
     return 1;
 }
 
@@ -960,6 +1313,14 @@ static uint32_t hook_LbPaletteGet(uint32_t eax, uint32_t edx, uint32_t ebx, uint
     return 1;
 }
 
+/* 0x0006b4c7: setup_show_bullfrog_legal_splash */
+static uint32_t hook_setup_show_bullfrog_legal_splash(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    printf("[Splash] Skipping legal splash & intro cutscene; maintaining high-res Mode 13\n");
+    fflush(stdout);
+    return 1;
+}
+
 /* 0x0e7750: LbScreenSetup(__cdecl: mode=stack[0], width=stack[1], height=stack[2], palette=stack[3]) */
 static uint32_t hook_LbScreenSetup(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
     (void)eax; (void)edx; (void)ebx; (void)ecx;
@@ -967,22 +1328,23 @@ static uint32_t hook_LbScreenSetup(uint32_t eax, uint32_t edx, uint32_t ebx, uin
     int32_t  width   = (int32_t)stack[1];
     int32_t  height  = (int32_t)stack[2];
     uint32_t palette = stack[3];
+    uint32_t caller  = stack ? stack[-1] : 0;
+
+    printf("[LbScreenSetup] Caller=0x%08x (orig=0x%08x), Mode=%u, W=%d, H=%d\n",
+           caller, caller - g_rebase_delta, mode, width, height);
+    fflush(stdout);
 
     /* Lookup mode dimensions from mode table @ 0x00194fe0 if needed */
     uint16_t mode_w = DK_MEM_U16(0x00194fe0 + mode * 0x26);
     uint16_t mode_h = DK_MEM_U16(0x00194fe2 + mode * 0x26);
-    if (mode_w == 0) mode_w = (uint16_t)(width > 0 ? width : 640);
-    if (mode_h == 0) mode_h = (uint16_t)(height > 0 ? height : 480);
+    if (mode_w == 0) mode_w = (uint16_t)(width > 0 ? width : (mode == 1 ? 320 : 640));
+    if (mode_h == 0) mode_h = (uint16_t)(height > 0 ? height : (mode == 1 ? 200 : 480));
     if (width <= 0)  width  = mode_w;
     if (height <= 0) height = mode_h;
 
-    /* Ensure WScreen buffer is allocated */
-    if (DK_MEM_U32(VA_LB_WSCREEN_PTR) == 0) {
-        void *wbuf = calloc(1, 640 * 480 + 4096);
-        DK_MEM_U32(VA_LB_WSCREEN_PTR) = (uint32_t)(uintptr_t)wbuf;
-    }
-
-    DK_MEM_U32(VA_LB_PHYSICAL_SCREEN) = 0x000a0000u;
+    /* Assign persistent screen buffers */
+    DK_MEM_U32(VA_LB_WSCREEN_PTR)     = (uint32_t)(uintptr_t)g_persistent_wscreen;
+    DK_MEM_U32(VA_LB_PHYSICAL_SCREEN) = (uint32_t)(uintptr_t)g_persistent_pscreen;
     DK_MEM_U16(VA_LB_DRAW_FLAGS)      = 0;
     DK_MEM_S32(VA_LB_PHYS_WIDTH)      = mode_w;
     DK_MEM_S32(VA_LB_PHYS_HEIGHT)     = mode_h;
@@ -2199,6 +2561,7 @@ int main(int argc, char **argv) {
     dk_argv[dk_argc++] = (char *)"C:\\KEEPER\\KEEPER.EXE";
 
     int   g_start_level = 0;
+    bool  g_dump_tmap   = false;
 
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "--game-dir") == 0 && i + 1 < argc) {
@@ -2220,7 +2583,12 @@ int main(int argc, char **argv) {
             }
             mkdir(g_dump_dir, 0775);
 #else
-            snprintf(g_dump_dir, sizeof(g_dump_dir), "%s", arg_dir);
+            char full[MAX_PATH];
+            if (_fullpath(full, arg_dir, sizeof(full)) != NULL) {
+                snprintf(g_dump_dir, sizeof(g_dump_dir), "%s", full);
+            } else {
+                snprintf(g_dump_dir, sizeof(g_dump_dir), "%s", arg_dir);
+            }
             _mkdir(g_dump_dir);
 #endif
         } else if (strcmp(argv[i], "--max-frames") == 0 && i + 1 < argc) {
@@ -2229,10 +2597,16 @@ int main(int argc, char **argv) {
             g_start_level = atoi(argv[++i]);
         } else if (strcmp(argv[i], "--headless") == 0) {
             g_headless_mode = true;
+        } else if (strcmp(argv[i], "--no-1080p") == 0) {
+            g_upscale_1080p_enabled = false;
+        } else if (strcmp(argv[i], "--xbrz") == 0 && i + 1 < argc) {
+            g_xbrz_factor = atoi(argv[++i]);
         } else if (strcmp(argv[i], "--verbose-io") == 0) {
             g_verbose_io = true;
         } else if (strcmp(argv[i], "--nosound") == 0 || strcmp(argv[i], "-nosound") == 0) {
             g_nosound_requested = true;
+        } else if (strcmp(argv[i], "--dump-tmap") == 0) {
+            g_dump_tmap = true;
         } else if (argv[i][0] == '-' && argv[i][1] != '-' && dk_argc < 30) {
             dk_argv[dk_argc++] = argv[i];
         }
@@ -2431,6 +2805,14 @@ int main(int argc, char **argv) {
         DK_MEM_U32(0x00063637)  = (uint32_t)g_start_level;
     }
 
+    /* Force high-resolution Mode 13 (640x480) across engine configuration */
+    DK_MEM_U32(0x00334065) = 0x20;         /* VA_LB_PHYSICAL_RAM_MB = 32 MB */
+    DK_MEM_U32(0x002ee8dc) = 0x0D;         /* Preferred screen mode: 0x0D (640x480) */
+    DK_MEM_U16(VA_LB_SCREEN_MODE) = 0x0D;  /* Active screen mode: 0x0D (640x480) */
+
+    /* Hook 0x0006b4c7: setup_show_bullfrog_legal_splash - skip intro screens & maintain high-res Mode 13 */
+    dk_install_hook(0x0006b4c7, hook_setup_show_bullfrog_legal_splash);
+
     /* Register recompiled C++ functions from runtime/recompiled_modules.cpp */
     dk_register_recompiled_cpp_functions();
 
@@ -2438,6 +2820,29 @@ int main(int argc, char **argv) {
     DK_MEM_U8(VA_LB_NOSOUND_FLAG) = g_nosound_requested ? 1 : 0;
     if (chdir(g_game_dir) != 0) {
         perror("chdir to game_dir failed");
+    }
+
+    if (g_dump_tmap) {
+        printf("[TMAP] Extracting uncompressed 557,056-byte TMAPA archives...\n");
+        fflush(stdout);
+        uint8_t *tbuf = (uint8_t *)calloc(1, 1024 * 1024);
+        typedef uint32_t (*fn_load_at_t)(const char *path, void *dst);
+        fn_load_at_t load_at = (fn_load_at_t)(uintptr_t)DK_VA(0x000e984c);
+        for (int t = 0; t < 8; t++) {
+            char in_path[256], out_path[256];
+            snprintf(in_path, sizeof(in_path), "DATA/backup_tmap/TMAPA%03d.DAT", t);
+            snprintf(out_path, sizeof(out_path), "DATA/TMAPA%03d_raw.DAT", t);
+            uint32_t len = load_at(in_path, tbuf);
+            FILE *f = fopen(out_path, "wb");
+            if (f) {
+                fwrite(tbuf, 1, 557056, f);
+                fclose(f);
+                printf("[TMAP] %s (%u b) -> %s (557,056 b)\n", in_path, len, out_path);
+                fflush(stdout);
+            }
+        }
+        free(tbuf);
+        return 0;
     }
 
     uint32_t lbmain_va = DK_VA(0x000633c4);
