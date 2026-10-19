@@ -23,6 +23,7 @@
 
 #ifdef _WIN32
 #include <windows.h>
+#include <mmsystem.h>
 #include <io.h>
 #include <direct.h>
 #else
@@ -32,6 +33,7 @@
 #include <sys/time.h>
 #include <signal.h>
 #include <ucontext.h>
+#include <pthread.h>
 #endif
 
 #ifdef USE_SDL2
@@ -1143,11 +1145,724 @@ static uint32_t hook_ret_one(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t 
     return 1;
 }
 
-/* 0x000fee88: AIL_startup -> prevent DOS hardware interrupt probing */
+/* ============================================================================
+ * Native Audio Mixer & Miles Sound System (AIL) Emulation Layer
+ * ============================================================================ */
+#define STB_VORBIS_HEADER_ONLY
+#include "stb_vorbis.c"
+
+#define MAX_AUDIO_VOICES 48
+#define AUDIO_SAMPLE_RATE 44100
+
+static stb_vorbis *g_music_vorbis = NULL;
+static uint32_t g_dummy_redbook[64];
+static uint32_t g_cd_current_track = 2;
+static uint32_t g_cd_status = 1; /* 1 = REDBOOK_STOPPED, 2 = REDBOOK_PLAYING */
+static int32_t  g_cd_volume = 127;
+
+typedef struct {
+    void *driver;             /* 0x00 */
+    uint32_t system_data;     /* 0x04 */
+    int32_t  status;          /* 0x08: 1=SMP_FREE, 2=SMP_DONE/STOPPED, 4=SMP_PLAYING */
+    const uint8_t *pcm;       /* 0x0c: pointer to raw PCM bytes */
+    uint32_t pos;             /* 0x10: current playback byte offset */
+    uint32_t len;             /* 0x14: length in bytes */
+    uint32_t done;            /* 0x18: bytes played */
+    uint8_t  _pad1[0x38 - 0x1c];
+    int32_t  loop_count;      /* 0x38: 1 = play once, 0 = loop forever */
+    uint8_t  _pad2[0x44 - 0x3c];
+    int32_t  format;          /* 0x44: 0 = mono 8-bit unsigned, 1 = mono 16-bit signed, 2 = stereo 8, 3 = stereo 16 */
+    uint32_t flags;           /* 0x48 */
+    int32_t  playback_rate;   /* 0x4c: sample rate, e.g. 22050, 11025 */
+    int32_t  volume;          /* 0x50: 0..127 */
+    int32_t  pan;             /* 0x54: 0..127 (64 = center) */
+    double   pos_frac;        /* 0x58: fractional sample position accumulator */
+    uint8_t  _reserved[0x8a8 - 0x60]; /* Total size 0x8a8 bytes matching AIL 3.0 _SAMPLE */
+} native_voice_t;
+
+static native_voice_t g_voices[MAX_AUDIO_VOICES];
+static bool g_audio_initialized = false;
+static bool g_nosound_requested = false;
+
+#ifdef _WIN32
+static CRITICAL_SECTION g_audio_cs;
+#define AUDIO_LOCK()   EnterCriticalSection(&g_audio_cs)
+#define AUDIO_UNLOCK() LeaveCriticalSection(&g_audio_cs)
+
+#define AUDIO_NUM_BUFFERS 4
+#define AUDIO_BUFFER_FRAMES 1024
+
+static HWAVEOUT g_hWaveOut = NULL;
+static WAVEHDR  g_wave_hdrs[AUDIO_NUM_BUFFERS];
+static int16_t  g_audio_pcm[AUDIO_NUM_BUFFERS][AUDIO_BUFFER_FRAMES * 2];
+static HANDLE   g_audio_thread = NULL;
+static volatile bool g_audio_running = false;
+#else
+static pthread_mutex_t g_audio_mutex = PTHREAD_MUTEX_INITIALIZER;
+#define AUDIO_LOCK()   pthread_mutex_lock(&g_audio_mutex)
+#define AUDIO_UNLOCK() pthread_mutex_unlock(&g_audio_mutex)
+#endif
+
+static bool native_parse_wav(const uint8_t *data, native_voice_t *v) {
+    if (!data) return false;
+    if (memcmp(data, "RIFF", 4) != 0 || memcmp(data + 8, "WAVE", 4) != 0) return false;
+
+    uint32_t riff_len = *(const uint32_t *)(data + 4);
+    if (riff_len < 4 || riff_len > 0x10000000) return false;
+    uint32_t total_size = riff_len + 8;
+
+    uint32_t offset = 12;
+    bool found_fmt = false, found_data = false;
+
+    while (offset + 8 <= total_size) {
+        const char *chunk_id = (const char *)(data + offset);
+        uint32_t chunk_size = *(const uint32_t *)(data + offset + 4);
+        const uint8_t *chunk_data = data + offset + 8;
+
+        if (offset + 8 + chunk_size > total_size) {
+            chunk_size = total_size - (offset + 8);
+        }
+
+        if (memcmp(chunk_id, "fmt ", 4) == 0 && chunk_size >= 14) {
+            uint16_t audio_format = *(const uint16_t *)(chunk_data + 0);
+            uint16_t channels = *(const uint16_t *)(chunk_data + 2);
+            uint32_t sample_rate = *(const uint32_t *)(chunk_data + 4);
+            uint16_t bits = (chunk_size >= 16) ? *(const uint16_t *)(chunk_data + 14) : 8;
+
+            if (audio_format == 1) { /* PCM */
+                v->playback_rate = sample_rate;
+                if (channels == 1) {
+                    v->format = (bits == 16) ? 1 : 0;
+                } else {
+                    v->format = (bits == 16) ? 3 : 2;
+                }
+                found_fmt = true;
+            }
+        } else if (memcmp(chunk_id, "data", 4) == 0) {
+            v->pcm = chunk_data;
+            v->len = chunk_size;
+            found_data = true;
+        }
+
+        uint32_t step = 8 + ((chunk_size + 1) & ~1);
+        if (step == 0 || offset + step <= offset) break;
+        offset += step;
+    }
+    return found_fmt && found_data;
+}
+
+static bool native_parse_voc(const uint8_t *data, native_voice_t *v) {
+    if (!data) return false;
+    if (memcmp(data, "Creative Voice File", 19) != 0) return false;
+
+    uint16_t header_len = *(const uint16_t *)(data + 20);
+    uint32_t offset = header_len;
+
+    while (offset < 0x2000000) {
+        uint8_t block_type = data[offset];
+        if (block_type == 0) break;
+
+        uint32_t block_len = (uint32_t)data[offset + 1] |
+                            ((uint32_t)data[offset + 2] << 8) |
+                            ((uint32_t)data[offset + 3] << 16);
+        const uint8_t *block_data = data + offset + 4;
+
+        if (block_type == 1 && block_len >= 2) {
+            uint8_t tc = block_data[0];
+            uint8_t pack = block_data[1];
+            if (pack == 0) {
+                v->playback_rate = (256 > (uint32_t)tc) ? (1000000 / (256 - (uint32_t)tc)) : 11025;
+                v->format = 0; /* mono 8-bit */
+                v->pcm = block_data + 2;
+                v->len = block_len - 2;
+                return true;
+            }
+        }
+        uint32_t step = 4 + block_len;
+        if (step == 0) break;
+        offset += step;
+    }
+    return false;
+}
+
+static bool native_parse_sample_file(const uint8_t *data, native_voice_t *v) {
+    if (!data) return false;
+    if (native_parse_wav(data, v)) return true;
+    if (native_parse_voc(data, v)) return true;
+    return false;
+}
+
+static void native_mix_audio(int16_t *out_stereo, int num_frames) {
+    static int32_t mix_buf_l[1024];
+    static int32_t mix_buf_r[1024];
+
+    if (num_frames > 1024) num_frames = 1024;
+    memset(mix_buf_l, 0, num_frames * sizeof(int32_t));
+    memset(mix_buf_r, 0, num_frames * sizeof(int32_t));
+
+    AUDIO_LOCK();
+    for (int vi = 0; vi < MAX_AUDIO_VOICES; vi++) {
+        native_voice_t *v = &g_voices[vi];
+        if (v->status != 4 || !v->pcm || v->len == 0 || v->playback_rate <= 0) {
+            continue;
+        }
+
+        double step = (double)v->playback_rate / (double)AUDIO_SAMPLE_RATE;
+        int32_t vol = (v->volume < 0) ? 0 : (v->volume > 127 ? 127 : v->volume);
+        int32_t pan = (v->pan < 0) ? 0 : (v->pan > 127 ? 127 : v->pan);
+
+        int32_t left_gain  = (vol * (127 - pan)) / 64;
+        int32_t right_gain = (vol * pan) / 64;
+        if (left_gain > 127) left_gain = 127;
+        if (right_gain > 127) right_gain = 127;
+
+        for (int i = 0; i < num_frames; i++) {
+            int16_t sample_val = 0;
+
+            if (v->format == 1) { /* Mono 16-bit signed */
+                uint32_t byte_idx = v->pos & ~1;
+                if (byte_idx + 2 > v->len) {
+                    if (v->loop_count == 0 || v->loop_count > 1) {
+                        if (v->loop_count > 1) v->loop_count--;
+                        v->pos = 0;
+                        v->pos_frac = 0.0;
+                        byte_idx = 0;
+                    } else {
+                        v->status = 2; /* SMP_STOPPED */
+                        break;
+                    }
+                }
+                sample_val = *(const int16_t *)(v->pcm + byte_idx);
+            } else if (v->format == 0) { /* Mono 8-bit unsigned */
+                if (v->pos >= v->len) {
+                    if (v->loop_count == 0 || v->loop_count > 1) {
+                        if (v->loop_count > 1) v->loop_count--;
+                        v->pos = 0;
+                        v->pos_frac = 0.0;
+                    } else {
+                        v->status = 2; /* SMP_STOPPED */
+                        break;
+                    }
+                }
+                uint8_t u8 = v->pcm[v->pos];
+                sample_val = ((int16_t)u8 - 128) << 8;
+            } else {
+                v->status = 2;
+                break;
+            }
+
+            mix_buf_l[i] += (sample_val * left_gain) >> 7;
+            mix_buf_r[i] += (sample_val * right_gain) >> 7;
+
+            v->pos_frac += step;
+            uint32_t advance = (uint32_t)v->pos_frac;
+            v->pos += (v->format == 1) ? (advance * 2) : advance;
+            v->pos_frac -= advance;
+        }
+    }
+
+    if (g_music_vorbis && g_cd_status == 2) {
+        static int16_t vorbis_pcm[1024 * 2];
+        int frames_to_read = num_frames;
+        int frames_read = 0;
+        while (frames_to_read > 0) {
+            int n = stb_vorbis_get_samples_short_interleaved(
+                g_music_vorbis, 2, vorbis_pcm + (frames_read * 2), frames_to_read * 2);
+            if (n <= 0) {
+                /* Loop track seamlessly */
+                stb_vorbis_seek_start(g_music_vorbis);
+                n = stb_vorbis_get_samples_short_interleaved(
+                    g_music_vorbis, 2, vorbis_pcm + (frames_read * 2), frames_to_read * 2);
+                if (n <= 0) break;
+            }
+            frames_read += n;
+            frames_to_read -= n;
+        }
+
+        int32_t music_vol = (g_cd_volume < 0) ? 0 : (g_cd_volume > 127 ? 127 : g_cd_volume);
+        for (int i = 0; i < frames_read; i++) {
+            mix_buf_l[i] += (vorbis_pcm[i * 2 + 0] * music_vol) >> 7;
+            mix_buf_r[i] += (vorbis_pcm[i * 2 + 1] * music_vol) >> 7;
+        }
+    }
+    AUDIO_UNLOCK();
+
+    for (int i = 0; i < num_frames; i++) {
+        int32_t l = mix_buf_l[i];
+        int32_t r = mix_buf_r[i];
+        if (l > 32767) l = 32767; else if (l < -32768) l = -32768;
+        if (r > 32767) r = 32767; else if (r < -32768) r = -32768;
+        out_stereo[i * 2 + 0] = (int16_t)l;
+        out_stereo[i * 2 + 1] = (int16_t)r;
+    }
+}
+
+#ifdef _WIN32
+static DWORD WINAPI win32_audio_worker(LPVOID param) {
+    (void)param;
+    while (g_audio_running) {
+        bool wrote = false;
+        for (int i = 0; i < AUDIO_NUM_BUFFERS; i++) {
+            if (g_wave_hdrs[i].dwFlags & WHDR_DONE) {
+                native_mix_audio(g_audio_pcm[i], AUDIO_BUFFER_FRAMES);
+                waveOutWrite(g_hWaveOut, &g_wave_hdrs[i], sizeof(WAVEHDR));
+                wrote = true;
+            }
+        }
+        if (!wrote) {
+            Sleep(5);
+        }
+    }
+    return 0;
+}
+
+static void native_audio_init_win32(void) {
+    static bool cs_inited = false;
+    if (!cs_inited) {
+        InitializeCriticalSection(&g_audio_cs);
+        cs_inited = true;
+    }
+
+    WAVEFORMATEX wfx;
+    memset(&wfx, 0, sizeof(wfx));
+    wfx.wFormatTag = WAVE_FORMAT_PCM;
+    wfx.nChannels = 2;
+    wfx.nSamplesPerSec = AUDIO_SAMPLE_RATE;
+    wfx.wBitsPerSample = 16;
+    wfx.nBlockAlign = wfx.nChannels * (wfx.wBitsPerSample / 8); /* 4 */
+    wfx.nAvgBytesPerSec = wfx.nSamplesPerSec * wfx.nBlockAlign; /* 88200 */
+    wfx.cbSize = 0;
+
+    MMRESULT res = waveOutOpen(&g_hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
+    if (res != MMSYSERR_NOERROR) {
+        fprintf(stderr, "[audio] waveOutOpen failed: %u\n", (unsigned)res);
+        return;
+    }
+
+    for (int i = 0; i < AUDIO_NUM_BUFFERS; i++) {
+        memset(&g_wave_hdrs[i], 0, sizeof(WAVEHDR));
+        g_wave_hdrs[i].lpData = (LPSTR)g_audio_pcm[i];
+        g_wave_hdrs[i].dwBufferLength = AUDIO_BUFFER_FRAMES * 2 * sizeof(int16_t);
+        waveOutPrepareHeader(g_hWaveOut, &g_wave_hdrs[i], sizeof(WAVEHDR));
+        memset(g_audio_pcm[i], 0, g_wave_hdrs[i].dwBufferLength);
+        waveOutWrite(g_hWaveOut, &g_wave_hdrs[i], sizeof(WAVEHDR));
+    }
+
+    g_audio_running = true;
+    g_audio_thread = CreateThread(NULL, 0, win32_audio_worker, NULL, 0, NULL);
+    fprintf(stderr, "[audio] Native Win32 waveOut audio mixer initialized (22050Hz stereo 16-bit)\n");
+}
+#endif
+
+/* --- AIL Hook Handlers --- */
 static uint32_t hook_ail_startup(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
     (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
-    DK_MEM_U8(VA_LB_NOSOUND_FLAG) = 1;
+    return 0; /* AIL_startup success */
+}
+
+static uint32_t hook_ail_api_read_ini(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx;
+    void *ini_struct = (void *)stack[0];
+    const char *ini_filename = (const char *)stack[1];
+
+    if (ini_filename && (strstr(ini_filename, "DIG") != NULL || strstr(ini_filename, "dig") != NULL || strstr(ini_filename, "Dig") != NULL)) {
+        if (ini_struct) {
+            strcpy((char *)ini_struct + 0x80, "DirectSound / WaveOut");
+        }
+        return 1; /* Success */
+    }
+    return 0; /* MDI.INI not provided, game skips MIDI */
+}
+
+static uint32_t hook_ail_install_dig_ini(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx;
+    void **dig_driver = (void **)stack[0];
+    if (dig_driver) {
+        *dig_driver = (void *)0x12345678;
+    }
+#ifdef _WIN32
+    if (!g_audio_initialized) {
+        native_audio_init_win32();
+        g_audio_initialized = true;
+    }
+#endif
+    printf("[AIL] DIG.INI driver installed successfully (Native WinMM WaveOut)\n");
+    fflush(stdout);
+    return 0; /* DIG_OK */
+}
+
+static uint32_t hook_ail_install_dig_driver_file(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    return 0x12345678;
+}
+
+static uint32_t hook_ail_uninstall_dig_driver(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    return 0;
+}
+
+static uint32_t hook_ail_allocate_sample_handle(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx;
+    void *driver = (void *)stack[0];
+
+    AUDIO_LOCK();
+    native_voice_t *chosen = NULL;
+    for (int i = 0; i < MAX_AUDIO_VOICES; i++) {
+        if (g_voices[i].status == 1 || g_voices[i].status == 0) {
+            chosen = &g_voices[i];
+            break;
+        }
+    }
+    if (!chosen) {
+        for (int i = 0; i < MAX_AUDIO_VOICES; i++) {
+            if (g_voices[i].status == 2) {
+                chosen = &g_voices[i];
+                break;
+            }
+        }
+    }
+    if (chosen) {
+        memset(chosen, 0, sizeof(native_voice_t));
+        chosen->driver = driver;
+        chosen->status = 2; /* SMP_STOPPED */
+        chosen->format = 1; /* Mono 16-bit */
+        chosen->playback_rate = 22050;
+        chosen->volume = 127;
+        chosen->pan = 64;
+        chosen->loop_count = 1;
+    }
+    AUDIO_UNLOCK();
+
+    return (uint32_t)(uintptr_t)chosen;
+}
+
+static uint32_t hook_ail_release_sample_handle(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx;
+    native_voice_t *v = (native_voice_t *)stack[0];
+    if (v) {
+        AUDIO_LOCK();
+        v->status = 1; /* SMP_FREE */
+        v->pcm = NULL;
+        AUDIO_UNLOCK();
+    }
+    return 0;
+}
+
+static uint32_t hook_ail_init_sample(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx;
+    native_voice_t *v = (native_voice_t *)stack[0];
+    if (v) {
+        AUDIO_LOCK();
+        v->status = 2; /* SMP_STOPPED */
+        v->pos = 0;
+        v->pos_frac = 0.0;
+        v->loop_count = 1;
+        AUDIO_UNLOCK();
+    }
+    return 0;
+}
+
+static uint32_t hook_ail_set_sample_file(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx;
+    native_voice_t *v = (native_voice_t *)stack[0];
+    const void *file_data = (const void *)stack[1];
+    (void)stack[2];
+
+    if (v && file_data) {
+        AUDIO_LOCK();
+        native_parse_sample_file((const uint8_t *)file_data, v);
+        AUDIO_UNLOCK();
+    }
     return 1;
+}
+
+static uint32_t hook_ail_set_sample_address(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx;
+    native_voice_t *v = (native_voice_t *)stack[0];
+    const void *pcm = (const void *)stack[1];
+    uint32_t len = (uint32_t)stack[2];
+
+    if (v) {
+        AUDIO_LOCK();
+        v->pcm = (const uint8_t *)pcm;
+        v->len = len;
+        v->pos = 0;
+        v->pos_frac = 0.0;
+        AUDIO_UNLOCK();
+    }
+    return 0;
+}
+
+static uint32_t hook_ail_set_sample_type(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx;
+    native_voice_t *v = (native_voice_t *)stack[0];
+    int32_t format = (int32_t)stack[1];
+    uint32_t flags = (uint32_t)stack[2];
+
+    if (v) {
+        AUDIO_LOCK();
+        v->format = format;
+        v->flags = flags;
+        AUDIO_UNLOCK();
+    }
+    return 0;
+}
+
+static uint32_t hook_ail_start_sample(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx;
+    native_voice_t *v = (native_voice_t *)stack[0];
+
+    if (v) {
+        AUDIO_LOCK();
+        v->pos = 0;
+        v->pos_frac = 0.0;
+        v->status = 4; /* SMP_PLAYING */
+        AUDIO_UNLOCK();
+    }
+    return 0;
+}
+
+static uint32_t hook_ail_stop_sample(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx;
+    native_voice_t *v = (native_voice_t *)stack[0];
+
+    if (v) {
+        AUDIO_LOCK();
+        v->status = 2; /* SMP_STOPPED */
+        AUDIO_UNLOCK();
+    }
+    return 0;
+}
+
+static uint32_t hook_ail_resume_sample(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx;
+    native_voice_t *v = (native_voice_t *)stack[0];
+
+    if (v) {
+        AUDIO_LOCK();
+        v->status = 4; /* SMP_PLAYING */
+        AUDIO_UNLOCK();
+    }
+    return 0;
+}
+
+static uint32_t hook_ail_set_sample_playback_rate(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx;
+    native_voice_t *v = (native_voice_t *)stack[0];
+    int32_t rate = (int32_t)stack[1];
+
+    if (v) {
+        AUDIO_LOCK();
+        v->playback_rate = rate;
+        AUDIO_UNLOCK();
+    }
+    return 0;
+}
+
+static uint32_t hook_ail_set_sample_volume(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx;
+    native_voice_t *v = (native_voice_t *)stack[0];
+    int32_t vol = (int32_t)stack[1];
+
+    if (v) {
+        AUDIO_LOCK();
+        v->volume = (vol < 0) ? 0 : (vol > 127 ? 127 : vol);
+        AUDIO_UNLOCK();
+    }
+    return 0;
+}
+
+static uint32_t hook_ail_set_sample_pan(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx;
+    native_voice_t *v = (native_voice_t *)stack[0];
+    int32_t pan = (int32_t)stack[1];
+
+    if (v) {
+        AUDIO_LOCK();
+        v->pan = (pan < 0) ? 0 : (pan > 127 ? 127 : pan);
+        AUDIO_UNLOCK();
+    }
+    return 0;
+}
+
+static uint32_t hook_ail_set_sample_loop_count(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx;
+    native_voice_t *v = (native_voice_t *)stack[0];
+    int32_t loop_count = (int32_t)stack[1];
+
+    if (v) {
+        AUDIO_LOCK();
+        v->loop_count = loop_count;
+        AUDIO_UNLOCK();
+    }
+    return 0;
+}
+
+static uint32_t hook_ail_sample_status(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx;
+    native_voice_t *v = (native_voice_t *)stack[0];
+    if (!v) return 2; /* SMP_STOPPED */
+    return (uint32_t)v->status;
+}
+
+static uint32_t hook_ail_set_digital_master_volume(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    return 0;
+}
+
+static uint32_t hook_ail_digital_master_volume(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    return 127;
+}
+
+static uint32_t hook_ail_minimum_sample_buffer_size(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    return 1024;
+}
+
+static uint32_t hook_ail_register_callback(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    return 0;
+}
+
+static uint32_t hook_ail_set_preference(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    return 0;
+}
+
+
+static uint32_t hook_ail_redbook_open(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    g_dummy_redbook[0] = (uint32_t)(uintptr_t)g_dummy_redbook;
+    printf("[Redbook] Device opened\n");
+    fflush(stdout);
+    return (uint32_t)(uintptr_t)g_dummy_redbook;
+}
+
+static uint32_t hook_ail_redbook_close(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    printf("[Redbook] Device closed\n");
+    fflush(stdout);
+    return 0;
+}
+
+static uint32_t hook_ail_redbook_status(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    return g_cd_status;
+}
+
+static uint32_t hook_ail_redbook_tracks(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    return 7; /* 1 data track + 6 audio tracks (keeper02..keeper07) */
+}
+
+static uint32_t hook_ail_redbook_track_info(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx;
+    uint32_t track = stack ? stack[1] : 0;
+    uint32_t *start_ms = stack ? (uint32_t *)stack[2] : NULL;
+    uint32_t *end_ms = stack ? (uint32_t *)stack[3] : NULL;
+    if (start_ms) *start_ms = (track > 0 ? track - 1 : 0) * 300000;
+    if (end_ms) *end_ms = (track > 0 ? track : 1) * 300000;
+    return 1;
+}
+
+static uint32_t hook_ail_redbook_track(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    return g_cd_current_track;
+}
+
+static uint32_t hook_ail_redbook_play(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx;
+    uint32_t start_ms = stack ? stack[1] : 0;
+    uint32_t end_ms = stack ? stack[2] : 0;
+    uint32_t track = (start_ms / 300000) + 1;
+    if (track < 2) track = 2;
+
+    AUDIO_LOCK();
+    if (g_music_vorbis) {
+        stb_vorbis_close(g_music_vorbis);
+        g_music_vorbis = NULL;
+    }
+    char ogg_path[512];
+    snprintf(ogg_path, sizeof(ogg_path), "%s/keeper%02u.ogg", g_game_dir, track);
+    int vorbis_err = 0;
+    g_music_vorbis = stb_vorbis_open_filename(ogg_path, &vorbis_err, NULL);
+    if (!g_music_vorbis) {
+        snprintf(ogg_path, sizeof(ogg_path), "keeper%02u.ogg", track);
+        g_music_vorbis = stb_vorbis_open_filename(ogg_path, &vorbis_err, NULL);
+    }
+    if (g_music_vorbis) {
+        printf("[Redbook] Playing OGG music '%s' (track %u, ms %u..%u)\n", ogg_path, track, start_ms, end_ms);
+    } else {
+        printf("[Redbook] Could not open OGG track '%s' (err=%d)\n", ogg_path, vorbis_err);
+    }
+    g_cd_current_track = track;
+    g_cd_status = 2; /* REDBOOK_PLAYING */
+    AUDIO_UNLOCK();
+    fflush(stdout);
+    return 1;
+}
+
+static uint32_t hook_ail_redbook_stop(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    AUDIO_LOCK();
+    if (g_music_vorbis) {
+        stb_vorbis_close(g_music_vorbis);
+        g_music_vorbis = NULL;
+    }
+    g_cd_status = 1; /* REDBOOK_STOPPED */
+    AUDIO_UNLOCK();
+    printf("[Redbook] Stop requested\n");
+    fflush(stdout);
+    return 0;
+}
+
+static uint32_t hook_ail_redbook_pause(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    g_cd_status = 3; /* REDBOOK_PAUSED */
+    return 0;
+}
+
+static uint32_t hook_ail_redbook_resume(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    g_cd_status = 2; /* REDBOOK_PLAYING */
+    return 0;
+}
+
+static uint32_t hook_ail_redbook_volume(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    return g_cd_volume;
+}
+
+static uint32_t hook_ail_redbook_set_volume(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx;
+    int32_t vol = stack ? (int32_t)stack[1] : 127;
+    g_cd_volume = (vol < 0) ? 0 : (vol > 127 ? 127 : vol);
+    return 0;
+}
+
+static uint32_t hook_ail_register_timer(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    return 1;
+}
+
+static uint32_t hook_ail_timer_stub(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    return 0;
+}
+
+static uint32_t hook_ail_mem_alloc_lock(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx;
+    uint32_t size = stack ? stack[0] : 0;
+    void *ptr = malloc(size ? size : 4);
+    return (uint32_t)(uintptr_t)ptr;
+}
+
+static uint32_t hook_ail_mem_free_lock(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx;
+    void *ptr = stack ? (void *)stack[0] : NULL;
+    if (ptr) free(ptr);
+    return 0;
 }
 
 /* 0x0efde0: play_smk(const char *fname=EAX, ...) */
@@ -1252,7 +1967,7 @@ static uint32_t hook_ret_zero(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t
     return 0;
 }
 
-/* 0x0f7786 / 0x0fed45: Safety net for any unhooked DOS int386 / int386x calls */
+/* 0x0f7786 / 0x0fed45 / 0x1101c7: Safety net for any unhooked DOS int386 / int386x calls */
 static uint32_t hook_int386_safety(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
     (void)ecx; (void)stack;
     printf("[int386] Intercepted DOS interrupt 0x%02x (inregs=0x%08x, outregs=0x%08x)\n", eax & 0xFF, edx, ebx);
@@ -1261,6 +1976,23 @@ static uint32_t hook_int386_safety(uint32_t eax, uint32_t edx, uint32_t ebx, uin
         memcpy((void *)(uintptr_t)ebx, (const void *)(uintptr_t)edx, 28);
     }
     return 0;
+}
+
+/* 0x0011013b: watcom isatty(int fd=EAX) */
+static uint32_t hook_watcom_isatty(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)edx; (void)ebx; (void)ecx; (void)stack;
+    return (eax <= 2) ? 1 : 0;
+}
+
+/* 0x000f9610: bflib sound debug logger */
+static uint32_t hook_sound_debug_log(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)edx; (void)ebx; (void)ecx; (void)stack;
+    const char *str = (const char *)(uintptr_t)eax;
+    if (str && (uintptr_t)str >= 0x10000 && (uintptr_t)str < 0x3f000000) {
+        printf("[DK-Sound] %s", str);
+        fflush(stdout);
+    }
+    return 1;
 }
 
 /* External registration point for recompiled C++ functions from runtime/recompiled_modules.cpp */
@@ -1499,21 +2231,24 @@ int main(int argc, char **argv) {
             g_headless_mode = true;
         } else if (strcmp(argv[i], "--verbose-io") == 0) {
             g_verbose_io = true;
+        } else if (strcmp(argv[i], "--nosound") == 0 || strcmp(argv[i], "-nosound") == 0) {
+            g_nosound_requested = true;
         } else if (argv[i][0] == '-' && argv[i][1] != '-' && dk_argc < 30) {
             dk_argv[dk_argc++] = argv[i];
         }
     }
 
-    /* Ensure -nosound is present to prevent DOS Miles Sound System port I/O */
-    bool has_nosound = false;
-    for (int i = 0; i < dk_argc; i++) {
-        if (strcasecmp(dk_argv[i], "-nosound") == 0) {
-            has_nosound = true;
-            break;
+    if (g_nosound_requested) {
+        bool has_nosound = false;
+        for (int i = 0; i < dk_argc; i++) {
+            if (strcasecmp(dk_argv[i], "-nosound") == 0) {
+                has_nosound = true;
+                break;
+            }
         }
-    }
-    if (!has_nosound && dk_argc < 30) {
-        dk_argv[dk_argc++] = (char *)"-nosound";
+        if (!has_nosound && dk_argc < 30) {
+            dk_argv[dk_argc++] = (char *)"-nosound";
+        }
     }
     dk_argv[dk_argc] = NULL;
 
@@ -1624,10 +2359,66 @@ int main(int argc, char **argv) {
     dk_install_hook(0x000efde0, hook_play_smk);
     dk_install_hook(0x000f7786, hook_int386_safety);
     dk_install_hook(0x000fed45, hook_int386_safety);
+    dk_install_hook(0x001101c7, hook_int386_safety);
+    dk_install_hook(0x0011013b, hook_watcom_isatty);
+    dk_install_hook(0x000f9610, hook_sound_debug_log);
 
+    /* AIL Audio Hooks */
     dk_install_hook(0x000fee88, hook_ail_startup);
     dk_install_hook(0x001145bf, hook_ret_one);
     dk_install_hook(0x000f98ca, hook_ret_one);
+    dk_install_hook(0x000f99cc, hook_ail_set_preference);
+    dk_install_hook(0x000f9d16, hook_ail_api_read_ini);
+    dk_install_hook(0x000fa535, hook_ail_install_dig_ini);
+    dk_install_hook(0x000fa593, hook_ail_install_dig_driver_file);
+    dk_install_hook(0x000fa5f7, hook_ail_uninstall_dig_driver);
+    dk_install_hook(0x000fa655, hook_ail_allocate_sample_handle);
+    dk_install_hook(0x000fa720, hook_ail_release_sample_handle);
+    dk_install_hook(0x000fa77e, hook_ail_init_sample);
+    dk_install_hook(0x000fa7dc, hook_ail_set_sample_file);
+    dk_install_hook(0x000fa849, hook_ail_set_sample_address);
+    dk_install_hook(0x000fa8b3, hook_ail_set_sample_type);
+    dk_install_hook(0x000fa91d, hook_ail_start_sample);
+    dk_install_hook(0x000fa97f, hook_ail_stop_sample);
+    dk_install_hook(0x000fa9dd, hook_ail_resume_sample);
+    dk_install_hook(0x000faa37, hook_ail_stop_sample);
+    dk_install_hook(0x000faa95, hook_ail_set_sample_playback_rate);
+    dk_install_hook(0x000faaf9, hook_ail_set_sample_volume);
+    dk_install_hook(0x000fab5d, hook_ail_set_sample_pan);
+    dk_install_hook(0x000fabc1, hook_ail_set_sample_loop_count);
+    dk_install_hook(0x000fac8f, hook_ail_sample_status);
+    dk_install_hook(0x000fae65, hook_ail_set_digital_master_volume);
+    dk_install_hook(0x000faec9, hook_ail_digital_master_volume);
+    dk_install_hook(0x000fb060, hook_ail_minimum_sample_buffer_size);
+    dk_install_hook(0x000fb340, hook_ail_register_callback);
+    dk_install_hook(0x000fb3a4, hook_ail_register_callback);
+    dk_install_hook(0x000fe896, hook_ail_mem_alloc_lock);
+    dk_install_hook(0x000fe8c1, hook_ail_mem_free_lock);
+
+    /* AIL Timer hooks (prevent DOS PIT port 0x43 reprogramming crash) */
+    dk_install_hook(0x000f9f10, hook_ail_register_timer);
+    dk_install_hook(0x000f9f71, hook_ail_timer_stub);
+    dk_install_hook(0x000f9fd5, hook_ail_timer_stub);
+    dk_install_hook(0x000fa039, hook_ail_timer_stub);
+    dk_install_hook(0x000fa1a4, hook_ail_timer_stub);
+    dk_install_hook(0x000fa257, hook_ail_timer_stub);
+    dk_install_hook(0x000fa30a, hook_ail_timer_stub);
+    dk_install_hook(0x000fa368, hook_ail_timer_stub);
+    dk_install_hook(0x000fa3bd, hook_ail_timer_stub);
+
+    /* Redbook (CD audio) hooks */
+    dk_install_hook(0x000fc8bd, hook_ail_redbook_open);
+    dk_install_hook(0x000fc91b, hook_ail_redbook_close);
+    dk_install_hook(0x000fca35, hook_ail_redbook_status);
+    dk_install_hook(0x000fca93, hook_ail_redbook_tracks);
+    dk_install_hook(0x000fcaf1, hook_ail_redbook_track_info);
+    dk_install_hook(0x000fcbbf, hook_ail_redbook_track);
+    dk_install_hook(0x000fcc7b, hook_ail_redbook_play);
+    dk_install_hook(0x000fcce5, hook_ail_redbook_stop);
+    dk_install_hook(0x000fcd43, hook_ail_redbook_pause);
+    dk_install_hook(0x000fcda1, hook_ail_redbook_resume);
+    dk_install_hook(0x000fcdff, hook_ail_redbook_volume);
+    dk_install_hook(0x000fce5d, hook_ail_redbook_set_volume);
 
     /* Patch 0x00065724 (pom_benchmark) to `fld1; ret` (D9 E8 C3) so it returns 1.0 in ST(0) without port 0x43 IO */
     uint8_t *bench_ptr = (uint8_t *)(uintptr_t)DK_VA(0x00065724);
@@ -1643,8 +2434,8 @@ int main(int argc, char **argv) {
     /* Register recompiled C++ functions from runtime/recompiled_modules.cpp */
     dk_register_recompiled_cpp_functions();
 
-    /* Default nosound=1 until AIL sound is hooked, and change to game directory */
-    DK_MEM_U8(VA_LB_NOSOUND_FLAG) = 1;
+    /* Enable sound by default unless user explicitly passed --nosound */
+    DK_MEM_U8(VA_LB_NOSOUND_FLAG) = g_nosound_requested ? 1 : 0;
     if (chdir(g_game_dir) != 0) {
         perror("chdir to game_dir failed");
     }
