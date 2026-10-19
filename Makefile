@@ -30,8 +30,14 @@ win32: build
 	$(CXX_WIN32) $(CFLAGS_COMMON) -c runtime/recompiled_modules.cpp -o build/recompiled_modules_win32.o
 	$(CXX_WIN32) build/keeper_runtime_win32.o build/recompiled_modules_win32.o $(LDFLAGS_WIN32) -o build/keeper_win32.exe
 
+rebase: build
+	python3 tools/le_to_elf32.py "/home/merlin/Dungeon Keeper/KEEPER.EXE" build/KEEPER_20000000.elf 0x20000000
+
 validate: linux
 	./build/keeper_linux32 --headless --max-frames 120 --dump-frames build/frames -nosound
+
+validate-win32: win32
+	./build/keeper_win32.exe --headless --max-frames 120 --dump-frames build/frames -nosound
 
 clean:
 	rm -rf build

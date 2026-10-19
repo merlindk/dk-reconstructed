@@ -29,7 +29,7 @@ def find_le_header(data: bytes) -> int:
         idx += 1
 
 
-def convert_le_to_elf32(le_path: str, elf_path: str) -> None:
+def convert_le_to_elf32(le_path: str, elf_path: str, delta: int = 0) -> None:
     with open(le_path, "rb") as f:
         data = f.read()
 
@@ -74,6 +74,7 @@ def convert_le_to_elf32(le_path: str, elf_path: str) -> None:
     for i in range(num_objs):
         off = le_off + obj_tab_off + i * 24
         vsize, rbase, flags, ptab_idx, npages, rsvd = struct.unpack_from("<6I", data, off)
+        rbase += delta
         buf_size = max(vsize, npages * page_size)
         objects.append(
             {
@@ -531,7 +532,8 @@ def convert_le_to_elf32(le_path: str, elf_path: str) -> None:
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print(f"Usage: {sys.argv[0]} <input_le.exe> <output.elf>", file=sys.stderr)
+    if len(sys.argv) < 3 or len(sys.argv) > 4:
+        print(f"Usage: {sys.argv[0]} <input_le.exe> <output.elf> [delta_hex]", file=sys.stderr)
         sys.exit(1)
-    convert_le_to_elf32(sys.argv[1], sys.argv[2])
+    rebase_delta = int(sys.argv[3], 16) if len(sys.argv) == 4 else 0
+    convert_le_to_elf32(sys.argv[1], sys.argv[2], rebase_delta)

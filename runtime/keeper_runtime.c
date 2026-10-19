@@ -56,13 +56,17 @@ static uint8_t  g_vga_palette_6bit[768];
 static uint32_t g_argb_palette[256];
 static uint32_t g_frame_argb_buf[640 * 480];
 
+/* Global base relocation delta (0 on Linux, 0x20000000 on Windows/rebased ELFs) */
+uint32_t g_rebase_delta = 0;
+#define DK_VA(orig_va)   ((uint32_t)((orig_va) + g_rebase_delta))
+
 /* Fixed Virtual Address Pointers into Dungeon Keeper's loaded .bss_obj3 / .data_obj3 */
-#define DK_MEM_U8(addr)  (*(volatile uint8_t  *)(uintptr_t)(addr))
-#define DK_MEM_U16(addr) (*(volatile uint16_t *)(uintptr_t)(addr))
-#define DK_MEM_S16(addr) (*(volatile int16_t  *)(uintptr_t)(addr))
-#define DK_MEM_U32(addr) (*(volatile uint32_t *)(uintptr_t)(addr))
-#define DK_MEM_S32(addr) (*(volatile int32_t  *)(uintptr_t)(addr))
-#define DK_MEM_PTR(addr) ((void *)(uintptr_t)(addr))
+#define DK_MEM_U8(addr)  (*(volatile uint8_t  *)(uintptr_t)(DK_VA(addr)))
+#define DK_MEM_U16(addr) (*(volatile uint16_t *)(uintptr_t)(DK_VA(addr)))
+#define DK_MEM_S16(addr) (*(volatile int16_t  *)(uintptr_t)(DK_VA(addr)))
+#define DK_MEM_U32(addr) (*(volatile uint32_t *)(uintptr_t)(DK_VA(addr)))
+#define DK_MEM_S32(addr) (*(volatile int32_t  *)(uintptr_t)(DK_VA(addr)))
+#define DK_MEM_PTR(addr) ((void *)(uintptr_t)(DK_VA(addr)))
 
 /* Verified BFLib Display / Input / Sound Global Addresses */
 #define VA_LB_SCREEN_INITIALIZED  0x003d980c
@@ -195,6 +199,7 @@ static void *create_watcall_bridge_stub(dk_hook_handler_t handler) {
 }
 
 void dk_install_hook(uint32_t target_va, dk_hook_handler_t handler) {
+    target_va = DK_VA(target_va);
     void *stub = create_watcall_bridge_stub(handler);
     uint8_t *code_ptr = (uint8_t *)(uintptr_t)target_va;
     code_ptr[0] = 0xE9; /* JMP rel32 */
@@ -203,6 +208,7 @@ void dk_install_hook(uint32_t target_va, dk_hook_handler_t handler) {
 }
 
 void dk_install_hook_ret_n(uint32_t target_va, dk_hook_handler_t handler, int stack_pop_bytes) {
+    target_va = DK_VA(target_va);
     void *stub = create_watcall_bridge_stub_ex(handler, stack_pop_bytes);
     uint8_t *code_ptr = (uint8_t *)(uintptr_t)target_va;
     code_ptr[0] = 0xE9; /* JMP rel32 */
@@ -211,6 +217,7 @@ void dk_install_hook_ret_n(uint32_t target_va, dk_hook_handler_t handler, int st
 }
 
 void dk_install_direct_c_hook(uint32_t target_va, void *c_func_ptr) {
+    target_va = DK_VA(target_va);
     uint8_t *code_ptr = (uint8_t *)(uintptr_t)target_va;
     code_ptr[0] = 0xE9; /* JMP rel32 */
     int32_t rel = (int32_t)((uintptr_t)c_func_ptr - ((uintptr_t)code_ptr + 5));
@@ -979,14 +986,14 @@ static uint32_t hook_LbScreenSwap(uint32_t eax, uint32_t edx, uint32_t ebx, uint
 
     /* Composite software mouse cursor onto WScreen via original 0x000eb840 */
     typedef void (*fn_void_t)(void);
-    ((fn_void_t)(uintptr_t)0x000eb840)();
+    ((fn_void_t)(uintptr_t)DK_VA(0x000eb840))();
 
     int w = DK_MEM_S32(VA_LB_WSCREEN_WIDTH);
     int h = DK_MEM_S32(VA_LB_WSCREEN_HEIGHT);
     platform_present_frame(w, h);
 
     /* Restore background pixels under mouse cursor via original 0x000eb974 */
-    ((fn_void_t)(uintptr_t)0x000eb974)();
+    ((fn_void_t)(uintptr_t)DK_VA(0x000eb974))();
     return 1;
 }
 
@@ -1067,12 +1074,12 @@ static uint32_t hook_LbMouseSetup(uint32_t eax, uint32_t edx, uint32_t ebx, uint
     DK_MEM_S32(VA_LB_MOUSE_Y)     = h / 2;
     if (eax != 0) {
         /* Call 0x0ebab0 (LbMouseChangeSprite) with EAX=sprite_ptr */
+        uint32_t fn_va = DK_VA(0x000ebab0);
         __asm__ volatile (
-            "movl $0x000ebab0, %%ecx\n\t"
             "call *%%ecx\n\t"
-            : "+a"(eax)
+            : "+a"(eax), "+c"(fn_va)
             :
-            : "ecx", "edx", "memory", "cc"
+            : "edx", "memory", "cc"
         );
     }
     return 1;
@@ -1252,16 +1259,37 @@ static bool load_keeper_elf_segments(const char *elf_path) {
         return false;
     }
 
-    /* Map flat address space 0x00010000 .. 0x00450000 (4.25 MB, including .bss_obj4 @ 0x00400000) RWX */
+    Elf32_Ehdr_t ehdr;
+    if (fread(&ehdr, 1, sizeof(ehdr), fp) != sizeof(ehdr) || memcmp(ehdr.e_ident, "\x7f""ELF", 4) != 0) {
+        fprintf(stderr, "ERROR: '%s' is not a valid ELF32 binary\n", elf_path);
+        fclose(fp);
+        return false;
+    }
+
+    /* Inspect first PT_LOAD segment to calculate base address and rebase delta */
     uintptr_t base_addr = 0x00010000u;
     size_t    region_sz = 0x00440000u;
+    for (uint16_t i = 0; i < ehdr.e_phnum; i++) {
+        Elf32_Phdr_t ph;
+        fseek(fp, (long)(ehdr.e_phoff + i * ehdr.e_phentsize), SEEK_SET);
+        if (fread(&ph, 1, sizeof(ph), fp) != sizeof(ph)) break;
+        if (ph.p_type == 1 && ph.p_vaddr >= 0x00010000) {
+            uint32_t aligned_base = ph.p_vaddr & ~0xFFFFu;
+            if (aligned_base > 0x00010000u) {
+                g_rebase_delta = aligned_base - 0x00010000u;
+                base_addr = aligned_base;
+            }
+            break;
+        }
+    }
+    printf("[Loader] Detected image base: 0x%08lx (Rebase Delta: +0x%08x)\n",
+           (unsigned long)base_addr, g_rebase_delta);
+
 #ifdef _WIN32
     void *mapped = VirtualAlloc((void *)base_addr, region_sz, MEM_RESERVE | MEM_COMMIT, PAGE_EXECUTE_READWRITE);
     if (mapped != (void *)base_addr) {
         fprintf(stderr, "ERROR: VirtualAlloc at 0x%08lx failed (got %p, err=%lu)\n",
                 (unsigned long)base_addr, mapped, GetLastError());
-        fprintf(stderr, "NOTE: On 64-bit Windows, low memory (0x00010000) is reserved by the OS loader / WoW64 subsystem.\n");
-        fprintf(stderr, "      Run natively via Linux/WSL (./build/keeper_linux32) where low-memory flat mapping is fully supported.\n");
         fclose(fp);
         return false;
     }
@@ -1271,7 +1299,7 @@ static bool load_keeper_elf_segments(const char *elf_path) {
                         PROT_READ | PROT_WRITE | PROT_EXEC,
                         MAP_PRIVATE | MAP_ANONYMOUS | MAP_FIXED, -1, 0);
     if (mapped == MAP_FAILED) {
-        fprintf(stderr, "ERROR: mmap at 0x00010000 failed: %s\n", strerror(errno));
+        fprintf(stderr, "ERROR: mmap at 0x%08lx failed: %s\n", (unsigned long)base_addr, strerror(errno));
         fclose(fp);
         return false;
     }
@@ -1280,13 +1308,6 @@ static bool load_keeper_elf_segments(const char *elf_path) {
                                   MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
 #endif
     memset((void *)base_addr, 0, region_sz);
-
-    Elf32_Ehdr_t ehdr;
-    if (fread(&ehdr, 1, sizeof(ehdr), fp) != sizeof(ehdr) || memcmp(ehdr.e_ident, "\x7f""ELF", 4) != 0) {
-        fprintf(stderr, "ERROR: '%s' is not a valid ELF32 binary\n", elf_path);
-        fclose(fp);
-        return false;
-    }
 
     for (uint16_t i = 0; i < ehdr.e_phnum; i++) {
         Elf32_Phdr_t ph;
@@ -1398,16 +1419,26 @@ int main(int argc, char **argv) {
     dk_argv[dk_argc] = NULL;
 
 #ifdef _WIN32
-    /* On Windows, if default Linux path is still set and KEEPER.CFG exists locally, use current directory */
+    /* On Windows, auto-detect game directory and rebased ELF */
     if (strncmp(g_game_dir, "/home/", 6) == 0) {
         struct stat st;
         if (stat("KEEPER.CFG", &st) == 0 || stat("keeper.cfg", &st) == 0) {
             strcpy(g_game_dir, ".");
-            if (stat("re/KEEPER.elf", &st) == 0) {
-                strcpy(g_elf_path, "re/KEEPER.elf");
-            } else if (stat("KEEPER.elf", &st) == 0) {
-                strcpy(g_elf_path, "KEEPER.elf");
-            }
+        } else if (stat("D:/SteamLibrary/steamapps/common/Dungeon Keeper/KEEPER.CFG", &st) == 0 ||
+                   stat("d:/SteamLibrary/steamapps/common/Dungeon Keeper/keeper.cfg", &st) == 0) {
+            strcpy(g_game_dir, "D:/SteamLibrary/steamapps/common/Dungeon Keeper");
+        }
+    }
+    if (strncmp(g_elf_path, "/home/", 6) == 0) {
+        struct stat st;
+        if (stat("build/KEEPER_20000000.elf", &st) == 0) {
+            strcpy(g_elf_path, "build/KEEPER_20000000.elf");
+        } else if (stat("KEEPER_20000000.elf", &st) == 0) {
+            strcpy(g_elf_path, "KEEPER_20000000.elf");
+        } else if (stat("build/KEEPER.elf", &st) == 0) {
+            strcpy(g_elf_path, "build/KEEPER.elf");
+        } else if (stat("KEEPER.elf", &st) == 0) {
+            strcpy(g_elf_path, "KEEPER.elf");
         }
     }
 #endif
@@ -1493,7 +1524,7 @@ int main(int argc, char **argv) {
     dk_install_hook(0x000fed45, hook_int386_safety);
 
     /* Patch 0x00065724 (pom_benchmark) to `fld1; ret` (D9 E8 C3) so it returns 1.0 in ST(0) without port 0x43 IO */
-    uint8_t *bench_ptr = (uint8_t *)(uintptr_t)0x00065724;
+    uint8_t *bench_ptr = (uint8_t *)(uintptr_t)DK_VA(0x00065724);
     bench_ptr[0] = 0xD9; bench_ptr[1] = 0xE8; bench_ptr[2] = 0xC3;
 
     /* If --level <N> was passed, enable direct level boot (bit 1 of g_game_operation_flags @ 0x0019d0b8) */
@@ -1511,7 +1542,8 @@ int main(int argc, char **argv) {
         perror("chdir to game_dir failed");
     }
 
-    printf("[Runtime] Invoking Dungeon Keeper LbMain (0x000633c4) with argc=%d...\n", dk_argc);
+    uint32_t lbmain_va = DK_VA(0x000633c4);
+    printf("[Runtime] Invoking Dungeon Keeper LbMain (0x%08x) with argc=%d...\n", lbmain_va, dk_argc);
     fflush(stdout);
 
     /* Call panmap_fn_0633c4 (LbMain @ 0x000633c4) with EAX=argc, EDX=argv */
@@ -1522,15 +1554,14 @@ int main(int argc, char **argv) {
         "pushl %%esi\n\t"
         "pushl %%edi\n\t"
         "pushl %%ebp\n\t"
-        "movl $0x000633c4, %%ecx\n\t"
         "call *%%ecx\n\t"
         "popl %%ebp\n\t"
         "popl %%edi\n\t"
         "popl %%esi\n\t"
         "popl %%ebx\n\t"
-        : "+a"(ret_val), "+d"(argv_ptr)
+        : "+a"(ret_val), "+d"(argv_ptr), "+c"(lbmain_va)
         :
-        : "ecx", "memory", "cc"
+        : "memory", "cc"
     );
 
     printf("[Runtime] LbMain returned %u.\n", ret_val);
