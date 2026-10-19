@@ -1518,26 +1518,29 @@ int main(int argc, char **argv) {
     dk_argv[dk_argc] = NULL;
 
 #ifdef _WIN32
-    /* On Windows, auto-detect game directory and rebased ELF */
+    /* On Windows, auto-detect game directory and rebased ELF (strictly local workspace) */
     if (strncmp(g_game_dir, "/home/", 6) == 0) {
         struct stat st;
         if (stat("KEEPER.CFG", &st) == 0 || stat("keeper.cfg", &st) == 0) {
             strcpy(g_game_dir, ".");
-        } else if (stat("D:/SteamLibrary/steamapps/common/Dungeon Keeper/KEEPER.CFG", &st) == 0 ||
-                   stat("d:/SteamLibrary/steamapps/common/Dungeon Keeper/keeper.cfg", &st) == 0) {
-            strcpy(g_game_dir, "D:/SteamLibrary/steamapps/common/Dungeon Keeper");
+        } else if (stat("C:/Users/Merlin/workspace/Dungeon Keeper/KEEPER.CFG", &st) == 0 ||
+                   stat("C:/Users/Merlin/workspace/Dungeon Keeper/keeper.cfg", &st) == 0) {
+            strcpy(g_game_dir, "C:/Users/Merlin/workspace/Dungeon Keeper");
+        } else if (stat("../Dungeon Keeper/KEEPER.CFG", &st) == 0 ||
+                   stat("../Dungeon Keeper/keeper.cfg", &st) == 0) {
+            strcpy(g_game_dir, "../Dungeon Keeper");
         }
     }
     if (strncmp(g_elf_path, "/home/", 6) == 0) {
         struct stat st;
-        if (stat("build/KEEPER_20000000.elf", &st) == 0) {
-            strcpy(g_elf_path, "build/KEEPER_20000000.elf");
-        } else if (stat("KEEPER_20000000.elf", &st) == 0) {
+        if (stat("KEEPER_20000000.elf", &st) == 0) {
             strcpy(g_elf_path, "KEEPER_20000000.elf");
-        } else if (stat("build/KEEPER.elf", &st) == 0) {
-            strcpy(g_elf_path, "build/KEEPER.elf");
-        } else if (stat("KEEPER.elf", &st) == 0) {
-            strcpy(g_elf_path, "KEEPER.elf");
+        } else if (stat("build/KEEPER_20000000.elf", &st) == 0) {
+            strcpy(g_elf_path, "build/KEEPER_20000000.elf");
+        } else if (stat("C:/Users/Merlin/workspace/Dungeon Keeper/KEEPER_20000000.elf", &st) == 0) {
+            strcpy(g_elf_path, "C:/Users/Merlin/workspace/Dungeon Keeper/KEEPER_20000000.elf");
+        } else if (stat("../Dungeon Keeper/KEEPER_20000000.elf", &st) == 0) {
+            strcpy(g_elf_path, "../Dungeon Keeper/KEEPER_20000000.elf");
         }
     }
 #endif
