@@ -1258,7 +1258,10 @@ static bool load_keeper_elf_segments(const char *elf_path) {
 #ifdef _WIN32
     void *mapped = VirtualAlloc((void *)base_addr, region_sz, MEM_RESERVE | MEM_COMMIT, PAGE_EXECUTE_READWRITE);
     if (mapped != (void *)base_addr) {
-        fprintf(stderr, "ERROR: VirtualAlloc at 0x00010000 failed (got %p, err=%lu)\n", mapped, GetLastError());
+        fprintf(stderr, "ERROR: VirtualAlloc at 0x%08lx failed (got %p, err=%lu)\n",
+                (unsigned long)base_addr, mapped, GetLastError());
+        fprintf(stderr, "NOTE: On 64-bit Windows, low memory (0x00010000) is reserved by the OS loader / WoW64 subsystem.\n");
+        fprintf(stderr, "      Run natively via Linux/WSL (./build/keeper_linux32) where low-memory flat mapping is fully supported.\n");
         fclose(fp);
         return false;
     }
