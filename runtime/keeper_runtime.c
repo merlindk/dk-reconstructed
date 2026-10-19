@@ -52,6 +52,7 @@ static int  g_max_frames     = 0; /* 0 = unlimited interactive mode */
 static int  g_swap_counter   = 0;
 static bool g_headless_mode  = false;
 static bool g_verbose_io     = false;
+static bool g_test_start_game = false; /* Simulate click on Start New Game */
 
 /* 32-bit RGB palette converted from 6-bit VGA (0..63 -> 0..255) */
 static uint8_t  g_vga_palette_6bit[768];
@@ -827,6 +828,30 @@ static void platform_present_frame(int width, int height) {
         exit(0);
     }
 
+    if (g_test_start_game && g_swap_counter >= 15) {
+        /* Start New Game button is at (320, 135) in 640x480 space (or 160, 68 in 320x200) */
+        int sw = DK_MEM_S32(VA_LB_PHYS_WIDTH)  > 0 ? DK_MEM_S32(VA_LB_PHYS_WIDTH)  : 640;
+        int click_x = (sw >= 640) ? 320 : 160;
+        int click_y = (sw >= 640) ? 135 : 68;
+        DK_MEM_S32(VA_LB_MMOUSE_X) = click_x;
+        DK_MEM_S32(VA_LB_MMOUSE_Y) = click_y;
+        DK_MEM_S32(VA_LB_MOUSE_X)  = click_x;
+        DK_MEM_S32(VA_LB_MOUSE_Y)  = click_y;
+        if (g_swap_counter == 15 || g_swap_counter == 16) {
+            DK_MEM_U8(VA_LB_MLEFT_BUTTON) = 1;
+            DK_MEM_U8(VA_LB_LEFT_BUTTON)  = 1;
+            printf("[TestClick] Injected LeftMouseDown at (%d, %d) on frame %d\n", click_x, click_y, g_swap_counter);
+            fflush(stdout);
+        } else if (g_swap_counter == 17) {
+            DK_MEM_U8(VA_LB_MLEFT_BUTTON) = 0;
+            DK_MEM_U8(VA_LB_RLEFT_BUTTON) = 1;
+            DK_MEM_S32(VA_LB_RMOUSE_X)    = click_x;
+            DK_MEM_S32(VA_LB_RMOUSE_Y)    = click_y;
+            printf("[TestClick] Injected LeftMouseUp at (%d, %d) on frame %d\n", click_x, click_y, g_swap_counter);
+            fflush(stdout);
+        }
+    }
+
     if (!g_headless_mode && (g_swap_counter == 1 || g_swap_counter % 300 == 0)) {
         printf("[Runtime] Interactive running: Frame #%d (%dx%d -> 1080p)\n", g_swap_counter, width, height);
         fflush(stdout);
@@ -1353,6 +1378,7 @@ static uint32_t hook_LbScreenSetup(uint32_t eax, uint32_t edx, uint32_t ebx, uin
     DK_MEM_S16(VA_LB_SCREEN_MODE)     = (int16_t)mode;
     DK_MEM_U8(VA_LB_VESA_PAGED)       = 0;
     DK_MEM_U8(0x003d9885)             = 0;
+    DK_MEM_U32(0x003de9b8)            = 0x00010000;
     DK_MEM_U32(VA_LB_SCREEN_ACTIVE)   = 1;
     DK_MEM_U32(VA_LB_SCREEN_MODE_READY) = 1;
 
@@ -1398,6 +1424,21 @@ static uint32_t hook_LbScreenSwap(uint32_t eax, uint32_t edx, uint32_t ebx, uint
 static uint32_t hook_LbScreenWaitVbi(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
     (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
     platform_poll_events();
+    return 1;
+}
+
+/* 0x06ae37: setup_clear_screen_backbuffer() */
+static uint32_t hook_setup_clear_screen_backbuffer(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    memset(g_persistent_pscreen, 0, sizeof(g_persistent_pscreen));
+    memset(g_persistent_wscreen, 0, sizeof(g_persistent_wscreen));
+    return 1;
+}
+
+/* 0x0f0d1c: LbScreenSetBank(uint16_t bank=AX) */
+static uint32_t hook_LbScreenSetBank(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)edx; (void)ebx; (void)ecx; (void)stack;
+    DK_MEM_U16(0x003de9b8) = (uint16_t)eax;
     return 1;
 }
 
@@ -2515,27 +2556,49 @@ static LONG WINAPI win32_crash_handler(EXCEPTION_POINTERS *ep) {
     uint32_t edi = (uint32_t)ctx->Edi;
     void *fault_addr = (void *)ep->ExceptionRecord->ExceptionInformation[1];
 
+    FILE *flog = fopen("keeper_crash.log", "w");
+    if (!flog) flog = stderr;
+
     fprintf(stderr, "\n[CRASH] Windows Exception 0x%08lx at EIP=0x%08x (fault_addr=%p)\n",
             code, eip, fault_addr);
     fprintf(stderr, "  EAX=0x%08x EBX=0x%08x ECX=0x%08x EDX=0x%08x\n", eax, ebx, ecx, edx);
     fprintf(stderr, "  ESI=0x%08x EDI=0x%08x EBP=0x%08x ESP=0x%08x\n", esi, edi, ebp, esp);
+    if (flog != stderr) {
+        fprintf(flog, "\n[CRASH] Windows Exception 0x%08lx at EIP=0x%08x (fault_addr=%p)\n",
+                code, eip, fault_addr);
+        fprintf(flog, "  EAX=0x%08x EBX=0x%08x ECX=0x%08x EDX=0x%08x\n", eax, ebx, ecx, edx);
+        fprintf(flog, "  ESI=0x%08x EDI=0x%08x EBP=0x%08x ESP=0x%08x\n", esi, edi, ebp, esp);
+    }
     if (eip >= DK_VA(0x10000) && eip < DK_VA(0x1500f0)) {
         const uint8_t *inst = (const uint8_t *)(uintptr_t)eip;
         fprintf(stderr, "  Bytes @ EIP:");
         for (int i = 0; i < 16; i++) fprintf(stderr, " %02x", inst[i]);
         fprintf(stderr, "\n");
+        if (flog != stderr) {
+            fprintf(flog, "  Bytes @ EIP:");
+            for (int i = 0; i < 16; i++) fprintf(flog, " %02x", inst[i]);
+            fprintf(flog, "\n");
+        }
     }
     fprintf(stderr, "  Stack trace (code VAs on stack):\n");
+    if (flog != stderr) fprintf(flog, "  Stack trace (code VAs on stack):\n");
     const uint32_t *sp = (const uint32_t *)(uintptr_t)esp;
     int printed = 0;
     for (int i = 0; i < 128 && printed < 16; i++) {
         uint32_t val = sp[i];
         if (val >= DK_VA(0x00010000) && val < DK_VA(0x00150100)) {
             fprintf(stderr, "    [ESP+0x%03x] = 0x%08x (orig=0x%08x)\n", i * 4, val, val - g_rebase_delta);
+            if (flog != stderr) {
+                fprintf(flog, "    [ESP+0x%03x] = 0x%08x (orig=0x%08x)\n", i * 4, val, val - g_rebase_delta);
+            }
             printed++;
         }
     }
     fflush(stderr);
+    if (flog != stderr) {
+        fflush(flog);
+        fclose(flog);
+    }
     return EXCEPTION_EXECUTE_HANDLER;
 }
 #endif
@@ -2605,6 +2668,8 @@ int main(int argc, char **argv) {
             g_verbose_io = true;
         } else if (strcmp(argv[i], "--nosound") == 0 || strcmp(argv[i], "-nosound") == 0) {
             g_nosound_requested = true;
+        } else if (strcmp(argv[i], "--test-start-game") == 0) {
+            g_test_start_game = true;
         } else if (strcmp(argv[i], "--dump-tmap") == 0) {
             g_dump_tmap = true;
         } else if (argv[i][0] == '-' && argv[i][1] != '-' && dk_argc < 30) {
@@ -2714,6 +2779,8 @@ int main(int argc, char **argv) {
     dk_install_hook(0x000e8214, hook_LbScreenWaitVbi);
     dk_install_hook(0x000e8420, hook_LbPaletteGet);
     dk_install_hook(0x000e846c, hook_LbPaletteSet);
+    dk_install_hook(0x0006ae37, hook_setup_clear_screen_backbuffer);
+    dk_install_hook(0x000f0d1c, hook_LbScreenSetBank);
 
     dk_install_hook(0x000eb7b0, hook_LbDate);
     dk_install_hook(0x000eb7e4, hook_LbTime);
@@ -2809,6 +2876,7 @@ int main(int argc, char **argv) {
     DK_MEM_U32(0x00334065) = 0x20;         /* VA_LB_PHYSICAL_RAM_MB = 32 MB */
     DK_MEM_U32(0x002ee8dc) = 0x0D;         /* Preferred screen mode: 0x0D (640x480) */
     DK_MEM_U16(VA_LB_SCREEN_MODE) = 0x0D;  /* Active screen mode: 0x0D (640x480) */
+    DK_MEM_U8(VA_LB_SKIP_INTRO_FLAG) = 1;  /* Disable demo movie timeout in frontend */
 
 
 
@@ -2820,6 +2888,18 @@ int main(int argc, char **argv) {
     if (chdir(g_game_dir) != 0) {
         perror("chdir to game_dir failed");
     }
+#ifdef _WIN32
+    if (!g_headless_mode) {
+        FILE *f_run = freopen("keeper_run.log", "a", stdout);
+        if (f_run) {
+            setvbuf(stdout, NULL, _IONBF, 0);
+        }
+        FILE *f_err = freopen("keeper_run.log", "a", stderr);
+        if (f_err) {
+            setvbuf(stderr, NULL, _IONBF, 0);
+        }
+    }
+#endif
 
     if (g_dump_tmap) {
         printf("[TMAP] Extracting uncompressed 557,056-byte TMAPA archives...\n");
