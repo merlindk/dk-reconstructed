@@ -362,6 +362,34 @@ static LRESULT CALLBACK dk_wndproc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
             DK_MEM_U8(VA_LB_EXIT_GAME_FLAG) = 1;
             PostQuitMessage(0);
             return 0;
+        case WM_ERASEBKGND:
+            return 1;
+        case WM_PAINT: {
+            PAINTSTRUCT ps;
+            HDC hdc = BeginPaint(hwnd, &ps);
+            RECT rc;
+            GetClientRect(hwnd, &rc);
+            int w = DK_MEM_S32(VA_LB_WSCREEN_WIDTH);
+            int h = DK_MEM_S32(VA_LB_WSCREEN_HEIGHT);
+            if (w > 0 && h > 0 && g_frame_argb_buf) {
+                BITMAPINFO bmi;
+                memset(&bmi, 0, sizeof(bmi));
+                bmi.bmiHeader.biSize        = sizeof(BITMAPINFOHEADER);
+                bmi.bmiHeader.biWidth       = w;
+                bmi.bmiHeader.biHeight      = -h;
+                bmi.bmiHeader.biPlanes      = 1;
+                bmi.bmiHeader.biBitCount    = 32;
+                bmi.bmiHeader.biCompression = BI_RGB;
+                StretchDIBits(
+                    hdc,
+                    0, 0, rc.right - rc.left, rc.bottom - rc.top,
+                    0, 0, w, h,
+                    g_frame_argb_buf, &bmi, DIB_RGB_COLORS, SRCCOPY
+                );
+            }
+            EndPaint(hwnd, &ps);
+            return 0;
+        }
         case WM_MOUSEMOVE: {
             RECT rc;
             GetClientRect(hwnd, &rc);
@@ -403,7 +431,7 @@ static LRESULT CALLBACK dk_wndproc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
         case WM_SYSKEYDOWN: {
             uint8_t sc = (uint8_t)((lParam >> 16) & 0xFF);
             if (lParam & (1 << 24)) sc |= 0x80;
-            volatile uint8_t *key_tab = (volatile uint8_t *)(uintptr_t)VA_LB_KEY_ON_TABLE;
+            volatile uint8_t *key_tab = (volatile uint8_t *)(uintptr_t)DK_VA(VA_LB_KEY_ON_TABLE);
             key_tab[sc] = 1;
             DK_MEM_U8(VA_LB_INKEY)  = sc;
             DK_MEM_U8(VA_LB_IINKEY) = sc;
@@ -413,7 +441,7 @@ static LRESULT CALLBACK dk_wndproc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
         case WM_SYSKEYUP: {
             uint8_t sc = (uint8_t)((lParam >> 16) & 0xFF);
             if (lParam & (1 << 24)) sc |= 0x80;
-            volatile uint8_t *key_tab = (volatile uint8_t *)(uintptr_t)VA_LB_KEY_ON_TABLE;
+            volatile uint8_t *key_tab = (volatile uint8_t *)(uintptr_t)DK_VA(VA_LB_KEY_ON_TABLE);
             key_tab[sc] = 0;
             return 0;
         }
@@ -463,7 +491,7 @@ static void platform_poll_events(void) {
             } else if (ev.type == SDL_KEYDOWN) {
                 uint8_t sc = sdl_scancode_to_dk_set1(ev.key.keysym.scancode);
                 if (sc) {
-                    volatile uint8_t *key_tab = (volatile uint8_t *)(uintptr_t)VA_LB_KEY_ON_TABLE;
+                    volatile uint8_t *key_tab = (volatile uint8_t *)(uintptr_t)DK_VA(VA_LB_KEY_ON_TABLE);
                     key_tab[sc] = 1;
                     DK_MEM_U8(VA_LB_INKEY)  = sc;
                     DK_MEM_U8(VA_LB_IINKEY) = sc;
@@ -471,7 +499,7 @@ static void platform_poll_events(void) {
             } else if (ev.type == SDL_KEYUP) {
                 uint8_t sc = sdl_scancode_to_dk_set1(ev.key.keysym.scancode);
                 if (sc) {
-                    volatile uint8_t *key_tab = (volatile uint8_t *)(uintptr_t)VA_LB_KEY_ON_TABLE;
+                    volatile uint8_t *key_tab = (volatile uint8_t *)(uintptr_t)DK_VA(VA_LB_KEY_ON_TABLE);
                     key_tab[sc] = 0;
                 }
             }
@@ -516,6 +544,11 @@ static void platform_present_frame(int width, int height) {
         fflush(stdout);
         DK_MEM_U8(VA_LB_EXIT_GAME_FLAG) = 1;
         exit(0);
+    }
+
+    if (!g_headless_mode && (g_swap_counter == 1 || g_swap_counter % 300 == 0)) {
+        printf("[Runtime] Interactive running: Frame #%d (%dx%d)\n", g_swap_counter, width, height);
+        fflush(stdout);
     }
 
 #ifdef USE_SDL2
@@ -1105,6 +1138,18 @@ static uint32_t hook_cdtest_ok(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_
     return 1;
 }
 
+static uint32_t hook_ret_one(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    return 1;
+}
+
+/* 0x000fee88: AIL_startup -> prevent DOS hardware interrupt probing */
+static uint32_t hook_ail_startup(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    DK_MEM_U8(VA_LB_NOSOUND_FLAG) = 1;
+    return 1;
+}
+
 /* 0x0efde0: play_smk(const char *fname=EAX, ...) */
 static uint32_t hook_play_smk(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
     (void)edx; (void)ebx; (void)ecx; (void)stack;
@@ -1361,11 +1406,53 @@ static void crash_signal_handler(int sig, siginfo_t *info, void *ucontext) {
 }
 #endif
 
+#ifdef _WIN32
+static LONG WINAPI win32_crash_handler(EXCEPTION_POINTERS *ep) {
+    DWORD code = ep->ExceptionRecord->ExceptionCode;
+    PCONTEXT ctx = ep->ContextRecord;
+    uint32_t eip = (uint32_t)ctx->Eip;
+    uint32_t esp = (uint32_t)ctx->Esp;
+    uint32_t ebp = (uint32_t)ctx->Ebp;
+    uint32_t eax = (uint32_t)ctx->Eax;
+    uint32_t ebx = (uint32_t)ctx->Ebx;
+    uint32_t ecx = (uint32_t)ctx->Ecx;
+    uint32_t edx = (uint32_t)ctx->Edx;
+    uint32_t esi = (uint32_t)ctx->Esi;
+    uint32_t edi = (uint32_t)ctx->Edi;
+    void *fault_addr = (void *)ep->ExceptionRecord->ExceptionInformation[1];
+
+    fprintf(stderr, "\n[CRASH] Windows Exception 0x%08lx at EIP=0x%08x (fault_addr=%p)\n",
+            code, eip, fault_addr);
+    fprintf(stderr, "  EAX=0x%08x EBX=0x%08x ECX=0x%08x EDX=0x%08x\n", eax, ebx, ecx, edx);
+    fprintf(stderr, "  ESI=0x%08x EDI=0x%08x EBP=0x%08x ESP=0x%08x\n", esi, edi, ebp, esp);
+    if (eip >= DK_VA(0x10000) && eip < DK_VA(0x1500f0)) {
+        const uint8_t *inst = (const uint8_t *)(uintptr_t)eip;
+        fprintf(stderr, "  Bytes @ EIP:");
+        for (int i = 0; i < 16; i++) fprintf(stderr, " %02x", inst[i]);
+        fprintf(stderr, "\n");
+    }
+    fprintf(stderr, "  Stack trace (code VAs on stack):\n");
+    const uint32_t *sp = (const uint32_t *)(uintptr_t)esp;
+    int printed = 0;
+    for (int i = 0; i < 128 && printed < 16; i++) {
+        uint32_t val = sp[i];
+        if (val >= DK_VA(0x00010000) && val < DK_VA(0x00150100)) {
+            fprintf(stderr, "    [ESP+0x%03x] = 0x%08x (orig=0x%08x)\n", i * 4, val, val - g_rebase_delta);
+            printed++;
+        }
+    }
+    fflush(stderr);
+    return EXCEPTION_EXECUTE_HANDLER;
+}
+#endif
+
 /* ============================================================================
  * 8. Main Entry Point
  * ============================================================================ */
 int main(int argc, char **argv) {
-#ifndef _WIN32
+#ifdef _WIN32
+    SetUnhandledExceptionFilter(win32_crash_handler);
+#else
     struct sigaction sa;
     memset(&sa, 0, sizeof(sa));
     sa.sa_sigaction = crash_signal_handler;
@@ -1412,9 +1499,21 @@ int main(int argc, char **argv) {
             g_headless_mode = true;
         } else if (strcmp(argv[i], "--verbose-io") == 0) {
             g_verbose_io = true;
-        } else if (dk_argc < 30) {
+        } else if (argv[i][0] == '-' && argv[i][1] != '-' && dk_argc < 30) {
             dk_argv[dk_argc++] = argv[i];
         }
+    }
+
+    /* Ensure -nosound is present to prevent DOS Miles Sound System port I/O */
+    bool has_nosound = false;
+    for (int i = 0; i < dk_argc; i++) {
+        if (strcasecmp(dk_argv[i], "-nosound") == 0) {
+            has_nosound = true;
+            break;
+        }
+    }
+    if (!has_nosound && dk_argc < 30) {
+        dk_argv[dk_argc++] = (char *)"-nosound";
     }
     dk_argv[dk_argc] = NULL;
 
@@ -1523,6 +1622,10 @@ int main(int argc, char **argv) {
     dk_install_hook(0x000f7786, hook_int386_safety);
     dk_install_hook(0x000fed45, hook_int386_safety);
 
+    dk_install_hook(0x000fee88, hook_ail_startup);
+    dk_install_hook(0x001145bf, hook_ret_one);
+    dk_install_hook(0x000f98ca, hook_ret_one);
+
     /* Patch 0x00065724 (pom_benchmark) to `fld1; ret` (D9 E8 C3) so it returns 1.0 in ST(0) without port 0x43 IO */
     uint8_t *bench_ptr = (uint8_t *)(uintptr_t)DK_VA(0x00065724);
     bench_ptr[0] = 0xD9; bench_ptr[1] = 0xE8; bench_ptr[2] = 0xC3;
@@ -1530,6 +1633,7 @@ int main(int argc, char **argv) {
     /* If --level <N> was passed, enable direct level boot (bit 1 of g_game_operation_flags @ 0x0019d0b8) */
     if (g_start_level > 0) {
         DK_MEM_U8(0x0019d0b8)  |= 0x02;
+        DK_MEM_U8(0x002e78ea)   = (uint8_t)g_start_level;
         DK_MEM_U32(0x00063637)  = (uint32_t)g_start_level;
     }
 
