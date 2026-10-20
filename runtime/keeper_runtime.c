@@ -1005,6 +1005,13 @@ static void platform_present_frame(int width, int height) {
                     : "ecx", "edx", "ebx", "esi", "edi", "memory"
                 );
             }
+        } else if (g_swap_counter == 70) {
+            if (g_net_cli_is_client) {
+                printf("[Network] Auto-joining room (calling Join handler)...\n");
+                fflush(stdout);
+                typedef void (*fn_join_t)(void);
+                ((fn_join_t)(uintptr_t)DK_VA(0x000349d9))();
+            }
         }
     }
 
@@ -2856,20 +2863,72 @@ static uint32_t hook_LbNetwork_Create(uint32_t eax, uint32_t edx, uint32_t ebx, 
         }
     }
 
+    /* Reset session selection when entering host room (Screen 6) so session widgets don't dereference NULL */
+    DK_MEM_S32(0x003359ab) = -1;
+    DK_MEM_S32(0x003359af) = -1;
+
     return 0;
 }
 
+#pragma pack(push, 1)
 typedef struct {
-    uint8_t flags;
-    uint32_t session_id;
-    uint32_t reserved;
-    char name[51];
-    char host_ip[32];
-    uint16_t host_port;
+    uint8_t flags;       /* offset 0 */
+    uint32_t session_id; /* offset 1 */
+    uint32_t reserved;   /* offset 5 */
+    char name[51];       /* offset 9 */
+    char host_ip[32];    /* offset 60 */
+    uint16_t host_port;  /* offset 92 */
 } dk_gui_session_entry_t;
+#pragma pack(pop)
 
 static dk_gui_session_entry_t s_gui_sessions[16];
 static dk_gui_session_entry_t s_empty_session = {0, 0, 0, "", "", 0};
+
+/* Safe hook for FUN_20034ea2 (selected session text renderer)
+ * Prevents dereferencing (str + 9) when str is NULL / unselected. */
+static uint32_t hook_gui_render_selected_session(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)edx; (void)ebx; (void)ecx; (void)stack;
+    int32_t sel_idx = DK_MEM_S32(0x003359ab);
+    int32_t count = DK_MEM_S32(0x003359a3);
+    const char *str = NULL;
+    if (sel_idx >= 0 && sel_idx < count) {
+        uint32_t sess_ptr = DK_MEM_U32(0x00335923 + sel_idx * 4);
+        if (sess_ptr) {
+            const char *cand = (const char *)dk_to_host_ptr(sess_ptr);
+            if (cand) {
+                cand += 9; /* name is at offset 9 */
+                if (*cand) {
+                    str = cand;
+                }
+            }
+        }
+    }
+
+    uint8_t *ctrl_ptr = (uint8_t *)dk_to_host_ptr(eax);
+    if (!ctrl_ptr) return 0;
+
+    uint32_t ctrl_id = *(uint32_t *)(ctrl_ptr + 0x33);
+    uint8_t *font_table = (uint8_t *)dk_to_host_ptr(0x0017ad09);
+    uint32_t font_id = font_table ? (uint32_t)font_table[ctrl_id * 3] : 0;
+
+    uint32_t target_fn = DK_VA(0x0003378f);
+    __asm__ __volatile__(
+        "push %%ebx\n\t"
+        "push %%edx\n\t"
+        "push %%ecx\n\t"
+        "movl %0, %%eax\n\t"
+        "movl %1, %%edx\n\t"
+        "movl %2, %%ebx\n\t"
+        "call *%3\n\t"
+        "pop %%ecx\n\t"
+        "pop %%edx\n\t"
+        "pop %%ebx\n\t"
+        :
+        : "r"(eax), "r"(font_id), "r"(str), "r"(target_fn)
+        : "eax", "memory"
+    );
+    return 0;
+}
 
 static uint32_t hook_LbNetwork_Join(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
     (void)edx; (void)ecx; (void)stack;
@@ -3005,7 +3064,7 @@ static uint32_t hook_LbNetwork_EnumerateSessions(uint32_t eax, uint32_t edx, uin
     int32_t active_count = DK_MEM_S32(0x003359a3);
     if (active_count > 0 && (DK_MEM_S32(0x003359ab) < 0 || DK_MEM_S32(0x003359ab) >= active_count)) {
         DK_MEM_S32(0x003359ab) = 0;
-        DK_MEM_U32(0x003359af) = *(uint32_t *)((char *)&s_gui_sessions[0] + 1);
+        DK_MEM_U32(0x003359af) = s_gui_sessions[0].session_id;
     }
     fflush(stdout);
     return 0;
@@ -3453,6 +3512,7 @@ int main(int argc, char **argv) {
     dk_install_hook(0x000f3b50, hook_LbNetwork_Send);
     dk_install_hook(0x000f3ed8, hook_LbNetwork_Receive);
     dk_install_hook(0x00033ead, hook_frontnet_LbNetwork_EnumerateServices);
+    dk_install_hook(0x00034ea2, hook_gui_render_selected_session);
 
     if (g_net_cli_is_host) {
         dk_net_start_host(g_net_cli_port ? g_net_cli_port : DK_NET_DEFAULT_PORT, "DK Internet Realm", g_net_cli_player_name);
