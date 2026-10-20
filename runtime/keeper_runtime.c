@@ -1026,6 +1026,8 @@ static void platform_present_frame(int width, int height) {
                 } else if (g_net_cli_is_client || g_test_multiplayer_gui) {
                     int32_t sel = DK_MEM_S32(0x003359ab);
                     int32_t count = DK_MEM_S32(0x003359a3);
+                    printf("[DEBUG-Scr5] count=%d sel=%d delay=%d\n", count, sel, s_nav_delay);
+                    fflush(stdout);
                     if (count > 0 && sel >= 0) {
                         s_nav_delay++;
                         if (s_nav_delay >= 2) {
