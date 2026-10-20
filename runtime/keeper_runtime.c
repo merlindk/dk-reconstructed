@@ -992,17 +992,23 @@ static void platform_present_frame(int width, int height) {
                 : "r"(target_fn)
                 : "ecx", "edx", "ebx", "esi", "edi", "memory"
             );
-        } else if (g_swap_counter == 60) {
-            if (g_net_cli_is_host) {
+        } else if (g_swap_counter >= 60) {
+            if (g_net_cli_is_host && g_swap_counter == 60) {
                 printf("[Network] Auto-hosting room (calling Create handler)...\n");
                 fflush(stdout);
                 typedef void (*fn_action_t)(void);
                 ((fn_action_t)(uintptr_t)DK_VA(0x00034a8a))();
             } else if (g_net_cli_is_client || g_test_multiplayer_gui) {
-                printf("[Network] Auto-joining room (calling Join handler)...\n");
-                fflush(stdout);
-                typedef void (*fn_action_t)(void);
-                ((fn_action_t)(uintptr_t)DK_VA(0x000349d9))();
+                static bool s_auto_joined = false;
+                int32_t sel = DK_MEM_S32(0x003359ab);
+                int32_t count = DK_MEM_S32(0x003359a3);
+                if (!s_auto_joined && count > 0 && sel >= 0) {
+                    s_auto_joined = true;
+                    printf("[Network] Auto-joining room (calling Join handler, count=%d, sel=%d)...\n", count, sel);
+                    fflush(stdout);
+                    typedef void (*fn_action_t)(void);
+                    ((fn_action_t)(uintptr_t)DK_VA(0x000349d9))();
+                }
             }
         }
     }
