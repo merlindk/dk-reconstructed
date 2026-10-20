@@ -3221,6 +3221,31 @@ static uint32_t hook_frontnet_validate_start_game(uint32_t eax, uint32_t edx, ui
     return 1;
 }
 
+static uint32_t hook_FUN_00052934(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    if (DK_MEM_U8(0x003358f3) != 0x01) {
+        printf("[Debug] In 0x52934: 0x%02x\n", DK_MEM_U8(0x003358f3));
+        fflush(stdout);
+    }
+    typedef void (*fn_t)(void);
+    ((fn_t)(uintptr_t)DK_VA(0x000529b9))();
+    ((fn_t)(uintptr_t)DK_VA(0x00052a88))();
+    ((fn_t)(uintptr_t)DK_VA(0x00052957))();
+    ((fn_t)(uintptr_t)DK_VA(0x00052988))();
+    DK_MEM_U8(0x003d987b) = 0;
+    DK_MEM_U8(0x003d987c) = 0;
+    if (DK_MEM_U8(0x003358f3) != 0x01) {
+        printf("[Debug] After 0x52934: 0x%02x\n", DK_MEM_U8(0x003358f3));
+        fflush(stdout);
+    }
+    return 0;
+}
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    printf("[Network] hook_frontnet_validate_start_game: Start Game approved for all players!\n");
+    fflush(stdout);
+    return 1;
+}
+
 static uint32_t hook_LbNetwork_StartExchange(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
     (void)edx; (void)ebx; (void)ecx; (void)stack;
     uint32_t turn = DK_MEM_U32(0x0019e314);
@@ -3893,6 +3918,7 @@ int main(int argc, char **argv) {
     dk_install_hook(0x00034ea2, hook_gui_render_selected_session);
     dk_install_hook(0x00035ce2, hook_frontnet_validate_start_game);
     dk_install_hook(0x00035e19, hook_frontnet_show_joining_box);
+    dk_install_hook(0x00052934, hook_FUN_00052934);
 
 
     /* Patch 0x00065724 (pom_benchmark) to `fld1; ret` (D9 E8 C3) so it returns 1.0 in ST(0) without port 0x43 IO */
