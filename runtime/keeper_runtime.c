@@ -1054,13 +1054,20 @@ static void platform_present_frame(int width, int height) {
                     DK_MEM_S32(0x003359ab) = 0;
                     DK_MEM_U32(0x003359af) = 1;
 
-                    if (s_nav_delay >= 2) {
-                        printf("[Network] Auto-joining room (calling Join handler for %s:%u)...\n",
-                               g_net_cli_host_ip, g_net_cli_port ? g_net_cli_port : DK_NET_DEFAULT_PORT);
+                    if (g_net_cli_player_name[0] != '\0') {
+                        char *un1 = (char *)dk_to_host_ptr(0x0017b976);
+                        if (un1) snprintf(un1, 32, "%s", g_net_cli_player_name);
+                        char *un2 = (char *)dk_to_host_ptr(0x003359b3);
+                        if (un2) snprintf(un2, 32, "%s", g_net_cli_player_name);
+                    }
+
+                    if (s_nav_delay == 2 || (s_nav_delay > 60 && (s_nav_delay % 60 == 0))) {
+                        printf("[Network] Auto-joining room (calling Join handler for %s:%u as '%s')...\n",
+                               g_net_cli_host_ip, g_net_cli_port ? g_net_cli_port : DK_NET_DEFAULT_PORT,
+                               (g_net_cli_player_name[0] != '\0') ? g_net_cli_player_name : "Keeper");
                         fflush(stdout);
                         typedef void (*fn_action_t)(void);
                         ((fn_action_t)(uintptr_t)DK_VA(0x000349d9))();
-                        s_nav_delay = 0;
                     }
                 } else if (g_test_multiplayer_gui) {
                     int32_t sel = DK_MEM_S32(0x003359ab);
@@ -2914,11 +2921,12 @@ static uint32_t hook_LbNetwork_Init(uint32_t eax, uint32_t edx, uint32_t ebx, ui
 }
 
 static const char *get_active_player_name(void) {
+    if (g_net_cli_player_name[0] != '\0') return g_net_cli_player_name;
     const char *n = (const char *)dk_to_host_ptr(0x003359b3);
     if (n && n[0] != '\0') return n;
     n = (const char *)dk_to_host_ptr(0x0017b976);
     if (n && n[0] != '\0') return n;
-    return (g_net_cli_player_name[0] != '\0') ? g_net_cli_player_name : "Keeper";
+    return "Keeper";
 }
 
 static void call_watcom3(uint32_t fn, uint32_t a, uint32_t d, uint32_t b) {
@@ -3083,9 +3091,16 @@ static uint32_t hook_LbNetwork_Create(uint32_t eax, uint32_t edx, uint32_t ebx, 
 
 static uint32_t hook_LbNetwork_Join(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
     (void)ecx; (void)stack;
-    const char *p_user = edx ? (const char *)dk_to_host_ptr(edx) : NULL;
+    const char *p_user = NULL;
+    if (g_net_cli_player_name[0] != '\0') {
+        p_user = g_net_cli_player_name;
+    } else if (edx) {
+        p_user = (const char *)dk_to_host_ptr(edx);
+    }
     if (!p_user || !*p_user) p_user = get_active_player_name();
-    if (p_user && *p_user) snprintf(g_net_cli_player_name, sizeof(g_net_cli_player_name), "%s", p_user);
+    if (p_user && *p_user && g_net_cli_player_name[0] == '\0') {
+        snprintf(g_net_cli_player_name, sizeof(g_net_cli_player_name), "%s", p_user);
+    }
 
     const char *target_ip = (g_net_cli_host_ip[0] != '\0') ? g_net_cli_host_ip : "127.0.0.1";
     uint16_t target_port = g_net_cli_port ? g_net_cli_port : DK_NET_DEFAULT_PORT;
@@ -3412,11 +3427,11 @@ static uint32_t hook_frontnet_LbNetwork_EnumerateServices(uint32_t eax, uint32_t
     DK_MEM_U32(0x003337eb) = (uint32_t)(uintptr_t)g_net_cli_player_name;
 
     char *user_name_buf = (char *)dk_to_host_ptr(0x0017b976);
-    if (user_name_buf && user_name_buf[0] == '\0') {
+    if (user_name_buf && g_net_cli_player_name[0] != '\0') {
         snprintf(user_name_buf, 32, "%s", g_net_cli_player_name);
     }
     char *user_name_buf2 = (char *)dk_to_host_ptr(0x003359b3);
-    if (user_name_buf2 && user_name_buf2[0] == '\0') {
+    if (user_name_buf2 && g_net_cli_player_name[0] != '\0') {
         snprintf(user_name_buf2, 32, "%s", g_net_cli_player_name);
     }
 
