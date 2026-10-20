@@ -63,6 +63,7 @@ static uint16_t g_net_cli_port = 0;
 static bool     g_net_cli_is_host = false;
 static bool     g_net_cli_is_client = false;
 static char     g_net_cli_player_name[32] = "";
+static bool     g_frontend_ready = false;
 
 /* 32-bit RGB palette converted from 6-bit VGA (0..63 -> 0..255) */
 static uint8_t  g_vga_palette_6bit[768];
@@ -1549,9 +1550,6 @@ static uint32_t hook_setup_show_bullfrog_legal_splash(uint32_t eax, uint32_t edx
     fflush(stdout);
     return 1;
 }
-
-/* State flag indicating frontend main loop has initialized */
-static bool g_frontend_ready = false;
 
 /* 0x0e7750: LbScreenSetup(__cdecl: mode=stack[0], width=stack[1], height=stack[2], palette=stack[3]) */
 static uint32_t hook_LbScreenSetup(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
