@@ -95,6 +95,7 @@ typedef struct {
     uint8_t  type;           /* 1 = PING/QUERY, 2 = PONG/RESPONSE */
     char     host_name[DK_NET_PLAYER_NAME_LEN];
     char     game_name[DK_NET_GAME_NAME_LEN];
+    char     host_ip[32];
     uint16_t port;
     uint8_t  current_players;
     uint8_t  max_players;

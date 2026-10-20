@@ -540,6 +540,9 @@ void dk_net_update(void) {
                     sendto(g_udp_sock, (const char *)&resp, sizeof(resp), 0, (struct sockaddr *)&from, from_len);
                 } else if (bcast.type == 2) {
                     /* Record discovered game */
+                    char ip_str[32] = {0};
+                    const char *p = inet_ntop(AF_INET, &from.sin_addr, ip_str, sizeof(ip_str));
+                    snprintf(bcast.host_ip, sizeof(bcast.host_ip), "%s", p ? p : "127.0.0.1");
                     bool found = false;
                     for (int g = 0; g < g_lan_game_count; g++) {
                         if (strcmp(g_lan_games[g].game_name, bcast.game_name) == 0) {
@@ -687,6 +690,7 @@ int dk_net_master_fetch_games(dk_lan_broadcast_t *out_games, int max_games) {
                name, &port, &players, &max_p, &lvl);
 
         snprintf(g->game_name, sizeof(g->game_name), "%s", name);
+        snprintf(g->host_ip, sizeof(g->host_ip), "%s", g_master_host);
         g->port            = (uint16_t)port;
         g->current_players = (uint8_t)players;
         g->max_players     = (uint8_t)max_p;
