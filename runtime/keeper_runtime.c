@@ -1003,9 +1003,17 @@ static void platform_present_frame(int width, int height) {
             s_host_ready_frames++;
             if (s_host_ready_frames == 30) {
                 printf("[Test] Host simulating click on 'Start Game' (calling 0x0003562b)...\n");
+                printf("[Test] Before click: my_player=%d, 0x203358f3[0]=0x%02x, [1]=0x%02x\n",
+                       DK_MEM_U8(0x002f10d1),
+                       DK_MEM_U8(0x003358f3),
+                       DK_MEM_U8(0x003358ff));
+                typedef uint32_t (*fn_t)(void);
+                uint32_t ret = ((fn_t)(uintptr_t)DK_VA(0x0003562b))();
+                printf("[Test] After click: ret=%u, 0x203358f3[0]=0x%02x, [1]=0x%02x\n",
+                       ret,
+                       DK_MEM_U8(0x003358f3),
+                       DK_MEM_U8(0x003358ff));
                 fflush(stdout);
-                typedef void (*fn_t)(void);
-                ((fn_t)(uintptr_t)DK_VA(0x0003562b))();
             }
         }
 
@@ -3218,6 +3226,14 @@ static uint32_t hook_LbNetwork_StartExchange(uint32_t eax, uint32_t edx, uint32_
         /* Screen 6 (Lobby) & Screen 24 (Map / Level Loading) 12-byte exchange */
         uint8_t local_id = dk_net_get_local_player_id();
         uint8_t *lobby_tbl = (uint8_t *)dk_to_host_ptr(0x003358ef);
+
+        static int s_exch_print_count = 0;
+        if (s_exch_print_count < 10 || (eax && (((uint8_t*)dk_to_host_ptr(eax))[4] >> 3) != 0)) {
+            s_exch_print_count++;
+            printf("[Exchange] Screen %u local_id=%u, eax=0x%08x, pkt[4]=0x%02x\n",
+                   curr_screen, local_id, eax, eax ? ((uint8_t*)dk_to_host_ptr(eax))[4] : 0);
+            fflush(stdout);
+        }
 
         if (eax && lobby_tbl) {
             uint8_t *local_pkt = (uint8_t *)dk_to_host_ptr(eax);
