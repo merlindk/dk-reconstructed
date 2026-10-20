@@ -33,7 +33,7 @@ class MasterServerHandler(BaseHTTPRequestHandler):
         prune_stale_games()
         parsed = urlparse(self.path)
 
-        if parsed.path == "/api/games/list":
+        if parsed.path in ("/api/games/list", "/api/games"):
             game_list = list(GAMES.values())
             self._send_json(200, game_list)
         elif parsed.path == "/api/health" or parsed.path == "/":

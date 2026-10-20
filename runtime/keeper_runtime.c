@@ -969,7 +969,7 @@ static void platform_present_frame(int width, int height) {
         }
     }
 
-    if (g_test_multiplayer_gui) {
+    if (g_test_multiplayer_gui || g_net_cli_is_client || g_net_cli_is_host) {
         if (g_swap_counter == 40) {
             printf("[Network] Auto-navigating to Multiplayer Services (screen 4)...\n");
             fflush(stdout);
@@ -994,23 +994,15 @@ static void platform_present_frame(int width, int height) {
             );
         } else if (g_swap_counter == 60) {
             if (g_net_cli_is_host) {
-                printf("[Network] Auto-hosting room (screen 6)...\n");
+                printf("[Network] Auto-hosting room (calling Create handler)...\n");
                 fflush(stdout);
-                uint32_t eax = 6;
-                uint32_t target_fn = DK_VA(0x0002e8a7);
-                __asm__ __volatile__(
-                    "call *%1"
-                    : "+a"(eax)
-                    : "r"(target_fn)
-                    : "ecx", "edx", "ebx", "esi", "edi", "memory"
-                );
-            }
-        } else if (g_swap_counter == 70) {
-            if (g_net_cli_is_client) {
+                typedef void (*fn_action_t)(void);
+                ((fn_action_t)(uintptr_t)DK_VA(0x00034a8a))();
+            } else if (g_net_cli_is_client || g_test_multiplayer_gui) {
                 printf("[Network] Auto-joining room (calling Join handler)...\n");
                 fflush(stdout);
-                typedef void (*fn_join_t)(void);
-                ((fn_join_t)(uintptr_t)DK_VA(0x000349d9))();
+                typedef void (*fn_action_t)(void);
+                ((fn_action_t)(uintptr_t)DK_VA(0x000349d9))();
             }
         }
     }
@@ -2839,12 +2831,6 @@ static uint32_t hook_LbNetwork_Init(uint32_t eax, uint32_t edx, uint32_t ebx, ui
     void *local_buf = exchange_buf ? dk_to_host_ptr(exchange_buf) : NULL;
     dk_net_set_exchange_params(local_buf, packet_size, g_net_composite_storage, (int)max_players);
 
-    if (g_net_cli_is_host) {
-        dk_net_start_host(g_net_cli_port ? g_net_cli_port : DK_NET_DEFAULT_PORT, "DK Internet Realm", g_net_cli_player_name);
-    } else if (g_net_cli_is_client) {
-        dk_net_connect_to_host(g_net_cli_host_ip, g_net_cli_port ? g_net_cli_port : DK_NET_DEFAULT_PORT, g_net_cli_player_name);
-    }
-
     return 0;
 }
 
@@ -3000,7 +2986,15 @@ static uint32_t hook_LbNetwork_Join(uint32_t eax, uint32_t edx, uint32_t ebx, ui
     const char *target_ip = (g_net_cli_host_ip[0] != '\0') ? g_net_cli_host_ip : "127.0.0.1";
     uint16_t target_port = g_net_cli_port ? g_net_cli_port : DK_NET_DEFAULT_PORT;
 
-    if (eax >= (uintptr_t)s_gui_sessions && eax < (uintptr_t)(s_gui_sessions + 16)) {
+    int32_t sel = DK_MEM_S32(0x003359ab);
+    if (sel >= 0 && sel < 16 && s_gui_sessions[sel].session_id != 0) {
+        if (s_gui_sessions[sel].host_ip[0] != '\0') {
+            target_ip = s_gui_sessions[sel].host_ip;
+        }
+        if (s_gui_sessions[sel].host_port != 0) {
+            target_port = s_gui_sessions[sel].host_port;
+        }
+    } else if (eax >= (uintptr_t)s_gui_sessions && eax < (uintptr_t)(s_gui_sessions + 16)) {
         dk_gui_session_entry_t *entry = (dk_gui_session_entry_t *)(uintptr_t)eax;
         if (entry->host_ip[0] != '\0') {
             target_ip = entry->host_ip;
@@ -3084,19 +3078,43 @@ static uint32_t hook_LbNetwork_EnumerateSessions(uint32_t eax, uint32_t edx, uin
 
     dk_lan_broadcast_t games[16];
     int count = dk_net_lan_get_discovered_games(games, 16);
-    if (count == 0 && should_query) {
-        count = dk_net_master_fetch_games(games, 16);
+
+    /* Fetch from master server (handles internal 2-second caching) */
+    dk_lan_broadcast_t master_games[16];
+    int mcount = dk_net_master_fetch_games(master_games, 16);
+    for (int m = 0; m < mcount && count < 16; m++) {
+        bool dup = false;
+        for (int l = 0; l < count; l++) {
+            if ((strcmp(games[l].host_ip, master_games[m].host_ip) == 0 &&
+                 games[l].port == master_games[m].port) ||
+                strcmp(games[l].game_name, master_games[m].game_name) == 0) {
+                dup = true;
+                break;
+            }
+        }
+        if (!dup) {
+            games[count++] = master_games[m];
+        }
     }
 
-    /* If CLI target was specified (--connect <ip>), provide it as entry */
-    if (count == 0 && g_net_cli_host_ip[0] != '\0') {
-        count = 1;
-        memset(&games[0], 0, sizeof(games[0]));
-        snprintf(games[0].game_name, sizeof(games[0].game_name), "Direct (%s)", g_net_cli_host_ip);
-        snprintf(games[0].host_ip, sizeof(games[0].host_ip), "%s", g_net_cli_host_ip);
-        games[0].port = g_net_cli_port ? g_net_cli_port : DK_NET_DEFAULT_PORT;
-        games[0].current_players = 1;
-        games[0].max_players = 4;
+    /* If CLI target was specified (--connect <ip>), ensure it's in the list */
+    if (g_net_cli_host_ip[0] != '\0') {
+        bool found = false;
+        for (int i = 0; i < count; i++) {
+            if (strcmp(games[i].host_ip, g_net_cli_host_ip) == 0) {
+                found = true;
+                break;
+            }
+        }
+        if (!found && count < 16) {
+            memset(&games[count], 0, sizeof(games[count]));
+            snprintf(games[count].game_name, sizeof(games[count].game_name), "Direct (%s)", g_net_cli_host_ip);
+            snprintf(games[count].host_ip, sizeof(games[count].host_ip), "%s", g_net_cli_host_ip);
+            games[count].port = g_net_cli_port ? g_net_cli_port : DK_NET_DEFAULT_PORT;
+            games[count].current_players = 1;
+            games[count].max_players = 4;
+            count++;
+        }
     }
 
     if (count > 0) {
@@ -3208,6 +3226,12 @@ static uint32_t hook_LbNetwork_EnumeratePlayers(uint32_t eax, uint32_t edx, uint
                 snprintf(pinfo.player_name, sizeof(pinfo.player_name), "%s", name);
                 if (cb) cb(&pinfo, &pinfo);
                 if (player_table) snprintf(player_table + count * 20, 20, "%s", name);
+                if (pbuf) {
+                    char *slot = pbuf + i * 36;
+                    memset(slot, 0, 36);
+                    snprintf(slot, 32, "%s", name);
+                    *(uint32_t *)(slot + 32) = 1;
+                }
                 count++;
             }
         }
@@ -3638,11 +3662,6 @@ int main(int argc, char **argv) {
     dk_install_hook(0x00033ead, hook_frontnet_LbNetwork_EnumerateServices);
     dk_install_hook(0x00034ea2, hook_gui_render_selected_session);
 
-    if (g_net_cli_is_host) {
-        dk_net_start_host(g_net_cli_port ? g_net_cli_port : DK_NET_DEFAULT_PORT, "DK Internet Realm", g_net_cli_player_name);
-    } else if (g_net_cli_is_client) {
-        dk_net_connect_to_host(g_net_cli_host_ip, g_net_cli_port ? g_net_cli_port : DK_NET_DEFAULT_PORT, g_net_cli_player_name);
-    }
 
     /* Patch 0x00065724 (pom_benchmark) to `fld1; ret` (D9 E8 C3) so it returns 1.0 in ST(0) without port 0x43 IO */
     uint8_t *bench_ptr = (uint8_t *)(uintptr_t)DK_VA(0x00065724);

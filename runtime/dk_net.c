@@ -692,6 +692,34 @@ static uint32_t           g_last_master_fetch_ms = 0;
 static dk_lan_broadcast_t g_master_cached_games[16];
 static int                g_master_cached_count = 0;
 
+static const char *json_find_key(const char *obj, const char *key) {
+    char needle[64];
+    snprintf(needle, sizeof(needle), "\"%s\"", key);
+    const char *p = strstr(obj, needle);
+    if (!p) return NULL;
+    p += strlen(needle);
+    while (*p == ' ' || *p == '\t' || *p == ':') p++;
+    return p;
+}
+
+static void json_parse_string(const char *p, char *out, size_t max_len) {
+    if (!p || *p != '"') {
+        if (out && max_len > 0) out[0] = '\0';
+        return;
+    }
+    p++;
+    size_t i = 0;
+    while (*p && *p != '"' && i + 1 < max_len) {
+        out[i++] = *p++;
+    }
+    out[i] = '\0';
+}
+
+static int json_parse_int(const char *p) {
+    if (!p) return 0;
+    return atoi(p);
+}
+
 int dk_net_master_fetch_games(dk_lan_broadcast_t *out_games, int max_games) {
     uint32_t now = get_ticks_ms();
     if (g_last_master_fetch_ms != 0 && (now - g_last_master_fetch_ms < 2000)) {
@@ -744,8 +772,11 @@ int dk_net_master_fetch_games(dk_lan_broadcast_t *out_games, int max_games) {
 
     /* Robust JSON parser for game entries */
     int count = 0;
-    char *entry = strstr(json, "{\"name\":\"");
+    char *entry = strchr(json, '{');
     while (entry && count < max_games) {
+        char *end_obj = strchr(entry, '}');
+        if (!end_obj) break;
+
         dk_lan_broadcast_t *g = &out_games[count];
         memset(g, 0, sizeof(*g));
         g->magic = DK_NET_MAGIC;
@@ -754,18 +785,23 @@ int dk_net_master_fetch_games(dk_lan_broadcast_t *out_games, int max_games) {
         char ip[32] = {0};
         int port = DK_NET_DEFAULT_PORT, players = 1, max_p = 4, lvl = 1;
 
-        char *p_name = strstr(entry, "\"name\":\"");
-        if (p_name) sscanf(p_name, "\"name\":\"%31[^\"]\"", name);
-        char *p_ip = strstr(entry, "\"ip\":\"");
-        if (p_ip) sscanf(p_ip, "\"ip\":\"%31[^\"]\"", ip);
-        char *p_port = strstr(entry, "\"port\":");
-        if (p_port) sscanf(p_port, "\"port\":%d", &port);
-        char *p_players = strstr(entry, "\"players\":");
-        if (p_players) sscanf(p_players, "\"players\":%d", &players);
-        char *p_max = strstr(entry, "\"max_players\":");
-        if (p_max) sscanf(p_max, "\"max_players\":%d", &max_p);
-        char *p_lvl = strstr(entry, "\"level\":");
-        if (p_lvl) sscanf(p_lvl, "\"level\":%d", &lvl);
+        const char *p_name = json_find_key(entry, "name");
+        if (p_name && p_name < end_obj) json_parse_string(p_name, name, sizeof(name));
+
+        const char *p_ip = json_find_key(entry, "ip");
+        if (p_ip && p_ip < end_obj) json_parse_string(p_ip, ip, sizeof(ip));
+
+        const char *p_port = json_find_key(entry, "port");
+        if (p_port && p_port < end_obj) port = json_parse_int(p_port);
+
+        const char *p_players = json_find_key(entry, "players");
+        if (p_players && p_players < end_obj) players = json_parse_int(p_players);
+
+        const char *p_max = json_find_key(entry, "max_players");
+        if (p_max && p_max < end_obj) max_p = json_parse_int(p_max);
+
+        const char *p_lvl = json_find_key(entry, "level");
+        if (p_lvl && p_lvl < end_obj) lvl = json_parse_int(p_lvl);
 
         snprintf(g->game_name, sizeof(g->game_name), "%s", name);
         snprintf(g->host_ip, sizeof(g->host_ip), "%s", (ip[0] != '\0') ? ip : g_master_host);
@@ -775,7 +811,7 @@ int dk_net_master_fetch_games(dk_lan_broadcast_t *out_games, int max_games) {
         g->level_number    = (uint16_t)lvl;
         count++;
 
-        entry = strstr(entry + 1, "{\"name\":\"");
+        entry = strchr(end_obj + 1, '{');
     }
 
     g_master_cached_count = count;
@@ -787,7 +823,7 @@ int dk_net_master_fetch_games(dk_lan_broadcast_t *out_games, int max_games) {
 
 void dk_net_master_heartbeat(void) {
     if (g_net_state != DK_NET_STATE_HOSTING) return;
-    dk_net_master_register_game(g_session_name, DK_NET_DEFAULT_PORT, dk_net_get_player_count(), 4, 1);
+    dk_net_master_register_game(g_session_name, g_listen_port ? g_listen_port : DK_NET_DEFAULT_PORT, dk_net_get_player_count(), 4, 1);
 }
 
 void dk_net_master_unregister(void) {
