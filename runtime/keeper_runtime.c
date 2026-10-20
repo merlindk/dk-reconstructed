@@ -57,6 +57,13 @@ static bool g_test_start_game = false; /* Simulate click on Start New Game */
 static bool g_test_multiplayer_gui = false; /* Simulate click on Multiplayer */
 static bool g_fullscreen      = true;  /* Fullscreen by default */
 
+/* CLI Network Parameters */
+static char     g_net_cli_host_ip[128] = "";
+static uint16_t g_net_cli_port = 0;
+static bool     g_net_cli_is_host = false;
+static bool     g_net_cli_is_client = false;
+static char     g_net_cli_player_name[32] = "DungeonKeeper";
+
 /* 32-bit RGB palette converted from 6-bit VGA (0..63 -> 0..255) */
 static uint8_t  g_vga_palette_6bit[768];
 static uint32_t g_argb_palette[256];
@@ -962,9 +969,9 @@ static void platform_present_frame(int width, int height) {
         }
     }
 
-    if (g_test_multiplayer_gui) {
+    if (g_test_multiplayer_gui || g_net_cli_is_host || g_net_cli_is_client) {
         if (g_swap_counter == 40) {
-            printf("[TestGUI] Frame 40: Triggering Multiplayer Menu (front_menu_set_screen(4))...\n");
+            printf("[Network] Auto-navigating to Multiplayer Services (screen 4)...\n");
             fflush(stdout);
             uint32_t eax = 4;
             uint32_t target_fn = DK_VA(0x0002e8a7);
@@ -974,8 +981,8 @@ static void platform_present_frame(int width, int height) {
                 : "r"(target_fn)
                 : "ecx", "edx", "ebx", "esi", "edi", "memory"
             );
-        } else if (g_swap_counter == 55) {
-            printf("[TestGUI] Frame 55: Selecting TCP/IP Internet & LAN (frontnet_init_service(2))...\n");
+        } else if (g_swap_counter == 50) {
+            printf("[Network] Auto-selecting TCP/IP Internet & LAN (service 2)...\n");
             fflush(stdout);
             uint32_t eax = 2;
             uint32_t target_fn = DK_VA(0x0003315b);
@@ -985,6 +992,19 @@ static void platform_present_frame(int width, int height) {
                 : "r"(target_fn)
                 : "ecx", "edx", "ebx", "esi", "edi", "memory"
             );
+        } else if (g_swap_counter == 60) {
+            if (g_net_cli_is_host) {
+                printf("[Network] Auto-hosting room (screen 6)...\n");
+                fflush(stdout);
+                uint32_t eax = 6;
+                uint32_t target_fn = DK_VA(0x0002e8a7);
+                __asm__ __volatile__(
+                    "call *%1"
+                    : "+a"(eax)
+                    : "r"(target_fn)
+                    : "ecx", "edx", "ebx", "esi", "edi", "memory"
+                );
+            }
         }
     }
 
@@ -2758,11 +2778,6 @@ static LONG WINAPI win32_crash_handler(EXCEPTION_POINTERS *ep) {
 /* ============================================================================
  * 7.5. Native Internet & LAN Multiplayer Subsystem Hooks (BFLib LbNetwork)
  * ============================================================================ */
-static char     g_net_cli_host_ip[128] = "";
-static uint16_t g_net_cli_port = 0;
-static bool     g_net_cli_is_host = false;
-static bool     g_net_cli_is_client = false;
-static char     g_net_cli_player_name[32] = "DungeonKeeper";
 static uint8_t  g_net_composite_storage[4 * 1024];
 
 static uint32_t hook_LbNetwork_Init(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
@@ -2985,6 +3000,13 @@ static uint32_t hook_LbNetwork_EnumerateSessions(uint32_t eax, uint32_t edx, uin
 
     printf("[Network] LbNetwork_EnumerateSessions: found %d session(s), session[0]=0x%08x ('%s')\n",
            (int)DK_MEM_S32(0x003359a3), DK_MEM_U32(0x00335923), s_gui_sessions[0].name);
+
+    /* Auto-select slot 0 if nothing selected or index out of range, enabling "Join Game" button */
+    int32_t active_count = DK_MEM_S32(0x003359a3);
+    if (active_count > 0 && (DK_MEM_S32(0x003359ab) < 0 || DK_MEM_S32(0x003359ab) >= active_count)) {
+        DK_MEM_S32(0x003359ab) = 0;
+        DK_MEM_U32(0x003359af) = *(uint32_t *)((char *)&s_gui_sessions[0] + 1);
+    }
     fflush(stdout);
     return 0;
 }
@@ -2995,27 +3017,59 @@ static uint32_t hook_LbNetwork_EnumeratePlayers(uint32_t eax, uint32_t edx, uint
     fn_player_cb_t cb = (fn_player_cb_t)(uintptr_t)edx;
 
     DK_MEM_U32(0x0033607f) = 0;
-    void *player_table = dk_to_host_ptr(DK_VA(0x00335323));
+    char *player_table = (char *)dk_to_host_ptr(DK_VA(0x00335323));
     if (player_table) {
         memset(player_table, 0, 100 * 20);
     }
+
+    /* Pump network packets so client handshakes and turn exchanges progress */
+    dk_net_update();
+
+    uint32_t pbuf_addr = DK_MEM_U32(0x003dd864);
+    char *pbuf = pbuf_addr ? (char *)dk_to_host_ptr(pbuf_addr) : NULL;
 
     struct {
         uint8_t pad[13];
         char player_name[32];
     } pinfo;
-    memset(&pinfo, 0, sizeof(pinfo));
-    snprintf(pinfo.player_name, sizeof(pinfo.player_name), "%s", g_net_cli_player_name);
 
-    if (cb) {
-        cb(&pinfo, &pinfo);
-    } else {
-        DK_MEM_U32(0x0033607f) = 1;
-        if (player_table) {
-            snprintf((char *)player_table, 20, "%s", g_net_cli_player_name);
+    uint32_t count = 0;
+    for (int i = 0; i < DK_NET_MAX_PLAYERS; i++) {
+        char name[32] = {0};
+        bool active = false;
+        if (dk_net_get_peer_info(i, name, sizeof(name), &active) && active) {
+            memset(&pinfo, 0, sizeof(pinfo));
+            snprintf(pinfo.player_name, sizeof(pinfo.player_name), "%s", name);
+            if (cb) {
+                cb(&pinfo, &pinfo);
+            }
+            if (player_table) {
+                snprintf(player_table + count * 20, 20, "%s", name);
+            }
+            if (pbuf) {
+                char *slot = pbuf + i * 36;
+                memset(slot, 0, 36);
+                snprintf(slot, 32, "%s", name);
+                *(uint32_t *)(slot + 32) = 1; /* active */
+            }
+            count++;
         }
     }
 
+    if (count == 0) {
+        memset(&pinfo, 0, sizeof(pinfo));
+        snprintf(pinfo.player_name, sizeof(pinfo.player_name), "%s", g_net_cli_player_name);
+        if (cb) cb(&pinfo, &pinfo);
+        if (player_table) snprintf(player_table, 20, "%s", g_net_cli_player_name);
+        if (pbuf) {
+            memset(pbuf, 0, 36);
+            snprintf(pbuf, 32, "%s", g_net_cli_player_name);
+            *(uint32_t *)(pbuf + 32) = 1;
+        }
+        count = 1;
+    }
+
+    DK_MEM_U32(0x0033607f) = count;
     return 0;
 }
 

@@ -111,6 +111,7 @@ bool dk_net_is_active(void);
 bool dk_net_is_host(void);
 uint8_t dk_net_get_local_player_id(void);
 uint8_t dk_net_get_player_count(void);
+bool dk_net_get_peer_info(int idx, char *out_name, size_t max_name, bool *out_active);
 
 /* Host / Join Actions */
 bool dk_net_start_host(uint16_t port, const char *game_name, const char *player_name);

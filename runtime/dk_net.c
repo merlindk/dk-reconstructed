@@ -41,7 +41,8 @@ static char           g_local_name[DK_NET_PLAYER_NAME_LEN] = "DungeonKeeper";
 static char           g_session_name[DK_NET_GAME_NAME_LEN] = "Evil Realm";
 
 /* TCP Sockets */
-static SOCKET g_listen_sock = INVALID_SOCKET;
+static SOCKET   g_listen_sock = INVALID_SOCKET;
+static uint16_t g_listen_port = DK_NET_DEFAULT_PORT;
 typedef struct {
     SOCKET   sock;
     bool     active;
@@ -57,6 +58,7 @@ static int        g_peer_count = 0;
 /* UDP Socket for LAN Discovery */
 static SOCKET g_udp_sock = INVALID_SOCKET;
 static dk_lan_broadcast_t g_lan_games[16];
+static uint32_t           g_lan_games_seen_ms[16];
 static int                g_lan_game_count = 0;
 static uint32_t           g_last_lan_query_ms = 0;
 
@@ -172,6 +174,17 @@ uint8_t dk_net_get_player_count(void) {
     return count;
 }
 
+bool dk_net_get_peer_info(int idx, char *out_name, size_t max_name, bool *out_active) {
+    if (idx < 0 || idx >= DK_NET_MAX_PLAYERS) return false;
+    if (out_name && max_name > 0) {
+        snprintf(out_name, max_name, "%s", g_peers[idx].name);
+    }
+    if (out_active) {
+        *out_active = g_peers[idx].active;
+    }
+    return g_peers[idx].active;
+}
+
 void dk_net_set_master_server(const char *host, uint16_t port) {
     if (host && *host) snprintf(g_master_host, sizeof(g_master_host), "%s", host);
     if (port > 0) g_master_port = port;
@@ -229,7 +242,8 @@ bool dk_net_start_host(uint16_t port, const char *game_name, const char *player_
     struct sockaddr_in addr;
     memset(&addr, 0, sizeof(addr));
     addr.sin_family      = AF_INET;
-    addr.sin_port        = htons(port ? port : DK_NET_DEFAULT_PORT);
+    g_listen_port = port ? port : DK_NET_DEFAULT_PORT;
+    addr.sin_port        = htons(g_listen_port);
     addr.sin_addr.s_addr = htonl(INADDR_ANY);
 
     if (bind(g_listen_sock, (struct sockaddr *)&addr, sizeof(addr)) == SOCKET_ERROR) {
@@ -528,12 +542,13 @@ void dk_net_update(void) {
                 if (bcast.type == 1 && g_net_state == DK_NET_STATE_HOSTING) {
                     /* Respond to query */
                     dk_lan_broadcast_t resp;
+                    memset(&resp, 0, sizeof(resp));
                     resp.magic           = DK_NET_MAGIC;
                     resp.version         = DK_NET_PROTOCOL_VERSION;
                     resp.type            = 2; /* PONG */
                     snprintf(resp.host_name, sizeof(resp.host_name), "%s", g_local_name);
                     snprintf(resp.game_name, sizeof(resp.game_name), "%s", g_session_name);
-                    resp.port            = htons(DK_NET_DEFAULT_PORT);
+                    resp.port            = g_listen_port ? g_listen_port : DK_NET_DEFAULT_PORT;
                     resp.current_players = dk_net_get_player_count();
                     resp.max_players     = 4;
                     resp.level_number    = 1;
@@ -543,18 +558,40 @@ void dk_net_update(void) {
                     char ip_str[32] = {0};
                     const char *p = inet_ntop(AF_INET, &from.sin_addr, ip_str, sizeof(ip_str));
                     snprintf(bcast.host_ip, sizeof(bcast.host_ip), "%s", p ? p : "127.0.0.1");
+                    uint32_t now_ticks = get_ticks_ms();
                     bool found = false;
                     for (int g = 0; g < g_lan_game_count; g++) {
-                        if (strcmp(g_lan_games[g].game_name, bcast.game_name) == 0) {
+                        if (strcmp(g_lan_games[g].game_name, bcast.game_name) == 0 ||
+                            strcmp(g_lan_games[g].host_ip, bcast.host_ip) == 0) {
                             g_lan_games[g] = bcast;
+                            g_lan_games_seen_ms[g] = now_ticks;
                             found = true;
                             break;
                         }
                     }
                     if (!found && g_lan_game_count < 16) {
+                        g_lan_games_seen_ms[g_lan_game_count] = now_ticks;
                         g_lan_games[g_lan_game_count++] = bcast;
+                        printf("[DKNet] Discovered LAN game: '%s' at %s:%u (Host: %s, Players: %u/%u)\n",
+                               bcast.game_name, bcast.host_ip, bcast.port, bcast.host_name,
+                               bcast.current_players, bcast.max_players);
+                        fflush(stdout);
                     }
                 }
+            }
+        }
+
+        /* Expire LAN games not heard from in 8 seconds */
+        uint32_t now_ticks = get_ticks_ms();
+        for (int g = 0; g < g_lan_game_count; ) {
+            if (now_ticks - g_lan_games_seen_ms[g] > 8000) {
+                for (int j = g; j < g_lan_game_count - 1; j++) {
+                    g_lan_games[j] = g_lan_games[j + 1];
+                    g_lan_games_seen_ms[j] = g_lan_games_seen_ms[j + 1];
+                }
+                g_lan_game_count--;
+            } else {
+                g++;
             }
         }
     }
@@ -569,7 +606,11 @@ void dk_net_update(void) {
 
 void dk_net_lan_broadcast_query(uint16_t port) {
     if (IS_INVALID_SOCKET(g_udp_sock)) return;
-    g_lan_game_count = 0;
+    uint32_t now = get_ticks_ms();
+    if (g_last_lan_query_ms != 0 && (now - g_last_lan_query_ms < 1000)) {
+        return; /* Rate limit discovery queries to 1 per second */
+    }
+    g_last_lan_query_ms = now;
 
     dk_lan_broadcast_t q;
     memset(&q, 0, sizeof(q));
@@ -581,10 +622,18 @@ void dk_net_lan_broadcast_query(uint16_t port) {
     memset(&baddr, 0, sizeof(baddr));
     baddr.sin_family      = AF_INET;
     baddr.sin_port        = htons(port ? port : DK_NET_DEFAULT_PORT);
-    baddr.sin_addr.s_addr = htonl(INADDR_BROADCAST);
 
+    /* 1. Global broadcast */
+    baddr.sin_addr.s_addr = htonl(INADDR_BROADCAST);
     sendto(g_udp_sock, (const char *)&q, sizeof(q), 0, (struct sockaddr *)&baddr, sizeof(baddr));
-    g_last_lan_query_ms = get_ticks_ms();
+
+    /* 2. Common Class-C LAN Subnets (covers multi-adapter setups like WSL/Hyper-V) */
+    baddr.sin_addr.s_addr = inet_addr("192.168.0.255");
+    sendto(g_udp_sock, (const char *)&q, sizeof(q), 0, (struct sockaddr *)&baddr, sizeof(baddr));
+    baddr.sin_addr.s_addr = inet_addr("192.168.1.255");
+    sendto(g_udp_sock, (const char *)&q, sizeof(q), 0, (struct sockaddr *)&baddr, sizeof(baddr));
+    baddr.sin_addr.s_addr = inet_addr("10.0.0.255");
+    sendto(g_udp_sock, (const char *)&q, sizeof(q), 0, (struct sockaddr *)&baddr, sizeof(baddr));
 }
 
 int dk_net_lan_get_discovered_games(dk_lan_broadcast_t *out_games, int max_games) {
