@@ -3241,13 +3241,6 @@ static uint32_t hook_FUN_00052934(uint32_t eax, uint32_t edx, uint32_t ebx, uint
     return 0;
 }
 
-static uint32_t hook_frontnet_validate_start_game(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
-    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
-    printf("[Network] hook_frontnet_validate_start_game: Start Game approved for all players!\n");
-    fflush(stdout);
-    return 1;
-}
-
 static uint32_t hook_LbNetwork_StartExchange(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
     (void)edx; (void)ebx; (void)ecx; (void)stack;
     uint32_t turn = DK_MEM_U32(0x0019e314);
