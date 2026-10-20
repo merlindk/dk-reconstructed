@@ -998,6 +998,17 @@ static void platform_present_frame(int width, int height) {
             s_last_screen = curr_screen;
         }
 
+        if (g_headless_mode && g_net_cli_is_host && curr_screen == 6) {
+            static int s_host_ready_frames = 0;
+            s_host_ready_frames++;
+            if (s_host_ready_frames == 30) {
+                printf("[Test] Host simulating click on 'Start Game' (calling 0x0003562b)...\n");
+                fflush(stdout);
+                typedef void (*fn_t)(void);
+                ((fn_t)(uintptr_t)DK_VA(0x0003562b))();
+            }
+        }
+
         if (!s_auto_nav_complete) {
             if (curr_screen == 6) {
                 s_auto_nav_complete = true;
