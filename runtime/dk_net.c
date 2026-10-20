@@ -627,7 +627,9 @@ void dk_net_lan_broadcast_query(uint16_t port) {
     baddr.sin_addr.s_addr = htonl(INADDR_BROADCAST);
     sendto(g_udp_sock, (const char *)&q, sizeof(q), 0, (struct sockaddr *)&baddr, sizeof(baddr));
 
-    /* 2. Common Class-C LAN Subnets (covers multi-adapter setups like WSL/Hyper-V) */
+    /* 2. Loopback and Common Class-C LAN Subnets (covers local dual-instance & multi-adapter setups) */
+    baddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    sendto(g_udp_sock, (const char *)&q, sizeof(q), 0, (struct sockaddr *)&baddr, sizeof(baddr));
     baddr.sin_addr.s_addr = inet_addr("192.168.0.255");
     sendto(g_udp_sock, (const char *)&q, sizeof(q), 0, (struct sockaddr *)&baddr, sizeof(baddr));
     baddr.sin_addr.s_addr = inet_addr("192.168.1.255");
@@ -686,9 +688,24 @@ bool dk_net_master_register_game(const char *game_name, uint16_t port, uint8_t c
     return true;
 }
 
+static uint32_t           g_last_master_fetch_ms = 0;
+static dk_lan_broadcast_t g_master_cached_games[16];
+static int                g_master_cached_count = 0;
+
 int dk_net_master_fetch_games(dk_lan_broadcast_t *out_games, int max_games) {
+    uint32_t now = get_ticks_ms();
+    if (g_last_master_fetch_ms != 0 && (now - g_last_master_fetch_ms < 2000)) {
+        int count = g_master_cached_count;
+        if (count > max_games) count = max_games;
+        if (count > 0 && out_games) {
+            memcpy(out_games, g_master_cached_games, count * sizeof(dk_lan_broadcast_t));
+        }
+        return count;
+    }
+    g_last_master_fetch_ms = now;
+
     SOCKET s = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-    if (IS_INVALID_SOCKET(s)) return 0;
+    if (IS_INVALID_SOCKET(s)) return g_master_cached_count;
 
     struct sockaddr_in addr;
     memset(&addr, 0, sizeof(addr));
@@ -703,7 +720,7 @@ int dk_net_master_fetch_games(dk_lan_broadcast_t *out_games, int max_games) {
 
     if (connect(s, (struct sockaddr *)&addr, sizeof(addr)) == SOCKET_ERROR) {
         CLOSE_SOCKET(s);
-        return 0;
+        return g_master_cached_count;
     }
 
     char req[256];
@@ -718,14 +735,14 @@ int dk_net_master_fetch_games(dk_lan_broadcast_t *out_games, int max_games) {
     char resp[4096];
     int len = recv(s, resp, sizeof(resp) - 1, 0);
     CLOSE_SOCKET(s);
-    if (len <= 0) return 0;
+    if (len <= 0) return g_master_cached_count;
     resp[len] = '\0';
 
     char *json = strstr(resp, "\r\n\r\n");
-    if (!json) return 0;
+    if (!json) return g_master_cached_count;
     json += 4;
 
-    /* Simple JSON parser for game entries */
+    /* Robust JSON parser for game entries */
     int count = 0;
     char *entry = strstr(json, "{\"name\":\"");
     while (entry && count < max_games) {
@@ -734,12 +751,24 @@ int dk_net_master_fetch_games(dk_lan_broadcast_t *out_games, int max_games) {
         g->magic = DK_NET_MAGIC;
 
         char name[DK_NET_GAME_NAME_LEN] = {0};
+        char ip[32] = {0};
         int port = DK_NET_DEFAULT_PORT, players = 1, max_p = 4, lvl = 1;
-        sscanf(entry, "{\"name\":\"%31[^\"]\",\"port\":%d,\"players\":%d,\"max_players\":%d,\"level\":%d}",
-               name, &port, &players, &max_p, &lvl);
+
+        char *p_name = strstr(entry, "\"name\":\"");
+        if (p_name) sscanf(p_name, "\"name\":\"%31[^\"]\"", name);
+        char *p_ip = strstr(entry, "\"ip\":\"");
+        if (p_ip) sscanf(p_ip, "\"ip\":\"%31[^\"]\"", ip);
+        char *p_port = strstr(entry, "\"port\":");
+        if (p_port) sscanf(p_port, "\"port\":%d", &port);
+        char *p_players = strstr(entry, "\"players\":");
+        if (p_players) sscanf(p_players, "\"players\":%d", &players);
+        char *p_max = strstr(entry, "\"max_players\":");
+        if (p_max) sscanf(p_max, "\"max_players\":%d", &max_p);
+        char *p_lvl = strstr(entry, "\"level\":");
+        if (p_lvl) sscanf(p_lvl, "\"level\":%d", &lvl);
 
         snprintf(g->game_name, sizeof(g->game_name), "%s", name);
-        snprintf(g->host_ip, sizeof(g->host_ip), "%s", g_master_host);
+        snprintf(g->host_ip, sizeof(g->host_ip), "%s", (ip[0] != '\0') ? ip : g_master_host);
         g->port            = (uint16_t)port;
         g->current_players = (uint8_t)players;
         g->max_players     = (uint8_t)max_p;
@@ -747,6 +776,11 @@ int dk_net_master_fetch_games(dk_lan_broadcast_t *out_games, int max_games) {
         count++;
 
         entry = strstr(entry + 1, "{\"name\":\"");
+    }
+
+    g_master_cached_count = count;
+    if (count > 0 && out_games) {
+        memcpy(g_master_cached_games, out_games, count * sizeof(dk_lan_broadcast_t));
     }
     return count;
 }
