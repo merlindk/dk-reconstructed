@@ -3283,6 +3283,13 @@ static uint32_t hook_frontnet_show_joining_box(uint32_t eax, uint32_t edx, uint3
     return 0;
 }
 
+static uint32_t hook_frontend_text_long_box(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    printf("[UI Dialog] frontend_text_long_box invoked\n");
+    fflush(stdout);
+    return 0;
+}
+
 static uint32_t hook_frontnet_LbNetwork_EnumerateServices(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
     (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
     printf("[Network] hook_frontnet_LbNetwork_EnumerateServices: Initializing network services menu\n");
@@ -3666,6 +3673,7 @@ int main(int argc, char **argv) {
     dk_install_hook(0x000eddf0, hook_LbNetwork_EnumeratePlayers);
     dk_install_hook(0x000f3b50, hook_LbNetwork_Send);
     dk_install_hook(0x000f3ed8, hook_LbNetwork_Receive);
+    dk_install_hook(0x00030a2d, hook_frontend_text_long_box);
     dk_install_hook(0x00033ead, hook_frontnet_LbNetwork_EnumerateServices);
     dk_install_hook(0x00034ea2, hook_gui_render_selected_session);
     dk_install_hook(0x00035e19, hook_frontnet_show_joining_box);
