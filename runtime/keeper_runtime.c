@@ -53,6 +53,7 @@ static int  g_swap_counter   = 0;
 static bool g_headless_mode  = false;
 static bool g_verbose_io     = false;
 static bool g_test_start_game = false; /* Simulate click on Start New Game */
+static bool g_fullscreen      = true;  /* Fullscreen by default */
 
 /* 32-bit RGB palette converted from 6-bit VGA (0..63 -> 0..255) */
 static uint8_t  g_vga_palette_6bit[768];
@@ -536,8 +537,65 @@ static uint8_t sdl_scancode_to_dk_set1(SDL_Scancode sc) {
 #endif
 
 #if defined(_WIN32) && !defined(USE_SDL2)
-static HWND g_hwnd = NULL;
-static int  g_win_w = 640, g_win_h = 480;
+static HWND  g_hwnd = NULL;
+static int   g_win_w = 640, g_win_h = 480;
+static RECT  g_prev_win_rect = {100, 100, 1700, 1000};
+static DWORD g_prev_win_style = WS_OVERLAPPEDWINDOW;
+
+static void get_viewport_dest_rect(int client_w, int client_h, int *dst_x, int *dst_y, int *dst_w, int *dst_h) {
+    if (!g_upscale_1080p_enabled) {
+        *dst_x = 0;
+        *dst_y = 0;
+        *dst_w = client_w;
+        *dst_h = client_h;
+        return;
+    }
+    int w = client_w;
+    int h = (w * 9) / 16;
+    if (h > client_h) {
+        h = client_h;
+        w = (h * 16) / 9;
+    }
+    *dst_w = (w > 0) ? w : client_w;
+    *dst_h = (h > 0) ? h : client_h;
+    *dst_x = (client_w - *dst_w) / 2;
+    *dst_y = (client_h - *dst_h) / 2;
+}
+
+static void toggle_fullscreen(HWND hwnd) {
+    g_fullscreen = !g_fullscreen;
+    int screen_w = GetSystemMetrics(SM_CXSCREEN);
+    int screen_h = GetSystemMetrics(SM_CYSCREEN);
+
+    if (g_fullscreen) {
+        GetWindowRect(hwnd, &g_prev_win_rect);
+        g_prev_win_style = (DWORD)GetWindowLongPtrA(hwnd, GWL_STYLE);
+        SetWindowLongPtrA(hwnd, GWL_STYLE, WS_POPUP | WS_VISIBLE);
+        SetWindowPos(hwnd, HWND_TOP, 0, 0, screen_w, screen_h, SWP_FRAMECHANGED | SWP_SHOWWINDOW);
+    } else {
+        SetWindowLongPtrA(hwnd, GWL_STYLE, WS_OVERLAPPEDWINDOW | WS_VISIBLE);
+        int win_w = 1600;
+        int win_h = 900;
+        if (screen_w < 1600 || screen_h < 900) {
+            win_w = 1280;
+            win_h = 720;
+        }
+        int pos_x = (screen_w - win_w) / 2;
+        int pos_y = (screen_h - win_h) / 2;
+        if (pos_x < 0) pos_x = 0;
+        if (pos_y < 0) pos_y = 0;
+        if ((g_prev_win_rect.right - g_prev_win_rect.left > 640) &&
+            (g_prev_win_rect.bottom - g_prev_win_rect.top > 480) &&
+            (g_prev_win_rect.right - g_prev_win_rect.left < screen_w)) {
+            win_w = g_prev_win_rect.right - g_prev_win_rect.left;
+            win_h = g_prev_win_rect.bottom - g_prev_win_rect.top;
+            pos_x = g_prev_win_rect.left;
+            pos_y = g_prev_win_rect.top;
+        }
+        SetWindowPos(hwnd, HWND_NOTOPMOST, pos_x, pos_y, win_w, win_h, SWP_FRAMECHANGED | SWP_SHOWWINDOW);
+    }
+    InvalidateRect(hwnd, NULL, TRUE);
+}
 
 static LRESULT CALLBACK dk_wndproc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     switch (msg) {
@@ -560,6 +618,22 @@ static LRESULT CALLBACK dk_wndproc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
             int ch = rc.bottom - rc.top;
 
             if (g_upscale_1080p_enabled) {
+                int dst_x, dst_y, dst_w, dst_h;
+                get_viewport_dest_rect(cw, ch, &dst_x, &dst_y, &dst_w, &dst_h);
+
+                if (dst_x > 0) {
+                    RECT r1 = {0, 0, dst_x, ch};
+                    RECT r2 = {dst_x + dst_w, 0, cw, ch};
+                    FillRect(hdc, &r1, (HBRUSH)GetStockObject(BLACK_BRUSH));
+                    FillRect(hdc, &r2, (HBRUSH)GetStockObject(BLACK_BRUSH));
+                }
+                if (dst_y > 0) {
+                    RECT r1 = {0, 0, cw, dst_y};
+                    RECT r2 = {0, dst_y + dst_h, cw, ch};
+                    FillRect(hdc, &r1, (HBRUSH)GetStockObject(BLACK_BRUSH));
+                    FillRect(hdc, &r2, (HBRUSH)GetStockObject(BLACK_BRUSH));
+                }
+
                 BITMAPINFO bmi;
                 memset(&bmi, 0, sizeof(bmi));
                 bmi.bmiHeader.biSize        = sizeof(BITMAPINFOHEADER);
@@ -570,7 +644,7 @@ static LRESULT CALLBACK dk_wndproc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
                 bmi.bmiHeader.biCompression = BI_RGB;
                 StretchDIBits(
                     hdc,
-                    0, 0, cw, ch,
+                    dst_x, dst_y, dst_w, dst_h,
                     0, 0, CANVAS_1080P_WIDTH, CANVAS_1080P_HEIGHT,
                     g_backbuffer_1080p, &bmi, DIB_RGB_COLORS, SRCCOPY
                 );
@@ -605,10 +679,22 @@ static LRESULT CALLBACK dk_wndproc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
             int sw = DK_MEM_S32(VA_LB_PHYS_WIDTH)  > 0 ? DK_MEM_S32(VA_LB_PHYS_WIDTH)  : 640;
             int sh = DK_MEM_S32(VA_LB_PHYS_HEIGHT) > 0 ? DK_MEM_S32(VA_LB_PHYS_HEIGHT) : 480;
 
+            int mouse_win_x = (short)LOWORD(lParam);
+            int mouse_win_y = (short)HIWORD(lParam);
+
             if (g_upscale_1080p_enabled) {
-                /* Map window client coordinates -> 1080p canvas -> 1440x1080 4:3 viewport -> game coords */
-                float canvas_x = ((float)(short)LOWORD(lParam) * (float)CANVAS_1080P_WIDTH) / (float)cw;
-                float canvas_y = ((float)(short)HIWORD(lParam) * (float)CANVAS_1080P_HEIGHT) / (float)ch;
+                int dst_x, dst_y, dst_w, dst_h;
+                get_viewport_dest_rect(cw, ch, &dst_x, &dst_y, &dst_w, &dst_h);
+
+                float norm_x = ((float)(mouse_win_x - dst_x)) / (float)dst_w;
+                float norm_y = ((float)(mouse_win_y - dst_y)) / (float)dst_h;
+                if (norm_x < 0.0f) norm_x = 0.0f;
+                if (norm_x > 1.0f) norm_x = 1.0f;
+                if (norm_y < 0.0f) norm_y = 0.0f;
+                if (norm_y > 1.0f) norm_y = 1.0f;
+
+                float canvas_x = norm_x * (float)CANVAS_1080P_WIDTH;
+                float canvas_y = norm_y * (float)CANVAS_1080P_HEIGHT;
 
                 float rel_x = canvas_x - (float)VIEWPORT_43_OFFSET_X;
                 float rel_y = canvas_y - (float)VIEWPORT_43_OFFSET_Y;
@@ -624,8 +710,12 @@ static LRESULT CALLBACK dk_wndproc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
                 DK_MEM_S32(VA_LB_MMOUSE_X) = game_x;
                 DK_MEM_S32(VA_LB_MMOUSE_Y) = game_y;
             } else {
-                int mx = ((int)(short)LOWORD(lParam) * sw) / cw;
-                int my = ((int)(short)HIWORD(lParam) * sh) / ch;
+                int mx = (mouse_win_x * sw) / cw;
+                int my = (mouse_win_y * sh) / ch;
+                if (mx < 0) mx = 0;
+                if (mx >= sw) mx = sw - 1;
+                if (my < 0) my = 0;
+                if (my >= sh) my = sh - 1;
                 DK_MEM_S32(VA_LB_MMOUSE_X) = mx;
                 DK_MEM_S32(VA_LB_MMOUSE_Y) = my;
             }
@@ -657,6 +747,10 @@ static LRESULT CALLBACK dk_wndproc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
             return 0;
         case WM_KEYDOWN:
         case WM_SYSKEYDOWN: {
+            if (wParam == VK_F11 || (wParam == VK_RETURN && ((GetKeyState(VK_MENU) & 0x8000) || (lParam & (1 << 29))))) {
+                toggle_fullscreen(hwnd);
+                return 0;
+            }
             uint8_t sc = (uint8_t)((lParam >> 16) & 0xFF);
             if (lParam & (1 << 24)) sc |= 0x80;
             volatile uint8_t *key_tab = (volatile uint8_t *)(uintptr_t)DK_VA(VA_LB_KEY_ON_TABLE);
@@ -863,10 +957,12 @@ static void platform_present_frame(int width, int height) {
             if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) == 0) {
                 int win_w = g_upscale_1080p_enabled ? 1280 : 960;
                 int win_h = g_upscale_1080p_enabled ? 720 : 720;
+                int win_flags = SDL_WINDOW_RESIZABLE | SDL_WINDOW_SHOWN;
+                if (g_fullscreen) win_flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
                 g_sdl_window = SDL_CreateWindow(
                     "Dungeon Keeper (Reconstructed Native Runtime - 1080p)",
                     SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                    win_w, win_h, SDL_WINDOW_RESIZABLE | SDL_WINDOW_SHOWN
+                    win_w, win_h, win_flags
                 );
                 if (g_sdl_window) {
                     g_sdl_renderer = SDL_CreateRenderer(g_sdl_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
@@ -905,33 +1001,44 @@ static void platform_present_frame(int width, int height) {
             wc.hCursor       = LoadCursor(NULL, IDC_ARROW);
             RegisterClassA(&wc);
 
-            /* Default window size: 1600x900 (or 1920x1080 if screen permits) */
             int screen_w = GetSystemMetrics(SM_CXSCREEN);
             int screen_h = GetSystemMetrics(SM_CYSCREEN);
-            int win_w = 1600;
-            int win_h = 900;
-            if (screen_w < 1600 || screen_h < 900) {
-                win_w = 1280;
-                win_h = 720;
+
+            if (g_fullscreen) {
+                g_hwnd = CreateWindowA(
+                    "DKReconstructedWnd",
+                    "Dungeon Keeper (Reconstructed Native Runtime - 1080p HD)",
+                    WS_POPUP | WS_VISIBLE,
+                    0, 0,
+                    screen_w, screen_h,
+                    NULL, NULL, wc.hInstance, NULL
+                );
+            } else {
+                int win_w = 1600;
+                int win_h = 900;
+                if (screen_w < 1600 || screen_h < 900) {
+                    win_w = 1280;
+                    win_h = 720;
+                }
+
+                RECT rc = {0, 0, win_w, win_h};
+                AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
+                int actual_w = rc.right - rc.left;
+                int actual_h = rc.bottom - rc.top;
+                int pos_x = (screen_w - actual_w) / 2;
+                int pos_y = (screen_h - actual_h) / 2;
+                if (pos_x < 0) pos_x = 0;
+                if (pos_y < 0) pos_y = 0;
+
+                g_hwnd = CreateWindowA(
+                    "DKReconstructedWnd",
+                    "Dungeon Keeper (Reconstructed Native Runtime - 1080p HD)",
+                    WS_OVERLAPPEDWINDOW | WS_VISIBLE,
+                    pos_x, pos_y,
+                    actual_w, actual_h,
+                    NULL, NULL, wc.hInstance, NULL
+                );
             }
-
-            RECT rc = {0, 0, win_w, win_h};
-            AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
-            int actual_w = rc.right - rc.left;
-            int actual_h = rc.bottom - rc.top;
-            int pos_x = (screen_w - actual_w) / 2;
-            int pos_y = (screen_h - actual_h) / 2;
-            if (pos_x < 0) pos_x = 0;
-            if (pos_y < 0) pos_y = 0;
-
-            g_hwnd = CreateWindowA(
-                "DKReconstructedWnd",
-                "Dungeon Keeper (Reconstructed Native Runtime - 1080p HD)",
-                WS_OVERLAPPEDWINDOW | WS_VISIBLE,
-                pos_x, pos_y,
-                actual_w, actual_h,
-                NULL, NULL, wc.hInstance, NULL
-            );
             ShowCursor(FALSE);
         }
         if (g_hwnd) {
@@ -942,6 +1049,9 @@ static void platform_present_frame(int width, int height) {
             int ch = rc.bottom - rc.top;
 
             if (g_upscale_1080p_enabled) {
+                int dst_x, dst_y, dst_w, dst_h;
+                get_viewport_dest_rect(cw, ch, &dst_x, &dst_y, &dst_w, &dst_h);
+
                 BITMAPINFO bmi;
                 memset(&bmi, 0, sizeof(bmi));
                 bmi.bmiHeader.biSize        = sizeof(BITMAPINFOHEADER);
@@ -952,7 +1062,7 @@ static void platform_present_frame(int width, int height) {
                 bmi.bmiHeader.biCompression = BI_RGB;
                 StretchDIBits(
                     hdc,
-                    0, 0, cw, ch,
+                    dst_x, dst_y, dst_w, dst_h,
                     0, 0, CANVAS_1080P_WIDTH, CANVAS_1080P_HEIGHT,
                     g_backbuffer_1080p, &bmi, DIB_RGB_COLORS, SRCCOPY
                 );
@@ -2662,6 +2772,10 @@ int main(int argc, char **argv) {
             g_headless_mode = true;
         } else if (strcmp(argv[i], "--no-1080p") == 0) {
             g_upscale_1080p_enabled = false;
+        } else if (strcmp(argv[i], "--fullscreen") == 0 || strcmp(argv[i], "-f") == 0) {
+            g_fullscreen = true;
+        } else if (strcmp(argv[i], "--windowed") == 0 || strcmp(argv[i], "-w") == 0) {
+            g_fullscreen = false;
         } else if (strcmp(argv[i], "--xbrz") == 0 && i + 1 < argc) {
             g_xbrz_factor = atoi(argv[++i]);
         } else if (strcmp(argv[i], "--verbose-io") == 0) {
@@ -2723,7 +2837,9 @@ int main(int argc, char **argv) {
     printf(" Dungeon Keeper (KEEPER.EXE) - Native Reconstructed Runtime\n");
     printf(" Game Directory : %s\n", g_game_dir);
     printf(" Binary Image   : %s\n", g_elf_path);
-    printf(" Mode           : %s (MaxFrames=%d, StartLevel=%d)\n", g_headless_mode ? "Headless Validation" : "Interactive Window", g_max_frames, g_start_level);
+    printf(" Mode           : %s (Fullscreen=%s, MaxFrames=%d, StartLevel=%d)\n",
+           g_headless_mode ? "Headless Validation" : "Interactive Display",
+           g_fullscreen ? "Yes" : "No", g_max_frames, g_start_level);
     printf("================================================================\n");
     fflush(stdout);
 
