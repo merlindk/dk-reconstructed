@@ -969,7 +969,7 @@ static void platform_present_frame(int width, int height) {
         }
     }
 
-    if (g_test_multiplayer_gui || g_net_cli_is_client || g_net_cli_is_host) {
+    if (g_frontend_ready && (g_test_multiplayer_gui || g_net_cli_is_client || g_net_cli_is_host)) {
         static bool s_auto_nav_complete = false;
         static int s_nav_delay = 0;
         uint32_t curr_screen = DK_MEM_U32(0x00334a44);
@@ -1550,6 +1550,9 @@ static uint32_t hook_setup_show_bullfrog_legal_splash(uint32_t eax, uint32_t edx
     return 1;
 }
 
+/* State flag indicating frontend main loop has initialized */
+static bool g_frontend_ready = false;
+
 /* 0x0e7750: LbScreenSetup(__cdecl: mode=stack[0], width=stack[1], height=stack[2], palette=stack[3]) */
 static uint32_t hook_LbScreenSetup(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
     (void)eax; (void)edx; (void)ebx; (void)ecx;
@@ -1562,6 +1565,12 @@ static uint32_t hook_LbScreenSetup(uint32_t eax, uint32_t edx, uint32_t ebx, uin
     printf("[LbScreenSetup] Caller=0x%08x (orig=0x%08x), Mode=%u, W=%d, H=%d\n",
            caller, caller - g_rebase_delta, mode, width, height);
     fflush(stdout);
+
+    if ((caller - g_rebase_delta) == 0x0006ad5f) {
+        g_frontend_ready = true;
+        printf("[Frontend] Frontend main loop initialized and ready!\n");
+        fflush(stdout);
+    }
 
     /* Lookup mode dimensions from mode table @ 0x00194fe0 if needed */
     uint16_t mode_w = DK_MEM_U16(0x00194fe0 + mode * 0x26);
@@ -3736,7 +3745,6 @@ int main(int argc, char **argv) {
     dk_install_hook(0x0003488f, hook_frontnet_draw_gui_session_button_label);
     dk_install_hook(0x00034ea2, hook_gui_render_selected_session);
     dk_install_hook(0x00035e19, hook_frontnet_show_joining_box);
-    dk_install_hook(0x0006b4c7, hook_setup_show_bullfrog_legal_splash);
 
 
     /* Patch 0x00065724 (pom_benchmark) to `fld1; ret` (D9 E8 C3) so it returns 1.0 in ST(0) without port 0x43 IO */
