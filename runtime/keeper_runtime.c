@@ -983,7 +983,7 @@ static void platform_present_frame(int width, int height) {
             } else if (curr_screen == 0 || curr_screen == 1) {
                 /* On Main Menu (screen 1): navigate to Services screen (screen 4) */
                 s_nav_delay++;
-                if (s_nav_delay >= 5) {
+                if (s_nav_delay >= 2) {
                     printf("[Network] Auto-navigating to Multiplayer Services (screen 4)...\n");
                     fflush(stdout);
                     uint32_t eax = 4;
@@ -999,7 +999,7 @@ static void platform_present_frame(int width, int height) {
             } else if (curr_screen == 4) {
                 /* On Services Screen: select TCP/IP (service 2) */
                 s_nav_delay++;
-                if (s_nav_delay >= 5) {
+                if (s_nav_delay >= 2) {
                     printf("[Network] Auto-selecting TCP/IP Internet & LAN (service 2)...\n");
                     fflush(stdout);
                     uint32_t eax = 2;
@@ -1016,7 +1016,7 @@ static void platform_present_frame(int width, int height) {
                 /* On TCP/IP Browser Screen */
                 if (g_net_cli_is_host) {
                     s_nav_delay++;
-                    if (s_nav_delay >= 5) {
+                    if (s_nav_delay >= 2) {
                         printf("[Network] Auto-hosting room (calling Create handler)...\n");
                         fflush(stdout);
                         typedef void (*fn_action_t)(void);
@@ -1028,7 +1028,7 @@ static void platform_present_frame(int width, int height) {
                     int32_t count = DK_MEM_S32(0x003359a3);
                     if (count > 0 && sel >= 0) {
                         s_nav_delay++;
-                        if (s_nav_delay >= 5) {
+                        if (s_nav_delay >= 2) {
                             printf("[Network] Auto-joining room (calling Join handler, count=%d, sel=%d)...\n", count, sel);
                             fflush(stdout);
                             typedef void (*fn_action_t)(void);
