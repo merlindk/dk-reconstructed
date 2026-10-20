@@ -974,16 +974,14 @@ static void platform_present_frame(int width, int height) {
         static bool s_auto_nav_complete = false;
         static int s_nav_delay = 0;
         uint32_t curr_screen = DK_MEM_U32(0x00334a44);
-        printf("[DEBUG-Nav] curr_screen=%u s_nav_delay=%d\n", curr_screen, s_nav_delay);
-        fflush(stdout);
 
         if (!s_auto_nav_complete) {
             if (curr_screen == 6) {
                 s_auto_nav_complete = true;
                 printf("[Network] Successfully reached Multiplayer Room (screen 6).\n");
                 fflush(stdout);
-            } else if (curr_screen == 0) {
-                /* On Main Menu: navigate to Services screen */
+            } else if (curr_screen == 0 || curr_screen == 1) {
+                /* On Main Menu (screen 1): navigate to Services screen (screen 4) */
                 s_nav_delay++;
                 if (s_nav_delay >= 5) {
                     printf("[Network] Auto-navigating to Multiplayer Services (screen 4)...\n");
