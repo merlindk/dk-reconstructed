@@ -3227,6 +3227,7 @@ static uint32_t hook_LbNetwork_StartExchange(uint32_t eax, uint32_t edx, uint32_
         uint8_t local_id = dk_net_get_local_player_id();
         uint8_t *lobby_tbl = (uint8_t *)dk_to_host_ptr(0x003358ef);
 
+        static int s_exch_print_count = 0;
         printf("[Exchange #%d] Screen %u local_id=%u, eax=0x%08x, [0]=0x%02x, [1]=0x%02x\n",
                s_exch_print_count++, curr_screen, local_id, eax,
                DK_MEM_U8(0x003358f3), DK_MEM_U8(0x003358ff));
