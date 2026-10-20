@@ -1816,6 +1816,10 @@ static uint32_t hook_LbMouseSuspend(uint32_t eax, uint32_t edx, uint32_t ebx, ui
 /* 0x0f4908 / 0x0f4960 / 0x0e8560: LbKeyboardOpen / LbKeyboardClose / LbKeyboardRead */
 static uint32_t hook_LbKeyboardStub(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
     (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    if (DK_MEM_U8(0x003358f3) != 0x01) {
+        printf("[Debug] In KeyboardStub: 0x203358f3[0]=0x%02x\n", DK_MEM_U8(0x003358f3));
+        fflush(stdout);
+    }
     platform_poll_events();
     return 1;
 }
@@ -3464,6 +3468,10 @@ static uint32_t hook_LbNetwork_EnumeratePlayers(uint32_t eax, uint32_t edx, uint
     }
 
     DK_MEM_U32(0x0033607f) = count;
+    if (DK_MEM_U8(0x003358f3) != 0x01) {
+        printf("[Debug] In EnumeratePlayers: 0x203358f3[0]=0x%02x\n", DK_MEM_U8(0x003358f3));
+        fflush(stdout);
+    }
     return 0;
 }
 
