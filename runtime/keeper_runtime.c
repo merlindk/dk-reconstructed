@@ -2898,6 +2898,44 @@ static uint32_t hook_gui_render_selected_session(uint32_t eax, uint32_t edx, uin
     return 0;
 }
 
+/* Hook for FUN_2003488f (Screen 5 session list button text renderer)
+ * Buttons 45, 46, 47 are the visible rows in the Sessions list box */
+static uint32_t hook_frontnet_draw_gui_session_button_label(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)edx; (void)ebx; (void)ecx; (void)stack;
+    uint8_t *ctrl_ptr = (uint8_t *)dk_to_host_ptr(eax);
+    if (!ctrl_ptr) return 0;
+
+    uint32_t ctrl_id = *(uint32_t *)(ctrl_ptr + 0x33);
+    int32_t scroll_offset = DK_MEM_S32(0x003359a7);
+    int32_t count = DK_MEM_S32(0x003359a3);
+    int32_t session_idx = (int32_t)ctrl_id + scroll_offset - 45;
+
+    if (session_idx >= 0 && session_idx < count) {
+        const char *sess_name = NULL;
+        uint32_t sess_ptr = DK_MEM_U32(0x00335923 + session_idx * 4);
+        if (sess_ptr) {
+            const char *cand = (const char *)dk_to_host_ptr(sess_ptr);
+            if (cand && *(cand + 9)) {
+                sess_name = cand + 9;
+            }
+        }
+        if (!sess_name && session_idx < 16 && s_gui_sessions[session_idx].name[0] != '\0') {
+            sess_name = s_gui_sessions[session_idx].name;
+        }
+
+        if (sess_name && *sess_name) {
+            int32_t sel_idx = DK_MEM_S32(0x003359ab);
+            /* Font 2 = Gold font (selected / highlighted), Font 1 = Silver / standard */
+            uint32_t font_id = 1;
+            if (session_idx == sel_idx || (ctrl_id != 0 && DK_MEM_U32(0x00334738) == ctrl_id)) {
+                font_id = 2;
+            }
+            call_watcom3(DK_VA(0x0003378f), eax, font_id, (uint32_t)(uintptr_t)sess_name);
+        }
+    }
+    return 0;
+}
+
 static uint32_t hook_LbNetwork_Create(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
     (void)ecx; (void)stack;
     const char *p_sess = eax ? (const char *)dk_to_host_ptr(eax) : NULL;
@@ -2960,6 +2998,9 @@ static uint32_t hook_LbNetwork_Create(uint32_t eax, uint32_t edx, uint32_t ebx, 
     s_gui_sessions[0].session_id = 1;
     s_gui_sessions[0].reserved = 0;
     snprintf(s_gui_sessions[0].name, sizeof(s_gui_sessions[0].name), "%s", host_sess_name);
+    for (char *p = s_gui_sessions[0].name; *p; p++) {
+        *p = (char)toupper((unsigned char)*p);
+    }
     snprintf(s_gui_sessions[0].host_ip, sizeof(s_gui_sessions[0].host_ip), "0.0.0.0");
     s_gui_sessions[0].host_port = hport;
     DK_MEM_U32(0x00335923) = (uint32_t)(uintptr_t)&s_gui_sessions[0];
@@ -3659,6 +3700,7 @@ int main(int argc, char **argv) {
     dk_install_hook(0x000f3ed8, hook_LbNetwork_Receive);
     dk_install_hook(0x00030a2d, hook_frontend_text_long_box);
     dk_install_hook(0x00033ead, hook_frontnet_LbNetwork_EnumerateServices);
+    dk_install_hook(0x0003488f, hook_frontnet_draw_gui_session_button_label);
     dk_install_hook(0x00034ea2, hook_gui_render_selected_session);
     dk_install_hook(0x00035e19, hook_frontnet_show_joining_box);
 
