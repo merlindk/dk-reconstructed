@@ -2734,21 +2734,49 @@ static LONG WINAPI win32_crash_handler(EXCEPTION_POINTERS *ep) {
     uint32_t esi = (uint32_t)ctx->Esi;
     uint32_t edi = (uint32_t)ctx->Edi;
     void *fault_addr = (void *)ep->ExceptionRecord->ExceptionInformation[1];
+    ULONG_PTR access_type = ep->ExceptionRecord->ExceptionInformation[0];
 
     FILE *flog = fopen("keeper_crash.log", "w");
     if (!flog) flog = stderr;
 
-    fprintf(stderr, "\n[CRASH] Windows Exception 0x%08lx at EIP=0x%08x (fault_addr=%p)\n",
-            code, eip, fault_addr);
+    fprintf(stderr, "\n[CRASH] Windows Exception 0x%08lx (type=%lu) at EIP=0x%08x (fault_addr=%p)\n",
+            code, (unsigned long)access_type, eip, fault_addr);
     fprintf(stderr, "  EAX=0x%08x EBX=0x%08x ECX=0x%08x EDX=0x%08x\n", eax, ebx, ecx, edx);
     fprintf(stderr, "  ESI=0x%08x EDI=0x%08x EBP=0x%08x ESP=0x%08x\n", esi, edi, ebp, esp);
     if (flog != stderr) {
-        fprintf(flog, "\n[CRASH] Windows Exception 0x%08lx at EIP=0x%08x (fault_addr=%p)\n",
-                code, eip, fault_addr);
+        fprintf(flog, "\n[CRASH] Windows Exception 0x%08lx (type=%lu) at EIP=0x%08x (fault_addr=%p)\n",
+                code, (unsigned long)access_type, eip, fault_addr);
         fprintf(flog, "  EAX=0x%08x EBX=0x%08x ECX=0x%08x EDX=0x%08x\n", eax, ebx, ecx, edx);
         fprintf(flog, "  ESI=0x%08x EDI=0x%08x EBP=0x%08x ESP=0x%08x\n", esi, edi, ebp, esp);
     }
-    if (eip >= DK_VA(0x10000) && eip < DK_VA(0x1500f0)) {
+
+    /* Print 64 bytes at EDX */
+    if (edx >= DK_VA(0x10000) && edx < DK_VA(0x450000)) {
+        fprintf(stderr, "  Dwords @ EDX (0x%08x):\n   ", edx);
+        if (flog != stderr) fprintf(flog, "  Dwords @ EDX (0x%08x):\n   ", edx);
+        uint32_t *dw = (uint32_t *)(uintptr_t)edx;
+        for (int i = 0; i < 16; i++) {
+            fprintf(stderr, " %08x", dw[i]);
+            if (flog != stderr) fprintf(flog, " %08x", dw[i]);
+        }
+        fprintf(stderr, "\n");
+        if (flog != stderr) fprintf(flog, "\n");
+    }
+
+    /* Print 32 bytes at 0x20034ea2 */
+    {
+        uint8_t *fn = (uint8_t *)(uintptr_t)DK_VA(0x00034ea2);
+        fprintf(stderr, "  Bytes @ 0x00034ea2:");
+        if (flog != stderr) fprintf(flog, "  Bytes @ 0x00034ea2:");
+        for (int i = 0; i < 32; i++) {
+            fprintf(stderr, " %02x", fn[i]);
+            if (flog != stderr) fprintf(flog, " %02x", fn[i]);
+        }
+        fprintf(stderr, "\n");
+        if (flog != stderr) fprintf(flog, "\n");
+    }
+
+    if (eip >= DK_VA(0x10000) && eip < DK_VA(0x450000)) {
         const uint8_t *inst = (const uint8_t *)(uintptr_t)eip;
         fprintf(stderr, "  Bytes @ EIP:");
         for (int i = 0; i < 16; i++) fprintf(stderr, " %02x", inst[i]);
@@ -2883,6 +2911,46 @@ typedef struct {
 
 static dk_gui_session_entry_t s_gui_sessions[16];
 static dk_gui_session_entry_t s_empty_session = {0, 0, 0, "", "", 0};
+
+static void call_watcom3(uint32_t fn, uint32_t a, uint32_t d, uint32_t b) {
+    __asm__ __volatile__(
+        "call *%3"
+        : "+a"(a), "+d"(d), "+b"(b)
+        : "rm"(fn)
+        : "ecx", "esi", "edi", "memory"
+    );
+}
+
+/* Safe hook for FUN_20034ea2 (selected session text renderer)
+ * Guarantees that str is NULL (ebx=0) when unselected or invalid, safely skipping font rendering */
+static uint32_t hook_gui_render_selected_session(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)edx; (void)ebx; (void)ecx; (void)stack;
+    int32_t sel_idx = DK_MEM_S32(0x003359ab);
+    int32_t count = DK_MEM_S32(0x003359a3);
+    const char *str = NULL;
+    if (sel_idx >= 0 && sel_idx < count) {
+        uint32_t sess_ptr = DK_MEM_U32(0x00335923 + sel_idx * 4);
+        if (sess_ptr) {
+            const char *cand = (const char *)dk_to_host_ptr(sess_ptr);
+            if (cand) {
+                cand += 9; /* name is at offset 9 */
+                if (*cand) {
+                    str = cand;
+                }
+            }
+        }
+    }
+
+    uint8_t *ctrl_ptr = (uint8_t *)dk_to_host_ptr(eax);
+    if (!ctrl_ptr) return 0;
+
+    uint32_t ctrl_id = *(uint32_t *)(ctrl_ptr + 0x33);
+    uint8_t *font_table = (uint8_t *)dk_to_host_ptr(0x0017ad09);
+    uint32_t font_id = font_table ? (uint32_t)font_table[ctrl_id * 3] : 0;
+
+    call_watcom3(DK_VA(0x0003378f), eax, font_id, (uint32_t)(uintptr_t)str);
+    return 0;
+}
 
 static uint32_t hook_LbNetwork_Join(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
     (void)edx; (void)ecx; (void)stack;
@@ -3466,23 +3534,7 @@ int main(int argc, char **argv) {
     dk_install_hook(0x000f3b50, hook_LbNetwork_Send);
     dk_install_hook(0x000f3ed8, hook_LbNetwork_Receive);
     dk_install_hook(0x00033ead, hook_frontnet_LbNetwork_EnumerateServices);
-
-    /* Patch 0x00034eba (FUN_20034ea2) to safely handle NULL session pointer without crashing:
-     * 6B 50 33 03  imul edx, DWORD PTR [eax+0x33], 3
-     * 85 DB        test ebx, ebx
-     * 74 03        jz +3 (skip add ebx, 9)
-     * 83 C3 09     add ebx, 9
-     * 90 90 90 90  nop nop nop nop
-     */
-    uint8_t *session_render_ptr = (uint8_t *)(uintptr_t)DK_VA(0x00034eba);
-    static const uint8_t s_safe_session_render_patch[15] = {
-        0x6B, 0x50, 0x33, 0x03,
-        0x85, 0xDB,
-        0x74, 0x03,
-        0x83, 0xC3, 0x09,
-        0x90, 0x90, 0x90, 0x90
-    };
-    memcpy(session_render_ptr, s_safe_session_render_patch, 15);
+    dk_install_hook(0x00034ea2, hook_gui_render_selected_session);
 
     if (g_net_cli_is_host) {
         dk_net_start_host(g_net_cli_port ? g_net_cli_port : DK_NET_DEFAULT_PORT, "DK Internet Realm", g_net_cli_player_name);
