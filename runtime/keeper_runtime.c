@@ -65,6 +65,22 @@ static bool     g_net_cli_is_client = false;
 static char     g_net_cli_player_name[32] = "";
 static bool     g_frontend_ready = false;
 
+#pragma pack(push, 1)
+typedef struct {
+    uint8_t flags;       /* offset 0 */
+    uint32_t session_id; /* offset 1 */
+    uint32_t reserved;   /* offset 5 */
+    char name[51];       /* offset 9 */
+    char host_ip[32];    /* offset 60 */
+    uint16_t host_port;  /* offset 92 */
+} dk_gui_session_entry_t;
+#pragma pack(pop)
+
+static dk_gui_session_entry_t s_gui_sessions[16];
+static dk_gui_session_entry_t s_empty_session = {0, 0, 0, "", "", 0};
+static uint32_t s_last_session_enum_ms = 0;
+static int      s_last_discovered_count = -1;
+
 /* 32-bit RGB palette converted from 6-bit VGA (0..63 -> 0..255) */
 static uint8_t  g_vga_palette_6bit[768];
 static uint32_t g_argb_palette[256];
@@ -2904,22 +2920,6 @@ static const char *get_active_player_name(void) {
     if (n && n[0] != '\0') return n;
     return (g_net_cli_player_name[0] != '\0') ? g_net_cli_player_name : "Keeper";
 }
-
-#pragma pack(push, 1)
-typedef struct {
-    uint8_t flags;       /* offset 0 */
-    uint32_t session_id; /* offset 1 */
-    uint32_t reserved;   /* offset 5 */
-    char name[51];       /* offset 9 */
-    char host_ip[32];    /* offset 60 */
-    uint16_t host_port;  /* offset 92 */
-} dk_gui_session_entry_t;
-#pragma pack(pop)
-
-static dk_gui_session_entry_t s_gui_sessions[16];
-static dk_gui_session_entry_t s_empty_session = {0, 0, 0, "", "", 0};
-static uint32_t s_last_session_enum_ms = 0;
-static int      s_last_discovered_count = -1;
 
 static void call_watcom3(uint32_t fn, uint32_t a, uint32_t d, uint32_t b) {
     __asm__ __volatile__(
