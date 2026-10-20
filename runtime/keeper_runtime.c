@@ -3276,6 +3276,13 @@ static uint32_t hook_LbNetwork_Receive(uint32_t eax, uint32_t edx, uint32_t ebx,
     return 0;
 }
 
+static uint32_t hook_frontnet_show_joining_box(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    printf("[Network] 'Attempting to join...' modal invoked\n");
+    fflush(stdout);
+    return 0;
+}
+
 static uint32_t hook_frontnet_LbNetwork_EnumerateServices(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
     (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
     printf("[Network] hook_frontnet_LbNetwork_EnumerateServices: Initializing network services menu\n");
@@ -3661,6 +3668,7 @@ int main(int argc, char **argv) {
     dk_install_hook(0x000f3ed8, hook_LbNetwork_Receive);
     dk_install_hook(0x00033ead, hook_frontnet_LbNetwork_EnumerateServices);
     dk_install_hook(0x00034ea2, hook_gui_render_selected_session);
+    dk_install_hook(0x00035e19, hook_frontnet_show_joining_box);
 
 
     /* Patch 0x00065724 (pom_benchmark) to `fld1; ret` (D9 E8 C3) so it returns 1.0 in ST(0) without port 0x43 IO */
