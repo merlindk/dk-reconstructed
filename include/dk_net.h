@@ -71,6 +71,8 @@ typedef struct {
     uint8_t  total_players;
     uint16_t level_number;
     char     session_name[DK_NET_GAME_NAME_LEN];
+    char     player_names[DK_NET_MAX_PLAYERS][DK_NET_PLAYER_NAME_LEN];
+    uint8_t  slot_active[DK_NET_MAX_PLAYERS];
 } dk_msg_welcome_t;
 
 typedef struct {
@@ -112,6 +114,7 @@ bool dk_net_is_host(void);
 uint8_t dk_net_get_local_player_id(void);
 uint8_t dk_net_get_player_count(void);
 bool dk_net_get_peer_info(int idx, char *out_name, size_t max_name, bool *out_active);
+bool dk_net_get_player_slot_info(int slot, char *out_name, size_t max_name, bool *out_active);
 
 /* Host / Join Actions */
 bool dk_net_start_host(uint16_t port, const char *game_name, const char *player_name);

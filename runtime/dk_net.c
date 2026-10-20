@@ -54,6 +54,8 @@ typedef struct {
 
 static net_peer_t g_peers[DK_NET_MAX_PLAYERS];
 static int        g_peer_count = 0;
+static char       g_lobby_player_names[DK_NET_MAX_PLAYERS][DK_NET_PLAYER_NAME_LEN];
+static bool       g_lobby_slot_active[DK_NET_MAX_PLAYERS];
 
 /* UDP Socket for LAN Discovery */
 static SOCKET g_udp_sock = INVALID_SOCKET;
@@ -119,6 +121,8 @@ bool dk_net_init(void) {
     for (int i = 0; i < DK_NET_MAX_PLAYERS; i++) {
         g_peers[i].sock = INVALID_SOCKET;
     }
+    memset(g_lobby_player_names, 0, sizeof(g_lobby_player_names));
+    memset(g_lobby_slot_active, 0, sizeof(g_lobby_slot_active));
 
     g_generic_rx_buf = (uint8_t *)calloc(1, GENERIC_QUEUE_SIZE);
 
@@ -167,11 +171,11 @@ bool dk_net_is_host(void)   { return g_net_state == DK_NET_STATE_HOSTING; }
 uint8_t dk_net_get_local_player_id(void) { return g_local_player_id; }
 uint8_t dk_net_get_player_count(void) {
     if (g_net_state == DK_NET_STATE_DISCONNECTED) return 1;
-    uint8_t count = 1;
+    uint8_t count = 0;
     for (int i = 0; i < DK_NET_MAX_PLAYERS; i++) {
-        if (g_peers[i].active && i != g_local_player_id) count++;
+        if (g_lobby_slot_active[i]) count++;
     }
-    return count;
+    return count > 0 ? count : 1;
 }
 
 bool dk_net_get_peer_info(int idx, char *out_name, size_t max_name, bool *out_active) {
@@ -183,6 +187,17 @@ bool dk_net_get_peer_info(int idx, char *out_name, size_t max_name, bool *out_ac
         *out_active = g_peers[idx].active;
     }
     return g_peers[idx].active;
+}
+
+bool dk_net_get_player_slot_info(int slot, char *out_name, size_t max_name, bool *out_active) {
+    if (slot < 0 || slot >= DK_NET_MAX_PLAYERS) return false;
+    if (out_name && max_name > 0) {
+        snprintf(out_name, max_name, "%s", g_lobby_player_names[slot]);
+    }
+    if (out_active) {
+        *out_active = g_lobby_slot_active[slot];
+    }
+    return g_lobby_slot_active[slot];
 }
 
 void dk_net_set_master_server(const char *host, uint16_t port) {
@@ -265,6 +280,11 @@ bool dk_net_start_host(uint16_t port, const char *game_name, const char *player_
     if (player_name && *player_name) snprintf(g_local_name, sizeof(g_local_name), "%s", player_name);
     if (game_name && *game_name) snprintf(g_session_name, sizeof(g_session_name), "%s", game_name);
 
+    memset(g_lobby_slot_active, 0, sizeof(g_lobby_slot_active));
+    memset(g_lobby_player_names, 0, sizeof(g_lobby_player_names));
+    g_lobby_slot_active[0] = true;
+    snprintf(g_lobby_player_names[0], sizeof(g_lobby_player_names[0]), "%s", g_local_name);
+
     g_peers[0].active    = true;
     g_peers[0].player_id = 0;
     snprintf(g_peers[0].name, sizeof(g_peers[0].name), "%s", g_local_name);
@@ -317,6 +337,8 @@ bool dk_net_connect_to_host(const char *host_ip, uint16_t port, const char *play
     set_socket_nonblocking(s);
 
     if (player_name && *player_name) snprintf(g_local_name, sizeof(g_local_name), "%s", player_name);
+    memset(g_lobby_slot_active, 0, sizeof(g_lobby_slot_active));
+    memset(g_lobby_player_names, 0, sizeof(g_lobby_player_names));
 
     g_peers[0].sock      = s;
     g_peers[0].active    = true;
@@ -372,6 +394,8 @@ void dk_net_disconnect(void) {
     }
     g_net_state  = DK_NET_STATE_DISCONNECTED;
     g_peer_count = 0;
+    memset(g_lobby_slot_active, 0, sizeof(g_lobby_slot_active));
+    memset(g_lobby_player_names, 0, sizeof(g_lobby_player_names));
 }
 
 static void process_packet(net_peer_t *peer, const dk_net_header_t *hdr, const uint8_t *payload) {
@@ -395,14 +419,36 @@ static void process_packet(net_peer_t *peer, const dk_net_header_t *hdr, const u
                 snprintf(peer->name, sizeof(peer->name), "%s", hello->player_name);
                 peer->active = true;
 
+                g_lobby_slot_active[assigned_id] = true;
+                snprintf(g_lobby_player_names[assigned_id], sizeof(g_lobby_player_names[assigned_id]), "%s", hello->player_name);
+
                 dk_msg_welcome_t welcome;
+                memset(&welcome, 0, sizeof(welcome));
                 welcome.assigned_id   = (uint8_t)assigned_id;
                 welcome.total_players = dk_net_get_player_count();
                 welcome.level_number  = 1;
                 snprintf(welcome.session_name, sizeof(welcome.session_name), "%s", g_session_name);
+                for (int i = 0; i < DK_NET_MAX_PLAYERS; i++) {
+                    welcome.slot_active[i] = g_lobby_slot_active[i] ? 1 : 0;
+                    snprintf(welcome.player_names[i], sizeof(welcome.player_names[i]), "%s", g_lobby_player_names[i]);
+                }
                 send_raw_packet(peer->sock, DK_MSG_WELCOME, 0, 0, &welcome, sizeof(welcome));
 
                 printf("[DKNet] Client '%s' joined as Player #%d\n", peer->name, assigned_id);
+
+                /* Broadcast lobby update to all other connected peers */
+                dk_msg_lobby_update_t update;
+                memset(&update, 0, sizeof(update));
+                for (int i = 0; i < DK_NET_MAX_PLAYERS; i++) {
+                    update.slot_active[i] = g_lobby_slot_active[i] ? 1 : 0;
+                    snprintf(update.player_names[i], sizeof(update.player_names[i]), "%s", g_lobby_player_names[i]);
+                }
+                update.level_number = 1;
+                for (int i = 1; i < DK_NET_MAX_PLAYERS; i++) {
+                    if (i != assigned_id && g_peers[i].active && !IS_INVALID_SOCKET(g_peers[i].sock)) {
+                        send_raw_packet(g_peers[i].sock, DK_MSG_LOBBY_UPDATE, 0, 0, &update, sizeof(update));
+                    }
+                }
             }
             break;
         }
@@ -411,7 +457,27 @@ static void process_packet(net_peer_t *peer, const dk_net_header_t *hdr, const u
                 const dk_msg_welcome_t *welcome = (const dk_msg_welcome_t *)payload;
                 g_local_player_id = welcome->assigned_id;
                 snprintf(g_session_name, sizeof(g_session_name), "%s", welcome->session_name);
+                for (int i = 0; i < DK_NET_MAX_PLAYERS; i++) {
+                    g_lobby_slot_active[i] = (welcome->slot_active[i] != 0);
+                    snprintf(g_lobby_player_names[i], sizeof(g_lobby_player_names[i]), "%s", welcome->player_names[i]);
+                }
+                g_lobby_slot_active[g_local_player_id] = true;
+                snprintf(g_lobby_player_names[g_local_player_id], sizeof(g_lobby_player_names[g_local_player_id]), "%s", g_local_name);
+                snprintf(g_peers[0].name, sizeof(g_peers[0].name), "%s", welcome->player_names[0]);
                 g_net_state = DK_NET_STATE_CONNECTED;
+            }
+            break;
+        }
+        case DK_MSG_LOBBY_UPDATE: {
+            const dk_msg_lobby_update_t *update = (const dk_msg_lobby_update_t *)payload;
+            for (int i = 0; i < DK_NET_MAX_PLAYERS; i++) {
+                g_lobby_slot_active[i] = (update->slot_active[i] != 0);
+                snprintf(g_lobby_player_names[i], sizeof(g_lobby_player_names[i]), "%s", update->player_names[i]);
+            }
+            g_lobby_slot_active[g_local_player_id] = true;
+            snprintf(g_lobby_player_names[g_local_player_id], sizeof(g_lobby_player_names[g_local_player_id]), "%s", g_local_name);
+            if (update->player_names[0][0] != '\0') {
+                snprintf(g_peers[0].name, sizeof(g_peers[0].name), "%s", update->player_names[0]);
             }
             break;
         }
@@ -450,7 +516,24 @@ static void process_packet(net_peer_t *peer, const dk_net_header_t *hdr, const u
         }
         case DK_MSG_LEAVE: {
             peer->active = false;
+            if (peer->player_id < DK_NET_MAX_PLAYERS) {
+                g_lobby_slot_active[peer->player_id] = false;
+                g_lobby_player_names[peer->player_id][0] = '\0';
+            }
             printf("[DKNet] Player #%d ('%s') left the game.\n", peer->player_id, peer->name);
+            if (g_net_state == DK_NET_STATE_HOSTING) {
+                dk_msg_lobby_update_t update;
+                memset(&update, 0, sizeof(update));
+                for (int i = 0; i < DK_NET_MAX_PLAYERS; i++) {
+                    update.slot_active[i] = g_lobby_slot_active[i] ? 1 : 0;
+                    snprintf(update.player_names[i], sizeof(update.player_names[i]), "%s", g_lobby_player_names[i]);
+                }
+                for (int i = 1; i < DK_NET_MAX_PLAYERS; i++) {
+                    if (g_peers[i].active && !IS_INVALID_SOCKET(g_peers[i].sock)) {
+                        send_raw_packet(g_peers[i].sock, DK_MSG_LOBBY_UPDATE, 0, 0, &update, sizeof(update));
+                    }
+                }
+            }
             break;
         }
         default:
@@ -527,6 +610,21 @@ void dk_net_update(void) {
             g_peers[i].sock     = INVALID_SOCKET;
             g_peers[i].active   = false;
             g_peers[i].recv_len = 0;
+            if (g_net_state == DK_NET_STATE_HOSTING) {
+                g_lobby_slot_active[i] = false;
+                g_lobby_player_names[i][0] = '\0';
+                dk_msg_lobby_update_t update;
+                memset(&update, 0, sizeof(update));
+                for (int s = 0; s < DK_NET_MAX_PLAYERS; s++) {
+                    update.slot_active[s] = g_lobby_slot_active[s] ? 1 : 0;
+                    snprintf(update.player_names[s], sizeof(update.player_names[s]), "%s", g_lobby_player_names[s]);
+                }
+                for (int s = 1; s < DK_NET_MAX_PLAYERS; s++) {
+                    if (g_peers[s].active && !IS_INVALID_SOCKET(g_peers[s].sock)) {
+                        send_raw_packet(g_peers[s].sock, DK_MSG_LOBBY_UPDATE, 0, 0, &update, sizeof(update));
+                    }
+                }
+            }
         }
     }
 

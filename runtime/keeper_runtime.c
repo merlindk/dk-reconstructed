@@ -3022,6 +3022,19 @@ static uint32_t hook_LbNetwork_Join(uint32_t eax, uint32_t edx, uint32_t ebx, ui
 
     uint32_t pbuf_addr = DK_MEM_U32(0x003dd864);
     if (pbuf_addr) {
+        for (int s = 0; s < DK_NET_MAX_PLAYERS; s++) {
+            char name[32] = {0};
+            bool active = false;
+            if (dk_net_get_player_slot_info(s, name, sizeof(name), &active) && active) {
+                char *slot = (char *)dk_to_host_ptr(pbuf_addr) + s * 36;
+                if (slot) {
+                    memset(slot, 0, 36);
+                    snprintf(slot, 32, "%s", name);
+                    *(uint32_t *)(slot + 32) = 1;
+                }
+            }
+        }
+        /* Ensure local player slot is set */
         char *my_slot = (char *)dk_to_host_ptr(pbuf_addr) + local_id * 36;
         if (my_slot) {
             memset(my_slot, 0, 36);
@@ -3124,14 +3137,15 @@ static uint32_t hook_LbNetwork_EnumerateSessions(uint32_t eax, uint32_t edx, uin
             s_gui_sessions[i].session_id = i + 1;
             s_gui_sessions[i].reserved = 0;
             snprintf(s_gui_sessions[i].name, sizeof(s_gui_sessions[i].name), "%s", games[i].game_name);
+            for (char *p = s_gui_sessions[i].name; *p; p++) {
+                *p = (char)toupper((unsigned char)*p);
+            }
             snprintf(s_gui_sessions[i].host_ip, sizeof(s_gui_sessions[i].host_ip), "%s", games[i].host_ip);
             s_gui_sessions[i].host_port = games[i].port;
             DK_MEM_U32(0x00335923 + i * 4) = (uint32_t)(uintptr_t)&s_gui_sessions[i];
-            if (cb) {
-                cb(&s_gui_sessions[i], &s_gui_sessions[i]);
-            }
         }
         DK_MEM_S32(0x003359a3) = count;
+        DK_MEM_S32(0x003359a7) = 0; /* Reset scroll offset to 0 so entry 0 maps to button 45 */
 
         /* Auto-select slot 0 if nothing selected or index out of range, enabling "Join Game" button */
         int32_t sel = DK_MEM_S32(0x003359ab);
@@ -3145,6 +3159,7 @@ static uint32_t hook_LbNetwork_EnumerateSessions(uint32_t eax, uint32_t edx, uin
     } else {
         /* No games found: clear session table and disable Join Game cleanly */
         DK_MEM_S32(0x003359a3) = 0;
+        DK_MEM_S32(0x003359a7) = 0;
         DK_MEM_S32(0x003359ab) = -1;
         DK_MEM_U32(0x003359af) = 0xffffffff;
         for (int s = 0; s < 32; s++) {
@@ -3185,43 +3200,12 @@ static uint32_t hook_LbNetwork_EnumeratePlayers(uint32_t eax, uint32_t edx, uint
 
     uint32_t count = 0;
 
-    if (dk_net_is_host()) {
-        /* On Screen 6 (Host Room): Slot 0 is local host, 1..3 are joined peers */
-        const char *my_name = get_active_player_name();
-        memset(&pinfo, 0, sizeof(pinfo));
-        snprintf(pinfo.player_name, sizeof(pinfo.player_name), "%s", my_name);
-        if (cb) cb(&pinfo, &pinfo);
-        if (player_table) snprintf(player_table, 20, "%s", my_name);
-        if (pbuf) {
-            memset(pbuf, 0, 36);
-            snprintf(pbuf, 32, "%s", my_name);
-            *(uint32_t *)(pbuf + 32) = 1;
-        }
-        count = 1;
-
-        for (int i = 1; i < DK_NET_MAX_PLAYERS; i++) {
-            char name[32] = {0};
-            bool active = false;
-            if (dk_net_get_peer_info(i, name, sizeof(name), &active) && active) {
-                memset(&pinfo, 0, sizeof(pinfo));
-                snprintf(pinfo.player_name, sizeof(pinfo.player_name), "%s", name);
-                if (cb) cb(&pinfo, &pinfo);
-                if (player_table) snprintf(player_table + count * 20, 20, "%s", name);
-                if (pbuf) {
-                    char *slot = pbuf + i * 36;
-                    memset(slot, 0, 36);
-                    snprintf(slot, 32, "%s", name);
-                    *(uint32_t *)(slot + 32) = 1;
-                }
-                count++;
-            }
-        }
-    } else if (dk_net_is_active()) {
-        /* Client connected: enumerate peers from host */
+    if (dk_net_is_active()) {
+        /* Both host and client in lobby: query unified player slot info */
         for (int i = 0; i < DK_NET_MAX_PLAYERS; i++) {
             char name[32] = {0};
             bool active = false;
-            if (dk_net_get_peer_info(i, name, sizeof(name), &active) && active) {
+            if (dk_net_get_player_slot_info(i, name, sizeof(name), &active) && active && name[0] != '\0') {
                 memset(&pinfo, 0, sizeof(pinfo));
                 snprintf(pinfo.player_name, sizeof(pinfo.player_name), "%s", name);
                 if (cb) cb(&pinfo, &pinfo);
