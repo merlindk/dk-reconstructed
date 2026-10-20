@@ -3100,7 +3100,7 @@ static uint32_t hook_LbNetwork_Create(uint32_t eax, uint32_t edx, uint32_t ebx, 
     if (ebx) {
         uint32_t *p_id = (uint32_t *)dk_to_host_ptr(ebx);
         if (p_id) {
-            *p_id = 1;
+            *p_id = 0; /* Host is always player 0 */
         }
     }
 
@@ -3214,8 +3214,8 @@ static uint32_t hook_LbNetwork_StartExchange(uint32_t eax, uint32_t edx, uint32_
     uint32_t turn = DK_MEM_U32(0x0019e314);
     uint32_t curr_screen = DK_MEM_U32(0x00334a44);
 
-    if (curr_screen == 6) {
-        /* Screen 6 (Multiplayer Room / Lobby) 12-byte exchange */
+    if (curr_screen == 6 || curr_screen == 24) {
+        /* Screen 6 (Lobby) & Screen 24 (Map / Level Loading) 12-byte exchange */
         uint8_t local_id = dk_net_get_local_player_id();
         uint8_t *lobby_tbl = (uint8_t *)dk_to_host_ptr(0x003358ef);
 
@@ -3223,7 +3223,7 @@ static uint32_t hook_LbNetwork_StartExchange(uint32_t eax, uint32_t edx, uint32_
             uint8_t *local_pkt = (uint8_t *)dk_to_host_ptr(eax);
             uint8_t action = local_pkt[4] >> 3;
             if (action != 0) {
-                printf("[Network] Screen 6 local player %u broadcast action %u (Start Game)\n", local_id, action);
+                printf("[Network] Screen %u local player %u broadcast action %u (Start Game)\n", curr_screen, local_id, action);
                 fflush(stdout);
             }
             dk_net_start_exchange_buf(turn, local_pkt, 12);
@@ -3245,10 +3245,12 @@ static uint32_t hook_LbNetwork_StartExchange(uint32_t eax, uint32_t edx, uint32_
                         if (dk_net_get_peer_turn_packet(p, peer_buf, sizeof(peer_buf), &peer_len) && peer_len >= 12) {
                             memcpy(peer_slot, peer_buf, 12);
                             memcpy(s_last_peer_packet[p], peer_buf, 12);
+                            /* Clear action from s_last_peer_packet so one-shot action only fires once */
+                            s_last_peer_packet[p][4] &= 0x07;
                             s_peer_packet_valid[p] = true;
                             uint8_t peer_action = peer_slot[4] >> 3;
                             if (peer_action != 0) {
-                                printf("[Network] Screen 6 received action %u from player %u!\n", peer_action, p);
+                                printf("[Network] Screen %u received action %u from player %u!\n", curr_screen, peer_action, p);
                                 fflush(stdout);
                             }
                         } else if (s_peer_packet_valid[p]) {
