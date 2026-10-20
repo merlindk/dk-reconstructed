@@ -1023,11 +1023,32 @@ static void platform_present_frame(int width, int height) {
                         ((fn_action_t)(uintptr_t)DK_VA(0x00034a8a))();
                         s_nav_delay = 0;
                     }
-                } else if (g_net_cli_is_client || g_test_multiplayer_gui) {
+                } else if (g_net_cli_is_client) {
+                    s_nav_delay++;
+                    if (s_gui_sessions[0].name[0] == '\0') {
+                        s_gui_sessions[0].flags = 0;
+                        s_gui_sessions[0].session_id = 1;
+                        s_gui_sessions[0].reserved = 0;
+                        snprintf(s_gui_sessions[0].name, sizeof(s_gui_sessions[0].name), "DIRECT (%s)", g_net_cli_host_ip);
+                        snprintf(s_gui_sessions[0].host_ip, sizeof(s_gui_sessions[0].host_ip), "%s", g_net_cli_host_ip);
+                        s_gui_sessions[0].host_port = g_net_cli_port ? g_net_cli_port : DK_NET_DEFAULT_PORT;
+                    }
+                    DK_MEM_U32(0x00335923) = (uint32_t)(uintptr_t)&s_gui_sessions[0];
+                    DK_MEM_S32(0x003359a3) = 1;
+                    DK_MEM_S32(0x003359ab) = 0;
+                    DK_MEM_U32(0x003359af) = 1;
+
+                    if (s_nav_delay >= 2) {
+                        printf("[Network] Auto-joining room (calling Join handler for %s:%u)...\n",
+                               g_net_cli_host_ip, g_net_cli_port ? g_net_cli_port : DK_NET_DEFAULT_PORT);
+                        fflush(stdout);
+                        typedef void (*fn_action_t)(void);
+                        ((fn_action_t)(uintptr_t)DK_VA(0x000349d9))();
+                        s_nav_delay = 0;
+                    }
+                } else if (g_test_multiplayer_gui) {
                     int32_t sel = DK_MEM_S32(0x003359ab);
                     int32_t count = DK_MEM_S32(0x003359a3);
-                    printf("[DEBUG-Scr5] count=%d sel=%d delay=%d\n", count, sel, s_nav_delay);
-                    fflush(stdout);
                     if (count > 0 && sel >= 0) {
                         s_nav_delay++;
                         if (s_nav_delay >= 2) {
