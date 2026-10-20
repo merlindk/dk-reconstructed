@@ -970,44 +970,71 @@ static void platform_present_frame(int width, int height) {
     }
 
     if (g_test_multiplayer_gui || g_net_cli_is_client || g_net_cli_is_host) {
-        if (g_swap_counter == 40) {
-            printf("[Network] Auto-navigating to Multiplayer Services (screen 4)...\n");
-            fflush(stdout);
-            uint32_t eax = 4;
-            uint32_t target_fn = DK_VA(0x0002e8a7);
-            __asm__ __volatile__(
-                "call *%1"
-                : "+a"(eax)
-                : "r"(target_fn)
-                : "ecx", "edx", "ebx", "esi", "edi", "memory"
-            );
-        } else if (g_swap_counter == 50) {
-            printf("[Network] Auto-selecting TCP/IP Internet & LAN (service 2)...\n");
-            fflush(stdout);
-            uint32_t eax = 2;
-            uint32_t target_fn = DK_VA(0x0003315b);
-            __asm__ __volatile__(
-                "call *%1"
-                : "+a"(eax)
-                : "r"(target_fn)
-                : "ecx", "edx", "ebx", "esi", "edi", "memory"
-            );
-        } else if (g_swap_counter >= 60) {
-            if (g_net_cli_is_host && g_swap_counter == 60) {
-                printf("[Network] Auto-hosting room (calling Create handler)...\n");
+        static bool s_auto_nav_complete = false;
+        static int s_nav_delay = 0;
+        uint32_t curr_screen = DK_MEM_U32(0x00334a44);
+
+        if (!s_auto_nav_complete) {
+            if (curr_screen == 6) {
+                s_auto_nav_complete = true;
+                printf("[Network] Successfully reached Multiplayer Room (screen 6).\n");
                 fflush(stdout);
-                typedef void (*fn_action_t)(void);
-                ((fn_action_t)(uintptr_t)DK_VA(0x00034a8a))();
-            } else if (g_net_cli_is_client || g_test_multiplayer_gui) {
-                static bool s_auto_joined = false;
-                int32_t sel = DK_MEM_S32(0x003359ab);
-                int32_t count = DK_MEM_S32(0x003359a3);
-                if (!s_auto_joined && count > 0 && sel >= 0) {
-                    s_auto_joined = true;
-                    printf("[Network] Auto-joining room (calling Join handler, count=%d, sel=%d)...\n", count, sel);
+            } else if (curr_screen == 0) {
+                /* On Main Menu: navigate to Services screen */
+                s_nav_delay++;
+                if (s_nav_delay >= 5) {
+                    printf("[Network] Auto-navigating to Multiplayer Services (screen 4)...\n");
                     fflush(stdout);
-                    typedef void (*fn_action_t)(void);
-                    ((fn_action_t)(uintptr_t)DK_VA(0x000349d9))();
+                    uint32_t eax = 4;
+                    uint32_t target_fn = DK_VA(0x0002e8a7);
+                    __asm__ __volatile__(
+                        "call *%1"
+                        : "+a"(eax)
+                        : "r"(target_fn)
+                        : "ecx", "edx", "ebx", "esi", "edi", "memory"
+                    );
+                    s_nav_delay = 0;
+                }
+            } else if (curr_screen == 4) {
+                /* On Services Screen: select TCP/IP (service 2) */
+                s_nav_delay++;
+                if (s_nav_delay >= 5) {
+                    printf("[Network] Auto-selecting TCP/IP Internet & LAN (service 2)...\n");
+                    fflush(stdout);
+                    uint32_t eax = 2;
+                    uint32_t target_fn = DK_VA(0x0003315b);
+                    __asm__ __volatile__(
+                        "call *%1"
+                        : "+a"(eax)
+                        : "r"(target_fn)
+                        : "ecx", "edx", "ebx", "esi", "edi", "memory"
+                    );
+                    s_nav_delay = 0;
+                }
+            } else if (curr_screen == 5) {
+                /* On TCP/IP Browser Screen */
+                if (g_net_cli_is_host) {
+                    s_nav_delay++;
+                    if (s_nav_delay >= 5) {
+                        printf("[Network] Auto-hosting room (calling Create handler)...\n");
+                        fflush(stdout);
+                        typedef void (*fn_action_t)(void);
+                        ((fn_action_t)(uintptr_t)DK_VA(0x00034a8a))();
+                        s_nav_delay = 0;
+                    }
+                } else if (g_net_cli_is_client || g_test_multiplayer_gui) {
+                    int32_t sel = DK_MEM_S32(0x003359ab);
+                    int32_t count = DK_MEM_S32(0x003359a3);
+                    if (count > 0 && sel >= 0) {
+                        s_nav_delay++;
+                        if (s_nav_delay >= 5) {
+                            printf("[Network] Auto-joining room (calling Join handler, count=%d, sel=%d)...\n", count, sel);
+                            fflush(stdout);
+                            typedef void (*fn_action_t)(void);
+                            ((fn_action_t)(uintptr_t)DK_VA(0x000349d9))();
+                            s_nav_delay = 0;
+                        }
+                    }
                 }
             }
         }
@@ -3709,6 +3736,7 @@ int main(int argc, char **argv) {
     dk_install_hook(0x0003488f, hook_frontnet_draw_gui_session_button_label);
     dk_install_hook(0x00034ea2, hook_gui_render_selected_session);
     dk_install_hook(0x00035e19, hook_frontnet_show_joining_box);
+    dk_install_hook(0x0006b4c7, hook_setup_show_bullfrog_legal_splash);
 
 
     /* Patch 0x00065724 (pom_benchmark) to `fld1; ret` (D9 E8 C3) so it returns 1.0 in ST(0) without port 0x43 IO */
