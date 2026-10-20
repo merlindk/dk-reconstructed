@@ -998,25 +998,6 @@ static void platform_present_frame(int width, int height) {
             s_last_screen = curr_screen;
         }
 
-        if (g_headless_mode && g_net_cli_is_host && curr_screen == 6) {
-            static int s_host_ready_frames = 0;
-            s_host_ready_frames++;
-            if (s_host_ready_frames == 5) {
-                printf("[Test] Host simulating click on 'Start Game' (calling 0x0003562b)...\n");
-                printf("[Test] Before click: my_player=%d, 0x203358f3[0]=0x%02x, [1]=0x%02x\n",
-                       DK_MEM_U8(0x002f10d1),
-                       DK_MEM_U8(0x003358f3),
-                       DK_MEM_U8(0x003358ff));
-                typedef uint32_t (*fn_t)(void);
-                uint32_t ret = ((fn_t)(uintptr_t)DK_VA(0x0003562b))();
-                printf("[Test] After click: ret=%u, 0x203358f3[0]=0x%02x, [1]=0x%02x\n",
-                       ret,
-                       DK_MEM_U8(0x003358f3),
-                       DK_MEM_U8(0x003358ff));
-                fflush(stdout);
-            }
-        }
-
         if (!s_auto_nav_complete) {
             if (curr_screen == 6) {
                 s_auto_nav_complete = true;
@@ -1816,10 +1797,6 @@ static uint32_t hook_LbMouseSuspend(uint32_t eax, uint32_t edx, uint32_t ebx, ui
 /* 0x0f4908 / 0x0f4960 / 0x0e8560: LbKeyboardOpen / LbKeyboardClose / LbKeyboardRead */
 static uint32_t hook_LbKeyboardStub(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
     (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
-    if (DK_MEM_U8(0x003358f3) != 0x01) {
-        printf("[Debug] In KeyboardStub: 0x203358f3[0]=0x%02x\n", DK_MEM_U8(0x003358f3));
-        fflush(stdout);
-    }
     platform_poll_events();
     return 1;
 }
@@ -3221,26 +3198,6 @@ static uint32_t hook_frontnet_validate_start_game(uint32_t eax, uint32_t edx, ui
     return 1;
 }
 
-static uint32_t hook_FUN_00052934(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
-    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
-    if (DK_MEM_U8(0x003358f3) != 0x01) {
-        printf("[Debug] In 0x52934: 0x%02x\n", DK_MEM_U8(0x003358f3));
-        fflush(stdout);
-    }
-    typedef void (*fn_t)(void);
-    ((fn_t)(uintptr_t)DK_VA(0x000529b9))();
-    ((fn_t)(uintptr_t)DK_VA(0x00052a88))();
-    ((fn_t)(uintptr_t)DK_VA(0x00052957))();
-    ((fn_t)(uintptr_t)DK_VA(0x00052988))();
-    DK_MEM_U8(0x003d987b) = 0;
-    DK_MEM_U8(0x003d987c) = 0;
-    if (DK_MEM_U8(0x003358f3) != 0x01) {
-        printf("[Debug] After 0x52934: 0x%02x\n", DK_MEM_U8(0x003358f3));
-        fflush(stdout);
-    }
-    return 0;
-}
-
 static uint32_t hook_LbNetwork_StartExchange(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
     (void)edx; (void)ebx; (void)ecx; (void)stack;
     uint32_t turn = DK_MEM_U32(0x0019e314);
@@ -3250,12 +3207,6 @@ static uint32_t hook_LbNetwork_StartExchange(uint32_t eax, uint32_t edx, uint32_
         /* Screen 6 (Lobby) & Screen 24 (Map / Level Loading) 12-byte exchange */
         uint8_t local_id = dk_net_get_local_player_id();
         uint8_t *lobby_tbl = (uint8_t *)dk_to_host_ptr(0x003358ef);
-
-        static int s_exch_print_count = 0;
-        printf("[Exchange #%d] Screen %u local_id=%u, eax=0x%08x, [0]=0x%02x, [1]=0x%02x\n",
-               s_exch_print_count++, curr_screen, local_id, eax,
-               DK_MEM_U8(0x003358f3), DK_MEM_U8(0x003358ff));
-        fflush(stdout);
 
         if (eax && lobby_tbl) {
             uint8_t *local_pkt = (uint8_t *)dk_to_host_ptr(eax);
@@ -3488,10 +3439,6 @@ static uint32_t hook_LbNetwork_EnumeratePlayers(uint32_t eax, uint32_t edx, uint
     }
 
     DK_MEM_U32(0x0033607f) = count;
-    if (DK_MEM_U8(0x003358f3) != 0x01) {
-        printf("[Debug] In EnumeratePlayers: 0x203358f3[0]=0x%02x\n", DK_MEM_U8(0x003358f3));
-        fflush(stdout);
-    }
     return 0;
 }
 
@@ -3913,7 +3860,6 @@ int main(int argc, char **argv) {
     dk_install_hook(0x00034ea2, hook_gui_render_selected_session);
     dk_install_hook(0x00035ce2, hook_frontnet_validate_start_game);
     dk_install_hook(0x00035e19, hook_frontnet_show_joining_box);
-    dk_install_hook(0x00052934, hook_FUN_00052934);
 
 
     /* Patch 0x00065724 (pom_benchmark) to `fld1; ret` (D9 E8 C3) so it returns 1.0 in ST(0) without port 0x43 IO */
