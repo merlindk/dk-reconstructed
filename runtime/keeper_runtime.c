@@ -89,6 +89,19 @@ void dk_xbrz_scale(int factor, const uint32_t *src, uint32_t *dst, int width, in
 uint32_t g_rebase_delta = 0;
 #define DK_VA(orig_va)   ((uint32_t)((orig_va) + g_rebase_delta))
 
+static inline void *dk_to_host_ptr(uint32_t addr) {
+    if (addr == 0) return NULL;
+    if (g_rebase_delta != 0) {
+        if (addr >= DK_VA(0x00010000) && addr < DK_VA(0x00450000)) {
+            return (void *)(uintptr_t)addr;
+        }
+        if (addr >= 0x00010000 && addr < 0x00450000) {
+            return (void *)(uintptr_t)DK_VA(addr);
+        }
+    }
+    return (void *)(uintptr_t)addr;
+}
+
 /* Fixed Virtual Address Pointers into Dungeon Keeper's loaded .bss_obj3 / .data_obj3 */
 #define DK_MEM_U8(addr)  (*(volatile uint8_t  *)(uintptr_t)(DK_VA(addr)))
 #define DK_MEM_U16(addr) (*(volatile uint16_t *)(uintptr_t)(DK_VA(addr)))
@@ -2754,24 +2767,26 @@ static uint8_t  g_net_composite_storage[4 * 1024];
 
 static uint32_t hook_LbNetwork_Init(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
     (void)eax; (void)edx; (void)ebx; (void)ecx;
-    uint32_t max_players  = stack ? stack[5] : 4;
-    uint32_t exchange_buf = stack ? stack[2] : 0;
-    uint32_t packet_size  = stack ? stack[3] : 12;
-    uint32_t players_info = stack ? stack[4] : 0;
+    uint32_t max_players  = stack ? stack[4] : 4;
+    uint32_t players_info = stack ? stack[5] : 0;
+    uint32_t packet_size  = stack ? stack[6] : 12;
+    uint32_t exchange_buf = stack ? stack[7] : 0;
     if (max_players <= 0 || max_players > 4) max_players = 4;
     if (packet_size <= 0 || packet_size > 1024) packet_size = 12;
 
-    printf("[Network] LbNetwork_Init: max_players=%u, packet_sz=%u, buf=0x%08x\n",
-           max_players, packet_size, exchange_buf);
+    printf("[Network] LbNetwork_Init: max_players=%u, packet_sz=%u, buf=0x%08x, pinfo=0x%08x\n",
+           max_players, packet_size, exchange_buf, players_info);
     fflush(stdout);
 
     DK_MEM_U32(0x003dd884) = max_players;
-    DK_MEM_U32(0x003dd894) = exchange_buf;
+    DK_MEM_U32(0x003dd894) = players_info;
     DK_MEM_U32(0x003dd898) = packet_size;
-    DK_MEM_U32(0x003dd864) = players_info;
+    DK_MEM_U32(0x003dd864) = exchange_buf;
+    DK_MEM_U32(0x003dd880) = max_players * packet_size;
+    DK_MEM_U32(0x003dd870) = (uint32_t)(uintptr_t)g_net_composite_storage;
     DK_MEM_U32(0x003dd89c) = (uint32_t)(uintptr_t)g_net_composite_storage;
 
-    void *local_buf = exchange_buf ? (void *)(uintptr_t)DK_VA(exchange_buf) : NULL;
+    void *local_buf = exchange_buf ? dk_to_host_ptr(exchange_buf) : NULL;
     dk_net_set_exchange_params(local_buf, packet_size, g_net_composite_storage, (int)max_players);
 
     if (g_net_cli_is_host) {
@@ -2795,18 +2810,35 @@ static uint32_t hook_LbNetwork_Create(uint32_t eax, uint32_t edx, uint32_t ebx, 
     DK_MEM_U32(0x003dd888) = 0; /* local_player_id = 0 */
     DK_MEM_U32(0x003dd8a8) = 0; /* host_player_id = 0 */
     DK_MEM_U32(0x003dd8a0) = 0x12345678; /* Non-null ServiceProvider */
+    DK_MEM_U32(0x003dd8ac) = 1;
+    DK_MEM_U32(0x003e0250) = 1;
+    DK_MEM_U32(0x003e024c) = 1;
 
-    uint32_t pinfo_addr = DK_MEM_U32(0x003dd864);
+    /* Initialize slot 0 in player buffer (36 bytes: 32 bytes name, active=1) */
+    uint32_t pbuf_addr = DK_MEM_U32(0x003dd864);
+    if (pbuf_addr) {
+        char *host_slot = (char *)dk_to_host_ptr(pbuf_addr);
+        if (host_slot) {
+            memset(host_slot, 0, 36);
+            snprintf(host_slot, 32, "%s", g_net_cli_player_name);
+            *(uint32_t *)(host_slot + 32) = 1; /* active */
+        }
+    }
+
+    /* Initialize slot 0 in player info array */
+    uint32_t pinfo_addr = DK_MEM_U32(0x003dd894);
     if (pinfo_addr) {
-        char *host_slot = (char *)(uintptr_t)DK_VA(pinfo_addr);
-        memset(host_slot, 0, 36);
-        snprintf(host_slot, 32, "%s", g_net_cli_player_name);
-        *(uint32_t *)(host_slot + 32) = 1; /* active */
+        uint8_t *slot = (uint8_t *)dk_to_host_ptr(pinfo_addr);
+        if (slot) {
+            slot[0] = 1;
+        }
     }
 
     if (ebx) {
-        uint32_t *p_id = (uint32_t *)(uintptr_t)DK_VA(ebx);
-        *p_id = 0;
+        uint32_t *p_id = (uint32_t *)dk_to_host_ptr(ebx);
+        if (p_id) {
+            *p_id = 0;
+        }
     }
 
     return 0;
@@ -2857,9 +2889,21 @@ static uint32_t hook_LbNetwork_Join(uint32_t eax, uint32_t edx, uint32_t ebx, ui
     DK_MEM_U32(0x003dd8a8) = 0;
     DK_MEM_U32(0x003dd8a0) = 0x12345678;
 
+    uint32_t pbuf_addr = DK_MEM_U32(0x003dd864);
+    if (pbuf_addr) {
+        char *my_slot = (char *)dk_to_host_ptr(pbuf_addr) + local_id * 36;
+        if (my_slot) {
+            memset(my_slot, 0, 36);
+            snprintf(my_slot, 32, "%s", g_net_cli_player_name);
+            *(uint32_t *)(my_slot + 32) = 1;
+        }
+    }
+
     if (ebx) {
-        uint32_t *p_id = (uint32_t *)(uintptr_t)DK_VA(ebx);
-        *p_id = local_id;
+        uint32_t *p_id = (uint32_t *)dk_to_host_ptr(ebx);
+        if (p_id) {
+            *p_id = local_id;
+        }
     }
 
     return 0;
@@ -2946,9 +2990,32 @@ static uint32_t hook_LbNetwork_EnumerateSessions(uint32_t eax, uint32_t edx, uin
 }
 
 static uint32_t hook_LbNetwork_EnumeratePlayers(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
-    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    (void)eax; (void)ebx; (void)ecx; (void)stack;
+    typedef uint32_t (__stdcall *fn_player_cb_t)(void *arg1, void *arg2);
+    fn_player_cb_t cb = (fn_player_cb_t)(uintptr_t)edx;
+
     DK_MEM_U32(0x0033607f) = 0;
-    memset((void *)(uintptr_t)DK_VA(0x00335323), 0, 100 * 20);
+    void *player_table = dk_to_host_ptr(DK_VA(0x00335323));
+    if (player_table) {
+        memset(player_table, 0, 100 * 20);
+    }
+
+    struct {
+        uint8_t pad[13];
+        char player_name[32];
+    } pinfo;
+    memset(&pinfo, 0, sizeof(pinfo));
+    snprintf(pinfo.player_name, sizeof(pinfo.player_name), "%s", g_net_cli_player_name);
+
+    if (cb) {
+        cb(&pinfo, &pinfo);
+    } else {
+        DK_MEM_U32(0x0033607f) = 1;
+        if (player_table) {
+            snprintf((char *)player_table, 20, "%s", g_net_cli_player_name);
+        }
+    }
+
     return 0;
 }
 
@@ -2956,7 +3023,8 @@ static uint32_t hook_LbNetwork_Send(uint32_t eax, uint32_t edx, uint32_t ebx, ui
     (void)edx;
     int dest_id = (int)eax;
     size_t len = (size_t)ebx;
-    const void *buf = (const void *)(uintptr_t)DK_VA(ecx ? ecx : (stack ? stack[1] : 0));
+    uint32_t raw_buf = ecx ? ecx : (stack ? stack[1] : 0);
+    const void *buf = dk_to_host_ptr(raw_buf);
     dk_net_send_data(dest_id, buf, len);
     return 0;
 }
