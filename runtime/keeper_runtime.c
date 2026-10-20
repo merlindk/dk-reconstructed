@@ -41,6 +41,7 @@
 #endif
 
 #include "../include/dk_ghidra_intrinsics.h"
+#include "../include/dk_net.h"
 
 /* ============================================================================
  * 1. Global Runtime Configuration & State
@@ -836,6 +837,7 @@ static void platform_poll_events(void) {
         }
     }
 #endif
+    dk_net_update();
 }
 
 static void platform_present_frame(int width, int height) {
@@ -2714,6 +2716,166 @@ static LONG WINAPI win32_crash_handler(EXCEPTION_POINTERS *ep) {
 #endif
 
 /* ============================================================================
+ * 7.5. Native Internet & LAN Multiplayer Subsystem Hooks (BFLib LbNetwork)
+ * ============================================================================ */
+static char     g_net_cli_host_ip[128] = "";
+static uint16_t g_net_cli_port = 0;
+static bool     g_net_cli_is_host = false;
+static bool     g_net_cli_is_client = false;
+static char     g_net_cli_player_name[32] = "DungeonKeeper";
+static uint8_t  g_net_composite_storage[4 * 1024];
+
+static uint32_t hook_LbNetwork_Init(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx;
+    uint32_t max_players  = stack ? stack[1] : 4;
+    uint32_t exchange_buf = stack ? stack[2] : 0;
+    uint32_t packet_size  = stack ? stack[3] : 0;
+    uint32_t players_info = stack ? stack[4] : 0;
+
+    printf("[Network] LbNetwork_Init: max_players=%u, packet_sz=%u, buf=0x%08x\n",
+           max_players, packet_size, exchange_buf);
+    fflush(stdout);
+
+    DK_MEM_U32(0x003dd884) = max_players;
+    DK_MEM_U32(0x003dd894) = exchange_buf;
+    DK_MEM_U32(0x003dd898) = packet_size;
+    DK_MEM_U32(0x003dd864) = players_info;
+    DK_MEM_U32(0x003dd89c) = (uint32_t)(uintptr_t)g_net_composite_storage;
+
+    void *local_buf = exchange_buf ? (void *)(uintptr_t)DK_VA(exchange_buf) : NULL;
+    dk_net_set_exchange_params(local_buf, packet_size, g_net_composite_storage, (int)max_players);
+
+    if (g_net_cli_is_host) {
+        dk_net_start_host(g_net_cli_port ? g_net_cli_port : DK_NET_DEFAULT_PORT, "DK Internet Realm", g_net_cli_player_name);
+    } else if (g_net_cli_is_client) {
+        dk_net_connect_to_host(g_net_cli_host_ip, g_net_cli_port ? g_net_cli_port : DK_NET_DEFAULT_PORT, g_net_cli_player_name);
+    }
+
+    return 0;
+}
+
+static uint32_t hook_LbNetwork_Create(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    printf("[Network] LbNetwork_Create: hosting session...\n");
+    fflush(stdout);
+
+    if (!dk_net_is_host()) {
+        dk_net_start_host(g_net_cli_port ? g_net_cli_port : DK_NET_DEFAULT_PORT, "DK Internet Realm", g_net_cli_player_name);
+    }
+
+    DK_MEM_U32(0x003dd888) = 0; /* local_player_id = 0 */
+    DK_MEM_U32(0x003dd8a8) = 0; /* host_player_id = 0 */
+    DK_MEM_U32(0x003dd8a0) = 0x12345678; /* Non-null ServiceProvider */
+
+    uint32_t pinfo_addr = DK_MEM_U32(0x003dd864);
+    if (pinfo_addr) {
+        char *host_slot = (char *)(uintptr_t)DK_VA(pinfo_addr);
+        memset(host_slot, 0, 36);
+        snprintf(host_slot, 32, "%s", g_net_cli_player_name);
+        host_slot[32] = 1; /* active */
+    }
+
+    return 0;
+}
+
+static uint32_t hook_LbNetwork_Join(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    printf("[Network] LbNetwork_Join: joining session...\n");
+    fflush(stdout);
+
+    if (!dk_net_is_active()) {
+        const char *target_ip = (g_net_cli_host_ip[0] != '\0') ? g_net_cli_host_ip : "127.0.0.1";
+        if (!dk_net_connect_to_host(target_ip, g_net_cli_port ? g_net_cli_port : DK_NET_DEFAULT_PORT, g_net_cli_player_name)) {
+            printf("[Network] Join failed to %s\n", target_ip);
+            return 0xff;
+        }
+    }
+
+    uint8_t local_id = dk_net_get_local_player_id();
+    DK_MEM_U32(0x003dd888) = local_id;
+    DK_MEM_U32(0x003dd8a8) = 0;
+    DK_MEM_U32(0x003dd8a0) = 0x12345678;
+
+    return 0;
+}
+
+static uint32_t hook_LbNetwork_Stop(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    printf("[Network] LbNetwork_Stop: session teardown\n");
+    fflush(stdout);
+    dk_net_disconnect();
+    DK_MEM_U32(0x003dd8a0) = 0;
+    return 0;
+}
+
+static uint32_t hook_LbNetwork_StartExchange(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    uint32_t turn = DK_MEM_U32(0x0019e314);
+    dk_net_start_exchange(turn);
+    return 0;
+}
+
+static uint32_t hook_LbNetwork_CompleteExchange(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    uint32_t turn = DK_MEM_U32(0x0019e314);
+    bool ok = dk_net_complete_exchange(turn);
+    return ok ? 0 : 1;
+}
+
+static uint32_t hook_LbNetwork_EnumerateSessions(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    dk_net_lan_broadcast_query(DK_NET_DEFAULT_PORT);
+
+    dk_lan_broadcast_t games[16];
+    int count = dk_net_lan_get_discovered_games(games, 16);
+    if (count == 0) {
+        count = dk_net_master_fetch_games(games, 16);
+    }
+    printf("[Network] LbNetwork_EnumerateSessions found %d games\n", count);
+    fflush(stdout);
+
+    DK_MEM_S32(0x003359a3) = count; /* g_frontnet_session_count */
+    return 0;
+}
+
+static uint32_t hook_LbNetwork_EnumeratePlayers(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    return 0;
+}
+
+static uint32_t hook_LbNetwork_Send(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)edx;
+    int dest_id = (int)eax;
+    size_t len = (size_t)ebx;
+    const void *buf = (const void *)(uintptr_t)DK_VA(ecx ? ecx : (stack ? stack[1] : 0));
+    dk_net_send_data(dest_id, buf, len);
+    return 0;
+}
+
+static uint32_t hook_LbNetwork_Receive(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    return 0;
+}
+
+static uint32_t hook_lbnet_enumerate_services(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)edx; (void)ebx; (void)ecx; (void)stack;
+    typedef uint32_t (*fn_callback_t)(void *service_info);
+    fn_callback_t cb = (fn_callback_t)(uintptr_t)DK_VA(eax);
+
+    struct {
+        uint8_t dummy;
+        char name[51];
+    } s_info;
+    memset(&s_info, 0, sizeof(s_info));
+    snprintf(s_info.name, sizeof(s_info.name), "TCP/IP Internet & LAN");
+
+    if (cb) {
+        cb(&s_info);
+    }
+    return 0;
+}
+
+/* ============================================================================
  * 8. Main Entry Point
  * ============================================================================ */
 int main(int argc, char **argv) {
@@ -2786,6 +2948,42 @@ int main(int argc, char **argv) {
             g_test_start_game = true;
         } else if (strcmp(argv[i], "--dump-tmap") == 0) {
             g_dump_tmap = true;
+        } else if (strcmp(argv[i], "--host") == 0) {
+            g_net_cli_is_host = true;
+            if (i + 1 < argc && argv[i + 1][0] != '-') {
+                g_net_cli_port = (uint16_t)atoi(argv[++i]);
+            }
+        } else if (strcmp(argv[i], "--connect") == 0 && i + 1 < argc) {
+            g_net_cli_is_client = true;
+            const char *target = argv[++i];
+            const char *colon = strchr(target, ':');
+            if (colon) {
+                size_t hlen = colon - target;
+                if (hlen < sizeof(g_net_cli_host_ip)) {
+                    strncpy(g_net_cli_host_ip, target, hlen);
+                    g_net_cli_host_ip[hlen] = '\0';
+                }
+                g_net_cli_port = (uint16_t)atoi(colon + 1);
+            } else {
+                snprintf(g_net_cli_host_ip, sizeof(g_net_cli_host_ip), "%s", target);
+                g_net_cli_port = DK_NET_DEFAULT_PORT;
+            }
+        } else if (strcmp(argv[i], "--player-name") == 0 && i + 1 < argc) {
+            snprintf(g_net_cli_player_name, sizeof(g_net_cli_player_name), "%s", argv[++i]);
+        } else if (strcmp(argv[i], "--master-server") == 0 && i + 1 < argc) {
+            const char *ms = argv[++i];
+            char mshost[128] = "192.168.0.4";
+            uint16_t msport = 5555;
+            const char *colon = strchr(ms, ':');
+            if (colon) {
+                size_t hlen = colon - ms;
+                strncpy(mshost, ms, hlen);
+                mshost[hlen] = '\0';
+                msport = (uint16_t)atoi(colon + 1);
+            } else {
+                snprintf(mshost, sizeof(mshost), "%s", ms);
+            }
+            dk_net_set_master_server(mshost, msport);
         } else if (argv[i][0] == '-' && argv[i][1] != '-' && dk_argc < 30) {
             dk_argv[dk_argc++] = argv[i];
         }
@@ -2840,6 +3038,15 @@ int main(int argc, char **argv) {
     printf(" Mode           : %s (Fullscreen=%s, MaxFrames=%d, StartLevel=%d)\n",
            g_headless_mode ? "Headless Validation" : "Interactive Display",
            g_fullscreen ? "Yes" : "No", g_max_frames, g_start_level);
+    if (g_net_cli_is_host) {
+        printf(" Network        : Hosting (Port %u, Player '%s')\n",
+               g_net_cli_port ? g_net_cli_port : DK_NET_DEFAULT_PORT, g_net_cli_player_name);
+    } else if (g_net_cli_is_client) {
+        printf(" Network        : Client (Target %s:%u, Player '%s')\n",
+               g_net_cli_host_ip, g_net_cli_port ? g_net_cli_port : DK_NET_DEFAULT_PORT, g_net_cli_player_name);
+    } else {
+        printf(" Network        : Ready (Auto-Discovery & Master Server Enabled)\n");
+    }
     printf("================================================================\n");
     fflush(stdout);
 
@@ -2976,6 +3183,25 @@ int main(int argc, char **argv) {
     dk_install_hook(0x000fcda1, hook_ail_redbook_resume);
     dk_install_hook(0x000fcdff, hook_ail_redbook_volume);
     dk_install_hook(0x000fce5d, hook_ail_redbook_set_volume);
+
+    /* Bullfrog Network Library (LbNetwork) Hooks */
+    dk_install_hook(0x000ed4e0, hook_LbNetwork_Init);
+    dk_install_hook(0x000ed84c, hook_LbNetwork_Create);
+    dk_install_hook(0x000eda20, hook_LbNetwork_Join);
+    dk_install_hook(0x000edc70, hook_LbNetwork_Stop);
+    dk_install_hook(0x000ee694, hook_LbNetwork_StartExchange);
+    dk_install_hook(0x000ee3c0, hook_LbNetwork_CompleteExchange);
+    dk_install_hook(0x000edd8c, hook_LbNetwork_EnumerateSessions);
+    dk_install_hook(0x000eddf0, hook_LbNetwork_EnumeratePlayers);
+    dk_install_hook(0x000f3b50, hook_LbNetwork_Send);
+    dk_install_hook(0x000f3ed8, hook_LbNetwork_Receive);
+    dk_install_hook(0x000ed0e8, hook_lbnet_enumerate_services);
+
+    if (g_net_cli_is_host) {
+        dk_net_start_host(g_net_cli_port ? g_net_cli_port : DK_NET_DEFAULT_PORT, "DK Internet Realm", g_net_cli_player_name);
+    } else if (g_net_cli_is_client) {
+        dk_net_connect_to_host(g_net_cli_host_ip, g_net_cli_port ? g_net_cli_port : DK_NET_DEFAULT_PORT, g_net_cli_player_name);
+    }
 
     /* Patch 0x00065724 (pom_benchmark) to `fld1; ret` (D9 E8 C3) so it returns 1.0 in ST(0) without port 0x43 IO */
     uint8_t *bench_ptr = (uint8_t *)(uintptr_t)DK_VA(0x00065724);
