@@ -2884,52 +2884,6 @@ typedef struct {
 static dk_gui_session_entry_t s_gui_sessions[16];
 static dk_gui_session_entry_t s_empty_session = {0, 0, 0, "", "", 0};
 
-/* Safe hook for FUN_20034ea2 (selected session text renderer)
- * Prevents dereferencing (str + 9) when str is NULL / unselected. */
-static uint32_t hook_gui_render_selected_session(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
-    (void)edx; (void)ebx; (void)ecx; (void)stack;
-    int32_t sel_idx = DK_MEM_S32(0x003359ab);
-    int32_t count = DK_MEM_S32(0x003359a3);
-    const char *str = NULL;
-    if (sel_idx >= 0 && sel_idx < count) {
-        uint32_t sess_ptr = DK_MEM_U32(0x00335923 + sel_idx * 4);
-        if (sess_ptr) {
-            const char *cand = (const char *)dk_to_host_ptr(sess_ptr);
-            if (cand) {
-                cand += 9; /* name is at offset 9 */
-                if (*cand) {
-                    str = cand;
-                }
-            }
-        }
-    }
-
-    uint8_t *ctrl_ptr = (uint8_t *)dk_to_host_ptr(eax);
-    if (!ctrl_ptr) return 0;
-
-    uint32_t ctrl_id = *(uint32_t *)(ctrl_ptr + 0x33);
-    uint8_t *font_table = (uint8_t *)dk_to_host_ptr(0x0017ad09);
-    uint32_t font_id = font_table ? (uint32_t)font_table[ctrl_id * 3] : 0;
-
-    uint32_t target_fn = DK_VA(0x0003378f);
-    __asm__ __volatile__(
-        "push %%ebx\n\t"
-        "push %%edx\n\t"
-        "push %%ecx\n\t"
-        "movl %0, %%eax\n\t"
-        "movl %1, %%edx\n\t"
-        "movl %2, %%ebx\n\t"
-        "call *%3\n\t"
-        "pop %%ecx\n\t"
-        "pop %%edx\n\t"
-        "pop %%ebx\n\t"
-        :
-        : "r"(eax), "r"(font_id), "r"(str), "r"(target_fn)
-        : "eax", "memory"
-    );
-    return 0;
-}
-
 static uint32_t hook_LbNetwork_Join(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
     (void)edx; (void)ecx; (void)stack;
     printf("[Network] LbNetwork_Join: joining session...\n");
@@ -3512,7 +3466,23 @@ int main(int argc, char **argv) {
     dk_install_hook(0x000f3b50, hook_LbNetwork_Send);
     dk_install_hook(0x000f3ed8, hook_LbNetwork_Receive);
     dk_install_hook(0x00033ead, hook_frontnet_LbNetwork_EnumerateServices);
-    dk_install_hook(0x00034ea2, hook_gui_render_selected_session);
+
+    /* Patch 0x00034eba (FUN_20034ea2) to safely handle NULL session pointer without crashing:
+     * 6B 50 33 03  imul edx, DWORD PTR [eax+0x33], 3
+     * 85 DB        test ebx, ebx
+     * 74 03        jz +3 (skip add ebx, 9)
+     * 83 C3 09     add ebx, 9
+     * 90 90 90 90  nop nop nop nop
+     */
+    uint8_t *session_render_ptr = (uint8_t *)(uintptr_t)DK_VA(0x00034eba);
+    static const uint8_t s_safe_session_render_patch[15] = {
+        0x6B, 0x50, 0x33, 0x03,
+        0x85, 0xDB,
+        0x74, 0x03,
+        0x83, 0xC3, 0x09,
+        0x90, 0x90, 0x90, 0x90
+    };
+    memcpy(session_render_ptr, s_safe_session_render_patch, 15);
 
     if (g_net_cli_is_host) {
         dk_net_start_host(g_net_cli_port ? g_net_cli_port : DK_NET_DEFAULT_PORT, "DK Internet Realm", g_net_cli_player_name);
