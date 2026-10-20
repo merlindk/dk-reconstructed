@@ -989,7 +989,14 @@ static void platform_present_frame(int width, int height) {
     if (g_frontend_ready && (g_test_multiplayer_gui || g_net_cli_is_client || g_net_cli_is_host)) {
         static bool s_auto_nav_complete = false;
         static int s_nav_delay = 0;
+        static uint32_t s_last_screen = 0xffffffff;
         uint32_t curr_screen = DK_MEM_U32(0x00334a44);
+
+        if (curr_screen != s_last_screen) {
+            printf("[Frontend] Current Screen: %u\n", curr_screen);
+            fflush(stdout);
+            s_last_screen = curr_screen;
+        }
 
         if (!s_auto_nav_complete) {
             if (curr_screen == 6) {
@@ -3181,10 +3188,79 @@ static uint32_t hook_LbNetwork_Stop(uint32_t eax, uint32_t edx, uint32_t ebx, ui
     return 0;
 }
 
-static uint32_t hook_LbNetwork_StartExchange(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+static uint8_t s_last_peer_packet[4][128];
+static bool    s_peer_packet_valid[4] = {false, false, false, false};
+
+static uint32_t hook_frontnet_validate_start_game(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
     (void)eax; (void)edx; (void)ebx; (void)ecx; (void)stack;
+    printf("[Network] hook_frontnet_validate_start_game: Start Game approved for all players!\n");
+    fflush(stdout);
+    return 1;
+}
+
+static uint32_t hook_LbNetwork_StartExchange(uint32_t eax, uint32_t edx, uint32_t ebx, uint32_t ecx, uint32_t *stack) {
+    (void)edx; (void)ebx; (void)ecx; (void)stack;
     uint32_t turn = DK_MEM_U32(0x0019e314);
-    dk_net_start_exchange(turn);
+    uint32_t curr_screen = DK_MEM_U32(0x00334a44);
+
+    if (curr_screen == 6) {
+        /* Screen 6 (Multiplayer Room / Lobby) 12-byte exchange */
+        uint8_t local_id = dk_net_get_local_player_id();
+        uint8_t *lobby_tbl = (uint8_t *)dk_to_host_ptr(0x003358ef);
+
+        if (eax && lobby_tbl) {
+            uint8_t *local_pkt = (uint8_t *)dk_to_host_ptr(eax);
+            uint8_t action = local_pkt[4] >> 3;
+            if (action != 0) {
+                printf("[Network] Screen 6 local player %u broadcast action %u (Start Game)\n", local_id, action);
+                fflush(stdout);
+            }
+            dk_net_start_exchange_buf(turn, local_pkt, 12);
+        }
+
+        /* Update socket IO */
+        dk_net_update();
+
+        /* Copy received peer packets into lobby_tbl so FUN_00035758 sees active peers and actions */
+        if (lobby_tbl) {
+            for (int p = 0; p < 4; p++) {
+                if (p != local_id) {
+                    char name[32] = {0};
+                    bool active = false;
+                    if (dk_net_get_player_slot_info(p, name, sizeof(name), &active) && active) {
+                        uint8_t *peer_slot = lobby_tbl + p * 12;
+                        uint8_t peer_buf[128];
+                        size_t peer_len = 0;
+                        if (dk_net_get_peer_turn_packet(p, peer_buf, sizeof(peer_buf), &peer_len) && peer_len >= 12) {
+                            memcpy(peer_slot, peer_buf, 12);
+                            memcpy(s_last_peer_packet[p], peer_buf, 12);
+                            s_peer_packet_valid[p] = true;
+                            uint8_t peer_action = peer_slot[4] >> 3;
+                            if (peer_action != 0) {
+                                printf("[Network] Screen 6 received action %u from player %u!\n", peer_action, p);
+                                fflush(stdout);
+                            }
+                        } else if (s_peer_packet_valid[p]) {
+                            memcpy(peer_slot, s_last_peer_packet[p], 12);
+                        } else {
+                            /* Default active slot */
+                            peer_slot[4] = 1;
+                            peer_slot[5] = 0;
+                            *(uint16_t *)(peer_slot + 6) = DK_MEM_U16(0x00179bfc);
+                            *(uint16_t *)(peer_slot + 8) = DK_MEM_U16(0x00179c00);
+                        }
+                        /* Ensure active bit is set so FUN_00035758 doesn't consider them dropped */
+                        peer_slot[4] |= 1;
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+
+    /* In-game turn packet exchange */
+    void *local_buf = eax ? dk_to_host_ptr(eax) : NULL;
+    dk_net_start_exchange_buf(turn, local_buf, 17);
     return 0;
 }
 
@@ -3780,6 +3856,7 @@ int main(int argc, char **argv) {
     dk_install_hook(0x00033ead, hook_frontnet_LbNetwork_EnumerateServices);
     dk_install_hook(0x0003488f, hook_frontnet_draw_gui_session_button_label);
     dk_install_hook(0x00034ea2, hook_gui_render_selected_session);
+    dk_install_hook(0x00035ce2, hook_frontnet_validate_start_game);
     dk_install_hook(0x00035e19, hook_frontnet_show_joining_box);
 
 

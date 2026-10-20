@@ -135,6 +135,8 @@ void dk_net_master_unregister(void);
 /* Lockstep Turn Packet Exchange API */
 void dk_net_set_exchange_params(void *local_buf, size_t packet_size, void *composite_buf, int max_players);
 bool dk_net_start_exchange(uint32_t turn_num);
+bool dk_net_start_exchange_buf(uint32_t turn_num, const void *buf, size_t len);
+bool dk_net_get_peer_turn_packet(int player_id, void *out_buf, size_t max_len, size_t *out_len);
 bool dk_net_complete_exchange(uint32_t turn_num);
 
 /* Large buffer send/receive (for 1.38MB initial game state & chat) */

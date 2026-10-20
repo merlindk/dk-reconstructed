@@ -77,6 +77,7 @@ static int    g_max_players_count      = 4;
 
 static bool   g_turn_received[DK_NET_MAX_PLAYERS];
 static uint8_t g_peer_turn_buf[DK_NET_MAX_PLAYERS][1024];
+static size_t  g_peer_turn_len[DK_NET_MAX_PLAYERS];
 
 /* Generic Data Queue (for 1.38MB initial level state & chat) */
 #define GENERIC_QUEUE_SIZE (2 * 1024 * 1024)
@@ -485,6 +486,7 @@ static void process_packet(net_peer_t *peer, const dk_net_header_t *hdr, const u
             uint8_t sender = hdr->player_id;
             if (sender < DK_NET_MAX_PLAYERS && hdr->payload_len <= sizeof(g_peer_turn_buf[0])) {
                 memcpy(g_peer_turn_buf[sender], payload, hdr->payload_len);
+                g_peer_turn_len[sender] = hdr->payload_len;
                 g_turn_received[sender] = true;
 
                 /* If host, relay to other clients */
@@ -957,34 +959,54 @@ void dk_net_set_exchange_params(void *local_buf, size_t packet_size, void *compo
     g_max_players_count      = max_players;
 }
 
-bool dk_net_start_exchange(uint32_t turn_num) {
+bool dk_net_start_exchange_buf(uint32_t turn_num, const void *buf, size_t len) {
     if (g_net_state == DK_NET_STATE_DISCONNECTED) return true;
     dk_net_update();
 
     memset(g_turn_received, 0, sizeof(g_turn_received));
 
-    /* Local turn packet is immediately available */
-    if (g_local_exchange_buf && g_composite_exchange_buf && g_exchange_packet_size > 0) {
+    const void *send_buf = buf ? buf : g_local_exchange_buf;
+    size_t send_len = len > 0 ? len : g_exchange_packet_size;
+    if (!send_buf || send_len == 0) return true;
+
+    /* Copy local packet into composite exchange buffer if available */
+    if (g_composite_exchange_buf && g_exchange_packet_size > 0) {
+        size_t cpy = send_len < g_exchange_packet_size ? send_len : g_exchange_packet_size;
         memcpy((uint8_t *)g_composite_exchange_buf + (g_local_player_id * g_exchange_packet_size),
-               g_local_exchange_buf, g_exchange_packet_size);
+               send_buf, cpy);
         g_turn_received[g_local_player_id] = true;
     }
 
-    /* Broadcast local turn packet to connected peers */
+    /* Broadcast local packet to connected peers */
     if (g_net_state == DK_NET_STATE_HOSTING) {
         for (int i = 1; i < DK_NET_MAX_PLAYERS; i++) {
             if (g_peers[i].active && !IS_INVALID_SOCKET(g_peers[i].sock)) {
                 send_raw_packet(g_peers[i].sock, DK_MSG_TURN_PACKET, g_local_player_id, turn_num,
-                                g_local_exchange_buf, (uint32_t)g_exchange_packet_size);
+                                send_buf, (uint32_t)send_len);
             }
         }
     } else if (g_net_state == DK_NET_STATE_CONNECTED) {
         /* Send to host */
         if (!IS_INVALID_SOCKET(g_peers[0].sock)) {
             send_raw_packet(g_peers[0].sock, DK_MSG_TURN_PACKET, g_local_player_id, turn_num,
-                            g_local_exchange_buf, (uint32_t)g_exchange_packet_size);
+                            send_buf, (uint32_t)send_len);
         }
     }
+    return true;
+}
+
+bool dk_net_start_exchange(uint32_t turn_num) {
+    return dk_net_start_exchange_buf(turn_num, g_local_exchange_buf, g_exchange_packet_size);
+}
+
+bool dk_net_get_peer_turn_packet(int player_id, void *out_buf, size_t max_len, size_t *out_len) {
+    if (player_id < 0 || player_id >= DK_NET_MAX_PLAYERS) return false;
+    if (!g_turn_received[player_id] || g_peer_turn_len[player_id] == 0) return false;
+    size_t copy_sz = g_peer_turn_len[player_id] < max_len ? g_peer_turn_len[player_id] : max_len;
+    if (out_buf && copy_sz > 0) {
+        memcpy(out_buf, g_peer_turn_buf[player_id], copy_sz);
+    }
+    if (out_len) *out_len = copy_sz;
     return true;
 }
 
